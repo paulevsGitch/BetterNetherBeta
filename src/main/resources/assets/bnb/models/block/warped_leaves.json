@@ -1,0 +1,103 @@
+{
+	"__comment": "Designed by Paulevs with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "minecraft:block/warped_leaves",
+		"texture": "minecraft:block/warped_leaves",
+		"fur": "minecraft:block/warped_leaves_fur"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "PlaneY2",
+			"from": [ 0, 7, 16 ],
+			"to": [ 16, 15, 16.001 ],
+			"rotation": { "origin": [ 0, 15, 16 ], "axis": "x", "angle": -22.5 },
+			"faces": {
+				"north": { "uv": [ 16, 0, 0, 8 ], "texture": "#fur" },
+				"south": { "uv": [ 0, 0, 16, 8 ], "texture": "#fur" }
+			}
+		},
+		{
+			"__comment": "PlaneY2",
+			"from": [ 0, -1, 16 ],
+			"to": [ 16, 7, 16.001 ],
+			"rotation": { "origin": [ 0, 7, 16 ], "axis": "x", "angle": -22.5 },
+			"faces": {
+				"north": { "uv": [ 0, 16, 16, 8 ], "texture": "#fur", "rotation": 180 },
+				"south": { "uv": [ 0, 8, 16, 16 ], "texture": "#fur" }
+			}
+		},
+		{
+			"__comment": "PlaneY2",
+			"from": [ 0, 7, 0 ],
+			"to": [ 16, 15, 0.001 ],
+			"rotation": { "origin": [ 0, 15, 0 ], "axis": "x", "angle": 22.5 },
+			"faces": {
+				"north": { "uv": [ 0, 0, 16, 8 ], "texture": "#fur" },
+				"south": { "uv": [ 16, 0, 0, 8 ], "texture": "#fur" }
+			}
+		},
+		{
+			"__comment": "PlaneY2",
+			"from": [ 0, -1, 0 ],
+			"to": [ 16, 7, 0.001 ],
+			"rotation": { "origin": [ 0, 7, 0 ], "axis": "x", "angle": 22.5 },
+			"faces": {
+				"north": { "uv": [ 16, 16, 0, 8 ], "texture": "#fur", "rotation": 180 },
+				"south": { "uv": [ 16, 8, 0, 16 ], "texture": "#fur" }
+			}
+		},
+		{
+			"__comment": "PlaneY7",
+			"from": [ 16, 7, 0 ],
+			"to": [ 16.001, 15, 16 ],
+			"rotation": { "origin": [ 16, 15, 0 ], "axis": "z", "angle": 22.5 },
+			"faces": {
+				"west": { "uv": [ 0, 8, 16, 0 ], "texture": "#fur", "rotation": 180 },
+				"east": { "uv": [ 0, 0, 16, 8 ], "texture": "#fur" }
+			}
+		},
+		{
+			"__comment": "PlaneY7",
+			"from": [ 16, -1, 0 ],
+			"to": [ 16.001, 7, 16 ],
+			"rotation": { "origin": [ 16, 7, 0 ], "axis": "z", "angle": 22.5 },
+			"faces": {
+				"west": { "uv": [ 0, 16, 16, 8 ], "texture": "#fur", "rotation": 180 },
+				"east": { "uv": [ 0, 8, 16, 16 ], "texture": "#fur" }
+			}
+		},
+		{
+			"__comment": "PlaneY7",
+			"from": [ 0, 7, 0 ],
+			"to": [ 0.001, 15, 16 ],
+			"rotation": { "origin": [ 0, 15, 0 ], "axis": "z", "angle": -22.5 },
+			"faces": {
+				"west": { "uv": [ 16, 8, 0, 0 ], "texture": "#fur", "rotation": 180 },
+				"east": { "uv": [ 16, 0, 0, 8 ], "texture": "#fur" }
+			}
+		},
+		{
+			"__comment": "PlaneY7",
+			"from": [ 0, -1, 0 ],
+			"to": [ 0.001, 7, 16 ],
+			"rotation": { "origin": [ 0, 7, 0 ], "axis": "z", "angle": -22.5 },
+			"faces": {
+				"west": { "uv": [ 16, 16, 0, 8 ], "texture": "#fur", "rotation": 180 },
+				"east": { "uv": [ 16, 8, 0, 16 ], "texture": "#fur" }
+			}
+		}
+	]
+}

@@ -1,0 +1,34 @@
+{
+	"schemaVersion": 1,
+	"id": "bnb",
+	"version": "${version}",
+
+	"name": "Better Nether Beta",
+	"description": "Enhancement for the Nether dimension",
+	"authors": [
+		"paulevs"
+	],
+	"contact": {
+		"homepage": "https://github.com/paulevsGitch/BetterNetherBeta",
+		"sources": "https://github.com/paulevsGitch/BetterNetherBeta"
+	},
+
+	"license": "CC0-1.0",
+	"icon": "assets/bnb/icon.png",
+
+	"environment": "*",
+	"entrypoints": {
+		"stationmod": [
+			"paulevs.bnb.BetterNetherBeta"
+		]
+	},
+
+	"mixins": [
+		"bnb.mixins.json"
+	],
+
+	"depends": {
+		"minecraft": "1.0.0-beta.7.3",
+		"stationloader": "1.3.*"
+	}
+}

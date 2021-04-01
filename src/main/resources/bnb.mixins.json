@@ -1,0 +1,21 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "paulevs.bnb.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": [
+		"NetherMixin"
+	],
+	"server": [],
+	"client": [
+		"AbstractClientPlayerMixin",
+		"ItemRendererMixin",
+		"TileRendererMixin",
+		"SoundHelperMixin",
+		"BlockBaseMixin",
+		"Class66Mixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
