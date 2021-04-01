@@ -9,8 +9,9 @@
 		"paulevs"
 	],
 	"contact": {
-		"homepage": "https://github.com/paulevsGitch/BetterNetherBeta",
-		"sources": "https://github.com/paulevsGitch/BetterNetherBeta"
+		"homepage": "https://github.com/paulevsGitch/BetterNetherBeta/releases",
+		"sources": "https://github.com/paulevsGitch/BetterNetherBeta",
+		"issues": "https://github.com/paulevsGitch/BetterNetherBeta/issues"
 	},
 
 	"license": "CC0-1.0",
