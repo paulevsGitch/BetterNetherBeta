@@ -23,7 +23,6 @@ public class NetherSoundSource {
 			String path = "assets/" + name.replace('.', '/');
 			List<String> resources = ResourceUtil.getResourceFiles(path);
 			for (String file: resources) {
-				System.out.println(file);
 				URL url = ResourceUtil.getURL(path + "/" + file);
 				String subname = path.substring(path.lastIndexOf('/') + 1) + "/" + file;
 				class_267 sound = new class_267(subname, url);

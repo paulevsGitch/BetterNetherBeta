@@ -29,7 +29,6 @@ public class ModelListener implements ModelRegister {
 		if (type == ModelRegister.Type.BLOCKS) {
 			String pathBlock = "/assets/" + BetterNetherBeta.MOD_ID + "/models/block/";
 			List<String> list = ResourceUtil.getResourceFiles(pathBlock);
-			System.out.println(list);
 			list.forEach((name) -> {
 				CustomModel model = loadModel(pathBlock, name);
 				fixRotation(model, pathBlock + "/" + name);

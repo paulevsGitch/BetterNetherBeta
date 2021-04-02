@@ -27,7 +27,6 @@ public class JsonConfig {
 	
 	public void save() {
 		if (requireSave) {
-			System.out.println(config);
 			JsonUtil.saveJson(getFile(), config);
 		}
 	}

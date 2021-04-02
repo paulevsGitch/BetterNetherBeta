@@ -12,8 +12,7 @@
 		"ItemRendererMixin",
 		"TileRendererMixin",
 		"SoundHelperMixin",
-		"BlockBaseMixin",
-		"Class66Mixin"
+		"BlockBaseMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
