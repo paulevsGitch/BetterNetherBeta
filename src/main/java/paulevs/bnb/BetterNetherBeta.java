@@ -1,6 +1,5 @@
 package paulevs.bnb;
 
-import net.modificationstation.stationloader.api.client.event.model.ModelRegister;
 import net.modificationstation.stationloader.api.client.event.texture.TextureRegister;
 import net.modificationstation.stationloader.api.common.event.block.BlockRegister;
 import net.modificationstation.stationloader.api.common.event.item.tool.EffectiveBlocksProvider;
@@ -10,7 +9,6 @@ import paulevs.bnb.listeners.BiomeListener;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.listeners.ChunkListener;
 import paulevs.bnb.listeners.EffectiveProvider;
-import paulevs.bnb.listeners.ModelListener;
 import paulevs.bnb.listeners.TextureListener;
 
 public class BetterNetherBeta implements StationMod {
@@ -22,7 +20,7 @@ public class BetterNetherBeta implements StationMod {
 		BlockRegister.EVENT.register(new BlockListener());
 		TextureRegister.EVENT.register(new TextureListener());
 		EffectiveBlocksProvider.EVENT.register(new EffectiveProvider());
-		ModelRegister.EVENT.register(new ModelListener());
+		//ModelRegister.EVENT.register(new ModelListener());
 		ChunkListener.EVENT.register(new ChunkListener());
 		BiomeRegister.EVENT.register(new BiomeListener());
 	}

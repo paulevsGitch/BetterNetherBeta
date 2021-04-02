@@ -17,7 +17,7 @@ import com.google.gson.JsonSyntaxException;
 public class JsonUtil {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	
-	private static JsonObject loadJsonResource(InputStream stream) {
+	public static JsonObject loadJson(InputStream stream) {
 		if (stream == null) {
 			return new JsonObject();
 		}
@@ -34,16 +34,16 @@ public class JsonUtil {
 		return obj == null ? new JsonObject() : obj;
 	}
 	
-	public static JsonObject loadJsonResource(String path) {
-		return loadJsonResource(JsonUtil.class.getResourceAsStream(path));
+	public static JsonObject loadJson(String path) {
+		return loadJson(ResourceUtil.getResourceAsStream(path));
 	}
 	
-	public static JsonObject loadJsonFile(File file) {
+	public static JsonObject loadJson(File file) {
 		if (!file.exists()) {
 			return new JsonObject();
 		}
 		try {
-			return loadJsonResource(new FileInputStream(file));
+			return loadJson(new FileInputStream(file));
 		}
 		catch (FileNotFoundException e) {
 			e.printStackTrace();

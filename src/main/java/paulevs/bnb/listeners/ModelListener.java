@@ -48,7 +48,7 @@ public class ModelListener implements ModelRegister {
 	}
 	
 	private void fixRotation(CustomModel model, String path) {
-		JsonObject root = JsonUtil.loadJsonResource(path);
+		JsonObject root = JsonUtil.loadJson(path);
 		JsonArray elements = root.getAsJsonArray("elements");
 		CustomCuboidRenderer[] cuboids = model.getCuboids();
 		for (int i = 0; i < elements.size(); i++) {

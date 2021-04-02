@@ -28,14 +28,14 @@ public class TextureListener implements TextureRegister {
 	}
 	
 	private void loadTextureMap(TextureFactory factory, TextureRegistry registry, String path, Map<String, Integer> map) {
-		JsonObject animation = JsonUtil.loadJsonResource(path + "animation_speed.json");
+		JsonObject animation = JsonUtil.loadJson(path + "animation_speed.json");
 		List<String> list = ResourceUtil.getResourceFiles(path);
 		list.forEach((texture) -> {
 			if (texture.endsWith(".png")) {
 				int width = 16;
 				int height = 16;
 				try {
-					InputStream stream = ResourceUtil.getResourceAsStream(path + "/" + texture);
+					InputStream stream = ResourceUtil.getResourceAsStream(path + texture);
 					DataInputStream data = new DataInputStream(stream);
 					data.skip(16);
 					width = data.readInt();
@@ -47,8 +47,8 @@ public class TextureListener implements TextureRegister {
 					e.printStackTrace();
 				}
 				boolean normal = width == height;
+				int index = normal ? factory.addTexture(registry, path + texture) : factory.addAnimatedTexture(registry, path + texture, getAnimationSpeed(animation, path + texture));
 				String name = texture.substring(0, texture.lastIndexOf('.'));
-				int index = normal ? factory.addTexture(registry, path + texture) : factory.addAnimatedTexture(registry, path + texture, getAnimationSpeed(animation, name));
 				map.put(name, index);
 			}
 		});

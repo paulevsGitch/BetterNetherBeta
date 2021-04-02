@@ -11,7 +11,7 @@ public class CreativeScreen extends ContainerBase {
 	
 	public CreativeScreen(InventoryBase playerInventory) {
 		super(new Chest(playerInventory, new BETabInventory()));
-		this.rows = 3;
+		this.rows = BETabInventory.ROWS;
 	}
 
 	@Override

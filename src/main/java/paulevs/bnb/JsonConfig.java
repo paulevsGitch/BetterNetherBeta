@@ -22,7 +22,7 @@ public class JsonConfig {
 	public void load() {
 		File file = getFile();
 		requireSave = !file.exists();
-		config = JsonUtil.loadJsonFile(file);
+		config = JsonUtil.loadJson(file);
 	}
 	
 	public void save() {

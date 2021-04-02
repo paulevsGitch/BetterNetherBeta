@@ -9,7 +9,8 @@ import paulevs.bnb.block.MultiBlock;
 import paulevs.bnb.listeners.BlockListener;
 
 public class BETabInventory implements InventoryBase {
-	private ItemInstance[] items = new ItemInstance[27];
+	public  static final int ROWS = 4;
+	private ItemInstance[] items = new ItemInstance[ROWS * 9];
 	
 	public BETabInventory() {
 		int i = 0;
@@ -34,7 +35,7 @@ public class BETabInventory implements InventoryBase {
 	
 	@Override
 	public int getInventorySize() {
-		return 27;
+		return items.length;
 	}
 
 	@Override
