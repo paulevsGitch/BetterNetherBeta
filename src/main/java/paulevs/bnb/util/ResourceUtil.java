@@ -42,7 +42,8 @@ public class ResourceUtil {
 			}
 		}
 		else {
-			int cut = path.length() - 1;
+			boolean start = path.startsWith("/");
+			int cut = start ? path.length() - 1 : path.length() + 1;
 			File dir = new File("./mods");
 			for (File mod: dir.listFiles()) {
 				if (mod.isFile() && mod.getName().endsWith(".jar")) {
@@ -57,7 +58,8 @@ public class ResourceUtil {
 						    		break;
 						    	}
 						    }
-						    if (("/" + entry.getName()).startsWith(path)) {
+						    String searchName = start ? "/" + entry.getName() : entry.getName();
+						    if (searchName.startsWith(path)) {
 						    	filenames.add(entry.getName().substring(cut));
 						    }
 						}

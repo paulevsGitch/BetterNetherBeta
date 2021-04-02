@@ -4,11 +4,13 @@ import net.modificationstation.stationloader.api.client.event.texture.TextureReg
 import net.modificationstation.stationloader.api.common.event.block.BlockRegister;
 import net.modificationstation.stationloader.api.common.event.item.tool.EffectiveBlocksProvider;
 import net.modificationstation.stationloader.api.common.event.level.biome.BiomeRegister;
+import net.modificationstation.stationloader.api.common.event.recipe.RecipeRegister;
 import net.modificationstation.stationloader.api.common.mod.StationMod;
 import paulevs.bnb.listeners.BiomeListener;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.listeners.ChunkListener;
 import paulevs.bnb.listeners.EffectiveProvider;
+import paulevs.bnb.listeners.RecipeListener;
 import paulevs.bnb.listeners.TextureListener;
 
 public class BetterNetherBeta implements StationMod {
@@ -23,6 +25,7 @@ public class BetterNetherBeta implements StationMod {
 		//ModelRegister.EVENT.register(new ModelListener());
 		ChunkListener.EVENT.register(new ChunkListener());
 		BiomeRegister.EVENT.register(new BiomeListener());
+		RecipeRegister.EVENT.register(new RecipeListener());
 	}
 	
 	public static String getID(String name) {
