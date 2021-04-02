@@ -7,6 +7,8 @@ import com.google.common.collect.Lists;
 
 import net.minecraft.block.BlockBase;
 import net.minecraft.entity.EntityEntry;
+import net.minecraft.entity.monster.Ghast;
+import net.minecraft.entity.monster.ZombiePigman;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.structure.Structure;
 import paulevs.bnb.util.BlockState;
@@ -26,6 +28,11 @@ public class NetherBiome extends Biome {
 	
 	public NetherBiome(String name) {
 		this.setName(name);
+		this.monsters.clear();
+		this.creatures.clear();
+		this.waterCreatures.clear();
+		this.addMonsterSpawn(ZombiePigman.class, 10);
+		this.addMonsterSpawn(Ghast.class, 1);
 	}
 	
 	@SuppressWarnings("unchecked")
