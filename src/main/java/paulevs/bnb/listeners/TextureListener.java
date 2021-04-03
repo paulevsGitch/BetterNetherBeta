@@ -25,9 +25,11 @@ public class TextureListener implements TextureRegister {
 		TextureRegistry terrain = TextureRegistry.getRegistry("TERRAIN");
 		String pathBlock = "/assets/" + BetterNetherBeta.MOD_ID + "/textures/block/";
 		loadTextureMap(textureFactory, terrain, pathBlock, BLOCK_TEXTURES);
+		ModelListener.updateModels();
 	}
 	
 	private void loadTextureMap(TextureFactory factory, TextureRegistry registry, String path, Map<String, Integer> map) {
+		System.out.println("Textures loaded");
 		JsonObject animation = JsonUtil.loadJson(path + "animation_speed.json");
 		List<String> list = ResourceUtil.getResourceFiles(path);
 		list.forEach((texture) -> {

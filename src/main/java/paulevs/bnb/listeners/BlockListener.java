@@ -17,6 +17,7 @@ import paulevs.bnb.block.NetherStairsBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.NetherVineBlock;
 import paulevs.bnb.block.NetherWoodBlock;
+import paulevs.bnb.block.TestBlock;
 import paulevs.bnb.block.types.NetherPlanks;
 import paulevs.bnb.interfaces.BlockInit;
 
@@ -37,6 +38,7 @@ public class BlockListener implements BlockRegister {
 		for (NetherPlanks plank: NetherPlanks.values()) {
 			register("stairs_" + plank.getName(), NetherStairsBlock::new);
 		}
+		register("test", TestBlock::new);
 		BetterNetherBeta.configBlocks.save();
 	}
 	

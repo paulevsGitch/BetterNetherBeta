@@ -24,4 +24,12 @@ public class MHelper {
 		result.y = lerp((float) a.y, (float) b.y, delta);
 		result.z = lerp((float) a.z, (float) b.z, delta);
 	}
+	
+	public static float max(float a, float b) {
+		return a > b ? a : b;
+	}
+	
+	public static float max(float a, float b, float c) {
+		return max(a, max(b, c));
+	}
 }
