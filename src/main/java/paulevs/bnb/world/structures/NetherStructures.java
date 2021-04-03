@@ -26,7 +26,7 @@ public class NetherStructures {
 		new BlockState(BlockListener.getBlock("nether_leaves"), NetherLeaves.POISON_LEAVES),
 		new BlockState(BlockListener.getBlock("glowing_fur"), GlowingFur.POISON_GLOWING_FUR_TOP),
 		new BlockState(BlockListener.getBlock("glowing_fur"), GlowingFur.POISON_GLOWING_FUR_BOTTOM),
-		0.3F, 1.5F
+		0.6F, 1.3F
 	);
 	
 	public static final Structure CRIMSON_ROOTS = new NetherGrass(new BlockState(BlockListener.getBlock("nether_plant"), NetherPlants.CRIMSON_ROOTS));

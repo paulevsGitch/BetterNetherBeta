@@ -29,7 +29,7 @@ public enum NetherWood implements BlockEnum {
 	}
 
 	@Override
-	public String getTexture(int side, int meta) {
+	public String getTexture(int side) {
 		return BlockUtil.isHorizontalSide(side) ? name + "_side" : name + "_top";
 	}
 

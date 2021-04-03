@@ -46,7 +46,7 @@ public class NetherVineBlock extends NetherCeilPlantBlock implements BlockWithLi
 		return new PlaceableTileEntityWithMeta(i) {
 			@Environment(EnvType.CLIENT)
 			public int getTexturePosition(int damage) {
-				String name = variants[clampMeta(damage)].getTexture(0, damage);
+				String name = variants[clampMeta(damage)].getTexture(0);
 				return TextureListener.getBlockTexture(name + "_inventory", name);
 			}
 		};
@@ -54,7 +54,7 @@ public class NetherVineBlock extends NetherCeilPlantBlock implements BlockWithLi
 	
 	@Override
 	public int getTextureForSide(int side, int meta) {
-		String name = variants[clampMeta(meta)].getTexture(side, meta);
+		String name = variants[clampMeta(meta)].getTexture(side);
 		if (BlockUtil.isLightPass()) {
 			return TextureListener.getBlockTexture(name + "_light", name);
 		}

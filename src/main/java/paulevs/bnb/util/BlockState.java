@@ -1,5 +1,7 @@
 package paulevs.bnb.util;
 
+import java.util.Locale;
+
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;
@@ -28,7 +30,7 @@ public class BlockState {
 	}
 	
 	public BlockState(MultiBlock block, BlockEnum variant) {
-		this(block.id, variant.getDropMeta());
+		this(block.id, variant.getMeta());
 	}
 
 	public int getBlockID() {
@@ -57,5 +59,19 @@ public class BlockState {
 	
 	public BlockBase getBlock() {
 		return BlockUtil.blockByID(tile);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		BlockState state = (BlockState) obj;
+		return state == null ? false : state.tile == this.tile && state.meta == this.meta;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format(Locale.ROOT, "[%d:%d]", tile, meta);
 	}
 }

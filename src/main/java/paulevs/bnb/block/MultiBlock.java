@@ -30,7 +30,7 @@ public class MultiBlock extends NetherBlock implements BlockItemProvider {
 	
 	@Override
 	public int getTextureForSide(int side, int meta) {
-		String name = variants[clampMeta(meta)].getTexture(side, meta);
+		String name = variants[clampMeta(meta)].getTexture(side);
 		return TextureListener.getBlockTexture(name);
 	}
 	

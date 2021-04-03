@@ -18,7 +18,7 @@ public class NetherWoodBlock extends MultiBlock implements BlockWithLight {
 	
 	@Override
 	public int getTextureForSide(int side, int meta) {
-		String name = variants[clampMeta(meta)].getTexture(side, meta);
+		String name = variants[clampMeta(meta)].getTexture(side);
 		if (BlockUtil.isItemRender()) {
 			return TextureListener.getBlockTexture(name + "_inventory", name);
 		}

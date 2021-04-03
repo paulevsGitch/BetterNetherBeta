@@ -28,7 +28,7 @@ public enum NetherLeaves implements BlockEnum {
 	}
 
 	@Override
-	public String getTexture(int side, int meta) {
+	public String getTexture(int side) {
 		return name;
 	}
 

@@ -156,7 +156,7 @@ public class NetherTree extends Structure {
 									leaves.setBlock(level, px, py, pz);
 									if (random.nextBoolean() && canReplaceLeaves(level.getTileId(px, py - 1, pz))) {
 										if (hasFurLength) {
-											int length = random.nextInt(3);
+											int length = 2 + random.nextInt(3);
 											for (int n = 1; n < length; n++) {
 												if (canReplaceLeaves(level.getTileId(px, py - n, pz))) {
 													furTop.setBlock(level, px, py - n, pz);
@@ -166,6 +166,7 @@ public class NetherTree extends Structure {
 													break;
 												}
 											}
+											furBottom.setBlock(level, px, py - length, pz);
 										}
 										else {
 											furBottom.setBlock(level, px, py - 1, pz);

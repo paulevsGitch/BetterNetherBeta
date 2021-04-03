@@ -31,7 +31,7 @@ public enum GlowingFur implements BlockEnum {
 	}
 
 	@Override
-	public String getTexture(int side, int meta) {
+	public String getTexture(int side) {
 		return name;
 	}
 

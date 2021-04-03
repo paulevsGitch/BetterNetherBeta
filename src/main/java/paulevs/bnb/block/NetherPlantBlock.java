@@ -27,7 +27,7 @@ public class NetherPlantBlock extends MultiBlock implements BlockWithLight {
 		return new PlaceableTileEntityWithMeta(i) {
 			@Environment(EnvType.CLIENT)
 			public int getTexturePosition(int damage) {
-				String name = variants[clampMeta(damage)].getTexture(0, damage);
+				String name = variants[clampMeta(damage)].getTexture(0);
 				return TextureListener.getBlockTexture(name + "_inventory", name);//getTextureForSide(0, damage);
 			}
 		};
@@ -87,7 +87,7 @@ public class NetherPlantBlock extends MultiBlock implements BlockWithLight {
 	
 	@Override
 	public int getTextureForSide(int side, int meta) {
-		String name = variants[clampMeta(meta)].getTexture(side, meta);
+		String name = variants[clampMeta(meta)].getTexture(side);
 		if (BlockUtil.isLightPass()) {
 			return TextureListener.getBlockTexture(name + "_light", name);
 		}

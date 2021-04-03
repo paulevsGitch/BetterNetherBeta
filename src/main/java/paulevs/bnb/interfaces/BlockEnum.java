@@ -5,7 +5,7 @@ public interface BlockEnum {
 	
 	public String getLocalizedName();
 	
-	public String getTexture(int side, int meta);
+	public String getTexture(int side);
 	
 	public int getDropMeta();
 	
