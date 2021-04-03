@@ -54,56 +54,63 @@ public class ChunkListener implements ChunkPopulator {
 						int sy = sect << 4;
 						int minY = sect == 0 ? 1 : 0;
 						int maxY = sect == 7 ? 15 : 16;
+						int count;
 						
-						int count = random.nextInt(countTrees);
-						for (int i = 0; i < count; i++) {
-							int px = random.nextInt(16);
-							int pz = random.nextInt(16);
-							for (int y = minY; y < maxY; y++) {
-								int py = sy | y;
-								int tile = chunk.getTileId(px, py, pz);
-								if (BlockUtil.isTerrain(tile)) {
-									tile = chunk.getTileId(px, py + 1, pz);
-									if (BlockUtil.isNonSolidNoLava(tile)) {
-										structure = bio.getTree(random);
-										structure.generate(level, random, px | startX, py + 1, pz | startZ);
-										break;
+						if (countTrees > 0) {
+							count = random.nextInt(countTrees);
+							for (int i = 0; i < count; i++) {
+								int px = random.nextInt(16);
+								int pz = random.nextInt(16);
+								for (int y = minY; y < maxY; y++) {
+									int py = sy | y;
+									int tile = chunk.getTileId(px, py, pz);
+									if (BlockUtil.isTerrain(tile)) {
+										tile = chunk.getTileId(px, py + 1, pz);
+										if (BlockUtil.isNonSolidNoLava(tile)) {
+											structure = bio.getTree(random);
+											structure.generate(level, random, px | startX, py + 1, pz | startZ);
+											break;
+										}
 									}
 								}
 							}
 						}
 						
-						count = random.nextInt(countPlants);
-						for (int i = 0; i < count; i++) {
-							int px = random.nextInt(16);
-							int pz = random.nextInt(16);
-							for (int y = minY; y < maxY; y++) {
-								int py = sy | y;
-								int tile = chunk.getTileId(px, py, pz);
-								if (BlockUtil.isTerrain(tile)) {
-									tile = chunk.getTileId(px, py + 1, pz);
-									if (BlockUtil.isNonSolidNoLava(tile)) {
-										structure = bio.getPlant(random);
-										structure.generate(level, random, px | startX, py + 1, pz | startZ);
-										break;
+						if (countPlants > 0) {
+							count = random.nextInt(countPlants);
+							for (int i = 0; i < count; i++) {
+								int px = random.nextInt(16);
+								int pz = random.nextInt(16);
+								for (int y = minY; y < maxY; y++) {
+									int py = sy | y;
+									int tile = chunk.getTileId(px, py, pz);
+									if (BlockUtil.isTerrain(tile)) {
+										tile = chunk.getTileId(px, py + 1, pz);
+										if (BlockUtil.isNonSolidNoLava(tile)) {
+											structure = bio.getPlant(random);
+											structure.generate(level, random, px | startX, py + 1, pz | startZ);
+											break;
+										}
 									}
 								}
 							}
 						}
 						
-						count = random.nextInt(countCeilPlants);
-						for (int i = 0; i < count; i++) {
-							int px = random.nextInt(16);
-							int pz = random.nextInt(16);
-							for (int y = minY; y < maxY; y++) {
-								int py = sy | y;
-								int tile = chunk.getTileId(px, py, pz);
-								if (BlockBase.BY_ID[tile] != null && BlockBase.BY_ID[tile].isFullCube()) {
-									tile = chunk.getTileId(px, py - 1, pz);
-									if (BlockUtil.isNonSolidNoLava(tile)) {
-										structure = bio.getCeilPlant(random);
-										structure.generate(level, random, px | startX, py - 1, pz | startZ);
-										break;
+						if (countCeilPlants > 0) {
+							count = random.nextInt(countCeilPlants);
+							for (int i = 0; i < count; i++) {
+								int px = random.nextInt(16);
+								int pz = random.nextInt(16);
+								for (int y = minY; y < maxY; y++) {
+									int py = sy | y;
+									int tile = chunk.getTileId(px, py, pz);
+									if (BlockBase.BY_ID[tile] != null && BlockBase.BY_ID[tile].isFullCube()) {
+										tile = chunk.getTileId(px, py - 1, pz);
+										if (BlockUtil.isNonSolidNoLava(tile)) {
+											structure = bio.getCeilPlant(random);
+											structure.generate(level, random, px | startX, py - 1, pz | startZ);
+											break;
+										}
 									}
 								}
 							}

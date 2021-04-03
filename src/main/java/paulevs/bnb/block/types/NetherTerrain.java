@@ -5,7 +5,8 @@ import paulevs.bnb.util.BlockUtil;
 
 public enum NetherTerrain implements BlockEnum {
 	CRIMSON_NYLIUM(0, "crimson_nylium", "Crimson Nylium"),
-	WARPED_NYLIUM(1, "warped_nylium", "Warped Nylium");
+	WARPED_NYLIUM(1, "warped_nylium", "Warped Nylium"),
+	POISON_NYLIUM(1, "poison_nylium", "Poison Nylium");
 	
 	private final String localizedName;
 	private final String name;
@@ -40,5 +41,10 @@ public enum NetherTerrain implements BlockEnum {
 	@Override
 	public int getMeta() {
 		return meta;
+	}
+	
+	@Override
+	public boolean isInCreative() {
+		return true;
 	}
 }

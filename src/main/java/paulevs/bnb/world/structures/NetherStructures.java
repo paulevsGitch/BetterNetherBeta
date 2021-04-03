@@ -21,6 +21,13 @@ public class NetherStructures {
 		new BlockState(BlockListener.getBlock("glowing_fur"), GlowingFur.WARPED_GLOWING_FUR),
 		0.5F, 1F
 	);
+	public static final Structure POISON_TREE = new NetherTree(
+		new BlockState(BlockListener.getBlock("nether_wood"), NetherWood.POISON_WOOD),
+		new BlockState(BlockListener.getBlock("nether_leaves"), NetherLeaves.POISON_LEAVES),
+		new BlockState(BlockListener.getBlock("glowing_fur"), GlowingFur.POISON_GLOWING_FUR_TOP),
+		new BlockState(BlockListener.getBlock("glowing_fur"), GlowingFur.POISON_GLOWING_FUR_BOTTOM),
+		0.3F, 1.5F
+	);
 	
 	public static final Structure CRIMSON_ROOTS = new NetherGrass(new BlockState(BlockListener.getBlock("nether_plant"), NetherPlants.CRIMSON_ROOTS));
 	public static final Structure LAMELLARIUM = new NetherGrass(new BlockState(BlockListener.getBlock("nether_plant"), NetherPlants.LAMELLARIUM));

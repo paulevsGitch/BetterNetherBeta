@@ -8,6 +8,7 @@ import paulevs.bnb.world.structures.NetherStructures;
 public class CrimsonForest extends NetherBiome {
 	public CrimsonForest(String name) {
 		super(name);
+		this.setFogColor("e23f36");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrain.CRIMSON_NYLIUM));
 		this.addTree(NetherStructures.CRIMSON_TREE);
 		this.addPlant(NetherStructures.CRIMSON_ROOTS);

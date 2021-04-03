@@ -35,14 +35,18 @@ public class MultiBlock extends NetherBlock implements BlockItemProvider {
 	}
 	
 	protected int clampMeta(int meta) {
-		return meta % getVariantCount();
+		return meta % variants.length;
 	}
 	
-	public int getVariantCount() {
-		return variants.length;
+	public BlockEnum[] getVariants() {
+		return variants;
 	}
 	
 	public int getMeta(int variant) {
-		return variants[variant].getDropMeta();
+		return variants[variant].getMeta();
+	}
+	
+	public BlockEnum getVariant(int meta) {
+		return variants[clampMeta(meta)];
 	}
 }

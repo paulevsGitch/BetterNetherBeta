@@ -4,7 +4,8 @@ import paulevs.bnb.interfaces.BlockEnum;
 
 public enum NetherLeaves implements BlockEnum {
 	CRIMSON_LEAVES(0, "crimson_leaves", "Crimson Leaves"),
-	WARPED_LEAVES(1, "warped_leaves", "Warped Leaves");
+	WARPED_LEAVES(1, "warped_leaves", "Warped Leaves"),
+	POISON_LEAVES(2, "poison_leaves", "Poison Leaves");
 	
 	private final String localizedName;
 	private final String name;
@@ -39,5 +40,10 @@ public enum NetherLeaves implements BlockEnum {
 	@Override
 	public int getMeta() {
 		return meta;
+	}
+	
+	@Override
+	public boolean isInCreative() {
+		return true;
 	}
 }

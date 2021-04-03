@@ -4,7 +4,8 @@ import paulevs.bnb.interfaces.BlockEnum;
 
 public enum NetherPlanks implements BlockEnum {
 	CRIMSON_PLANKS(0, "crimson_planks", "Crimson Planks"),
-	WARPED_PLANKS(1, "warped_planks", "Warped Planks");
+	WARPED_PLANKS(1, "warped_planks", "Warped Planks"),
+	POISON_PLANKS(2, "poison_planks", "Poison Planks");
 	
 	private final String localizedName;
 	private final String name;
@@ -39,5 +40,10 @@ public enum NetherPlanks implements BlockEnum {
 	@Override
 	public int getMeta() {
 		return meta;
+	}
+	
+	@Override
+	public boolean isInCreative() {
+		return true;
 	}
 }

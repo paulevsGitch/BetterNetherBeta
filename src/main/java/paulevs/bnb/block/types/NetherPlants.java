@@ -49,4 +49,9 @@ public enum NetherPlants implements BlockEnum {
 	public int getMeta() {
 		return meta;
 	}
+	
+	@Override
+	public boolean isInCreative() {
+		return true;
+	}
 }

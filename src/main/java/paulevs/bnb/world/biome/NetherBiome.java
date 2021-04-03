@@ -11,6 +11,7 @@ import net.minecraft.entity.monster.Ghast;
 import net.minecraft.entity.monster.ZombiePigman;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.structure.Structure;
+import net.minecraft.util.maths.Vec3f;
 import paulevs.bnb.util.BlockState;
 
 public class NetherBiome extends Biome {
@@ -25,6 +26,8 @@ public class NetherBiome extends Biome {
 	private int ceilCount = 0;
 	
 	private boolean hasFire = true;
+	
+	private Vec3f fogColor = Vec3f.method_1293(0.2F, 0.03F, 0.03F);
 	
 	public NetherBiome(String name) {
 		this.setName(name);
@@ -51,7 +54,7 @@ public class NetherBiome extends Biome {
 	}
 	
 	public int getMaxTreeCount() {
-		return treeCount;
+		return trees.isEmpty() ? 0 : treeCount;
 	}
 	
 	public void setMaxTreeCount(int treeCount) {
@@ -59,7 +62,7 @@ public class NetherBiome extends Biome {
 	}
 	
 	public int getMaxPlantCount() {
-		return plantCount;
+		return plants.isEmpty() ? 0 : plantCount;
 	}
 	
 	public void setMaxPlantCount(int plantCount) {
@@ -67,7 +70,7 @@ public class NetherBiome extends Biome {
 	}
 	
 	public int getMaxCeilPlantCount() {
-		return ceilCount;
+		return ceil.isEmpty() ? 0 : ceilCount;
 	}
 	
 	public void setMaxCeilPlantCount(int plantCount) {
@@ -108,5 +111,25 @@ public class NetherBiome extends Biome {
 	
 	public boolean hasFire() {
 		return hasFire;
+	}
+	
+	public Vec3f getFogColor() {
+		return fogColor;
+	}
+	
+	public void setFogColor(float r, float g, float b) {
+		fogColor.x = r;
+		fogColor.y = g;
+		fogColor.z = b;
+	}
+	
+	public void setFogColor(int r, int g, int b) {
+		setFogColor(r / 255F, g / 255F, b / 255F);
+	}
+	
+	public void setFogColor(String hex) {
+		fogColor.x = (float) Integer.parseInt(hex.substring(0, 2), 16) / 255F;
+		fogColor.y = (float) Integer.parseInt(hex.substring(2, 4), 16) / 255F;
+		fogColor.z = (float) Integer.parseInt(hex.substring(4, 6), 16) / 255F;
 	}
 }

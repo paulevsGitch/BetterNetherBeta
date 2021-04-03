@@ -8,6 +8,7 @@ import paulevs.bnb.world.structures.NetherStructures;
 public class WarpedForest extends NetherBiome {
 	public WarpedForest(String name) {
 		super(name);
+		this.setFogColor("30b7a9");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrain.WARPED_NYLIUM));
 		this.addTree(NetherStructures.WARPED_TREE);
 		this.addPlant(NetherStructures.WARPED_ROOTS);

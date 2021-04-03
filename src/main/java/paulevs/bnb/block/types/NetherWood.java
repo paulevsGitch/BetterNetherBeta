@@ -5,7 +5,8 @@ import paulevs.bnb.util.BlockUtil;
 
 public enum NetherWood implements BlockEnum {
 	CRIMSON_WOOD(0, "crimson_wood", "Crimson Wood"),
-	WARPED_WOOD(1, "warped_wood", "Warped Wood");
+	WARPED_WOOD(1, "warped_wood", "Warped Wood"),
+	POISON_WOOD(2, "poison_wood", "Poison Wood");
 	
 	private final String localizedName;
 	private final String name;
@@ -40,5 +41,10 @@ public enum NetherWood implements BlockEnum {
 	@Override
 	public int getMeta() {
 		return meta;
+	}
+
+	@Override
+	public boolean isInCreative() {
+		return true;
 	}
 }

@@ -10,4 +10,6 @@ public interface BlockEnum {
 	public int getDropMeta();
 	
 	public int getMeta();
+	
+	public boolean isInCreative();
 }

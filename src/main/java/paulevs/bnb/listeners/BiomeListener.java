@@ -9,6 +9,7 @@ import net.minecraft.level.biome.Biome;
 import net.modificationstation.stationloader.api.common.event.level.biome.BiomeRegister;
 import paulevs.bnb.world.NetherBiomeSource;
 import paulevs.bnb.world.biome.CrimsonForest;
+import paulevs.bnb.world.biome.PoisonForest;
 import paulevs.bnb.world.biome.WarpedForest;
 
 public class BiomeListener implements BiomeRegister {
@@ -19,6 +20,7 @@ public class BiomeListener implements BiomeRegister {
 		NetherBiomeSource.addBiome(Biome.NETHER);
 		register("Crimson Forest", CrimsonForest::new);
 		register("Warped Forest", WarpedForest::new);
+		register("Poison Forest", PoisonForest::new);
 	}
 	
 	private static void register(String name, Function<String, Biome> init) {

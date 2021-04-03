@@ -6,6 +6,7 @@ import net.minecraft.inventory.InventoryBase;
 import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import paulevs.bnb.block.MultiBlock;
+import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.listeners.BlockListener;
 
 public class BETabInventory implements InventoryBase {
@@ -22,9 +23,11 @@ public class BETabInventory implements InventoryBase {
 		items[i++] = new ItemInstance(ItemBase.ironAxe);
 		for (BlockBase block: BlockListener.getModBlocks()) {
 			if (block instanceof MultiBlock) {
-				int max = ((MultiBlock) block).getVariantCount();
-				for (int meta = 0; meta < max; meta ++) {
-					items[i++] = new ItemInstance(block, 1, ((MultiBlock) block).getMeta(meta));
+				BlockEnum[] variants = ((MultiBlock) block).getVariants();
+				for (BlockEnum variant: variants) {
+					if (variant.isInCreative()) {
+						items[i++] = new ItemInstance(block, 1, variant.getMeta());
+					}
 				}
 			}
 			else {
