@@ -10,7 +10,7 @@ import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.listeners.BlockListener;
 
 public class BETabInventory implements InventoryBase {
-	public  static final int ROWS = 4;
+	public  static final int ROWS = 5;
 	private ItemInstance[] items = new ItemInstance[ROWS * 9];
 	
 	public BETabInventory() {

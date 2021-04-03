@@ -13,7 +13,12 @@ public enum NetherPlants implements BlockEnum {
 	WARPED_ROOTS(4, "warped_roots", "Warped Roots"),
 	GLOWTAIL(5, "glowtail", "Glowtail"),
 	WARPED_CORAL(6, "warped_coral", "Warped Coral"),
-	WARPED_MOSS(7, "warped_moss", "Warped Moss");
+	WARPED_MOSS(7, "warped_moss", "Warped Moss"),
+	
+	BUBBLE_GRASS(8, "bubble_grass", "Bubble Grass"),
+	LONGWEED(9, "longweed", "Longweed"),
+	JELLYSHROOM(10, "jellyshroom", "Jellyshroom"),
+	TAILGRASS(11, "tailgrass", "Tailgrass");
 	
 	private final String localizedName;
 	private final String name;

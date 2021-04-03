@@ -4,6 +4,7 @@ import net.minecraft.level.structure.Structure;
 import paulevs.bnb.block.types.GlowingFur;
 import paulevs.bnb.block.types.NetherLeaves;
 import paulevs.bnb.block.types.NetherPlants;
+import paulevs.bnb.block.types.NetherVines;
 import paulevs.bnb.block.types.NetherWood;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
@@ -29,22 +30,31 @@ public class NetherStructures {
 		0.6F, 1.3F
 	);
 	
-	public static final Structure CRIMSON_ROOTS = new NetherGrass(new BlockState(BlockListener.getBlock("nether_plant"), NetherPlants.CRIMSON_ROOTS));
-	public static final Structure LAMELLARIUM = new NetherGrass(new BlockState(BlockListener.getBlock("nether_plant"), NetherPlants.LAMELLARIUM));
-	public static final Structure LANTERN_GRASS = new NetherGrass(new BlockState(BlockListener.getBlock("nether_plant"), NetherPlants.LANTERN_GRASS));
-	public static final Structure CRIMSON_BUSH = new NetherGrass(new BlockState(BlockListener.getBlock("nether_plant"), NetherPlants.CRIMSON_BUSH));
+	public static final Structure CRIMSON_ROOTS = makeGrass(NetherPlants.CRIMSON_ROOTS);
+	public static final Structure LAMELLARIUM = makeGrass(NetherPlants.LAMELLARIUM);
+	public static final Structure LANTERN_GRASS = makeGrass(NetherPlants.LANTERN_GRASS);
+	public static final Structure CRIMSON_BUSH = makeGrass(NetherPlants.CRIMSON_BUSH);
 	
-	public static final Structure WARPED_ROOTS = new NetherGrass(new BlockState(BlockListener.getBlock("nether_plant"), NetherPlants.WARPED_ROOTS));
-	public static final Structure GLOWTAIL = new NetherGrass(new BlockState(BlockListener.getBlock("nether_plant"), NetherPlants.GLOWTAIL));
-	public static final Structure WARPED_CORAL = new NetherGrass(new BlockState(BlockListener.getBlock("nether_plant"), NetherPlants.WARPED_CORAL));
-	public static final Structure WARPED_MOSS = new NetherGrass(new BlockState(BlockListener.getBlock("nether_plant"), NetherPlants.WARPED_MOSS));
+	public static final Structure WARPED_ROOTS = makeGrass(NetherPlants.WARPED_ROOTS);
+	public static final Structure GLOWTAIL = makeGrass(NetherPlants.GLOWTAIL);
+	public static final Structure WARPED_CORAL = makeGrass(NetherPlants.WARPED_CORAL);
+	public static final Structure WARPED_MOSS = makeGrass(NetherPlants.WARPED_MOSS);
+	
+	public static final Structure BUBBLE_GRASS = makeGrass(NetherPlants.BUBBLE_GRASS);
+	public static final Structure LONGWEED = makeGrass(NetherPlants.LONGWEED);
+	public static final Structure JELLYSHROOM = makeGrass(NetherPlants.JELLYSHROOM);
+	public static final Structure TAILGRASS = makeGrass(NetherPlants.TAILGRASS);
 	
 	public static final Structure CRIMSON_VINE = new NetherVine(
-		new BlockState(BlockListener.getBlockID("nether_vine"), 1),
-		new BlockState(BlockListener.getBlockID("nether_vine"), 0)
+		new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.CRIMSON_VINE_TOP),
+		new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.CRIMSON_VINE_BOTTOM)
 	);
 	public static final Structure WARPED_VINE = new NetherVine(
-		new BlockState(BlockListener.getBlockID("nether_vine"), 3),
-		new BlockState(BlockListener.getBlockID("nether_vine"), 2)
+		new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.WARPED_VINE_TOP),
+		new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.WARPED_VINE_BOTTOM)
 	);
+	
+	private static Structure makeGrass(NetherPlants variant) {
+		return new NetherGrass(new BlockState(BlockListener.getBlock("nether_plant"), variant));
+	}
 }

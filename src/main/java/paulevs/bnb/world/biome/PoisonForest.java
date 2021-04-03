@@ -11,6 +11,10 @@ public class PoisonForest extends NetherBiome {
 		this.setFogColor("b1fb43");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrain.POISON_NYLIUM));
 		this.addTree(NetherStructures.POISON_TREE);
+		this.addPlant(NetherStructures.BUBBLE_GRASS);
+		this.addPlant(NetherStructures.LONGWEED);
+		this.addPlant(NetherStructures.JELLYSHROOM);
+		this.addPlant(NetherStructures.TAILGRASS);
 		this.setMaxTreeCount(5);
 		this.setMaxPlantCount(15);
 		this.setMaxCeilPlantCount(30);

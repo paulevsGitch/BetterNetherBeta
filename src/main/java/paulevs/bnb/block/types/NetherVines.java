@@ -46,6 +46,6 @@ public enum NetherVines implements BlockEnum {
 	
 	@Override
 	public boolean isInCreative() {
-		return true;
+		return name.contains("bottom");
 	}
 }
