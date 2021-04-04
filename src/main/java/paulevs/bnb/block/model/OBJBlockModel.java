@@ -9,6 +9,7 @@ import java.util.List;
 
 import net.minecraft.client.render.QuadPoint;
 import net.minecraft.util.maths.MathHelper;
+import net.minecraft.util.maths.Vec3f;
 import net.modificationstation.stationloader.api.client.model.CustomCuboidRenderer;
 import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.api.client.texture.TextureRegistry;
@@ -300,5 +301,56 @@ public class OBJBlockModel implements CustomModel {
 		copy.materials = materials;
 		copy.textures = textures;
 		return copy;
+	}
+	
+	public OBJBlockModel rotateX(float angle) {
+		float sin = MathHelper.sin(angle);
+		float cos = MathHelper.cos(angle);
+		for (net.modificationstation.stationloader.api.client.model.CustomTexturedQuad quad: cuboids[0].getCubeQuads()) {
+			for (QuadPoint point: quad.getQuadPoints()) {
+				Vec3f pos = point.pointVector;
+				pos.y -= 8;
+				pos.z -= 8;
+				double ny = pos.y * cos - pos.z * sin;
+				double nz = pos.z * cos + pos.y * sin;
+				pos.y = ny + 8;
+				pos.z = nz + 8;
+			}
+		}
+		return this;
+	}
+	
+	public OBJBlockModel rotateY(float angle) {
+		float sin = MathHelper.sin(angle);
+		float cos = MathHelper.cos(angle);
+		for (net.modificationstation.stationloader.api.client.model.CustomTexturedQuad quad: cuboids[0].getCubeQuads()) {
+			for (QuadPoint point: quad.getQuadPoints()) {
+				Vec3f pos = point.pointVector;
+				pos.x -= 8;
+				pos.z -= 8;
+				double nx = pos.x * cos - pos.z * sin;
+				double nz = pos.z * cos + pos.x * sin;
+				pos.x = nx + 8;
+				pos.z = nz + 8;
+			}
+		}
+		return this;
+	}
+	
+	public OBJBlockModel rotateZ(float angle) {
+		float sin = MathHelper.sin(angle);
+		float cos = MathHelper.cos(angle);
+		for (net.modificationstation.stationloader.api.client.model.CustomTexturedQuad quad: cuboids[0].getCubeQuads()) {
+			for (QuadPoint point: quad.getQuadPoints()) {
+				Vec3f pos = point.pointVector;
+				pos.x -= 8;
+				pos.y -= 8;
+				double nx = pos.x * cos - pos.y * sin;
+				double ny = pos.y * cos + pos.x * sin;
+				pos.x = nx + 8;
+				pos.y = ny + 8;
+			}
+		}
+		return this;
 	}
 }

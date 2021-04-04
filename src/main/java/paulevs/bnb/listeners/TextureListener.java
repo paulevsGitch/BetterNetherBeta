@@ -26,7 +26,6 @@ public class TextureListener implements TextureRegister {
 		TextureRegistry terrain = TextureRegistry.getRegistry("TERRAIN");
 		String pathBlock = "/assets/" + BetterNetherBeta.MOD_ID + "/textures/block/";
 		loadTextureMap(textureFactory, terrain, pathBlock, BLOCK_TEXTURES);
-		System.out.println(getSolidBlockTexture("warped_fungus") + " " + getEmissiveBlockTexture("warped_fungus"));
 		ModelListener.updateModels();
 	}
 	

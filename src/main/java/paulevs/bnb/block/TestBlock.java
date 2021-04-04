@@ -6,6 +6,7 @@ import net.modificationstation.stationloader.api.client.model.BlockModelProvider
 import net.modificationstation.stationloader.api.client.model.CustomModel;
 import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.listeners.ModelListener;
+import paulevs.bnb.util.MHelper;
 
 public class TestBlock extends NetherBlock implements BlockModelProvider, BlockWithLight {
 	public TestBlock(String registryName, int id) {
@@ -18,8 +19,9 @@ public class TestBlock extends NetherBlock implements BlockModelProvider, BlockW
 	}
 
 	@Override
-	public CustomModel getCustomWorldModel(Level level, int i, int j, int k, int i1) {
-		return ModelListener.getBlockModel("test");
+	public CustomModel getCustomWorldModel(Level level, int x, int y, int z, int meta) {
+		int state = MHelper.getSeed(y, x, z) & 3;
+		return ModelListener.getBlockModel("warped_fungus_" + state);
 	}
 	
 	@Override
