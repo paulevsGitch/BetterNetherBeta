@@ -8,6 +8,7 @@ import net.modificationstation.stationloader.api.client.event.model.ModelRegiste
 import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
 import paulevs.bnb.block.model.OBJBlockModel;
+import paulevs.bnb.block.types.NetherPlants;
 import paulevs.bnb.util.BlockUtil;
 
 public class ModelListener implements ModelRegister {
@@ -16,8 +17,12 @@ public class ModelListener implements ModelRegister {
 	@Override
 	public void registerModels(Type type) {
 		if (type == ModelRegister.Type.BLOCKS) {
-			BLOCK_MODELS.put("test", new OBJBlockModel("/assets/bnb/models/block/warped_fungus.obj", 16, 8, 0, 8, null, "warped_fungus", "warped_fungus_bottom"));
-			BLOCK_MODELS.put("fluffy_grass", new OBJBlockModel("/assets/bnb/models/block/fluffy_grass.obj", 16, 8, 0, 8, BlockFaces.UP, "crimson_roots"));
+			BLOCK_MODELS.put("test", new OBJBlockModel("/assets/bnb/models/block/warped_fungus.obj", 16, 8, 0, 8, null).setTextures("warped_fungus", "warped_fungus_bottom"));
+			
+			OBJBlockModel fluffyGrass = new OBJBlockModel("/assets/bnb/models/block/fluffy_grass.obj", 16, 8, 0, 8, BlockFaces.UP);
+			for (NetherPlants plant: NetherPlants.values()) {
+				BLOCK_MODELS.put(plant.getName(), fluffyGrass.clone().setTextures(plant.getTexture(0)));
+			}
 		}
 	}
 	

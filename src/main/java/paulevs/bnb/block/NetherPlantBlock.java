@@ -98,7 +98,7 @@ public class NetherPlantBlock extends MultiBlock implements BlockModelProvider, 
 	}
 
 	@Override
-	public CustomModel getCustomWorldModel(Level level, int i, int j, int k, int i1) {
-		return ModelListener.getBlockModel("fluffy_grass");
+	public CustomModel getCustomWorldModel(Level level, int x, int y, int z, int meta) {
+		return ModelListener.getBlockModel(getVariant(meta).getName());
 	}
 }

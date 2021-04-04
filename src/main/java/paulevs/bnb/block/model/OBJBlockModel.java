@@ -22,20 +22,26 @@ import paulevs.bnb.util.ResourceUtil;
 public class OBJBlockModel implements CustomModel {
 	private OBJCuboidRenderer[] emissive;
 	private OBJCuboidRenderer[] cuboids;
-	private final String[] textures;
+	private String[] textures;
 	private Integer[] materials;
 	private int[] atlasIDemissive;
 	private int[] atlasIDsolid;
 	
-	public OBJBlockModel(String modelPath, String... textures) {
-		this(modelPath, 16, 8, 8, 8, null, textures);
+	public OBJBlockModel(String modelPath) {
+		this(modelPath, 16, 8, 8, 8, null);
 	}
 	
-	public OBJBlockModel(String modelPath, float scale, float offsetX, float offsetY, float offsetZ, BlockFaces mainFace, String... textures) {
-		this.textures = textures;
+	public OBJBlockModel(String modelPath, float scale, float offsetX, float offsetY, float offsetZ, BlockFaces mainFace) {
 		this.cuboids = new OBJCuboidRenderer[] {
 			new OBJCuboidRenderer(makeQuads(modelPath, scale, offsetX, offsetY, offsetZ, mainFace))
 		};
+	}
+	
+	private OBJBlockModel() {}
+	
+	public OBJBlockModel setTextures(String... textures) {
+		this.textures = textures;
+		return this;
 	}
 	
 	private CustomTexturedQuad[] makeQuads(String modelPath, float scale, float offsetX, float offsetY, float offsetZ, BlockFaces mainFace) {
@@ -254,5 +260,45 @@ public class OBJBlockModel implements CustomModel {
 	
 	public int getAtlasID(int quadIndex) {
 		return BlockUtil.isLightPass() ? atlasIDemissive[quadIndex] : atlasIDsolid[quadIndex];
+	}
+	
+	private OBJCuboidRenderer copyCuboid(OBJCuboidRenderer src) {
+		CustomTexturedQuad[] quads = new CustomTexturedQuad[src.getCubeQuads().length];
+		for (int i = 0; i < quads.length; i++) {
+			net.modificationstation.stationloader.api.client.model.CustomTexturedQuad srcQuad = src.getCubeQuads()[i];
+			QuadPoint[] copyPoints = new QuadPoint[srcQuad.getQuadPoints().length];
+			for (int j = 0; j < copyPoints.length; j++) {
+				QuadPoint srcPoint = srcQuad.getQuadPoints()[j];
+				copyPoints[j] = new QuadPoint(
+					(float) srcPoint.pointVector.x,
+					(float) srcPoint.pointVector.y,
+					(float) srcPoint.pointVector.z,
+					(float) srcPoint.field_1147,
+					(float) srcPoint.field_1148
+				);
+			}
+			quads[i] = new CustomFacedTexturedQuad(copyPoints, srcQuad.getSide());
+		}
+		return new OBJCuboidRenderer(quads);
+	}
+	
+	private OBJCuboidRenderer[] copyCuboids(OBJCuboidRenderer[] cuboids) {
+		if (cuboids == null) {
+			return null;
+		}
+		if (cuboids.length == 0) {
+			return new OBJCuboidRenderer[0];
+		}
+		return new OBJCuboidRenderer[] { copyCuboid(cuboids[0]) };
+	}
+	
+	@Override
+	public OBJBlockModel clone() {
+		OBJBlockModel copy = new OBJBlockModel();
+		copy.emissive = copyCuboids(emissive);
+		copy.cuboids = copyCuboids(cuboids);
+		copy.materials = materials;
+		copy.textures = textures;
+		return copy;
 	}
 }
