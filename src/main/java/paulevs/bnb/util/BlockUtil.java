@@ -6,6 +6,7 @@ import paulevs.bnb.block.NetherTerrainBlock;
 public class BlockUtil {
 	private static boolean requireLight;
 	private static boolean lightPass;
+	private static int breakStage;
 	
 	public static boolean isTerrain(int id) {
 		return id == BlockBase.NETHERRACK.id || blockByID(id) instanceof NetherTerrainBlock;
@@ -33,6 +34,14 @@ public class BlockUtil {
 	
 	public static boolean requireLight() {
 		return requireLight;
+	}
+	
+	public static void setBreakStage(int value) {
+		breakStage = value;
+	}
+	
+	public static int getBreakStage() {
+		return breakStage;
 	}
 	
 	public static BlockBase blockByID(int id) {

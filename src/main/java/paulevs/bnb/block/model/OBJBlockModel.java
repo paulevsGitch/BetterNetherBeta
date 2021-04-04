@@ -21,6 +21,7 @@ import paulevs.bnb.util.MHelper;
 import paulevs.bnb.util.ResourceUtil;
 
 public class OBJBlockModel implements CustomModel {
+	private OBJCuboidRenderer[][] breaking;
 	private OBJCuboidRenderer[] emissive;
 	private OBJCuboidRenderer[] cuboids;
 	private String[] textures;
@@ -36,6 +37,21 @@ public class OBJBlockModel implements CustomModel {
 		this.cuboids = new OBJCuboidRenderer[] {
 			new OBJCuboidRenderer(makeQuads(modelPath, scale, offsetX, offsetY, offsetZ, mainFace))
 		};
+		this.breaking = new OBJCuboidRenderer[10][1];
+		for (int i = 0; i < 10; i++) {
+			this.breaking[i] = copyCuboids(this.cuboids);
+			for (net.modificationstation.stationloader.api.client.model.CustomTexturedQuad quad: this.breaking[i][0].getCubeQuads()) {
+				int textureIndex = 240 + i;
+				int posX = textureIndex & 15;
+				int posY = textureIndex >> 4;
+				float startU = posX / 16F;
+				float startV = posY / 16F;
+				for (QuadPoint point: quad.getQuadPoints()) {
+					point.field_1147 += startU;
+					point.field_1148 += startV;
+				}
+			}
+		}
 	}
 	
 	private OBJBlockModel() {}
@@ -132,40 +148,7 @@ public class OBJBlockModel implements CustomModel {
 			
 			BlockFaces face = mainFace;
 			if (face == null) {
-				float ax = (float) points[1].pointVector.x - (float) points[0].pointVector.x;
-				float ay = (float) points[1].pointVector.y - (float) points[0].pointVector.y;
-				float az = (float) points[1].pointVector.z - (float) points[0].pointVector.z;
-				float bx = (float) points[2].pointVector.x - (float) points[0].pointVector.x;
-				float by = (float) points[2].pointVector.y - (float) points[0].pointVector.y;
-				float bz = (float) points[2].pointVector.z - (float) points[0].pointVector.z;
-				
-				float l = MathHelper.sqrt(ax * ax + ay * ay + az * az);
-				ax /= l;
-				ay /= l;
-				az /= l;
-				
-				l = MathHelper.sqrt(bx * bx + by * by + bz * bz);
-				bx /= l;
-				by /= l;
-				bz /= l;
-				
-				float nx = (ay * bz) - (az * by);
-				float ny = (az * bx) - (ax * bz);
-				float nz = (ax * by) - (ay * bx);
-				ax = MathHelper.abs(nx);
-				ay = MathHelper.abs(ny);
-				az = MathHelper.abs(nz);
-				float max = MHelper.max(ax, ay, az);
-				
-				if (max == ax) {
-					face = nx > 0 ? BlockFaces.EAST : BlockFaces.WEST;
-				}
-				else if (max == ay) {
-					face = ny > 0 ? BlockFaces.UP : BlockFaces.DOWN;
-				}
-				else {
-					face = nz > 0 ? BlockFaces.SOUTH : BlockFaces.NORTH;
-				}
+				face = getFace(points);
 			}
 			
 			quads[index++] = new CustomFacedTexturedQuad(points, face);
@@ -173,9 +156,51 @@ public class OBJBlockModel implements CustomModel {
 		
 		return quads;
 	}
+	
+	private BlockFaces getFace(QuadPoint[] points) {
+		float ax = (float) points[1].pointVector.x - (float) points[0].pointVector.x;
+		float ay = (float) points[1].pointVector.y - (float) points[0].pointVector.y;
+		float az = (float) points[1].pointVector.z - (float) points[0].pointVector.z;
+		float bx = (float) points[2].pointVector.x - (float) points[0].pointVector.x;
+		float by = (float) points[2].pointVector.y - (float) points[0].pointVector.y;
+		float bz = (float) points[2].pointVector.z - (float) points[0].pointVector.z;
+		
+		float l = MathHelper.sqrt(ax * ax + ay * ay + az * az);
+		ax /= l;
+		ay /= l;
+		az /= l;
+		
+		l = MathHelper.sqrt(bx * bx + by * by + bz * bz);
+		bx /= l;
+		by /= l;
+		bz /= l;
+		
+		float nx = (ay * bz) - (az * by);
+		float ny = (az * bx) - (ax * bz);
+		float nz = (ax * by) - (ay * bx);
+		ax = MathHelper.abs(nx);
+		ay = MathHelper.abs(ny);
+		az = MathHelper.abs(nz);
+		float max = MHelper.max(ax, ay, az);
+		
+		if (max == ax) {
+			return nx < 0 ? BlockFaces.SOUTH : BlockFaces.NORTH;
+		}
+		else if (max == ay) {
+			return ny > 0 ? BlockFaces.UP : BlockFaces.DOWN;
+		}
+		else {
+			return nz > 0 ? BlockFaces.EAST : BlockFaces.WEST;
+		}
+	}
 
 	@Override
 	public CustomCuboidRenderer[] getCuboids() {
+		int stage = BlockUtil.getBreakStage();
+		if (stage > -1) {
+			stage -= 240;
+			return breaking[stage];
+		}
 		return BlockUtil.isLightPass() ? emissive : cuboids;
 	}
 	
@@ -260,6 +285,10 @@ public class OBJBlockModel implements CustomModel {
 	}
 	
 	public int getAtlasID(int quadIndex) {
+		int stage = BlockUtil.getBreakStage();
+		if (stage > -1) {
+			return 0;
+		}
 		return BlockUtil.isLightPass() ? atlasIDemissive[quadIndex] : atlasIDsolid[quadIndex];
 	}
 	
@@ -298,6 +327,10 @@ public class OBJBlockModel implements CustomModel {
 		OBJBlockModel copy = new OBJBlockModel();
 		copy.emissive = copyCuboids(emissive);
 		copy.cuboids = copyCuboids(cuboids);
+		copy.breaking = new OBJCuboidRenderer[10][];
+		for (int i = 0; i < 10; i++) {
+			copy.breaking[i] = copyCuboids(breaking[i]);
+		}
 		copy.materials = materials;
 		copy.textures = textures;
 		return copy;
@@ -316,7 +349,11 @@ public class OBJBlockModel implements CustomModel {
 				pos.y = ny + 8;
 				pos.z = nz + 8;
 			}
+			if (quad.getSide() != null) {
+				((CustomFacedTexturedQuad) quad).setSide(getFace(quad.getQuadPoints()));
+			}
 		}
+		copyToBreaking();
 		return this;
 	}
 	
@@ -333,7 +370,11 @@ public class OBJBlockModel implements CustomModel {
 				pos.x = nx + 8;
 				pos.z = nz + 8;
 			}
+			if (quad.getSide() != null) {
+				((CustomFacedTexturedQuad) quad).setSide(getFace(quad.getQuadPoints()));
+			}
 		}
+		copyToBreaking();
 		return this;
 	}
 	
@@ -350,7 +391,26 @@ public class OBJBlockModel implements CustomModel {
 				pos.x = nx + 8;
 				pos.y = ny + 8;
 			}
+			if (quad.getSide() != null) {
+				((CustomFacedTexturedQuad) quad).setSide(getFace(quad.getQuadPoints()));
+			}
 		}
+		copyToBreaking();
 		return this;
+	}
+	
+	private void copyToBreaking() {
+		for (int i = 0; i < cuboids[0].getCubeQuads().length; i++) {
+			net.modificationstation.stationloader.api.client.model.CustomTexturedQuad quadSrc = cuboids[0].getCubeQuads()[i];
+			for (int j = 0; j < 10; j++) {
+				net.modificationstation.stationloader.api.client.model.CustomTexturedQuad quadRes = breaking[j][0].getCubeQuads()[i];
+				for (int k = 0; k < quadSrc.getQuadPoints().length; k++) {
+					QuadPoint pointSrc = quadSrc.getQuadPoints()[k];
+					QuadPoint pointRes = quadRes.getQuadPoints()[k];
+					pointRes.pointVector = pointSrc.pointVector;
+				}
+				((CustomFacedTexturedQuad) quadRes).setSide(quadSrc.getSide());
+			}
+		}
 	}
 }

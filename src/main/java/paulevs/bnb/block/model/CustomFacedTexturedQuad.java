@@ -5,7 +5,7 @@ import net.modificationstation.stationloader.api.common.util.BlockFaces;
 import net.modificationstation.stationloader.impl.client.model.CustomTexturedQuad;
 
 public class CustomFacedTexturedQuad extends CustomTexturedQuad {
-	private final BlockFaces side;
+	private BlockFaces side;
 	
 	public CustomFacedTexturedQuad(QuadPoint[] args, BlockFaces side) {
 		super(args);
@@ -15,5 +15,9 @@ public class CustomFacedTexturedQuad extends CustomTexturedQuad {
 	@Override
 	public BlockFaces getSide() {
 		return this.side;
+	}
+	
+	public void setSide(BlockFaces side) {
+		this.side = side;
 	}
 }

@@ -1,6 +1,8 @@
 package paulevs.bnb;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Supplier;
 
 import com.google.gson.JsonElement;
@@ -50,7 +52,38 @@ public class JsonConfig {
 		return element;
 	}
 	
+	private void set(String path, JsonElement value) {
+		String[] parts = path.split("\\.");
+		JsonElement element = config;
+		int last = parts.length - 1;
+		for (int i = 0; i < last; i++) {
+			String name = parts[i];
+			if (!element.getAsJsonObject().has(name)) {
+				element.getAsJsonObject().add(name, new JsonObject());
+			}
+			element = element.getAsJsonObject().get(name);
+		}
+		requireSave = true;
+		element.getAsJsonObject().add(parts[last], value);
+	}
+	
 	public int getInt(String path, int def) {
 		return get(path, () -> new JsonPrimitive(def)).getAsInt();
+	}
+	
+	public void setInt(String path, int value) {
+		set(path, new JsonPrimitive(value));
+	}
+	
+	public Set<Integer> getSet(String path) {
+		JsonObject obj = get(path, () -> new JsonObject()).getAsJsonObject();
+		Set<Integer> result = new HashSet<Integer>();
+		obj.entrySet().forEach((entry) -> {
+			JsonElement element = entry.getValue();
+			if (element.isJsonPrimitive() && element.getAsJsonPrimitive().isNumber()) {
+				result.add(element.getAsInt());
+			}
+		});
+		return result;
 	}
 }

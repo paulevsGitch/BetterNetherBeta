@@ -32,6 +32,10 @@ public class MHelper {
 		result.z = lerp((float) a.z, (float) b.z, delta);
 	}
 	
+	public static int max(int a, int b) {
+		return a > b ? a : b;
+	}
+	
 	public static float max(float a, float b) {
 		return a > b ? a : b;
 	}

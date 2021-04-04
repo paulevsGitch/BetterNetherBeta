@@ -1,35 +1,45 @@
 package paulevs.bnb.listeners;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import net.minecraft.block.BlockBase;
 import net.modificationstation.stationloader.api.common.event.block.BlockRegister;
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.block.GlowingFurBlock;
+import paulevs.bnb.block.NetherFungusBlock;
 import paulevs.bnb.block.NetherLeavesBlock;
 import paulevs.bnb.block.NetherPlanksBlock;
 import paulevs.bnb.block.NetherPlantBlockImpl;
 import paulevs.bnb.block.NetherStairsBlock;
+import paulevs.bnb.block.NetherStumpBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.NetherVineBlock;
 import paulevs.bnb.block.NetherWoodBlock;
-import paulevs.bnb.block.NetherFungusBlock;
 import paulevs.bnb.block.types.NetherPlanks;
 import paulevs.bnb.interfaces.BlockInit;
+import paulevs.bnb.util.BlockUtil;
 
 public class BlockListener implements BlockRegister {
 	private static final Map<String, BlockBase> BLOCKS = Maps.newHashMap();
+	private static final List<BlockBase> BLOCKS_TAB = Lists.newArrayList();
+	private static Set<Integer> occupiedIDs;
 	private static int startID = 200;
 	
 	@Override
 	public void registerBlocks() {
 		BetterNetherBeta.configBlocks.load();
+		occupiedIDs = BetterNetherBeta.configBlocks.getSet("blocks");
+		
 		register("nether_terrain", NetherTerrainBlock::new);
 		register("nether_wood", NetherWoodBlock::new);
+		register("nether_stump", NetherStumpBlock::new);
 		register("nether_leaves", NetherLeavesBlock::new);
 		register("nether_plant", NetherPlantBlockImpl::new);
 		register("nether_vine", NetherVineBlock::new);
@@ -39,11 +49,15 @@ public class BlockListener implements BlockRegister {
 			register("stairs_" + plank.getName(), NetherStairsBlock::new);
 		}
 		register("test", NetherFungusBlock::new);
+		
 		BetterNetherBeta.configBlocks.save();
 	}
 	
 	private static int getID(String name) {
-		return BetterNetherBeta.configBlocks.getInt("blocks." + name, startID++);
+		while (BlockUtil.blockByID(startID) != null && startID < 255 && !occupiedIDs.contains(startID)) {
+			startID++;
+		}
+		return BetterNetherBeta.configBlocks.getInt("blocks." + name, startID);
 	}
 
 	@SuppressWarnings("unused")
@@ -53,10 +67,11 @@ public class BlockListener implements BlockRegister {
 	
 	private static <T extends BlockBase> void register(String name, BlockInit<String, Integer, T> init) {
 		BLOCKS.put(name, init.apply(name, getID(name)));
+		BLOCKS_TAB.add(BLOCKS.get(name));
 	}
 	
 	public static Collection<BlockBase> getModBlocks() {
-		return BLOCKS.values();
+		return BLOCKS_TAB;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -9,6 +9,7 @@ import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
 import paulevs.bnb.block.model.OBJBlockModel;
 import paulevs.bnb.block.types.NetherPlants;
+import paulevs.bnb.block.types.NetherWood;
 import paulevs.bnb.util.BlockUtil;
 
 public class ModelListener implements ModelRegister {
@@ -17,18 +18,27 @@ public class ModelListener implements ModelRegister {
 	@Override
 	public void registerModels(Type type) {
 		if (type == ModelRegister.Type.BLOCKS) {
-			BLOCK_MODELS.put("test", new OBJBlockModel("/assets/bnb/models/block/warped_fungus.obj", 16, 8, 0, 8, null).setTextures("warped_fungus", "warped_fungus_bottom"));
+			OBJBlockModel model;
+			model = new OBJBlockModel("/assets/bnb/models/block/warped_fungus.obj", 16, 8, 0, 8, null).setTextures("warped_fungus", "warped_fungus_bottom");
+			makeRotated("warped_fungus", model);
 			
-			OBJBlockModel fungus = new OBJBlockModel("/assets/bnb/models/block/warped_fungus.obj", 16, 8, 0, 8, null).setTextures("warped_fungus", "warped_fungus_bottom");
-			for (int i = 0; i < 4; i++) {
-				float angle = (float) Math.PI * 0.5F * i;
-				BLOCK_MODELS.put("warped_fungus_" + i, fungus.clone().rotateY(angle));
-			}
-			
-			OBJBlockModel fluffyGrass = new OBJBlockModel("/assets/bnb/models/block/fluffy_grass.obj", 16, 8, 0, 8, BlockFaces.UP);
+			model = new OBJBlockModel("/assets/bnb/models/block/fluffy_grass.obj", 16, 8, 0, 8, BlockFaces.UP);
 			for (NetherPlants plant: NetherPlants.values()) {
-				BLOCK_MODELS.put(plant.getName(), fluffyGrass.clone().setTextures(plant.getTexture(0)));
+				BLOCK_MODELS.put(plant.getName(), model.clone().setTextures(plant.getTexture(0)));
 			}
+			
+			model = new OBJBlockModel("/assets/bnb/models/block/tree_stump.obj");
+			for (NetherWood wood: NetherWood.values()) {
+				makeRotated(wood.getName().replace("wood", "stump"), model.clone().setTextures(wood.getTexture(2) + "_1", wood.getTexture(0)));
+				makeRotated(wood.getName().replace("wood", "stump_full"), model.clone().setTextures(wood.getTexture(2) + "_1"));
+			}
+		}
+	}
+	
+	private void makeRotated(String name, OBJBlockModel model) {
+		for (int i = 0; i < 4; i++) {
+			float angle = (float) Math.PI * 0.5F * i;
+			BLOCK_MODELS.put(name + "_" + i, model.clone().rotateY(angle));
 		}
 	}
 	

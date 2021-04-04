@@ -141,19 +141,50 @@ public class TileRendererMixin {
 	private float field_54;
 	
 	/**
+	 * Destruction stage, if = -1 then normal block render, otherwise used as index
+	 */
+	@Shadow
+	private int field_83;
+	
+	/**
 	 * Main method to render block in the world
 	 */
 	@Inject(method = "method_57", at = @At("HEAD"), cancellable = true)
 	private void renderBlock(BlockBase block, int x, int y, int z, CallbackInfoReturnable<Boolean> info) {
 		if (block instanceof BlockWithLight) {
-			boolean result1 = bnb_renderModel(block, x, y, z);
-			BlockUtil.setLightPass(true);
-			boolean result2 = bnb_renderModel(block, x, y, z);
-			BlockUtil.setLightPass(false);
-			if (result1 | result2) {
-				info.setReturnValue(true);
+			BlockUtil.setBreakStage(field_83);
+			if (field_83 > -1) {
+				boolean result = bnb_renderModel(block, x, y, z);
+				if (result) {
+					info.setReturnValue(true);
+				}
+				info.cancel();
 			}
-			info.cancel();
+			else {
+				boolean result1 = bnb_renderModel(block, x, y, z);
+				BlockUtil.setLightPass(true);
+				boolean result2 = bnb_renderModel(block, x, y, z);
+				BlockUtil.setLightPass(false);
+				
+				if (result1 | result2) {
+					info.setReturnValue(true);
+				}
+				info.cancel();
+			}
+		}
+		else if (block instanceof BlockModelProvider) {
+			Minecraft minecraft = bnb_getMinecraft();
+			Level level = minecraft.level;
+			CustomModel model = ((BlockModelProvider) block).getCustomWorldModel(level, x, y, z, level.getTileMeta(x, y, z));
+			if (model instanceof OBJBlockModel) {
+				BlockUtil.setBreakStage(field_83);
+				boolean result = bnb_renderModel(block, x, y, z);
+				
+				if (result) {
+					info.setReturnValue(true);
+				}
+				info.cancel();
+			}
 		}
 	}
 	
@@ -258,15 +289,6 @@ public class TileRendererMixin {
 	@Shadow
 	private boolean method_82(BlockBase block, int x, int y, int z) { return false; }
 	
-	/*(private void bnb_overrideTexture(int texID) {
-		if (TextureRegistry.currentRegistry() != null) {
-			int atlasID = texID / TextureRegistry.currentRegistry().texturesPerFile();
-			if (TextureRegistry.currentRegistry().currentTexture() != atlasID) {
-				TextureRegistry.currentRegistry().bindAtlas(bnb_getMinecraft().textureManager, atlasID);
-			}
-		}
-	}*/
-	
 	private boolean bnb_renderModel(BlockBase block, int x, int y, int z) {
 		if (block instanceof BlockModelProvider) {
 			Minecraft minecraft = bnb_getMinecraft();
@@ -321,12 +343,7 @@ public class TileRendererMixin {
 							float var10 = this.field_93;
 							float var11 = this.field_93;
 							float var12 = this.field_93;
-							boolean var13 = true;
-							boolean var14 = true;
-							boolean var15 = true;
-							boolean var16 = true;
-							boolean var17 = true;
-							boolean var18 = true;
+							
 							this.field_93 = block.method_1604(this.field_82, x, y, z);
 							this.field_94 = block.method_1604(this.field_82, x - 1, y, z);
 							this.field_95 = block.method_1604(this.field_82, x, y - 1, z);
@@ -334,6 +351,7 @@ public class TileRendererMixin {
 							this.field_97 = block.method_1604(this.field_82, x + 1, y, z);
 							this.field_98 = block.method_1604(this.field_82, x, y + 1, z);
 							this.field_99 = block.method_1604(this.field_82, x, y, z + 1);
+							
 							this.field_70 = BlockBase.field_1942[this.field_82.getTileId(x + 1, y + 1, z)];
 							this.field_78 = BlockBase.field_1942[this.field_82.getTileId(x + 1, y - 1, z)];
 							this.field_74 = BlockBase.field_1942[this.field_82.getTileId(x + 1, y, z + 1)];
@@ -346,6 +364,7 @@ public class TileRendererMixin {
 							this.field_69 = BlockBase.field_1942[this.field_82.getTileId(x, y + 1, z - 1)];
 							this.field_80 = BlockBase.field_1942[this.field_82.getTileId(x, y - 1, z + 1)];
 							this.field_77 = BlockBase.field_1942[this.field_82.getTileId(x, y - 1, z - 1)];
+							
 							int xTemp;
 							if (texturedQuad.getSide() == BlockFaces.DOWN) {
 								if (this.field_55 <= 0) {
@@ -395,12 +414,10 @@ public class TileRendererMixin {
 									var10 = (this.field_101 + this.field_100 + this.field_95 + this.field_103) / 4.0F;
 								}
 
-								this.field_56 = this.field_57 = this.field_58 = this.field_59 = (var13 ? colorR : 1.0F)
-										* 0.5F;
-								this.field_60 = this.field_61 = this.field_62 = this.field_63 = (var13 ? colorG : 1.0F)
-										* 0.5F;
-								this.field_64 = this.field_65 = this.field_66 = this.field_68 = (var13 ? colorB : 1.0F)
-										* 0.5F;
+								this.field_56 = this.field_57 = this.field_58 = this.field_59 = colorR;
+								this.field_60 = this.field_61 = this.field_62 = this.field_63 = colorG;
+								this.field_64 = this.field_65 = this.field_66 = this.field_68 = colorB;
+								
 								this.field_56 *= var9;
 								this.field_60 *= var9;
 								this.field_64 *= var9;
@@ -462,9 +479,10 @@ public class TileRendererMixin {
 									var11 = (this.field_44 + this.field_43 + this.field_98 + this.field_46) / 4.0F;
 								}
 
-								this.field_56 = this.field_57 = this.field_58 = this.field_59 = var14 ? colorR : 1.0F;
-								this.field_60 = this.field_61 = this.field_62 = this.field_63 = var14 ? colorG : 1.0F;
-								this.field_64 = this.field_65 = this.field_66 = this.field_68 = var14 ? colorB : 1.0F;
+								this.field_56 = this.field_57 = this.field_58 = this.field_59 = colorR;
+								this.field_60 = this.field_61 = this.field_62 = this.field_63 = colorG;
+								this.field_64 = this.field_65 = this.field_66 = this.field_68 = colorB;
+								
 								this.field_56 *= var9;
 								this.field_60 *= var9;
 								this.field_64 *= var9;
@@ -526,12 +544,10 @@ public class TileRendererMixin {
 									var12 = (this.field_100 + this.field_51 + this.field_103 + this.field_96) / 4.0F;
 								}
 
-								this.field_56 = this.field_57 = this.field_58 = this.field_59 = (var15 ? colorR : 1.0F)
-										* 0.8F;
-								this.field_60 = this.field_61 = this.field_62 = this.field_63 = (var15 ? colorG : 1.0F)
-										* 0.8F;
-								this.field_64 = this.field_65 = this.field_66 = this.field_68 = (var15 ? colorB : 1.0F)
-										* 0.8F;
+								this.field_56 = this.field_57 = this.field_58 = this.field_59 = colorR * 0.8F;
+								this.field_60 = this.field_61 = this.field_62 = this.field_63 = colorG * 0.8F;
+								this.field_64 = this.field_65 = this.field_66 = this.field_68 = colorB * 0.8F;
+								
 								this.field_56 *= var9;
 								this.field_60 *= var9;
 								this.field_64 *= var9;
@@ -593,12 +609,10 @@ public class TileRendererMixin {
 									var10 = (this.field_102 + this.field_53 + this.field_104 + this.field_99) / 4.0F;
 								}
 
-								this.field_56 = this.field_57 = this.field_58 = this.field_59 = (var16 ? colorR : 1.0F)
-										* 0.8F;
-								this.field_60 = this.field_61 = this.field_62 = this.field_63 = (var16 ? colorG : 1.0F)
-										* 0.8F;
-								this.field_64 = this.field_65 = this.field_66 = this.field_68 = (var16 ? colorB : 1.0F)
-										* 0.8F;
+								this.field_56 = this.field_57 = this.field_58 = this.field_59 = colorR * 0.8F;
+								this.field_60 = this.field_61 = this.field_62 = this.field_63 = colorG * 0.8F;
+								this.field_64 = this.field_65 = this.field_66 = this.field_68 = colorB * 0.8F;
+								
 								this.field_56 *= var9;
 								this.field_60 *= var9;
 								this.field_64 *= var9;
@@ -660,12 +674,10 @@ public class TileRendererMixin {
 									var11 = (this.field_100 + this.field_101 + this.field_51 + this.field_94) / 4.0F;
 								}
 
-								this.field_56 = this.field_57 = this.field_58 = this.field_59 = (var17 ? colorR : 1.0F)
-										* 0.6F;
-								this.field_60 = this.field_61 = this.field_62 = this.field_63 = (var17 ? colorG : 1.0F)
-										* 0.6F;
-								this.field_64 = this.field_65 = this.field_66 = this.field_68 = (var17 ? colorB : 1.0F)
-										* 0.6F;
+								this.field_56 = this.field_57 = this.field_58 = this.field_59 = colorR * 0.6F;
+								this.field_60 = this.field_61 = this.field_62 = this.field_63 = colorG * 0.6F;
+								this.field_64 = this.field_65 = this.field_66 = this.field_68 = colorB * 0.6F;
+								
 								this.field_56 *= var9;
 								this.field_60 *= var9;
 								this.field_64 *= var9;
@@ -727,9 +739,9 @@ public class TileRendererMixin {
 									var10 = (this.field_105 + this.field_41 + this.field_52 + this.field_97) / 4.0F;
 								}
 
-								this.field_56 = this.field_57 = this.field_58 = this.field_59 = (var18 ? colorR : 1.0F) * 0.6F;
-								this.field_60 = this.field_61 = this.field_62 = this.field_63 = (var18 ? colorG : 1.0F) * 0.6F;
-								this.field_64 = this.field_65 = this.field_66 = this.field_68 = (var18 ? colorB : 1.0F) * 0.6F;
+								this.field_56 = this.field_57 = this.field_58 = this.field_59 = colorR * 0.6F;
+								this.field_60 = this.field_61 = this.field_62 = this.field_63 = colorG * 0.6F;
+								this.field_64 = this.field_65 = this.field_66 = this.field_68 = colorB * 0.6F;
 								this.field_56 *= var9;
 								this.field_60 *= var9;
 								this.field_64 *= var9;
