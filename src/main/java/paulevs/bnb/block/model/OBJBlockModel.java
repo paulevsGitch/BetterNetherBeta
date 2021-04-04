@@ -197,7 +197,7 @@ public class OBJBlockModel implements CustomModel {
 	@Override
 	public CustomCuboidRenderer[] getCuboids() {
 		int stage = BlockUtil.getBreakStage();
-		if (stage > -1) {
+		if (stage > 0) {
 			stage -= 240;
 			return breaking[stage];
 		}
@@ -286,7 +286,7 @@ public class OBJBlockModel implements CustomModel {
 	
 	public int getAtlasID(int quadIndex) {
 		int stage = BlockUtil.getBreakStage();
-		if (stage > -1) {
+		if (stage > 0) {
 			return 0;
 		}
 		return BlockUtil.isLightPass() ? atlasIDemissive[quadIndex] : atlasIDsolid[quadIndex];
