@@ -31,4 +31,9 @@ public class TestBlock extends NetherBlock implements BlockModelProvider, BlockW
 	public boolean isFullCube() {
 		return false;
 	}
+
+	@Override
+	public float getEmissionIntensity() {
+		return 3F;
+	}
 }

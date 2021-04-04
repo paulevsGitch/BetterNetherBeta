@@ -49,4 +49,9 @@ public class NetherVineBlock extends NetherCeilPlantBlock implements BlockWithLi
 			}
 		};
 	}
+
+	@Override
+	public float getEmissionIntensity() {
+		return 2F;
+	}
 }

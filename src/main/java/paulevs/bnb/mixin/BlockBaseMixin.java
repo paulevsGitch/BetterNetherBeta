@@ -29,7 +29,7 @@ public abstract class BlockBaseMixin {
 	@Inject(method = "method_1604", at = @At("HEAD"), cancellable = true)
 	private void bnb_getLight(TileView world, int x, int y, int z, CallbackInfoReturnable<Float> info) {
 		if (this instanceof BlockWithLight && BlockUtil.isLightPass()) {
-			info.setReturnValue(1F);
+			info.setReturnValue(((BlockWithLight) (Object) this).getEmissionIntensity());
 			info.cancel();
 		}
 	}

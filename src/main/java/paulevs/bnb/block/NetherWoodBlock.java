@@ -10,4 +10,9 @@ public class NetherWoodBlock extends MultiBlock implements BlockWithLight {
 		this.setHardness(WOOD.getHardness());
 		this.sounds(WOOD_SOUNDS);
 	}
+
+	@Override
+	public float getEmissionIntensity() {
+		return 2F;
+	}
 }

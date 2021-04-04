@@ -83,4 +83,9 @@ public class NetherPlantBlock extends MultiBlock implements BlockWithLight {
 	public int method_1621() {
 		return 1;
 	}
+
+	@Override
+	public float getEmissionIntensity() {
+		return 1;
+	}
 }
