@@ -6,7 +6,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.block.BlockBase;
+import net.minecraft.level.TileView;
+import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.listeners.TextureListener;
+import paulevs.bnb.util.BlockUtil;
 
 @Mixin(BlockBase.class)
 public abstract class BlockBaseMixin {
@@ -19,6 +22,14 @@ public abstract class BlockBaseMixin {
 		}
 		else if (block == BlockBase.GLOWSTONE) {
 			info.setReturnValue(TextureListener.getBlockTexture("glowstone"));
+			info.cancel();
+		}
+	}
+	
+	@Inject(method = "method_1604", at = @At("HEAD"), cancellable = true)
+	private void bnb_getLight(TileView world, int x, int y, int z, CallbackInfoReturnable<Float> info) {
+		if (this instanceof BlockWithLight && BlockUtil.isLightPass()) {
+			info.setReturnValue(1F);
 			info.cancel();
 		}
 	}

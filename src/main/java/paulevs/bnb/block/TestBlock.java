@@ -4,9 +4,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.modificationstation.stationloader.api.client.model.BlockModelProvider;
 import net.modificationstation.stationloader.api.client.model.CustomModel;
+import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.listeners.ModelListener;
 
-public class TestBlock extends NetherBlock implements BlockModelProvider {
+public class TestBlock extends NetherBlock implements BlockModelProvider, BlockWithLight {
 	public TestBlock(String registryName, int id) {
 		super(registryName, id, Material.STONE);
 	}

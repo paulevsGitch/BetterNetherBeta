@@ -14,11 +14,13 @@ import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
 import net.modificationstation.stationloader.impl.client.model.CustomTexturedQuad;
 import paulevs.bnb.listeners.TextureListener;
+import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.MHelper;
 import paulevs.bnb.util.ResourceUtil;
 
 public class OBJBlockModel implements CustomModel {
-	private final OBJCuboidRenderer[] cuboids;
+	private OBJCuboidRenderer[] emissive;
+	private OBJCuboidRenderer[] cuboids;
 	private final String[] textures;
 	private Integer[] materials;
 	
@@ -163,28 +165,72 @@ public class OBJBlockModel implements CustomModel {
 
 	@Override
 	public CustomCuboidRenderer[] getCuboids() {
-		return cuboids;
+		return BlockUtil.isLightPass() ? emissive : cuboids;
 	}
 	
 	public void updateUVs() {
 		int index = 0;
-		int textures[] = new int[this.textures.length];
-		for (int i = 0; i < textures.length; i++) {
-			textures[i] = TextureListener.getBlockTexture(this.textures[i]) & 255;
+		int textures[] = new int[this.textures.length << 1];
+		int offset = this.textures.length;
+		
+		for (int i = 0; i < this.textures.length; i++) {
+			System.out.println(this.textures[i]);
+			textures[i + offset] = TextureListener.getEmissiveBlockTexture(this.textures[i]);
+			textures[i] = TextureListener.getSolidBlockTexture(this.textures[i]) & 255;
+			System.out.println(textures[i] + " " + textures[i + offset]);
 		}
+		
+		int posX;
+		int posY;
+		float startU;
+		float startV;
+		List<CustomTexturedQuad> emissiveQuads = new ArrayList<CustomTexturedQuad>();
+		
 		for (CustomCuboidRenderer renderer: cuboids) {
 			for (net.modificationstation.stationloader.api.client.model.CustomTexturedQuad quad: renderer.getCubeQuads()) {
 				int material = materials[index++];
-				int texture = material >= textures.length ? 0 : textures[material];
-				int posX = texture & 15;
-				int posY = texture >> 4;
-				float startU = posX / 16F;
-				float startV = posY / 16F;
+				if (material >= this.textures.length) {
+					material = 0;
+				}
+				int texture = textures[material];
+				int emissive = textures[material + offset];
+				
+				if (emissive != -1) {
+					emissive &= 255;
+					posX = emissive & 15;
+					posY = emissive >> 4;
+					startU = posX / 16F;
+					startV = posY / 16F;
+					QuadPoint[] copy = new QuadPoint[quad.getQuadPoints().length];
+					for (int i = 0; i < copy.length; i++) {
+						QuadPoint src = quad.getQuadPoints()[i];
+						copy[i] = new QuadPoint(src.pointVector, src.field_1147, src.field_1148);
+					}
+					CustomFacedTexturedQuad eQuad = new CustomFacedTexturedQuad(copy, quad.getSide());
+					for (QuadPoint point: eQuad.getQuadPoints()) {
+						point.field_1147 += startU;
+						point.field_1148 += startV;
+					}
+					emissiveQuads.add(eQuad);
+				}
+				
+				posX = texture & 15;
+				posY = texture >> 4;
+				startU = posX / 16F;
+				startV = posY / 16F;
 				for (QuadPoint point: quad.getQuadPoints()) {
 					point.field_1147 += startU;
 					point.field_1148 += startV;
 				}
 			}
+		}
+		
+		System.out.println("Has emissive: " + emissiveQuads.size());
+		if (emissiveQuads.isEmpty()) {
+			emissive = new OBJCuboidRenderer[0];
+		}
+		else {
+			emissive = new OBJCuboidRenderer[] { new OBJCuboidRenderer(emissiveQuads.toArray(new CustomTexturedQuad[] {})) };
 		}
 	}
 }

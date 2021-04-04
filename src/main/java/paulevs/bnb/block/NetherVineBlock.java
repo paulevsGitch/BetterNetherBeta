@@ -4,12 +4,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.PlaceableTileEntity;
 import net.minecraft.level.Level;
-import net.minecraft.level.TileView;
 import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTileEntityWithMeta;
 import paulevs.bnb.block.types.NetherVines;
 import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.listeners.TextureListener;
-import paulevs.bnb.util.BlockUtil;
 
 public class NetherVineBlock extends NetherCeilPlantBlock implements BlockWithLight {
 	public NetherVineBlock(String name, int id) {
@@ -47,24 +45,8 @@ public class NetherVineBlock extends NetherCeilPlantBlock implements BlockWithLi
 			@Environment(EnvType.CLIENT)
 			public int getTexturePosition(int damage) {
 				String name = variants[clampMeta(damage)].getTexture(0);
-				return TextureListener.getBlockTexture(name + "_inventory", name);
+				return TextureListener.getBlockTexture(name);
 			}
 		};
-	}
-	
-	@Override
-	public int getTextureForSide(int side, int meta) {
-		String name = variants[clampMeta(meta)].getTexture(side);
-		if (BlockUtil.isLightPass()) {
-			return TextureListener.getBlockTexture(name + "_light", name);
-		}
-		else {
-			return TextureListener.getBlockTexture(name);
-		}
-	}
-	
-	@Environment(EnvType.CLIENT)
-	public float method_1604(TileView arg, int i, int j, int k) {
-		return BlockUtil.isLightPass() ? 1F : super.method_1604(arg, i, j, k);
 	}
 }

@@ -4,8 +4,9 @@ import net.minecraft.block.BlockBase;
 import paulevs.bnb.block.NetherTerrainBlock;
 
 public class BlockUtil {
-	private static boolean lightPass;
+	private static boolean requireLight;
 	private static boolean renderItem;
+	private static boolean lightPass;
 	
 	public static boolean isTerrain(int id) {
 		return id == BlockBase.NETHERRACK.id || blockByID(id) instanceof NetherTerrainBlock;
@@ -25,6 +26,14 @@ public class BlockUtil {
 	
 	public static boolean isLightPass() {
 		return lightPass;
+	}
+	
+	public static void setRequireLight(boolean value) {
+		requireLight = value;
+	}
+	
+	public static boolean requireLight() {
+		return requireLight;
 	}
 	
 	public static BlockBase blockByID(int id) {

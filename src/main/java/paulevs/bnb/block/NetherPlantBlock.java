@@ -7,7 +7,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.PlaceableTileEntity;
 import net.minecraft.level.Level;
-import net.minecraft.level.TileView;
 import net.minecraft.util.maths.Box;
 import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTileEntityWithMeta;
 import paulevs.bnb.interfaces.BlockEnum;
@@ -28,7 +27,7 @@ public class NetherPlantBlock extends MultiBlock implements BlockWithLight {
 			@Environment(EnvType.CLIENT)
 			public int getTexturePosition(int damage) {
 				String name = variants[clampMeta(damage)].getTexture(0);
-				return TextureListener.getBlockTexture(name + "_inventory", name);//getTextureForSide(0, damage);
+				return TextureListener.getBlockTexture(name);
 			}
 		};
 	}
@@ -83,21 +82,5 @@ public class NetherPlantBlock extends MultiBlock implements BlockWithLight {
 	@Environment(EnvType.CLIENT)
 	public int method_1621() {
 		return 1;
-	}
-	
-	@Override
-	public int getTextureForSide(int side, int meta) {
-		String name = variants[clampMeta(meta)].getTexture(side);
-		if (BlockUtil.isLightPass()) {
-			return TextureListener.getBlockTexture(name + "_light", name);
-		}
-		else {
-			return TextureListener.getBlockTexture(name);
-		}
-	}
-	
-	@Environment(EnvType.CLIENT)
-	public float method_1604(TileView arg, int i, int j, int k) {
-		return BlockUtil.isLightPass() ? 1F : super.method_1604(arg, i, j, k);
 	}
 }

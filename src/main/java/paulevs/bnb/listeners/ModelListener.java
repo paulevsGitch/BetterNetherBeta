@@ -7,6 +7,7 @@ import com.google.common.collect.Maps;
 import net.modificationstation.stationloader.api.client.event.model.ModelRegister;
 import net.modificationstation.stationloader.api.client.model.CustomModel;
 import paulevs.bnb.block.model.OBJBlockModel;
+import paulevs.bnb.util.BlockUtil;
 
 public class ModelListener implements ModelRegister {
 	private static final Map<String, CustomModel> BLOCK_MODELS = Maps.newHashMap();
@@ -24,6 +25,7 @@ public class ModelListener implements ModelRegister {
 	}
 	
 	protected static void updateModels() {
+		BlockUtil.setLightPass(false);
 		for (CustomModel model: BLOCK_MODELS.values()) {
 			if (model instanceof OBJBlockModel) {
 				((OBJBlockModel) model).updateUVs();

@@ -13,6 +13,7 @@ import net.modificationstation.stationloader.api.client.event.texture.TextureReg
 import net.modificationstation.stationloader.api.client.texture.TextureFactory;
 import net.modificationstation.stationloader.api.client.texture.TextureRegistry;
 import paulevs.bnb.BetterNetherBeta;
+import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.JsonUtil;
 import paulevs.bnb.util.ResourceUtil;
 
@@ -25,11 +26,11 @@ public class TextureListener implements TextureRegister {
 		TextureRegistry terrain = TextureRegistry.getRegistry("TERRAIN");
 		String pathBlock = "/assets/" + BetterNetherBeta.MOD_ID + "/textures/block/";
 		loadTextureMap(textureFactory, terrain, pathBlock, BLOCK_TEXTURES);
+		System.out.println(getSolidBlockTexture("warped_fungus") + " " + getEmissiveBlockTexture("warped_fungus"));
 		ModelListener.updateModels();
 	}
 	
 	private void loadTextureMap(TextureFactory factory, TextureRegistry registry, String path, Map<String, Integer> map) {
-		System.out.println("Textures loaded");
 		JsonObject animation = JsonUtil.loadJson(path + "animation_speed.json");
 		List<String> list = ResourceUtil.getResourceFiles(path);
 		list.forEach((texture) -> {
@@ -61,8 +62,16 @@ public class TextureListener implements TextureRegister {
 		return obj == null ? 1 : obj.getAsInt();
 	}
 	
+	public static int getEmissiveBlockTexture(String name) {
+		return BLOCK_TEXTURES.getOrDefault(name + "_e", -1);
+	}
+	
+	public static int getSolidBlockTexture(String name) {
+		return BLOCK_TEXTURES.getOrDefault(name, -1);
+	}
+	
 	public static int getBlockTexture(String name) {
-		return BLOCK_TEXTURES.getOrDefault(name, 0);
+		return BlockUtil.isLightPass() ? getBlockTexture(name + "_e", "empty") : BLOCK_TEXTURES.getOrDefault(name, 0);
 	}
 	
 	public static int getBlockTexture(String name, String alternative) {
