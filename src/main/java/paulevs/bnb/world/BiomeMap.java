@@ -77,7 +77,7 @@ public class BiomeMap {
 		
 		BiomeChunk chunk = maps.get(pos);
 		if (chunk == null) {
-			RANDOM.setSeed(MHelper.getSeed(seed, pos.x, pos.y));
+			RANDOM.setSeed(MHelper.getRandomHash(seed, pos.x, pos.y));
 			chunk = new BiomeChunk(this, RANDOM, picker);
 			maps.put(new Point(pos.x, pos.y), chunk);
 		}

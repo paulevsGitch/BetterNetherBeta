@@ -70,10 +70,21 @@ public class TextureListener implements TextureRegister {
 	}
 	
 	public static int getBlockTexture(String name) {
-		return BlockUtil.isLightPass() ? getBlockTexture(name + "_e", "empty") : BLOCK_TEXTURES.getOrDefault(name, 0);
+		return BlockUtil.isLightPass() ? getBlockTextureA(name + "_e", "empty") : BLOCK_TEXTURES.getOrDefault(name, 0);
 	}
 	
 	public static int getBlockTexture(String name, String alternative) {
+		if (BlockUtil.isLightPass()) {
+			Integer value = BLOCK_TEXTURES.get(name + "_e");
+			if (value == null) {
+				value = BLOCK_TEXTURES.get(alternative + "_e");
+			}
+			return value == null ? BLOCK_TEXTURES.get("empty") : value.intValue();
+		}
+		return getBlockTextureA(name, alternative);
+	}
+	
+	private static int getBlockTextureA(String name, String alternative) {
 		Integer value = BLOCK_TEXTURES.get(name);
 		if (value == null) {
 			value = BLOCK_TEXTURES.get(alternative);

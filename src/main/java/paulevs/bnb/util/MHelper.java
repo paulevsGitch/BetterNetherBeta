@@ -1,18 +1,25 @@
 package paulevs.bnb.util;
 
 import net.minecraft.util.maths.Vec3f;
+import paulevs.bnb.noise.OpenSimplexNoise;
 
 public class MHelper {
-	public static int getSeed(int x, int z) {
+	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(0);
+	
+	public static int getRandomHash(int x, int z) {
 		int h = x * 374761393 + z * 668265263;
 		h = (h ^ (h >> 13)) * 1274126177;
 		return h ^ (h >> 16);
 	}
 	
-	public static int getSeed(int seed, int x, int y) {
-		int h = seed + x * 374761393 + y * 668265263;
+	public static int getRandomHash(int offset, int x, int y) {
+		int h = offset + x * 374761393 + y * 668265263;
 		h = (h ^ (h >> 13)) * 1274126177;
 		return h ^ (h >> 16);
+	}
+	
+	public static float getNoiseValue(double x, double y) {
+		return (float) NOISE.eval(x, y);
 	}
 	
 	public static float lerp(float start, float end, float delta) {
@@ -31,5 +38,9 @@ public class MHelper {
 	
 	public static float max(float a, float b, float c) {
 		return max(a, max(b, c));
+	}
+
+	public static int abs(int i) {
+		return i < 0 ? -i : i;
 	}
 }
