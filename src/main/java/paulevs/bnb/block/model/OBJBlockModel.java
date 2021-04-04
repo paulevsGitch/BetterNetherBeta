@@ -104,8 +104,8 @@ public class OBJBlockModel implements CustomModel {
 				float v = 0;
 				if (hasUV) {
 					vi = quad.get(j + 4) << 1;
-					u = uvs.get(vi) / 16F;
-					v = uvs.get(vi + 1) / 16F;
+					u = (uvs.get(vi)) / 16F;
+					v = (1F - uvs.get(vi + 1)) / 16F;
 				}
 				points[j] = new QuadPoint(x, y, z, u, v);
 			}
@@ -146,7 +146,7 @@ public class OBJBlockModel implements CustomModel {
 				face = nz > 0 ? BlockFaces.SOUTH : BlockFaces.NORTH;
 			}
 			
-			quads[index] = new CustomTexturedQuad(points, 0, 0, 16, 16, 256, 256, face, null);
+			quads[index] = new CustomFacedTexturedQuad(points, face);
 			index++;
 		}
 		

@@ -14,7 +14,7 @@ public class ModelListener implements ModelRegister {
 	@Override
 	public void registerModels(Type type) {
 		if (type == ModelRegister.Type.BLOCKS) {
-			CustomModel test = new OBJBlockModel("/assets/bnb/models/block/cube_poly.obj", 10, 8, 8, 8, "netherrack");
+			CustomModel test = new OBJBlockModel("/assets/bnb/models/block/warped_fungus.obj", 10, 8, 0, 8, "warped_fungus");
 			BLOCK_MODELS.put("test", test);
 		}
 	}
