@@ -19,14 +19,15 @@ import paulevs.bnb.util.ResourceUtil;
 
 public class OBJBlockModel implements CustomModel {
 	private final OBJCuboidRenderer[] cuboids;
-	private String texture;
+	private final String[] textures;
+	private Integer[] materials;
 	
-	public OBJBlockModel(String modelPath, String texture) {
-		this(modelPath, 16, 8, 8, 8, texture);
+	public OBJBlockModel(String modelPath, String... textures) {
+		this(modelPath, 16, 8, 8, 8, textures);
 	}
 	
-	public OBJBlockModel(String modelPath, float scale, float offsetX, float offsetY, float offsetZ, String texture) {
-		this.texture = texture;
+	public OBJBlockModel(String modelPath, float scale, float offsetX, float offsetY, float offsetZ, String... textures) {
+		this.textures = textures;
 		this.cuboids = new OBJCuboidRenderer[] {
 			new OBJCuboidRenderer(makeQuads(modelPath, scale, offsetX, offsetY, offsetZ))
 		};
@@ -36,7 +37,9 @@ public class OBJBlockModel implements CustomModel {
 		List<List<Integer>> groups = new ArrayList<List<Integer>>();
 		List<Float> vertex = new ArrayList<Float>();
 		List<Float> uvs = new ArrayList<Float>();
-
+		List<Integer> mat = new ArrayList<Integer>();
+		int material = -1;
+		
 		try {
 			InputStream input = ResourceUtil.getResourceAsStream(modelPath);
 			if (input != null) {
@@ -45,7 +48,10 @@ public class OBJBlockModel implements CustomModel {
 				String string;
 
 				while ((string = reader.readLine()) != null) {
-					if (string.startsWith("vt")) {
+					if (string.startsWith("usemtl")) {
+						material ++;
+					}
+					else if (string.startsWith("vt")) {
 						String[] uv = string.split(" ");
 						uvs.add(Float.parseFloat(uv[1]));
 						uvs.add(Float.parseFloat(uv[2]));
@@ -76,6 +82,7 @@ public class OBJBlockModel implements CustomModel {
 								}
 							}
 						}
+						mat.add(material < 0 ? 0 : material);
 						list.addAll(uvList);
 						groups.add(list);
 					}
@@ -92,6 +99,7 @@ public class OBJBlockModel implements CustomModel {
 		
 		int index = 0;
 		boolean hasUV = !uvs.isEmpty();
+		materials = mat.toArray(new Integer[] {});
 		CustomTexturedQuad[] quads = new CustomTexturedQuad[groups.size()];
 		for (List<Integer> quad : groups) {
 			QuadPoint[] points = new QuadPoint[4];
@@ -159,13 +167,19 @@ public class OBJBlockModel implements CustomModel {
 	}
 	
 	public void updateUVs() {
-		int texture = TextureListener.getBlockTexture(this.texture) & 255;
-		int posX = texture & 15;
-		int posY = texture >> 4;
-		float startU = posX / 16F;
-		float startV = posY / 16F;
+		int index = 0;
+		int textures[] = new int[this.textures.length];
+		for (int i = 0; i < textures.length; i++) {
+			textures[i] = TextureListener.getBlockTexture(this.textures[i]) & 255;
+		}
 		for (CustomCuboidRenderer renderer: cuboids) {
 			for (net.modificationstation.stationloader.api.client.model.CustomTexturedQuad quad: renderer.getCubeQuads()) {
+				int material = materials[index++];
+				int texture = material >= textures.length ? 0 : textures[material];
+				int posX = texture & 15;
+				int posY = texture >> 4;
+				float startU = posX / 16F;
+				float startV = posY / 16F;
 				for (QuadPoint point: quad.getQuadPoints()) {
 					point.field_1147 += startU;
 					point.field_1148 += startV;
