@@ -8,13 +8,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.PlaceableTileEntity;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.Box;
+import net.modificationstation.stationloader.api.client.model.BlockModelProvider;
+import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTileEntityWithMeta;
 import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.interfaces.BlockWithLight;
+import paulevs.bnb.listeners.ModelListener;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.BlockUtil;
 
-public class NetherPlantBlock extends MultiBlock implements BlockWithLight {
+public class NetherPlantBlock extends MultiBlock implements BlockModelProvider, BlockWithLight {
 	public <T extends BlockEnum> NetherPlantBlock(String name, int id, Class<T> type) {
 		super(name, id, Material.PLANT, type);
 		this.setBoundingBox(0.125F, 0F, 0.125F, 0.875F, 0.75F, 0.875F);
@@ -87,5 +90,15 @@ public class NetherPlantBlock extends MultiBlock implements BlockWithLight {
 	@Override
 	public float getEmissionIntensity() {
 		return 1;
+	}
+	
+	@Override
+	public CustomModel getCustomInventoryModel(int i) {
+		return null;
+	}
+
+	@Override
+	public CustomModel getCustomWorldModel(Level level, int i, int j, int k, int i1) {
+		return ModelListener.getBlockModel("fluffy_grass");
 	}
 }

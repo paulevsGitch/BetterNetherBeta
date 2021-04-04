@@ -9,7 +9,6 @@
 	"server": [],
 	"client": [
 		"AbstractClientPlayerMixin",
-		"ItemRendererMixin",
 		"TileRendererMixin",
 		"SoundHelperMixin",
 		"BlockBaseMixin"

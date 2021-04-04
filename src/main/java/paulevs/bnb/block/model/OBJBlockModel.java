@@ -11,6 +11,7 @@ import net.minecraft.client.render.QuadPoint;
 import net.minecraft.util.maths.MathHelper;
 import net.modificationstation.stationloader.api.client.model.CustomCuboidRenderer;
 import net.modificationstation.stationloader.api.client.model.CustomModel;
+import net.modificationstation.stationloader.api.client.texture.TextureRegistry;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
 import net.modificationstation.stationloader.impl.client.model.CustomTexturedQuad;
 import paulevs.bnb.listeners.TextureListener;
@@ -23,19 +24,21 @@ public class OBJBlockModel implements CustomModel {
 	private OBJCuboidRenderer[] cuboids;
 	private final String[] textures;
 	private Integer[] materials;
+	private int[] atlasIDemissive;
+	private int[] atlasIDsolid;
 	
 	public OBJBlockModel(String modelPath, String... textures) {
-		this(modelPath, 16, 8, 8, 8, textures);
+		this(modelPath, 16, 8, 8, 8, null, textures);
 	}
 	
-	public OBJBlockModel(String modelPath, float scale, float offsetX, float offsetY, float offsetZ, String... textures) {
+	public OBJBlockModel(String modelPath, float scale, float offsetX, float offsetY, float offsetZ, BlockFaces mainFace, String... textures) {
 		this.textures = textures;
 		this.cuboids = new OBJCuboidRenderer[] {
-			new OBJCuboidRenderer(makeQuads(modelPath, scale, offsetX, offsetY, offsetZ))
+			new OBJCuboidRenderer(makeQuads(modelPath, scale, offsetX, offsetY, offsetZ, mainFace))
 		};
 	}
 	
-	private CustomTexturedQuad[] makeQuads(String modelPath, float scale, float offsetX, float offsetY, float offsetZ) {
+	private CustomTexturedQuad[] makeQuads(String modelPath, float scale, float offsetX, float offsetY, float offsetZ, BlockFaces mainFace) {
 		List<List<Integer>> groups = new ArrayList<List<Integer>>();
 		List<Float> vertex = new ArrayList<Float>();
 		List<Float> uvs = new ArrayList<Float>();
@@ -120,44 +123,45 @@ public class OBJBlockModel implements CustomModel {
 				points[j] = new QuadPoint(x, y, z, u, v);
 			}
 			
-			float ax = (float) points[1].pointVector.x - (float) points[0].pointVector.x;
-			float ay = (float) points[1].pointVector.y - (float) points[0].pointVector.y;
-			float az = (float) points[1].pointVector.z - (float) points[0].pointVector.z;
-			float bx = (float) points[2].pointVector.x - (float) points[0].pointVector.x;
-			float by = (float) points[2].pointVector.y - (float) points[0].pointVector.y;
-			float bz = (float) points[2].pointVector.z - (float) points[0].pointVector.z;
-			
-			float l = MathHelper.sqrt(ax * ax + ay * ay + az * az);
-			ax /= l;
-			ay /= l;
-			az /= l;
-			
-			l = MathHelper.sqrt(bx * bx + by * by + bz * bz);
-			bx /= l;
-			by /= l;
-			bz /= l;
-			
-			float nx = (ay * bz) - (az * by);
-			float ny = (az * bx) - (ax * bz);
-			float nz = (ax * by) - (ay * bx);
-			ax = MathHelper.abs(nx);
-			ay = MathHelper.abs(ny);
-			az = MathHelper.abs(nz);
-			float max = MHelper.max(ax, ay, az);
-			BlockFaces face = null;
-			
-			if (max == ax) {
-				face = nx > 0 ? BlockFaces.EAST : BlockFaces.WEST;
+			BlockFaces face = mainFace;
+			if (face == null) {
+				float ax = (float) points[1].pointVector.x - (float) points[0].pointVector.x;
+				float ay = (float) points[1].pointVector.y - (float) points[0].pointVector.y;
+				float az = (float) points[1].pointVector.z - (float) points[0].pointVector.z;
+				float bx = (float) points[2].pointVector.x - (float) points[0].pointVector.x;
+				float by = (float) points[2].pointVector.y - (float) points[0].pointVector.y;
+				float bz = (float) points[2].pointVector.z - (float) points[0].pointVector.z;
+				
+				float l = MathHelper.sqrt(ax * ax + ay * ay + az * az);
+				ax /= l;
+				ay /= l;
+				az /= l;
+				
+				l = MathHelper.sqrt(bx * bx + by * by + bz * bz);
+				bx /= l;
+				by /= l;
+				bz /= l;
+				
+				float nx = (ay * bz) - (az * by);
+				float ny = (az * bx) - (ax * bz);
+				float nz = (ax * by) - (ay * bx);
+				ax = MathHelper.abs(nx);
+				ay = MathHelper.abs(ny);
+				az = MathHelper.abs(nz);
+				float max = MHelper.max(ax, ay, az);
+				
+				if (max == ax) {
+					face = nx > 0 ? BlockFaces.EAST : BlockFaces.WEST;
+				}
+				else if (max == ay) {
+					face = ny > 0 ? BlockFaces.UP : BlockFaces.DOWN;
+				}
+				else {
+					face = nz > 0 ? BlockFaces.SOUTH : BlockFaces.NORTH;
+				}
 			}
-			else if (max == ay) {
-				face = ny > 0 ? BlockFaces.UP : BlockFaces.DOWN;
-			}
-			else {
-				face = nz > 0 ? BlockFaces.SOUTH : BlockFaces.NORTH;
-			}
 			
-			quads[index] = new CustomFacedTexturedQuad(points, face);
-			index++;
+			quads[index++] = new CustomFacedTexturedQuad(points, face);
 		}
 		
 		return quads;
@@ -168,37 +172,45 @@ public class OBJBlockModel implements CustomModel {
 		return BlockUtil.isLightPass() ? emissive : cuboids;
 	}
 	
+	private int calcAtlasID(int texture) {
+		return textures.length > 0 ? texture / TextureRegistry.currentRegistry().texturesPerFile() : 0;
+	}
+	
 	public void updateUVs() {
 		int index = 0;
 		int textures[] = new int[this.textures.length << 1];
 		int offset = this.textures.length;
 		
 		for (int i = 0; i < this.textures.length; i++) {
-			System.out.println(this.textures[i]);
 			textures[i + offset] = TextureListener.getEmissiveBlockTexture(this.textures[i]);
-			textures[i] = TextureListener.getSolidBlockTexture(this.textures[i]) & 255;
-			System.out.println(textures[i] + " " + textures[i + offset]);
+			textures[i] = TextureListener.getSolidBlockTexture(this.textures[i]);
 		}
 		
 		int posX;
 		int posY;
 		float startU;
 		float startV;
+		int textureIndex;
+		
 		List<CustomTexturedQuad> emissiveQuads = new ArrayList<CustomTexturedQuad>();
+		List<Integer> emissiveAtlasses = new ArrayList<Integer>();
+		atlasIDsolid = new int[cuboids[0].getCubeQuads().length];
 		
 		for (CustomCuboidRenderer renderer: cuboids) {
 			for (net.modificationstation.stationloader.api.client.model.CustomTexturedQuad quad: renderer.getCubeQuads()) {
-				int material = materials[index++];
+				int material = materials[index];
 				if (material >= this.textures.length) {
 					material = 0;
 				}
 				int texture = textures[material];
 				int emissive = textures[material + offset];
+				atlasIDsolid[index] = calcAtlasID(texture);
+				index++;
 				
 				if (emissive != -1) {
-					emissive &= 255;
-					posX = emissive & 15;
-					posY = emissive >> 4;
+					textureIndex = emissive & 255;
+					posX = textureIndex & 15;
+					posY = textureIndex >> 4;
 					startU = posX / 16F;
 					startV = posY / 16F;
 					QuadPoint[] copy = new QuadPoint[quad.getQuadPoints().length];
@@ -212,10 +224,12 @@ public class OBJBlockModel implements CustomModel {
 						point.field_1148 += startV;
 					}
 					emissiveQuads.add(eQuad);
+					emissiveAtlasses.add(calcAtlasID(emissive));
 				}
 				
-				posX = texture & 15;
-				posY = texture >> 4;
+				textureIndex = texture & 255;
+				posX = textureIndex & 15;
+				posY = textureIndex >> 4;
 				startU = posX / 16F;
 				startV = posY / 16F;
 				for (QuadPoint point: quad.getQuadPoints()) {
@@ -225,12 +239,20 @@ public class OBJBlockModel implements CustomModel {
 			}
 		}
 		
-		System.out.println("Has emissive: " + emissiveQuads.size());
 		if (emissiveQuads.isEmpty()) {
 			emissive = new OBJCuboidRenderer[0];
+			atlasIDemissive = new int[0];
 		}
 		else {
 			emissive = new OBJCuboidRenderer[] { new OBJCuboidRenderer(emissiveQuads.toArray(new CustomTexturedQuad[] {})) };
+			atlasIDemissive = new int[emissiveAtlasses.size()];
+			for (int i = 0; i < atlasIDemissive.length; i++) {
+				atlasIDemissive[i] = emissiveAtlasses.get(i);
+			}
 		}
+	}
+	
+	public int getAtlasID(int quadIndex) {
+		return BlockUtil.isLightPass() ? atlasIDemissive[quadIndex] : atlasIDsolid[quadIndex];
 	}
 }

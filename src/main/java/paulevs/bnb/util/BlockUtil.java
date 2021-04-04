@@ -5,7 +5,6 @@ import paulevs.bnb.block.NetherTerrainBlock;
 
 public class BlockUtil {
 	private static boolean requireLight;
-	private static boolean renderItem;
 	private static boolean lightPass;
 	
 	public static boolean isTerrain(int id) {
@@ -50,13 +49,5 @@ public class BlockUtil {
 	
 	public static boolean isHorizontalSide(int side) {
 		return side > 1;
-	}
-	
-	public static void setItemRender(boolean render) {
-		renderItem = render;
-	}
-	
-	public static boolean isItemRender() {
-		return renderItem;
 	}
 }

@@ -14,7 +14,7 @@ public class TestBlock extends NetherBlock implements BlockModelProvider, BlockW
 
 	@Override
 	public CustomModel getCustomInventoryModel(int i) {
-		return ModelListener.getBlockModel("test");
+		return null;
 	}
 
 	@Override

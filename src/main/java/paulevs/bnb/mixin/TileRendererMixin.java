@@ -25,6 +25,7 @@ import net.modificationstation.stationloader.api.client.model.CustomTexturedQuad
 import net.modificationstation.stationloader.api.client.texture.TextureRegistry;
 import net.modificationstation.stationloader.api.common.StationLoader;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
+import paulevs.bnb.block.model.OBJBlockModel;
 import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.util.BlockUtil;
 
@@ -151,8 +152,8 @@ public class TileRendererMixin {
 			BlockUtil.setLightPass(false);
 			if (result1 | result2) {
 				info.setReturnValue(true);
-				info.cancel();
 			}
+			info.cancel();
 		}
 	}
 	
@@ -161,49 +162,45 @@ public class TileRendererMixin {
 		return (Minecraft) FabricLoader.getInstance().getGameInstance();
 	}
 	
-	/*private float bnb_getLight(BlockBase block, TileView world, int x, int y, int z) {
-		return BlockUtil.isLightPass() ? 1F : block.method_1604(world, x, y, z);
-	}*/
-	
 	private boolean bnb_vanillaBlockRender(BlockBase block, int x, int y, int z) {
-		int var5 = block.method_1621();
+		int renderType = block.method_1621();
 		block.method_1616(this.field_82, x, y, z);
-		if (var5 == 0) {
+		if (renderType == 0) {
 			return this.method_76(block, x, y, z);
-		} else if (var5 == 4) {
+		} else if (renderType == 4) {
 			return this.method_75(block, x, y, z);
-		} else if (var5 == 13) {
+		} else if (renderType == 13) {
 			return this.method_77(block, x, y, z);
-		} else if (var5 == 1) {
+		} else if (renderType == 1) {
 			return this.method_73(block, x, y, z);
-		} else if (var5 == 6) {
+		} else if (renderType == 6) {
 			return this.method_74(block, x, y, z);
-		} else if (var5 == 2) {
+		} else if (renderType == 2) {
 			return this.method_62(block, x, y, z);
-		} else if (var5 == 3) {
+		} else if (renderType == 3) {
 			return this.method_70(block, x, y, z);
-		} else if (var5 == 5) {
+		} else if (renderType == 5) {
 			return this.method_71(block, x, y, z);
-		} else if (var5 == 8) {
+		} else if (renderType == 8) {
 			return this.method_72(block, x, y, z);
-		} else if (var5 == 7) {
+		} else if (renderType == 7) {
 			return this.method_80(block, x, y, z);
-		} else if (var5 == 9) {
+		} else if (renderType == 9) {
 			return this.method_44((Rail) block, x, y, z);
-		} else if (var5 == 10) {
+		} else if (renderType == 10) {
 			return this.method_79(block, x, y, z);
-		} else if (var5 == 11) {
+		} else if (renderType == 11) {
 			return this.method_78(block, x, y, z);
-		} else if (var5 == 12) {
+		} else if (renderType == 12) {
 			return this.method_68(block, x, y, z);
-		} else if (var5 == 14) {
+		} else if (renderType == 14) {
 			return this.method_81(block, x, y, z);
-		} else if (var5 == 15) {
+		} else if (renderType == 15) {
 			return this.method_82(block, x, y, z);
-		} else if (var5 == 16) {
+		} else if (renderType == 16) {
 			return this.method_59(block, x, y, z, false);
 		} else {
-			return var5 == 17 ? this.method_64(block, x, y, z, true) : false;
+			return renderType == 17 ? this.method_64(block, x, y, z, true) : false;
 		}
 	}
 	
@@ -261,6 +258,15 @@ public class TileRendererMixin {
 	@Shadow
 	private boolean method_82(BlockBase block, int x, int y, int z) { return false; }
 	
+	/*(private void bnb_overrideTexture(int texID) {
+		if (TextureRegistry.currentRegistry() != null) {
+			int atlasID = texID / TextureRegistry.currentRegistry().texturesPerFile();
+			if (TextureRegistry.currentRegistry().currentTexture() != atlasID) {
+				TextureRegistry.currentRegistry().bindAtlas(bnb_getMinecraft().textureManager, atlasID);
+			}
+		}
+	}*/
+	
 	private boolean bnb_renderModel(BlockBase block, int x, int y, int z) {
 		if (block instanceof BlockModelProvider) {
 			Minecraft minecraft = bnb_getMinecraft();
@@ -271,8 +277,11 @@ public class TileRendererMixin {
 				tessellator.draw();
 				TextureRegistry lastRegistry = TextureRegistry.currentRegistry();
 				int lastTex = lastRegistry.currentTexture();
-				TextureRegistry.unbind();
 				CustomCuboidRenderer[] cuboids = model.getCuboids();
+				
+				if (!(model instanceof OBJBlockModel)) {
+					TextureRegistry.unbind();
+				}
 
 				for (int indexCuboid = 0; indexCuboid < cuboids.length; ++indexCuboid) {
 					CustomCuboidRenderer cuboid = cuboids[indexCuboid];
@@ -282,6 +291,13 @@ public class TileRendererMixin {
 						CustomTexturedQuad texturedQuad = quads[indexQuad];
 						if (texturedQuad.getTexture() != null) {
 							GL11.glBindTexture(GL11.GL_TEXTURE_2D, minecraft.textureManager.getTextureId("/assets/" + cuboid.getModID() + "/" + StationLoader.INSTANCE.getData().getId() + "/models/textures/" + texturedQuad.getTexture() + ".png"));
+						}
+						
+						if (model instanceof OBJBlockModel) {
+							int atlasID = ((OBJBlockModel) model).getAtlasID(indexQuad);
+							if (atlasID != lastTex) {
+								TextureRegistry.currentRegistry().bindAtlas(minecraft.textureManager, atlasID);
+							}
 						}
 
 						tessellator.start();
