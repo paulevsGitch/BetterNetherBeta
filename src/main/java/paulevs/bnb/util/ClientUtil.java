@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 @Environment(EnvType.CLIENT)
 public class ClientUtil {
 	private static final Random RANDOM = new Random();
+	private static final boolean GLSL = FabricLoader.getInstance().isModLoaded("glsl");
 	
 	@SuppressWarnings("deprecation")
 	public static Minecraft getMinecraft() {
@@ -22,5 +23,9 @@ public class ClientUtil {
 	
 	public static Random getRandom() {
 		return RANDOM;
+	}
+	
+	public static boolean haveShaders() {
+		return GLSL;
 	}
 }

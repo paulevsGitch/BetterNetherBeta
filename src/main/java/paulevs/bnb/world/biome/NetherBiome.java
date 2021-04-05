@@ -13,6 +13,7 @@ import net.minecraft.level.biome.Biome;
 import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.Vec3f;
 import paulevs.bnb.util.BlockState;
+import paulevs.bnb.util.ClientUtil;
 
 public class NetherBiome extends Biome {
 	private List<Structure> trees = Lists.newArrayList();
@@ -121,6 +122,11 @@ public class NetherBiome extends Biome {
 		fogColor.x = r;
 		fogColor.y = g;
 		fogColor.z = b;
+		if (ClientUtil.haveShaders()) {
+			fogColor.x *= 0.5;
+			fogColor.y *= 0.5;
+			fogColor.z *= 0.5;
+		}
 	}
 	
 	public void setFogColor(int r, int g, int b) {
@@ -128,9 +134,11 @@ public class NetherBiome extends Biome {
 	}
 	
 	public void setFogColor(String hex) {
-		fogColor.x = (float) Integer.parseInt(hex.substring(0, 2), 16) / 255F;
-		fogColor.y = (float) Integer.parseInt(hex.substring(2, 4), 16) / 255F;
-		fogColor.z = (float) Integer.parseInt(hex.substring(4, 6), 16) / 255F;
+		setFogColor(
+			(float) Integer.parseInt(hex.substring(0, 2), 16) / 255F,
+			(float) Integer.parseInt(hex.substring(2, 4), 16) / 255F,
+			(float) Integer.parseInt(hex.substring(4, 6), 16) / 255F
+		);
 	}
 	
 	public float getParticleChance() {
