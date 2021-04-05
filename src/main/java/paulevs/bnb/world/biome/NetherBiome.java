@@ -132,4 +132,12 @@ public class NetherBiome extends Biome {
 		fogColor.y = (float) Integer.parseInt(hex.substring(2, 4), 16) / 255F;
 		fogColor.z = (float) Integer.parseInt(hex.substring(4, 6), 16) / 255F;
 	}
+	
+	public float getParticleChance() {
+		return -1;
+	}
+	
+	public int getParticleID(Random random) {
+		return 0;
+	}
 }

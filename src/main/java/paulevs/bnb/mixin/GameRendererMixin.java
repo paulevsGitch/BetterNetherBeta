@@ -7,9 +7,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.level.biome.Biome;
+import net.minecraft.level.dimension.Nether;
 import net.minecraft.sortme.GameRenderer;
+import net.minecraft.util.maths.MathHelper;
 import paulevs.bnb.particles.BiomeParticle;
 import paulevs.bnb.util.ClientUtil;
+import paulevs.bnb.world.biome.NetherBiome;
 
 @Mixin(value = GameRenderer.class, priority = 100)
 public class GameRendererMixin {
@@ -18,9 +22,17 @@ public class GameRendererMixin {
 	
 	@Inject(method = "method_1846", at = @At("HEAD"))
 	private void bnb_renderParticles(CallbackInfo info) {
-		double x = minecraft.player.x + ClientUtil.getRandom().nextDouble() * 16 - 8;
-		double y = minecraft.player.y + ClientUtil.getRandom().nextDouble() * 16 - 8;
-		double z = minecraft.player.z + ClientUtil.getRandom().nextDouble() * 16 - 8;
-		minecraft.particleManager.addParticle(new BiomeParticle(minecraft.level, x, y, z));
+		if (minecraft.level.dimension instanceof Nether) {
+			double x = minecraft.player.x + ClientUtil.getRandom().nextDouble() * 16 - 8;
+			double y = minecraft.player.y + ClientUtil.getRandom().nextDouble() * 16 - 8;
+			double z = minecraft.player.z + ClientUtil.getRandom().nextDouble() * 16 - 8;
+			Biome biome = minecraft.level.getBiomeSource().getBiome(MathHelper.floor(x), MathHelper.floor(z));
+			if (biome instanceof NetherBiome) {
+				NetherBiome netherBiome = (NetherBiome) biome;
+				if (ClientUtil.getRandom().nextFloat() <= netherBiome.getParticleChance()) {
+					minecraft.particleManager.addParticle(new BiomeParticle(minecraft.level, x, y, z, netherBiome.getParticleID(ClientUtil.getRandom())));
+				}
+			}
+		}
 	}
 }
