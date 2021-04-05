@@ -94,7 +94,7 @@ public class OBJBlockModel implements CustomModel {
 						List<Integer> uvList = new ArrayList<Integer>();
 						String[] members = string.split(" ");
 						if (members.length < 5) {
-							System.out.println("Only qads in OBJ are supported!");
+							new RuntimeException("Only qads in OBJ are supported! Model " + modelPath + " has n-gons or triangles!");
 						}
 						else {
 							for (int i = 1; i < 5; i++) {

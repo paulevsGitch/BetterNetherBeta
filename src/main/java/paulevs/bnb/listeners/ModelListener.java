@@ -44,7 +44,6 @@ public class ModelListener implements ModelRegister {
 			model = new OBJBlockModel("/assets/bnb/models/block/fluffy_leaves.obj");
 			for (NetherLeaves leaves: NetherLeaves.values()) {
 				String fur = leaves.getName().substring(0, leaves.getName().indexOf('_')) + "_outer_leaves";
-				System.out.println(fur);
 				BLOCK_MODELS.put(leaves.getName(), model.clone().setTextures(leaves.getTexture(0), fur));
 			}
 		}

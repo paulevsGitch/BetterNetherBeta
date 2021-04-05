@@ -35,7 +35,6 @@ public class NetherTreeFurBlock extends NetherCeilPlantBlock implements BlockMod
 	public int method_1626(TileView world, int x, int y, int z, int side) {
 		String texture = getVariant(world.getTileMeta(x, y, z)).getName();
 		if (world.getTileId(x, y - 1, z) != this.id) {
-			System.out.println("bottom");
 			texture += "_bottom";
 		}
 		return TextureListener.getBlockTexture(texture);

@@ -59,7 +59,6 @@ public class BlockListener implements BlockRegister {
 	}
 	
 	private static int getID(String name) {
-		System.out.println(occupiedIDs);
 		while ((BlockUtil.blockByID(startID) != null || occupiedIDs.contains(startID)) && startID < 255) {
 			startID++;
 		}
