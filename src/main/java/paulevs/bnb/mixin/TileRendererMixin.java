@@ -297,12 +297,12 @@ public class TileRendererMixin {
 			if (model != null) {
 				boolean isOBJ = model instanceof OBJBlockModel;
 				Tessellator tessellator = Tessellator.INSTANCE;
-				tessellator.draw();
 				TextureRegistry lastRegistry = TextureRegistry.currentRegistry();
 				int lastTex = lastRegistry.currentTexture();
 				CustomCuboidRenderer[] cuboids = model.getCuboids();
 				
 				if (!isOBJ) {
+					tessellator.draw();
 					TextureRegistry.unbind();
 				}
 
@@ -319,12 +319,16 @@ public class TileRendererMixin {
 						if (isOBJ) {
 							int atlasID = ((OBJBlockModel) model).getAtlasID(indexQuad);
 							if (atlasID != lastTex) {
+								tessellator.draw();
 								TextureRegistry.currentRegistry().bindAtlas(minecraft.textureManager, atlasID);
 								lastTex = atlasID;
+								tessellator.start();
 							}
 						}
-
-						tessellator.start();
+						else {
+							tessellator.start();
+						}
+						
 						tessellator.colour(1.0F, 1.0F, 1.0F);
 						QuadPoint[] points = texturedQuad.getQuadPoints();
 
@@ -767,14 +771,16 @@ public class TileRendererMixin {
 							);
 						}
 
-						tessellator.draw();
+						if (!isOBJ) {
+							tessellator.draw();
+						}
 					}
 				}
 
 				if (!isOBJ) {
 					lastRegistry.bindAtlas(minecraft.textureManager, lastTex);
+					tessellator.start();
 				}
-				tessellator.start();
 				return true;
 			}
 		}
