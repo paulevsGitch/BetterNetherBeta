@@ -1,5 +1,7 @@
 package paulevs.bnb.util;
 
+import java.util.Random;
+
 import net.minecraft.util.maths.Vec3f;
 import paulevs.bnb.noise.OpenSimplexNoise;
 
@@ -46,5 +48,17 @@ public class MHelper {
 
 	public static int abs(int i) {
 		return i < 0 ? -i : i;
+	}
+	
+	public static int randRange(int min, int max, Random random) {
+		return min + random.nextInt(max - min + 1);
+	}
+	
+	public static double randRange(double min, double max, Random random) {
+		return min + random.nextDouble() * (max - min);
+	}
+
+	public static float randRange(float min, float max, Random random) {
+		return min + random.nextFloat() * (max - min);
 	}
 }

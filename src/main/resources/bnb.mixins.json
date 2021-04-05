@@ -9,6 +9,7 @@
 	"server": [],
 	"client": [
 		"AbstractClientPlayerMixin",
+		"GameRendererMixin",
 		"TileRendererMixin",
 		"SoundHelperMixin",
 		"BlockBaseMixin"

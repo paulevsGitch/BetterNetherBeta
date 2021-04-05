@@ -321,8 +321,8 @@ public class TileRendererMixin {
 							int atlasID = ((OBJBlockModel) model).getAtlasID(indexQuad);
 							if (atlasID != lastTex) {
 								tessellator.draw();
-								TextureRegistry.currentRegistry().bindAtlas(minecraft.textureManager, atlasID);
 								lastTex = atlasID;
+								lastRegistry.bindAtlas(minecraft.textureManager, lastTex);
 								tessellator.start();
 							}
 						}

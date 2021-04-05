@@ -19,6 +19,7 @@ import paulevs.bnb.util.ResourceUtil;
 
 public class TextureListener implements TextureRegister {
 	private static final Map<String, Integer> BLOCK_TEXTURES = Maps.newHashMap();
+	public static int particleAtlas;
 	
 	@Override
 	public void registerTextures() {
@@ -26,6 +27,8 @@ public class TextureListener implements TextureRegister {
 		TextureRegistry terrain = TextureRegistry.getRegistry("TERRAIN");
 		String pathBlock = "/assets/" + BetterNetherBeta.MOD_ID + "/textures/block/";
 		loadTextureMap(textureFactory, terrain, pathBlock, BLOCK_TEXTURES);
+		//TextureRegistry particles = TextureRegistry.getRegistry("PARTICLES");
+		//particleAtlas = textureFactory.createNewAtlas(particles, "bnb_particles", "/assets/" + BetterNetherBeta.MOD_ID + "/textures/particles.png");
 		ModelListener.updateModels();
 	}
 	

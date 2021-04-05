@@ -18,7 +18,6 @@ import paulevs.bnb.block.NetherLeavesBlock;
 import paulevs.bnb.block.NetherPlanksBlock;
 import paulevs.bnb.block.NetherPlantBlockImpl;
 import paulevs.bnb.block.NetherStairsBlock;
-import paulevs.bnb.block.NetherStumpBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.NetherTreeFurBlock;
 import paulevs.bnb.block.NetherVineBlock;
@@ -41,7 +40,6 @@ public class BlockListener implements BlockRegister {
 		register("nether_terrain", NetherTerrainBlock::new);
 		
 		register("nether_wood", NetherWoodBlock::new);
-		register("nether_stump", NetherStumpBlock::new);
 		register("nether_leaves", NetherLeavesBlock::new);
 		register("nether_lantern", NetherLanternBlock::new);
 		register("nether_tree_fur", NetherTreeFurBlock::new);
