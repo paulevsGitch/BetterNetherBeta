@@ -4,10 +4,11 @@ import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockBase;
 import net.minecraft.block.Rail;
 import net.minecraft.client.Minecraft;
@@ -17,6 +18,7 @@ import net.minecraft.client.render.TileRenderer;
 import net.minecraft.level.Level;
 import net.minecraft.level.TileView;
 import net.minecraft.sortme.GameRenderer;
+import net.minecraft.util.maths.MathHelper;
 import net.modificationstation.stationloader.api.client.model.BlockModelProvider;
 import net.modificationstation.stationloader.api.client.model.BlockWithWorldRenderer;
 import net.modificationstation.stationloader.api.client.model.CustomCuboidRenderer;
@@ -28,6 +30,7 @@ import net.modificationstation.stationloader.api.common.util.BlockFaces;
 import paulevs.bnb.block.model.OBJBlockModel;
 import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.util.BlockUtil;
+import paulevs.bnb.util.ClientUtil;
 
 @Mixin(value = TileRenderer.class, priority = 100)
 public class TileRendererMixin {
@@ -173,7 +176,7 @@ public class TileRendererMixin {
 			}
 		}
 		else if (block instanceof BlockModelProvider) {
-			Minecraft minecraft = bnb_getMinecraft();
+			Minecraft minecraft = ClientUtil.getMinecraft();
 			Level level = minecraft.level;
 			CustomModel model = ((BlockModelProvider) block).getCustomWorldModel(level, x, y, z, level.getTileMeta(x, y, z));
 			if (model instanceof OBJBlockModel) {
@@ -186,11 +189,6 @@ public class TileRendererMixin {
 				info.cancel();
 			}
 		}
-	}
-	
-	@SuppressWarnings("deprecation")
-	private Minecraft bnb_getMinecraft() {
-		return (Minecraft) FabricLoader.getInstance().getGameInstance();
 	}
 	
 	private boolean bnb_vanillaBlockRender(BlockBase block, int x, int y, int z) {
@@ -290,8 +288,11 @@ public class TileRendererMixin {
 	private boolean method_82(BlockBase block, int x, int y, int z) { return false; }
 	
 	private boolean bnb_renderModel(BlockBase block, int x, int y, int z) {
-		if (block instanceof BlockModelProvider) {
-			Minecraft minecraft = bnb_getMinecraft();
+		if (!ClientUtil.isFancyGraphics()) {
+			bnb_vanillaBlockRender(block, x, y, z);
+		}
+		else if (block instanceof BlockModelProvider) {
+			Minecraft minecraft = ClientUtil.getMinecraft();
 			Level level = minecraft.level;
 			CustomModel model = ((BlockModelProvider) block).getCustomWorldModel(level, x, y, z, level.getTileMeta(x, y, z));
 			if (model != null) {
@@ -791,5 +792,10 @@ public class TileRendererMixin {
 			return bnb_vanillaBlockRender(block, x, y, z);
 		}
 		return false;
+	}
+	
+	@ModifyVariable(method = {"method_56(Lnet/minecraft/block/BlockBase;IDDD)V" }, index = 10, at = @At(value = "CONSTANT", args = {"intValue=15" }, ordinal = 0, shift = Shift.BEFORE, by = 2))
+	private int bnb_getCropsTextureID(int texID, BlockBase block, int meta, double x, double y, double z) {
+		return block.method_1626(field_82, MathHelper.floor(x), MathHelper.floor(y + 0.0625), MathHelper.floor(z), 0);
 	}
 }

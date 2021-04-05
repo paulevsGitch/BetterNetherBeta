@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.PlaceableTileEntity;
 import net.minecraft.level.Level;
+import net.minecraft.level.TileView;
 import net.modificationstation.stationloader.api.client.model.BlockModelProvider;
 import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTileEntityWithMeta;
@@ -30,6 +31,16 @@ public class NetherTreeFurBlock extends NetherCeilPlantBlock implements BlockMod
 		};
 	}
 	
+	@Environment(EnvType.CLIENT)
+	public int method_1626(TileView world, int x, int y, int z, int side) {
+		String texture = getVariant(world.getTileMeta(x, y, z)).getName();
+		if (world.getTileId(x, y - 1, z) != this.id) {
+			System.out.println("bottom");
+			texture += "_bottom";
+		}
+		return TextureListener.getBlockTexture(texture);
+	}
+	
 	@Override
 	public boolean canPlaceAt(Level level, int x, int y, int z) {
 		int id = level.getTileId(x, y + 1, z);
@@ -53,5 +64,10 @@ public class NetherTreeFurBlock extends NetherCeilPlantBlock implements BlockMod
 	@Override
 	public float getEmissionIntensity() {
 		return 2F;
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public int method_1621() {
+		return 6;
 	}
 }
