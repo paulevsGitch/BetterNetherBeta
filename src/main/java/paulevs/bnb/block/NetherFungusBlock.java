@@ -28,4 +28,9 @@ public class NetherFungusBlock extends NetherPlantBlock implements BlockModelPro
 	public float getEmissionIntensity() {
 		return 3F;
 	}
+	
+	@Override
+	public boolean isFullOpaque() {
+		return true;
+	}
 }

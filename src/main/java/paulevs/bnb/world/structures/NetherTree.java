@@ -2,7 +2,6 @@ package paulevs.bnb.world.structures;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.MathHelper;
@@ -10,22 +9,18 @@ import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.BlockUtil;
 
 public class NetherTree extends Structure {
-	private final BlockState log;
+	private final BlockState lantern;
 	private final BlockState leaves;
-	private final BlockState furTop;
-	private final BlockState furBottom;
-	private final float aspect;
+	private final BlockState log;
+	private final BlockState fur;
 	private final float radiusScale;
+	private final float aspect;
 	
-	public NetherTree(BlockState log, BlockState leaves, BlockState fur, float aspect, float radiusScale) {
-		this(log, leaves, fur, fur, aspect, radiusScale);
-	}
-	
-	public NetherTree(BlockState log, BlockState leaves, BlockState furTop, BlockState furBottom, float aspect, float radiusScale) {
-		this.log = log;
+	public NetherTree(BlockState log, BlockState leaves, BlockState fur, BlockState lantern, float aspect, float radiusScale) {
+		this.lantern = lantern;
 		this.leaves = leaves;
-		this.furTop = furTop;
-		this.furBottom = furBottom;
+		this.log = log;
+		this.fur = fur;
 		this.aspect = aspect;
 		this.radiusScale = radiusScale;
 	}
@@ -113,11 +108,11 @@ public class NetherTree extends Structure {
 	}
 	
 	private boolean canReplaceRoot(int tile) {
-		return tile == 0 || BlockBase.BY_ID[tile].material.isReplaceable() || BlockUtil.isTerrain(tile);
+		return tile == 0 || BlockUtil.blockByID(tile).material.isReplaceable() || BlockUtil.isTerrain(tile);
 	}
 	
 	private boolean canReplaceLeaves(int tile) {
-		return tile == 0 || BlockBase.BY_ID[tile].material.isReplaceable();
+		return tile == 0 || BlockUtil.blockByID(tile).material.isReplaceable();
 	}
 	
 	private boolean isLogNear(Level level, int x, int y, int z) {
@@ -134,7 +129,6 @@ public class NetherTree extends Structure {
 	private void makeLeaves(Level level, int x, int y, int z, float radius, Random random) {
 		double r2 = radius * radius;
 		int largeR = MathHelper.floor(radius * aspect + 1);
-		boolean hasFurLength = !furTop.equals(furBottom);
 		for (int i = (int) -radius; i <= radius; i++) {
 			int i2 = i * i;
 			int px = x + i;
@@ -153,23 +147,16 @@ public class NetherTree extends Structure {
 							if (d + k2 > r2) {
 								int py = y + k;
 								if (canReplaceLeaves(level.getTileId(px, py, pz))) {
-									leaves.setBlock(level, px, py, pz);
+									if (random.nextInt(16) == 0) {
+										lantern.setBlock(level, px, py, pz);
+									}
+									else {
+										leaves.setBlock(level, px, py, pz);
+									}
 									if (random.nextBoolean() && canReplaceLeaves(level.getTileId(px, py - 1, pz))) {
-										if (hasFurLength) {
-											int length = 2 + random.nextInt(3);
-											for (int n = 1; n < length; n++) {
-												if (canReplaceLeaves(level.getTileId(px, py - n, pz))) {
-													furTop.setBlock(level, px, py - n, pz);
-												}
-												else {
-													furBottom.setBlock(level, px, py - n, pz);
-													break;
-												}
-											}
-											furBottom.setBlock(level, px, py - length, pz);
-										}
-										else {
-											furBottom.setBlock(level, px, py - 1, pz);
+										int length = 1 + random.nextInt(3);
+										for (int n = 1; n <= length && canReplaceLeaves(level.getTileId(px, py - n, pz)); n++) {
+											fur.setBlock(level, px, py - n, pz);
 										}
 									}
 								}

@@ -8,7 +8,9 @@ import net.modificationstation.stationloader.api.client.event.model.ModelRegiste
 import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
 import paulevs.bnb.block.model.OBJBlockModel;
+import paulevs.bnb.block.types.NetherLeaves;
 import paulevs.bnb.block.types.NetherPlants;
+import paulevs.bnb.block.types.NetherTreeFur;
 import paulevs.bnb.block.types.NetherWood;
 import paulevs.bnb.util.BlockUtil;
 
@@ -31,6 +33,19 @@ public class ModelListener implements ModelRegister {
 			for (NetherWood wood: NetherWood.values()) {
 				makeRotated(wood.getName().replace("wood", "stump"), model.clone().setTextures(wood.getTexture(2) + "_1", wood.getTexture(0)));
 				makeRotated(wood.getName().replace("wood", "stump_full"), model.clone().setTextures(wood.getTexture(2) + "_1"));
+			}
+			
+			model = new OBJBlockModel("/assets/bnb/models/block/normal_crop.obj");
+			for (NetherTreeFur fur: NetherTreeFur.values()) {
+				BLOCK_MODELS.put(fur.getName(), model.clone().setTextures(fur.getTexture(0)));
+				BLOCK_MODELS.put(fur.getName() + "_bottom", model.clone().setTextures(fur.getTexture(0) + "_bottom"));
+			}
+			
+			model = new OBJBlockModel("/assets/bnb/models/block/fluffy_leaves.obj");
+			for (NetherLeaves leaves: NetherLeaves.values()) {
+				String fur = leaves.getName().substring(0, leaves.getName().indexOf('_')) + "_outer_leaves";
+				System.out.println(fur);
+				BLOCK_MODELS.put(leaves.getName(), model.clone().setTextures(leaves.getTexture(0), fur));
 			}
 		}
 	}

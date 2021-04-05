@@ -2,22 +2,19 @@ package paulevs.bnb.block.types;
 
 import paulevs.bnb.interfaces.BlockEnum;
 
-public enum GlowingFur implements BlockEnum {
-	CRIMSON_GLOWING_FUR(0, 0, "crimson_glowing_fur", "Crimson Glowing Fur"),
-	WARPED_GLOWING_FUR(1, 1, "warped_glowing_fur", "Warped Glowing Fur"),
-	POISON_GLOWING_FUR_BOTTOM(2, 2, "poison_glowing_fur_bottom", "Poison Glowing Fur"),
-	POISON_GLOWING_FUR_TOP(3, 2, "poison_glowing_fur_top", "Poison Glowing Fur");
+public enum NetherLantern implements BlockEnum {
+	CRIMSON_LANTERN(0, "crimson_lantern", "Crimson Lantern"),
+	WARPED_LANTERN(1, "warped_lantern", "Warped Lantern"),
+	POISON_LANTERN(2, "poison_lantern", "Poison Lantern");
 	
 	private final String localizedName;
 	private final String name;
 	private final int meta;
-	private final int drop;
 	
-	GlowingFur(int meta, int drop, String name, String localizedName) {
+	NetherLantern(int meta, String name, String localizedName) {
 		this.localizedName = localizedName;
 		this.name = name;
 		this.meta = meta;
-		this.drop = drop;
 	}
 
 	@Override
@@ -37,7 +34,7 @@ public enum GlowingFur implements BlockEnum {
 
 	@Override
 	public int getDropMeta() {
-		return drop;
+		return meta;
 	}
 	
 	@Override
@@ -47,6 +44,6 @@ public enum GlowingFur implements BlockEnum {
 
 	@Override
 	public boolean isInCreative() {
-		return !name.contains("top");
+		return true;
 	}
 }

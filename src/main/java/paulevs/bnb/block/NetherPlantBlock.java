@@ -101,4 +101,9 @@ public class NetherPlantBlock extends MultiBlock implements BlockModelProvider, 
 	public CustomModel getCustomWorldModel(Level level, int x, int y, int z, int meta) {
 		return ModelListener.getBlockModel(getVariant(meta).getName());
 	}
+	
+	/*@Environment(EnvType.CLIENT)
+	public int method_1619() {
+		return 0;
+	}*/
 }

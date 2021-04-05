@@ -48,6 +48,10 @@ public class BlockUtil {
 		return BlockBase.BY_ID[id];
 	}
 	
+	public static boolean isOpaque(int id) {
+		return id > 0 && blockByID(id).isFullOpaque();
+	}
+	
 	public static boolean isTopSide(int side) {
 		return side == 1;
 	}

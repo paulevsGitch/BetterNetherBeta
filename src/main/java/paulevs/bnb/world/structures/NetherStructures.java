@@ -1,9 +1,10 @@
 package paulevs.bnb.world.structures;
 
 import net.minecraft.level.structure.Structure;
-import paulevs.bnb.block.types.GlowingFur;
+import paulevs.bnb.block.types.NetherLantern;
 import paulevs.bnb.block.types.NetherLeaves;
 import paulevs.bnb.block.types.NetherPlants;
+import paulevs.bnb.block.types.NetherTreeFur;
 import paulevs.bnb.block.types.NetherVines;
 import paulevs.bnb.block.types.NetherWood;
 import paulevs.bnb.listeners.BlockListener;
@@ -13,20 +14,22 @@ public class NetherStructures {
 	public static final Structure CRIMSON_TREE = new NetherTree(
 		new BlockState(BlockListener.getBlock("nether_wood"), NetherWood.CRIMSON_WOOD),
 		new BlockState(BlockListener.getBlock("nether_leaves"), NetherLeaves.CRIMSON_LEAVES),
-		new BlockState(BlockListener.getBlock("glowing_fur"), GlowingFur.CRIMSON_GLOWING_FUR),
+		new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.CRIMSON_GLOWING_FUR),
+		new BlockState(BlockListener.getBlock("nether_lantern"), NetherLantern.CRIMSON_LANTERN),
 		1.5F, 0.7F
 	);
 	public static final Structure WARPED_TREE = new NetherTree(
 		new BlockState(BlockListener.getBlock("nether_wood"), NetherWood.WARPED_WOOD),
 		new BlockState(BlockListener.getBlock("nether_leaves"), NetherLeaves.WARPED_LEAVES),
-		new BlockState(BlockListener.getBlock("glowing_fur"), GlowingFur.WARPED_GLOWING_FUR),
+		new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.WARPED_GLOWING_FUR),
+		new BlockState(BlockListener.getBlock("nether_lantern"), NetherLantern.WARPED_LANTERN),
 		0.5F, 1F
 	);
 	public static final Structure POISON_TREE = new NetherTree(
 		new BlockState(BlockListener.getBlock("nether_wood"), NetherWood.POISON_WOOD),
 		new BlockState(BlockListener.getBlock("nether_leaves"), NetherLeaves.POISON_LEAVES),
-		new BlockState(BlockListener.getBlock("glowing_fur"), GlowingFur.POISON_GLOWING_FUR_TOP),
-		new BlockState(BlockListener.getBlock("glowing_fur"), GlowingFur.POISON_GLOWING_FUR_BOTTOM),
+		new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.POISON_GLOWING_FUR),
+		new BlockState(BlockListener.getBlock("nether_lantern"), NetherLantern.POISON_LANTERN),
 		0.6F, 1.3F
 	);
 	

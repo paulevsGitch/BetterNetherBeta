@@ -12,14 +12,15 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.BlockBase;
 import net.modificationstation.stationloader.api.common.event.block.BlockRegister;
 import paulevs.bnb.BetterNetherBeta;
-import paulevs.bnb.block.GlowingFurBlock;
 import paulevs.bnb.block.NetherFungusBlock;
+import paulevs.bnb.block.NetherLanternBlock;
 import paulevs.bnb.block.NetherLeavesBlock;
 import paulevs.bnb.block.NetherPlanksBlock;
 import paulevs.bnb.block.NetherPlantBlockImpl;
 import paulevs.bnb.block.NetherStairsBlock;
 import paulevs.bnb.block.NetherStumpBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
+import paulevs.bnb.block.NetherTreeFurBlock;
 import paulevs.bnb.block.NetherVineBlock;
 import paulevs.bnb.block.NetherWoodBlock;
 import paulevs.bnb.block.types.NetherPlanks;
@@ -38,13 +39,17 @@ public class BlockListener implements BlockRegister {
 		occupiedIDs = BetterNetherBeta.configBlocks.getSet("blocks");
 		
 		register("nether_terrain", NetherTerrainBlock::new);
+		
 		register("nether_wood", NetherWoodBlock::new);
 		register("nether_stump", NetherStumpBlock::new);
 		register("nether_leaves", NetherLeavesBlock::new);
+		register("nether_lantern", NetherLanternBlock::new);
+		register("nether_tree_fur", NetherTreeFurBlock::new);
+		register("nether_planks", NetherPlanksBlock::new);
+		
 		register("nether_plant", NetherPlantBlockImpl::new);
 		register("nether_vine", NetherVineBlock::new);
-		register("glowing_fur", GlowingFurBlock::new);
-		register("nether_planks", NetherPlanksBlock::new);
+		
 		for (NetherPlanks plank: NetherPlanks.values()) {
 			register("stairs_" + plank.getName(), NetherStairsBlock::new);
 		}
@@ -54,7 +59,8 @@ public class BlockListener implements BlockRegister {
 	}
 	
 	private static int getID(String name) {
-		while (BlockUtil.blockByID(startID) != null && startID < 255 && !occupiedIDs.contains(startID)) {
+		System.out.println(occupiedIDs);
+		while ((BlockUtil.blockByID(startID) != null || occupiedIDs.contains(startID)) && startID < 255) {
 			startID++;
 		}
 		return BetterNetherBeta.configBlocks.getInt("blocks." + name, startID);
