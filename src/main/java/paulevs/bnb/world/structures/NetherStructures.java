@@ -25,12 +25,12 @@ public class NetherStructures {
 		new BlockState(BlockListener.getBlock("nether_lantern"), NetherLantern.WARPED_LANTERN),
 		0.5F, 1F
 	);
-	public static final Structure POISON_TREE = new NetherTree(
+	public static final Structure POISON_TREE = new NetherTreeSpherical(
 		new BlockState(BlockListener.getBlock("nether_wood"), NetherWood.POISON_WOOD),
 		new BlockState(BlockListener.getBlock("nether_leaves"), NetherLeaves.POISON_LEAVES),
 		new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.POISON_GLOWING_FUR),
 		new BlockState(BlockListener.getBlock("nether_lantern"), NetherLantern.POISON_LANTERN),
-		0.6F, 1.3F
+		0.9F
 	);
 	
 	public static final Structure CRIMSON_ROOTS = makeGrass(NetherPlants.CRIMSON_ROOTS);
