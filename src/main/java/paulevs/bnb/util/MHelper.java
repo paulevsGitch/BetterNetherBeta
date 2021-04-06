@@ -7,6 +7,7 @@ import paulevs.bnb.noise.OpenSimplexNoise;
 
 public class MHelper {
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(0);
+	private static final Random RANDOM = new Random();
 	
 	public static int getRandomHash(int x, int z) {
 		int h = x * 374761393 + z * 668265263;
@@ -60,5 +61,19 @@ public class MHelper {
 
 	public static float randRange(float min, float max, Random random) {
 		return min + random.nextFloat() * (max - min);
+	}
+	
+	public static void shuffle(Object[] array, Random random) {
+		Object obj;
+		for (int i = 0; i < array.length; i++) {
+			int i2 = random.nextInt(array.length);
+			obj = array[i];
+			array[i] = array[i2];
+			array[i2] = obj;
+		}
+	}
+
+	public static Random getRandom() {
+		return RANDOM;
 	}
 }

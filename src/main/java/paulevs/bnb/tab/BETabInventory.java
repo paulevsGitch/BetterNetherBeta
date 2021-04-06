@@ -22,6 +22,7 @@ public class BETabInventory implements InventoryBase {
 		items[i++] = new ItemInstance(ItemBase.flintAndSteel);
 		items[i++] = new ItemInstance(ItemBase.ironPickaxe);
 		items[i++] = new ItemInstance(ItemBase.ironAxe);
+		items[i++] = new ItemInstance(ItemBase.dyePowder, 1, 15);
 		for (BlockBase block: BlockListener.getModBlocks()) {
 			if (block instanceof MultiBlock) {
 				BlockEnum[] variants = ((MultiBlock) block).getVariants();

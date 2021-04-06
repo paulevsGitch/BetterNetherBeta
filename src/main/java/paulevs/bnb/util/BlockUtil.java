@@ -1,6 +1,7 @@
 package paulevs.bnb.util;
 
 import net.minecraft.block.BlockBase;
+import net.minecraft.level.Level;
 import paulevs.bnb.block.NetherTerrainBlock;
 
 public class BlockUtil {
@@ -46,6 +47,10 @@ public class BlockUtil {
 	
 	public static BlockBase blockByID(int id) {
 		return BlockBase.BY_ID[id];
+	}
+	
+	public static BlockBase getBlock(Level level, int x, int y, int z) {
+		return blockByID(level.getTileId(x, y, z));
 	}
 	
 	public static int getMaxID() {

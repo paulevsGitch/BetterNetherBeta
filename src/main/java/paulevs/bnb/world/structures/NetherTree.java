@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.MathHelper;
+import paulevs.bnb.block.NetherPlantBlock;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.BlockUtil;
 
@@ -108,7 +109,7 @@ public class NetherTree extends Structure {
 	}
 	
 	private boolean canReplaceRoot(int tile) {
-		return tile == 0 || BlockUtil.blockByID(tile).material.isReplaceable() || BlockUtil.isTerrain(tile);
+		return tile == 0 || BlockUtil.blockByID(tile).material.isReplaceable() || BlockUtil.isTerrain(tile) || BlockUtil.blockByID(tile) instanceof NetherPlantBlock;
 	}
 	
 	private boolean canReplaceLeaves(int tile) {

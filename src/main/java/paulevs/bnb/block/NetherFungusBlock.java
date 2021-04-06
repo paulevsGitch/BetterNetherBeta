@@ -11,6 +11,7 @@ import paulevs.bnb.block.types.NetherFungus;
 import paulevs.bnb.listeners.ModelListener;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.MHelper;
+import paulevs.bnb.world.structures.NetherStructures;
 
 public class NetherFungusBlock extends NetherPlantBlock implements BlockModelProvider {
 	public NetherFungusBlock(String registryName, int id) {
@@ -43,5 +44,15 @@ public class NetherFungusBlock extends NetherPlantBlock implements BlockModelPro
 	@Override
 	public float getEmissionIntensity() {
 		return 3F;
+	}
+	
+	public boolean growTree(Level level, int x, int y, int z, int meta) {
+		if (meta == NetherFungus.CRIMSON_FUNGUS.getMeta()) {
+			return NetherStructures.CRIMSON_TREE.generate(level, MHelper.getRandom(), x, y, z);
+		}
+		else if (meta == NetherFungus.WARPED_FUNGUS.getMeta()) {
+			return NetherStructures.WARPED_TREE.generate(level, MHelper.getRandom(), x, y, z);
+		}
+		return false;
 	}
 }
