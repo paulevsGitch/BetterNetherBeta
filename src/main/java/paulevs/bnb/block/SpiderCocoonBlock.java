@@ -22,7 +22,7 @@ public class SpiderCocoonBlock extends BlockWithEntity implements BlockModelProv
 		this.setName(registryName);
 		this.setHardness(LEAVES.getHardness());
 		this.sounds(GRASS_SOUNDS);
-		this.setBoundingBox(0.125F, 0F, 0.125F, 0.875F, 0.875F, 0.875F);
+		this.setBoundingBox(0.125F, 0F, 0.125F, 0.875F, 0.75F, 0.875F);
 	}
 	
 	@Override

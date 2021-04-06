@@ -17,7 +17,7 @@ public class NetherGrass extends Structure {
 	
 	@Override
 	public boolean generate(Level level, Random random, int x, int y, int z) {
-		int count = 5 + random.nextInt(10);
+		int count = 10 + random.nextInt(30);
 		for (int i = 0; i < count; i++) {
 			int px = MathHelper.floor(x + random.nextGaussian() * 3 + 0.5);
 			int pz = MathHelper.floor(z + random.nextGaussian() * 3 + 0.5);
