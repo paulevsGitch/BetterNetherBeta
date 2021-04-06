@@ -289,7 +289,7 @@ public class TileRendererMixin {
 	
 	private boolean bnb_renderModel(BlockBase block, int x, int y, int z) {
 		if (!ClientUtil.isFancyGraphics()) {
-			bnb_vanillaBlockRender(block, x, y, z);
+			return bnb_vanillaBlockRender(block, x, y, z);
 		}
 		else if (block instanceof BlockModelProvider) {
 			Minecraft minecraft = ClientUtil.getMinecraft();
@@ -299,7 +299,7 @@ public class TileRendererMixin {
 				boolean isOBJ = model instanceof OBJBlockModel;
 				Tessellator tessellator = Tessellator.INSTANCE;
 				TextureRegistry lastRegistry = TextureRegistry.currentRegistry();
-				int lastTex = lastRegistry.currentTexture();
+				Integer lastTex = lastRegistry == null ? 0 : lastRegistry.currentTexture();
 				CustomCuboidRenderer[] cuboids = model.getCuboids();
 				
 				if (!isOBJ) {

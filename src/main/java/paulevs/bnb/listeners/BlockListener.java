@@ -21,6 +21,7 @@ import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.NetherTreeFurBlock;
 import paulevs.bnb.block.NetherVineBlock;
 import paulevs.bnb.block.NetherWoodBlock;
+import paulevs.bnb.block.SpiderCocoonBlock;
 import paulevs.bnb.block.types.NetherPlanks;
 import paulevs.bnb.interfaces.BlockInit;
 import paulevs.bnb.util.BlockUtil;
@@ -44,13 +45,15 @@ public class BlockListener implements BlockRegister {
 		register("nether_tree_fur", NetherTreeFurBlock::new);
 		register("nether_planks", NetherPlanksBlock::new);
 		
-		register("nether_plant", NetherPlantBlockImpl::new);
-		register("nether_vine", NetherVineBlock::new);
-		
 		for (NetherPlanks plank: NetherPlanks.values()) {
 			register("stairs_" + plank.getName(), NetherStairsBlock::new);
 		}
-		register("test", NetherFungusBlock::new);
+		
+		register("nether_plant", NetherPlantBlockImpl::new);
+		register("nether_vine", NetherVineBlock::new);
+		register("nether_fungus", NetherFungusBlock::new);
+		
+		register("spider_cocoon", SpiderCocoonBlock::new);
 		
 		occupiedIDs = null;
 		BetterNetherBeta.configBlocks.save();

@@ -4,13 +4,15 @@
 	"package": "paulevs.bnb.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
-		"NetherMixin",
 		"LivingMixin",
+		"NetherMixin",
+		"SpiderMixin",
 		"DyeMixin"
 	],
 	"server": [],
 	"client": [
 		"AbstractClientPlayerMixin",
+		"SpiderEyesRendererMixin",
 		"ParticleManagerMixin",
 		"GameRendererMixin",
 		"TileRendererMixin",

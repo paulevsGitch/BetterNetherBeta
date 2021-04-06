@@ -6,12 +6,13 @@ import net.minecraft.inventory.InventoryBase;
 import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import paulevs.bnb.block.MultiBlock;
+import paulevs.bnb.block.SpiderCocoonBlock;
 import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.listeners.ItemListener;
 
 public class BETabInventory implements InventoryBase {
-	public  static final int ROWS = 6;
+	public  static final int ROWS = 7;
 	private ItemInstance[] items = new ItemInstance[ROWS * 9];
 	
 	public BETabInventory() {
@@ -23,6 +24,7 @@ public class BETabInventory implements InventoryBase {
 		items[i++] = new ItemInstance(ItemBase.ironPickaxe);
 		items[i++] = new ItemInstance(ItemBase.ironAxe);
 		items[i++] = new ItemInstance(ItemBase.dyePowder, 1, 15);
+		items[i++] = new ItemInstance(BlockBase.GLASS, 1, 15);
 		for (BlockBase block: BlockListener.getModBlocks()) {
 			if (block instanceof MultiBlock) {
 				BlockEnum[] variants = ((MultiBlock) block).getVariants();
@@ -30,6 +32,11 @@ public class BETabInventory implements InventoryBase {
 					if (variant.isInCreative()) {
 						items[i++] = new ItemInstance(block, 1, variant.getMeta());
 					}
+				}
+			}
+			if (block instanceof SpiderCocoonBlock) {
+				for (int meta = 0; meta < 3; meta++) {
+					items[i++] = new ItemInstance(block, 1, meta);
 				}
 			}
 			else {

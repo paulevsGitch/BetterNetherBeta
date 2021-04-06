@@ -43,7 +43,7 @@ public class NetherTree extends Structure {
 	private boolean canGenerate(Level level, int x, int y, int z, int height) {
 		for (int i = 0; i < height; i++) {
 			int tile = level.getTileId(x, y + i, z);
-			if (!BlockUtil.isNonSolid(tile)) {
+			if (!canReplaceRoot(tile)) {
 				return false;
 			}
 		}

@@ -11,7 +11,6 @@ import paulevs.bnb.block.model.OBJBlockModel;
 import paulevs.bnb.block.types.NetherLeaves;
 import paulevs.bnb.block.types.NetherPlants;
 import paulevs.bnb.block.types.NetherTreeFur;
-import paulevs.bnb.block.types.NetherWood;
 import paulevs.bnb.util.BlockUtil;
 
 public class ModelListener implements ModelRegister {
@@ -28,15 +27,14 @@ public class ModelListener implements ModelRegister {
 			model = new OBJBlockModel("/assets/bnb/models/block/crimson_fungus.obj", 16, 8, 0, 8, null).setTextures("crimson_fungus", "crimson_fungus_bottom");
 			makeRotated("crimson_fungus", model);
 			
+			model = new OBJBlockModel("/assets/bnb/models/block/cocoon.obj", 16, 8, 0, 8, null);
+			makeRotated("cocoon_crimson", model.setTextures("cocoon_crimson"));
+			makeRotated("cocoon_warped", model.setTextures("cocoon_warped"));
+			makeRotated("cocoon_poison", model.setTextures("cocoon_poison"));
+			
 			model = new OBJBlockModel("/assets/bnb/models/block/fluffy_grass.obj", 16, 8, 0, 8, BlockFaces.UP);
 			for (NetherPlants plant: NetherPlants.values()) {
 				BLOCK_MODELS.put(plant.getName(), model.clone().setTextures(plant.getTexture(0)));
-			}
-			
-			model = new OBJBlockModel("/assets/bnb/models/block/tree_stump.obj");
-			for (NetherWood wood: NetherWood.values()) {
-				makeRotated(wood.getName().replace("wood", "stump"), model.clone().setTextures(wood.getTexture(2) + "_1", wood.getTexture(0)));
-				makeRotated(wood.getName().replace("wood", "stump_full"), model.clone().setTextures(wood.getTexture(2) + "_1"));
 			}
 			
 			model = new OBJBlockModel("/assets/bnb/models/block/normal_crop.obj");

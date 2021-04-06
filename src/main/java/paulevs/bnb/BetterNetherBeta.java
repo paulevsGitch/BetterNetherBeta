@@ -3,6 +3,7 @@ package paulevs.bnb;
 import net.modificationstation.stationloader.api.client.event.model.ModelRegister;
 import net.modificationstation.stationloader.api.client.event.texture.TextureRegister;
 import net.modificationstation.stationloader.api.common.event.block.BlockRegister;
+import net.modificationstation.stationloader.api.common.event.block.TileEntityRegister;
 import net.modificationstation.stationloader.api.common.event.item.ItemRegister;
 import net.modificationstation.stationloader.api.common.event.item.tool.EffectiveBlocksProvider;
 import net.modificationstation.stationloader.api.common.event.level.biome.BiomeRegister;
@@ -16,6 +17,7 @@ import paulevs.bnb.listeners.ItemListener;
 import paulevs.bnb.listeners.ModelListener;
 import paulevs.bnb.listeners.RecipeListener;
 import paulevs.bnb.listeners.TextureListener;
+import paulevs.bnb.listeners.TileEntityListener;
 
 public class BetterNetherBeta implements StationMod {
 	public static final String MOD_ID = "bnb";
@@ -32,6 +34,7 @@ public class BetterNetherBeta implements StationMod {
 		ChunkListener.EVENT.register(new ChunkListener());
 		BiomeRegister.EVENT.register(new BiomeListener());
 		RecipeRegister.EVENT.register(new RecipeListener());
+		TileEntityRegister.EVENT.register(new TileEntityListener());
 	}
 	
 	public static String getID(String name) {

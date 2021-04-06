@@ -26,7 +26,7 @@ public class DyeMixin {
 		if (item.getDamage() == 15) {
 			BlockBase block = BlockUtil.getBlock(level, x, y, z);
 			if (block instanceof NetherFungusBlock) {
-				if (((NetherFungusBlock) block).growTree(level, x, y + 1, z, level.getTileMeta(x, y, z))) {
+				if (((NetherFungusBlock) block).growTree(level, x, y, z, level.getTileMeta(x, y, z))) {
 					item.count--;
 					info.setReturnValue(true);
 					info.cancel();
