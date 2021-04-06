@@ -21,8 +21,12 @@ public class ModelListener implements ModelRegister {
 	public void registerModels(Type type) {
 		if (type == ModelRegister.Type.BLOCKS) {
 			OBJBlockModel model;
+			
 			model = new OBJBlockModel("/assets/bnb/models/block/warped_fungus.obj", 16, 8, 0, 8, null).setTextures("warped_fungus", "warped_fungus_bottom");
 			makeRotated("warped_fungus", model);
+			
+			model = new OBJBlockModel("/assets/bnb/models/block/crimson_fungus.obj", 16, 8, 0, 8, null).setTextures("crimson_fungus", "crimson_fungus_bottom");
+			makeRotated("crimson_fungus", model);
 			
 			model = new OBJBlockModel("/assets/bnb/models/block/fluffy_grass.obj", 16, 8, 0, 8, BlockFaces.UP);
 			for (NetherPlants plant: NetherPlants.values()) {

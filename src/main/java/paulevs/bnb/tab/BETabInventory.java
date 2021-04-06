@@ -8,6 +8,7 @@ import net.minecraft.item.ItemInstance;
 import paulevs.bnb.block.MultiBlock;
 import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.listeners.BlockListener;
+import paulevs.bnb.listeners.ItemListener;
 
 public class BETabInventory implements InventoryBase {
 	public  static final int ROWS = 6;
@@ -34,6 +35,9 @@ public class BETabInventory implements InventoryBase {
 				items[i++] = new ItemInstance(block);
 			}
 		}
+		for (ItemBase item: ItemListener.getModItems()) {
+			items[i++] = new ItemInstance(item);
+		}
 	}
 	
 	@Override
@@ -56,7 +60,7 @@ public class BETabInventory implements InventoryBase {
 
 	@Override
 	public String getContainerName() {
-		return "test";
+		return "Better End Beta";
 	}
 
 	@Override

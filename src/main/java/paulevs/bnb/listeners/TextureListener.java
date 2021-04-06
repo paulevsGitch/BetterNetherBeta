@@ -19,16 +19,17 @@ import paulevs.bnb.util.ResourceUtil;
 
 public class TextureListener implements TextureRegister {
 	private static final Map<String, Integer> BLOCK_TEXTURES = Maps.newHashMap();
-	public static int particleAtlas;
+	private static final Map<String, Integer> ITEM_TEXTURES = Maps.newHashMap();
 	
 	@Override
 	public void registerTextures() {
 		TextureFactory textureFactory = TextureFactory.INSTANCE;
 		TextureRegistry terrain = TextureRegistry.getRegistry("TERRAIN");
+		TextureRegistry items = TextureRegistry.getRegistry("GUI_ITEMS");
 		String pathBlock = "/assets/" + BetterNetherBeta.MOD_ID + "/textures/block/";
+		String pathItem = "/assets/" + BetterNetherBeta.MOD_ID + "/textures/item/";
 		loadTextureMap(textureFactory, terrain, pathBlock, BLOCK_TEXTURES);
-		//TextureRegistry particles = TextureRegistry.getRegistry("PARTICLES");
-		//particleAtlas = textureFactory.createNewAtlas(particles, "bnb_particles", "/assets/" + BetterNetherBeta.MOD_ID + "/textures/particles.png");
+		loadTextureMap(textureFactory, items, pathItem, ITEM_TEXTURES);
 		ModelListener.updateModels();
 	}
 	
@@ -93,5 +94,9 @@ public class TextureListener implements TextureRegister {
 			value = BLOCK_TEXTURES.get(alternative);
 		}
 		return value == null ? 0 : value.intValue();
+	}
+	
+	public static int getItemTexture(String name) {
+		return ITEM_TEXTURES.getOrDefault(name, 0);
 	}
 }

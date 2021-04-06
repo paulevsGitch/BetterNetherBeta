@@ -48,6 +48,10 @@ public class BlockUtil {
 		return BlockBase.BY_ID[id];
 	}
 	
+	public static int getMaxID() {
+		return BlockBase.BY_ID.length;
+	}
+	
 	public static boolean isOpaque(int id) {
 		return id > 0 && blockByID(id).isFullOpaque();
 	}

@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -53,19 +52,15 @@ public class BlockListener implements BlockRegister {
 		}
 		register("test", NetherFungusBlock::new);
 		
+		occupiedIDs = null;
 		BetterNetherBeta.configBlocks.save();
 	}
 	
 	private static int getID(String name) {
-		while ((BlockUtil.blockByID(startID) != null || occupiedIDs.contains(startID)) && startID < 255) {
+		while ((BlockUtil.blockByID(startID) != null || occupiedIDs.contains(startID)) && startID < BlockUtil.getMaxID()) {
 			startID++;
 		}
 		return BetterNetherBeta.configBlocks.getInt("blocks." + name, startID);
-	}
-
-	@SuppressWarnings("unused")
-	private static <T extends BlockBase> void register(String name, Function<Integer, T> init) {
-		BLOCKS.put(name, init.apply(getID(name)));
 	}
 	
 	private static <T extends BlockBase> void register(String name, BlockInit<String, Integer, T> init) {

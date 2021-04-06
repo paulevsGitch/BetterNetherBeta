@@ -7,11 +7,15 @@ import net.minecraft.container.Chest;
 import net.minecraft.inventory.InventoryBase;
 
 public class CreativeScreen extends ContainerBase {
+	private InventoryBase inventory;
 	private int rows = 0;
 	
 	public CreativeScreen(InventoryBase playerInventory) {
-		super(new Chest(playerInventory, new BETabInventory()));
+		super(null);
+		inventory = new BETabInventory();
+		container = new Chest(playerInventory, inventory);
 		this.rows = BETabInventory.ROWS;
+		this.containerHeight = 114 + this.rows * 18;
 	}
 
 	@Override
@@ -23,5 +27,10 @@ public class CreativeScreen extends ContainerBase {
 		int var4 = (this.height - this.containerHeight) / 2;
 		this.blit(var3, var4, 0, 0, this.containerWidth, this.rows * 18 + 17);
 		this.blit(var3, var4 + this.rows * 18 + 17, 0, 126, this.containerWidth, 96);
+	}
+	
+	@Override
+	protected void renderForeground() {
+		this.textManager.drawText(inventory.getContainerName(), 8, 6, 4210752);
 	}
 }
