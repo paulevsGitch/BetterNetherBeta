@@ -14,11 +14,12 @@ import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.Vec3f;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.ClientUtil;
+import paulevs.bnb.util.WeightedList;
 
 public class NetherBiome extends Biome {
 	private List<Structure> trees = Lists.newArrayList();
-	private List<Structure> plants = Lists.newArrayList();
 	private List<Structure> ceil = Lists.newArrayList();
+	private WeightedList<Structure> plants = new WeightedList<Structure>();
 	
 	private BlockState topBlock = new BlockState(BlockBase.NETHERRACK);
 	
@@ -90,8 +91,8 @@ public class NetherBiome extends Biome {
 		trees.add(structure);
 	}
 	
-	public void addPlant(Structure structure) {
-		plants.add(structure);
+	public void addPlant(Structure structure, float chance) {
+		plants.add(structure, chance);
 	}
 	
 	public void addCeilPlant(Structure structure) {
@@ -99,7 +100,7 @@ public class NetherBiome extends Biome {
 	}
 
 	public Structure getPlant(Random random) {
-		return plants.get(random.nextInt(plants.size()));
+		return plants.get(random);
 	}
 	
 	public Structure getCeilPlant(Random random) {

@@ -12,6 +12,7 @@ import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationloader.api.common.event.level.gen.ChunkPopulator;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.BlockUtil;
+import paulevs.bnb.util.MHelper;
 import paulevs.bnb.world.biome.NetherBiome;
 
 public class ChunkListener implements ChunkPopulator {
@@ -77,7 +78,7 @@ public class ChunkListener implements ChunkPopulator {
 						}
 						
 						if (countPlants > 0) {
-							count = random.nextInt(countPlants);
+							count = MHelper.randRange(countPlants >> 1, countPlants, random);
 							for (int i = 0; i < count; i++) {
 								int px = random.nextInt(16);
 								int pz = random.nextInt(16);

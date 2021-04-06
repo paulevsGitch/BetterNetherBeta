@@ -13,10 +13,11 @@ public class WarpedForest extends NetherBiome {
 		this.setFogColor("30b7a9");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrain.WARPED_NYLIUM));
 		this.addTree(NetherStructures.WARPED_TREE);
-		this.addPlant(NetherStructures.WARPED_ROOTS);
-		this.addPlant(NetherStructures.GLOWTAIL);
-		this.addPlant(NetherStructures.WARPED_CORAL);
-		this.addPlant(NetherStructures.WARPED_MOSS);
+		this.addPlant(NetherStructures.WARPED_ROOTS, 1F);
+		this.addPlant(NetherStructures.GLOWTAIL, 0.4F);
+		this.addPlant(NetherStructures.WARPED_CORAL, 0.2F);
+		this.addPlant(NetherStructures.WARPED_MOSS, 1F);
+		this.addPlant(NetherStructures.WARPED_COCOON, 0.01F);
 		this.addCeilPlant(NetherStructures.WARPED_VINE);
 		this.setMaxTreeCount(5);
 		this.setMaxPlantCount(15);
