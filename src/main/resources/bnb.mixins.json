@@ -10,6 +10,7 @@
 	"server": [],
 	"client": [
 		"AbstractClientPlayerMixin",
+		"ParticleManagerMixin",
 		"GameRendererMixin",
 		"TileRendererMixin",
 		"SoundHelperMixin",
