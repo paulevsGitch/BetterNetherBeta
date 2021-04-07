@@ -35,13 +35,10 @@ public class TranslationStorageMixin {
 			info.setReturnValue(result);
 			info.cancel();
 		}
-		else {
-			info.setReturnValue(key);
-		}
 	}
 	
 	private String bnb_transformName(String key, String pattern) {
-		String result = bnb_capitalize(key.substring(pattern.length()).replace('_', ' '));
+		String result = bnb_capitalize(key.substring(pattern.length()).replace('_', ' ')).replace("Stairs", "Stairs From");
 		TRANSLATIONS.put(key, result);
 		return result;
 	}

@@ -6,11 +6,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockBase;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemInstance;
 import net.minecraft.item.PlaceableTileEntity;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.Box;
 import net.modificationstation.stationloader.api.common.block.BlockItemProvider;
 import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTileEntityWithMeta;
+import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.interfaces.BlockEnum;
 
 public class NetherCeilPlantBlock extends MultiBlock implements BlockItemProvider {
@@ -23,9 +25,16 @@ public class NetherCeilPlantBlock extends MultiBlock implements BlockItemProvide
 	@Override
 	public PlaceableTileEntity getBlockItem(int i) {
 		return new PlaceableTileEntityWithMeta(i) {
+			@Override
 			@Environment(EnvType.CLIENT)
 			public int getTexturePosition(int damage) {
 				return getTextureForSide(0, damage);
+			}
+			
+			@Override
+			@Environment(EnvType.CLIENT)
+			public String getTranslationKey(ItemInstance item) {
+				return "tile." + BetterNetherBeta.MOD_ID + ":" + getVariant(item.getDamage()).getLocalizedName();
 			}
 		};
 	}
