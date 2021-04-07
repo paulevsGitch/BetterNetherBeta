@@ -11,11 +11,11 @@ import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.listeners.ItemListener;
 
-public class BETabInventory implements InventoryBase {
+public class BNTabInventory implements InventoryBase {
 	public  static final int ROWS = 6;
 	private ItemInstance[] items = new ItemInstance[ROWS * 9];
 	
-	public BETabInventory() {
+	public BNTabInventory() {
 		int i = 0;
 		items[i++] = new ItemInstance(BlockBase.NETHERRACK);
 		items[i++] = new ItemInstance(BlockBase.GLOWSTONE);
@@ -68,7 +68,7 @@ public class BETabInventory implements InventoryBase {
 
 	@Override
 	public String getContainerName() {
-		return "Better End Beta";
+		return "Better Nether Beta";
 	}
 
 	@Override

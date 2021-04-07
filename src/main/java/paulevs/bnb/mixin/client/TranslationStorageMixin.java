@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.google.common.collect.Maps;
 
 import net.minecraft.client.resource.language.TranslationStorage;
+import net.modificationstation.stationloader.mixin.common.accessor.TranslationStorageAccessor;
 import paulevs.bnb.BetterNetherBeta;
 
 @Mixin(TranslationStorage.class)
@@ -31,7 +32,7 @@ public class TranslationStorageMixin {
 			info.cancel();
 		}
 		else {
-			result = translations.getProperty(key, null);
+			result = bnb_getAPITranslation(key);
 			if (result != null) {
 				TRANSLATIONS.put(key, result);
 				info.setReturnValue(result);
@@ -48,6 +49,11 @@ public class TranslationStorageMixin {
 				info.cancel();
 			}
 		}
+	}
+	
+	private String bnb_getAPITranslation(String key) {
+		Properties translations = ((TranslationStorageAccessor) TranslationStorage.getInstance()).getTranslations();
+		return translations.getProperty(key + ".name");
 	}
 	
 	private String bnb_transformName(String key, String pattern) {

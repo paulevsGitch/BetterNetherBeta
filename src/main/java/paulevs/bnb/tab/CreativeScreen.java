@@ -12,9 +12,9 @@ public class CreativeScreen extends ContainerBase {
 	
 	public CreativeScreen(InventoryBase playerInventory) {
 		super(null);
-		inventory = new BETabInventory();
+		inventory = new BNTabInventory();
 		container = new Chest(playerInventory, inventory);
-		this.rows = BETabInventory.ROWS;
+		this.rows = BNTabInventory.ROWS;
 		this.containerHeight = 114 + this.rows * 18;
 	}
 
