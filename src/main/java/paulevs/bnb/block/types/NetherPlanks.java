@@ -3,16 +3,14 @@ package paulevs.bnb.block.types;
 import paulevs.bnb.interfaces.BlockEnum;
 
 public enum NetherPlanks implements BlockEnum {
-	CRIMSON_PLANKS(0, "crimson_planks", "Crimson Planks"),
-	WARPED_PLANKS(1, "warped_planks", "Warped Planks"),
-	POISON_PLANKS(2, "poison_planks", "Poison Planks");
+	CRIMSON_PLANKS(0, "crimson_planks"),
+	WARPED_PLANKS(1, "warped_planks"),
+	POISON_PLANKS(2, "poison_planks");
 	
-	private final String localizedName;
 	private final String name;
 	private final int meta;
 	
-	NetherPlanks(int meta, String name, String localizedName) {
-		this.localizedName = localizedName;
+	NetherPlanks(int meta, String name) {
 		this.name = name;
 		this.meta = meta;
 	}
@@ -23,8 +21,8 @@ public enum NetherPlanks implements BlockEnum {
 	}
 
 	@Override
-	public String getLocalizedName() {
-		return localizedName;
+	public String getTranslationKey() {
+		return name;
 	}
 
 	@Override

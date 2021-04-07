@@ -3,16 +3,14 @@ package paulevs.bnb.block.types;
 import paulevs.bnb.interfaces.BlockEnum;
 
 public enum NetherLeaves implements BlockEnum {
-	CRIMSON_LEAVES(0, "crimson_leaves", "Crimson Leaves"),
-	WARPED_LEAVES(1, "warped_leaves", "Warped Leaves"),
-	POISON_LEAVES(2, "poison_leaves", "Poison Leaves");
+	CRIMSON_LEAVES(0, "crimson_leaves"),
+	WARPED_LEAVES(1, "warped_leaves"),
+	POISON_LEAVES(2, "poison_leaves");
 	
-	private final String localizedName;
 	private final String name;
 	private final int meta;
 	
-	NetherLeaves(int meta, String name, String localizedName) {
-		this.localizedName = localizedName;
+	NetherLeaves(int meta, String name) {
 		this.name = name;
 		this.meta = meta;
 	}
@@ -23,8 +21,8 @@ public enum NetherLeaves implements BlockEnum {
 	}
 
 	@Override
-	public String getLocalizedName() {
-		return localizedName;
+	public String getTranslationKey() {
+		return name;
 	}
 
 	@Override

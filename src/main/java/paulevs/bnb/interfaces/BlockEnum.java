@@ -3,7 +3,7 @@ package paulevs.bnb.interfaces;
 public interface BlockEnum {
 	public String getName();
 	
-	public String getLocalizedName();
+	public String getTranslationKey();
 	
 	public String getTexture(int side);
 	

@@ -4,16 +4,14 @@ import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.util.BlockUtil;
 
 public enum NetherWood implements BlockEnum {
-	CRIMSON_WOOD(0, "crimson_wood", "Crimson Wood"),
-	WARPED_WOOD(1, "warped_wood", "Warped Wood"),
-	POISON_WOOD(2, "poison_wood", "Poison Wood");
+	CRIMSON_WOOD(0, "crimson_wood"),
+	WARPED_WOOD(1, "warped_wood"),
+	POISON_WOOD(2, "poison_wood");
 	
-	private final String localizedName;
 	private final String name;
 	private final int meta;
 	
-	NetherWood(int meta, String name, String localizedName) {
-		this.localizedName = localizedName;
+	NetherWood(int meta, String name) {
 		this.name = name;
 		this.meta = meta;
 	}
@@ -24,8 +22,8 @@ public enum NetherWood implements BlockEnum {
 	}
 
 	@Override
-	public String getLocalizedName() {
-		return localizedName;
+	public String getTranslationKey() {
+		return name;
 	}
 
 	@Override

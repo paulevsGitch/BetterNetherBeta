@@ -3,16 +3,16 @@ package paulevs.bnb.block.types;
 import paulevs.bnb.interfaces.BlockEnum;
 
 public enum NetherTreeFur implements BlockEnum {
-	CRIMSON_GLOWING_FUR(0, "crimson_fur", "Crimson Glowing Fur"),
-	WARPED_GLOWING_FUR(1, "warped_fur", "Warped Glowing Fur"),
-	POISON_GLOWING_FUR(2, "poison_fur", "Poison Glowing Fur");
+	CRIMSON_GLOWING_FUR(0, "crimson_fur", "crimson_tree_fur"),
+	WARPED_GLOWING_FUR(1, "warped_fur", "warped_tree_fur"),
+	POISON_GLOWING_FUR(2, "poison_fur", "poison_tree_fur");
 	
-	private final String localizedName;
 	private final String name;
+	private final String key;
 	private final int meta;
 	
-	NetherTreeFur(int meta, String name, String localizedName) {
-		this.localizedName = localizedName;
+	NetherTreeFur(int meta, String name, String key) {
+		this.key = key;
 		this.name = name;
 		this.meta = meta;
 	}
@@ -23,8 +23,8 @@ public enum NetherTreeFur implements BlockEnum {
 	}
 
 	@Override
-	public String getLocalizedName() {
-		return localizedName;
+	public String getTranslationKey() {
+		return key;
 	}
 
 	@Override

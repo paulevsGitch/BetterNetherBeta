@@ -3,16 +3,14 @@ package paulevs.bnb.block.types;
 import paulevs.bnb.interfaces.BlockEnum;
 
 public enum NetherLantern implements BlockEnum {
-	CRIMSON_LANTERN(0, "crimson_lantern", "Crimson Lantern"),
-	WARPED_LANTERN(1, "warped_lantern", "Warped Lantern"),
-	POISON_LANTERN(2, "poison_lantern", "Poison Lantern");
+	CRIMSON_LANTERN(0, "crimson_lantern"),
+	WARPED_LANTERN(1, "warped_lantern"),
+	POISON_LANTERN(2, "poison_lantern");
 	
-	private final String localizedName;
 	private final String name;
 	private final int meta;
 	
-	NetherLantern(int meta, String name, String localizedName) {
-		this.localizedName = localizedName;
+	NetherLantern(int meta, String name) {
 		this.name = name;
 		this.meta = meta;
 	}
@@ -23,8 +21,8 @@ public enum NetherLantern implements BlockEnum {
 	}
 
 	@Override
-	public String getLocalizedName() {
-		return localizedName;
+	public String getTranslationKey() {
+		return name;
 	}
 
 	@Override

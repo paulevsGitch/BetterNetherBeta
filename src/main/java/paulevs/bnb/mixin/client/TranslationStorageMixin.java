@@ -1,8 +1,10 @@
 package paulevs.bnb.mixin.client;
 
 import java.util.Map;
+import java.util.Properties;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -18,6 +20,9 @@ public class TranslationStorageMixin {
 	private static final String BLOCK_PATTERN = "tile." + BetterNetherBeta.MOD_ID + ":";
 	private static final String ITEM_PATTERN = "item." + BetterNetherBeta.MOD_ID + ":";
 	
+	@Shadow
+	private Properties translations;
+	
 	@Inject(method = "method_995", at = @At("HEAD"), cancellable = true)
 	private void bnb_getTranslatedName(String key, CallbackInfoReturnable<String> info) {
 		String result = TRANSLATIONS.get(key);
@@ -25,15 +30,23 @@ public class TranslationStorageMixin {
 			info.setReturnValue(result);
 			info.cancel();
 		}
-		else if (key.startsWith(BLOCK_PATTERN)) {
-			result = bnb_transformName(key, BLOCK_PATTERN);
-			info.setReturnValue(result);
-			info.cancel();
-		}
-		else if (key.startsWith(ITEM_PATTERN)) {
-			result = bnb_transformName(key, ITEM_PATTERN);
-			info.setReturnValue(result);
-			info.cancel();
+		else {
+			result = translations.getProperty(key, null);
+			if (result != null) {
+				TRANSLATIONS.put(key, result);
+				info.setReturnValue(result);
+				info.cancel();
+			}
+			else if (key.startsWith(BLOCK_PATTERN)) {
+				result = bnb_transformName(key, BLOCK_PATTERN);
+				info.setReturnValue(result);
+				info.cancel();
+			}
+			else if (key.startsWith(ITEM_PATTERN)) {
+				result = bnb_transformName(key, ITEM_PATTERN);
+				info.setReturnValue(result);
+				info.cancel();
+			}
 		}
 	}
 	

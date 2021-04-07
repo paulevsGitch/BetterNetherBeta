@@ -4,16 +4,14 @@ import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.util.BlockUtil;
 
 public enum NetherTerrain implements BlockEnum {
-	CRIMSON_NYLIUM(0, "crimson_nylium", "Crimson Nylium"),
-	WARPED_NYLIUM(1, "warped_nylium", "Warped Nylium"),
-	POISON_NYLIUM(2, "poison_nylium", "Poison Nylium");
+	CRIMSON_NYLIUM(0, "crimson_nylium"),
+	WARPED_NYLIUM(1, "warped_nylium"),
+	POISON_NYLIUM(2, "poison_nylium");
 	
-	private final String localizedName;
 	private final String name;
 	private final int meta;
 	
-	NetherTerrain(int meta, String name, String localizedName) {
-		this.localizedName = localizedName;
+	NetherTerrain(int meta, String name) {
 		this.name = name;
 		this.meta = meta;
 	}
@@ -24,8 +22,8 @@ public enum NetherTerrain implements BlockEnum {
 	}
 
 	@Override
-	public String getLocalizedName() {
-		return localizedName;
+	public String getTranslationKey() {
+		return name;
 	}
 
 	@Override

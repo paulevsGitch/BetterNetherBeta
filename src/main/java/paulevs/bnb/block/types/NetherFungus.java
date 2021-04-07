@@ -3,15 +3,13 @@ package paulevs.bnb.block.types;
 import paulevs.bnb.interfaces.BlockEnum;
 
 public enum NetherFungus implements BlockEnum {
-	CRIMSON_FUNGUS(0, "crimson_fungus", "Crimson Fungus"),
-	WARPED_FUNGUS(1, "warped_fungus", "Warped Fungus");
+	CRIMSON_FUNGUS(0, "crimson_fungus"),
+	WARPED_FUNGUS(1, "warped_fungus");
 	
-	private final String localizedName;
 	private final String name;
 	private final int meta;
 	
-	NetherFungus(int meta, String name, String localizedName) {
-		this.localizedName = localizedName;
+	NetherFungus(int meta, String name) {
 		this.name = name;
 		this.meta = meta;
 	}
@@ -22,8 +20,8 @@ public enum NetherFungus implements BlockEnum {
 	}
 
 	@Override
-	public String getLocalizedName() {
-		return localizedName;
+	public String getTranslationKey() {
+		return name;
 	}
 
 	@Override

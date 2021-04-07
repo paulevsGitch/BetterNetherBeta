@@ -38,7 +38,7 @@ public class NetherFungusBlock extends NetherPlantBlock implements BlockModelPro
 			@Override
 			@Environment(EnvType.CLIENT)
 			public String getTranslationKey(ItemInstance item) {
-				return "tile." + BetterNetherBeta.MOD_ID + ":" + getVariant(item.getDamage()).getLocalizedName();
+				return "tile." + BetterNetherBeta.MOD_ID + ":" + getVariant(item.getDamage()).getTranslationKey();
 			}
 		};
 	}
