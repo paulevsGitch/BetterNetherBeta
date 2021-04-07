@@ -8,6 +8,7 @@
 	"client": [
 		"AbstractClientPlayerMixin",
 		"SpiderEyesRendererMixin",
+		"TranslationStorageMixin",
 		"ParticleManagerMixin",
 		"GameRendererMixin",
 		"TileRendererMixin",

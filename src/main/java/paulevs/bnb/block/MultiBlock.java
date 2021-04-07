@@ -1,9 +1,13 @@
 package paulevs.bnb.block;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemInstance;
 import net.minecraft.item.PlaceableTileEntity;
 import net.modificationstation.stationloader.api.common.block.BlockItemProvider;
 import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTileEntityWithMeta;
+import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.listeners.TextureListener;
 
@@ -20,7 +24,13 @@ public class MultiBlock extends NetherBlock implements BlockItemProvider {
 
 	@Override
 	public PlaceableTileEntity getBlockItem(int id) {
-		return new PlaceableTileEntityWithMeta(id);
+		return new PlaceableTileEntityWithMeta(id) {
+			@Override
+			@Environment(EnvType.CLIENT)
+			public String getTranslationKey(ItemInstance item) {
+				return "tile." + BetterNetherBeta.MOD_ID + ":" + getVariant(item.getDamage()).getLocalizedName();
+			}
+		};
 	}
 	
 	@Override
