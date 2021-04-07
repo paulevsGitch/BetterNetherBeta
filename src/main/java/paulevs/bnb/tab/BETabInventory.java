@@ -12,7 +12,7 @@ import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.listeners.ItemListener;
 
 public class BETabInventory implements InventoryBase {
-	public  static final int ROWS = 7;
+	public  static final int ROWS = 6;
 	private ItemInstance[] items = new ItemInstance[ROWS * 9];
 	
 	public BETabInventory() {
@@ -34,7 +34,7 @@ public class BETabInventory implements InventoryBase {
 					}
 				}
 			}
-			if (block instanceof SpiderCocoonBlock) {
+			else if (block instanceof SpiderCocoonBlock) {
 				for (int meta = 0; meta < 3; meta++) {
 					items[i++] = new ItemInstance(block, 1, meta);
 				}

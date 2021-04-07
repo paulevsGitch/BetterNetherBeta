@@ -1,4 +1,4 @@
-package paulevs.bnb.mixin;
+package paulevs.bnb.mixin.client;
 
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;

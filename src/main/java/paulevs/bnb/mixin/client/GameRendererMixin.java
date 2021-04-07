@@ -1,4 +1,4 @@
-package paulevs.bnb.mixin;
+package paulevs.bnb.mixin.client;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

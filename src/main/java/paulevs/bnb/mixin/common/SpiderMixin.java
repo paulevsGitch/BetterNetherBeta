@@ -1,4 +1,4 @@
-package paulevs.bnb.mixin;
+package paulevs.bnb.mixin.common;
 
 import org.spongepowered.asm.mixin.Mixin;
 

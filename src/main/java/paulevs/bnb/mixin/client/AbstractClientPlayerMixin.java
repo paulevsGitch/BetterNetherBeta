@@ -1,4 +1,4 @@
-package paulevs.bnb.mixin;
+package paulevs.bnb.mixin.client;
 
 import org.lwjgl.input.Keyboard;
 import org.spongepowered.asm.mixin.Mixin;

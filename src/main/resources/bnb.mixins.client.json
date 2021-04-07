@@ -1,14 +1,9 @@
 {
 	"required": true,
 	"minVersion": "0.8",
-	"package": "paulevs.bnb.mixin",
+	"package": "paulevs.bnb.mixin.client",
 	"compatibilityLevel": "JAVA_8",
-	"mixins": [
-		"LivingMixin",
-		"NetherMixin",
-		"SpiderMixin",
-		"DyeMixin"
-	],
+	"mixins": [],
 	"server": [],
 	"client": [
 		"AbstractClientPlayerMixin",
@@ -17,7 +12,8 @@
 		"GameRendererMixin",
 		"TileRendererMixin",
 		"SoundHelperMixin",
-		"BlockBaseMixin"
+		"BlockBaseMixin",
+		"SpiderMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

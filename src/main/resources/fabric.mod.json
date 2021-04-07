@@ -25,7 +25,8 @@
 	},
 
 	"mixins": [
-		"bnb.mixins.json"
+		"bnb.mixins.common.json",
+		"bnb.mixins.client.json"
 	],
 
 	"depends": {

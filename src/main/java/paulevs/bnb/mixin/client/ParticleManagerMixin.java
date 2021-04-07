@@ -1,4 +1,4 @@
-package paulevs.bnb.mixin;
+package paulevs.bnb.mixin.client;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,0 +1,17 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "paulevs.bnb.mixin.common",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": [
+		"LivingMixin",
+		"NetherMixin",
+		"SpiderMixin",
+		"DyeMixin"
+	],
+	"server": [],
+	"client": [],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
