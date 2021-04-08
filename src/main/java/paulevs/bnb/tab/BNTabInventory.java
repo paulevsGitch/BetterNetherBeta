@@ -1,87 +1,50 @@
 package paulevs.bnb.tab;
 
 import net.minecraft.block.BlockBase;
-import net.minecraft.entity.player.PlayerBase;
-import net.minecraft.inventory.InventoryBase;
 import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
+import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.block.MultiBlock;
 import paulevs.bnb.block.SpiderCocoonBlock;
 import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.listeners.ItemListener;
+import paulevs.creative.api.CreativeTabs;
+import paulevs.creative.api.SimpleTab;
+import paulevs.creative.api.TabRegister;
 
-public class BNTabInventory implements InventoryBase {
-	public  static final int ROWS = 6;
-	private ItemInstance[] items = new ItemInstance[ROWS * 9];
-	
-	public BNTabInventory() {
-		int i = 0;
-		items[i++] = new ItemInstance(BlockBase.NETHERRACK);
-		items[i++] = new ItemInstance(BlockBase.GLOWSTONE);
-		items[i++] = new ItemInstance(BlockBase.OBSIDIAN);
-		items[i++] = new ItemInstance(ItemBase.flintAndSteel);
-		items[i++] = new ItemInstance(ItemBase.ironPickaxe);
-		items[i++] = new ItemInstance(ItemBase.ironAxe);
-		items[i++] = new ItemInstance(ItemBase.dyePowder, 1, 15);
-		items[i++] = new ItemInstance(BlockBase.GLASS, 1, 15);
-		for (BlockBase block: BlockListener.getModBlocks()) {
-			if (block instanceof MultiBlock) {
-				BlockEnum[] variants = ((MultiBlock) block).getVariants();
-				for (BlockEnum variant: variants) {
-					if (variant.isInCreative()) {
-						items[i++] = new ItemInstance(block, 1, variant.getMeta());
+public class BNTabInventory {
+	public static void createTab() {
+		TabRegister.EVENT.register(new TabRegister() {
+			@Override
+			public void registerTabs() {
+				SimpleTab tab = CreativeTabs.register(new SimpleTab("better_nether", BetterNetherBeta.MOD_ID, BlockListener.getBlock("nether_terrain")) {
+					public String getTranslatedName() {
+						return "Better Nether Beta";
+					}
+				});
+				for (BlockBase block: BlockListener.getModBlocks()) {
+					if (block instanceof MultiBlock) {
+						BlockEnum[] variants = ((MultiBlock) block).getVariants();
+						for (BlockEnum variant: variants) {
+							if (variant.isInCreative()) {
+								tab.addItem(new ItemInstance(block, 1, variant.getMeta()));
+							}
+						}
+					}
+					else if (block instanceof SpiderCocoonBlock) {
+						for (int meta = 0; meta < 3; meta++) {
+							tab.addItem(new ItemInstance(block, 1, meta));
+						}
+					}
+					else {
+						tab.addItem(new ItemInstance(block));
 					}
 				}
-			}
-			else if (block instanceof SpiderCocoonBlock) {
-				for (int meta = 0; meta < 3; meta++) {
-					items[i++] = new ItemInstance(block, 1, meta);
+				for (ItemBase item: ItemListener.getModItems()) {
+					tab.addItem(new ItemInstance(item));
 				}
 			}
-			else {
-				items[i++] = new ItemInstance(block);
-			}
-		}
-		for (ItemBase item: ItemListener.getModItems()) {
-			items[i++] = new ItemInstance(item);
-		}
+		});
 	}
-	
-	@Override
-	public int getInventorySize() {
-		return items.length;
-	}
-
-	@Override
-	public ItemInstance getInventoryItem(int i) {
-		return items[i] != null ? items[i].copy() : items[i];
-	}
-
-	@Override
-	public ItemInstance takeInventoryItem(int index, int j) {
-		return items[index].copy();
-	}
-
-	@Override
-	public void setInventoryItem(int slot, ItemInstance arg) {}
-
-	@Override
-	public String getContainerName() {
-		return "Better Nether Beta";
-	}
-
-	@Override
-	public int getMaxItemCount() {
-		return 64;
-	}
-
-	@Override
-	public void markDirty() {}
-
-	@Override
-	public boolean canPlayerUse(PlayerBase arg) {
-		return true;
-	}
-	
 }

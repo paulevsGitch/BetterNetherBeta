@@ -1,5 +1,6 @@
 package paulevs.bnb;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.modificationstation.stationloader.api.client.event.model.ModelRegister;
 import net.modificationstation.stationloader.api.client.event.texture.TextureRegister;
 import net.modificationstation.stationloader.api.common.event.block.BlockRegister;
@@ -18,6 +19,7 @@ import paulevs.bnb.listeners.ModelListener;
 import paulevs.bnb.listeners.RecipeListener;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.listeners.TileEntityListener;
+import paulevs.bnb.tab.BNTabInventory;
 
 public class BetterNetherBeta implements StationMod {
 	public static final String MOD_ID = "bnb";
@@ -35,6 +37,10 @@ public class BetterNetherBeta implements StationMod {
 		BiomeRegister.EVENT.register(new BiomeListener());
 		RecipeRegister.EVENT.register(new RecipeListener());
 		TileEntityRegister.EVENT.register(new TileEntityListener());
+		
+		if (FabricLoader.getInstance().isModLoaded("creative")) {
+			BNTabInventory.createTab();
+		}
 	}
 	
 	public static String getID(String name) {
