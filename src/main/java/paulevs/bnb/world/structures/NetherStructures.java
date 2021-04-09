@@ -61,7 +61,13 @@ public class NetherStructures {
 		new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.WARPED_VINE_BOTTOM)
 	);
 	
+	public static final NetherOre ORICHALCUM_ORE = makeOre(paulevs.bnb.block.types.NetherOre.ORICHALCUM_ORE, 8);
+	
 	private static Structure makeGrass(NetherPlants variant) {
 		return new BlockScatter(new BlockState(BlockListener.getBlock("nether_plant"), variant), 3F);
+	}
+	
+	private static NetherOre makeOre(paulevs.bnb.block.types.NetherOre variant, int size) {
+		return new NetherOre(new BlockState(BlockListener.getBlock("nether_ore"), variant), size);
 	}
 }
