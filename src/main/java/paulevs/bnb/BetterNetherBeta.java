@@ -1,5 +1,7 @@
 package paulevs.bnb;
 
+import java.util.Locale;
+
 import net.fabricmc.loader.api.FabricLoader;
 import net.modificationstation.stationloader.api.client.event.model.ModelRegister;
 import net.modificationstation.stationloader.api.client.event.texture.TextureRegister;
@@ -45,5 +47,13 @@ public class BetterNetherBeta implements StationMod {
 	
 	public static String getID(String name) {
 		return MOD_ID + "." + name;
+	}
+	
+	public static String getTexturePath(String category) {
+		return String.format(Locale.ROOT, "/assets/%s/textures/%s/", MOD_ID, category);
+	}
+	
+	public static String getTexturePath(String category, String name) {
+		return String.format(Locale.ROOT, "/assets/%s/textures/%s/%s.png", MOD_ID, category, name);
 	}
 }

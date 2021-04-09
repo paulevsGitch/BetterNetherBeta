@@ -15,9 +15,9 @@ import paulevs.bnb.interfaces.NetherMob;
 @Mixin(SpiderEyesRenderer.class)
 public abstract class SpiderEyesRendererMixin extends LivingEntityRenderer {
 	private static final String[] TEXTURES = new String[] {
-		"/assets/" + BetterNetherBeta.MOD_ID + "/textures/entity/crimson_spider_e.png",
-		"/assets/" + BetterNetherBeta.MOD_ID + "/textures/entity/warped_spider_e.png",
-		"/assets/" + BetterNetherBeta.MOD_ID + "/textures/entity/poison_spider_e.png"
+		BetterNetherBeta.getTexturePath("entity", "crimson_spider_e"),
+		BetterNetherBeta.getTexturePath("entity", "warped_spider_e"),
+		BetterNetherBeta.getTexturePath("entity", "poison_spider_e")
 	};
 	
 	public SpiderEyesRendererMixin(EntityModelBase model, float shadowScale) {

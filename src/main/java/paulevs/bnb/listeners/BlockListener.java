@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -14,6 +15,7 @@ import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.block.NetherFungusBlock;
 import paulevs.bnb.block.NetherLanternBlock;
 import paulevs.bnb.block.NetherLeavesBlock;
+import paulevs.bnb.block.NetherOreBlock;
 import paulevs.bnb.block.NetherPlanksBlock;
 import paulevs.bnb.block.NetherPlantBlockImpl;
 import paulevs.bnb.block.NetherStairsBlock;
@@ -23,7 +25,6 @@ import paulevs.bnb.block.NetherVineBlock;
 import paulevs.bnb.block.NetherWoodBlock;
 import paulevs.bnb.block.SpiderCocoonBlock;
 import paulevs.bnb.block.types.NetherPlanks;
-import paulevs.bnb.interfaces.BlockInit;
 import paulevs.bnb.util.BlockUtil;
 
 public class BlockListener implements BlockRegister {
@@ -55,6 +56,8 @@ public class BlockListener implements BlockRegister {
 		
 		register("spider_cocoon", SpiderCocoonBlock::new);
 		
+		register("nether_ore", NetherOreBlock::new);
+		
 		occupiedIDs = null;
 		BetterNetherBeta.configBlocks.save();
 	}
@@ -66,7 +69,7 @@ public class BlockListener implements BlockRegister {
 		return BetterNetherBeta.configBlocks.getInt("blocks." + name, startID);
 	}
 	
-	private static <T extends BlockBase> void register(String name, BlockInit<String, Integer, T> init) {
+	private static <T extends BlockBase> void register(String name, BiFunction<String, Integer, T> init) {
 		BLOCKS.put(name, init.apply(name, getID(name)));
 		BLOCKS_TAB.add(BLOCKS.get(name));
 	}

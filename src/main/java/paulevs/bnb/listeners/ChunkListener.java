@@ -29,7 +29,7 @@ public class ChunkListener implements ChunkPopulator {
 						boolean fire = ((NetherBiome) bio).hasFire();
 						for (int y = 0; y < 127; y++) {
 							int tile = chunk.getTileId(x, y, z);
-							if (tile == BlockBase.NETHERRACK.id) {
+							if (tile == BlockBase.NETHERRACK.id || tile == BlockBase.SOUL_SAND.id || tile == BlockBase.GRAVEL.id) {
 								tile = chunk.getTileId(x, y + 1, z);
 								if (tile == 0 || BlockBase.BY_ID[tile] == null || !BlockBase.BY_ID[tile].isFullOpaque()) {
 									top.setBlock(chunk, x, y, z);

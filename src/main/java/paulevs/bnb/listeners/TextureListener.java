@@ -26,8 +26,8 @@ public class TextureListener implements TextureRegister {
 		TextureFactory textureFactory = TextureFactory.INSTANCE;
 		TextureRegistry terrain = TextureRegistry.getRegistry("TERRAIN");
 		TextureRegistry items = TextureRegistry.getRegistry("GUI_ITEMS");
-		String pathBlock = "/assets/" + BetterNetherBeta.MOD_ID + "/textures/block/";
-		String pathItem = "/assets/" + BetterNetherBeta.MOD_ID + "/textures/item/";
+		String pathBlock = BetterNetherBeta.getTexturePath("block");
+		String pathItem = BetterNetherBeta.getTexturePath("item");
 		loadTextureMap(textureFactory, terrain, pathBlock, BLOCK_TEXTURES);
 		loadTextureMap(textureFactory, items, pathItem, ITEM_TEXTURES);
 		ModelListener.updateModels();

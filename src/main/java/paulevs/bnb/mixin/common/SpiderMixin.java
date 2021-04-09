@@ -19,9 +19,9 @@ import paulevs.bnb.world.biome.WarpedForest;
 @Mixin(value = Spider.class, priority = 100)
 public abstract class SpiderMixin extends MonsterBase implements NetherMob {
 	private static final String[] TEXTURES = new String[] {
-		"/assets/" + BetterNetherBeta.MOD_ID + "/textures/entity/crimson_spider.png",
-		"/assets/" + BetterNetherBeta.MOD_ID + "/textures/entity/warped_spider.png",
-		"/assets/" + BetterNetherBeta.MOD_ID + "/textures/entity/poison_spider.png"
+		BetterNetherBeta.getTexturePath("entity", "crimson_spider"),
+		BetterNetherBeta.getTexturePath("entity", "warped_spider"),
+		BetterNetherBeta.getTexturePath("entity", "poison_spider")
 	};
 	
 	public SpiderMixin(Level level) {
