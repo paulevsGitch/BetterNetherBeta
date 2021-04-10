@@ -72,4 +72,16 @@ public class BlockUtil {
 	public static boolean isHorizontalSide(int side) {
 		return side > 1;
 	}
+	
+	public static boolean isSideY(int side) {
+		return side < 2;
+	}
+	
+	public static boolean isSideX(int side) {
+		return side == 2 || side == 3;
+	}
+	
+	public static boolean isSideZ(int side) {
+		return side == 4 || side == 5;
+	}
 }

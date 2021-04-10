@@ -29,6 +29,7 @@ import net.modificationstation.stationloader.api.common.StationLoader;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
 import paulevs.bnb.block.model.OBJBlockModel;
 import paulevs.bnb.interfaces.BlockWithLight;
+import paulevs.bnb.interfaces.RenderTypePerMeta;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.ClientUtil;
 
@@ -189,10 +190,24 @@ public class TileRendererMixin {
 				info.cancel();
 			}
 		}
+		else if (block instanceof RenderTypePerMeta) {
+			Minecraft minecraft = ClientUtil.getMinecraft();
+			Level level = minecraft.level;
+			int renderType = ((RenderTypePerMeta) block).getTypeByMeta(level.getTileMeta(x, y, z));
+			boolean result = bnb_vanillaBlockRenderTyped(block, x, y, z, renderType);
+			if (result) {
+				info.setReturnValue(true);
+			}
+			info.cancel();
+		}
 	}
 	
 	private boolean bnb_vanillaBlockRender(BlockBase block, int x, int y, int z) {
 		int renderType = block.method_1621();
+		return bnb_vanillaBlockRenderTyped(block, x, y, z, renderType);
+	}
+	
+	private boolean bnb_vanillaBlockRenderTyped(BlockBase block, int x, int y, int z, int renderType) {
 		block.method_1616(this.field_82, x, y, z);
 		if (renderType == 0) {
 			return this.method_76(block, x, y, z);

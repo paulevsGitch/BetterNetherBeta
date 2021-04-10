@@ -12,6 +12,7 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.BlockBase;
 import net.modificationstation.stationloader.api.common.event.block.BlockRegister;
 import paulevs.bnb.BetterNetherBeta;
+import paulevs.bnb.block.NetherComplexStoneBlock;
 import paulevs.bnb.block.NetherFungusBlock;
 import paulevs.bnb.block.NetherLanternBlock;
 import paulevs.bnb.block.NetherLeavesBlock;
@@ -25,6 +26,9 @@ import paulevs.bnb.block.NetherVineBlock;
 import paulevs.bnb.block.NetherWoodBlock;
 import paulevs.bnb.block.SpiderCocoonBlock;
 import paulevs.bnb.block.types.NetherPlanks;
+import paulevs.bnb.block.types.NetherrackBricks;
+import paulevs.bnb.interfaces.BlockEnum;
+import paulevs.bnb.interfaces.TriFunction;
 import paulevs.bnb.util.BlockUtil;
 
 public class BlockListener implements BlockRegister {
@@ -58,6 +62,8 @@ public class BlockListener implements BlockRegister {
 		
 		register("nether_ore", NetherOreBlock::new);
 		
+		register("netherrack_brick", NetherComplexStoneBlock::new, NetherrackBricks.class);
+		
 		occupiedIDs = null;
 		BetterNetherBeta.configBlocks.save();
 	}
@@ -70,8 +76,15 @@ public class BlockListener implements BlockRegister {
 	}
 	
 	private static <T extends BlockBase> void register(String name, BiFunction<String, Integer, T> init) {
-		BLOCKS.put(name, init.apply(name, getID(name)));
-		BLOCKS_TAB.add(BLOCKS.get(name));
+		BlockBase block = init.apply(name, getID(name));
+		BLOCKS.put(name, block);
+		BLOCKS_TAB.add(block);
+	}
+	
+	private static <T extends BlockBase, B extends BlockEnum> void register(String name, TriFunction<String, Integer, Class<B>, T> init, Class<B> type) {
+		BlockBase block = init.apply(name, getID(name), type);
+		BLOCKS.put(name, block);
+		BLOCKS_TAB.add(block);
 	}
 	
 	public static Collection<BlockBase> getModBlocks() {
