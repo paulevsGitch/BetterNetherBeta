@@ -51,7 +51,7 @@ public class BlockListener implements BlockRegister {
 		register("nether_planks", NetherPlanksBlock::new);
 		
 		for (NetherPlanks plank: NetherPlanks.values()) {
-			register("stairs_" + plank.getName(), NetherStairsBlock::new);
+			register("stairs_" + plank.getName(), NetherStairsBlock::new, getBlock("nether_planks"));
 		}
 		
 		register("nether_plant", NetherPlantBlockImpl::new);
@@ -62,7 +62,8 @@ public class BlockListener implements BlockRegister {
 		
 		register("nether_ore", NetherOreBlock::new);
 		
-		register("netherrack_brick", NetherComplexStoneBlock::new, NetherrackBricks.class);
+		register("netherrack_bricks", NetherComplexStoneBlock::new, NetherrackBricks.class);
+		register("stairs_netherrack_bricks", NetherStairsBlock::new, getBlock("netherrack_bricks"));
 		
 		occupiedIDs = null;
 		BetterNetherBeta.configBlocks.save();
@@ -83,6 +84,12 @@ public class BlockListener implements BlockRegister {
 	
 	private static <T extends BlockBase, B extends BlockEnum> void register(String name, TriFunction<String, Integer, Class<B>, T> init, Class<B> type) {
 		BlockBase block = init.apply(name, getID(name), type);
+		BLOCKS.put(name, block);
+		BLOCKS_TAB.add(block);
+	}
+	
+	private static <T extends NetherStairsBlock, B extends BlockBase> void register(String name, TriFunction<String, Integer, B, T> init, B source) {
+		NetherStairsBlock block = init.apply(name, getID(name), source);
 		BLOCKS.put(name, block);
 		BLOCKS_TAB.add(block);
 	}
