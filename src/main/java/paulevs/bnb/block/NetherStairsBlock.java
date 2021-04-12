@@ -2,29 +2,39 @@ package paulevs.bnb.block;
 
 import java.util.Random;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockBase;
 import net.minecraft.block.Stairs;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.level.Level;
-import paulevs.bnb.listeners.TextureListener;
+import net.minecraft.level.TileView;
 
 public class NetherStairsBlock extends Stairs {
-	private final String texture;
+	private final BlockBase source;
+	private final int sourceMeta;
 	
-	public NetherStairsBlock(String name, int id, BlockBase source) {
+	public NetherStairsBlock(String name, int id, BlockBase source, int sourceMeta) {
 		super(id, source);
 		this.setName(name);
-		texture = name.replace("stairs_", "");
-	}
-	
-	@Override
-	public int getTextureForSide(int side, int meta) {
-		return TextureListener.getBlockTexture(texture);
+		this.source = source;
+		this.sourceMeta = sourceMeta;
 	}
 	
 	@Override
 	public int getTextureForSide(int side) {
-		return TextureListener.getBlockTexture(texture);
+		return getTextureForSide(side, sourceMeta);
+	}
+	
+	@Override
+	public int getTextureForSide(int side, int meta) {
+		return source.getTextureForSide(side, sourceMeta);
+	}
+	
+	@Override
+	@Environment(EnvType.CLIENT)
+	public int method_1626(TileView world, int x, int y, int z, int side) {
+		return this.getTextureForSide(side, 0);
 	}
 	
 	@Override

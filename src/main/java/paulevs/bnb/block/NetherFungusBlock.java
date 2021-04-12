@@ -17,7 +17,7 @@ import paulevs.bnb.world.structures.NetherStructures;
 
 public class NetherFungusBlock extends NetherPlantBlock implements BlockModelProvider {
 	public NetherFungusBlock(String registryName, int id) {
-		super(registryName, id, NetherFungus.class);
+		super(registryName, id, NetherFungus.class, false);
 	}
 
 	@Override

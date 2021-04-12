@@ -1,7 +1,6 @@
 package paulevs.bnb.item;
 
 import net.minecraft.block.BlockBase;
-import net.minecraft.item.ItemBase;
 import paulevs.bnb.item.material.NetherToolMaterial;
 
 public class NetherPickaxeItem extends NetherToolItem {
@@ -11,6 +10,6 @@ public class NetherPickaxeItem extends NetherToolItem {
 
 	@Override
 	public boolean isEffectiveOn(BlockBase tile) {
-		return ItemBase.ironPickaxe.isEffectiveOn(tile);
+		return isEffectiveOn(ironPickaxe, tile);
 	}
 }

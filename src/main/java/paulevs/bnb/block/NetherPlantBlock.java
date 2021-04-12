@@ -5,8 +5,11 @@ import java.util.Random;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerBase;
+import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.item.PlaceableTileEntity;
+import net.minecraft.item.tool.Shears;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.Box;
 import net.modificationstation.stationloader.api.client.model.BlockModelProvider;
@@ -15,15 +18,20 @@ import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTi
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.interfaces.BlockWithLight;
+import paulevs.bnb.item.NetherShearsItem;
 import paulevs.bnb.listeners.ModelListener;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.BlockUtil;
+import paulevs.bnb.util.ItemUtil;
 
 public class NetherPlantBlock extends MultiBlock implements BlockModelProvider, BlockWithLight {
-	public <T extends BlockEnum> NetherPlantBlock(String name, int id, Class<T> type) {
+	private final boolean useShears;
+	
+	public <T extends BlockEnum> NetherPlantBlock(String name, int id, Class<T> type, boolean useShears) {
 		super(name, id, Material.PLANT, type);
 		this.setBoundingBox(0.125F, 0F, 0.125F, 0.875F, 0.75F, 0.875F);
 		this.sounds(GRASS_SOUNDS);
+		this.useShears = useShears;
 	}
 	
 	@Override
@@ -66,7 +74,9 @@ public class NetherPlantBlock extends MultiBlock implements BlockModelProvider, 
 
 	protected void tick(Level level, int x, int y, int z) {
 		if (!this.canGrow(level, x, y, z)) {
-			this.drop(level, x, y, z, level.getTileMeta(x, y, z));
+			if (!useShears) {
+				this.drop(level, x, y, z, level.getTileMeta(x, y, z));
+			}
 			level.setTile(x, y, z, 0);
 		}
 	}
@@ -109,5 +119,18 @@ public class NetherPlantBlock extends MultiBlock implements BlockModelProvider, 
 	@Override
 	public CustomModel getCustomWorldModel(Level level, int x, int y, int z, int meta) {
 		return ModelListener.getBlockModel(getVariant(meta).getName());
+	}
+	
+	@Override
+	public void afterBreak(Level level, PlayerBase player, int x, int y, int z, int meta) {
+		if (useShears) {
+			ItemBase item = player.getHeldItem() == null ? null : ItemUtil.itemByID(player.getHeldItem().itemId);
+			if (!level.isClient && item != null && (item instanceof Shears || item instanceof NetherShearsItem)) {
+				this.drop(level, x, y, z, meta);
+			}
+		}
+		else {
+			super.afterBreak(level, player, x, y, z, meta);
+		}
 	}
 }

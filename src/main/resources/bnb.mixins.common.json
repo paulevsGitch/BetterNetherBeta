@@ -4,6 +4,7 @@
 	"package": "paulevs.bnb.mixin.common",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
+		"ToolBaseAccessor",
 		"LivingMixin",
 		"NetherMixin",
 		"SpiderMixin",

@@ -6,8 +6,8 @@ import paulevs.bnb.interfaces.RenderTypePerMeta;
 import paulevs.bnb.interfaces.StoneBlockEnum;
 import paulevs.bnb.util.BlockUtil;
 
-public class NetherComplexStoneBlock extends MultiBlock implements RenderTypePerMeta {
-	public <T extends StoneBlockEnum> NetherComplexStoneBlock(String name, int id, Class<T> type) {
+public class NetherStoneBlock extends MultiBlock implements RenderTypePerMeta {
+	public <T extends StoneBlockEnum> NetherStoneBlock(String name, int id, Class<T> type) {
 		super(name, id, Material.STONE, type);
 		this.setHardness(STONE.getHardness());
 	}

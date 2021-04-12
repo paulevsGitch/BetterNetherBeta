@@ -57,7 +57,7 @@ public class TranslationStorageMixin {
 	}
 	
 	private String bnb_transformName(String key, String pattern) {
-		String result = bnb_capitalize(key.substring(pattern.length()).replace('_', ' ')).replace("Stairs", "Stairs From");
+		String result = bnb_capitalize(key.substring(pattern.length()).replace('_', ' ')).replace("Stairs", "Stairs From").replace("Slab", "Slab From");
 		TRANSLATIONS.put(key, result);
 		return result;
 	}
