@@ -5,8 +5,10 @@ import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import net.modificationstation.stationloader.api.common.event.recipe.RecipeRegister;
 import net.modificationstation.stationloader.api.common.recipe.CraftingRegistry;
+import net.modificationstation.stationloader.api.common.recipe.SmeltingRegistry;
 import paulevs.bnb.block.types.NetherPlanks;
 import paulevs.bnb.block.types.NetherWood;
+import paulevs.bnb.block.types.NetherrackBricks;
 
 public class RecipeListener implements RecipeRegister {
 	@Override
@@ -22,12 +24,7 @@ public class RecipeListener implements RecipeRegister {
 				'#', new ItemInstance(netherPlanks, 1, -1)
 			);
 			
-			CraftingRegistry.INSTANCE.addShapedRecipe(
-				new ItemInstance(BlockBase.WORKBENCH),
-				"##",
-				"##",
-				'#', new ItemInstance(netherPlanks, 1, -1)
-			);
+			addSquareRecipe(new ItemInstance(netherPlanks, 1, -1), new ItemInstance(BlockBase.WORKBENCH));
 			
 			CraftingRegistry.INSTANCE.addShapedRecipe(
 				new ItemInstance(BlockBase.CHEST),
@@ -97,14 +94,26 @@ public class RecipeListener implements RecipeRegister {
 			);
 			
 			for (NetherPlanks plank: NetherPlanks.values()) {
-				CraftingRegistry.INSTANCE.addShapedRecipe(
-					new ItemInstance(BlockListener.getBlock("stairs_" + plank.getName()), 4),
-					"#  ",
-					"## ",
-					"###",
-					'#', new ItemInstance(netherPlanks, 1, plank.getMeta())
-				);
+				addStairsRecipe(netherPlanks, plank.getMeta(), BlockListener.getBlock("stairs_" + plank.getName()));
+				addSlabRecipe(netherPlanks, plank.getMeta(), BlockListener.getBlock("slab_" + plank.getName()));
 			}
+			
+			BlockBase block = BlockListener.getBlock("netherrack_bricks");
+			addSquareRecipe(new ItemInstance(ItemListener.getItem("netherrack_brick")), new ItemInstance(block));
+			addStairsRecipe(block, 0, BlockListener.getBlock("netherrack_brick_stairs"));
+			addSlabRecipe(block, 0, BlockListener.getBlock("netherrack_brick_slab"));
+			addSquareRecipe(
+				new ItemInstance(BlockListener.getBlock("netherrack_brick_slab"), 1, -1),
+				new ItemInstance(block, 4, NetherrackBricks.NETHERRACK_BRICK_LARGE_TILE.getMeta())
+			);
+			addSquareRecipe(
+				new ItemInstance(block, 1, NetherrackBricks.NETHERRACK_BRICK_LARGE_TILE.getMeta()),
+				new ItemInstance(block, 4, NetherrackBricks.NETHERRACK_BRICK_SMALL_TILE.getMeta())
+			);
+			addSlabRecipe(
+				new ItemInstance(block, 1, NetherrackBricks.NETHERRACK_BRICK_SMALL_TILE.getMeta()),
+				BlockListener.getBlock("netherrack_tile_slab")
+			);
 		}
 		else if (type == RecipeRegister.Vanilla.CRAFTING_SHAPELESS) {
 			CraftingRegistry.INSTANCE.addShapelessRecipe(new ItemInstance(BlockBase.BUTTON), new ItemInstance(netherPlanks, 1, -1));
@@ -113,5 +122,24 @@ public class RecipeListener implements RecipeRegister {
 				CraftingRegistry.INSTANCE.addShapelessRecipe(new ItemInstance(netherPlanks, 4, wood.getMeta()), new ItemInstance(netherWood, 1, wood.getMeta()));
 			}
 		}
+		else if (type == RecipeRegister.Vanilla.SMELTING) {
+			SmeltingRegistry.INSTANCE.addSmeltingRecipe(new ItemInstance(BlockBase.NETHERRACK), new ItemInstance(ItemListener.getItem("netherrack_brick")));
+		}
+	}
+	
+	private static void addSquareRecipe(ItemInstance src, ItemInstance res) {
+		CraftingRegistry.INSTANCE.addShapedRecipe(res, "##", "##", '#', src);
+	}
+	
+	private static void addStairsRecipe(BlockBase src, int meta, BlockBase res) {
+		CraftingRegistry.INSTANCE.addShapedRecipe(new ItemInstance(res, 4), "#  ", "## ", "###", '#', new ItemInstance(src, 1, meta));
+	}
+	
+	private static void addSlabRecipe(BlockBase src, int meta, BlockBase res) {
+		CraftingRegistry.INSTANCE.addShapedRecipe(new ItemInstance(res, 6), "###", '#', new ItemInstance(src, 1, meta));
+	}
+	
+	private static void addSlabRecipe(ItemInstance src, BlockBase res) {
+		CraftingRegistry.INSTANCE.addShapedRecipe(new ItemInstance(res, 6), "###", '#', src);
 	}
 }

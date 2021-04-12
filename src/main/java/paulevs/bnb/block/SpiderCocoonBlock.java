@@ -16,6 +16,7 @@ import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTi
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.block.tileentity.CocoonSpawner;
 import paulevs.bnb.listeners.ModelListener;
+import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.MHelper;
 
 public class SpiderCocoonBlock extends BlockWithEntity implements BlockModelProvider, BlockItemProvider {
@@ -32,6 +33,13 @@ public class SpiderCocoonBlock extends BlockWithEntity implements BlockModelProv
 	@Override
 	public PlaceableTileEntity getBlockItem(int id) {
 		return new PlaceableTileEntityWithMeta(id) {
+			@Override
+			@Environment(EnvType.CLIENT)
+			public int getTexturePosition(int damage) {
+				String name = NAMES[clampMeta(damage)];
+				return TextureListener.getBlockTexture("cocoon_" + name + "_item");
+			}
+			
 			@Override
 			@Environment(EnvType.CLIENT)
 			public String getTranslationKey(ItemInstance item) {
@@ -78,5 +86,10 @@ public class SpiderCocoonBlock extends BlockWithEntity implements BlockModelProv
 	
 	private int clampMeta(int meta) {
 		return meta % 3;
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public int method_1621() {
+		return -1;
 	}
 }

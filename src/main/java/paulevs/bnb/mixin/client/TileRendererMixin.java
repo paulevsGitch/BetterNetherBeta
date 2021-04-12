@@ -813,4 +813,12 @@ public class TileRendererMixin {
 	private int bnb_getCropsTextureID(int texID, BlockBase block, int meta, double x, double y, double z) {
 		return block.method_1626(field_82, MathHelper.floor(x), MathHelper.floor(y + 0.0625), MathHelper.floor(z), 0);
 	}
+	
+	@Inject(method = "method_42", at = @At("HEAD"), cancellable = true)
+	private static void bnb_render3DItem(int i, CallbackInfoReturnable<Boolean> info) {
+		if (i < 0) {
+			info.setReturnValue(false);
+			info.cancel();
+		}
+	}
 }

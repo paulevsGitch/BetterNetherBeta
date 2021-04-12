@@ -87,4 +87,9 @@ public class ItemListener implements ItemRegister {
 	public static Collection<ItemBase> getModItems() {
 		return ITEMS_TAB;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends ItemBase> T getItem(String name) {
+		return (T) ITEMS.get(name);
+	}
 }
