@@ -69,7 +69,7 @@ public class BlockListener implements BlockRegister {
 		register("netherrack_bricks", NetherStoneBlock::new, NetherrackBricks.class);
 		register("netherrack_brick_stairs", NetherStairsBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICKS.getMeta());
 		register("netherrack_brick_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICKS.getMeta());
-		register("netherrack_tile_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICK_LARGE_TILE.getMeta());
+		register("netherrack_tile_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICK_SMALL_TILE.getMeta());
 		
 		occupiedIDs = null;
 		BetterNetherBeta.configBlocks.save();

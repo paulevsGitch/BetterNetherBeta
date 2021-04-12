@@ -59,4 +59,19 @@ public enum BlockDirection {
 	public int getFacing() {
 		return facing;
 	}
+	
+	public BlockAxis getAxis() {
+		switch (this) {
+			case POS_X:
+			case NEG_X:
+				return BlockAxis.AXIS_X;
+			case POS_Y:
+			case NEG_Y:
+				return BlockAxis.AXIS_Y;
+			case POS_Z:
+			case NEG_Z:
+				return BlockAxis.AXIS_Z;
+			default: return BlockAxis.AXIS_Y;
+		}
+	}
 }

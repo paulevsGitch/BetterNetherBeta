@@ -28,7 +28,7 @@ public class ChunkListener implements ChunkPopulator {
 					if (bio instanceof NetherBiome) {
 						BlockState top = ((NetherBiome) bio).getTopBlock();
 						boolean fire = ((NetherBiome) bio).hasFire();
-						for (int y = 0; y < 127; y++) {
+						for (int y = 31; y < 127; y++) {
 							int tile = chunk.getTileId(x, y, z);
 							if (tile == BlockBase.NETHERRACK.id || tile == BlockBase.SOUL_SAND.id || tile == BlockBase.GRAVEL.id) {
 								tile = chunk.getTileId(x, y + 1, z);
@@ -54,7 +54,7 @@ public class ChunkListener implements ChunkPopulator {
 				
 				for (int sect = 0; sect < 8; sect++) {
 					int sy = sect << 4;
-					int minY = sect == 0 ? 1 : 0;
+					int minY = sect < 2 ? 16 : 0;
 					int maxY = sect == 7 ? 15 : 16;
 					int count;
 					

@@ -11,7 +11,7 @@ public class NetherLanternBlock extends MultiBlock implements BlockWithLight {
 		super(registryName, id, Material.ORGANIC, NetherLantern.class);
 		this.setLightEmittance(1F);
 		this.sounds(WOOL_SOUNDS);
-		this.setHardness(1F);
+		this.setHardness(0.5F);
 	}
 	
 	@Override
