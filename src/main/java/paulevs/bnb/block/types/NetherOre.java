@@ -1,6 +1,7 @@
 package paulevs.bnb.block.types;
 
 import paulevs.bnb.interfaces.BlockEnum;
+import paulevs.bnb.listeners.ItemListener;
 
 public enum NetherOre implements BlockEnum {
 	ORICHALCUM_ORE(0, "orichalcum_ore");
@@ -41,5 +42,12 @@ public enum NetherOre implements BlockEnum {
 	@Override
 	public boolean isInCreative() {
 		return true;
+	}
+
+	public int getDropID() {
+		switch (this) {
+			case ORICHALCUM_ORE: return ItemListener.getItem("raw_orichalcum").id;
+		}
+		return 0;
 	}
 }

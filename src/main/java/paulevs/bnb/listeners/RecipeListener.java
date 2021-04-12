@@ -114,6 +114,89 @@ public class RecipeListener implements RecipeRegister {
 				new ItemInstance(block, 1, NetherrackBricks.NETHERRACK_BRICK_SMALL_TILE.getMeta()),
 				BlockListener.getBlock("netherrack_tile_slab")
 			);
+			
+			ItemBase item = ItemListener.getItem("orichalcum_ingot");
+			CraftingRegistry.INSTANCE.addShapedRecipe(
+				new ItemInstance(ItemListener.getItem("orichalcum_pickaxe")),
+				"###",
+				" I ",
+				" I ",
+				'#', new ItemInstance(item),
+				'I', new ItemInstance(ItemBase.stick)
+			);
+			
+			CraftingRegistry.INSTANCE.addShapedRecipe(
+				new ItemInstance(ItemListener.getItem("orichalcum_axe")),
+				"##",
+				"#I",
+				" I",
+				'#', new ItemInstance(item),
+				'I', new ItemInstance(ItemBase.stick)
+			);
+			
+			CraftingRegistry.INSTANCE.addShapedRecipe(
+				new ItemInstance(ItemListener.getItem("orichalcum_hoe")),
+				"##",
+				" I",
+				" I",
+				'#', new ItemInstance(item),
+				'I', new ItemInstance(ItemBase.stick)
+			);
+			
+			CraftingRegistry.INSTANCE.addShapedRecipe(
+				new ItemInstance(ItemListener.getItem("orichalcum_shovel")),
+				"#",
+				"I",
+				"I",
+				'#', new ItemInstance(item),
+				'I', new ItemInstance(ItemBase.stick)
+			);
+			
+			CraftingRegistry.INSTANCE.addShapedRecipe(
+				new ItemInstance(ItemListener.getItem("orichalcum_sword")),
+				"#",
+				"#",
+				"I",
+				'#', new ItemInstance(item),
+				'I', new ItemInstance(ItemBase.stick)
+			);
+			
+			CraftingRegistry.INSTANCE.addShapedRecipe(
+				new ItemInstance(ItemListener.getItem("orichalcum_shears")),
+				"# ",
+				" #",
+				'#', new ItemInstance(item)
+			);
+			
+			CraftingRegistry.INSTANCE.addShapedRecipe(
+				new ItemInstance(ItemListener.getItem("orichalcum_helmet")),
+				"###",
+				"# #",
+				'#', new ItemInstance(item)
+			);
+			
+			CraftingRegistry.INSTANCE.addShapedRecipe(
+				new ItemInstance(ItemListener.getItem("orichalcum_chestplate")),
+				"# #",
+				"###",
+				"###",
+				'#', new ItemInstance(item)
+			);
+			
+			CraftingRegistry.INSTANCE.addShapedRecipe(
+				new ItemInstance(ItemListener.getItem("orichalcum_leggings")),
+				"###",
+				"# #",
+				"# #",
+				'#', new ItemInstance(item)
+			);
+			
+			CraftingRegistry.INSTANCE.addShapedRecipe(
+				new ItemInstance(ItemListener.getItem("orichalcum_boots")),
+				"# #",
+				"# #",
+				'#', new ItemInstance(item)
+			);
 		}
 		else if (type == RecipeRegister.Vanilla.CRAFTING_SHAPELESS) {
 			CraftingRegistry.INSTANCE.addShapelessRecipe(new ItemInstance(BlockBase.BUTTON), new ItemInstance(netherPlanks, 1, -1));
@@ -124,6 +207,7 @@ public class RecipeListener implements RecipeRegister {
 		}
 		else if (type == RecipeRegister.Vanilla.SMELTING) {
 			SmeltingRegistry.INSTANCE.addSmeltingRecipe(new ItemInstance(BlockBase.NETHERRACK), new ItemInstance(ItemListener.getItem("netherrack_brick")));
+			SmeltingRegistry.INSTANCE.addSmeltingRecipe(new ItemInstance(ItemListener.getItem("raw_orichalcum")), new ItemInstance(ItemListener.getItem("orichalcum_ingot")));
 		}
 	}
 	
