@@ -8,9 +8,10 @@ import net.modificationstation.stationloader.api.client.event.model.ModelRegiste
 import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
 import paulevs.bnb.block.model.OBJBlockModel;
+import paulevs.bnb.block.types.NetherGrass;
 import paulevs.bnb.block.types.NetherLeaves;
-import paulevs.bnb.block.types.NetherPlants;
 import paulevs.bnb.block.types.NetherTreeFur;
+import paulevs.bnb.block.types.SoulGrass;
 import paulevs.bnb.util.BlockUtil;
 
 public class ModelListener implements ModelRegister {
@@ -33,8 +34,11 @@ public class ModelListener implements ModelRegister {
 			makeRotated("cocoon_poison", model.setTextures("cocoon_poison"));
 			
 			model = new OBJBlockModel("/assets/bnb/models/block/fluffy_grass.obj", 16, 8, 0, 8, BlockFaces.UP);
-			for (NetherPlants plant: NetherPlants.values()) {
+			for (NetherGrass plant: NetherGrass.values()) {
 				BLOCK_MODELS.put(plant.getName(), model.clone().setTextures(plant.getTexture(0)));
+			}
+			for (SoulGrass grass: SoulGrass.values()) {
+				BLOCK_MODELS.put(grass.getName(), model.clone().setTextures(grass.getTexture(0)));
 			}
 			
 			model = new OBJBlockModel("/assets/bnb/models/block/normal_crop.obj");

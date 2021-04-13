@@ -7,14 +7,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.block.BlockBase;
-import net.minecraft.block.Netherrack;
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.item.Dye;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.level.Level;
 import paulevs.bnb.block.NetherFungusBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
+import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.BlockUtil;
+import paulevs.bnb.util.BonemealUtil;
 import paulevs.bnb.util.MHelper;
 
 @Mixin(Dye.class)
@@ -32,14 +33,7 @@ public class DyeMixin {
 					info.cancel();
 				}
 			}
-			else if (block instanceof NetherTerrainBlock && level.getTileId(x, y + 1, z) == 0) {
-				if (((NetherTerrainBlock) block).growGrass(level, x, y, z, level.getTileMeta(x, y, z))) {
-					item.count--;
-					info.setReturnValue(true);
-					info.cancel();
-				}
-			}
-			else if (block instanceof Netherrack && level.getTileId(x, y + 1, z) == 0) {
+			else if (block == BlockBase.NETHERRACK && level.getTileId(x, y + 1, z) == 0) {
 				int meta = 0;
 				BlockBase grass = null;
 				MHelper.shuffle(OFFSETS, level.rand);
@@ -55,6 +49,13 @@ public class DyeMixin {
 				}
 				if (grass != null) {
 					level.placeBlockWithMetaData(x, y, z, grass.id, meta);
+					item.count--;
+					info.setReturnValue(true);
+					info.cancel();
+				}
+			}
+			else if (level.getTileId(x, y + 1, z) == 0) {
+				if (BonemealUtil.growGrass(level, x, y, z, new BlockState(block, level.getTileMeta(x, y, z)))) {
 					item.count--;
 					info.setReturnValue(true);
 					info.cancel();

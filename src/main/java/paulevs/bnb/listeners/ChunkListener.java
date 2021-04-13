@@ -26,14 +26,18 @@ public class ChunkListener implements ChunkPopulator {
 				for (int z = 0; z < 16; z++) {
 					Biome bio = biomes[x << 4 | z];
 					if (bio instanceof NetherBiome) {
-						BlockState top = ((NetherBiome) bio).getTopBlock();
+						BlockState top = ((NetherBiome) bio).getTopBlock(x, z);
+						int depth = ((NetherBiome) bio).getTopDepth();
 						boolean fire = ((NetherBiome) bio).hasFire();
 						for (int y = 31; y < 127; y++) {
 							int tile = chunk.getTileId(x, y, z);
 							if (tile == BlockBase.NETHERRACK.id || tile == BlockBase.SOUL_SAND.id || tile == BlockBase.GRAVEL.id) {
-								tile = chunk.getTileId(x, y + 1, z);
+								tile = chunk.getTileId(x, y + depth, z);
 								if (tile == 0 || BlockBase.BY_ID[tile] == null || !BlockBase.BY_ID[tile].isFullOpaque()) {
 									top.setBlock(chunk, x, y, z);
+								}
+								else if (tile != BlockBase.NETHERRACK.id) {
+									chunk.setTileWithMetadata(x, y, z, BlockBase.NETHERRACK.id, 0);
 								}
 							}
 							else if (!fire && tile == BlockBase.FIRE.id) {
@@ -77,7 +81,7 @@ public class ChunkListener implements ChunkPopulator {
 							for (int y = minY; y < maxY; y++) {
 								int py = sy | y;
 								int tile = chunk.getTileId(px, py, pz);
-								if (BlockUtil.isTerrain(tile)) {
+								if (BlockUtil.isTerrain(tile) || BlockUtil.isSoulTerrain(tile)) {
 									tile = chunk.getTileId(px, py + 1, pz);
 									if (BlockUtil.isNonSolidNoLava(tile)) {
 										structure = bio.getTree(random);
@@ -97,7 +101,7 @@ public class ChunkListener implements ChunkPopulator {
 							for (int y = minY; y < maxY; y++) {
 								int py = sy | y;
 								int tile = chunk.getTileId(px, py, pz);
-								if (BlockUtil.isTerrain(tile)) {
+								if (BlockUtil.isTerrain(tile) || BlockUtil.isSoulTerrain(tile)) {
 									tile = chunk.getTileId(px, py + 1, pz);
 									if (BlockUtil.isNonSolidNoLava(tile)) {
 										structure = bio.getPlant(random);

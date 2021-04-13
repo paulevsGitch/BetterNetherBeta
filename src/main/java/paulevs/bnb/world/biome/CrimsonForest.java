@@ -17,6 +17,7 @@ public class CrimsonForest extends NetherBiome {
 		this.addPlant(NetherStructures.LAMELLARIUM, 0.5F);
 		this.addPlant(NetherStructures.LANTERN_GRASS, 0.2F);
 		this.addPlant(NetherStructures.CRIMSON_BUSH, 0.1F);
+		this.addPlant(NetherStructures.CRIMSON_FUNGUS, 0.1F);
 		this.addPlant(NetherStructures.CRIMSON_COCOON, 0.01F);
 		this.addCeilPlant(NetherStructures.CRIMSON_VINE);
 		this.setMaxTreeCount(5);

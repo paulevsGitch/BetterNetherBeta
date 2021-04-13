@@ -3,6 +3,7 @@ package paulevs.bnb.util;
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import paulevs.bnb.block.NetherTerrainBlock;
+import paulevs.bnb.block.SoulSoilBlock;
 
 public class BlockUtil {
 	private static boolean requireLight;
@@ -11,6 +12,10 @@ public class BlockUtil {
 	
 	public static boolean isTerrain(int id) {
 		return id == BlockBase.NETHERRACK.id || blockByID(id) instanceof NetherTerrainBlock;
+	}
+	
+	public static boolean isSoulTerrain(int id) {
+		return id == BlockBase.SOUL_SAND.id || blockByID(id) instanceof SoulSoilBlock;
 	}
 	
 	public static boolean isNonSolid(int tile) {

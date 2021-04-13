@@ -22,7 +22,7 @@ public class BlockState {
 	
 	public BlockState(int id, int meta) {
 		this.setBlockID(id);
-		this.setMeta(meta);
+		this.setBlockMeta(meta);
 	}
 	
 	public BlockState(BlockBase block, int meta) {
@@ -45,7 +45,7 @@ public class BlockState {
 		return meta;
 	}
 
-	public void setMeta(int meta) {
+	public void setBlockMeta(int meta) {
 		this.meta = meta;
 	}
 	
@@ -77,5 +77,10 @@ public class BlockState {
 	@Override
 	public String toString() {
 		return String.format(Locale.ROOT, "[%d:%d]", tile, meta);
+	}
+	
+	@Override
+	public int hashCode() {
+		return tile << 4 | meta;
 	}
 }

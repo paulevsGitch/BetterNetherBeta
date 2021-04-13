@@ -82,8 +82,8 @@ public class NetherPlantBlock extends MultiBlock implements BlockModelProvider, 
 	}
 
 	@Override
-	public boolean canGrow(Level arg, int x, int y, int z) {
-		return (arg.isAboveGroundCached(x, y, z)) && this.canPlantOnTopOf(arg.getTileId(x, y - 1, z));
+	public boolean canGrow(Level level, int x, int y, int z) {
+		return this.canPlantOnTopOf(level.getTileId(x, y - 1, z));
 	}
 
 	@Override

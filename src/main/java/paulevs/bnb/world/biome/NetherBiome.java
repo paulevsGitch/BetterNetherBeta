@@ -21,8 +21,9 @@ public class NetherBiome extends Biome {
 	private List<Structure> ceil = Lists.newArrayList();
 	private WeightedList<Structure> plants = new WeightedList<Structure>();
 	
-	private BlockState topBlock = new BlockState(BlockBase.NETHERRACK);
+	protected BlockState topBlock = new BlockState(BlockBase.NETHERRACK);
 	
+	private int topDepth = 1;
 	private int treeCount = 0;
 	private int plantCount = 0;
 	private int ceilCount = 0;
@@ -79,7 +80,7 @@ public class NetherBiome extends Biome {
 		this.ceilCount = plantCount;
 	}
 	
-	public BlockState getTopBlock() {
+	public BlockState getTopBlock(int x, int z) {
 		return topBlock;
 	}
 	
@@ -148,5 +149,13 @@ public class NetherBiome extends Biome {
 	
 	public int getParticleID(Random random) {
 		return 0;
+	}
+	
+	public void setTopDepth(int depth) {
+		topDepth = depth;
+	}
+	
+	public int getTopDepth() {
+		return topDepth;
 	}
 }

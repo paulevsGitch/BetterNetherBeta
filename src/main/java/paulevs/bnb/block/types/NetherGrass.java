@@ -2,7 +2,7 @@ package paulevs.bnb.block.types;
 
 import paulevs.bnb.interfaces.BlockEnum;
 
-public enum NetherPlants implements BlockEnum {
+public enum NetherGrass implements BlockEnum {
 	// Crimson plants
 	CRIMSON_ROOTS(0, "crimson_roots"),
 	LAMELLARIUM(1, "lamellarium"),
@@ -23,7 +23,7 @@ public enum NetherPlants implements BlockEnum {
 	private final String name;
 	private final int meta;
 	
-	NetherPlants(int meta, String name) {
+	NetherGrass(int meta, String name) {
 		this.name = name;
 		this.meta = meta;
 	}

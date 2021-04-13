@@ -10,6 +10,7 @@ import net.modificationstation.stationloader.api.common.event.level.biome.BiomeR
 import paulevs.bnb.world.NetherBiomeSource;
 import paulevs.bnb.world.biome.CrimsonForest;
 import paulevs.bnb.world.biome.PoisonForest;
+import paulevs.bnb.world.biome.SoulValley;
 import paulevs.bnb.world.biome.WarpedForest;
 
 public class BiomeListener implements BiomeRegister {
@@ -21,6 +22,7 @@ public class BiomeListener implements BiomeRegister {
 		register("Crimson Forest", CrimsonForest::new);
 		register("Warped Forest", WarpedForest::new);
 		register("Poison Forest", PoisonForest::new);
+		register("Soul Valley", SoulValley::new);
 	}
 	
 	private static void register(String name, Function<String, Biome> init) {

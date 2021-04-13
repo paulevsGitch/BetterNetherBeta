@@ -17,6 +17,7 @@ public class WarpedForest extends NetherBiome {
 		this.addPlant(NetherStructures.GLOWTAIL, 0.4F);
 		this.addPlant(NetherStructures.WARPED_CORAL, 0.2F);
 		this.addPlant(NetherStructures.WARPED_MOSS, 1F);
+		this.addPlant(NetherStructures.WARPED_FUNGUS, 0.1F);
 		this.addPlant(NetherStructures.WARPED_COCOON, 0.01F);
 		this.addCeilPlant(NetherStructures.WARPED_VINE);
 		this.setMaxTreeCount(5);

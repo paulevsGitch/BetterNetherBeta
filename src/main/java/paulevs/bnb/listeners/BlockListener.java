@@ -25,6 +25,10 @@ import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.NetherTreeFurBlock;
 import paulevs.bnb.block.NetherVineBlock;
 import paulevs.bnb.block.NetherWoodBlock;
+import paulevs.bnb.block.SoulGrassBlock;
+import paulevs.bnb.block.SoulSoilBlock;
+import paulevs.bnb.block.SoulSpireBlock;
+import paulevs.bnb.block.SoulSpirePlantBlock;
 import paulevs.bnb.block.SpiderCocoonBlock;
 import paulevs.bnb.block.types.NetherPlanks;
 import paulevs.bnb.block.types.NetherrackBricks;
@@ -45,6 +49,7 @@ public class BlockListener implements BlockRegister {
 		occupiedIDs = BetterNetherBeta.configBlocks.getSet("blocks");
 		
 		register("nether_terrain", NetherTerrainBlock::new);
+		register("soul_soil", SoulSoilBlock::new);
 		
 		register("nether_wood", NetherWoodBlock::new);
 		register("nether_leaves", NetherLeavesBlock::new);
@@ -58,18 +63,22 @@ public class BlockListener implements BlockRegister {
 			register(plank.getName() + "_slab", NetherSlabBlock::new, block, plank.getMeta());
 		}
 		
-		register("nether_plant", NetherGrassBlock::new);
+		register("nether_grass", NetherGrassBlock::new);
 		register("nether_vine", NetherVineBlock::new);
 		register("nether_fungus", NetherFungusBlock::new);
 		
-		register("spider_cocoon", SpiderCocoonBlock::new);
+		register("soul_spire", SoulSpirePlantBlock::new);
+		register("soul_spire_block", SoulSpireBlock::new);
+		register("soul_grass", SoulGrassBlock::new);
 		
-		register("nether_ore", NetherOreBlock::new);
+		register("spider_cocoon", SpiderCocoonBlock::new);
 		
 		register("netherrack_bricks", NetherStoneBlock::new, NetherrackBricks.class);
 		register("netherrack_brick_stairs", NetherStairsBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICKS.getMeta());
 		register("netherrack_brick_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICKS.getMeta());
 		register("netherrack_tile_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICK_SMALL_TILE.getMeta());
+		
+		register("nether_ore", NetherOreBlock::new);
 		
 		occupiedIDs = null;
 		BetterNetherBeta.configBlocks.save();
