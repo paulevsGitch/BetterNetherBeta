@@ -205,6 +205,9 @@ public class OBJBlockModel implements CustomModel {
 	}
 	
 	private int calcAtlasID(int texture) {
+		if (TextureRegistry.currentRegistry() == null) {
+			return 0;
+		}
 		return textures.length > 0 ? texture / TextureRegistry.currentRegistry().texturesPerFile() : 0;
 	}
 	
