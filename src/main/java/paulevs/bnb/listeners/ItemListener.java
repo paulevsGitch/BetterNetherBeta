@@ -15,6 +15,7 @@ import net.modificationstation.stationloader.api.common.event.item.ItemRegister;
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.interfaces.PentaFunction;
 import paulevs.bnb.interfaces.TriFunction;
+import paulevs.bnb.item.HeartFruitItem;
 import paulevs.bnb.item.NetherArmourItem;
 import paulevs.bnb.item.NetherAxeItem;
 import paulevs.bnb.item.NetherHoeItem;
@@ -54,6 +55,8 @@ public class ItemListener implements ItemRegister {
 		register("orichalcum_axe", NetherAxeItem::new, NetherToolMaterial.ORICHALCUM);
 		register("orichalcum_hoe", NetherHoeItem::new, NetherToolMaterial.ORICHALCUM);
 		register("orichalcum_shears", NetherShearsItem::new, NetherToolMaterial.ORICHALCUM);
+		
+		register("heart_fruit", HeartFruitItem::new);
 		
 		occupiedIDs = null;
 		BetterNetherBeta.configItems.save();

@@ -11,8 +11,8 @@ import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.item.Dye;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.level.Level;
-import paulevs.bnb.block.NetherFungusBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
+import paulevs.bnb.interfaces.Bonemealable;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.BonemealUtil;
@@ -26,8 +26,8 @@ public class DyeMixin {
 	private void bnb_onBonemealUse(ItemInstance item, PlayerBase player, Level level, int x, int y, int z, int facing, CallbackInfoReturnable<Boolean> info) {
 		if (item.getDamage() == 15) {
 			BlockBase block = BlockUtil.getBlock(level, x, y, z);
-			if (block instanceof NetherFungusBlock) {
-				if (((NetherFungusBlock) block).growTree(level, x, y, z, level.getTileMeta(x, y, z))) {
+			if (block instanceof Bonemealable) {
+				if (((Bonemealable) block).onBonemealUse(level, x, y, z, level.getTileMeta(x, y, z))) {
 					item.count--;
 					info.setReturnValue(true);
 					info.cancel();

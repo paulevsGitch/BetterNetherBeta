@@ -14,7 +14,8 @@
 		"TileRendererMixin",
 		"SoundHelperMixin",
 		"BlockBaseMixin",
-		"SpiderMixin"
+		"SpiderMixin",
+		"InGameMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

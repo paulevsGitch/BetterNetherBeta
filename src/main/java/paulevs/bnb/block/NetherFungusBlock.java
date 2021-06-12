@@ -10,12 +10,13 @@ import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTileEntityWithMeta;
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.block.types.NetherFungus;
+import paulevs.bnb.interfaces.Bonemealable;
 import paulevs.bnb.listeners.ModelListener;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.MHelper;
 import paulevs.bnb.world.structures.NetherStructures;
 
-public class NetherFungusBlock extends NetherPlantBlock implements BlockModelProvider {
+public class NetherFungusBlock extends NetherPlantBlock implements BlockModelProvider, Bonemealable {
 	public NetherFungusBlock(String registryName, int id) {
 		super(registryName, id, NetherFungus.class, false);
 	}
@@ -55,7 +56,8 @@ public class NetherFungusBlock extends NetherPlantBlock implements BlockModelPro
 		return 3F;
 	}
 	
-	public boolean growTree(Level level, int x, int y, int z, int meta) {
+	@Override
+	public boolean onBonemealUse(Level level, int x, int y, int z, int meta) {
 		if (meta == NetherFungus.CRIMSON_FUNGUS.getMeta()) {
 			return NetherStructures.CRIMSON_TREE.generate(level, MHelper.getRandom(), x, y, z);
 		}

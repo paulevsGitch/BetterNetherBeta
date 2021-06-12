@@ -26,6 +26,7 @@ import paulevs.bnb.block.NetherTreeFurBlock;
 import paulevs.bnb.block.NetherVineBlock;
 import paulevs.bnb.block.NetherWoodBlock;
 import paulevs.bnb.block.SoulGrassBlock;
+import paulevs.bnb.block.SoulHeartBlock;
 import paulevs.bnb.block.SoulSoilBlock;
 import paulevs.bnb.block.SoulSpireBlock;
 import paulevs.bnb.block.SoulSpirePlantBlock;
@@ -70,6 +71,7 @@ public class BlockListener implements BlockRegister {
 		register("soul_spire", SoulSpirePlantBlock::new);
 		register("soul_spire_block", SoulSpireBlock::new);
 		register("soul_grass", SoulGrassBlock::new);
+		register("soul_heart", SoulHeartBlock::new);
 		
 		register("spider_cocoon", SpiderCocoonBlock::new);
 		

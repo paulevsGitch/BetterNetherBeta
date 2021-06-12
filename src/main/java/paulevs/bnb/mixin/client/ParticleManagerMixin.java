@@ -22,7 +22,7 @@ import paulevs.bnb.particles.BiomeParticle;
 @Mixin(ParticleManager.class)
 public class ParticleManagerMixin {
 	private static List<ParticleBase> biomeParticles = new ArrayList<ParticleBase>(128);
-	private static int textureID = -1;
+	private static int bnb_particleTexID = -1;
 	
 	@Shadow
 	private TextureManager textureManager;
@@ -67,10 +67,10 @@ public class ParticleManagerMixin {
 			float var5 = -yawSin * pitchSin;
 			float var6 = yawCos * pitchSin;
 			
-			if (textureID < 0) {
-				textureID = textureManager.getTextureId("/assets/" + BetterNetherBeta.MOD_ID + "/textures/particles.png");
+			if (bnb_particleTexID < 0) {
+				bnb_particleTexID = textureManager.getTextureId("/assets/" + BetterNetherBeta.MOD_ID + "/textures/particles.png");
 			}
-			textureManager.bindTexture(textureID);
+			textureManager.bindTexture(bnb_particleTexID);
 			
 			Tessellator tesselator = Tessellator.INSTANCE;
 			tesselator.start();

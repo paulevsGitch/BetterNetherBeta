@@ -10,5 +10,6 @@ Requires **[Fabric Legacy](https://github.com/calmilamsy/Cursed-Fabric-MultiMC)*
 - Download [Station API](https://github.com/ModificationStation/StationAPI/releases) and import it as a mod in MultiMC
 - Import this mod
 
-## Used keys:
-- G: opens a "creative" tab
+## Setup
+Dev: "gradlew eclipse" or "gradlew rebuildLVT genSources eclipse"
+Build: "gradlew build"

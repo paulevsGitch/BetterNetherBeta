@@ -19,6 +19,8 @@ public class NetherCeilPlantBlock extends MultiBlock implements BlockItemProvide
 	public <T extends BlockEnum> NetherCeilPlantBlock(String name, int id, Class<T> type) {
 		super(name, id, Material.PLANT, type);
 		this.setBoundingBox(0.125F, 0.25F, 0.125F, 0.875F, 1.0F, 0.875F);
+		this.disableNotifyOnMetaDataChange();
+		this.disableStat();
 		this.sounds(GRASS_SOUNDS);
 	}
 	

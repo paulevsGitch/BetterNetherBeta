@@ -5,35 +5,31 @@ import java.util.Random;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.PlayerBase;
-import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.item.PlaceableTileEntity;
-import net.minecraft.item.tool.Shears;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.Box;
-import net.modificationstation.stationloader.api.client.model.BlockModelProvider;
-import net.modificationstation.stationloader.api.client.model.CustomModel;
+import net.modificationstation.stationloader.api.common.block.BlockItemProvider;
 import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTileEntityWithMeta;
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.interfaces.BlockEnum;
-import paulevs.bnb.interfaces.BlockWithLight;
-import paulevs.bnb.item.NetherShearsItem;
-import paulevs.bnb.listeners.ModelListener;
+import paulevs.bnb.interfaces.Bonemealable;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.BlockUtil;
-import paulevs.bnb.util.ItemUtil;
 
-public class NetherPlantBlock extends MultiBlock implements BlockModelProvider, BlockWithLight {
-	private final boolean useShears;
+public class NetherCropBlock extends NetherBlock implements BlockItemProvider, Bonemealable {
+	private final String name;
+	private final int maxAge;
 	
-	public <T extends BlockEnum> NetherPlantBlock(String name, int id, Class<T> type, boolean useShears) {
-		super(name, id, Material.PLANT, type);
+	public <T extends BlockEnum> NetherCropBlock(String name, int id, int maxAge) {
+		super(name, id, Material.PLANT);
 		this.setBoundingBox(0.125F, 0F, 0.125F, 0.875F, 0.75F, 0.875F);
 		this.disableNotifyOnMetaDataChange();
 		this.disableStat();
+		this.setTicksRandomly(true);
 		this.sounds(GRASS_SOUNDS);
-		this.useShears = useShears;
+		this.maxAge = maxAge;
+		this.name = name;
 	}
 	
 	@Override
@@ -42,14 +38,13 @@ public class NetherPlantBlock extends MultiBlock implements BlockModelProvider, 
 			@Override
 			@Environment(EnvType.CLIENT)
 			public int getTexturePosition(int damage) {
-				String name = variants[clampMeta(damage)].getTexture(0);
-				return TextureListener.getBlockTexture(name);
+				return getTextureForSide(0, maxAge);
 			}
 			
 			@Override
 			@Environment(EnvType.CLIENT)
 			public String getTranslationKey(ItemInstance item) {
-				return "tile." + BetterNetherBeta.MOD_ID + ":" + getVariant(item.getDamage()).getTranslationKey();
+				return "tile." + BetterNetherBeta.MOD_ID + ":" + name;
 			}
 		};
 	}
@@ -71,16 +66,23 @@ public class NetherPlantBlock extends MultiBlock implements BlockModelProvider, 
 
 	@Override
 	public void onScheduledTick(Level level, int x, int y, int z, Random rand) {
-		this.tick(level, x, y, z);
+		super.onScheduledTick(level, x, y, z, rand);
+		if (this.tick(level, x, y, z) && rand.nextInt(8) == 0) {
+			int age = level.getTileMeta(x, y, z);
+			if (age >= maxAge) {
+				return;
+			}
+			level.setTileMeta(x, y, z, age + 1);
+		}
 	}
 
-	protected void tick(Level level, int x, int y, int z) {
+	protected boolean tick(Level level, int x, int y, int z) {
 		if (!this.canGrow(level, x, y, z)) {
-			if (!useShears) {
-				this.drop(level, x, y, z, level.getTileMeta(x, y, z));
-			}
+			this.drop(level, x, y, z, level.getTileMeta(x, y, z));
 			level.setTile(x, y, z, 0);
+			return false;
 		}
+		return true;
 	}
 
 	@Override
@@ -105,34 +107,24 @@ public class NetherPlantBlock extends MultiBlock implements BlockModelProvider, 
 
 	@Environment(EnvType.CLIENT)
 	public int method_1621() {
-		return 1;
-	}
-
-	@Override
-	public float getEmissionIntensity() {
-		return 1;
+		return 6;
 	}
 	
 	@Override
-	public CustomModel getCustomInventoryModel(int i) {
-		return null;
+	public int getTextureForSide(int side, int meta) {
+		return TextureListener.getBlockTexture(name + "_" + (meta % (maxAge + 1)));
 	}
 
 	@Override
-	public CustomModel getCustomWorldModel(Level level, int x, int y, int z, int meta) {
-		return ModelListener.getBlockModel(getVariant(meta).getName());
-	}
-	
-	@Override
-	public void afterBreak(Level level, PlayerBase player, int x, int y, int z, int meta) {
-		if (useShears) {
-			ItemBase item = player.getHeldItem() == null ? null : ItemUtil.itemByID(player.getHeldItem().itemId);
-			if (!level.isClient && item != null && (item instanceof Shears || item instanceof NetherShearsItem)) {
-				this.drop(level, x, y, z, meta);
+	public boolean onBonemealUse(Level level, int x, int y, int z, int meta) {
+		if (meta < maxAge) {
+			int age = meta + level.rand.nextInt(2) + 1;
+			if (age > maxAge) {
+				age = maxAge;
 			}
+			level.setTileMeta(x, y, z, age);
+			return true;
 		}
-		else {
-			super.afterBreak(level, player, x, y, z, meta);
-		}
+		return false;
 	}
 }
