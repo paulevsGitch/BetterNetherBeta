@@ -35,17 +35,27 @@ public class InGameMixin extends DrawableHelper {
 			return;
 		}
 		int health = ((AdditionalHealthEffect) effect).getHealth();
+		double delta = effect.getDelta();
+		boolean isFading = delta > 0.75;
 		
 		ScreenScaler scaler = new ScreenScaler(this.minecraft.options, this.minecraft.actualWidth, this.minecraft.actualHeight);
 		int width = scaler.getScaledWidth();
 		int height = scaler.getScaledHeight();
 		
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		
 		if (bnb_textureID < 0) {
 			bnb_textureID = this.minecraft.textureManager.getTextureId("/assets/" + BetterNetherBeta.MOD_ID + "/textures/icons.png");
-			System.out.println(bnb_textureID);
 		}
-		GL11.glBindTexture(3553, bnb_textureID);
+		if (isFading) {
+			delta = (delta - 0.75) / 0.25;
+			delta = Math.cos(delta * Math.PI * 13) * 0.5 + 0.5;
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, (float) delta);
+		}
+		else {
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		}
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, bnb_textureID);
 		
 		int h = 0;
 		for (h = 0; h < 5; h++) {
@@ -61,10 +71,14 @@ public class InGameMixin extends DrawableHelper {
 			this.blit(posX, posY, 9, 0, 9, 9);
 		}
 		
-		if ((health & 1) == 1) {
+		if (health > 0 && (health & 1) == 1) {
 			int posY = height - 32 - 10;
 			int posX = width / 2 - 91 + h * 8;
 			this.blit(posX, posY, 18, 0, 9, 9);
+		}
+		
+		if (isFading) {
+			GL11.glDisable(GL11.GL_BLEND);
 		}
 	}
 }

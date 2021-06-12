@@ -1,20 +1,21 @@
 package paulevs.bnb.effects;
 
+import java.util.List;
+
 import net.minecraft.entity.player.PlayerBase;
-import paulevs.bnb.interfaces.StatusEffectable;
+import net.minecraft.util.io.CompoundTag;
 
 public abstract class StatusEffect {
-	private final int maxTime;
-	private int time = 0;
+	private int maxTime;
+	private int time;
 	
 	public StatusEffect(int maxTime) {
 		this.maxTime = maxTime;
 	}
 	
-	public void tick(PlayerBase player) {
+	public void tick(PlayerBase player, List<String> toRemove) {
 		if (time > maxTime) {
-			StatusEffectable effect = (StatusEffectable) player;
-			effect.removeEffect(getName());
+			toRemove.add(getName());
 			return;
 		}
 		onPlayerTick(player);
@@ -24,4 +25,27 @@ public abstract class StatusEffect {
 	public abstract void onPlayerTick(PlayerBase player);
 	
 	public abstract String getName();
+	
+	public abstract void writeCustomData(CompoundTag tag);
+	
+	public abstract void readCustomData(CompoundTag tag);
+	
+	public double getDelta() {
+		return (double) time / maxTime;
+	}
+	
+	public CompoundTag toTag() {
+		CompoundTag tag = new CompoundTag();
+		tag.put("name", getName());
+		tag.put("maxTime", maxTime);
+		tag.put("time", time);
+		writeCustomData(tag);
+		return tag;
+	}
+	
+	public void fromTag(CompoundTag tag) {
+		maxTime = tag.getInt("maxTime");
+		time = tag.getInt("time");
+		readCustomData(tag);
+	}
 }

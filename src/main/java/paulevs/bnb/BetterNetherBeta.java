@@ -11,6 +11,7 @@ import net.modificationstation.stationloader.api.common.event.item.tool.Effectiv
 import net.modificationstation.stationloader.api.common.event.level.biome.BiomeRegister;
 import net.modificationstation.stationloader.api.common.event.recipe.RecipeRegister;
 import net.modificationstation.stationloader.api.common.mod.StationMod;
+import paulevs.bnb.effects.StatusEffects;
 import paulevs.bnb.listeners.BiomeListener;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.listeners.ChunkListener;
@@ -30,6 +31,7 @@ public class BetterNetherBeta implements StationMod {
 	
 	@Override
 	public void preInit() {
+		StatusEffects.register();
 		ItemRegister.EVENT.register(new ItemListener());
 		BlockRegister.EVENT.register(new BlockListener());
 		TextureRegister.EVENT.register(new TextureListener());

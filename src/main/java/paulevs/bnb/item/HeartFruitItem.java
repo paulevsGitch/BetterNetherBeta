@@ -6,8 +6,7 @@ import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.item.food.FoodBase;
 import net.minecraft.level.Level;
-import paulevs.bnb.effects.AdditionalHealthEffect;
-import paulevs.bnb.interfaces.StatusEffectable;
+import paulevs.bnb.effects.StatusEffects;
 import paulevs.bnb.listeners.TextureListener;
 
 public class HeartFruitItem extends FoodBase {
@@ -22,8 +21,7 @@ public class HeartFruitItem extends FoodBase {
 	@Override
 	public ItemInstance use(ItemInstance item, Level level, PlayerBase player) {
 		ItemInstance result = super.use(item, level, player);
-		StatusEffectable stated = (StatusEffectable) player;
-		stated.addEffect(new AdditionalHealthEffect());
+		StatusEffects.addEffect(player, "additional_health");
 		return result;
 	}
 	

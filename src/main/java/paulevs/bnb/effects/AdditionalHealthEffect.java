@@ -1,6 +1,7 @@
 package paulevs.bnb.effects;
 
 import net.minecraft.entity.player.PlayerBase;
+import net.minecraft.util.io.CompoundTag;
 
 public class AdditionalHealthEffect extends StatusEffect {
 	private int additionalHealth = 10;
@@ -11,11 +12,14 @@ public class AdditionalHealthEffect extends StatusEffect {
 
 	@Override
 	public void onPlayerTick(PlayerBase player) {
-		if (player.health < 20) {
-			player.health ++;
-			additionalHealth--;
+		if (additionalHealth > 1 && player.health < 20) {
+			int diff = 20 - player.health;
+			if (diff > additionalHealth) {
+				diff = additionalHealth;
+			}
+			player.health += diff;
+			additionalHealth -= diff;
 		}
-		player.field_1613 = player.field_1009 / 2;
 	}
 
 	@Override
@@ -32,5 +36,15 @@ public class AdditionalHealthEffect extends StatusEffect {
 		if (additionalHealth > 10) {
 			additionalHealth = 10;
 		}
+	}
+
+	@Override
+	public void writeCustomData(CompoundTag tag) {
+		tag.put("health", additionalHealth);
+	}
+
+	@Override
+	public void readCustomData(CompoundTag tag) {
+		additionalHealth = tag.getInt("health");
 	}
 }
