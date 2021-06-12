@@ -27,6 +27,7 @@ import net.modificationstation.stationloader.api.client.model.CustomTexturedQuad
 import net.modificationstation.stationloader.api.client.texture.TextureRegistry;
 import net.modificationstation.stationloader.api.common.StationLoader;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
+import paulevs.bnb.block.NetherBlock;
 import paulevs.bnb.block.model.OBJBlockModel;
 import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.interfaces.RenderTypePerMeta;
@@ -816,7 +817,7 @@ public class TileRendererMixin {
 	
 	@ModifyVariable(method = {"method_47(Lnet/minecraft/block/BlockBase;IDDD)V" }, index = 10, at = @At(value = "CONSTANT", args = {"intValue=15" }, ordinal = 0, shift = Shift.BEFORE, by = 2))
 	private int bnb_getCrossTextureID(int texID, BlockBase block, int meta, double x, double y, double z) {
-		return block.id > 255 ? block.method_1626(field_82, MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z), 0) : texID;
+		return block instanceof NetherBlock ? block.method_1626(field_82, MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z), 0) : texID;
 	}
 	
 	@Inject(method = "method_42", at = @At("HEAD"), cancellable = true)

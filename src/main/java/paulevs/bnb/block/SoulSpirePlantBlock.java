@@ -1,5 +1,7 @@
 package paulevs.bnb.block;
 
+import java.util.Random;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
@@ -7,11 +9,13 @@ import net.minecraft.item.PlaceableTileEntity;
 import net.minecraft.level.Level;
 import net.minecraft.level.TileView;
 import net.modificationstation.stationloader.api.common.block.BlockItemProvider;
+import paulevs.bnb.interfaces.Bonemealable;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.BlockDirection;
 import paulevs.bnb.util.BlockUtil;
+import paulevs.bnb.world.structures.NetherStructures;
 
-public class SoulSpirePlantBlock extends NetherBlock implements BlockItemProvider {
+public class SoulSpirePlantBlock extends NetherBlock implements BlockItemProvider, Bonemealable {
 	private final String texture;
 	
 	public SoulSpirePlantBlock(String name, int id) {
@@ -19,6 +23,9 @@ public class SoulSpirePlantBlock extends NetherBlock implements BlockItemProvide
 		this.setBoundingBox(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
 		this.setLightEmittance(1F);
 		this.texture = name + "_";
+		this.disableNotifyOnMetaDataChange();
+		this.disableStat();
+		this.sounds(GRASS_SOUNDS);
 	}
 	
 	@Override
@@ -88,9 +95,38 @@ public class SoulSpirePlantBlock extends NetherBlock implements BlockItemProvide
 			y += dir.getY();
 			int id = world.getTileId(x, y, z);
 			if (id == this.id) {
-				count ++;
+				count++;
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public boolean onBonemealUse(Level level, int x, int y, int z, int meta) {
+		if (level.getTileId(x, y + 1, z) == 0 && level.getTileId(x, y - 1, z) != id) {
+			level.setTile(x, y, z, 0);
+			NetherStructures.SOUL_SPIRE.generate(level, level.rand, x, y, z);
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public void onAdjacentBlockUpdate(Level level, int x, int y, int z, int id) {
+		super.onAdjacentBlockUpdate(level, x, y, z, id);
+		this.tick(level, x, y, z);
+	}
+
+	@Override
+	public void onScheduledTick(Level level, int x, int y, int z, Random rand) {
+		this.tick(level, x, y, z);
+	}
+
+	protected void tick(Level level, int x, int y, int z) {
+		int id = level.getTileId(x, y - 1, z);
+		if (id != this.id && !BlockUtil.isSoulTerrain(id)) {
+			this.drop(level, x, y, z, 0);
+			level.setTile(x, y, z, 0);
+		}
 	}
 }

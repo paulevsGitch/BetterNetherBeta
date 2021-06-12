@@ -197,6 +197,8 @@ public class RecipeListener implements RecipeRegister {
 				"# #",
 				'#', new ItemInstance(item)
 			);
+			
+			addSquareRecipe(new ItemInstance(BlockListener.getBlock("soul_spire")), new ItemInstance(BlockListener.getBlock("soul_spire_block")));
 		}
 		else if (type == RecipeRegister.Vanilla.CRAFTING_SHAPELESS) {
 			CraftingRegistry.INSTANCE.addShapelessRecipe(new ItemInstance(BlockBase.BUTTON), new ItemInstance(netherPlanks, 1, -1));
