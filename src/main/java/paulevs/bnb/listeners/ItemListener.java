@@ -24,6 +24,7 @@ import paulevs.bnb.item.NetherShearsItem;
 import paulevs.bnb.item.NetherShovelItem;
 import paulevs.bnb.item.NetherSwordItem;
 import paulevs.bnb.item.NetherToolItem;
+import paulevs.bnb.item.SeedsTileEntity;
 import paulevs.bnb.item.SimpleNetherItem;
 import paulevs.bnb.item.material.NetherToolMaterial;
 import paulevs.bnb.util.ItemUtil;
@@ -57,6 +58,7 @@ public class ItemListener implements ItemRegister {
 		register("orichalcum_shears", NetherShearsItem::new, NetherToolMaterial.ORICHALCUM);
 		
 		register("heart_fruit", HeartFruitItem::new);
+		register("soul_heart_seeds", SeedsTileEntity::new, BlockListener.getBlock("soul_heart"));
 		
 		occupiedIDs = null;
 		BetterNetherBeta.configItems.save();
@@ -77,6 +79,12 @@ public class ItemListener implements ItemRegister {
 	
 	private static <T extends NetherToolItem> void register(String name, TriFunction<String, Integer, NetherToolMaterial, T> init, NetherToolMaterial material) {
 		T item = init.apply(name, getID(name), material);
+		ITEMS.put(name, item);
+		ITEMS_TAB.add(item);
+	}
+	
+	private static <T extends SeedsTileEntity> void register(String name, TriFunction<String, Integer, BlockBase, T> init, BlockBase plant) {
+		T item = init.apply(name, getID(name), plant);
 		ITEMS.put(name, item);
 		ITEMS_TAB.add(item);
 	}
