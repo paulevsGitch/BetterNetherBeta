@@ -11,6 +11,7 @@ import paulevs.bnb.block.types.NetherWood;
 import paulevs.bnb.block.types.SoulGrass;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
+import paulevs.bnb.util.RangedBlockState;
 
 public class NetherStructures {
 	public static final Structure CRIMSON_TREE = new NetherTree(
@@ -52,6 +53,7 @@ public class NetherStructures {
 	public static final Structure TAILGRASS = makeGrass(NetherGrass.TAILGRASS);
 	
 	public static final Structure SOUL_BULBITE = makeGrass(SoulGrass.SOUL_BULBITE);
+	public static final Structure SOUL_HEART = new BlockScatter(new RangedBlockState(BlockListener.getBlock("soul_heart"), 3), 2F);
 	
 	public static final Structure CRIMSON_FUNGUS = new BlockScatter(new BlockState(BlockListener.getBlock("nether_fungus"), NetherFungus.CRIMSON_FUNGUS), 1F);
 	public static final Structure WARPED_FUNGUS = new BlockScatter(new BlockState(BlockListener.getBlock("nether_fungus"), NetherFungus.WARPED_FUNGUS), 1F);

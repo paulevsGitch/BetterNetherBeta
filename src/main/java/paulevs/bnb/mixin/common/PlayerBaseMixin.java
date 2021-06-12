@@ -84,4 +84,11 @@ public class PlayerBaseMixin extends Living implements StatusEffectable {
 			}
 		}
 	}
+	
+	@Inject(method = "applyDamage", at = @At("TAIL"))
+	private void bnb_applyPlayerDamage(int damageAmount, CallbackInfo info) {
+		if (this.health <= 0) {
+			bnb_effects.clear();
+		}
+	}
 }
