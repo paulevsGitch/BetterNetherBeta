@@ -1,5 +1,7 @@
 package paulevs.bnb.util;
 
+import net.minecraft.util.Vec3i;
+
 public enum BlockDirection {
 	NEG_X(4, -1, 0, 0),
 	NEG_Y(0, 0, -1, 0),
@@ -8,6 +10,7 @@ public enum BlockDirection {
 	POS_Y(1, 0, 1, 0),
 	POS_Z(3, 0, 0, 1);
 	
+	public static final BlockDirection[] VALUES = BlockDirection.values();
 	private final int facing;
 	private final int x;
 	private final int y;
@@ -73,5 +76,16 @@ public enum BlockDirection {
 				return BlockAxis.AXIS_Z;
 			default: return BlockAxis.AXIS_Y;
 		}
+	}
+	
+	public Vec3i add(Vec3i pos) {
+		return new Vec3i(pos.x + x, pos.y + y, pos.z + z);
+	}
+	
+	public Vec3i offset(Vec3i pos) {
+		pos.x += x;
+		pos.y += y;
+		pos.z += z;
+		return pos;
 	}
 }
