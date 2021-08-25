@@ -36,9 +36,9 @@ public class NetherLeavesBlock extends MultiBlock {
 		}
 	}
 	
-	@Override
+	/*@Override
 	protected int clampMeta(int meta) {
-		return meta & 3;
+		return meta & 7;
 	}
 	
 	@Override
@@ -46,7 +46,7 @@ public class NetherLeavesBlock extends MultiBlock {
 		int meta = level.getTileMeta(x, y, z);
 		meta = clampMeta(meta) | 8;
 		level.setTileMeta(x, y, z, meta);
-	}
+	}*/
 	
 	/*@Override
 	public void onScheduledTick(Level level, int x, int y, int z, Random rand) {
