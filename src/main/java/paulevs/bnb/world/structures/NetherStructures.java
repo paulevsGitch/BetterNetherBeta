@@ -64,6 +64,11 @@ public class NetherStructures {
 	
 	public static final Structure CRIMSON_VINE = new NetherVine(new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.CRIMSON_VINE));
 	public static final Structure WARPED_VINE = new NetherVine(new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.WARPED_VINE));
+	public static final Structure VIRID_VINE = new NetherVine(new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.VIRID_VINE));
+	
+	//public static final Structure CRIMSON_GLOWING_FUR = new NetherGroupedVine(new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.CRIMSON_GLOWING_FUR));
+	//public static final Structure WARPED_GLOWING_FUR = new NetherGroupedVine(new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.WARPED_GLOWING_FUR));
+	//public static final Structure POISON_GLOWING_FUR = new NetherGroupedVine(new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.POISON_GLOWING_FUR));
 	
 	public static final NetherOre ORICHALCUM_ORE = makeOre(paulevs.bnb.block.types.NetherOre.ORICHALCUM_ORE, 8);
 	

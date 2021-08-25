@@ -3,9 +3,9 @@ package paulevs.bnb.block.types;
 import paulevs.bnb.interfaces.BlockEnum;
 
 public enum NetherVines implements BlockEnum {
-	// Crimson plants
 	CRIMSON_VINE(0, "crimson_vine"),
-	WARPED_VINE(1, "warped_vine");
+	WARPED_VINE(1, "warped_vine"),
+	VIRID_VINE(2, "virid_vine");
 	
 	private final String name;
 	private final int meta;

@@ -18,9 +18,10 @@ public class PoisonForest extends NetherBiome {
 		this.addPlant(NetherStructures.JELLYSHROOM, 0.1F);
 		this.addPlant(NetherStructures.TAILGRASS, 1.0F);
 		this.addPlant(NetherStructures.POISON_COCOON, 0.01F);
+		this.addCeilPlant(NetherStructures.VIRID_VINE);
 		this.setMaxTreeCount(5);
 		this.setMaxPlantCount(15);
-		this.setMaxCeilPlantCount(30);
+		this.setMaxCeilPlantCount(10);
 		this.setFire(false);
 	}
 	
