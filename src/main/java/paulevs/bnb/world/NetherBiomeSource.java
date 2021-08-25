@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.level.biome.Biome;
+import net.minecraft.level.dimension.DimensionData;
 import net.minecraft.level.gen.BiomeSource;
 
 import java.util.Arrays;
@@ -13,8 +14,8 @@ public class NetherBiomeSource extends BiomeSource {
 	private static final List<Biome> BIOMES = Lists.newArrayList();
 	private BiomeMap map;
 	
-	public NetherBiomeSource(long seed) {
-		map = new BiomeMap(seed, 64, BIOMES);
+	public NetherBiomeSource(DimensionData data, long seed) {
+		map = new BiomeMap(data, seed, 64, BIOMES);
 		temperatureNoises = new double[1];
 		rainfallNoises = new double[1];
 		detailNoises = new double[1];

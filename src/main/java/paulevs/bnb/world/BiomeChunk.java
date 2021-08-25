@@ -17,13 +17,37 @@ public class BiomeChunk {
 		Biome[][] PreBio = new Biome[SM_WIDTH][SM_WIDTH];
 		biomes = new Biome[WIDTH][WIDTH];
 
-		for (int x = 0; x < SM_WIDTH; x++)
-			for (int z = 0; z < SM_WIDTH; z++)
+		for (int x = 0; x < SM_WIDTH; x++) {
+			for (int z = 0; z < SM_WIDTH; z++) {
 				PreBio[x][z] = picker.get(random.nextInt(picker.size()));
+			}
+		}
 
-		for (int x = 0; x < WIDTH; x++)
-			for (int z = 0; z < WIDTH; z++)
+		for (int x = 0; x < WIDTH; x++) {
+			for (int z = 0; z < WIDTH; z++) {
 				biomes[x][z] = PreBio[offsetXZ(x, random)][offsetXZ(z, random)];
+			}
+		}
+	}
+	
+	public BiomeChunk(byte[] biomeIDs, List<Biome> picker) {
+		biomes = new Biome[WIDTH][WIDTH];
+		for (int x = 0; x < WIDTH; x++) {
+			for (int z = 0; z < WIDTH; z++) {
+				int id = biomeIDs[x * WIDTH + z];
+				biomes[x][z] = id < 0 || id >= picker.size() ? Biome.NETHER : picker.get(id);
+			}
+		}
+	}
+	
+	public byte[] getBiomes(List<Biome> picker) {
+		byte[] biomeIDs = new byte[WIDTH * WIDTH];
+		for (int x = 0; x < WIDTH; x++) {
+			for (int z = 0; z < WIDTH; z++) {
+				biomeIDs[x * WIDTH + z] = (byte) picker.indexOf(biomes[x][z]);
+			}
+		}
+		return biomeIDs;
 	}
 
 	public Biome getBiome(int x, int z) {

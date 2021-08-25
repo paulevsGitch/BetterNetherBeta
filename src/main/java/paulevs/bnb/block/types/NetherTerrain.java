@@ -6,7 +6,8 @@ import paulevs.bnb.util.BlockUtil;
 public enum NetherTerrain implements BlockEnum {
 	CRIMSON_NYLIUM(0, "crimson_nylium"),
 	WARPED_NYLIUM(1, "warped_nylium"),
-	POISON_NYLIUM(2, "poison_nylium");
+	POISON_NYLIUM(2, "poison_nylium"),
+	CORRUPTED_NYLIUM(3, "corrupted_nylium");
 	
 	private final String name;
 	private final int meta;

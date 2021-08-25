@@ -24,7 +24,7 @@ public abstract class NetherMixin extends Dimension {
 	
 	@Inject(method = "initBiomeSource", at = @At("TAIL"))
 	private void bnb_initBiomeSource(CallbackInfo info) {
-		this.biomeSource = new NetherBiomeSource(level.getSeed());
+		this.biomeSource = new NetherBiomeSource(((LevelAccessor) level).bnb_getDimensionData(), level.getSeed());
 	}
 	
 	@Inject(method = "method_1762", at = @At("HEAD"), cancellable = true)

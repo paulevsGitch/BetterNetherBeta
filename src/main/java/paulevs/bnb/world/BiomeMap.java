@@ -2,11 +2,17 @@ package paulevs.bnb.world;
 
 import com.google.common.collect.Maps;
 import net.minecraft.level.biome.Biome;
+import net.minecraft.level.dimension.DimensionData;
+import net.minecraft.util.io.CompoundTag;
+import net.minecraft.util.io.NBTIO;
 import net.minecraft.util.maths.MathHelper;
 import paulevs.bnb.noise.OpenSimplexNoise;
 import paulevs.bnb.util.MHelper;
 
 import java.awt.Point;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -19,13 +25,15 @@ public class BiomeMap {
 	private final OpenSimplexNoise noiseZ;
 	private final Point pos = new Point();
 	private final List<Biome> picker;
+	private final DimensionData data;
 	private final int sizeXZ;
 	private final int depth;
 	private final int seed;
 	private final int size;
 	
-	public BiomeMap(long seed, int size, List<Biome> picker) {
+	public BiomeMap(DimensionData data, long seed, int size, List<Biome> picker) {
 		maps.clear();
+		this.data = data;
 		RANDOM.setSeed(seed);
 		this.seed = RANDOM.nextInt();
 		noiseX = new OpenSimplexNoise(RANDOM.nextLong());
@@ -76,11 +84,37 @@ public class BiomeMap {
 		
 		BiomeChunk chunk = maps.get(pos);
 		if (chunk == null) {
-			RANDOM.setSeed(MHelper.getRandomHash(seed, pos.x, pos.y));
-			chunk = new BiomeChunk(this, RANDOM, picker);
+			chunk = loadChunk(pos);
 			maps.put(new Point(pos.x, pos.y), chunk);
 		}
 		
 		return chunk.getBiome(MathHelper.floor(x), MathHelper.floor(z));
+	}
+	
+	private BiomeChunk loadChunk(Point pos) {
+		File file = data.getFile("nether_biome_map/chunk_" + pos.x + "_" + pos.y);
+		CompoundTag tag = null;
+		if (file.exists()) {
+			try {
+				FileInputStream stream = new FileInputStream(file);
+				if (stream != null) {
+					tag = NBTIO.readGzipped(stream);
+					stream.close();
+				}
+			}
+			catch (IOException e) {}
+		}
+		
+		BiomeChunk chunk;
+		if (tag == null) {
+			RANDOM.setSeed(MHelper.getRandomHash(seed, pos.x, pos.y));
+			chunk = new BiomeChunk(this, RANDOM, picker);
+			new ChunkSaver(chunk, file, picker).start();
+		}
+		else {
+			byte[] biomes = tag.getByteArray("biomes");
+			chunk = new BiomeChunk(biomes, picker);
+		}
+		return chunk;
 	}
 }

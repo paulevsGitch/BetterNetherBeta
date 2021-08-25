@@ -35,6 +35,14 @@ public class MHelper {
 		result.z = lerp((float) a.z, (float) b.z, delta);
 	}
 	
+	public static int clamp(int val, int min, int max) {
+		return val < min ? min : val > max ? max : val;
+	}
+	
+	public static int min(int a, int b) {
+		return a < b ? a : b;
+	}
+	
 	public static int max(int a, int b) {
 		return a > b ? a : b;
 	}
