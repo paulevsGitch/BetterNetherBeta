@@ -1,11 +1,11 @@
 package paulevs.bnb.world.biome;
 
-import java.util.Random;
-
 import paulevs.bnb.block.types.NetherTerrain;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.world.structures.NetherStructures;
+
+import java.util.Random;
 
 public class WarpedForest extends NetherBiome {
 	public WarpedForest(String name) {

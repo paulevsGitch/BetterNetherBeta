@@ -1,9 +1,9 @@
 package paulevs.bnb.listeners;
 
-import java.util.Map;
-
 import net.modificationstation.stationloader.api.common.event.block.TileEntityRegister;
 import paulevs.bnb.block.tileentity.CocoonSpawner;
+
+import java.util.Map;
 
 public class TileEntityListener implements TileEntityRegister {
 	@Override

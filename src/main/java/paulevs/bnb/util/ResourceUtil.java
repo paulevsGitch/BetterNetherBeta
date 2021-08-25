@@ -1,5 +1,10 @@
 package paulevs.bnb.util;
 
+import com.google.common.collect.Lists;
+import com.google.gson.JsonObject;
+import net.fabricmc.loader.api.FabricLoader;
+import paulevs.bnb.BetterNetherBeta;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -10,12 +15,6 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
-import com.google.common.collect.Lists;
-import com.google.gson.JsonObject;
-
-import net.fabricmc.loader.api.FabricLoader;
-import paulevs.bnb.BetterNetherBeta;
 
 public class ResourceUtil {
 	public static List<String> getResourceFiles(String path) {

@@ -1,7 +1,5 @@
 package paulevs.bnb.block;
 
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
@@ -14,6 +12,8 @@ import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.BlockDirection;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.world.structures.NetherStructures;
+
+import java.util.Random;
 
 public class SoulSpirePlantBlock extends NetherBlock implements BlockItemProvider, Bonemealable {
 	private final String texture;

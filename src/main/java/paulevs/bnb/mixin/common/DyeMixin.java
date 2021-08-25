@@ -1,16 +1,15 @@
 package paulevs.bnb.mixin.common;
 
-import org.lwjgl.util.Point;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 import net.minecraft.block.BlockBase;
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.item.Dye;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.level.Level;
+import org.lwjgl.util.Point;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.interfaces.Bonemealable;
 import paulevs.bnb.util.BlockState;

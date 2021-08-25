@@ -1,7 +1,6 @@
 package paulevs.bnb.block;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Living;
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;

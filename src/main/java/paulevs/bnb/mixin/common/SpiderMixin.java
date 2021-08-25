@@ -1,7 +1,5 @@
 package paulevs.bnb.mixin.common;
 
-import org.spongepowered.asm.mixin.Mixin;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.monster.MonsterBase;
@@ -10,6 +8,7 @@ import net.minecraft.level.Level;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.dimension.Nether;
 import net.minecraft.util.io.CompoundTag;
+import org.spongepowered.asm.mixin.Mixin;
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.interfaces.NetherMob;
 import paulevs.bnb.world.biome.CrimsonForest;

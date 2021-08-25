@@ -62,14 +62,8 @@ public class NetherStructures {
 	public static final Structure WARPED_COCOON = new BlockScatter(new BlockState(BlockListener.getBlock("spider_cocoon"), 1), 1F);
 	public static final Structure POISON_COCOON = new BlockScatter(new BlockState(BlockListener.getBlock("spider_cocoon"), 2), 1F);
 	
-	public static final Structure CRIMSON_VINE = new NetherVine(
-		new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.CRIMSON_VINE_TOP),
-		new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.CRIMSON_VINE_BOTTOM)
-	);
-	public static final Structure WARPED_VINE = new NetherVine(
-		new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.WARPED_VINE_TOP),
-		new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.WARPED_VINE_BOTTOM)
-	);
+	public static final Structure CRIMSON_VINE = new NetherVine(new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.CRIMSON_VINE));
+	public static final Structure WARPED_VINE = new NetherVine(new BlockState(BlockListener.getBlock("nether_vine"), NetherVines.WARPED_VINE));
 	
 	public static final NetherOre ORICHALCUM_ORE = makeOre(paulevs.bnb.block.types.NetherOre.ORICHALCUM_ORE, 8);
 	

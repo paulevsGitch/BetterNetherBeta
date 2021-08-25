@@ -1,9 +1,6 @@
 package paulevs.bnb.listeners;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import net.modificationstation.stationloader.api.client.event.model.ModelRegister;
 import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
@@ -13,6 +10,8 @@ import paulevs.bnb.block.types.NetherLeaves;
 import paulevs.bnb.block.types.NetherTreeFur;
 import paulevs.bnb.block.types.SoulGrass;
 import paulevs.bnb.util.BlockUtil;
+
+import java.util.Map;
 
 public class ModelListener implements ModelRegister {
 	private static final Map<String, CustomModel> BLOCK_MODELS = Maps.newHashMap();

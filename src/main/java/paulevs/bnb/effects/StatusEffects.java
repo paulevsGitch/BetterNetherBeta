@@ -1,13 +1,12 @@
 package paulevs.bnb.effects;
 
-import java.util.Map;
-import java.util.function.Supplier;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.util.io.CompoundTag;
 import paulevs.bnb.interfaces.StatusEffectable;
+
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class StatusEffects {
 	private static final Map<String, Supplier<StatusEffect>> REGISTRY = Maps.newHashMap();

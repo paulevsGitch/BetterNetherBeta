@@ -1,14 +1,13 @@
 package paulevs.bnb.mixin.client;
 
+import net.minecraft.client.render.entity.LivingEntityRenderer;
+import net.minecraft.client.render.entity.SpiderEyesRenderer;
+import net.minecraft.client.render.entity.model.EntityModelBase;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.SpiderEyesRenderer;
-import net.minecraft.client.render.entity.model.EntityModelBase;
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.interfaces.NetherMob;
 

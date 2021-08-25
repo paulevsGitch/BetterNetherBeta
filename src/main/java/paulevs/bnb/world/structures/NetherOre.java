@@ -1,12 +1,12 @@
 package paulevs.bnb.world.structures;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.MathHelper;
 import paulevs.bnb.util.BlockState;
+
+import java.util.Random;
 
 public class NetherOre extends Structure {
 	private final BlockState ore;

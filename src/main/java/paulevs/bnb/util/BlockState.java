@@ -1,12 +1,12 @@
 package paulevs.bnb.util;
 
-import java.util.Locale;
-
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;
 import paulevs.bnb.block.MultiBlock;
 import paulevs.bnb.interfaces.BlockEnum;
+
+import java.util.Locale;
 
 public class BlockState {
 	private int tile;

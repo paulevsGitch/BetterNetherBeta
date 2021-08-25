@@ -1,7 +1,5 @@
 package paulevs.bnb.block;
 
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockBase;
@@ -9,6 +7,8 @@ import net.minecraft.block.Stairs;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.level.Level;
 import net.minecraft.level.TileView;
+
+import java.util.Random;
 
 public class NetherStairsBlock extends Stairs {
 	private final BlockBase source;

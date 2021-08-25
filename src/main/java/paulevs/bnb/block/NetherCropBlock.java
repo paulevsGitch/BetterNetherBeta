@@ -1,7 +1,5 @@
 package paulevs.bnb.block;
 
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
@@ -16,6 +14,8 @@ import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.interfaces.Bonemealable;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.BlockUtil;
+
+import java.util.Random;
 
 public class NetherCropBlock extends NetherBlock implements BlockItemProvider, Bonemealable {
 	private final String name;

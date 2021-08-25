@@ -1,14 +1,7 @@
 package paulevs.bnb.listeners;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.BiFunction;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import net.minecraft.block.BlockBase;
 import net.modificationstation.stationloader.api.common.event.block.BlockRegister;
 import paulevs.bnb.BetterNetherBeta;
@@ -37,6 +30,12 @@ import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.interfaces.QuadFunction;
 import paulevs.bnb.interfaces.TriFunction;
 import paulevs.bnb.util.BlockUtil;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.BiFunction;
 
 public class BlockListener implements BlockRegister {
 	private static final Map<String, BlockBase> BLOCKS = Maps.newHashMap();

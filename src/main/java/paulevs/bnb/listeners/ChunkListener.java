@@ -1,7 +1,5 @@
 package paulevs.bnb.listeners;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import net.minecraft.level.biome.Biome;
@@ -15,6 +13,8 @@ import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.MHelper;
 import paulevs.bnb.world.biome.NetherBiome;
 import paulevs.bnb.world.structures.NetherStructures;
+
+import java.util.Random;
 
 public class ChunkListener implements ChunkPopulator {
 	@Override

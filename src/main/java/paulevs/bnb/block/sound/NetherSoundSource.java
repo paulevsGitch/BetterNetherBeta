@@ -1,15 +1,14 @@
 package paulevs.bnb.block.sound;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import net.minecraft.class_267;
+import paulevs.bnb.util.ResourceUtil;
+
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
-import net.minecraft.class_267;
-import paulevs.bnb.util.ResourceUtil;
 
 public class NetherSoundSource {
 	private final Map<String, List<class_267>> sounds = Maps.newHashMap();

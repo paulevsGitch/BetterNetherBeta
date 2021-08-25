@@ -1,16 +1,15 @@
 package paulevs.bnb.mixin.client;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.dimension.Nether;
 import net.minecraft.sortme.GameRenderer;
 import net.minecraft.util.maths.MathHelper;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.particles.BiomeParticle;
 import paulevs.bnb.util.ClientUtil;
 import paulevs.bnb.world.biome.NetherBiome;

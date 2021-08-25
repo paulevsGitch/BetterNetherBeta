@@ -1,16 +1,15 @@
 package paulevs.bnb;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import net.fabricmc.loader.api.FabricLoader;
+import paulevs.bnb.util.JsonUtil;
+
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Supplier;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-
-import net.fabricmc.loader.api.FabricLoader;
-import paulevs.bnb.util.JsonUtil;
 
 public class JsonConfig {
 	private final String name;

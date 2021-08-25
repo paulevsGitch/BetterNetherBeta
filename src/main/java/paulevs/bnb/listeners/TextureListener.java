@@ -1,14 +1,8 @@
 package paulevs.bnb.listeners;
 
-import java.io.DataInputStream;
-import java.io.InputStream;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
 import net.modificationstation.stationloader.api.client.event.texture.TextureRegister;
 import net.modificationstation.stationloader.api.client.texture.TextureFactory;
 import net.modificationstation.stationloader.api.client.texture.TextureRegistry;
@@ -16,6 +10,11 @@ import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.JsonUtil;
 import paulevs.bnb.util.ResourceUtil;
+
+import java.io.DataInputStream;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
 
 public class TextureListener implements TextureRegister {
 	private static final Map<String, Integer> BLOCK_TEXTURES = Maps.newHashMap();

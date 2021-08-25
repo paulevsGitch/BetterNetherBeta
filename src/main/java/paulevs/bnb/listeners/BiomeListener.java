@@ -1,10 +1,6 @@
 package paulevs.bnb.listeners;
 
-import java.util.Map;
-import java.util.function.Function;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.level.biome.Biome;
 import net.modificationstation.stationloader.api.common.event.level.biome.BiomeRegister;
 import paulevs.bnb.world.NetherBiomeSource;
@@ -12,6 +8,9 @@ import paulevs.bnb.world.biome.CrimsonForest;
 import paulevs.bnb.world.biome.PoisonForest;
 import paulevs.bnb.world.biome.SoulValley;
 import paulevs.bnb.world.biome.WarpedForest;
+
+import java.util.Map;
+import java.util.function.Function;
 
 public class BiomeListener implements BiomeRegister {
 	private static final Map<String, Biome> BIOMES = Maps.newHashMap();

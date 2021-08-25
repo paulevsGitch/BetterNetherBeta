@@ -1,25 +1,23 @@
 package paulevs.bnb.mixin.common;
 
-import java.util.List;
-import java.util.Map;
-
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import net.minecraft.entity.Living;
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.level.Level;
 import net.minecraft.util.io.CompoundTag;
 import net.minecraft.util.io.ListTag;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.effects.AdditionalHealthEffect;
 import paulevs.bnb.effects.StatusEffect;
 import paulevs.bnb.effects.StatusEffects;
 import paulevs.bnb.interfaces.StatusEffectable;
+
+import java.util.List;
+import java.util.Map;
 
 @Mixin(PlayerBase.class)
 public class PlayerBaseMixin extends Living implements StatusEffectable {

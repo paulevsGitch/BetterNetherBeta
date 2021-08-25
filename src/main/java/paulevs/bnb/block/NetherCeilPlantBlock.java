@@ -1,7 +1,5 @@
 package paulevs.bnb.block;
 
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockBase;
@@ -14,6 +12,8 @@ import net.modificationstation.stationloader.api.common.block.BlockItemProvider;
 import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTileEntityWithMeta;
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.interfaces.BlockEnum;
+
+import java.util.Random;
 
 public class NetherCeilPlantBlock extends MultiBlock implements BlockItemProvider {
 	public <T extends BlockEnum> NetherCeilPlantBlock(String name, int id, Class<T> type) {

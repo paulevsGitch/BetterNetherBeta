@@ -3,7 +3,7 @@ package paulevs.bnb.block;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.PlaceableTileEntity;
-import net.minecraft.level.Level;
+import net.minecraft.level.TileView;
 import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTileEntityWithMeta;
 import paulevs.bnb.block.types.NetherVines;
 import paulevs.bnb.interfaces.BlockWithLight;
@@ -22,24 +22,6 @@ public class NetherVineBlock extends NetherCeilPlantBlock implements BlockWithLi
 	}
 	
 	@Override
-	protected void tick(Level level, int x, int y, int z) {
-		super.tick(level, x, y, z);
-		int id = level.getTileId(x, y, z);
-		int meta = level.getTileMeta(x, y, z);
-		if (id == this.id) {
-			boolean isNotSameDown = level.getTileId(x, y - 1, z) != this.id;
-			boolean bottom = isNotSameDown || (level.getTileId(x, y + 1, z) != this.id && isNotSameDown);
-			boolean zeroMeta = (meta & 1) == 0;
-			if (!zeroMeta && bottom) {
-				level.setTileMeta(x, y, z, meta & 0b11111110);
-			}
-			else if (zeroMeta && !bottom) {
-				level.setTileMeta(x, y, z, meta | 1);
-			}
-		}
-	}
-	
-	@Override
 	public PlaceableTileEntity getBlockItem(int i) {
 		return new PlaceableTileEntityWithMeta(i) {
 			@Environment(EnvType.CLIENT)
@@ -53,5 +35,15 @@ public class NetherVineBlock extends NetherCeilPlantBlock implements BlockWithLi
 	@Override
 	public float getEmissionIntensity() {
 		return 2F;
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public int method_1626(TileView world, int x, int y, int z, int side) {
+		int meta = world.getTileMeta(x, y, z);
+		String name = variants[clampMeta(meta)].getTexture(side);
+		if (world.getTileId(x, y - 1, z) != id) {
+			name += "_bottom";
+		}
+		return TextureListener.getBlockTexture(name);
 	}
 }

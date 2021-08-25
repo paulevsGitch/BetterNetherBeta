@@ -1,12 +1,12 @@
 package paulevs.bnb.world.biome;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockBase;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.MHelper;
 import paulevs.bnb.world.structures.NetherStructures;
+
+import java.util.Random;
 
 public class SoulValley extends NetherBiome {
 	private BlockState soilBlock = new BlockState(BlockListener.getBlockID("soul_soil"));

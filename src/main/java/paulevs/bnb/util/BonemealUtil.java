@@ -1,10 +1,6 @@
 package paulevs.bnb.util;
 
-import java.util.Map;
-import java.util.Random;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.MathHelper;
@@ -14,6 +10,9 @@ import paulevs.bnb.block.types.NetherGrass;
 import paulevs.bnb.block.types.NetherTerrain;
 import paulevs.bnb.block.types.SoulGrass;
 import paulevs.bnb.listeners.BlockListener;
+
+import java.util.Map;
+import java.util.Random;
 
 public class BonemealUtil {
 	private static final Map<BlockState, WeightedList<BlockState>> GRASSES = Maps.newHashMap();

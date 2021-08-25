@@ -1,9 +1,9 @@
 package paulevs.bnb.effects;
 
-import java.util.List;
-
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.util.io.CompoundTag;
+
+import java.util.List;
 
 public abstract class StatusEffect {
 	private int maxTime;

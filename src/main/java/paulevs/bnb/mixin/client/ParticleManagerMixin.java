@@ -1,14 +1,5 @@
 package paulevs.bnb.mixin.client;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.texture.TextureManager;
@@ -16,8 +7,16 @@ import net.minecraft.entity.EntityBase;
 import net.minecraft.entity.ParticleBase;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.MathHelper;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.particles.BiomeParticle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mixin(ParticleManager.class)
 public class ParticleManagerMixin {

@@ -1,16 +1,15 @@
 package paulevs.bnb.mixin.client;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.InGame;
+import net.minecraft.client.util.ScreenScaler;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.InGame;
-import net.minecraft.client.util.ScreenScaler;
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.effects.AdditionalHealthEffect;
 import paulevs.bnb.effects.StatusEffect;

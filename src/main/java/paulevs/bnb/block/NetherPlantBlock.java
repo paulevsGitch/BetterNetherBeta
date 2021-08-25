@@ -1,7 +1,5 @@
 package paulevs.bnb.block;
 
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
@@ -23,6 +21,8 @@ import paulevs.bnb.listeners.ModelListener;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.ItemUtil;
+
+import java.util.Random;
 
 public class NetherPlantBlock extends MultiBlock implements BlockModelProvider, BlockWithLight {
 	private final boolean useShears;

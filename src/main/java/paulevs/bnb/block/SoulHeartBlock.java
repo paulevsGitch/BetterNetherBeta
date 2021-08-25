@@ -1,7 +1,5 @@
 package paulevs.bnb.block;
 
-import java.util.Random;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemInstance;
@@ -10,6 +8,8 @@ import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.listeners.ItemListener;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.MHelper;
+
+import java.util.Random;
 
 public class SoulHeartBlock extends NetherCropBlock implements BlockWithLight {
 	public SoulHeartBlock(String name, int id) {

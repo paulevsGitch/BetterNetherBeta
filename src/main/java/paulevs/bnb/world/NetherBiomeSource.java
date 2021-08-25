@@ -1,14 +1,13 @@
 package paulevs.bnb.world;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.gen.BiomeSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class NetherBiomeSource extends BiomeSource {
 	private static final List<Biome> BIOMES = Lists.newArrayList();

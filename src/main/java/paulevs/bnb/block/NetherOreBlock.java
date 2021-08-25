@@ -1,10 +1,10 @@
 package paulevs.bnb.block;
 
-import java.util.Random;
-
 import net.minecraft.block.material.Material;
 import paulevs.bnb.block.types.NetherOre;
 import paulevs.bnb.util.MHelper;
+
+import java.util.Random;
 
 public class NetherOreBlock extends MultiBlock {
 	public NetherOreBlock(String name, int id) {

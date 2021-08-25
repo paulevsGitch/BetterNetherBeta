@@ -1,10 +1,6 @@
 package paulevs.bnb.world.biome;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.BlockBase;
 import net.minecraft.entity.EntityEntry;
 import net.minecraft.entity.monster.Ghast;
@@ -15,6 +11,9 @@ import net.minecraft.util.maths.Vec3f;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.ClientUtil;
 import paulevs.bnb.util.WeightedList;
+
+import java.util.List;
+import java.util.Random;
 
 public class NetherBiome extends Biome {
 	private List<Structure> trees = Lists.newArrayList();

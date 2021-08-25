@@ -1,16 +1,15 @@
 package paulevs.bnb.world;
 
-import java.awt.Point;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.level.biome.Biome;
 import net.minecraft.util.maths.MathHelper;
 import paulevs.bnb.noise.OpenSimplexNoise;
 import paulevs.bnb.util.MHelper;
+
+import java.awt.Point;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class BiomeMap {
 	private static final Random RANDOM = new Random();

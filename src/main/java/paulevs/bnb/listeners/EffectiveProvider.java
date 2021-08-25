@@ -1,7 +1,5 @@
 package paulevs.bnb.listeners;
 
-import java.util.List;
-
 import net.minecraft.block.BlockBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.tool.Hatchet;
@@ -10,6 +8,8 @@ import net.minecraft.item.tool.ToolBase;
 import net.minecraft.item.tool.ToolMaterial;
 import net.modificationstation.stationloader.api.common.event.item.tool.EffectiveBlocksProvider;
 import paulevs.bnb.block.material.NetherMaterials;
+
+import java.util.List;
 
 public class EffectiveProvider implements EffectiveBlocksProvider {
 	@Override

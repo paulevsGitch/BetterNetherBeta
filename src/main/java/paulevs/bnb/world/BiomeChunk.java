@@ -1,9 +1,9 @@
 package paulevs.bnb.world;
 
+import net.minecraft.level.biome.Biome;
+
 import java.util.List;
 import java.util.Random;
-
-import net.minecraft.level.biome.Biome;
 
 public class BiomeChunk {
 	protected static final int WIDTH = 16;

@@ -1,9 +1,9 @@
 package paulevs.bnb.util;
 
-import java.util.Random;
-
 import net.minecraft.util.maths.Vec3f;
 import paulevs.bnb.noise.OpenSimplexNoise;
+
+import java.util.Random;
 
 public class MHelper {
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(0);

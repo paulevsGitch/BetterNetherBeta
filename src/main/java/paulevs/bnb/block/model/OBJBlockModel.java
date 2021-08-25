@@ -1,12 +1,5 @@
 package paulevs.bnb.block.model;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.client.render.QuadPoint;
 import net.minecraft.util.maths.MathHelper;
 import net.minecraft.util.maths.Vec3f;
@@ -19,6 +12,13 @@ import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.MHelper;
 import paulevs.bnb.util.ResourceUtil;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OBJBlockModel implements CustomModel {
 	private OBJCuboidRenderer[][] breaking;
