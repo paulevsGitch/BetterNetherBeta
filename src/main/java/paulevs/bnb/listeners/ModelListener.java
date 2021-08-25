@@ -32,9 +32,15 @@ public class ModelListener implements ModelRegister {
 			makeRotated("cocoon_warped", model.setTextures("cocoon_warped"));
 			makeRotated("cocoon_poison", model.setTextures("cocoon_poison"));
 			
+			OBJBlockModel cross = new OBJBlockModel("/assets/bnb/models/block/cross_no_dist.obj", 16, 8, 0, 8, BlockFaces.UP);
 			model = new OBJBlockModel("/assets/bnb/models/block/fluffy_grass.obj", 16, 8, 0, 8, BlockFaces.UP);
 			for (NetherGrass plant: NetherGrass.values()) {
-				BLOCK_MODELS.put(plant.getName(), model.clone().setTextures(plant.getTexture(0)));
+				if (plant.isCross()) {
+					BLOCK_MODELS.put(plant.getName(), cross.clone().setTextures(plant.getTexture(0)));
+				}
+				else {
+					BLOCK_MODELS.put(plant.getName(), model.clone().setTextures(plant.getTexture(0)));
+				}
 			}
 			for (SoulGrass grass: SoulGrass.values()) {
 				BLOCK_MODELS.put(grass.getName(), model.clone().setTextures(grass.getTexture(0)));
@@ -51,6 +57,13 @@ public class ModelListener implements ModelRegister {
 				String fur = leaves.getName().substring(0, leaves.getName().indexOf('_')) + "_outer_leaves";
 				BLOCK_MODELS.put(leaves.getName(), model.clone().setTextures(leaves.getTexture(0), fur));
 			}
+			
+			for (int i = 0; i < 3; i++) {
+				model = new OBJBlockModel("/assets/bnb/models/block/bulbine_stem_" + i + ".obj", 16, 8, 0, 8, BlockFaces.UP);
+				makeRotated("bulbine_stem_" + i, model.setTextures("bulbine_stem", "bulbine_lanterns"));
+			}
+			model = new OBJBlockModel("/assets/bnb/models/block/bulbine_stem_top.obj", 16, 8, 0, 8, BlockFaces.UP);
+			makeRotated("bulbine_stem_top", model.setTextures("bulbine_stem_top", "bulbine_lanterns"));
 		}
 	}
 	

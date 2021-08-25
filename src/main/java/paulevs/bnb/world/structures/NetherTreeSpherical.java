@@ -51,7 +51,7 @@ public class NetherTreeSpherical extends Structure {
 		for (int i = 0; i < height; i++) {
 			int py = y + i;
 			if (canReplaceRoot(level.getTileId(x, py, z))) {
-				log.setBlock(level, x, py, z);
+				log.setBlockFast(level, x, py, z);
 			}
 		}
 		
@@ -64,7 +64,7 @@ public class NetherTreeSpherical extends Structure {
 				for (int j = -1; j < h; j++) {
 					int py = y + j;
 					if (canReplaceRoot(level.getTileId(px, py, pz))) {
-						log.setBlock(level, px, py, pz);
+						log.setBlockFast(level, px, py, pz);
 					}
 				}
 			}
@@ -79,7 +79,7 @@ public class NetherTreeSpherical extends Structure {
 				for (int j = -1; j < h; j++) {
 					int py = y - j + height;
 					if (canReplaceRoot(level.getTileId(px, py, pz))) {
-						log.setBlock(level, px, py, pz);
+						log.setBlockFast(level, px, py, pz);
 					}
 				}
 			}
@@ -96,7 +96,7 @@ public class NetherTreeSpherical extends Structure {
 						if (canReplaceRoot(level.getTileId(px, py, pz))) {
 							int tile = level.getTileId(px, py - 1, pz);
 							if ((tile == log.getBlockID() || BlockUtil.isTerrain(tile)) && isLogNear(level, px, py, pz)) {
-								log.setBlock(level, px, py, pz);
+								log.setBlockFast(level, px, py, pz);
 							}
 						}
 					}
@@ -144,16 +144,16 @@ public class NetherTreeSpherical extends Structure {
 								int py = y + k;
 								if (canReplaceLeaves(level.getTileId(px, py, pz))) {
 									if (random.nextInt(16) == 0) {
-										lantern.setBlock(level, px, py, pz);
+										lantern.setBlockFast(level, px, py, pz);
 									}
 									else {
-										leaves.setBlock(level, px, py, pz);
+										leaves.setBlockFast(level, px, py, pz);
 									}
 									if (random.nextBoolean() && canReplaceLeaves(level.getTileId(px, py - 1, pz))) {
 										int scale = (int) ((radius - MathHelper.sqrt(d)) * 2.5F);
 										int length = 1 + scale + random.nextInt(3);
 										for (int n = 1; n <= length && canReplaceLeaves(level.getTileId(px, py - n, pz)); n++) {
-											fur.setBlock(level, px, py - n, pz);
+											fur.setBlockFast(level, px, py - n, pz);
 										}
 									}
 								}

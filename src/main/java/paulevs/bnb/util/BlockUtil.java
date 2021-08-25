@@ -2,6 +2,7 @@ package paulevs.bnb.util;
 
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
+import net.minecraft.level.chunk.Chunk;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.SoulSoilBlock;
 
@@ -88,5 +89,15 @@ public class BlockUtil {
 	
 	public static boolean isSideZ(int side) {
 		return side == 4 || side == 5;
+	}
+	
+	public static void fastTilePlace(Level level, int x, int y, int z, int id, int meta) {
+		Chunk chunk = level.getChunk(x, z);
+		fastTilePlace(chunk, x & 15, y, z & 15, id, meta);
+	}
+	
+	public static void fastTilePlace(Chunk chunk, int x, int y, int z, int id, int meta) {
+		chunk.tiles[x << 11 | z << 7 | y] = (byte) id;
+		chunk.field_957.method_1704(x, y, z, meta);
 	}
 }

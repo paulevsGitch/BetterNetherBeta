@@ -43,6 +43,15 @@ public class NetherTerrainBlock extends MultiBlock implements BlockWithLight {
 	}
 	
 	@Override
+	public int getTextureForSide(int side, int meta) {
+		if (meta == NetherTerrain.CORRUPTED_NYLIUM.getMeta() && BlockUtil.isTopSide(side)) {
+			String name = variants[clampMeta(meta)].getTexture(side) + "_0";
+			return TextureListener.getBlockTexture(name);
+		}
+		return super.getTextureForSide(side, meta);
+	}
+	
+	@Override
 	public float getEmissionIntensity() {
 		return 2;
 	}

@@ -53,12 +53,20 @@ public class BlockState {
 		level.setTileWithMetadata(x, y, z, tile, meta);
 	}
 	
+	public void setBlockFast(Level level, int x, int y, int z) {
+		BlockUtil.fastTilePlace(level, x, y, z, tile, meta);
+	}
+	
 	public void setBlockAndUpdate(Level level, int x, int y, int z) {
 		level.placeBlockWithMetaData(x, y, z, tile, meta);
 	}
 	
 	public void setBlock(Chunk chunk, int x, int y, int z) {
 		chunk.setTileWithMetadata(x, y, z, tile, meta);
+	}
+	
+	public void setBlockFast(Chunk chunk, int x, int y, int z) {
+		BlockUtil.fastTilePlace(chunk, x, y, z, tile, meta);
 	}
 	
 	public BlockBase getBlock() {

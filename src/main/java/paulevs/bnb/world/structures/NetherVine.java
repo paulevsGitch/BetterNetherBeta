@@ -27,7 +27,7 @@ public class NetherVine extends Structure {
 			}
 			
 			if (level.getTileId(x, py - 1, z) == 0) {
-				vine.setBlock(level, x, py, z);
+				vine.setBlockFast(level, x, py, z);
 			}
 			else {
 				return true;

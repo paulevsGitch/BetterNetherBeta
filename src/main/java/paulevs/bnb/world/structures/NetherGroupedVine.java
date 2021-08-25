@@ -6,6 +6,7 @@ import paulevs.bnb.util.BlockState;
 
 import java.util.Random;
 
+@Deprecated
 public class NetherGroupedVine extends Structure {
 	private final BlockState vine;
 	
@@ -39,7 +40,7 @@ public class NetherGroupedVine extends Structure {
 			}
 			
 			if (level.getTileId(x, py - 1, z) == 0) {
-				vine.setBlock(level, x, py, z);
+				vine.setBlockFast(level, x, py, z);
 			}
 			else {
 				return;

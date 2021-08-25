@@ -3,6 +3,7 @@ package paulevs.bnb.world.biome;
 import paulevs.bnb.block.types.NetherTerrain;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
+import paulevs.bnb.world.structures.NetherStructures;
 
 import java.util.Random;
 
@@ -11,9 +12,10 @@ public class CorruptedLands extends NetherBiome {
 		super(name);
 		this.setFogColor("1c1323");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrain.CORRUPTED_NYLIUM));
-		this.setMaxTreeCount(2);
-		this.setMaxPlantCount(2);
-		this.setMaxCeilPlantCount(2);
+		this.addPlant(NetherStructures.BULBINE, 0.1F);
+		this.addPlant(NetherStructures.VIOLEUM, 0.3F);
+		this.addPlant(NetherStructures.SHATTERED_GRASS, 1F);
+		this.setMaxPlantCount(8);
 		this.setFire(false);
 	}
 	

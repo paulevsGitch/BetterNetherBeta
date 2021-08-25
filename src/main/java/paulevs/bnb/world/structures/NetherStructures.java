@@ -9,6 +9,7 @@ import paulevs.bnb.block.types.NetherTreeFur;
 import paulevs.bnb.block.types.NetherVines;
 import paulevs.bnb.block.types.NetherWood;
 import paulevs.bnb.block.types.SoulGrass;
+import paulevs.bnb.block.types.TallGlowNetherPlants;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.RangedBlockState;
@@ -51,6 +52,13 @@ public class NetherStructures {
 	public static final Structure LONGWEED = makeGrass(NetherGrass.LONGWEED);
 	public static final Structure JELLYSHROOM = makeGrass(NetherGrass.JELLYSHROOM);
 	public static final Structure TAILGRASS = makeGrass(NetherGrass.TAILGRASS);
+	
+	public static final Structure VIOLEUM = makeGrass(NetherGrass.VIOLEUM);
+	public static final Structure SHATTERED_GRASS = makeGrass(NetherGrass.SHATTERED_GRASS);
+	
+	public static final Structure BULBINE = new TallPlant(new BlockState(BlockListener.getBlock("tall_glow_nether_plant"),
+		TallGlowNetherPlants.BULBINE
+	), 3, 5F);
 	
 	public static final Structure SOUL_BULBITE = makeGrass(SoulGrass.SOUL_BULBITE);
 	public static final Structure SOUL_HEART = new BlockScatter(new RangedBlockState(BlockListener.getBlock("soul_heart"), 3), 2F);

@@ -34,14 +34,14 @@ public class ChunkListener implements ChunkPopulator {
 							if (tile == BlockBase.NETHERRACK.id || tile == BlockBase.SOUL_SAND.id || tile == BlockBase.GRAVEL.id) {
 								tile = chunk.getTileId(x, y + depth, z);
 								if (tile == 0 || BlockBase.BY_ID[tile] == null || !BlockBase.BY_ID[tile].isFullOpaque()) {
-									top.setBlock(chunk, x, y, z);
+									top.setBlockFast(chunk, x, y, z);
 								}
 								else if (tile != BlockBase.NETHERRACK.id) {
-									chunk.setTileWithMetadata(x, y, z, BlockBase.NETHERRACK.id, 0);
+									BlockUtil.fastTilePlace(chunk, x, y, z, BlockBase.NETHERRACK.id, 0);
 								}
 							}
 							else if (!fire && tile == BlockBase.FIRE.id) {
-								chunk.setTileWithMetadata(x, y, z, 0, 0);
+								BlockUtil.fastTilePlace(chunk, x, y, z, 0, 0);
 							}
 						}
 					}
@@ -55,7 +55,6 @@ public class ChunkListener implements ChunkPopulator {
 				int countCeilPlants = bio.getMaxCeilPlantCount();
 				
 				Structure structure;
-				
 				for (int sect = 0; sect < 8; sect++) {
 					int sy = sect << 4;
 					int minY = sect < 2 ? 16 : 0;

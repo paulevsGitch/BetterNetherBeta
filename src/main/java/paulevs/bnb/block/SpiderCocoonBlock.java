@@ -17,6 +17,7 @@ import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.block.tileentity.CocoonSpawner;
 import paulevs.bnb.listeners.ModelListener;
 import paulevs.bnb.listeners.TextureListener;
+import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.MHelper;
 
 public class SpiderCocoonBlock extends BlockWithEntity implements BlockModelProvider, BlockItemProvider {
@@ -91,5 +92,10 @@ public class SpiderCocoonBlock extends BlockWithEntity implements BlockModelProv
 	@Environment(EnvType.CLIENT)
 	public int method_1621() {
 		return -1;
+	}
+	
+	@Override
+	public boolean canPlaceAt(Level level, int x, int y, int z) {
+		return BlockUtil.isTerrain(level.getTileId(x, y - 1, z));
 	}
 }

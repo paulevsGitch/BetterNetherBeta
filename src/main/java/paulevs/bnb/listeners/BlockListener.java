@@ -24,8 +24,10 @@ import paulevs.bnb.block.SoulSoilBlock;
 import paulevs.bnb.block.SoulSpireBlock;
 import paulevs.bnb.block.SoulSpirePlantBlock;
 import paulevs.bnb.block.SpiderCocoonBlock;
+import paulevs.bnb.block.TallNetherPlant;
 import paulevs.bnb.block.types.NetherPlanks;
 import paulevs.bnb.block.types.NetherrackBricks;
+import paulevs.bnb.block.types.TallGlowNetherPlants;
 import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.interfaces.QuadFunction;
 import paulevs.bnb.interfaces.TriFunction;
@@ -70,6 +72,7 @@ public class BlockListener implements BlockRegister {
 		register("soul_spire", SoulSpirePlantBlock::new);
 		register("soul_spire_block", SoulSpireBlock::new);
 		register("soul_grass", SoulGrassBlock::new);
+		register("tall_glow_nether_plant", TallNetherPlant::new, TallGlowNetherPlants.class, 0.75F);
 		register("soul_heart", SoulHeartBlock::new);
 		
 		register("spider_cocoon", SpiderCocoonBlock::new);
@@ -113,6 +116,12 @@ public class BlockListener implements BlockRegister {
 	
 	private static <B extends BlockBase, S extends BlockBase> void register(String name, QuadFunction<String, Integer, S, Integer, B> init, S source, int meta) {
 		BlockBase block = init.apply(name, getID(name), source, meta);
+		BLOCKS.put(name, block);
+		BLOCKS_TAB.add(block);
+	}
+	
+	private static <B extends BlockBase, S extends BlockEnum> void register(String name, QuadFunction<String, Integer, Class<S>, Float, B> init, Class<S> type, float light) {
+		BlockBase block = init.apply(name, getID(name), type, light);
 		BLOCKS.put(name, block);
 		BLOCKS_TAB.add(block);
 	}
