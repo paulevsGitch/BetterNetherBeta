@@ -50,7 +50,7 @@ public class PlayerBaseMixin extends Living implements StatusEffectable {
 		bnb_toRemove.clear();
 	}
 	
-	@Inject(method = "addHealth", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "addHealth(I)V", at = @At("HEAD"), cancellable = true)
 	private void bnb_addHealth(int amount, CallbackInfo info) {
 		if (bnb_effects.containsKey("additional_health")) {
 			this.health += amount;

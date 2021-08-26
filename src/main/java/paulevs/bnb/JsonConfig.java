@@ -33,7 +33,7 @@ public class JsonConfig {
 	}
 	
 	private File getFile() {
-		return new File(FabricLoader.getInstance().getConfigDir().toString(), BetterNetherBeta.MOD_ID + "/" + name + ".json");
+		return new File(FabricLoader.getInstance().getConfigDirectory().toString(), BetterNetherBeta.MOD_ID + "/" + name + ".json");
 	}
 	
 	private JsonElement get(String path, Supplier<JsonElement> def) {
