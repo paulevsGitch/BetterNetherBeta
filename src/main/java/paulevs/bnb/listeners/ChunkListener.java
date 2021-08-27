@@ -15,6 +15,7 @@ import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.ClientUtil;
 import paulevs.bnb.world.biome.NetherBiome;
+import paulevs.bnb.world.structures.NetherStructures;
 
 import java.util.Queue;
 import java.util.Random;
@@ -61,6 +62,20 @@ public class ChunkListener implements ChunkPopulator {
 			
 			if (biome instanceof NetherBiome) {
 				NetherBiome bio = (NetherBiome) biome;
+				
+				for (int sect = 0; sect < 8; sect++) {
+					int sy = sect << 4;
+					int count = random.nextInt(4);
+					for (int i = 0; i < count; i++) {
+						int px = random.nextInt(16) + sx;
+						int pz = random.nextInt(16) + sz;
+						int py = random.nextInt(16) | sy;
+						int tile = level.getTileId(px, py, pz);
+						if (tile == BlockBase.NETHERRACK.id) {
+							NetherStructures.ORICHALCUM_ORE.generate(level, random, px, py, pz);
+						}
+					}
+				}
 				
 				if (featureGenerator == null || !featureGenerator.isAlive()) {
 					featureGenerator = new FeatureGenerationThread(random);

@@ -19,21 +19,21 @@ public class NetherOre extends Structure {
 
 	@Override
 	public boolean generate(Level level, Random rand, int x, int y, int z) {
-		float var6 = rand.nextFloat() * (float) Math.PI;
-		double var7 = ((float) (x + 8) + MathHelper.sin(var6) * (float) size / 8.0F);
-		double var9 = ((float) (x + 8) - MathHelper.sin(var6) * (float) size / 8.0F);
-		double var11 = ((float) (z + 8) + MathHelper.cos(var6) * (float) size / 8.0F);
-		double var13 = ((float) (z + 8) - MathHelper.cos(var6) * (float) size / 8.0F);
+		float angle = rand.nextFloat() * (float) Math.PI;
+		double var7 = (x + 8 + MathHelper.sin(angle) * size / 8.0F);
+		double var9 = (x + 8 - MathHelper.sin(angle) * size / 8.0F);
+		double var11 = (z + 8 + MathHelper.cos(angle) * size / 8.0F);
+		double var13 = (z + 8 - MathHelper.cos(angle) * size / 8.0F);
 		double var15 = (y + rand.nextInt(3) + 2);
 		double var17 = (y + rand.nextInt(3) + 2);
 
-		for (int var19 = 0; var19 <= size; ++var19) {
-			double var20 = var7 + (var9 - var7) * (double) var19 / (double) size;
-			double var22 = var15 + (var17 - var15) * (double) var19 / (double) size;
-			double var24 = var11 + (var13 - var11) * (double) var19 / (double) size;
+		for (int i = 0; i <= size; i++) {
+			double var20 = var7 + (var9 - var7) * (double) i / (double) size;
+			double var22 = var15 + (var17 - var15) * (double) i / (double) size;
+			double var24 = var11 + (var13 - var11) * (double) i / (double) size;
 			double var26 = rand.nextDouble() * (double) size / 16.0;
-			double var28 = (double) (MathHelper.sin((float) var19 * (float) Math.PI / (float) size) + 1.0F) * var26 + 1.0;
-			double var30 = (double) (MathHelper.sin((float) var19 * (float) Math.PI / (float) size) + 1.0F) * var26 + 1.0;
+			double var28 = (double) (MathHelper.sin((float) i * (float) Math.PI / (float) size) + 1.0F) * var26 + 1.0;
+			double var30 = (double) (MathHelper.sin((float) i * (float) Math.PI / (float) size) + 1.0F) * var26 + 1.0;
 			int mixX = MathHelper.floor(var20 - var28 / 2.0);
 			int minY = MathHelper.floor(var22 - var30 / 2.0);
 			int minZ = MathHelper.floor(var24 - var28 / 2.0);
@@ -52,7 +52,9 @@ public class NetherOre extends Structure {
 							for (int pz = minZ; pz <= maxZ; ++pz) {
 								double pz2 = ((double) pz + 0.5D - var24) / (var28 / 2.0);
 								if (px2 + py2 + pz2 < 1.0 && level.getTileId(px, py, pz) == BlockBase.NETHERRACK.id) {
-									ore.setBlockFast(level, px, py, pz);
+									if (level.getTileId(px, py + 1, pz) != 0) {
+										ore.setBlockFast(level, px, py, pz);
+									}
 								}
 							}
 						}
