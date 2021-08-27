@@ -2,6 +2,7 @@ package paulevs.bnb.mixin.client;
 
 import net.minecraft.block.BlockBase;
 import net.minecraft.block.Rail;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.QuadPoint;
 import net.minecraft.client.render.Tessellator;
@@ -143,6 +144,8 @@ public class TileRendererMixin {
 	private float field_53;
 	@Shadow
 	private float field_54;
+	@Shadow
+	private boolean field_85;
 	
 	/**
 	 * Destruction stage, if = -1 then normal block render, otherwise used as index
@@ -826,4 +829,172 @@ public class TileRendererMixin {
 			info.cancel();
 		}
 	}
+	
+	@Shadow
+	private float method_43(int i, int j, int k, Material arg) { return 0; }
+	
+	@Shadow
+	public void method_46(BlockBase arg, double d, double d1, double d2, int i) {}
+	
+	/*@Inject(method = "method_75", at = @At("HEAD"), cancellable = true)
+	private void bnb_fixFluidTexture(BlockBase arg, int i, int j, int k, CallbackInfoReturnable<Boolean> info) {
+		int texture = arg.getTextureForSide(0, 0);
+		TextureRegistry lastRegistry = TextureRegistry.currentRegistry();
+		Integer lastTex = lastRegistry == null ? 0 : lastRegistry.currentTexture();
+		int atlasID = texture >> 8;
+		if (atlasID != lastTex) {
+			Tessellator.INSTANCE.draw();
+			lastRegistry.bindAtlas(ClientUtil.getMinecraft().textureManager, atlasID);
+			Tessellator.INSTANCE.start();
+			texture &= 255;
+			
+			Tessellator var5 = Tessellator.INSTANCE;
+			int var6 = arg.getColor(this.field_82, i, j, k);
+			float var7 = (float)(var6 >> 16 & 255) / 255.0F;
+			float var8 = (float)(var6 >> 8 & 255) / 255.0F;
+			float var9 = (float)(var6 & 255) / 255.0F;
+			boolean var10 = arg.method_1618(this.field_82, i, j + 1, k, 1);
+			boolean var11 = arg.method_1618(this.field_82, i, j - 1, k, 0);
+			
+			boolean[] var12 = new boolean[] {
+				arg.method_1618(this.field_82, i, j, k - 1, 2),
+				arg.method_1618(this.field_82, i, j, k + 1, 3),
+				arg.method_1618(this.field_82, i - 1, j, k, 4),
+				arg.method_1618(this.field_82, i + 1, j, k, 5)
+			};
+			
+			if (!var10 && !var11 && !var12[0] && !var12[1] && !var12[2] && !var12[3]) {
+				info.setReturnValue(false);
+				return;
+			}
+			else {
+				int var13 = 0;
+				float var14 = 0.5F;
+				float var15 = 1.0F;
+				float var16 = 0.8F;
+				float var17 = 0.6F;
+				double var18 = 0.0D;
+				double var20 = 1.0D;
+				Material var22 = arg.material;
+				int var23 = this.field_82.getTileMeta(i, j, k);
+				float var24 = this.method_43(i, j, k, var22);
+				float var25 = this.method_43(i, j, k + 1, var22);
+				float var26 = this.method_43(i + 1, j, k + 1, var22);
+				float var27 = this.method_43(i + 1, j, k, var22);
+				if (this.field_85 || var10) {
+					var13 = 1;
+					float var29 = (float) Fluid.method_1223(this.field_82, i, j, k, var22);
+					int var30 = (texture & 15) << 4;
+					int var31 = texture & 240;
+					double var32 = ((double)var30 + 8.0D) / 256.0D;
+					double var34 = ((double)var31 + 8.0D) / 256.0D;
+					if (var29 < -999.0F) {
+						var29 = 0.0F;
+					} else {
+						var32 = (double)((float)(var30 + 16) / 256.0F);
+						var34 = (double)((float)(var31 + 16) / 256.0F);
+					}
+					
+					float var36 = MathHelper.sin(var29) * 8.0F / 256.0F;
+					float var37 = MathHelper.cos(var29) * 8.0F / 256.0F;
+					float var38 = arg.method_1604(this.field_82, i, j, k);
+					var5.colour(var15 * var38 * var7, var15 * var38 * var8, var15 * var38 * var9);
+					var5.vertex((double)(i + 0), (double)((float)j + var24), (double)(k + 0), var32 - (double)var37 - (double)var36, var34 - (double)var37 + (double)var36);
+					var5.vertex((double)(i + 0), (double)((float)j + var25), (double)(k + 1), var32 - (double)var37 + (double)var36, var34 + (double)var37 + (double)var36);
+					var5.vertex((double)(i + 1), (double)((float)j + var26), (double)(k + 1), var32 + (double)var37 + (double)var36, var34 + (double)var37 - (double)var36);
+					var5.vertex((double)(i + 1), (double)((float)j + var27), (double)(k + 0), var32 + (double)var37 - (double)var36, var34 - (double)var37 - (double)var36);
+				}
+				
+				if (this.field_85 || var11) {
+					float var28 = arg.method_1604(this.field_82, i, j - 1, k);
+					var5.colour(var14 * var28, var14 * var28, var14 * var28);
+					this.method_46(arg, (double)i, (double)j, (double)k, arg.getTextureForSide(0));
+					var13 = 1;
+				}
+				
+				for(int var28 = 0; var28 < 4; ++var28) {
+					int var29 = i;
+					int var31 = k;
+					if (var28 == 0) {
+						var31 = k - 1;
+					}
+					
+					if (var28 == 1) {
+						++var31;
+					}
+					
+					if (var28 == 2) {
+						var29 = i - 1;
+					}
+					
+					if (var28 == 3) {
+						++var29;
+					}
+					
+					int var32 = arg.getTextureForSide(var28 + 2, var23);
+					int var33 = (var32 & 15) << 4;
+					int var34 = var32 & 240;
+					
+					if (this.field_85 || var12[var28]) {
+						float var35, var39, var40, var36, var37, var38;
+						
+						if (var28 == 0) {
+							var35 = var24;
+							var36 = var27;
+							var37 = i;
+							var39 = (i + 1);
+							var38 = k;
+							var40 = k;
+						}
+						else if (var28 == 1) {
+							var35 = var26;
+							var36 = var25;
+							var37 = (i + 1);
+							var39 = i;
+							var38 = (k + 1);
+							var40 = (k + 1);
+						}
+						else if (var28 == 2) {
+							var35 = var25;
+							var36 = var24;
+							var37 = i;
+							var39 = i;
+							var38 = (k + 1);
+							var40 = k;
+						}
+						else {
+							var35 = var27;
+							var36 = var26;
+							var37 = (i + 1);
+							var39 = (i + 1);
+							var38 = k;
+							var40 = (k + 1);
+						}
+						
+						double var41 = ((float) (var33 + 0) / 256.0F);
+						double var43 = ((double) (var33 + 16) - 0.01D) / 256.0D;
+						double var45 = (((float) var34 + (1.0F - var35) * 16.0F) / 256.0F);
+						double var47 = (((float) var34 + (1.0F - var36) * 16.0F) / 256.0F);
+						double var49 = ((double) (var34 + 16) - 0.01D) / 256.0D;
+						float var51 = arg.method_1604(this.field_82, var29, j, var31);
+						if (var28 < 2) {
+							var51 = var51 * var16;
+						} else {
+							var51 = var51 * var17;
+						}
+						
+						var5.colour(var15 * var51 * var7, var15 * var51 * var8, var15 * var51 * var9);
+						var5.vertex(var37, (j + var35), var38, var41, var45);
+						var5.vertex(var39, (j + var36), var40, var43, var47);
+						var5.vertex(var39, (j + 0), var40, var43, var49);
+						var5.vertex(var37, (j + 0), var38, var41, var49);
+					}
+				}
+				
+				arg.minY = var18;
+				arg.maxY = var20;
+				info.setReturnValue(var13 > 0);
+			}
+		}
+	}*/
 }

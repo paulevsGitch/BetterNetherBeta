@@ -6,6 +6,7 @@
 	"mixins": [],
 	"server": [],
 	"client": [
+		"FlowingLavaTextureBinder2Mixin",
 		"SpiderEyesRendererMixin",
 		"TranslationStorageMixin",
 		"ParticleManagerMixin",

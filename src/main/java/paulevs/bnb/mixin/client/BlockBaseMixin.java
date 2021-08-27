@@ -27,10 +27,6 @@ public abstract class BlockBaseMixin {
 			info.setReturnValue(TextureListener.getBlockTexture("soul_sand"));
 			info.cancel();
 		}
-		/*else if (block == BlockBase.STILL_LAVA) {
-			info.setReturnValue(TextureListener.getBlockTexture("lava_still"));
-			info.cancel();
-		}*/
 	}
 	
 	@Inject(method = "method_1604", at = @At("HEAD"), cancellable = true)
