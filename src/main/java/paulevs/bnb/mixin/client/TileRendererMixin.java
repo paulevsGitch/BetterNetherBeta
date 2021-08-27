@@ -1,6 +1,7 @@
 package paulevs.bnb.mixin.client;
 
 import net.minecraft.block.BlockBase;
+import net.minecraft.block.Portal;
 import net.minecraft.block.Rail;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -158,25 +159,24 @@ public class TileRendererMixin {
 	 */
 	@Inject(method = "method_57", at = @At("HEAD"), cancellable = true)
 	private void renderBlock(BlockBase block, int x, int y, int z, CallbackInfoReturnable<Boolean> info) {
-		if (block instanceof BlockWithLight) {
+		if (block instanceof Portal) {
+			BlockUtil.setLightPass(true);
+			bnb_vanillaBlockRenderTyped(block, x, y, z, block.method_1621());
+			BlockUtil.setLightPass(false);
+			info.setReturnValue(true);
+		}
+		else if (block instanceof BlockWithLight) {
 			BlockUtil.setBreakStage(field_83);
 			if (field_83 > -1) {
 				boolean result = bnb_renderModel(block, x, y, z);
-				if (result) {
-					info.setReturnValue(true);
-				}
-				info.cancel();
+				info.setReturnValue(result);
 			}
 			else {
 				boolean result1 = bnb_renderModel(block, x, y, z);
 				BlockUtil.setLightPass(true);
 				boolean result2 = bnb_renderModel(block, x, y, z);
 				BlockUtil.setLightPass(false);
-				
-				if (result1 | result2) {
-					info.setReturnValue(true);
-				}
-				info.cancel();
+				info.setReturnValue(result1 | result2);
 			}
 		}
 		else if (block instanceof BlockModelProvider) {
@@ -186,11 +186,7 @@ public class TileRendererMixin {
 			if (model instanceof OBJBlockModel) {
 				BlockUtil.setBreakStage(field_83);
 				boolean result = bnb_renderModel(block, x, y, z);
-				
-				if (result) {
-					info.setReturnValue(true);
-				}
-				info.cancel();
+				info.setReturnValue(result);
 			}
 		}
 		else if (block instanceof RenderTypePerMeta) {
@@ -198,10 +194,7 @@ public class TileRendererMixin {
 			Level level = minecraft.level;
 			int renderType = ((RenderTypePerMeta) block).getTypeByMeta(level.getTileMeta(x, y, z));
 			boolean result = bnb_vanillaBlockRenderTyped(block, x, y, z, renderType);
-			if (result) {
-				info.setReturnValue(true);
-			}
-			info.cancel();
+			info.setReturnValue(result);
 		}
 	}
 	
