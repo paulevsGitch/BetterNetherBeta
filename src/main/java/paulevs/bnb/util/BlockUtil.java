@@ -92,8 +92,12 @@ public class BlockUtil {
 	}
 	
 	public static void fastTilePlace(Level level, int x, int y, int z, int id, int meta) {
-		Chunk chunk = level.getChunk(x, z);
-		fastTilePlace(chunk, x & 15, y, z & 15, id, meta);
+		if (y >= 0 && y < 128) {
+			Chunk chunk = level.getChunk(x, z);
+			if (chunk != null) {
+				fastTilePlace(chunk, x & 15, y, z & 15, id, meta);
+			}
+		}
 	}
 	
 	public static void fastTilePlace(Chunk chunk, int x, int y, int z, int id, int meta) {
