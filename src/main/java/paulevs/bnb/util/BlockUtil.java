@@ -104,4 +104,8 @@ public class BlockUtil {
 		chunk.tiles[x << 11 | z << 7 | y] = (byte) id;
 		chunk.field_957.method_1704(x, y, z, meta);
 	}
+	
+	public static void fastTilePlace(Chunk chunk, int x, int y, int z, int id) {
+		chunk.tiles[x << 11 | z << 7 | y] = (byte) id;
+	}
 }

@@ -39,6 +39,14 @@ public class MHelper {
 		return val < min ? min : val > max ? max : val;
 	}
 	
+	public static float clamp(float val, float min, float max) {
+		return val < min ? min : val > max ? max : val;
+	}
+	
+	public static float min(float a, float b) {
+		return a < b ? a : b;
+	}
+	
 	public static int min(int a, int b) {
 		return a < b ? a : b;
 	}
@@ -83,5 +91,14 @@ public class MHelper {
 
 	public static Random getRandom() {
 		return RANDOM;
+	}
+	
+	public static float smoothUnion(float a, float b, float delta) {
+		float h = clamp(0.5F + 0.5F * (b - a) / delta, 0, 1);
+		return lerp(b, a, h) - delta * h * (1 - h);
+	}
+	
+	public static float smoothUnionInverted(float a, float b, float delta) {
+		return -smoothUnion(-a, -b, delta);
 	}
 }

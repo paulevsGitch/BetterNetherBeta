@@ -10,7 +10,7 @@ import java.util.Random;
 public class PoisonForest extends NetherBiome {
 	public PoisonForest(String name) {
 		super(name);
-		this.setFogColor("b1fb43");
+		this.setFogColor("72a950");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrain.POISON_NYLIUM));
 		this.addTree(NetherStructures.POISON_TREE);
 		this.addPlant(NetherStructures.BUBBLE_GRASS, 0.2F);

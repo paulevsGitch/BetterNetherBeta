@@ -28,6 +28,10 @@ public class NetherTree extends Structure {
 	
 	@Override
 	public boolean generate(Level level, Random random, int x, int y, int z) {
+		if (!BlockUtil.isTerrain(level.getTileId(x, y - 1, z))) {
+			return false;
+		}
+		
 		int height = 5 + random.nextInt(10);
 		
 		if (!canGenerate(level, x, y, z, height)) {

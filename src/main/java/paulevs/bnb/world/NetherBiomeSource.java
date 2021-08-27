@@ -45,6 +45,10 @@ public class NetherBiomeSource extends BiomeSource {
 	
 	@Override
 	public Biome[] getBiomes(Biome[] biomes, int x, int z, int xSize, int zSize) {
+		if ((x & 31) == 0 && (z & 31) == 0) {
+			map.clearCache();
+		}
+		
 		if (biomes == null || biomes.length < xSize * zSize) {
 			biomes = new Biome[xSize * zSize];
 		}
