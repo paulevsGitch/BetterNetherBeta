@@ -25,10 +25,14 @@ import java.util.stream.IntStream;
 
 public class ChunkListener implements ChunkPopulator {
 	private FeatureGenerationThread featureGenerator;
+	private Thread main;
 	
 	@Override
 	public void populate(Level level, LevelSource levelSource, Biome biome, int startX, int startZ, Random random) {
 		if (level.dimension instanceof Nether) {
+			if (main == null) {
+				main = Thread.currentThread();
+			}
 			final int sx = startX + 8;
 			final int sz = startZ + 8;
 			Biome[] biomes = level.getBiomeSource().getBiomes(sx, sz, 16, 16);
@@ -155,6 +159,9 @@ public class ChunkListener implements ChunkPopulator {
 	
 	@SuppressWarnings("deprecation")
 	private boolean isActive() {
+		if (main != null && !main.isAlive()) {
+			return false;
+		}
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
 			MinecraftServer server = (MinecraftServer) FabricLoader.getInstance().getGameInstance();
 			return ((MinecraftServerAccessor) server).bnb_isRunning();

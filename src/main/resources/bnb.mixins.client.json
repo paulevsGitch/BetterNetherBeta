@@ -15,6 +15,7 @@
 		"TileRendererMixin",
 		"SoundHelperMixin",
 		"BlockBaseMixin",
+		"NetherMixin",
 		"SpiderMixin",
 		"InGameMixin"
 	],
