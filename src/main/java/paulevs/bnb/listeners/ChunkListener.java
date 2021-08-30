@@ -43,15 +43,21 @@ public class ChunkListener implements ChunkPopulator {
 				x += sx;
 				z += sz;
 				if (bio instanceof NetherBiome) {
-					BlockState top = ((NetherBiome) bio).getTopBlock(x, z);
 					int depth = ((NetherBiome) bio).getTopDepth();
 					boolean fire = ((NetherBiome) bio).hasFire();
 					for (int y = 31; y < 127; y++) {
 						int tile = level.getTileId(x, y, z);
 						if (tile == BlockBase.NETHERRACK.id || tile == BlockBase.SOUL_SAND.id || tile == BlockBase.GRAVEL.id) {
 							tile = level.getTileId(x, y + depth, z);
-							if (tile == 0 || BlockBase.BY_ID[tile] == null || !BlockBase.BY_ID[tile].isFullOpaque()) {
-								top.setBlockFast(level, x, y, z);
+							if (BlockUtil.isNonSolidNoLava(tile)) {
+								BlockState state;
+								if (BlockUtil.isNonSolidNoLava(level.getTileId(x, y + 1, z))) {
+									state = ((NetherBiome) bio).getTopBlock(level, x, y, z);
+								}
+								else {
+									state = ((NetherBiome) bio).getBottomBlock(level, x, y, z);
+								}
+								state.setBlockFast(level, x, y, z);
 							}
 							else if (tile != BlockBase.NETHERRACK.id) {
 								BlockUtil.fastTilePlace(level, x, y, z, BlockBase.NETHERRACK.id, 0);

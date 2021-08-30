@@ -30,7 +30,14 @@ public class NetherGenerator {
 			float noiseHor2 = (float) noiseH.eval(px * 0.03, pz * 0.03);
 			float noiseHor3 = (float) noiseV.eval(px * 0.001, pz * 0.010);
 			float ceiling = (float) noiseH.eval(px * 0.02, pz * 0.02) * 12 + (float) noiseH.eval(px * 0.1, pz * 0.1) * 5;
-			for (int y = 0; y < 128; y++) {
+			BlockUtil.fastTilePlace(chunk, x, 0, z, BlockBase.BEDROCK.id);
+			BlockUtil.fastTilePlace(chunk, x, 127, z, BlockBase.BEDROCK.id);
+			for (int y = 1; y < 127; y++) {
+				if ((y == 1 || y == 126) && noiseH.eval(px, pz) > 0) {
+					BlockUtil.fastTilePlace(chunk, x, y, z, BlockBase.BEDROCK.id);
+					continue;
+				}
+				
 				// Big pillars and ceiling/floor
 				float gradient = 55 - MathHelper.abs(y - 63.5F);
 				float pillars = (float) noiseV.eval(px * 0.01, y * 0.01, pz * 0.01) * 80 + 40F;

@@ -5,6 +5,7 @@ import net.minecraft.block.BlockBase;
 import net.minecraft.entity.EntityEntry;
 import net.minecraft.entity.monster.Ghast;
 import net.minecraft.entity.monster.ZombiePigman;
+import net.minecraft.level.Level;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.Vec3f;
@@ -79,8 +80,12 @@ public class NetherBiome extends Biome {
 		this.ceilCount = plantCount;
 	}
 	
-	public BlockState getTopBlock(int x, int z) {
+	public BlockState getTopBlock(Level level, int x, int y, int z) {
 		return topBlock;
+	}
+	
+	public BlockState getBottomBlock(Level level, int x, int y, int z) {
+		return getTopBlock(level, x, y, z);
 	}
 	
 	public void setTopBlock(BlockState block) {

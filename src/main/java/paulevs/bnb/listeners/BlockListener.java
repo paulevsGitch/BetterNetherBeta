@@ -84,6 +84,8 @@ public class BlockListener implements BlockRegister {
 		
 		register("nether_ore", NetherOreBlock::new);
 		
+		//register("soul_layered_block", SoulLayeredBlock::new);
+		
 		occupiedIDs = null;
 		BetterNetherBeta.configBlocks.save();
 	}

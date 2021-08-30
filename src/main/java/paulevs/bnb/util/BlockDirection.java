@@ -10,6 +10,7 @@ public enum BlockDirection {
 	POS_Y(1, 0, 1, 0),
 	POS_Z(3, 0, 0, 1);
 	
+	public static final BlockDirection[] HORIZONTAL = new BlockDirection[] { NEG_X, NEG_Z, POS_X, POS_Z };
 	public static final BlockDirection[] VALUES = BlockDirection.values();
 	private final int facing;
 	private final int x;
