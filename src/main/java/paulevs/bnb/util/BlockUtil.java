@@ -108,4 +108,12 @@ public class BlockUtil {
 	public static void fastTilePlace(Chunk chunk, int x, int y, int z, int id) {
 		chunk.tiles[x << 11 | z << 7 | y] = (byte) id;
 	}
+	
+	public static void updateTile(Level level, int x, int y, int z) {
+		level.method_202(x, y, z, x, y, z);
+	}
+	
+	public static void updateArea(Level level, int x1, int y1, int z1, int x2, int y2, int z2) {
+		level.method_202(x1, y1, z1, x2, y2, z2);
+	}
 }

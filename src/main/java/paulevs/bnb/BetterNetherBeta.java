@@ -21,6 +21,7 @@ import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.listeners.TileEntityListener;
 import paulevs.bnb.tab.BNTabInventory;
 import paulevs.bnb.util.CreativeUtil;
+import paulevs.bnb.util.RadialSearch;
 
 import java.util.Locale;
 
@@ -31,6 +32,7 @@ public class BetterNetherBeta implements StationMod {
 	
 	@Override
 	public void preInit() {
+		RadialSearch.init();
 		StatusEffects.register();
 		ItemRegister.EVENT.register(new ItemListener());
 		BlockRegister.EVENT.register(new BlockListener());
