@@ -151,6 +151,10 @@ public class NetherBiome extends Biome {
 		return -1;
 	}
 	
+	public boolean isParticlesEmissive() {
+		return true;
+	}
+	
 	public int getParticleID(Random random) {
 		return 0;
 	}

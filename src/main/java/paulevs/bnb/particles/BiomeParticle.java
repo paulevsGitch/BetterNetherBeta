@@ -7,6 +7,7 @@ import paulevs.bnb.util.ClientUtil;
 import paulevs.bnb.util.MHelper;
 
 public class BiomeParticle extends ParticleBase {
+	private final boolean emissive;
 	private float nextSpeedX;
 	private float nextSpeedY;
 	private float nextSpeedZ;
@@ -17,8 +18,9 @@ public class BiomeParticle extends ParticleBase {
 	private int maxAge;
 	private int ticks;
 	
-	public BiomeParticle(Level level, double x, double y, double z, int index) {
+	public BiomeParticle(Level level, double x, double y, double z, int index, boolean emissive) {
 		super(level, x, y, z, 0, 0, 0);
+		this.emissive = emissive;
 		this.setPositionAndAngles(x, y, z, 0, 0);
 		maxAge = MHelper.randRange(100, 300, ClientUtil.getRandom());
 		field_2640 = MHelper.randRange(0.75F, 1.5F, ClientUtil.getRandom()); // Particle size
@@ -79,7 +81,7 @@ public class BiomeParticle extends ParticleBase {
 	
 	@Override
 	public float getBrightnessAtEyes(float f) {
-		return 1F;
+		return emissive ? 1F : super.getBrightnessAtEyes(f);
 	}
 	
 	@Override

@@ -58,6 +58,11 @@ public class NetherGenerator {
 				gradient = (y - height);
 				val = MHelper.smoothUnion(val, gradient, 100F);
 				
+				// Shore
+				height = (float) Math.atan(noiseHor1 + 0.2) / 1.5374F * variation;
+				gradient = (y - height + 10);
+				val = MHelper.smoothUnion(val, gradient, 100F);
+				
 				// Ceiling
 				val = MHelper.min(val, ceiling + 120 - y);
 				

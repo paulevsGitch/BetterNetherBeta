@@ -13,6 +13,7 @@ import paulevs.bnb.block.NetherOreBlock;
 import paulevs.bnb.block.NetherPlanksBlock;
 import paulevs.bnb.block.NetherSlabBlock;
 import paulevs.bnb.block.NetherStairsBlock;
+import paulevs.bnb.block.NetherStoneBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.NetherTreeFurBlock;
 import paulevs.bnb.block.NetherVineBlock;
@@ -25,6 +26,7 @@ import paulevs.bnb.block.SoulSpireBlock;
 import paulevs.bnb.block.SoulSpirePlantBlock;
 import paulevs.bnb.block.SpiderCocoonBlock;
 import paulevs.bnb.block.TallNetherPlant;
+import paulevs.bnb.block.types.BasaltBlockType;
 import paulevs.bnb.block.types.NetherPlanks;
 import paulevs.bnb.block.types.NetherrackBricks;
 import paulevs.bnb.block.types.TallGlowNetherPlants;
@@ -81,6 +83,10 @@ public class BlockListener implements BlockRegister {
 		register("netherrack_brick_stairs", NetherStairsBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICKS.getMeta());
 		register("netherrack_brick_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICKS.getMeta());
 		register("netherrack_tile_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICK_SMALL_TILE.getMeta());
+		
+		register("basalt", NetherStoneBlock::new, BasaltBlockType.class);
+		register("basalt_brick_stairs", NetherStairsBlock::new, getBlock("basalt"), BasaltBlockType.BASALT.getMeta());
+		register("basalt_brick_slab", NetherSlabBlock::new, getBlock("basalt"), BasaltBlockType.BASALT.getMeta());
 		
 		register("nether_ore", NetherOreBlock::new);
 		

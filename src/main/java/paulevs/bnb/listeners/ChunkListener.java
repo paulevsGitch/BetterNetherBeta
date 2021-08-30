@@ -11,9 +11,11 @@ import net.minecraft.level.structure.Structure;
 import net.minecraft.server.MinecraftServer;
 import net.modificationstation.stationloader.api.common.event.level.gen.ChunkPopulator;
 import paulevs.bnb.mixin.common.MinecraftServerAccessor;
+import paulevs.bnb.noise.OpenSimplexNoise;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.ClientUtil;
+import paulevs.bnb.util.MHelper;
 import paulevs.bnb.world.biome.NetherBiome;
 import paulevs.bnb.world.structures.NetherStructures;
 
@@ -24,6 +26,8 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 
 public class ChunkListener implements ChunkPopulator {
+	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(10);
+	private static final BlockState GRAVEL = new BlockState(BlockBase.GRAVEL);
 	private FeatureGenerationThread featureGenerator;
 	private Thread main;
 	
@@ -42,10 +46,19 @@ public class ChunkListener implements ChunkPopulator {
 				Biome bio = biomes[x << 4 | z];
 				x += sx;
 				z += sz;
+				int terrainY = (int) (35 + NOISE.eval(x * 0.1, z * 0.1) * 3);
+				for (int y = 1; y < terrainY; y++) {
+					int tile = level.getTileId(x, y, z);
+					if (tile == BlockBase.NETHERRACK.id || tile == BlockBase.SOUL_SAND.id || tile == BlockBase.GRAVEL.id) {
+						if (y < terrainY && BlockUtil.isNonSolidNoLava(level.getTileId(x, y + 3, z))) {
+							GRAVEL.setBlockFast(level, x, y, z);
+						}
+					}
+				}
 				if (bio instanceof NetherBiome) {
 					int depth = ((NetherBiome) bio).getTopDepth();
 					boolean fire = ((NetherBiome) bio).hasFire();
-					for (int y = 31; y < 127; y++) {
+					for (int y = MHelper.max(terrainY, 31); y < 127; y++) {
 						int tile = level.getTileId(x, y, z);
 						if (tile == BlockBase.NETHERRACK.id || tile == BlockBase.SOUL_SAND.id || tile == BlockBase.GRAVEL.id) {
 							tile = level.getTileId(x, y + depth, z);

@@ -12,6 +12,7 @@ import paulevs.bnb.block.types.SoulGrass;
 import paulevs.bnb.block.types.TallGlowNetherPlants;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
+import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.RangedBlockState;
 
 public class NetherStructures {
@@ -77,6 +78,13 @@ public class NetherStructures {
 	//public static final Structure CRIMSON_GLOWING_FUR = new NetherGroupedVine(new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.CRIMSON_GLOWING_FUR));
 	//public static final Structure WARPED_GLOWING_FUR = new NetherGroupedVine(new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.WARPED_GLOWING_FUR));
 	//public static final Structure POISON_GLOWING_FUR = new NetherGroupedVine(new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.POISON_GLOWING_FUR));
+	
+	public static final Structure BASALT_PEAK = new PeakStructure(
+		new BlockState(BlockListener.getBlock("basalt")),
+		10,
+		6,
+		tileID -> tileID == BlockListener.getBlockID("basalt") || BlockUtil.isTerrain(tileID)
+	);
 	
 	public static final NetherOre ORICHALCUM_ORE = makeOre(paulevs.bnb.block.types.NetherOre.ORICHALCUM_ORE, 8);
 	

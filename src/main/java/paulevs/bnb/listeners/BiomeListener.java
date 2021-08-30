@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import net.minecraft.level.biome.Biome;
 import net.modificationstation.stationloader.api.common.event.level.biome.BiomeRegister;
 import paulevs.bnb.world.NetherBiomeSource;
+import paulevs.bnb.world.biome.BasaltShield;
 import paulevs.bnb.world.biome.CorruptedLands;
 import paulevs.bnb.world.biome.CrimsonForest;
 import paulevs.bnb.world.biome.PoisonForest;
@@ -24,6 +25,7 @@ public class BiomeListener implements BiomeRegister {
 		register("Poison Forest", PoisonForest::new);
 		register("Soul Valley", SoulValley::new);
 		register("Corrupted Lands", CorruptedLands::new);
+		register("Basalt Shield", BasaltShield::new);
 	}
 	
 	private static void register(String name, Function<String, Biome> init) {

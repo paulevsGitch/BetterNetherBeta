@@ -29,7 +29,12 @@ public class GameRendererMixin {
 			if (biome instanceof NetherBiome) {
 				NetherBiome netherBiome = (NetherBiome) biome;
 				if (ClientUtil.getRandom().nextFloat() <= netherBiome.getParticleChance()) {
-					minecraft.particleManager.addParticle(new BiomeParticle(minecraft.level, x, y, z, netherBiome.getParticleID(ClientUtil.getRandom())));
+					minecraft.particleManager.addParticle(new BiomeParticle(
+						minecraft.level,
+						x, y, z,
+						netherBiome.getParticleID(ClientUtil.getRandom()),
+						netherBiome.isParticlesEmissive()
+					));
 				}
 			}
 		}
