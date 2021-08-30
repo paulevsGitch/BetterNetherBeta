@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.BlockBase;
 import net.modificationstation.stationloader.api.common.event.block.BlockRegister;
 import paulevs.bnb.BetterNetherBeta;
+import paulevs.bnb.block.BasaltBlock;
 import paulevs.bnb.block.NetherFungusBlock;
 import paulevs.bnb.block.NetherGrassBlock;
 import paulevs.bnb.block.NetherLanternBlock;
@@ -13,7 +14,6 @@ import paulevs.bnb.block.NetherOreBlock;
 import paulevs.bnb.block.NetherPlanksBlock;
 import paulevs.bnb.block.NetherSlabBlock;
 import paulevs.bnb.block.NetherStairsBlock;
-import paulevs.bnb.block.NetherStoneBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.NetherTreeFurBlock;
 import paulevs.bnb.block.NetherVineBlock;
@@ -84,9 +84,11 @@ public class BlockListener implements BlockRegister {
 		register("netherrack_brick_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICKS.getMeta());
 		register("netherrack_tile_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICK_SMALL_TILE.getMeta());
 		
-		register("basalt", NetherStoneBlock::new, BasaltBlockType.class);
-		register("basalt_brick_stairs", NetherStairsBlock::new, getBlock("basalt"), BasaltBlockType.BASALT.getMeta());
-		register("basalt_brick_slab", NetherSlabBlock::new, getBlock("basalt"), BasaltBlockType.BASALT.getMeta());
+		register("basalt", BasaltBlock::new);
+		register("basalt_stairs", NetherStairsBlock::new, getBlock("basalt"), BasaltBlockType.BASALT.getMeta());
+		register("basalt_slab", NetherSlabBlock::new, getBlock("basalt"), BasaltBlockType.BASALT.getMeta());
+		register("basalt_brick_stairs", NetherStairsBlock::new, getBlock("basalt"), BasaltBlockType.BASALT_BRICKS.getMeta());
+		register("basalt_brick_slab", NetherSlabBlock::new, getBlock("basalt"), BasaltBlockType.BASALT_BRICKS.getMeta());
 		
 		register("nether_ore", NetherOreBlock::new);
 		

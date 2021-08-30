@@ -6,6 +6,7 @@ import net.minecraft.item.ItemInstance;
 import net.modificationstation.stationloader.api.common.event.recipe.RecipeRegister;
 import net.modificationstation.stationloader.api.common.recipe.CraftingRegistry;
 import net.modificationstation.stationloader.api.common.recipe.SmeltingRegistry;
+import paulevs.bnb.block.types.BasaltBlockType;
 import paulevs.bnb.block.types.NetherPlanks;
 import paulevs.bnb.block.types.NetherWood;
 import paulevs.bnb.block.types.NetherrackBricks;
@@ -104,7 +105,7 @@ public class RecipeListener implements RecipeRegister {
 			addSlabRecipe(block, 0, BlockListener.getBlock("netherrack_brick_slab"));
 			addSquareRecipe(
 				new ItemInstance(BlockListener.getBlock("netherrack_brick_slab"), 1, -1),
-				new ItemInstance(block, 4, NetherrackBricks.NETHERRACK_BRICK_LARGE_TILE.getMeta())
+				new ItemInstance(block, 2, NetherrackBricks.NETHERRACK_BRICK_LARGE_TILE.getMeta())
 			);
 			addSquareRecipe(
 				new ItemInstance(block, 1, NetherrackBricks.NETHERRACK_BRICK_LARGE_TILE.getMeta()),
@@ -114,6 +115,29 @@ public class RecipeListener implements RecipeRegister {
 				new ItemInstance(block, 1, NetherrackBricks.NETHERRACK_BRICK_SMALL_TILE.getMeta()),
 				BlockListener.getBlock("netherrack_tile_slab")
 			);
+			addPillarRecipe(
+				new ItemInstance(BlockListener.getBlock("netherrack_brick_slab"), 1, -1),
+				new ItemInstance(block, 2, NetherrackBricks.NETHERRACK_BRICK_PILLAR_Y.getMeta())
+			);
+			
+			block = BlockListener.getBlock("basalt");
+			addStairsRecipe(block, 0, BlockListener.getBlock("basalt_stairs"));
+			addSlabRecipe(block, 0, BlockListener.getBlock("basalt_slab"));
+			addSquareRecipe(
+				new ItemInstance(block, 1, BasaltBlockType.BASALT.getMeta()),
+				new ItemInstance(block, 4, BasaltBlockType.BASALT_SMOOTH.getMeta())
+			);
+			addSquareRecipe(
+				new ItemInstance(block, 1, BasaltBlockType.BASALT_SMOOTH.getMeta()),
+				new ItemInstance(block, 4, BasaltBlockType.BASALT_BRICKS.getMeta())
+			);
+			addPillarRecipe(
+				new ItemInstance(BlockListener.getBlock("basalt_slab"), 1, -1),
+				new ItemInstance(block, 2, BasaltBlockType.BASALT_PILLAR_Y.getMeta())
+			);
+			block = BlockListener.getBlock("basalt_bricks");
+			addStairsRecipe(block, 0, BlockListener.getBlock("basalt_brick_stairs"));
+			addSlabRecipe(block, 0, BlockListener.getBlock("basalt_brick_slab"));
 			
 			ItemBase item = ItemListener.getItem("orichalcum_ingot");
 			CraftingRegistry.INSTANCE.addShapedRecipe(
@@ -215,6 +239,10 @@ public class RecipeListener implements RecipeRegister {
 	
 	private static void addSquareRecipe(ItemInstance src, ItemInstance res) {
 		CraftingRegistry.INSTANCE.addShapedRecipe(res, "##", "##", '#', src);
+	}
+	
+	private static void addPillarRecipe(ItemInstance src, ItemInstance res) {
+		CraftingRegistry.INSTANCE.addShapedRecipe(res, "#", "#", src);
 	}
 	
 	private static void addStairsRecipe(BlockBase src, int meta, BlockBase res) {

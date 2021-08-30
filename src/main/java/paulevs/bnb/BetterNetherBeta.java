@@ -41,8 +41,8 @@ public class BetterNetherBeta implements StationMod {
 		ModelRegister.EVENT.register(new ModelListener());
 		ChunkListener.EVENT.register(new ChunkListener());
 		BiomeRegister.EVENT.register(new BiomeListener());
-		RecipeRegister.EVENT.register(new RecipeListener());
 		TileEntityRegister.EVENT.register(new TileEntityListener());
+		RecipeRegister.EVENT.register(new RecipeListener());
 		
 		if (CreativeUtil.isCreativeInstalled()) {
 			BNTabInventory.createTab();
