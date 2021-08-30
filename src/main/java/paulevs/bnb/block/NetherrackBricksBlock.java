@@ -27,6 +27,9 @@ public class NetherrackBricksBlock extends NetherStoneBlock {
 			}
 		}
 		return super.method_1626(world, x, y, z, side);*/
+		if (world.getTileMeta(x, y, z) != NetherrackBricks.NETHERRACK_BRICKS.getMeta()) {
+			return super.method_1626(world, x, y, z, side);
+		}
 		int texture = MHelper.getRandomHash(y, x, z) & 3;
 		return texture == 0 ? super.method_1626(world, x, y, z, side) : TextureListener.getBlockTexture("netherrack_bricks_" + texture);
 	}

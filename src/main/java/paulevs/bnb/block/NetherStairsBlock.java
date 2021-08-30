@@ -34,7 +34,7 @@ public class NetherStairsBlock extends Stairs {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public int method_1626(TileView world, int x, int y, int z, int side) {
-		return source.getTextureForSide(side, 0);
+		return source.getTextureForSide(side, sourceMeta);
 	}
 	
 	@Override

@@ -135,9 +135,8 @@ public class RecipeListener implements RecipeRegister {
 				new ItemInstance(BlockListener.getBlock("basalt_slab"), 1, -1),
 				new ItemInstance(block, 2, BasaltBlockType.BASALT_PILLAR_Y.getMeta())
 			);
-			block = BlockListener.getBlock("basalt_bricks");
-			addStairsRecipe(block, 0, BlockListener.getBlock("basalt_brick_stairs"));
-			addSlabRecipe(block, 0, BlockListener.getBlock("basalt_brick_slab"));
+			addStairsRecipe(block, BasaltBlockType.BASALT_BRICKS.getMeta(), BlockListener.getBlock("basalt_brick_stairs"));
+			addSlabRecipe(block, BasaltBlockType.BASALT_BRICKS.getMeta(), BlockListener.getBlock("basalt_brick_slab"));
 			
 			ItemBase item = ItemListener.getItem("orichalcum_ingot");
 			CraftingRegistry.INSTANCE.addShapedRecipe(
@@ -242,7 +241,7 @@ public class RecipeListener implements RecipeRegister {
 	}
 	
 	private static void addPillarRecipe(ItemInstance src, ItemInstance res) {
-		CraftingRegistry.INSTANCE.addShapedRecipe(res, "#", "#", src);
+		CraftingRegistry.INSTANCE.addShapedRecipe(res, "#", "#", '#', src);
 	}
 	
 	private static void addStairsRecipe(BlockBase src, int meta, BlockBase res) {
