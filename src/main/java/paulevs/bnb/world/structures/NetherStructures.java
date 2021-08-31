@@ -1,6 +1,7 @@
 package paulevs.bnb.world.structures;
 
 import net.minecraft.level.structure.Structure;
+import paulevs.bnb.block.types.BasaltBlockType;
 import paulevs.bnb.block.types.NetherFungus;
 import paulevs.bnb.block.types.NetherGrass;
 import paulevs.bnb.block.types.NetherLantern;
@@ -83,7 +84,26 @@ public class NetherStructures {
 		new BlockState(BlockListener.getBlock("basalt")),
 		10,
 		6,
-		tileID -> tileID == BlockListener.getBlockID("basalt") || BlockUtil.isTerrain(tileID)
+		blockState -> {
+			if (blockState.getBlockID() == BlockListener.getBlockID("basalt") && blockState.getMeta() == BasaltBlockType.FLAMING_BASALT.getMeta()) {
+				return false;
+			}
+			return BlockUtil.isTerrain(blockState.getBlockID());
+		}
+	);
+	
+	public static final Structure FLAMING_BASALT_PEAK = new PeakWithTopStructure(
+		new BlockState(BlockListener.getBlock("basalt"), BasaltBlockType.BASALT),
+		10,
+		6,
+		blockState -> {
+			if (blockState.getBlockID() == BlockListener.getBlockID("basalt") && blockState.getMeta() == BasaltBlockType.FLAMING_BASALT.getMeta()) {
+				return false;
+			}
+			return BlockUtil.isTerrain(blockState.getBlockID());
+		},
+		new BlockState(BlockListener.getBlock("basalt"), BasaltBlockType.FLAMING_BASALT),
+		new BlockState(BlockListener.getBlock("nether_lantern"), NetherLantern.CRIMSON_LANTERN)
 	);
 	
 	public static final NetherOre ORICHALCUM_ORE = makeOre(paulevs.bnb.block.types.NetherOre.ORICHALCUM_ORE, 8);

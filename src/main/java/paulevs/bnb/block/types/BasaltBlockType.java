@@ -9,7 +9,8 @@ public enum BasaltBlockType implements StoneBlockEnum {
 	BASALT_PILLAR_X(2, "basalt_pillar"),
 	BASALT_PILLAR_Y(3, "basalt_pillar"),
 	BASALT_PILLAR_Z(4, "basalt_pillar"),
-	BASALT_BRICKS(5, "basalt_bricks");
+	BASALT_BRICKS(5, "basalt_bricks"),
+	FLAMING_BASALT(6, "flaming_basalt");
 	
 	private final String name;
 	private final int meta;
@@ -33,6 +34,9 @@ public enum BasaltBlockType implements StoneBlockEnum {
 	public String getTexture(int side) {
 		if (meta == BASALT.getMeta()) {
 			return BlockUtil.isHorizontalSide(side) ? name + "_side" : name + "_top";
+		}
+		else if (meta == FLAMING_BASALT.getMeta()) {
+			return BlockUtil.isHorizontalSide(side) ? name + "_side" : BlockUtil.isTopSide(side) ?  name + "_top" : "basalt_top";
 		}
 		else if (name.contains("pillar")) {
 			if (meta == getPillarYMeta()) {

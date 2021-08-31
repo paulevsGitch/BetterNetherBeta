@@ -10,12 +10,13 @@ import java.util.Random;
 import java.util.function.Function;
 
 public class PeakStructure extends Structure {
-	private final Function<Integer, Boolean> placeFunction;
-	private final BlockState block;
-	private final int height;
-	private final int radius;
+	protected final Function<BlockState, Boolean> placeFunction;
+	private final BlockState check = new BlockState(0);
+	protected final BlockState block;
+	protected final int height;
+	protected final int radius;
 	
-	public PeakStructure(BlockState block, int height, int radius, Function<Integer, Boolean> placeFunction) {
+	public PeakStructure(BlockState block, int height, int radius, Function<BlockState, Boolean> placeFunction) {
 		this.placeFunction = placeFunction;
 		this.height = height;
 		this.radius = radius;
@@ -24,7 +25,8 @@ public class PeakStructure extends Structure {
 	
 	@Override
 	public boolean generate(Level level, Random rand, int x, int y, int z) {
-		if (!placeFunction.apply(level.getTileId(x, y - 1, z))) {
+		BlockState check = new BlockState(level.getTileId(x, y - 1, z), level.getTileMeta(x, y - 1, z));
+		if (!placeFunction.apply(check)) {
 			return false;
 		}
 		
@@ -40,13 +42,19 @@ public class PeakStructure extends Structure {
 			int pz = z + dz;
 			int minY = y + MathHelper.floor(distance * 0.3F * radius) - rand.nextInt(2);
 			int maxY = minY + MathHelper.floor(height * scale * (distance / radius + rand.nextFloat() * 0.2F));
-			if (placeFunction.apply(level.getTileId(px, minY - 1, pz))) {
-				for (int py = minY; py <= maxY; py++) {
-					block.setBlockFast(level, px, py, pz);
-				}
+			check.setBlockID(level.getTileId(px, minY - 1, pz));
+			check.setBlockMeta(level.getTileMeta(px, minY - 1, pz));
+			if (placeFunction.apply(check)) {
+				generatePillar(level, rand, px, pz, minY, maxY);
 			}
 		}
 		
 		return false;
+	}
+	
+	protected void generatePillar(Level level, Random random, int x, int z, int minY, int maxY) {
+		for (int y = minY; y <= maxY; y++) {
+			block.setBlockFast(level, x, y, z);
+		}
 	}
 }

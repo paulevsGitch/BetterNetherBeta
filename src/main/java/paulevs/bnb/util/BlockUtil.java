@@ -3,6 +3,7 @@ package paulevs.bnb.util;
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;
+import paulevs.bnb.block.NetherStoneBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.SoulSoilBlock;
 
@@ -12,7 +13,11 @@ public class BlockUtil {
 	private static int breakStage;
 	
 	public static boolean isTerrain(int id) {
-		return id == BlockBase.NETHERRACK.id || blockByID(id) instanceof NetherTerrainBlock;
+		if (id == BlockBase.NETHERRACK.id || isSoulTerrain(id)) {
+			return true;
+		}
+		BlockBase block = blockByID(id);
+		return block instanceof NetherStoneBlock || block instanceof NetherTerrainBlock;
 	}
 	
 	public static boolean isSoulTerrain(int id) {
