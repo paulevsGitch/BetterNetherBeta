@@ -13,7 +13,7 @@ public class BlockUtil {
 	private static int breakStage;
 	
 	public static boolean isTerrain(int id) {
-		if (id == BlockBase.NETHERRACK.id || isSoulTerrain(id)) {
+		if (id == BlockBase.NETHERRACK.id || id == BlockBase.GRAVEL.id || isSoulTerrain(id)) {
 			return true;
 		}
 		BlockBase block = blockByID(id);

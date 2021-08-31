@@ -1,6 +1,8 @@
 package paulevs.bnb.util;
 
 import net.minecraft.util.maths.Vec3f;
+import net.minecraft.util.maths.Vec3i;
+import org.lwjgl.util.Point;
 import paulevs.bnb.noise.OpenSimplexNoise;
 
 import java.util.Random;
@@ -8,6 +10,7 @@ import java.util.Random;
 public class MHelper {
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(0);
 	private static final Random RANDOM = new Random();
+	private static final Vec3i[] OFFSETS;
 	
 	public static int getRandomHash(int x, int z) {
 		int h = x * 374761393 + z * 668265263;
@@ -100,5 +103,24 @@ public class MHelper {
 	
 	public static float smoothUnionInverted(float a, float b, float delta) {
 		return -smoothUnion(-a, -b, delta);
+	}
+	
+	public static Vec3i[] getOffsets(Random random) {
+		shuffle(OFFSETS, random);
+		return OFFSETS;
+	}
+	
+	static {
+		int index = 0;
+		OFFSETS = new Vec3i[3 * 3 * 3 - 1];
+		for (int x = -1; x < 2; x++) {
+			for (int y = -1; y < 2; y++) {
+				for (int z = -1; z < 2; z++) {
+					if (x != 0 || y != 0 || z != 0) {
+						OFFSETS[index++] = new Vec3i(x, y, z);
+					}
+				}
+			}
+		}
 	}
 }

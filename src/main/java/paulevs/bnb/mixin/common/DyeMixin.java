@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.item.Dye;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.level.Level;
+import net.minecraft.util.maths.Vec3i;
 import org.lwjgl.util.Point;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,8 +20,6 @@ import paulevs.bnb.util.MHelper;
 
 @Mixin(Dye.class)
 public class DyeMixin {
-	private static final Point[] OFFSETS;
-	
 	@Inject(method = "useOnTile", at = @At("HEAD"), cancellable = true)
 	private void bnb_onBonemealUse(ItemInstance item, PlayerBase player, Level level, int x, int y, int z, int facing, CallbackInfoReturnable<Boolean> info) {
 		if (item.getDamage() == 15) {
@@ -35,14 +34,15 @@ public class DyeMixin {
 			else if (block == BlockBase.NETHERRACK && level.getTileId(x, y + 1, z) == 0) {
 				int meta = 0;
 				BlockBase grass = null;
-				MHelper.shuffle(OFFSETS, level.rand);
-				for (Point offset: OFFSETS) {
-					int px = x + offset.getX();
-					int pz = z + offset.getY();
-					block = BlockUtil.getBlock(level, px, y, pz);
+				Vec3i[] offsets = MHelper.getOffsets(level.rand);
+				for (Vec3i offset: offsets) {
+					int px = x + offset.x;
+					int py = y + offset.y;
+					int pz = z + offset.z;
+					block = BlockUtil.getBlock(level, px, py, pz);
 					if (block instanceof NetherTerrainBlock) {
 						grass = block;
-						meta = level.getTileMeta(px, y, pz);
+						meta = level.getTileMeta(px, py, pz);
 						break;
 					}
 				}
@@ -58,18 +58,6 @@ public class DyeMixin {
 					item.count--;
 					info.setReturnValue(true);
 					info.cancel();
-				}
-			}
-		}
-	}
-	
-	static {
-		int index = 0;
-		OFFSETS = new Point[8];
-		for (int x = -1; x < 2; x++) {
-			for (int y = -1; y < 2; y++) {
-				if (x != 0 || y != 0) {
-					OFFSETS[index++] = new Point(x, y);
 				}
 			}
 		}
