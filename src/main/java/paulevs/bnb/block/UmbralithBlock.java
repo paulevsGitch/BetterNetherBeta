@@ -31,6 +31,6 @@ public class UmbralithBlock extends NetherStoneBlock implements BlockWithLight {
 	
 	@Override
 	public float getEmissionIntensity() {
-		return 2;
+		return 0.5F;
 	}
 }

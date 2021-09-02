@@ -60,7 +60,11 @@ public class TextureListener implements TextureRegister {
 	}
 	
 	private int getAnimationSpeed(JsonObject animation, String texture) {
-		JsonElement obj = animation.get(texture);
+		String name = texture.substring(texture.lastIndexOf('/') + 1, texture.lastIndexOf('.'));
+		if (name.endsWith("_e")) {
+			name = name.substring(0, name.length() - 2);
+		}
+		JsonElement obj = animation.get(name);
 		return obj == null ? 1 : obj.getAsInt();
 	}
 	

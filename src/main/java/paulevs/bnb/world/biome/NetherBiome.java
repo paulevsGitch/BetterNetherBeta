@@ -23,6 +23,7 @@ public class NetherBiome extends Biome {
 	protected BlockState fillBlock = NETHERRRACK;
 	protected BlockState topBlock = NETHERRRACK;
 	private boolean hasFire = true;
+	private float fogDensity = 1F;
 	private int topDepth = 1;
 	
 	public NetherBiome(String name) {
@@ -42,6 +43,14 @@ public class NetherBiome extends Biome {
 	@SuppressWarnings("unchecked")
 	public void addCreatureSpawn(Class<?> entryClass, int rarity) {
 		this.creatures.add(new EntityEntry(entryClass, rarity));
+	}
+	
+	public void setFogDensity(float density) {
+		this.fogDensity = density;
+	}
+	
+	public float getFogDensity() {
+		return fogDensity;
 	}
 	
 	public BlockState getTopBlock(Level level, int x, int y, int z) {

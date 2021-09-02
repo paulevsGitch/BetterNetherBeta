@@ -11,6 +11,7 @@ public class DeepDarkBiome extends NetherBiome {
 	public DeepDarkBiome(String name) {
 		super(name);
 		this.setFogColor("052a32");
+		this.setFogDensity(3F);
 		this.setTopBlock(new BlockState(BlockListener.getBlock("umbralith"), UmbralithType.DARK_NYLIUM));
 		this.setFillBlock(new BlockState(BlockListener.getBlock("umbralith"), UmbralithType.UMBRALITH));
 		this.addStructure(NetherStructures.DARKSHROOM, 1.0F, 10);
