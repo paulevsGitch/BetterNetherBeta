@@ -6,7 +6,7 @@ import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.item.tool.Shears;
 import net.minecraft.level.Level;
-import paulevs.bnb.block.types.NetherLeaves;
+import paulevs.bnb.block.types.NetherLeavesType;
 import paulevs.bnb.item.NetherShearsItem;
 import paulevs.bnb.util.ItemUtil;
 
@@ -16,7 +16,7 @@ public class NetherLeavesBlock extends MultiBlock {
 	//private static final Set<Vec3i> ENDS = Sets.newHashSet();
 	
 	public NetherLeavesBlock(String name, int id) {
-		super(name, id, Material.LEAVES, NetherLeaves.class);
+		super(name, id, Material.LEAVES, NetherLeavesType.class);
 		this.setHardness(LEAVES.getHardness());
 		this.disableNotifyOnMetaDataChange();
 		this.sounds(GRASS_SOUNDS);

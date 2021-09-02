@@ -5,10 +5,10 @@ import net.modificationstation.stationloader.api.client.event.model.ModelRegiste
 import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
 import paulevs.bnb.block.model.OBJBlockModel;
-import paulevs.bnb.block.types.NetherGrass;
-import paulevs.bnb.block.types.NetherLeaves;
-import paulevs.bnb.block.types.NetherTreeFur;
-import paulevs.bnb.block.types.SoulGrass;
+import paulevs.bnb.block.types.NetherPlantType;
+import paulevs.bnb.block.types.NetherLeavesType;
+import paulevs.bnb.block.types.NetherTreeFurType;
+import paulevs.bnb.block.types.SoulPlantType;
 import paulevs.bnb.util.BlockUtil;
 
 import java.util.Map;
@@ -34,7 +34,7 @@ public class ModelListener implements ModelRegister {
 			
 			OBJBlockModel cross = new OBJBlockModel("/assets/bnb/models/block/cross_no_dist.obj", 16, 8, 0, 8, BlockFaces.UP);
 			model = new OBJBlockModel("/assets/bnb/models/block/fluffy_grass.obj", 16, 8, 0, 8, BlockFaces.UP);
-			for (NetherGrass plant: NetherGrass.values()) {
+			for (NetherPlantType plant: NetherPlantType.values()) {
 				if (plant.isCross()) {
 					BLOCK_MODELS.put(plant.getName(), cross.clone().setTextures(plant.getTexture(0)));
 				}
@@ -42,18 +42,23 @@ public class ModelListener implements ModelRegister {
 					BLOCK_MODELS.put(plant.getName(), model.clone().setTextures(plant.getTexture(0)));
 				}
 			}
-			for (SoulGrass grass: SoulGrass.values()) {
-				BLOCK_MODELS.put(grass.getName(), model.clone().setTextures(grass.getTexture(0)));
+			for (SoulPlantType plant: SoulPlantType.values()) {
+				if (plant.isCross()) {
+					BLOCK_MODELS.put(plant.getName(), cross.clone().setTextures(plant.getTexture(0)));
+				}
+				else {
+					BLOCK_MODELS.put(plant.getName(), model.clone().setTextures(plant.getTexture(0)));
+				}
 			}
 			
 			model = new OBJBlockModel("/assets/bnb/models/block/normal_crop.obj");
-			for (NetherTreeFur fur: NetherTreeFur.values()) {
+			for (NetherTreeFurType fur: NetherTreeFurType.values()) {
 				BLOCK_MODELS.put(fur.getName(), model.clone().setTextures(fur.getTexture(0)));
 				BLOCK_MODELS.put(fur.getName() + "_bottom", model.clone().setTextures(fur.getTexture(0) + "_bottom"));
 			}
 			
 			model = new OBJBlockModel("/assets/bnb/models/block/fluffy_leaves.obj");
-			for (NetherLeaves leaves: NetherLeaves.values()) {
+			for (NetherLeavesType leaves: NetherLeavesType.values()) {
 				String fur = leaves.getName().substring(0, leaves.getName().indexOf('_')) + "_outer_leaves";
 				BLOCK_MODELS.put(leaves.getName(), model.clone().setTextures(leaves.getTexture(0), fur));
 			}

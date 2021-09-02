@@ -1,14 +1,15 @@
 package paulevs.bnb.block.types;
 
 import paulevs.bnb.interfaces.BlockEnum;
+import paulevs.bnb.listeners.ItemListener;
 
-public enum TallGlowNetherPlants implements BlockEnum {
-	BULBINE(0, "bulbine");
+public enum NetherOreType implements BlockEnum {
+	ORICHALCUM_ORE(0, "orichalcum_ore");
 	
 	private final String name;
 	private final int meta;
 	
-	TallGlowNetherPlants(int meta, String name) {
+	NetherOreType(int meta, String name) {
 		this.name = name;
 		this.meta = meta;
 	}
@@ -32,7 +33,7 @@ public enum TallGlowNetherPlants implements BlockEnum {
 	public int getDropMeta() {
 		return meta;
 	}
-	
+
 	@Override
 	public int getMeta() {
 		return meta;
@@ -41,5 +42,12 @@ public enum TallGlowNetherPlants implements BlockEnum {
 	@Override
 	public boolean isInCreative() {
 		return true;
+	}
+
+	public int getDropID() {
+		switch (this) {
+			case ORICHALCUM_ORE: return ItemListener.getItem("raw_orichalcum").id;
+		}
+		return 0;
 	}
 }

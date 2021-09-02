@@ -1,20 +1,20 @@
 package paulevs.bnb.block;
 
 import net.minecraft.block.material.Material;
-import paulevs.bnb.block.types.NetherOre;
+import paulevs.bnb.block.types.NetherOreType;
 import paulevs.bnb.util.MHelper;
 
 import java.util.Random;
 
 public class NetherOreBlock extends MultiBlock {
 	public NetherOreBlock(String name, int id) {
-		super(name, id, Material.STONE, NetherOre.class);
+		super(name, id, Material.STONE, NetherOreType.class);
 		this.setHardness(NETHERRACK.getHardness());
 	}
 	
 	@Override
 	public int getDropId(int meta, Random rand) {
-		NetherOre ore = (NetherOre) getVariant(meta);
+		NetherOreType ore = (NetherOreType) getVariant(meta);
 		return ore.getDropID();
 	}
 	

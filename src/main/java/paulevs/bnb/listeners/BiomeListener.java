@@ -9,6 +9,7 @@ import paulevs.bnb.world.biome.BasaltShield;
 import paulevs.bnb.world.biome.CorruptedLands;
 import paulevs.bnb.world.biome.CrimsonForest;
 import paulevs.bnb.world.biome.PoisonForest;
+import paulevs.bnb.world.biome.SoulGrassland;
 import paulevs.bnb.world.biome.SoulValley;
 import paulevs.bnb.world.biome.WarpedForest;
 
@@ -28,6 +29,7 @@ public class BiomeListener implements BiomeRegister {
 		register("Corrupted Lands", CorruptedLands::new);
 		register("Basalt Shield", BasaltShield::new);
 		register("Basalt Garden", BasaltGarden::new);
+		register("Soul Grassland", SoulGrassland::new);
 	}
 	
 	private static void register(String name, Function<String, Biome> init) {

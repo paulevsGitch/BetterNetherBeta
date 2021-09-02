@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.level.TileView;
 import net.minecraft.util.maths.MathHelper;
 import paulevs.bnb.block.sound.NetherBlockSounds;
-import paulevs.bnb.block.types.NetherTerrain;
+import paulevs.bnb.block.types.NetherTerrainType;
 import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.BlockUtil;
@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class NetherTerrainBlock extends MultiBlock implements BlockWithLight {
 	public NetherTerrainBlock(String name, int id) {
-		super(name, id, Material.STONE, NetherTerrain.class);
+		super(name, id, Material.STONE, NetherTerrainType.class);
 		this.setHardness(NETHERRACK.getHardness());
 		this.sounds(NetherBlockSounds.NYLIUM);
 	}
@@ -25,7 +25,7 @@ public class NetherTerrainBlock extends MultiBlock implements BlockWithLight {
 	@Environment(EnvType.CLIENT)
 	public int method_1626(TileView world, int x, int y, int z, int side) {
 		int meta = world.getTileMeta(x, y, z);
-		if (meta != NetherTerrain.CORRUPTED_NYLIUM.getMeta() || !BlockUtil.isTopSide(side)) {
+		if (meta != NetherTerrainType.CORRUPTED_NYLIUM.getMeta() || !BlockUtil.isTopSide(side)) {
 			return super.method_1626(world, x, y, z, side);
 		}
 		
@@ -44,7 +44,7 @@ public class NetherTerrainBlock extends MultiBlock implements BlockWithLight {
 	
 	@Override
 	public int getTextureForSide(int side, int meta) {
-		if (meta == NetherTerrain.CORRUPTED_NYLIUM.getMeta() && BlockUtil.isTopSide(side)) {
+		if (meta == NetherTerrainType.CORRUPTED_NYLIUM.getMeta() && BlockUtil.isTopSide(side)) {
 			String name = variants[clampMeta(meta)].getTexture(side) + "_0";
 			return TextureListener.getBlockTexture(name);
 		}

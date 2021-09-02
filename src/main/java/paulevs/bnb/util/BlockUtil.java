@@ -5,7 +5,7 @@ import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;
 import paulevs.bnb.block.NetherStoneBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
-import paulevs.bnb.block.SoulSoilBlock;
+import paulevs.bnb.block.SoulTerrainBlock;
 
 public class BlockUtil {
 	private static boolean requireLight;
@@ -21,7 +21,7 @@ public class BlockUtil {
 	}
 	
 	public static boolean isSoulTerrain(int id) {
-		return id == BlockBase.SOUL_SAND.id || blockByID(id) instanceof SoulSoilBlock;
+		return id == BlockBase.SOUL_SAND.id || blockByID(id) instanceof SoulTerrainBlock;
 	}
 	
 	public static boolean isNonSolid(int tile) {

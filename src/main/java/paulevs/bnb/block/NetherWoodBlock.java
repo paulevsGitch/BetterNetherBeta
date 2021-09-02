@@ -5,14 +5,14 @@ import net.fabricmc.api.Environment;
 import net.minecraft.level.TileView;
 import net.minecraft.util.maths.MathHelper;
 import paulevs.bnb.block.material.NetherMaterials;
-import paulevs.bnb.block.types.NetherWood;
+import paulevs.bnb.block.types.NetherWoodType;
 import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.MHelper;
 
 public class NetherWoodBlock extends MultiBlock implements BlockWithLight {
 	public NetherWoodBlock(String name, int id) {
-		super(name, id, NetherMaterials.NETHER_WOOD, NetherWood.class);
+		super(name, id, NetherMaterials.NETHER_WOOD, NetherWoodType.class);
 		this.setHardness(WOOD.getHardness());
 		this.sounds(WOOD_SOUNDS);
 	}

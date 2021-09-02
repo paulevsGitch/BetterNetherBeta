@@ -7,7 +7,7 @@ import net.minecraft.item.PlaceableTileEntity;
 import net.minecraft.level.TileView;
 import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTileEntityWithMeta;
 import paulevs.bnb.BetterNetherBeta;
-import paulevs.bnb.block.types.NetherVines;
+import paulevs.bnb.block.types.NetherVineType;
 import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.MHelper;
@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class NetherVineBlock extends NetherCeilPlantBlock implements BlockWithLight {
 	public NetherVineBlock(String name, int id) {
-		super(name, id, NetherVines.class);
+		super(name, id, NetherVineType.class);
 		this.disableStat();
 		this.disableNotifyOnMetaDataChange();
 	}
@@ -55,7 +55,7 @@ public class NetherVineBlock extends NetherCeilPlantBlock implements BlockWithLi
 		if (world.getTileId(x, y - 1, z) != id) {
 			name += "_bottom";
 		}
-		else if (meta == NetherVines.VIRID_VINE.getMeta()) {
+		else if (meta == NetherVineType.VIRID_VINE.getMeta()) {
 			int seed = MHelper.getRandomHash(y, x, z);
 			Random random = MHelper.getRandom();
 			random.setSeed(seed);

@@ -24,9 +24,10 @@ public class SoulValley extends NetherBiome {
 		this.setTopBlock(new BlockState(BlockBase.SOUL_SAND));
 		this.addTree(NetherStructures.SOUL_SPIRE);
 		this.addPlant(NetherStructures.SOUL_BULBITE, 1.0F);
-		this.addPlant(NetherStructures.SOUL_HEART, 0.1F);
+		this.addPlant(NetherStructures.BONE_PEAKS, 0.6F);
+		this.addPlant(NetherStructures.SOUL_HEART, 0.3F);
 		this.setMaxPlantCount(2);
-		this.setMaxTreeCount(10);
+		this.setMaxTreeCount(7);
 		this.setFire(false);
 		this.setTopDepth(5);
 	}

@@ -21,15 +21,15 @@ import paulevs.bnb.block.NetherWoodBlock;
 import paulevs.bnb.block.NetherrackBricksBlock;
 import paulevs.bnb.block.SoulGrassBlock;
 import paulevs.bnb.block.SoulHeartBlock;
-import paulevs.bnb.block.SoulSoilBlock;
+import paulevs.bnb.block.SoulTerrainBlock;
 import paulevs.bnb.block.SoulSpireBlock;
 import paulevs.bnb.block.SoulSpirePlantBlock;
 import paulevs.bnb.block.SpiderCocoonBlock;
 import paulevs.bnb.block.TallNetherPlant;
 import paulevs.bnb.block.types.BasaltBlockType;
-import paulevs.bnb.block.types.NetherPlanks;
-import paulevs.bnb.block.types.NetherrackBricks;
-import paulevs.bnb.block.types.TallGlowNetherPlants;
+import paulevs.bnb.block.types.NetherPlanksType;
+import paulevs.bnb.block.types.NetherrackBricksType;
+import paulevs.bnb.block.types.TallGlowNetherPlantType;
 import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.interfaces.QuadFunction;
 import paulevs.bnb.interfaces.TriFunction;
@@ -53,7 +53,7 @@ public class BlockListener implements BlockRegister {
 		occupiedIDs = BetterNetherBeta.configBlocks.getSet("blocks");
 		
 		register("nether_terrain", NetherTerrainBlock::new);
-		register("soul_soil", SoulSoilBlock::new);
+		register("soul_soil", SoulTerrainBlock::new);
 		
 		register("nether_wood", NetherWoodBlock::new);
 		register("nether_leaves", NetherLeavesBlock::new);
@@ -61,7 +61,7 @@ public class BlockListener implements BlockRegister {
 		register("nether_tree_fur", NetherTreeFurBlock::new);
 		register("nether_planks", NetherPlanksBlock::new);
 		
-		for (NetherPlanks plank: NetherPlanks.values()) {
+		for (NetherPlanksType plank: NetherPlanksType.values()) {
 			BlockBase block = getBlock("nether_planks");
 			register(plank.getName() + "_stairs", NetherStairsBlock::new, block, plank.getMeta());
 			register(plank.getName() + "_slab", NetherSlabBlock::new, block, plank.getMeta());
@@ -74,15 +74,15 @@ public class BlockListener implements BlockRegister {
 		register("soul_spire", SoulSpirePlantBlock::new);
 		register("soul_spire_block", SoulSpireBlock::new);
 		register("soul_grass", SoulGrassBlock::new);
-		register("tall_glow_nether_plant", TallNetherPlant::new, TallGlowNetherPlants.class, 0.75F);
+		register("tall_glow_nether_plant", TallNetherPlant::new, TallGlowNetherPlantType.class, 0.75F);
 		register("soul_heart", SoulHeartBlock::new);
 		
 		register("spider_cocoon", SpiderCocoonBlock::new);
 		
 		register("netherrack_bricks", NetherrackBricksBlock::new);
-		register("netherrack_brick_stairs", NetherStairsBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICKS.getMeta());
-		register("netherrack_brick_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICKS.getMeta());
-		register("netherrack_tile_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricks.NETHERRACK_BRICK_SMALL_TILE.getMeta());
+		register("netherrack_brick_stairs", NetherStairsBlock::new, getBlock("netherrack_bricks"), NetherrackBricksType.NETHERRACK_BRICKS.getMeta());
+		register("netherrack_brick_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricksType.NETHERRACK_BRICKS.getMeta());
+		register("netherrack_tile_slab", NetherSlabBlock::new, getBlock("netherrack_bricks"), NetherrackBricksType.NETHERRACK_BRICK_SMALL_TILE.getMeta());
 		
 		register("basalt", BasaltBlock::new);
 		register("basalt_stairs", NetherStairsBlock::new, getBlock("basalt"), BasaltBlockType.BASALT.getMeta());

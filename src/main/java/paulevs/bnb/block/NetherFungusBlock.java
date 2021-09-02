@@ -9,7 +9,7 @@ import net.modificationstation.stationloader.api.client.model.BlockModelProvider
 import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTileEntityWithMeta;
 import paulevs.bnb.BetterNetherBeta;
-import paulevs.bnb.block.types.NetherFungus;
+import paulevs.bnb.block.types.NetherFungusType;
 import paulevs.bnb.interfaces.Bonemealable;
 import paulevs.bnb.listeners.ModelListener;
 import paulevs.bnb.listeners.TextureListener;
@@ -18,7 +18,7 @@ import paulevs.bnb.world.structures.NetherStructures;
 
 public class NetherFungusBlock extends NetherPlantBlock implements BlockModelProvider, Bonemealable {
 	public NetherFungusBlock(String registryName, int id) {
-		super(registryName, id, NetherFungus.class, false);
+		super(registryName, id, NetherFungusType.class, false);
 	}
 
 	@Override
@@ -58,10 +58,10 @@ public class NetherFungusBlock extends NetherPlantBlock implements BlockModelPro
 	
 	@Override
 	public boolean onBonemealUse(Level level, int x, int y, int z, int meta) {
-		if (meta == NetherFungus.CRIMSON_FUNGUS.getMeta()) {
+		if (meta == NetherFungusType.CRIMSON_FUNGUS.getMeta()) {
 			return NetherStructures.CRIMSON_TREE.generate(level, MHelper.getRandom(), x, y, z);
 		}
-		else if (meta == NetherFungus.WARPED_FUNGUS.getMeta()) {
+		else if (meta == NetherFungusType.WARPED_FUNGUS.getMeta()) {
 			return NetherStructures.WARPED_TREE.generate(level, MHelper.getRandom(), x, y, z);
 		}
 		return false;

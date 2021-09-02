@@ -1,6 +1,6 @@
 package paulevs.bnb.world.biome;
 
-import paulevs.bnb.block.types.NetherTerrain;
+import paulevs.bnb.block.types.NetherTerrainType;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.world.structures.NetherStructures;
@@ -11,7 +11,7 @@ public class CrimsonForest extends NetherBiome {
 	public CrimsonForest(String name) {
 		super(name);
 		this.setFogColor("e23f36");
-		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrain.CRIMSON_NYLIUM));
+		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrainType.CRIMSON_NYLIUM));
 		this.addTree(NetherStructures.CRIMSON_TREE);
 		this.addPlant(NetherStructures.CRIMSON_ROOTS, 1.0F);
 		this.addPlant(NetherStructures.LAMELLARIUM, 0.5F);

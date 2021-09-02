@@ -2,7 +2,7 @@ package paulevs.bnb.block;
 
 import net.minecraft.level.Level;
 import net.modificationstation.stationloader.api.client.model.CustomModel;
-import paulevs.bnb.block.types.TallGlowNetherPlants;
+import paulevs.bnb.block.types.TallGlowNetherPlantType;
 import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.listeners.ModelListener;
@@ -37,7 +37,7 @@ public class TallNetherPlant extends NetherPlantBlock implements BlockWithLight 
 	
 	@Override
 	public CustomModel getCustomWorldModel(Level level, int x, int y, int z, int meta) {
-		if (meta == TallGlowNetherPlants.BULBINE.getMeta()) {
+		if (meta == TallGlowNetherPlantType.BULBINE.getMeta()) {
 			if (level.getTileId(x, y + 1, z) != this.id) {
 				int rotation = MHelper.getRandomHash(y, x, z) & 3;
 				return ModelListener.getBlockModel("bulbine_stem_top_" + rotation);

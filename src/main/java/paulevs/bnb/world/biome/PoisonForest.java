@@ -1,6 +1,6 @@
 package paulevs.bnb.world.biome;
 
-import paulevs.bnb.block.types.NetherTerrain;
+import paulevs.bnb.block.types.NetherTerrainType;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.world.structures.NetherStructures;
@@ -11,7 +11,7 @@ public class PoisonForest extends NetherBiome {
 	public PoisonForest(String name) {
 		super(name);
 		this.setFogColor("72a950");
-		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrain.POISON_NYLIUM));
+		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrainType.POISON_NYLIUM));
 		this.addTree(NetherStructures.POISON_TREE);
 		this.addPlant(NetherStructures.BUBBLE_GRASS, 0.2F);
 		this.addPlant(NetherStructures.LONGWEED, 0.3F);
