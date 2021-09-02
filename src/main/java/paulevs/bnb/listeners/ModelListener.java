@@ -9,6 +9,7 @@ import paulevs.bnb.block.types.NetherLeavesType;
 import paulevs.bnb.block.types.NetherPlantType;
 import paulevs.bnb.block.types.NetherTreeFurType;
 import paulevs.bnb.block.types.SoulPlantType;
+import paulevs.bnb.block.types.UmbraPlantType;
 import paulevs.bnb.util.BlockUtil;
 
 import java.util.Map;
@@ -32,7 +33,7 @@ public class ModelListener implements ModelRegister {
 			makeRotated("cocoon_warped", model.setTextures("cocoon_warped"));
 			makeRotated("cocoon_poison", model.setTextures("cocoon_poison"));
 			
-			OBJBlockModel cross = new OBJBlockModel("/assets/bnb/models/block/cross_no_dist.obj", 16, 8, 0, 8, BlockFaces.UP);
+			OBJBlockModel cross = new OBJBlockModel("/assets/bnb/models/block/cross.obj", 16, 8, 0, 8, BlockFaces.UP);
 			model = new OBJBlockModel("/assets/bnb/models/block/fluffy_grass.obj", 16, 8, 0, 8, BlockFaces.UP);
 			for (NetherPlantType plant: NetherPlantType.values()) {
 				if (plant.isCross()) {
@@ -50,6 +51,13 @@ public class ModelListener implements ModelRegister {
 					BLOCK_MODELS.put(plant.getName(), model.clone().setTextures(plant.getTexture(0)));
 				}
 			}
+			for (UmbraPlantType plant: UmbraPlantType.values()) {
+				if (plant != UmbraPlantType.SMALL_DARKSHROOM) {
+					BLOCK_MODELS.put(plant.getName(), cross.clone().setTextures(plant.getTexture(0)));
+				}
+			}
+			model = new OBJBlockModel("/assets/bnb/models/block/small_darkshroom.obj", 16, 8, 0, 8, null);
+			BLOCK_MODELS.put("small_darkshroom", model.setTextures("small_darkshroom_side", "small_darkshroom_top"));
 			
 			model = new OBJBlockModel("/assets/bnb/models/block/normal_crop.obj");
 			for (NetherTreeFurType fur: NetherTreeFurType.values()) {
@@ -69,6 +77,12 @@ public class ModelListener implements ModelRegister {
 			}
 			model = new OBJBlockModel("/assets/bnb/models/block/bulbine_stem_top.obj", 16, 8, 0, 8, BlockFaces.UP);
 			makeRotated("bulbine_stem_top", model.setTextures("bulbine_stem_top", "bulbine_lanterns"));
+			
+			model = new OBJBlockModel("/assets/bnb/models/block/darkshroom_block_side.obj");
+			BLOCK_MODELS.put("darkshroom_side", model.setTextures("darkshroom_top", "darkshroom_side", "darkshroom_bottom"));
+			
+			model = new OBJBlockModel("/assets/bnb/models/block/darkshroom_block_center.obj");
+			BLOCK_MODELS.put("darkshroom_center", model.setTextures("darkshroom_top", "darkshroom_center_side", "darkshroom_bottom"));
 		}
 	}
 	

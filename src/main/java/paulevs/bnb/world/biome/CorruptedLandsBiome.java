@@ -7,8 +7,8 @@ import paulevs.bnb.world.structures.NetherStructures;
 
 import java.util.Random;
 
-public class CorruptedLands extends NetherBiome {
-	public CorruptedLands(String name) {
+public class CorruptedLandsBiome extends NetherBiome {
+	public CorruptedLandsBiome(String name) {
 		super(name);
 		this.setFogColor("1c1323");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrainType.CORRUPTED_NYLIUM));

@@ -17,9 +17,11 @@ import java.util.List;
 import java.util.Random;
 
 public class NetherBiome extends Biome {
+	protected static final BlockState NETHERRRACK = new BlockState(BlockBase.NETHERRACK);
 	private Vec3f fogColor = Vec3f.method_1293(0.2F, 0.03F, 0.03F);
 	private final List<StructureInstance> structures = Lists.newArrayList();
-	protected BlockState topBlock = new BlockState(BlockBase.NETHERRACK);
+	protected BlockState fillBlock = NETHERRRACK;
+	protected BlockState topBlock = NETHERRRACK;
 	private boolean hasFire = true;
 	private int topDepth = 1;
 	
@@ -50,8 +52,16 @@ public class NetherBiome extends Biome {
 		return getTopBlock(level, x, y, z);
 	}
 	
+	public BlockState getFillBlock(Level level, int x, int y, int z) {
+		return fillBlock;
+	}
+	
 	public void setTopBlock(BlockState block) {
 		this.topBlock = block;
+	}
+	
+	public void setFillBlock(BlockState block) {
+		this.fillBlock = block;
 	}
 	
 	public void addStructure(Structure structure, float chance, int count) {

@@ -6,6 +6,7 @@ import net.minecraft.block.BlockBase;
 import net.modificationstation.stationloader.api.common.event.block.BlockRegister;
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.block.BasaltBlock;
+import paulevs.bnb.block.DarkshroomBlock;
 import paulevs.bnb.block.NetherFungusBlock;
 import paulevs.bnb.block.NetherGrassBlock;
 import paulevs.bnb.block.NetherLanternBlock;
@@ -14,18 +15,21 @@ import paulevs.bnb.block.NetherOreBlock;
 import paulevs.bnb.block.NetherPlanksBlock;
 import paulevs.bnb.block.NetherSlabBlock;
 import paulevs.bnb.block.NetherStairsBlock;
+import paulevs.bnb.block.NetherStemBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.NetherTreeFurBlock;
 import paulevs.bnb.block.NetherVineBlock;
 import paulevs.bnb.block.NetherWoodBlock;
 import paulevs.bnb.block.NetherrackBricksBlock;
-import paulevs.bnb.block.SoulGrassBlock;
 import paulevs.bnb.block.SoulHeartBlock;
+import paulevs.bnb.block.SoulPlantBlock;
 import paulevs.bnb.block.SoulSpireBlock;
 import paulevs.bnb.block.SoulSpirePlantBlock;
 import paulevs.bnb.block.SoulTerrainBlock;
 import paulevs.bnb.block.SpiderCocoonBlock;
 import paulevs.bnb.block.TallNetherPlant;
+import paulevs.bnb.block.UmbraPlantBlock;
+import paulevs.bnb.block.UmbralithBlock;
 import paulevs.bnb.block.types.BasaltBlockType;
 import paulevs.bnb.block.types.NetherPlanksType;
 import paulevs.bnb.block.types.NetherrackBricksType;
@@ -67,15 +71,20 @@ public class BlockListener implements BlockRegister {
 			register(plank.getName() + "_slab", NetherSlabBlock::new, block, plank.getMeta());
 		}
 		
+		register("nether_stem", NetherStemBlock::new);
+		register("darkshroom", DarkshroomBlock::new);
+		
 		register("nether_grass", NetherGrassBlock::new);
 		register("nether_vine", NetherVineBlock::new);
 		register("nether_fungus", NetherFungusBlock::new);
 		
 		register("soul_spire", SoulSpirePlantBlock::new);
 		register("soul_spire_block", SoulSpireBlock::new);
-		register("soul_grass", SoulGrassBlock::new);
+		register("soul_grass", SoulPlantBlock::new);
 		register("tall_glow_nether_plant", TallNetherPlant::new, TallGlowNetherPlantType.class, 0.75F);
 		register("soul_heart", SoulHeartBlock::new);
+		
+		register("umbra_plant", UmbraPlantBlock::new);
 		
 		register("spider_cocoon", SpiderCocoonBlock::new);
 		
@@ -89,6 +98,8 @@ public class BlockListener implements BlockRegister {
 		register("basalt_slab", NetherSlabBlock::new, getBlock("basalt"), BasaltBlockType.BASALT.getMeta());
 		register("basalt_brick_stairs", NetherStairsBlock::new, getBlock("basalt"), BasaltBlockType.BASALT_BRICKS.getMeta());
 		register("basalt_brick_slab", NetherSlabBlock::new, getBlock("basalt"), BasaltBlockType.BASALT_BRICKS.getMeta());
+		
+		register("umbralith", UmbralithBlock::new);
 		
 		register("nether_ore", NetherOreBlock::new);
 		

@@ -4,14 +4,15 @@ import com.google.common.collect.Maps;
 import net.minecraft.level.biome.Biome;
 import net.modificationstation.stationloader.api.common.event.level.biome.BiomeRegister;
 import paulevs.bnb.world.NetherBiomeSource;
-import paulevs.bnb.world.biome.BasaltGarden;
-import paulevs.bnb.world.biome.BasaltShield;
-import paulevs.bnb.world.biome.CorruptedLands;
-import paulevs.bnb.world.biome.CrimsonForest;
-import paulevs.bnb.world.biome.PoisonForest;
-import paulevs.bnb.world.biome.SoulGrassland;
-import paulevs.bnb.world.biome.SoulValley;
-import paulevs.bnb.world.biome.WarpedForest;
+import paulevs.bnb.world.biome.BasaltGardenBiome;
+import paulevs.bnb.world.biome.BasaltShieldBiome;
+import paulevs.bnb.world.biome.CorruptedLandsBiome;
+import paulevs.bnb.world.biome.CrimsonForestBiome;
+import paulevs.bnb.world.biome.DeepDarkBiome;
+import paulevs.bnb.world.biome.PoisonForestBiome;
+import paulevs.bnb.world.biome.SoulGrasslandBiome;
+import paulevs.bnb.world.biome.SoulValleyBiome;
+import paulevs.bnb.world.biome.WarpedForestBiome;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -22,14 +23,15 @@ public class BiomeListener implements BiomeRegister {
 	@Override
 	public void registerBiomes() {
 		NetherBiomeSource.addBiome(Biome.NETHER);
-		register("Crimson Forest", CrimsonForest::new);
-		register("Warped Forest", WarpedForest::new);
-		register("Poison Forest", PoisonForest::new);
-		register("Soul Valley", SoulValley::new);
-		register("Corrupted Lands", CorruptedLands::new);
-		register("Basalt Shield", BasaltShield::new);
-		register("Basalt Garden", BasaltGarden::new);
-		register("Soul Grassland", SoulGrassland::new);
+		register("Crimson Forest", CrimsonForestBiome::new);
+		register("Warped Forest", WarpedForestBiome::new);
+		register("Poison Forest", PoisonForestBiome::new);
+		register("Soul Valley", SoulValleyBiome::new);
+		register("Corrupted Lands", CorruptedLandsBiome::new);
+		register("Basalt Shield", BasaltShieldBiome::new);
+		register("Basalt Garden", BasaltGardenBiome::new);
+		register("Soul Grassland", SoulGrasslandBiome::new);
+		register("Deep Dark", DeepDarkBiome::new);
 	}
 	
 	private static void register(String name, Function<String, Biome> init) {

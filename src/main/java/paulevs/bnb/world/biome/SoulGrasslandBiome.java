@@ -10,7 +10,7 @@ import paulevs.bnb.world.structures.NetherStructures;
 
 import java.util.Random;
 
-public class SoulGrassland extends NetherBiome {
+public class SoulGrasslandBiome extends NetherBiome {
 	private BlockState soulNylium = new BlockState(BlockListener.getBlockID("soul_soil"), SoulTerrainType.SOUL_NYLIUM.getMeta());
 	private BlockState air = new BlockState(0);
 	private BlockState[] soilLayers = new BlockState[] {
@@ -19,7 +19,7 @@ public class SoulGrassland extends NetherBiome {
 		new BlockState(BlockListener.getBlockID("soul_layered_block"), 2)
 	};
 	
-	public SoulGrassland(String name) {
+	public SoulGrasslandBiome(String name) {
 		super(name);
 		this.setFogColor("0a9ea2");
 		this.setTopBlock(new BlockState(BlockListener.getBlockID("soul_soil")));

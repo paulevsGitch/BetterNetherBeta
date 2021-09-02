@@ -11,9 +11,9 @@ import net.minecraft.util.io.CompoundTag;
 import org.spongepowered.asm.mixin.Mixin;
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.interfaces.NetherMob;
-import paulevs.bnb.world.biome.CrimsonForest;
-import paulevs.bnb.world.biome.PoisonForest;
-import paulevs.bnb.world.biome.WarpedForest;
+import paulevs.bnb.world.biome.CrimsonForestBiome;
+import paulevs.bnb.world.biome.PoisonForestBiome;
+import paulevs.bnb.world.biome.WarpedForestBiome;
 
 @Mixin(value = Spider.class, priority = 100)
 public abstract class SpiderMixin extends MonsterBase implements NetherMob {
@@ -32,13 +32,13 @@ public abstract class SpiderMixin extends MonsterBase implements NetherMob {
 		super.initDataTracker();
 		if (level.dimension instanceof Nether) {
 			Biome biome = level.getBiomeSource().getBiome((int) x, (int) z);
-			if (biome instanceof CrimsonForest) {
+			if (biome instanceof CrimsonForestBiome) {
 				startTrack(1);
 			}
-			else if (biome instanceof WarpedForest) {
+			else if (biome instanceof WarpedForestBiome) {
 				startTrack(2);
 			}
-			else if (biome instanceof PoisonForest) {
+			else if (biome instanceof PoisonForestBiome) {
 				startTrack(3);
 			}
 			else {

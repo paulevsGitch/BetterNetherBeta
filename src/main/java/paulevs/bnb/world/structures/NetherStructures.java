@@ -13,6 +13,7 @@ import paulevs.bnb.block.types.NetherWoodType;
 import paulevs.bnb.block.types.SoulPlantType;
 import paulevs.bnb.block.types.SoulTerrainType;
 import paulevs.bnb.block.types.TallGlowNetherPlantType;
+import paulevs.bnb.block.types.UmbraPlantType;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.BlockUtil;
@@ -89,9 +90,11 @@ public class NetherStructures {
 	public static final Structure WARPED_VINE = new NetherVine(new BlockState(BlockListener.getBlock("nether_vine"), NetherVineType.WARPED_VINE));
 	public static final Structure VIRID_VINE = new NetherVine(new BlockState(BlockListener.getBlock("nether_vine"), NetherVineType.VIRID_VINE));
 	
-	//public static final Structure CRIMSON_GLOWING_FUR = new NetherGroupedVine(new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.CRIMSON_GLOWING_FUR));
-	//public static final Structure WARPED_GLOWING_FUR = new NetherGroupedVine(new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.WARPED_GLOWING_FUR));
-	//public static final Structure POISON_GLOWING_FUR = new NetherGroupedVine(new BlockState(BlockListener.getBlock("nether_tree_fur"), NetherTreeFur.POISON_GLOWING_FUR));
+	public static final Structure DARKSHROOM = new DarkshroomStructure();
+	public static final Structure CYANIA = new BlockScatter(new BlockState(BlockListener.getBlock("umbra_plant"), UmbraPlantType.CYANIA), 4F);
+	public static final Structure SMALL_DARKSHROOM = new BlockScatter(new BlockState(BlockListener.getBlock("umbra_plant"), UmbraPlantType.SMALL_DARKSHROOM), 2F);
+	public static final Structure DARK_WILLOW = new BlockScatter(new BlockState(BlockListener.getBlock("umbra_plant"), UmbraPlantType.DARK_WILLOW), 2F);
+	public static final Structure DEEP_ROSE = new BlockScatter(new BlockState(BlockListener.getBlock("umbra_plant"), UmbraPlantType.DEEP_ROSE), 2F);
 	
 	public static final Structure BASALT_PEAK = new PeakStructure(
 		new BlockState(BlockListener.getBlock("basalt")),

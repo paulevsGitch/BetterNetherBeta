@@ -55,16 +55,19 @@ public class ChunkListener implements ChunkPopulator {
 						}
 					}
 				}
+				BlockState state;
 				if (bio instanceof NetherBiome) {
 					int depth = ((NetherBiome) bio).getTopDepth();
 					boolean fire = ((NetherBiome) bio).hasFire();
 					for (int y = MHelper.max(terrainY, 31); y < 127; y++) {
 						int tile = level.getTileId(x, y, z);
-						if (tile == BlockBase.NETHERRACK.id || tile == BlockBase.SOUL_SAND.id || tile == BlockBase.GRAVEL.id) {
+						if (tile == BlockBase.FIRE.id && !fire) {
+							BlockUtil.fastTilePlace(level, x, y, z, 0, 0);
+						}
+						else if (tile == BlockBase.NETHERRACK.id || tile == BlockBase.SOUL_SAND.id || tile == BlockBase.GRAVEL.id) {
 							tile = level.getTileId(x, y + depth, z);
 							if (BlockUtil.isNonSolidNoLava(tile)) {
 								int offset = 0;
-								BlockState state;
 								if (BlockUtil.isNonSolidNoLava(level.getTileId(x, y + 1, z))) {
 									state = ((NetherBiome) bio).getTopBlock(level, x, y, z);
 									offset = 4;
@@ -77,12 +80,10 @@ public class ChunkListener implements ChunkPopulator {
 									y += offset;
 								}
 							}
-							else if (tile != BlockBase.NETHERRACK.id) {
-								BlockUtil.fastTilePlace(level, x, y, z, BlockBase.NETHERRACK.id, 0);
+							else {
+								state = ((NetherBiome) bio).getFillBlock(level, x, y, z);
+								state.setBlockFast(level, x, y, z);
 							}
-						}
-						else if (!fire && tile == BlockBase.FIRE.id) {
-							BlockUtil.fastTilePlace(level, x, y, z, 0, 0);
 						}
 					}
 				}

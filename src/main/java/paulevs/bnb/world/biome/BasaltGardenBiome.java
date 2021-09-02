@@ -7,8 +7,8 @@ import paulevs.bnb.world.structures.NetherStructures;
 
 import java.util.Random;
 
-public class BasaltGarden extends NetherBiome {
-	public BasaltGarden(String name) {
+public class BasaltGardenBiome extends NetherBiome {
+	public BasaltGardenBiome(String name) {
 		super(name);
 		this.setFogColor("c68885");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("basalt"), BasaltBlockType.BASALT));

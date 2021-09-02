@@ -29,6 +29,9 @@ public class BlockUtil {
 	}
 	
 	public static boolean isNonSolidNoLava(int tile) {
+		if (tile == BlockBase.BROWN_MUSHROOM.id || tile == BlockBase.RED_MUSHROOM.id) {
+			return true;
+		}
 		return tile != BlockBase.STILL_LAVA.id && tile != BlockBase.FLOWING_LAVA.id && isNonSolid(tile);
 	}
 	
