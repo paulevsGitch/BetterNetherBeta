@@ -10,15 +10,15 @@ import java.util.Random;
 public class DeepDarkBiome extends NetherBiome {
 	public DeepDarkBiome(String name) {
 		super(name);
-		this.setFogColor("052a32");
+		this.setFogColor("02181d");
 		this.setFogDensity(3F);
 		this.setTopBlock(new BlockState(BlockListener.getBlock("umbralith"), UmbralithType.DARK_NYLIUM));
 		this.setFillBlock(new BlockState(BlockListener.getBlock("umbralith"), UmbralithType.UMBRALITH));
 		this.addStructure(NetherStructures.DARKSHROOM, 1.0F, 10);
-		this.addStructure(NetherStructures.CYANIA, 1.0F, 4);
-		this.addStructure(NetherStructures.SMALL_DARKSHROOM, 0.4F, 3);
-		this.addStructure(NetherStructures.DARK_WILLOW, 0.4F, 3);
-		this.addStructure(NetherStructures.DEEP_ROSE, 0.2F, 3);
+		this.addStructure(NetherStructures.CYANIA, 1.0F, 3);
+		this.addStructure(NetherStructures.SMALL_DARKSHROOM, 0.2F, 3);
+		this.addStructure(NetherStructures.DARK_WILLOW, 1.0F, 3);
+		this.addStructure(NetherStructures.DEEP_ROSE, 1.0F, 3);
 		this.setFire(false);
 	}
 	
