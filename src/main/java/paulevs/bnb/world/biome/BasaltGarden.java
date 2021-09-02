@@ -12,11 +12,8 @@ public class BasaltGarden extends NetherBiome {
 		super(name);
 		this.setFogColor("c68885");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("basalt"), BasaltBlockType.BASALT));
-		this.addTree(NetherStructures.FLAMING_BASALT_PEAK);
-		this.addPlant(NetherStructures.CRIMSON_ROOTS, 1.0F);
-		this.setMaxCeilPlantCount(0);
-		this.setMaxPlantCount(10);
-		this.setMaxTreeCount(5);
+		this.addStructure(NetherStructures.FLAMING_BASALT_PEAK, 1.0F, 5);
+		this.addStructure(NetherStructures.CRIMSON_ROOTS, 1.0F, 10);
 		this.setTopDepth(10);
 		this.setFire(false);
 	}

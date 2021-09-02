@@ -12,10 +12,9 @@ public class CorruptedLands extends NetherBiome {
 		super(name);
 		this.setFogColor("1c1323");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrainType.CORRUPTED_NYLIUM));
-		this.addPlant(NetherStructures.BULBINE, 0.1F);
-		this.addPlant(NetherStructures.VIOLEUM, 0.3F);
-		this.addPlant(NetherStructures.SHATTERED_GRASS, 1F);
-		this.setMaxPlantCount(8);
+		this.addStructure(NetherStructures.BULBINE, 0.1F, 8);
+		this.addStructure(NetherStructures.VIOLEUM, 0.3F, 8);
+		this.addStructure(NetherStructures.SHATTERED_GRASS, 1F, 8);
 		this.setFire(false);
 	}
 	

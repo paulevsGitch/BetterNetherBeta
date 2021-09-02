@@ -27,12 +27,16 @@ public class BlockScatter extends Structure {
 			int pz = z + MHelper.clamp(MathHelper.floor(random.nextGaussian() * radius + 0.5), -8, 8);
 			for (int py = y + 5; py > y - 5; py --) {
 				if (level.getTileId(px, py, pz) == 0 && block.getBlock().canPlaceAt(level, px, py, pz)) {
-					block.setBlockFast(level, px, py, pz);
+					placeBlock(level, px, py, pz);
 					break;
 				}
 			}
 		}
 		
 		return true;
+	}
+	
+	protected void placeBlock(Level level, int x, int y, int z) {
+		block.setBlockFast(level, x, y, z);
 	}
 }

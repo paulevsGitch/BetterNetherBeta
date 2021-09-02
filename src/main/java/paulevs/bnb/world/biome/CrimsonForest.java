@@ -12,17 +12,14 @@ public class CrimsonForest extends NetherBiome {
 		super(name);
 		this.setFogColor("e23f36");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrainType.CRIMSON_NYLIUM));
-		this.addTree(NetherStructures.CRIMSON_TREE);
-		this.addPlant(NetherStructures.CRIMSON_ROOTS, 1.0F);
-		this.addPlant(NetherStructures.LAMELLARIUM, 0.5F);
-		this.addPlant(NetherStructures.LANTERN_GRASS, 0.2F);
-		this.addPlant(NetherStructures.CRIMSON_BUSH, 0.1F);
-		this.addPlant(NetherStructures.CRIMSON_FUNGUS, 0.1F);
-		this.addPlant(NetherStructures.CRIMSON_COCOON, 0.01F);
-		this.addCeilPlant(NetherStructures.CRIMSON_VINE);
-		this.setMaxTreeCount(5);
-		this.setMaxPlantCount(15);
-		this.setMaxCeilPlantCount(30);
+		this.addStructure(NetherStructures.CRIMSON_TREE, 1.0F, 5);
+		this.addStructure(NetherStructures.CRIMSON_ROOTS, 1.0F, 8);
+		this.addStructure(NetherStructures.LAMELLARIUM, 0.2F, 8);
+		this.addStructure(NetherStructures.LANTERN_GRASS, 0.2F, 8);
+		this.addStructure(NetherStructures.CRIMSON_BUSH, 0.2F, 8);
+		this.addStructure(NetherStructures.CRIMSON_FUNGUS, 0.1F, 8);
+		this.addStructure(NetherStructures.CRIMSON_COCOON, 0.01F, 8);
+		this.addStructure(NetherStructures.CRIMSON_VINE, 1.0F, 20);
 		this.setFire(false);
 	}
 	

@@ -12,17 +12,14 @@ public class WarpedForest extends NetherBiome {
 		super(name);
 		this.setFogColor("30b7a9");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrainType.WARPED_NYLIUM));
-		this.addTree(NetherStructures.WARPED_TREE);
-		this.addPlant(NetherStructures.WARPED_ROOTS, 1F);
-		this.addPlant(NetherStructures.GLOWTAIL, 0.4F);
-		this.addPlant(NetherStructures.WARPED_CORAL, 0.2F);
-		this.addPlant(NetherStructures.WARPED_MOSS, 1F);
-		this.addPlant(NetherStructures.WARPED_FUNGUS, 0.1F);
-		this.addPlant(NetherStructures.WARPED_COCOON, 0.01F);
-		this.addCeilPlant(NetherStructures.WARPED_VINE);
-		this.setMaxTreeCount(5);
-		this.setMaxPlantCount(15);
-		this.setMaxCeilPlantCount(30);
+		this.addStructure(NetherStructures.WARPED_TREE, 1.0F, 5);
+		this.addStructure(NetherStructures.WARPED_ROOTS, 1.0F, 8);
+		this.addStructure(NetherStructures.GLOWTAIL, 0.4F, 8);
+		this.addStructure(NetherStructures.WARPED_CORAL, 0.2F, 8);
+		this.addStructure(NetherStructures.WARPED_MOSS, 1F, 8);
+		this.addStructure(NetherStructures.WARPED_FUNGUS, 0.1F, 8);
+		this.addStructure(NetherStructures.WARPED_COCOON, 0.01F, 8);
+		this.addStructure(NetherStructures.WARPED_VINE, 1.0F, 20);
 		this.setFire(false);
 	}
 	

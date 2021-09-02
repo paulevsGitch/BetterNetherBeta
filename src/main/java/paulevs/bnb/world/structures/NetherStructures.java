@@ -3,19 +3,22 @@ package paulevs.bnb.world.structures;
 import net.minecraft.level.structure.Structure;
 import paulevs.bnb.block.types.BasaltBlockType;
 import paulevs.bnb.block.types.NetherFungusType;
-import paulevs.bnb.block.types.NetherPlantType;
 import paulevs.bnb.block.types.NetherLanternType;
 import paulevs.bnb.block.types.NetherLeavesType;
 import paulevs.bnb.block.types.NetherOreType;
+import paulevs.bnb.block.types.NetherPlantType;
 import paulevs.bnb.block.types.NetherTreeFurType;
 import paulevs.bnb.block.types.NetherVineType;
 import paulevs.bnb.block.types.NetherWoodType;
 import paulevs.bnb.block.types.SoulPlantType;
+import paulevs.bnb.block.types.SoulTerrainType;
 import paulevs.bnb.block.types.TallGlowNetherPlantType;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.RangedBlockState;
+
+import java.util.function.Function;
 
 public class NetherStructures {
 	public static final Structure CRIMSON_TREE = new NetherTree(
@@ -40,6 +43,7 @@ public class NetherStructures {
 		0.9F
 	);
 	public static final Structure SOUL_SPIRE = new SoulSpireStructure();
+	public static final Structure SOUL_SPIRE_CONDITIONAL = new SoulSpireStructureConditional();
 	
 	public static final Structure CRIMSON_ROOTS = makeGrass(NetherPlantType.CRIMSON_ROOTS);
 	public static final Structure LAMELLARIUM = makeGrass(NetherPlantType.LAMELLARIUM);
@@ -63,9 +67,16 @@ public class NetherStructures {
 		TallGlowNetherPlantType.BULBINE
 	), 3, 5F);
 	
+	private static final Function<BlockState, Boolean> SOUL_NYLIUM_CONDITION = blockState -> blockState.getBlockID() == BlockListener.getBlockID("soul_soil") && blockState.getMeta() == SoulTerrainType.SOUL_NYLIUM.getMeta();
+	private static final Function<BlockState, Boolean> SOUL_LAND_CONDITION = blockState -> blockState.getBlockID() == BlockListener.getBlockID("soul_soil") && blockState.getMeta() != SoulTerrainType.SOUL_NYLIUM.getMeta();
+	
 	public static final Structure SOUL_BULBITE = makeGrass(SoulPlantType.SOUL_BULBITE);
 	public static final Structure BONE_PEAKS = makeGrass(SoulPlantType.BONE_PEAKS);
 	public static final Structure SOUL_HEART = new BlockScatter(new RangedBlockState(BlockListener.getBlock("soul_heart"), 3), 2F);
+	public static final Structure SOUL_BULBITE_CONDITIONAL = new BlockScatterConditional(new BlockState(BlockListener.getBlock("soul_grass"), SoulPlantType.SOUL_BULBITE), 3F, SOUL_NYLIUM_CONDITION);
+	public static final Structure SOUL_HEART_CONDITIONAL = new BlockScatterConditional(new RangedBlockState(BlockListener.getBlock("soul_heart"), 3), 2F, SOUL_NYLIUM_CONDITION);
+	public static final Structure BONE_PEAKS_CONDITIONAL = new BlockScatterConditional(new BlockState(BlockListener.getBlock("soul_grass"), SoulPlantType.BONE_PEAKS), 2F, SOUL_LAND_CONDITION);
+	public static final Structure SOUL_CORAL = new BlockScatterConditional(new BlockState(BlockListener.getBlock("soul_grass"), SoulPlantType.SOUL_CORAL), 4F, SOUL_NYLIUM_CONDITION);
 	
 	public static final Structure CRIMSON_FUNGUS = new BlockScatter(new BlockState(BlockListener.getBlock("nether_fungus"), NetherFungusType.CRIMSON_FUNGUS), 1F);
 	public static final Structure WARPED_FUNGUS = new BlockScatter(new BlockState(BlockListener.getBlock("nether_fungus"), NetherFungusType.WARPED_FUNGUS), 1F);

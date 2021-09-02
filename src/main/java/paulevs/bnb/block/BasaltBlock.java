@@ -5,7 +5,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.level.Level;
 import net.minecraft.level.TileView;
 import net.minecraft.util.maths.Vec3i;
-import org.lwjgl.util.Point;
 import paulevs.bnb.block.types.BasaltBlockType;
 import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.interfaces.Bonemealable;

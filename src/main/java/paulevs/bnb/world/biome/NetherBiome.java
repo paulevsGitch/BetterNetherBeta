@@ -11,26 +11,17 @@ import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.Vec3f;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.ClientUtil;
-import paulevs.bnb.util.WeightedList;
+import paulevs.bnb.world.structures.StructureInstance;
 
 import java.util.List;
 import java.util.Random;
 
 public class NetherBiome extends Biome {
-	private List<Structure> trees = Lists.newArrayList();
-	private List<Structure> ceil = Lists.newArrayList();
-	private WeightedList<Structure> plants = new WeightedList<Structure>();
-	
-	protected BlockState topBlock = new BlockState(BlockBase.NETHERRACK);
-	
-	private int topDepth = 1;
-	private int treeCount = 0;
-	private int plantCount = 0;
-	private int ceilCount = 0;
-	
-	private boolean hasFire = true;
-	
 	private Vec3f fogColor = Vec3f.method_1293(0.2F, 0.03F, 0.03F);
+	private final List<StructureInstance> structures = Lists.newArrayList();
+	protected BlockState topBlock = new BlockState(BlockBase.NETHERRACK);
+	private boolean hasFire = true;
+	private int topDepth = 1;
 	
 	public NetherBiome(String name) {
 		this.setName(name);
@@ -51,35 +42,6 @@ public class NetherBiome extends Biome {
 		this.creatures.add(new EntityEntry(entryClass, rarity));
 	}
 	
-	@Override
-	public Structure getTree(Random rand) {
-		return trees.get(rand.nextInt(trees.size()));
-	}
-	
-	public int getMaxTreeCount() {
-		return trees.isEmpty() ? 0 : treeCount;
-	}
-	
-	public void setMaxTreeCount(int treeCount) {
-		this.treeCount = treeCount;
-	}
-	
-	public int getMaxPlantCount() {
-		return plants.isEmpty() ? 0 : plantCount;
-	}
-	
-	public void setMaxPlantCount(int plantCount) {
-		this.plantCount = plantCount;
-	}
-	
-	public int getMaxCeilPlantCount() {
-		return ceil.isEmpty() ? 0 : ceilCount;
-	}
-	
-	public void setMaxCeilPlantCount(int plantCount) {
-		this.ceilCount = plantCount;
-	}
-	
 	public BlockState getTopBlock(Level level, int x, int y, int z) {
 		return topBlock;
 	}
@@ -92,24 +54,12 @@ public class NetherBiome extends Biome {
 		this.topBlock = block;
 	}
 	
-	public void addTree(Structure structure) {
-		trees.add(structure);
+	public void addStructure(Structure structure, float chance, int count) {
+		structures.add(new StructureInstance(structure, chance, count));
 	}
 	
-	public void addPlant(Structure structure, float chance) {
-		plants.add(structure, chance);
-	}
-	
-	public void addCeilPlant(Structure structure) {
-		ceil.add(structure);
-	}
-
-	public Structure getPlant(Random random) {
-		return plants.get(random);
-	}
-	
-	public Structure getCeilPlant(Random random) {
-		return ceil.get(random.nextInt(ceil.size()));
+	public List<StructureInstance> getStructures() {
+		return structures;
 	}
 	
 	public void setFire(boolean fire) {

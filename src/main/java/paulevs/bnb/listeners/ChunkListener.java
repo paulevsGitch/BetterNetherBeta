@@ -7,7 +7,6 @@ import net.minecraft.level.Level;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.dimension.Nether;
 import net.minecraft.level.source.LevelSource;
-import net.minecraft.level.structure.Structure;
 import net.minecraft.server.MinecraftServer;
 import net.modificationstation.stationloader.api.common.event.level.gen.ChunkPopulator;
 import paulevs.bnb.mixin.common.MinecraftServerAccessor;
@@ -18,17 +17,18 @@ import paulevs.bnb.util.ClientUtil;
 import paulevs.bnb.util.MHelper;
 import paulevs.bnb.world.biome.NetherBiome;
 import paulevs.bnb.world.structures.NetherStructures;
+import paulevs.bnb.world.structures.StructureInstance;
 
+import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.function.Function;
 import java.util.stream.IntStream;
 
 public class ChunkListener implements ChunkPopulator {
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(10);
 	private static final BlockState GRAVEL = new BlockState(BlockBase.GRAVEL);
-	private FeatureGenerationThread featureGenerator;
+	private StructureGenerationThread featureGenerator;
 	private Thread main;
 	
 	@Override
@@ -106,71 +106,53 @@ public class ChunkListener implements ChunkPopulator {
 				}
 				
 				if (featureGenerator == null || !featureGenerator.isAlive()) {
-					featureGenerator = new FeatureGenerationThread(random);
+					featureGenerator = new StructureGenerationThread();
 					featureGenerator.start();
 				}
 				
-				int count = bio.getMaxTreeCount();
-				if (count > 0) {
-					featureGenerator.queue.add(new FeatureData(bio::getTree, level, count, sx, sz));
-				}
-				count = bio.getMaxPlantCount();
-				if (count > 0) {
-					featureGenerator.queue.add(new FeatureData(bio::getPlant, level, count, sx, sz));
-				}
-				count = bio.getMaxCeilPlantCount();
-				if (count > 0) {
-					featureGenerator.queue.add(new FeatureData(bio::getCeilPlant, level, count, sx, sz));
+				List<StructureInstance> structures = bio.getStructures();
+				for (StructureInstance instance: structures) {
+					featureGenerator.queue.add(new StructureData(instance, level, sx, sz));
 				}
 			}
 		}
 	}
 	
-	private final class FeatureData {
-		final Function<Random, Structure> featureGetter;
+	private final class StructureData {
+		final StructureInstance instance;
 		final Level level;
-		final int count;
 		final int sx;
 		final int sz;
 		
-		private FeatureData(Function<Random, Structure> featureGetter,  Level level, int count, int sx, int sz) {
-			this.featureGetter = featureGetter;
+		private StructureData(StructureInstance instance, Level level, int sx, int sz) {
+			this.instance = instance;
 			this.level = level;
-			this.count = count;
 			this.sx = sx;
 			this.sz = sz;
 		}
-		
-		public Structure getStructure(Random random) {
-			return featureGetter.apply(random);
-		}
 	}
 	
-	private class FeatureGenerationThread extends Thread {
-		private final Queue<FeatureData> queue = new ArrayBlockingQueue<>(16384);
-		private final Random random;
-		
-		FeatureGenerationThread(Random random) {
-			this.random = random;
-		}
+	private final class StructureGenerationThread extends Thread {
+		private final Queue<StructureData> queue = new ArrayBlockingQueue<>(16384);
 		
 		public void run() {
 			while (isActive()) {
-				FeatureData data = queue.poll();
+				StructureData data = queue.poll();
 				if (data != null) {
 					for (int sect = 2; sect < 8; sect++) {
 						int sy = sect << 4;
-						int count = random.nextInt(data.count);
+						int count = data.level.rand.nextInt(data.instance.getCount());
 						for (int i = 0; i < count; i++) {
-							int px = random.nextInt(16) + data.sx;
-							int pz = random.nextInt(16) + data.sz;
-							for (int y = 0; y < 16; y++) {
-								int py = sy | y;
-								int tile = data.level.getTileId(px, py, pz);
-								if (BlockUtil.isNonSolidNoLava(tile)) {
-									Structure structure = data.getStructure(random);
-									if (structure.generate(data.level, random, px, py, pz)) {
-										break;
+							if (data.level.rand.nextFloat() < data.instance.getChance()) {
+								int px = data.level.rand.nextInt(16) + data.sx;
+								int pz = data.level.rand.nextInt(16) + data.sz;
+								for (int y = 0; y < 16; y++) {
+									int py = sy | y;
+									int tile = data.level.getTileId(px, py, pz);
+									if (BlockUtil.isNonSolidNoLava(tile)) {
+										if (data.instance.getStructure().generate(data.level, data.level.rand, px, py, pz)) {
+											break;
+										}
 									}
 								}
 							}

@@ -2,7 +2,6 @@ package paulevs.bnb.util;
 
 import net.minecraft.util.maths.Vec3f;
 import net.minecraft.util.maths.Vec3i;
-import org.lwjgl.util.Point;
 import paulevs.bnb.noise.OpenSimplexNoise;
 
 import java.util.Random;

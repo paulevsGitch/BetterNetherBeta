@@ -5,8 +5,8 @@ import net.modificationstation.stationloader.api.client.event.model.ModelRegiste
 import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
 import paulevs.bnb.block.model.OBJBlockModel;
-import paulevs.bnb.block.types.NetherPlantType;
 import paulevs.bnb.block.types.NetherLeavesType;
+import paulevs.bnb.block.types.NetherPlantType;
 import paulevs.bnb.block.types.NetherTreeFurType;
 import paulevs.bnb.block.types.SoulPlantType;
 import paulevs.bnb.util.BlockUtil;

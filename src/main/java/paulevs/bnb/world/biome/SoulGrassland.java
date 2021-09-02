@@ -1,6 +1,5 @@
 package paulevs.bnb.world.biome;
 
-import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.MathHelper;
 import paulevs.bnb.block.types.SoulTerrainType;
@@ -24,12 +23,11 @@ public class SoulGrassland extends NetherBiome {
 		super(name);
 		this.setFogColor("0a9ea2");
 		this.setTopBlock(new BlockState(BlockListener.getBlockID("soul_soil")));
-		//this.addTree(NetherStructures.SOUL_SPIRE);
-		//this.addPlant(NetherStructures.SOUL_BULBITE, 1.0F);
-		//this.addPlant(NetherStructures.BONE_PEAKS, 0.6F);
-		//this.addPlant(NetherStructures.SOUL_HEART, 0.3F);
-		this.setMaxPlantCount(2);
-		this.setMaxTreeCount(7);
+		this.addStructure(NetherStructures.SOUL_SPIRE_CONDITIONAL, 1.0F, 15);
+		this.addStructure(NetherStructures.SOUL_CORAL, 1.0F, 32);
+		this.addStructure(NetherStructures.SOUL_BULBITE_CONDITIONAL, 1.0F, 20);
+		this.addStructure(NetherStructures.BONE_PEAKS_CONDITIONAL, 1.0F, 10);
+		this.addStructure(NetherStructures.SOUL_HEART_CONDITIONAL, 0.3F, 8);
 		this.setFire(false);
 		this.setTopDepth(5);
 	}
@@ -66,7 +64,7 @@ public class SoulGrassland extends NetherBiome {
 	}
 	
 	private float getNoiseValue(int x, int z) {
-		float value = MHelper.getNoiseValue(x * 0.1, z * 0.1);
+		float value = MHelper.getNoiseValue(x * 0.07, z * 0.07);
 		value = MathHelper.abs(value);
 		return value;
 	}

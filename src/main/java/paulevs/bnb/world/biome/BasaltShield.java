@@ -11,10 +11,7 @@ public class BasaltShield extends NetherBiome {
 		super(name);
 		this.setFogColor("a8a8a8");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("basalt")));
-		this.addTree(NetherStructures.BASALT_PEAK);
-		this.setMaxCeilPlantCount(0);
-		this.setMaxPlantCount(0);
-		this.setMaxTreeCount(5);
+		this.addStructure(NetherStructures.BASALT_PEAK, 1.0F, 5);
 		this.setTopDepth(10);
 		this.setFire(false);
 	}
