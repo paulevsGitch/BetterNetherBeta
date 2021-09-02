@@ -10,6 +10,7 @@ import paulevs.bnb.block.types.BasaltBlockType;
 import paulevs.bnb.block.types.NetherPlanksType;
 import paulevs.bnb.block.types.NetherWoodType;
 import paulevs.bnb.block.types.NetherrackBricksType;
+import paulevs.bnb.block.types.UmbralithType;
 
 public class RecipeListener implements RecipeRegister {
 	@Override
@@ -117,7 +118,7 @@ public class RecipeListener implements RecipeRegister {
 			);
 			addPillarRecipe(
 				new ItemInstance(BlockListener.getBlock("netherrack_brick_slab"), 1, -1),
-				new ItemInstance(block, 2, NetherrackBricksType.NETHERRACK_BRICK_PILLAR_Y.getMeta())
+				new ItemInstance(block, 1, NetherrackBricksType.NETHERRACK_BRICK_PILLAR_Y.getMeta())
 			);
 			
 			block = BlockListener.getBlock("basalt");
@@ -133,10 +134,32 @@ public class RecipeListener implements RecipeRegister {
 			);
 			addPillarRecipe(
 				new ItemInstance(BlockListener.getBlock("basalt_slab"), 1, -1),
-				new ItemInstance(block, 2, BasaltBlockType.BASALT_PILLAR_Y.getMeta())
+				new ItemInstance(block, 1, BasaltBlockType.BASALT_PILLAR_Y.getMeta())
 			);
 			addStairsRecipe(block, BasaltBlockType.BASALT_BRICKS.getMeta(), BlockListener.getBlock("basalt_brick_stairs"));
 			addSlabRecipe(block, BasaltBlockType.BASALT_BRICKS.getMeta(), BlockListener.getBlock("basalt_brick_slab"));
+			
+			block = BlockListener.getBlock("umbralith");
+			addStairsRecipe(block, 0, BlockListener.getBlock("umbralith_stairs"));
+			addSlabRecipe(block, 0, BlockListener.getBlock("umbralith_slab"));
+			addSquareRecipe(
+				new ItemInstance(block, 1, UmbralithType.UMBRALITH.getMeta()),
+				new ItemInstance(block, 4, UmbralithType.UMBRALITH_POLISHED.getMeta())
+			);
+			addSquareRecipe(
+				new ItemInstance(block, 1, UmbralithType.UMBRALITH_POLISHED.getMeta()),
+				new ItemInstance(block, 4, UmbralithType.UMBRALITH_BRICKS.getMeta())
+			);
+			addSquareRecipe(
+				new ItemInstance(BlockListener.getBlock("umbralith_brick_slab"), 1, -1),
+				new ItemInstance(block, 2, UmbralithType.UMBRALITH_TILES.getMeta())
+			);
+			addPillarRecipe(
+				new ItemInstance(BlockListener.getBlock("umbralith_brick_slab"), 1, -1),
+				new ItemInstance(block, 1, UmbralithType.UMBRALITH_PILLAR_Y.getMeta())
+			);
+			addStairsRecipe(block, UmbralithType.UMBRALITH_BRICKS.getMeta(), BlockListener.getBlock("umbralith_brick_stairs"));
+			addSlabRecipe(block, UmbralithType.UMBRALITH_BRICKS.getMeta(), BlockListener.getBlock("umbralith_brick_slab"));
 			
 			ItemBase item = ItemListener.getItem("orichalcum_ingot");
 			CraftingRegistry.INSTANCE.addShapedRecipe(

@@ -10,7 +10,8 @@ public enum UmbralithType implements StoneBlockEnum {
 	UMBRALITH_PILLAR_X(3, "umbralith_pillar"),
 	UMBRALITH_PILLAR_Y(4, "umbralith_pillar"),
 	UMBRALITH_PILLAR_Z(5, "umbralith_pillar"),
-	DARK_NYLIUM(6, "dark_nylium");
+	UMBRALITH_BRICKS(6, "umbralith_bricks"),
+	DARK_NYLIUM(7, "dark_nylium");
 	
 	private final String name;
 	private final int meta;

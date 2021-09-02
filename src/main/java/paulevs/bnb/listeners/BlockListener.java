@@ -34,6 +34,7 @@ import paulevs.bnb.block.types.BasaltBlockType;
 import paulevs.bnb.block.types.NetherPlanksType;
 import paulevs.bnb.block.types.NetherrackBricksType;
 import paulevs.bnb.block.types.TallGlowNetherPlantType;
+import paulevs.bnb.block.types.UmbralithType;
 import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.interfaces.QuadFunction;
 import paulevs.bnb.interfaces.TriFunction;
@@ -49,7 +50,7 @@ public class BlockListener implements BlockRegister {
 	private static final Map<String, BlockBase> BLOCKS = Maps.newHashMap();
 	private static final List<BlockBase> BLOCKS_TAB = Lists.newArrayList();
 	private static Set<Integer> occupiedIDs;
-	private static int startID = 200;
+	private static int startID = 180;
 	
 	@Override
 	public void registerBlocks() {
@@ -100,6 +101,10 @@ public class BlockListener implements BlockRegister {
 		register("basalt_brick_slab", NetherSlabBlock::new, getBlock("basalt"), BasaltBlockType.BASALT_BRICKS.getMeta());
 		
 		register("umbralith", UmbralithBlock::new);
+		register("umbralith_stairs", NetherStairsBlock::new, getBlock("umbralith"), UmbralithType.UMBRALITH.getMeta());
+		register("umbralith_slab", NetherSlabBlock::new, getBlock("umbralith"), UmbralithType.UMBRALITH.getMeta());
+		register("umbralith_brick_stairs", NetherStairsBlock::new, getBlock("umbralith"), UmbralithType.UMBRALITH_BRICKS.getMeta());
+		register("umbralith_brick_slab", NetherSlabBlock::new, getBlock("umbralith"), UmbralithType.UMBRALITH_BRICKS.getMeta());
 		
 		register("nether_ore", NetherOreBlock::new);
 		
