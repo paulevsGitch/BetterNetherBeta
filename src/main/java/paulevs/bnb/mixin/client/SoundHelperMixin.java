@@ -10,7 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.BetterNetherBeta;
-import paulevs.bnb.block.sound.NetherSoundSource;
+import paulevs.bnb.sound.MusicManager;
+import paulevs.bnb.sound.NetherSoundSource;
 import paulscode.sound.SoundSystem;
 
 @Mixin(SoundHelper.class)
@@ -28,8 +29,14 @@ public class SoundHelperMixin {
 	@Shadow // Sound source ID
 	private int field_2671;
 	
+	@Inject(method = "setLibsAndCodecs", at = @At("TAIL"))
+	private void bnb_setLibsAndCodecs(CallbackInfo info) {
+		MusicManager.init(soundSystem, SOURCE, gameOptions);
+	}
+	
 	@Inject(method = "playSound", at = @At("HEAD"), cancellable = true)
 	private void bnb_playSound(String name, float x, float y, float z, float volume, float pitch, CallbackInfo info) {
+		MusicManager.checkStop();
 		if (field_2673 && this.gameOptions.sound > 0 && volume > 0) {
 			class_267 sound = this.soundMapMusic.method_958(name);
 			if (sound == null && name.startsWith(BetterNetherBeta.MOD_ID)) {
@@ -55,5 +62,10 @@ public class SoundHelperMixin {
 				info.cancel();
 			}
 		}
+	}
+	
+	@Inject(method = "playBackgroundMusic", at = @At("HEAD"), cancellable = true)
+	private void bnb_playBackgroundMusic(CallbackInfo info) {
+		MusicManager.checkStart();
 	}
 }

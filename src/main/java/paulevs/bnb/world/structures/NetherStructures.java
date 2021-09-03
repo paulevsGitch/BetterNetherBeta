@@ -89,6 +89,7 @@ public class NetherStructures {
 	public static final Structure CRIMSON_VINE = new NetherVine(new BlockState(BlockListener.getBlock("nether_vine"), NetherVineType.CRIMSON_VINE));
 	public static final Structure WARPED_VINE = new NetherVine(new BlockState(BlockListener.getBlock("nether_vine"), NetherVineType.WARPED_VINE));
 	public static final Structure VIRID_VINE = new NetherVine(new BlockState(BlockListener.getBlock("nether_vine"), NetherVineType.VIRID_VINE));
+	public static final Structure DARK_VINE = new NetherVine(new BlockState(BlockListener.getBlock("nether_vine"), NetherVineType.DARK_VINE));
 	
 	public static final Structure DARKSHROOM = new DarkshroomStructure();
 	public static final Structure CYANIA = new BlockScatter(new BlockState(BlockListener.getBlock("umbra_plant"), UmbraPlantType.CYANIA), 4F);

@@ -5,7 +5,8 @@ import paulevs.bnb.interfaces.BlockEnum;
 public enum NetherVineType implements BlockEnum {
 	CRIMSON_VINE(0, "crimson_vine"),
 	WARPED_VINE(1, "warped_vine"),
-	VIRID_VINE(2, "virid_vine");
+	VIRID_VINE(2, "virid_vine"),
+	DARK_VINE(3, "dark_vine");
 	
 	private final String name;
 	private final int meta;

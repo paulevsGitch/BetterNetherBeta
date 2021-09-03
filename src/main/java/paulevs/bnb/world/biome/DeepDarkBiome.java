@@ -19,6 +19,7 @@ public class DeepDarkBiome extends NetherBiome {
 		this.addStructure(NetherStructures.SMALL_DARKSHROOM, 0.2F, 3);
 		this.addStructure(NetherStructures.DARK_WILLOW, 1.0F, 3);
 		this.addStructure(NetherStructures.DEEP_ROSE, 1.0F, 3);
+		this.addStructure(NetherStructures.DARK_VINE, 1.0F, 8);
 		this.setFire(false);
 	}
 	

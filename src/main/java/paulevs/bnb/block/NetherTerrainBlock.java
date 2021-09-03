@@ -5,10 +5,10 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.TileView;
 import net.minecraft.util.maths.MathHelper;
-import paulevs.bnb.block.sound.NetherBlockSounds;
 import paulevs.bnb.block.types.NetherTerrainType;
 import paulevs.bnb.interfaces.BlockWithLight;
 import paulevs.bnb.listeners.TextureListener;
+import paulevs.bnb.sound.NetherSounds;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.MHelper;
 
@@ -18,7 +18,7 @@ public class NetherTerrainBlock extends MultiBlock implements BlockWithLight {
 	public NetherTerrainBlock(String name, int id) {
 		super(name, id, Material.STONE, NetherTerrainType.class);
 		this.setHardness(NETHERRACK.getHardness());
-		this.sounds(NetherBlockSounds.NYLIUM);
+		this.sounds(NetherSounds.NYLIUM);
 	}
 	
 	@Override

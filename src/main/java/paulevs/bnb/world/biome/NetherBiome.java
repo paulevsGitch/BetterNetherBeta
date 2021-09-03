@@ -9,6 +9,7 @@ import net.minecraft.level.Level;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.Vec3f;
+import paulevs.bnb.sound.NetherAmbientSound;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.ClientUtil;
 import paulevs.bnb.world.structures.StructureInstance;
@@ -22,6 +23,7 @@ public class NetherBiome extends Biome {
 	private final List<StructureInstance> structures = Lists.newArrayList();
 	protected BlockState fillBlock = NETHERRRACK;
 	protected BlockState topBlock = NETHERRRACK;
+	private NetherAmbientSound ambientSound;
 	private boolean hasFire = true;
 	private float fogDensity = 1F;
 	private int topDepth = 1;
@@ -134,5 +136,13 @@ public class NetherBiome extends Biome {
 	
 	public int getTopDepth() {
 		return topDepth;
+	}
+	
+	public void setAmbientSound(NetherAmbientSound ambientSound) {
+		this.ambientSound = ambientSound;
+	}
+	
+	public NetherAmbientSound getAmbientSound() {
+		return ambientSound;
 	}
 }

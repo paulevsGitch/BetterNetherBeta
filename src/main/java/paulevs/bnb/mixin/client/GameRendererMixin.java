@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.particles.BiomeParticle;
+import paulevs.bnb.sound.MusicManager;
 import paulevs.bnb.util.ClientUtil;
 import paulevs.bnb.util.MHelper;
 import paulevs.bnb.world.biome.NetherBiome;
@@ -70,6 +71,11 @@ public class GameRendererMixin {
 			GL11.glFogf(GL11.GL_FOG_START, 0.0F);
 			GL11.glFogf(GL11.GL_FOG_END, field_2350 / bnb_fogDensity);
 		}
+	}
+	
+	@Inject(method = "method_1844", at = @At("HEAD"))
+	public void method_1844(CallbackInfo info) {
+		MusicManager.checkStop();
 	}
 	
 	private float bnb_getDensity(int x, int z) {
