@@ -13,6 +13,7 @@ import paulscode.sound.SoundSystem;
 
 public class MusicManager {
 	private static final String AMBIENCE_ID = "bnbAmbientSound";
+	private static final float AMBIENCE_VOLUME = 0.6F;
 	private static NetherSoundSource soundSource;
 	private static NetherAmbientSound sound;
 	private static SoundSystem soundSystem;
@@ -44,7 +45,7 @@ public class MusicManager {
 				return;
 			}
 			if (sound != null && ticks < 50) {
-				soundSystem.setVolume(AMBIENCE_ID, gameOptions.sound * (50 - ticks) * 0.02F);
+				soundSystem.setVolume(AMBIENCE_ID, AMBIENCE_VOLUME * gameOptions.sound * (50 - ticks) * 0.02F);
 				ticks++;
 			}
 			else {
@@ -58,7 +59,7 @@ public class MusicManager {
 					return;
 				}
 				soundSystem.backgroundMusic(AMBIENCE_ID, source.field_2127, source.field_2126, true);
-				soundSystem.setVolume(AMBIENCE_ID, gameOptions.sound);
+				soundSystem.setVolume(AMBIENCE_ID, AMBIENCE_VOLUME * gameOptions.sound);
 				soundSystem.play(AMBIENCE_ID);
 			}
 		}

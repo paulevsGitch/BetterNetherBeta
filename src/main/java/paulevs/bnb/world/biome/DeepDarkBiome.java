@@ -2,6 +2,7 @@ package paulevs.bnb.world.biome;
 
 import paulevs.bnb.block.types.UmbralithType;
 import paulevs.bnb.listeners.BlockListener;
+import paulevs.bnb.sound.NetherSounds;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.world.structures.NetherStructures;
 
@@ -20,6 +21,7 @@ public class DeepDarkBiome extends NetherBiome {
 		this.addStructure(NetherStructures.DARK_WILLOW, 1.0F, 3);
 		this.addStructure(NetherStructures.DEEP_ROSE, 1.0F, 3);
 		this.addStructure(NetherStructures.DARK_VINE, 1.0F, 8);
+		this.setAmbientSound(NetherSounds.DEEP_DARK_AMBIENCE);
 		this.setFire(false);
 	}
 	

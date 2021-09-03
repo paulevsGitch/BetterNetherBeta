@@ -2,6 +2,7 @@ package paulevs.bnb.world.biome;
 
 import paulevs.bnb.block.types.NetherTerrainType;
 import paulevs.bnb.listeners.BlockListener;
+import paulevs.bnb.sound.NetherSounds;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.world.structures.NetherStructures;
 
@@ -19,6 +20,7 @@ public class PoisonForestBiome extends NetherBiome {
 		this.addStructure(NetherStructures.TAILGRASS, 1.0F, 15);
 		this.addStructure(NetherStructures.POISON_COCOON, 0.01F, 15);
 		this.addStructure(NetherStructures.VIRID_VINE, 1.0F, 10);
+		this.setAmbientSound(NetherSounds.NETHER_FOREST_AMBIENCE);
 		this.setFire(false);
 	}
 	

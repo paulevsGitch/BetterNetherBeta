@@ -21,7 +21,7 @@ public class CrimsonForestBiome extends NetherBiome {
 		this.addStructure(NetherStructures.CRIMSON_FUNGUS, 0.1F, 8);
 		this.addStructure(NetherStructures.CRIMSON_COCOON, 0.01F, 8);
 		this.addStructure(NetherStructures.CRIMSON_VINE, 1.0F, 20);
-		this.setAmbientSound(NetherSounds.NETHER_FOREST);
+		this.setAmbientSound(NetherSounds.NETHER_FOREST_AMBIENCE);
 		this.setFire(false);
 	}
 	

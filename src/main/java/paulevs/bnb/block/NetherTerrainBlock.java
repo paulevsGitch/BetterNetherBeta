@@ -18,7 +18,7 @@ public class NetherTerrainBlock extends MultiBlock implements BlockWithLight {
 	public NetherTerrainBlock(String name, int id) {
 		super(name, id, Material.STONE, NetherTerrainType.class);
 		this.setHardness(NETHERRACK.getHardness());
-		this.sounds(NetherSounds.NYLIUM);
+		this.sounds(NetherSounds.NYLIUM_BLOCK);
 	}
 	
 	@Override

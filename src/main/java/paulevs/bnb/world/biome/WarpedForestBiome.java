@@ -2,6 +2,7 @@ package paulevs.bnb.world.biome;
 
 import paulevs.bnb.block.types.NetherTerrainType;
 import paulevs.bnb.listeners.BlockListener;
+import paulevs.bnb.sound.NetherSounds;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.world.structures.NetherStructures;
 
@@ -20,6 +21,7 @@ public class WarpedForestBiome extends NetherBiome {
 		this.addStructure(NetherStructures.WARPED_FUNGUS, 0.1F, 8);
 		this.addStructure(NetherStructures.WARPED_COCOON, 0.01F, 8);
 		this.addStructure(NetherStructures.WARPED_VINE, 1.0F, 20);
+		this.setAmbientSound(NetherSounds.NETHER_FOREST_AMBIENCE);
 		this.setFire(false);
 	}
 	
