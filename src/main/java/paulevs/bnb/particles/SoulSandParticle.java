@@ -6,18 +6,18 @@ import net.minecraft.util.maths.MathHelper;
 import paulevs.bnb.util.ClientUtil;
 import paulevs.bnb.util.MHelper;
 
-public class SoulParticle extends NetherParticle {
+public class SoulSandParticle extends NetherParticle {
 	private float nextSpeedX;
 	private float nextSpeedZ;
 	private float preSpeedX;
 	private float preSpeedZ;
 	private float scale;
 	
-	public SoulParticle(Level level, double x, double y, double z) {
+	public SoulSandParticle(Level level, double x, double y, double z) {
 		super(level, x, y, z, 0, 0, 0);
-		setMaxAge(MHelper.randRange(20, 60, ClientUtil.getRandom()));
-		setTextureIndex(224);
-		velocityY = 0.04F;
+		setMaxAge(MHelper.randRange(15, 30, ClientUtil.getRandom()));
+		setTextureIndex(240);
+		velocityY = 0.075F;
 		randomizeSpeed();
 		scale = 1F;
 	}
@@ -34,7 +34,8 @@ public class SoulParticle extends NetherParticle {
 	
 	@Override
 	public float getBrightnessAtEyes(float f) {
-		return 1F;
+		float sup = super.getBrightnessAtEyes(f);
+		return MHelper.lerp(1.0F, sup, (scale - 0.5F) * 2);
 	}
 	
 	@Override
@@ -63,8 +64,8 @@ public class SoulParticle extends NetherParticle {
 		move(velocityX, velocityY, velocityZ);
 		
 		delta = (float) getAge() / getMaxAge();
-		setTextureIndex(224 + MathHelper.floor(delta * 3));
-		scale = 1F - delta;
+		setTextureIndex(240 + MathHelper.floor(delta * 11));
+		scale = 1F - delta * 0.5F;
 	}
 	
 	@Override

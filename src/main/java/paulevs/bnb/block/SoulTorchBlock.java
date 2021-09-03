@@ -60,6 +60,9 @@ public class SoulTorchBlock extends Torch implements BlockItemProvider {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public void randomDisplayTick(Level level, int x, int y, int z, Random rand) {
+		if (rand.nextInt(4) > 0) {
+			return;
+		}
 		int meta = level.getTileMeta(x, y, z);
 		double posX = x + 0.5F;
 		double posY = y + 0.7F;
