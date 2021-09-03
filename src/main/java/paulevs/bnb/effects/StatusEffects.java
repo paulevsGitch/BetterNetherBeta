@@ -27,7 +27,8 @@ public class StatusEffects {
 	}
 	
 	public static void register() {
-		registerEffect("additional_health", AdditionalHealthEffect::new);
+		registerEffect(AdditionalHealthEffect.NAME, AdditionalHealthEffect::new);
+		registerEffect(SoulProtectionEffect.NAME, SoulProtectionEffect::new);
 	}
 	
 	public static void addEffect(PlayerBase player, String name) {

@@ -4,6 +4,7 @@ import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.util.io.CompoundTag;
 
 public class AdditionalHealthEffect extends StatusEffect {
+	public static final String NAME = "additional_health";
 	private int additionalHealth = 10;
 	
 	public AdditionalHealthEffect() {
@@ -24,7 +25,7 @@ public class AdditionalHealthEffect extends StatusEffect {
 
 	@Override
 	public String getName() {
-		return "additional_health";
+		return NAME;
 	}
 	
 	@Override
