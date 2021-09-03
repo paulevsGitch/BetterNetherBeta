@@ -1,9 +1,11 @@
 package paulevs.bnb.effects;
 
+import net.minecraft.entity.EntityBase;
 import net.minecraft.entity.monster.ZombiePigman;
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.util.io.CompoundTag;
 import net.minecraft.util.maths.Box;
+import paulevs.bnb.mixin.common.ZombiePigmanAccessor;
 
 import java.util.List;
 
@@ -19,7 +21,14 @@ public class SoulProtectionEffect extends StatusEffect {
 	public void onPlayerTick(PlayerBase player) {
 		box.method_99(player.x - 16, player.y - 16, player.z - 16, player.x + 16, player.y + 16, player.z + 16);
 		List entities = player.level.getEntities(ZombiePigman.class, box);
-		entities.forEach(entity -> ((ZombiePigman) entity).setTarget(null));
+		entities.forEach(entity -> {
+			ZombiePigmanAccessor pigman = (ZombiePigmanAccessor) entity;
+			EntityBase target = pigman.callGetAttackTarget();
+			if (target != null && target.entityId == player.entityId) {
+				pigman.callSetTarget(null);
+				pigman.setAnger(0);
+			}
+		});
 	}
 	
 	@Override

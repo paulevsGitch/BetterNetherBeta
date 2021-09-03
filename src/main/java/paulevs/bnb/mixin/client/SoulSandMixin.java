@@ -7,7 +7,6 @@ import net.minecraft.block.SoulSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
-import paulevs.bnb.particles.SoulParticle;
 import paulevs.bnb.particles.SoulSandParticle;
 import paulevs.bnb.util.ClientUtil;
 
