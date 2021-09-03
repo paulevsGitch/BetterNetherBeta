@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
+import paulevs.bnb.BetterNetherBeta;
 
 import java.util.Random;
 
@@ -27,5 +28,9 @@ public class ClientUtil {
 	
 	public static boolean haveShaders() {
 		return GLSL;
+	}
+	
+	public static int getTextureID(String texture) {
+		return getMinecraft().textureManager.getTextureId("/assets/" + BetterNetherBeta.MOD_ID + "/textures/" + texture + ".png");
 	}
 }

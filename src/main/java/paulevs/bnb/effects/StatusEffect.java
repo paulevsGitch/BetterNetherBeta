@@ -7,10 +7,12 @@ import java.util.List;
 
 public abstract class StatusEffect {
 	private int maxTime;
+	private int iconID;
 	private int time;
 	
-	public StatusEffect(int maxTime) {
+	public StatusEffect(int maxTime, int iconID) {
 		this.maxTime = maxTime;
+		this.iconID = iconID;
 	}
 	
 	public void tick(PlayerBase player, List<String> toRemove) {
@@ -25,6 +27,8 @@ public abstract class StatusEffect {
 	public abstract void onPlayerTick(PlayerBase player);
 	
 	public abstract String getName();
+	
+	public abstract String getDescription();
 	
 	public abstract void writeCustomData(CompoundTag tag);
 	
@@ -47,5 +51,13 @@ public abstract class StatusEffect {
 		maxTime = tag.getInt("maxTime");
 		time = tag.getInt("time");
 		readCustomData(tag);
+	}
+	
+	public int getIconID() {
+		return iconID;
+	}
+	
+	public int getRemainingTicks() {
+		return maxTime - time;
 	}
 }

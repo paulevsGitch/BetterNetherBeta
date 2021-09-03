@@ -16,6 +16,7 @@ import paulevs.bnb.effects.StatusEffect;
 import paulevs.bnb.effects.StatusEffects;
 import paulevs.bnb.interfaces.StatusEffectable;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,11 @@ public class PlayerBaseMixin extends Living implements StatusEffectable {
 	@Override
 	public void removeEffect(String name) {
 		bnb_effects.remove(name);
+	}
+	
+	@Override
+	public Collection<StatusEffect> getEffects() {
+		return bnb_effects.values();
 	}
 	
 	@Inject(method = "tick", at = @At("TAIL"))

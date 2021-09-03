@@ -2,12 +2,14 @@ package paulevs.bnb.effects;
 
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.util.io.CompoundTag;
+import paulevs.bnb.BetterNetherBeta;
+import paulevs.bnb.util.ClientUtil;
 
 public class AdditionalHealthEffect extends StatusEffect {
 	private int additionalHealth = 10;
 	
 	public AdditionalHealthEffect() {
-		super(600);
+		super(600, 240);
 	}
 
 	@Override
@@ -25,6 +27,11 @@ public class AdditionalHealthEffect extends StatusEffect {
 	@Override
 	public String getName() {
 		return "additional_health";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "Additional Health";
 	}
 	
 	public int getHealth() {
