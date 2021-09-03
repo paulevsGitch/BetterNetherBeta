@@ -1,12 +1,11 @@
 package paulevs.bnb.particles;
 
 import net.minecraft.client.render.Tessellator;
-import net.minecraft.entity.ParticleBase;
 import net.minecraft.level.Level;
 import paulevs.bnb.util.ClientUtil;
 import paulevs.bnb.util.MHelper;
 
-public class BiomeParticle extends ParticleBase {
+public class BiomeParticle extends NetherParticle {
 	private final boolean emissive;
 	private float nextSpeedX;
 	private float nextSpeedY;
@@ -14,22 +13,19 @@ public class BiomeParticle extends ParticleBase {
 	private float preSpeedX;
 	private float preSpeedY;
 	private float preSpeedZ;
-	private float alpha;
-	private int maxAge;
-	private int ticks;
+	private float scale;
 	
 	public BiomeParticle(Level level, double x, double y, double z, int index, boolean emissive) {
 		super(level, x, y, z, 0, 0, 0);
 		this.emissive = emissive;
 		this.setPositionAndAngles(x, y, z, 0, 0);
-		maxAge = MHelper.randRange(100, 300, ClientUtil.getRandom());
+		setMaxAge(MHelper.randRange(100, 300, ClientUtil.getRandom()));
 		field_2640 = MHelper.randRange(0.75F, 1.5F, ClientUtil.getRandom()); // Particle size
-		field_2635 = index; // Particle texture index
+		setTextureIndex(index);
 		randomizeSpeed();
 		velocityX = 0;
 		velocityY = 0;
 		velocityZ = 0;
-		ticks = 0;
 	}
 	
 	private void randomizeSpeed() {
@@ -46,14 +42,13 @@ public class BiomeParticle extends ParticleBase {
 	
 	@Override
 	public void tick() {
-		ticks ++;
-		
-		if (ticks > maxAge) {
+		incrementAge();
+		if (toRemove()) {
 			remove();
 			return;
 		}
 		
-		int tick = ticks & 63;
+		int tick = getAge() & 63;
 		if (tick == 0) {
 			updateSpeed();
 			randomizeSpeed();
@@ -71,11 +66,11 @@ public class BiomeParticle extends ParticleBase {
 		
 		move(velocityX, velocityY, velocityZ);
 		
-		if (ticks <= 63) {
-			alpha = delta;
+		if (getAge() <= 63) {
+			scale = delta;
 		}
-		else if (ticks >= maxAge - 63) {
-			alpha = 1F - (ticks - maxAge + 63) / 63F;
+		else if (getAge() >= getMaxAge() - 63) {
+			scale = 1F - (getAge() - getMaxAge() + 63) / 63F;
 		}
 	}
 	
@@ -90,7 +85,7 @@ public class BiomeParticle extends ParticleBase {
 		float u2 = u1 + 0.0624375F;
 		float v1 = (this.field_2635 / 16) / 16.0F;
 		float v2 = v1 + 0.0624375F;
-		float scale = 0.1F * this.field_2640 * alpha;
+		float scale = 0.1F * this.field_2640 * this.scale;
 		float posX = (float)(this.prevX + (this.x - this.prevX) * f - field_2645);
 		float posY = (float)(this.prevY + (this.y - this.prevY) * f - field_2646);
 		float posZ = (float)(this.prevZ + (this.z - this.prevZ) * f - field_2647);

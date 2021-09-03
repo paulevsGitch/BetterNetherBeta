@@ -12,43 +12,43 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import paulevs.bnb.BetterNetherBeta;
-import paulevs.bnb.particles.BiomeParticle;
+import paulevs.bnb.particles.NetherParticle;
+import paulevs.bnb.util.ClientUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(ParticleManager.class)
 public class ParticleManagerMixin {
-	private static List<ParticleBase> biomeParticles = new ArrayList<ParticleBase>(128);
-	private static int bnb_particleTexID = -1;
+	private static List<ParticleBase> customParticles = new ArrayList<ParticleBase>(128);
+	private static final int BNB_PARTICLES_TEXTURE = ClientUtil.getTextureID("particles");
 	
 	@Shadow
 	private TextureManager textureManager;
 	
 	@Inject(method = "method_323", at = @At("TAIL"))
 	private void bnb_clearParticles(Level arg, CallbackInfo info) {
-		biomeParticles.clear();
+		customParticles.clear();
 	}
 	
 	@Inject(method = "addParticle", at = @At("HEAD"), cancellable = true)
 	private void bnb_addParticle(ParticleBase particle, CallbackInfo info) {
-		if (particle instanceof BiomeParticle) {
-			if (biomeParticles.size() > 127) {
-				biomeParticles.remove(0);
+		if (particle instanceof NetherParticle) {
+			if (customParticles.size() > 127) {
+				customParticles.remove(0);
 			}
-			biomeParticles.add(particle);
+			customParticles.add(particle);
 			info.cancel();
 		}
 	}
 	
 	@Inject(method = "method_320", at = @At("TAIL"))
 	private void bnb_particleTick(CallbackInfo info) {
-		for (int i = 0; i < biomeParticles.size(); i++) {
-			ParticleBase particle = biomeParticles.get(i);
+		for (int i = 0; i < customParticles.size(); i++) {
+			ParticleBase particle = customParticles.get(i);
 			particle.tick();
 			if (particle.removed) {
-				biomeParticles.remove(i);
+				customParticles.remove(i);
 				i--;
 			}
 		}
@@ -56,7 +56,7 @@ public class ParticleManagerMixin {
 	
 	@Inject(method = "method_324", at = @At("TAIL"))
 	private void bnb_renderParticles(EntityBase entity, float f, CallbackInfo info) {
-		if (!biomeParticles.isEmpty()) {
+		if (!customParticles.isEmpty()) {
 			float yaw = entity.yaw * (float) Math.PI / 180.0F;
 			float pitch = entity.pitch * (float) Math.PI / 180.0F;
 			float yawCos = MathHelper.cos(yaw);
@@ -66,18 +66,15 @@ public class ParticleManagerMixin {
 			float var5 = -yawSin * pitchSin;
 			float var6 = yawCos * pitchSin;
 			
-			if (bnb_particleTexID < 0) {
-				bnb_particleTexID = textureManager.getTextureId("/assets/" + BetterNetherBeta.MOD_ID + "/textures/particles.png");
-			}
-			textureManager.bindTexture(bnb_particleTexID);
+			textureManager.bindTexture(BNB_PARTICLES_TEXTURE);
 			
-			Tessellator tesselator = Tessellator.INSTANCE;
-			tesselator.start();
-			for (int i = 0; i < biomeParticles.size(); i++) {
-				ParticleBase particle = biomeParticles.get(i);
-				particle.method_2002(tesselator, f, yawCos, pitchCos, yawSin, var5, var6);
+			Tessellator tessellator = Tessellator.INSTANCE;
+			tessellator.start();
+			for (int i = 0; i < customParticles.size(); i++) {
+				ParticleBase particle = customParticles.get(i);
+				particle.method_2002(tessellator, f, yawCos, pitchCos, yawSin, var5, var6);
 			}
-			tesselator.draw();
+			tessellator.draw();
 		}
 	}
 }

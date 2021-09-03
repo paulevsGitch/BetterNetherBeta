@@ -5,7 +5,6 @@ import net.minecraft.level.biome.Biome;
 import net.minecraft.level.dimension.Nether;
 import net.minecraft.sortme.GameRenderer;
 import net.minecraft.util.maths.MathHelper;
-import net.minecraft.util.maths.Vec3f;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

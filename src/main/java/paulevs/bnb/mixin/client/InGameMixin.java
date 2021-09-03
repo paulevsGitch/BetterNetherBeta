@@ -3,24 +3,19 @@ package paulevs.bnb.mixin.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.InGame;
-import net.minecraft.client.render.TextRenderer;
 import net.minecraft.client.util.ScreenScaler;
-import net.minecraft.item.Dye;
-import net.minecraft.util.maths.MathHelper;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.effects.AdditionalHealthEffect;
 import paulevs.bnb.effects.StatusEffect;
 import paulevs.bnb.interfaces.StatusEffectable;
 import paulevs.bnb.util.ClientUtil;
 import paulevs.bnb.util.CreativeUtil;
 import paulevs.bnb.util.MCColors;
-import paulevs.bnb.util.MHelper;
 
 import java.util.Collection;
 
@@ -36,7 +31,6 @@ public class InGameMixin extends DrawableHelper {
 		StatusEffectable effectable = (StatusEffectable) this.minecraft.player;
 		Collection<StatusEffect> effects = effectable.getEffects();
 		
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, BNB_ICONS_TEXTURE);
 		int posY = 2;
 		for (StatusEffect effect: effects) {
 			int icon = effect.getIconID();
@@ -54,6 +48,7 @@ public class InGameMixin extends DrawableHelper {
 			}
 			GL11.glPushMatrix();
 			GL11.glScalef(1.5F, 1.5F, 1.5F);
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, BNB_ICONS_TEXTURE);
 			this.blit(2, posY, u, v, 16, 16);
 			GL11.glPopMatrix();
 			int offsetY = (int) (posY * 1.5F) + 2;
@@ -89,6 +84,8 @@ public class InGameMixin extends DrawableHelper {
 		else {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		}
+		
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, BNB_ICONS_TEXTURE);
 		
 		int h = 0;
 		for (h = 0; h < 5; h++) {

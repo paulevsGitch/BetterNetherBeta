@@ -2,8 +2,6 @@ package paulevs.bnb.effects;
 
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.util.io.CompoundTag;
-import paulevs.bnb.BetterNetherBeta;
-import paulevs.bnb.util.ClientUtil;
 
 public class AdditionalHealthEffect extends StatusEffect {
 	private int additionalHealth = 10;

@@ -60,4 +60,8 @@ public abstract class StatusEffect {
 	public int getRemainingTicks() {
 		return maxTime - time;
 	}
+	
+	public void resetTime() {
+		time = 0;
+	}
 }

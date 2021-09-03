@@ -26,6 +26,7 @@ import paulevs.bnb.block.SoulPlantBlock;
 import paulevs.bnb.block.SoulSpireBlock;
 import paulevs.bnb.block.SoulSpirePlantBlock;
 import paulevs.bnb.block.SoulTerrainBlock;
+import paulevs.bnb.block.SoulTorchBlock;
 import paulevs.bnb.block.SpiderCocoonBlock;
 import paulevs.bnb.block.TallNetherPlant;
 import paulevs.bnb.block.UmbraPlantBlock;
@@ -107,6 +108,7 @@ public class BlockListener implements BlockRegister {
 		register("umbralith_brick_slab", NetherSlabBlock::new, getBlock("umbralith"), UmbralithType.UMBRALITH_BRICKS.getMeta());
 		
 		register("nether_ore", NetherOreBlock::new);
+		register("soul_torch", SoulTorchBlock::new);
 		
 		//register("soul_layered_block", SoulLayeredBlock::new);
 		
