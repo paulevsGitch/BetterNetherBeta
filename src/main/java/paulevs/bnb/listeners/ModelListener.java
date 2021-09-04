@@ -56,6 +56,24 @@ public class ModelListener implements ModelRegister {
 					BLOCK_MODELS.put(plant.getName(), cross.clone().setTextures(plant.getTexture(0)));
 				}
 			}
+			
+			BLOCK_MODELS.put("distorted_bamboo_sapling", cross.clone().setTextures("distorted_bamboo_sapling"));
+			
+			model = new OBJBlockModel("/assets/bnb/models/block/bamboo_stem.obj", 16, 8, 0, 8, null);
+			BLOCK_MODELS.put("distorted_bamboo_stem", model.setTextures("distorted_bamboo_stem"));
+			
+			model = new OBJBlockModel("/assets/bnb/models/block/bamboo_middle.obj", 16, 8, 0, 8, null);
+			BLOCK_MODELS.put("distorted_bamboo_middle", model.setTextures("distorted_bamboo_stem", "distorted_bamboo_leaves"));
+			
+			model = new OBJBlockModel("/assets/bnb/models/block/bamboo_stem_1.obj", 16, 8, 0, 8, null);
+			BLOCK_MODELS.put("distorted_bamboo_stem_1", model.setTextures("distorted_bamboo_stem", "distorted_bamboo_leaves_small"));
+			
+			model = new OBJBlockModel("/assets/bnb/models/block/bamboo_stem_2.obj", 16, 8, 0, 8, null);
+			makeRotated("distorted_bamboo_stem_2", model.setTextures("distorted_bamboo_stem", "distorted_bamboo_leaves_small"));
+			
+			model = new OBJBlockModel("/assets/bnb/models/block/bamboo_top.obj", 16, 8, 0, 8, null);
+			BLOCK_MODELS.put("distorted_bamboo_top", model.setTextures("distorted_bamboo_stem", "distorted_bamboo_leaves"));
+			
 			model = new OBJBlockModel("/assets/bnb/models/block/small_darkshroom.obj", 16, 8, 0, 8, null);
 			BLOCK_MODELS.put("small_darkshroom", model.setTextures("small_darkshroom_side", "small_darkshroom_top"));
 			

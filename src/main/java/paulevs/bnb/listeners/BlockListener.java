@@ -7,6 +7,7 @@ import net.modificationstation.stationloader.api.common.event.block.BlockRegiste
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.block.BasaltBlock;
 import paulevs.bnb.block.DarkshroomBlock;
+import paulevs.bnb.block.DistortedBamboo;
 import paulevs.bnb.block.NetherFungusBlock;
 import paulevs.bnb.block.NetherGrassBlock;
 import paulevs.bnb.block.NetherLanternBlock;
@@ -75,6 +76,8 @@ public class BlockListener implements BlockRegister {
 		
 		register("nether_stem", NetherStemBlock::new);
 		register("darkshroom", DarkshroomBlock::new);
+		
+		register("distorted_bamboo", DistortedBamboo::new);
 		
 		register("nether_grass", NetherGrassBlock::new);
 		register("nether_vine", NetherVineBlock::new);

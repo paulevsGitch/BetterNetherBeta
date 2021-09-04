@@ -9,7 +9,7 @@ import paulevs.bnb.util.MHelper;
 import java.util.Random;
 
 public class BlockScatter extends Structure {
-	private final BlockState block;
+	protected final BlockState block;
 	private final float radius;
 	private final int count;
 	

@@ -15,7 +15,7 @@ import paulevs.bnb.listeners.ModelListener;
 public class DarkshroomBlock extends MultiBlock implements BlockWithLight, BlockModelProvider {
 	public DarkshroomBlock(String name, int id) {
 		super(name, id, NetherMaterials.NETHER_WOOD, DarkshroomType.class);
-		this.setHardness(WOOD.getHardness());
+		this.setHardness(WOOD.getHardness() * 0.6F);
 		this.setLightEmittance(1F);
 		this.sounds(WOOD_SOUNDS);
 	}

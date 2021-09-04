@@ -1,37 +1,39 @@
 package paulevs.bnb.block.types;
 
 import paulevs.bnb.interfaces.BlockEnum;
+import paulevs.bnb.util.BlockUtil;
 
-public enum NetherPlanksType implements BlockEnum {
-	CRIMSON_PLANKS(0, "crimson_planks"),
-	WARPED_PLANKS(1, "warped_planks"),
-	POISON_PLANKS(2, "poison_planks"),
-	PALE_PLANKS(3, "pale_planks"),
-	EMBER_PLANKS(4, "ember_planks");
+public enum DistortedBambooType implements BlockEnum {
+	SAPLING(0, "distorted_bamboo_sapling"),
+	STEM(1, "distorted_bamboo_stem"),
+	MIDDLE(2, "distorted_bamboo_middle"),
+	TOP(3, "distorted_bamboo_top"),
+	TOP_INACTIVE(4, "distorted_bamboo_top"),
+	UNNATURAL_STEM(5, "distorted_bamboo_stem");
 	
 	private final String name;
 	private final int meta;
 	
-	NetherPlanksType(int meta, String name) {
+	DistortedBambooType(int meta, String name) {
 		this.name = name;
 		this.meta = meta;
 	}
-
+	
 	@Override
 	public String getName() {
 		return name;
 	}
-
+	
 	@Override
 	public String getTranslationKey() {
 		return name;
 	}
-
+	
 	@Override
 	public String getTexture(int side) {
-		return name;
+		return BlockUtil.isHorizontalSide(side) ? name + "_side" : name + "_top";
 	}
-
+	
 	@Override
 	public int getDropMeta() {
 		return meta;
