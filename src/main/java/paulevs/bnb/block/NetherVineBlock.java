@@ -9,12 +9,13 @@ import net.modificationstation.stationloader.impl.common.preset.item.PlaceableTi
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.block.types.NetherVineType;
 import paulevs.bnb.interfaces.BlockWithLight;
+import paulevs.bnb.interfaces.Climmable;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.MHelper;
 
 import java.util.Random;
 
-public class NetherVineBlock extends NetherCeilPlantBlock implements BlockWithLight {
+public class NetherVineBlock extends NetherCeilPlantBlock implements BlockWithLight, Climmable {
 	public NetherVineBlock(String name, int id) {
 		super(name, id, NetherVineType.class);
 		this.disableStat();
@@ -68,5 +69,10 @@ public class NetherVineBlock extends NetherCeilPlantBlock implements BlockWithLi
 			}
 		}
 		return TextureListener.getBlockTexture(name);
+	}
+	
+	@Override
+	public boolean canClimb(int meta) {
+		return true;
 	}
 }

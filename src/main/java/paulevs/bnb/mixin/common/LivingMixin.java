@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import paulevs.bnb.block.NetherVineBlock;
+import paulevs.bnb.interfaces.Climmable;
 import paulevs.bnb.util.BlockUtil;
 
 @Mixin(Living.class)
@@ -22,7 +22,7 @@ public abstract class LivingMixin extends EntityBase {
 	private void bnb_blockIsLadder(CallbackInfoReturnable<Boolean> info, int x, int y, int z) {
 		if (!info.getReturnValue()) {
 			BlockBase block = BlockUtil.blockByID(this.level.getTileId(x, y, z));
-			if (block instanceof NetherVineBlock) {
+			if (block instanceof Climmable && ((Climmable) block).canClimb(this.level.getTileMeta(x, y, z))) {
 				this.onGround = true;
 				if (this.velocityY > 0.15) {
 					this.velocityY = 0.15;

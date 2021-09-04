@@ -3,18 +3,19 @@ package paulevs.bnb.block.types;
 import paulevs.bnb.interfaces.BlockEnum;
 import paulevs.bnb.util.BlockUtil;
 
-public enum DistortedBambooType implements BlockEnum {
-	SAPLING(0, "distorted_bamboo_sapling"),
-	STEM(1, "distorted_bamboo_stem"),
-	MIDDLE(2, "distorted_bamboo_middle"),
-	TOP(3, "distorted_bamboo_top"),
-	TOP_INACTIVE(4, "distorted_bamboo_top"),
-	UNNATURAL_STEM(5, "distorted_bamboo_stem");
+public enum FlameBambooType implements BlockEnum {
+	SAPLING(0, "flame_bamboo_sapling"),
+	STEM(1, "flame_bamboo_stem"),
+	MIDDLE(2, "flame_bamboo_middle"),
+	TOP(3, "flame_bamboo_top"),
+	TOP_INACTIVE(4, "flame_bamboo_top"),
+	UNNATURAL_STEM(5, "flame_bamboo_stem"),
+	LADDER(6, "flame_bamboo_ladder");
 	
 	private final String name;
 	private final int meta;
 	
-	DistortedBambooType(int meta, String name) {
+	FlameBambooType(int meta, String name) {
 		this.name = name;
 		this.meta = meta;
 	}
@@ -46,6 +47,6 @@ public enum DistortedBambooType implements BlockEnum {
 	
 	@Override
 	public boolean isInCreative() {
-		return true;
+		return meta == SAPLING.getMeta() || meta == UNNATURAL_STEM.getMeta() || meta == LADDER.getMeta();
 	}
 }

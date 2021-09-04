@@ -11,13 +11,14 @@ import java.util.Random;
 public class DistortedBambooForestBiome extends NetherBiome {
 	public DistortedBambooForestBiome(String name) {
 		super(name);
-		this.setFogColor("217b82");
-		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrainType.WARPED_NYLIUM));
-		this.addStructure(NetherStructures.DISTORTED_BAMBOO, 1.0F, 3);
-		this.addStructure(NetherStructures.GLOWTAIL, 1.0F, 3);
-		this.addStructure(NetherStructures.WARPED_CORAL, 1.0F, 3);
-		this.addStructure(NetherStructures.WARPED_ROOTS, 1.0F, 10);
-		this.addStructure(NetherStructures.WARPED_VINE, 1.0F, 8);
+		this.setFogColor("a4222f");
+		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrainType.CRIMSON_NYLIUM));
+		this.addStructure(NetherStructures.FLAME_BAMBOO, 1.0F, 3);
+		this.addStructure(NetherStructures.CRIMSON_ROOTS, 1.0F, 10);
+		this.addStructure(NetherStructures.LAMELLARIUM, 1.0F, 3);
+		this.addStructure(NetherStructures.LANTERN_GRASS, 1.0F, 3);
+		this.addStructure(NetherStructures.CRIMSON_BUSH, 1.0F, 3);
+		this.addStructure(NetherStructures.CRIMSON_VINE, 1.0F, 8);
 		this.setAmbientSound(NetherSounds.NETHER_FOREST_AMBIENCE);
 		this.setFogDensity(2F);
 		this.setFire(false);
@@ -25,11 +26,11 @@ public class DistortedBambooForestBiome extends NetherBiome {
 	
 	@Override
 	public float getParticleChance() {
-		return 0.1F;
+		return 0.6F;
 	}
 	
 	@Override
 	public int getParticleID(Random random) {
-		return 3 + random.nextInt(3);
+		return random.nextInt(3);
 	}
 }

@@ -1,7 +1,7 @@
 package paulevs.bnb.world.structures;
 
 import net.minecraft.level.Level;
-import paulevs.bnb.block.types.DistortedBambooType;
+import paulevs.bnb.block.types.FlameBambooType;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.BlockUtil;
@@ -9,7 +9,7 @@ import paulevs.bnb.util.MHelper;
 
 public class DistortedBambooStructure extends BlockScatter {
 	public DistortedBambooStructure() {
-		super(new BlockState(BlockListener.getBlock("distorted_bamboo"), DistortedBambooType.SAPLING), 5);
+		super(new BlockState(BlockListener.getBlock("flame_bamboo"), FlameBambooType.SAPLING), 5);
 	}
 	
 	@Override
@@ -21,15 +21,15 @@ public class DistortedBambooStructure extends BlockScatter {
 		for (int i = 0; i < h; i++) {
 			int py = y + i;
 			if (level.getTileId(x, py, z) != 0) {
-				BlockUtil.fastTilePlace(level, x, py - 1, z, block.getBlockID(), DistortedBambooType.TOP_INACTIVE.getMeta());
-				BlockUtil.fastTilePlace(level, x, py - 2, z, block.getBlockID(), DistortedBambooType.MIDDLE.getMeta());
+				BlockUtil.fastTilePlace(level, x, py - 1, z, block.getBlockID(), FlameBambooType.TOP_INACTIVE.getMeta());
+				BlockUtil.fastTilePlace(level, x, py - 2, z, block.getBlockID(), FlameBambooType.MIDDLE.getMeta());
 			}
 			else {
-				BlockUtil.fastTilePlace(level, x, py, z, block.getBlockID(), DistortedBambooType.STEM.getMeta());
+				BlockUtil.fastTilePlace(level, x, py, z, block.getBlockID(), FlameBambooType.STEM.getMeta());
 			}
 		}
 		h += y;
-		BlockUtil.fastTilePlace(level, x, h, z, block.getBlockID(), DistortedBambooType.TOP_INACTIVE.getMeta());
-		BlockUtil.fastTilePlace(level, x, h - 1, z, block.getBlockID(), DistortedBambooType.MIDDLE.getMeta());
+		BlockUtil.fastTilePlace(level, x, h, z, block.getBlockID(), FlameBambooType.TOP_INACTIVE.getMeta());
+		BlockUtil.fastTilePlace(level, x, h - 1, z, block.getBlockID(), FlameBambooType.MIDDLE.getMeta());
 	}
 }
