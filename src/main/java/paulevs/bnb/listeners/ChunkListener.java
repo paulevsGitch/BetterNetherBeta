@@ -39,6 +39,10 @@ public class ChunkListener implements ChunkPopulator {
 			}
 			final int sx = startX + 8;
 			final int sz = startZ + 8;
+			level.getChunk(sx, sz);
+			level.getChunk(sx + 16, sz);
+			level.getChunk(sx, sz + 16);
+			level.getChunk(sx + 16, sz + 16);
 			Biome[] biomes = level.getBiomeSource().getBiomes(sx, sz, 16, 16);
 			IntStream.range(0, 256).parallel().forEach(index -> {
 				int x = index & 15;
