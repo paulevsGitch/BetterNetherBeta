@@ -44,7 +44,8 @@ public class FlameBamboo extends MultiBlock implements BlockModelProvider, Block
 			@Override
 			@Environment(EnvType.CLIENT)
 			public int getTexturePosition(int damage) {
-				String name = damage == FlameBambooType.SAPLING.getMeta() ? "flame_bamboo_sapling" : "flame_bamboo_stem_item";
+				BlockEnum variant = getVariant(damage);
+				String name = variant == FlameBambooType.SAPLING ? "flame_bamboo_sapling" : variant.getName() + "_item";
 				return TextureListener.getBlockTexture(name);
 			}
 			

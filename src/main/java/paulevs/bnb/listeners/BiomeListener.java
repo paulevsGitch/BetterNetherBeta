@@ -9,7 +9,7 @@ import paulevs.bnb.world.biome.BasaltShieldBiome;
 import paulevs.bnb.world.biome.CorruptedLandsBiome;
 import paulevs.bnb.world.biome.CrimsonForestBiome;
 import paulevs.bnb.world.biome.DeepDarkBiome;
-import paulevs.bnb.world.biome.DistortedBambooForestBiome;
+import paulevs.bnb.world.biome.FlameBambooForestBiome;
 import paulevs.bnb.world.biome.PoisonForestBiome;
 import paulevs.bnb.world.biome.SoulGrasslandBiome;
 import paulevs.bnb.world.biome.SoulValleyBiome;
@@ -33,7 +33,7 @@ public class BiomeListener implements BiomeRegister {
 		register("Basalt Garden", BasaltGardenBiome::new);
 		register("Soul Grassland", SoulGrasslandBiome::new);
 		register("Deep Dark", DeepDarkBiome::new);
-		register("Distorted Bamboo Forest", DistortedBambooForestBiome::new);
+		register("Flame Bamboo Forest", FlameBambooForestBiome::new);
 	}
 	
 	private static void register(String name, Function<String, Biome> init) {

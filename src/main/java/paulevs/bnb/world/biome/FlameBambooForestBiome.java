@@ -8,8 +8,8 @@ import paulevs.bnb.world.structures.NetherStructures;
 
 import java.util.Random;
 
-public class DistortedBambooForestBiome extends NetherBiome {
-	public DistortedBambooForestBiome(String name) {
+public class FlameBambooForestBiome extends NetherBiome {
+	public FlameBambooForestBiome(String name) {
 		super(name);
 		this.setFogColor("a4222f");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("nether_terrain"), NetherTerrainType.CRIMSON_NYLIUM));
