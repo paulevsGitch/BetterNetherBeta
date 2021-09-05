@@ -160,9 +160,11 @@ public class FlameBamboo extends MultiBlock implements BlockModelProvider, Block
 	public void onAdjacentBlockUpdate(Level level, int x, int y, int z, int meta) {
 		super.onAdjacentBlockUpdate(level, x, y, z, meta);
 		if (!canPlaceAt(level, x, y, z)) {
+			meta = level.getTileMeta(x, y, z);
 			level.playSound(x + 0.5, y + 0.5, z + 0.5, this.sounds.getBreakSound(), (this.sounds.getVolume() + 1.0F) / 2.0F, this.sounds.getPitch() * 0.8F);
+			int count = meta == FlameBambooType.TOP.getMeta() || meta == FlameBambooType.TOP_INACTIVE.getMeta() ? MHelper.randRange(1, 2, level.rand) : 1;
+			this.drop(level, x, y, z, new ItemInstance(this, count, this.droppedMeta(meta)));
 			level.setTile(x, y, z, 0);
-			drop(level, x, y, z, meta);
 		}
 	}
 	
@@ -224,5 +226,16 @@ public class FlameBamboo extends MultiBlock implements BlockModelProvider, Block
 	@Override
 	public boolean canClimb(int meta) {
 		return meta == FlameBambooType.LADDER.getMeta();
+	}
+	
+	@Override
+	protected int droppedMeta(int meta) {
+		if (meta == FlameBambooType.LADDER.getMeta() || meta == FlameBambooType.SAPLING.getMeta()) {
+			return meta;
+		}
+		if (meta == FlameBambooType.TOP.getMeta() || meta == FlameBambooType.TOP_INACTIVE.getMeta()) {
+			return FlameBambooType.SAPLING.getMeta();
+		}
+		return FlameBambooType.UNNATURAL_STEM.getMeta();
 	}
 }

@@ -4,6 +4,7 @@ import net.minecraft.level.Level;
 import net.minecraft.util.maths.MathHelper;
 import paulevs.bnb.block.types.SoulTerrainType;
 import paulevs.bnb.listeners.BlockListener;
+import paulevs.bnb.sound.NetherSounds;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.MHelper;
 import paulevs.bnb.world.structures.NetherStructures;
@@ -28,6 +29,7 @@ public class SoulGrasslandBiome extends NetherBiome {
 		this.addStructure(NetherStructures.SOUL_BULBITE_CONDITIONAL, 1.0F, 20);
 		this.addStructure(NetherStructures.BONE_PEAKS_CONDITIONAL, 1.0F, 10);
 		this.addStructure(NetherStructures.SOUL_HEART_CONDITIONAL, 0.3F, 8);
+		this.setAmbientSound(NetherSounds.GRASSLANDS);
 		this.setFire(false);
 		this.setTopDepth(5);
 	}

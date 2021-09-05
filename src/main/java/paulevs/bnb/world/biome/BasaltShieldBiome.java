@@ -1,6 +1,7 @@
 package paulevs.bnb.world.biome;
 
 import paulevs.bnb.listeners.BlockListener;
+import paulevs.bnb.sound.NetherSounds;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.world.structures.NetherStructures;
 
@@ -12,6 +13,7 @@ public class BasaltShieldBiome extends NetherBiome {
 		this.setFogColor("a8a8a8");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("basalt")));
 		this.addStructure(NetherStructures.BASALT_PEAK, 1.0F, 5);
+		this.setAmbientSound(NetherSounds.GRASSLANDS);
 		this.setTopDepth(10);
 		this.setFire(false);
 	}

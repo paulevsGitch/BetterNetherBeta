@@ -1,6 +1,7 @@
 package paulevs.bnb.util;
 
 import net.minecraft.block.BlockBase;
+import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;
 import paulevs.bnb.block.NetherStoneBlock;
@@ -25,7 +26,14 @@ public class BlockUtil {
 	}
 	
 	public static boolean isNonSolid(int tile) {
-		return tile == 0 || blockByID(tile) == null || blockByID(tile).material.isReplaceable();
+		if (tile == 0) {
+			return true;
+		}
+		BlockBase block = blockByID(tile);
+		if (block == null || block.material.isReplaceable() || !block.material.blocksMovement() || block.material == Material.PLANT) {
+			return true;
+		}
+		return false;
 	}
 	
 	public static boolean isNonSolidNoLava(int tile) {

@@ -255,13 +255,22 @@ public class RecipeListener implements RecipeRegister {
 				'B', new ItemInstance(BlockListener.getBlock("flame_bamboo"), 1, FlameBambooType.UNNATURAL_STEM.getMeta()),
 				'#', new ItemInstance(ItemBase.stick)
 			);
+			
+			addSquareRecipe(
+				new ItemInstance(BlockListener.getBlock("flame_bamboo"), 1, FlameBambooType.UNNATURAL_STEM.getMeta()),
+				new ItemInstance(BlockListener.getBlock("nether_wood"), 1, NetherWoodType.FLAME_BAMBOO_BLOCK.getMeta())
+			);
 		}
 		else if (type == RecipeRegister.Vanilla.CRAFTING_SHAPELESS) {
-			for (NetherWoodType wood: NetherWoodType.values()) {
-				CraftingRegistry.INSTANCE.addShapelessRecipe(new ItemInstance(netherPlanks, 4, wood.getMeta()), new ItemInstance(netherWood, 1, wood.getMeta()));
+			for (NetherPlanksType plank: NetherPlanksType.values()) {
+				CraftingRegistry.INSTANCE.addShapelessRecipe(new ItemInstance(netherPlanks, 4, plank.getMeta()), new ItemInstance(netherWood, 1, plank.getMeta()));
 			}
 			
 			CraftingRegistry.INSTANCE.addShapelessRecipe(new ItemInstance(ItemBase.stick, 4, 0), new ItemInstance(BlockListener.getBlockID("flame_bamboo"), 1, 5));
+			CraftingRegistry.INSTANCE.addShapelessRecipe(
+				new ItemInstance(BlockListener.getBlockID("flame_bamboo"), 4, FlameBambooType.UNNATURAL_STEM.getMeta()),
+				new ItemInstance(BlockListener.getBlock("nether_wood"), 1, NetherWoodType.FLAME_BAMBOO_BLOCK.getMeta())
+			);
 		}
 		else if (type == RecipeRegister.Vanilla.SMELTING) {
 			SmeltingRegistry.INSTANCE.addSmeltingRecipe(new ItemInstance(BlockBase.NETHERRACK), new ItemInstance(ItemListener.getItem("netherrack_brick")));

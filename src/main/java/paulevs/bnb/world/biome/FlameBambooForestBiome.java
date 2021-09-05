@@ -19,7 +19,7 @@ public class FlameBambooForestBiome extends NetherBiome {
 		this.addStructure(NetherStructures.LANTERN_GRASS, 1.0F, 3);
 		this.addStructure(NetherStructures.CRIMSON_BUSH, 1.0F, 3);
 		this.addStructure(NetherStructures.CRIMSON_VINE, 1.0F, 8);
-		this.setAmbientSound(NetherSounds.NETHER_FOREST_AMBIENCE);
+		this.setAmbientSound(NetherSounds.BAMBOO_FOREST_AMBIENCE);
 		this.setFogDensity(2F);
 		this.setFire(false);
 	}

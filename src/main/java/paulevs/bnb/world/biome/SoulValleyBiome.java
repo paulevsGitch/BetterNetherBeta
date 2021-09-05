@@ -3,6 +3,7 @@ package paulevs.bnb.world.biome;
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import paulevs.bnb.listeners.BlockListener;
+import paulevs.bnb.sound.NetherSounds;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.MHelper;
 import paulevs.bnb.world.structures.NetherStructures;
@@ -26,6 +27,7 @@ public class SoulValleyBiome extends NetherBiome {
 		this.addStructure(NetherStructures.SOUL_BULBITE, 1.0F, 2);
 		this.addStructure(NetherStructures.BONE_PEAKS, 0.6F, 2);
 		this.addStructure(NetherStructures.SOUL_HEART, 0.3F, 2);
+		this.setAmbientSound(NetherSounds.GRASSLANDS);
 		this.setFire(false);
 		this.setTopDepth(5);
 	}
