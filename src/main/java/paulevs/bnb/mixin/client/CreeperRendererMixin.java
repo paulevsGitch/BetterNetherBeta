@@ -33,7 +33,9 @@ public abstract class CreeperRendererMixin extends LivingEntityRenderer {
 			}
 			this.setModel(model);
 			this.bindTexture(BNB_SOUL_TEXTURE);
-			GL11.glScalef(1.001F, 1.001F, 1.001F);
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glDisable(GL11.GL_ALPHA_TEST);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glColor4f(2.0F, 2.0F, 2.0F, 1.0F);
 			info.setReturnValue(true);
 		}
