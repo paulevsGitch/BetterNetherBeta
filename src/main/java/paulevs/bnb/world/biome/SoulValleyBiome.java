@@ -1,6 +1,7 @@
 package paulevs.bnb.world.biome;
 
 import net.minecraft.block.BlockBase;
+import net.minecraft.entity.monster.Creeper;
 import net.minecraft.level.Level;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.sound.NetherSounds;
@@ -28,6 +29,7 @@ public class SoulValleyBiome extends NetherBiome {
 		this.addStructure(NetherStructures.BONE_PEAKS, 0.6F, 2);
 		this.addStructure(NetherStructures.SOUL_HEART, 0.3F, 2);
 		this.setAmbientSound(NetherSounds.GRASSLANDS);
+		this.addMonsterSpawn(Creeper.class, 5);
 		this.setFire(false);
 		this.setTopDepth(5);
 	}

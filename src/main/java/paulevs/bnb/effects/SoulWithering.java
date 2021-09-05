@@ -7,7 +7,7 @@ public class SoulWithering extends StatusEffect {
 	public static final String NAME = "soul_withering";
 	
 	public SoulWithering() {
-		super(60, 243);
+		super(120, 243);
 	}
 	
 	@Override

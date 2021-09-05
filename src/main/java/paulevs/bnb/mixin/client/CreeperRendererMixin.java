@@ -4,6 +4,7 @@ import net.minecraft.client.render.entity.CreeperRenderer;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.model.Creeper;
 import net.minecraft.client.render.entity.model.EntityModelBase;
+import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,7 +15,7 @@ import paulevs.bnb.interfaces.NetherMob;
 
 @Mixin(CreeperRenderer.class)
 public abstract class CreeperRendererMixin extends LivingEntityRenderer {
-	private static final String BNB_SOUL_TEXTURE = BetterNetherBeta.getTexturePath("entity", "soul_creeper");
+	private static final String BNB_SOUL_TEXTURE = BetterNetherBeta.getTexturePath("entity", "soul_creeper_e");
 	
 	@Shadow
 	private EntityModelBase field_1685;
@@ -30,13 +31,10 @@ public abstract class CreeperRendererMixin extends LivingEntityRenderer {
 			if (model == null) {
 				model = new Creeper();
 			}
+			this.setModel(model);
 			this.bindTexture(BNB_SOUL_TEXTURE);
-			//this.setModel(model);
-			//float var4 = (1.0F - creeper.getBrightnessAtEyes(1.0F)) * 0.5F;
-			//GL11.glEnable(GL11.GL_BLEND);
-			//GL11.glDisable(GL11.GL_ALPHA_TEST);
-			//GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			//GL11.glColor4f(1.0F, 1.0F, 1.0F, var4);
+			GL11.glScalef(1.001F, 1.001F, 1.001F);
+			GL11.glColor4f(2.0F, 2.0F, 2.0F, 1.0F);
 			info.setReturnValue(true);
 		}
 	}

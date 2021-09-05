@@ -1,5 +1,7 @@
 package paulevs.bnb.world.biome;
 
+import net.minecraft.entity.monster.Creeper;
+import net.minecraft.entity.monster.ZombiePigman;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.MathHelper;
 import paulevs.bnb.block.types.SoulTerrainType;
@@ -30,6 +32,7 @@ public class SoulGrasslandBiome extends NetherBiome {
 		this.addStructure(NetherStructures.BONE_PEAKS_CONDITIONAL, 1.0F, 10);
 		this.addStructure(NetherStructures.SOUL_HEART_CONDITIONAL, 0.3F, 8);
 		this.setAmbientSound(NetherSounds.GRASSLANDS);
+		this.addMonsterSpawn(Creeper.class, 5);
 		this.setFire(false);
 		this.setTopDepth(5);
 	}

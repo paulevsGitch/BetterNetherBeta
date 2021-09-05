@@ -15,7 +15,7 @@ import paulevs.bnb.item.NetherHoeItem;
 import paulevs.bnb.item.NetherPickaxeItem;
 import paulevs.bnb.item.NetherShearsItem;
 import paulevs.bnb.item.NetherShovelItem;
-import paulevs.bnb.item.NetherSpawnEgg;
+import paulevs.bnb.item.NetherSpawnEggItem;
 import paulevs.bnb.item.NetherSwordItem;
 import paulevs.bnb.item.NetherToolItem;
 import paulevs.bnb.item.SeedsTileEntity;
@@ -60,7 +60,7 @@ public class ItemListener implements ItemRegister {
 		register("heart_fruit", HeartFruitItem::new);
 		register("soul_heart_seeds", SeedsTileEntity::new, BlockListener.getBlock("soul_heart"));
 		
-		register("spawn_egg", NetherSpawnEgg::new);
+		register("spawn_egg", NetherSpawnEggItem::new);
 		
 		occupiedIDs = null;
 		BetterNetherBeta.configItems.save();
