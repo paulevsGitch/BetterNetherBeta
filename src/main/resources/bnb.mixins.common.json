@@ -10,6 +10,7 @@
 		"ToolBaseAccessor",
 		"PlayerBaseMixin",
 		"LevelAccessor",
+		"CreeperMixin",
 		"LivingMixin",
 		"NetherMixin",
 		"PortalMixin",

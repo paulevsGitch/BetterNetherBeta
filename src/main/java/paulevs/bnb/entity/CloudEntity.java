@@ -21,11 +21,13 @@ public class CloudEntity extends EntityBase {
 	protected void initDataTracker() {
 		this.dataTracker.startTracking(16, 200);
 		this.dataTracker.startTracking(17, DyeColors.WHITE.getColor());
-		this.dataTracker.startTracking(18, "");
 	}
 	
 	@Override
 	protected void readCustomDataFromTag(CompoundTag tag) {
+		field_1645 = tag.getInt("age");
+		setMaxAge(tag.getInt("maxAge"));
+		setColor(tag.getInt("color"));
 		if (tag.containsKey("statusEffect")) {
 			statusEffect = tag.getCompoundTag("statusEffect");
 		}
@@ -33,6 +35,9 @@ public class CloudEntity extends EntityBase {
 	
 	@Override
 	protected void writeCustomDataToTag(CompoundTag tag) {
+		tag.put("age", getAge());
+		tag.put("maxAge", getMaxAge());
+		tag.put("color", getColor());
 		if (statusEffect != null) {
 			tag.put("statusEffect", statusEffect);
 		}
