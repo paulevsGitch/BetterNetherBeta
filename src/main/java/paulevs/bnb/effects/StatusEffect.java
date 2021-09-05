@@ -64,4 +64,8 @@ public abstract class StatusEffect {
 	public void resetTime() {
 		time = 0;
 	}
+	
+	protected int getTime() {
+		return time;
+	}
 }

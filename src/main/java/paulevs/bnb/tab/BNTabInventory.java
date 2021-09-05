@@ -7,6 +7,7 @@ import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.block.MultiBlock;
 import paulevs.bnb.block.SpiderCocoonBlock;
 import paulevs.bnb.interfaces.BlockEnum;
+import paulevs.bnb.interfaces.ItemWithMeta;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.listeners.ItemListener;
 import paulevs.creative.api.CreativeTabs;
@@ -42,7 +43,15 @@ public class BNTabInventory {
 					}
 				}
 				for (ItemBase item: ItemListener.getModItems()) {
-					tab.addItem(new ItemInstance(item));
+					if (item instanceof ItemWithMeta) {
+						int count = ((ItemWithMeta) item).getMaxMeta();
+						for (int meta = 0; meta < count; meta++) {
+							tab.addItem(new ItemInstance(item, 1, meta));
+						}
+					}
+					else {
+						tab.addItem(new ItemInstance(item));
+					}
 				}
 			}
 		});

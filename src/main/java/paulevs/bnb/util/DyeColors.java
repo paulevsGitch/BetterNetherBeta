@@ -2,14 +2,14 @@ package paulevs.bnb.util;
 
 import net.minecraft.item.Dye;
 
-public enum MCColors {
+public enum DyeColors {
 	BLACK, RED, GREEN, BROWN, BLUE, PURPLE, CYAN, SILVER, GRAY, PINK, LIME, YELLOW, LIGHTBLUE, MAGENTA, ORANGE, WHITE;
 	
 	private final String name;
 	private final int color;
 	private final int id;
 	
-	MCColors() {
+	DyeColors() {
 		id = this.ordinal();
 		color = Dye.COLOURS[id];
 		name = Dye.NAMES[id];

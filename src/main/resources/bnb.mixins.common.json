@@ -6,6 +6,7 @@
 	"mixins": [
 		"NetherLevelSourceMixin",
 		"ZombiePigmanAccessor",
+		"EntityRegistryMixin",
 		"ToolBaseAccessor",
 		"PlayerBaseMixin",
 		"LevelAccessor",

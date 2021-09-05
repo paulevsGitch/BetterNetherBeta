@@ -15,7 +15,7 @@ import paulevs.bnb.effects.StatusEffect;
 import paulevs.bnb.interfaces.StatusEffectable;
 import paulevs.bnb.util.ClientUtil;
 import paulevs.bnb.util.CreativeUtil;
-import paulevs.bnb.util.MCColors;
+import paulevs.bnb.util.DyeColors;
 
 import java.util.Collection;
 
@@ -54,8 +54,8 @@ public class InGameMixin extends DrawableHelper {
 			int offsetY = (int) (posY * 1.5F) + 2;
 			int seconds = effect.getRemainingTicks() / 20;
 			String time = String.format("%02d:%02d", seconds / 60, seconds % 60);
-			this.drawTextWithShadow(minecraft.textRenderer, effect.getDescription(), 30, offsetY, MCColors.WHITE.getColor());
-			this.drawTextWithShadow(minecraft.textRenderer, time, 30, offsetY + 10, MCColors.YELLOW.getColor());
+			this.drawTextWithShadow(minecraft.textRenderer, effect.getDescription(), 30, offsetY, DyeColors.WHITE.getColor());
+			this.drawTextWithShadow(minecraft.textRenderer, time, 30, offsetY + 10, DyeColors.YELLOW.getColor());
 			posY += 18;
 		}
 		
