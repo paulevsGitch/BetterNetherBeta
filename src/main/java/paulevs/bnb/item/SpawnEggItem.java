@@ -9,6 +9,9 @@ import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.level.Level;
 import net.minecraft.util.Vec3i;
+import paulevs.bnb.effects.SoulProtectionEffect;
+import paulevs.bnb.effects.StatusEffect;
+import paulevs.bnb.effects.StatusEffects;
 import paulevs.bnb.entity.CloudEntity;
 import paulevs.bnb.interfaces.ItemWithMeta;
 import paulevs.bnb.listeners.TextureListener;
@@ -17,8 +20,11 @@ import paulevs.bnb.util.DyeColors;
 import paulevs.bnb.util.MHelper;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class SpawnEggItem extends NetherItem implements ItemWithMeta {
 	private final List<Function<Level, ? extends EntityBase>> entities;
@@ -32,6 +38,13 @@ public class SpawnEggItem extends NetherItem implements ItemWithMeta {
 		entities.add(level -> {
 			CloudEntity entity = new CloudEntity(level);
 			entity.setColor(DyeColors.values()[MHelper.getRandom().nextInt(16)].getColor());
+			Collection<Supplier<StatusEffect>> effects = StatusEffects.getAllEffects();
+			int index = MHelper.getRandom().nextInt(effects.size());
+			Iterator<Supplier<StatusEffect>> iterator = effects.iterator();
+			for (int i = 0; i < index; i++) {
+				iterator.next();
+			}
+			entity.setStatusEffect(iterator.next().get());
 			return entity;
 		});
 		

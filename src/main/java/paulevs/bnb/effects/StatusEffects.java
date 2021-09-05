@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.util.io.CompoundTag;
 import paulevs.bnb.interfaces.StatusEffectable;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -37,5 +38,9 @@ public class StatusEffects {
 		if (builder != null) {
 			((StatusEffectable) player).addEffect(builder.get());
 		}
+	}
+	
+	public static Collection<Supplier<StatusEffect>> getAllEffects() {
+		return REGISTRY.values();
 	}
 }
