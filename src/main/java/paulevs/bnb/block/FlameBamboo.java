@@ -6,7 +6,6 @@ import net.minecraft.block.BlockBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.item.ItemInstance;
-import net.minecraft.item.PlaceableBlock;
 import net.minecraft.item.PlaceableTileEntity;
 import net.minecraft.level.Level;
 import net.minecraft.level.TileView;

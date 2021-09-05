@@ -18,6 +18,7 @@
 		"TileRendererMixin",
 		"SoundHelperMixin",
 		"BlockBaseMixin",
+		"Class556Mixin",
 		"SoulSandMixin",
 		"NetherMixin",
 		"SpiderMixin",
