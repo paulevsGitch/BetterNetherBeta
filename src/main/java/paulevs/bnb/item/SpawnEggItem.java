@@ -23,6 +23,7 @@ public abstract class SpawnEggItem extends NetherItem implements ItemWithMeta {
 	
 	public SpawnEggItem(String name, int id) {
 		super(name, id);
+		addMobs();
 	}
 	
 	protected abstract void addMobs();
