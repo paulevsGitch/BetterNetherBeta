@@ -1,7 +1,6 @@
 package paulevs.bnb.world.biome;
 
 import net.minecraft.entity.monster.Creeper;
-import net.minecraft.entity.monster.ZombiePigman;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.MathHelper;
 import paulevs.bnb.block.types.SoulTerrainType;

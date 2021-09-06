@@ -2,34 +2,26 @@ package paulevs.bnb.mixin.common;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockBase;
 import net.minecraft.entity.EntityBase;
 import net.minecraft.entity.Living;
 import net.minecraft.entity.monster.Creeper;
 import net.minecraft.entity.monster.MonsterBase;
 import net.minecraft.level.Level;
-import net.minecraft.level.LightType;
-import net.minecraft.level.biome.Biome;
 import net.minecraft.level.dimension.Nether;
 import net.minecraft.util.io.CompoundTag;
 import net.minecraft.util.maths.Box;
 import net.minecraft.util.maths.MathHelper;
-import net.minecraft.util.maths.TilePos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.effects.SoulWithering;
-import paulevs.bnb.effects.StatusEffects;
 import paulevs.bnb.entity.CloudEntity;
 import paulevs.bnb.interfaces.NetherMob;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.MHelper;
-
-import java.util.List;
 
 @Mixin(value = Creeper.class, priority = 100)
 public abstract class CreeperMixin extends MonsterBase implements NetherMob {

@@ -1,20 +1,19 @@
 package paulevs.bnb.block;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.item.ItemBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.item.tool.Shears;
 import net.minecraft.level.Level;
+import net.minecraft.level.TileView;
 import paulevs.bnb.block.types.NetherLeavesType;
 import paulevs.bnb.item.NetherShearsItem;
 import paulevs.bnb.util.ItemUtil;
 
 public class NetherLeavesBlock extends MultiBlock {
-	//private static final Set<Vec3i> POSITIONS = Sets.newHashSet();
-	//private static final Set<Vec3i> NEW_ENDS = Sets.newHashSet();
-	//private static final Set<Vec3i> ENDS = Sets.newHashSet();
-	
 	public NetherLeavesBlock(String name, int id) {
 		super(name, id, Material.LEAVES, NetherLeavesType.class);
 		this.setHardness(LEAVES.getHardness());
@@ -32,5 +31,17 @@ public class NetherLeavesBlock extends MultiBlock {
 		else {
 			super.afterBreak(level, player, x, y, z, meta);
 		}
+	}
+	
+	public boolean isFullOpaque() {
+		return false;
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public boolean method_1618(TileView world, int x, int y, int z, int side) {
+		if (world.getTileMeta(x, y, z) != NetherLeavesType.EMBER_LEAVES.getMeta()) {
+			return super.method_1618(world, x, y, z, side);
+		}
+		return world.getTileId(x, y, z) == this.id ? true : super.method_1618(world, x, y, z, side);
 	}
 }
