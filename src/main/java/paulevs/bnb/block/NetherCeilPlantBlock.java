@@ -48,7 +48,7 @@ public class NetherCeilPlantBlock extends MultiBlock implements BlockItemProvide
 
 	protected boolean isCeil(int id) {
 		BlockBase block = BlockBase.BY_ID[id];
-		return block != null && block.isFullCube() && block.isFullOpaque();
+		return block != null && ((block.isFullCube() && block.isFullOpaque()) || block instanceof NetherLeavesBlock);
 	}
 
 	@Override

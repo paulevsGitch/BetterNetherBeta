@@ -40,7 +40,11 @@ public class BlockUtil {
 		if (tile == BlockBase.BROWN_MUSHROOM.id || tile == BlockBase.RED_MUSHROOM.id) {
 			return true;
 		}
-		return tile != BlockBase.STILL_LAVA.id && tile != BlockBase.FLOWING_LAVA.id && isNonSolid(tile);
+		return !isLava(tile) && isNonSolid(tile);
+	}
+	
+	public static boolean isLava(int tile) {
+		return tile == BlockBase.STILL_LAVA.id || tile == BlockBase.FLOWING_LAVA.id;
 	}
 	
 	public static void setLightPass(boolean value) {

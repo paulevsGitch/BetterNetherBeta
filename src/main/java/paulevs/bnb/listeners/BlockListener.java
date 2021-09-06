@@ -8,12 +8,14 @@ import paulevs.bnb.BetterNetherBeta;
 import paulevs.bnb.block.BasaltBlock;
 import paulevs.bnb.block.DarkshroomBlock;
 import paulevs.bnb.block.FlameBamboo;
+import paulevs.bnb.block.NetherDoublePlant;
 import paulevs.bnb.block.NetherFungusBlock;
 import paulevs.bnb.block.NetherGrassBlock;
 import paulevs.bnb.block.NetherLanternBlock;
 import paulevs.bnb.block.NetherLeavesBlock;
 import paulevs.bnb.block.NetherOreBlock;
 import paulevs.bnb.block.NetherPlanksBlock;
+import paulevs.bnb.block.NetherSaplingBlock;
 import paulevs.bnb.block.NetherSlabBlock;
 import paulevs.bnb.block.NetherStairsBlock;
 import paulevs.bnb.block.NetherStemBlock;
@@ -32,6 +34,7 @@ import paulevs.bnb.block.SpiderCocoonBlock;
 import paulevs.bnb.block.TallNetherPlant;
 import paulevs.bnb.block.UmbraPlantBlock;
 import paulevs.bnb.block.UmbralithBlock;
+import paulevs.bnb.block.WallCoralBlock;
 import paulevs.bnb.block.types.BasaltBlockType;
 import paulevs.bnb.block.types.NetherPlanksType;
 import paulevs.bnb.block.types.NetherrackBricksType;
@@ -82,6 +85,7 @@ public class BlockListener implements BlockRegister {
 		register("nether_grass", NetherGrassBlock::new);
 		register("nether_vine", NetherVineBlock::new);
 		register("nether_fungus", NetherFungusBlock::new);
+		register("nether_sapling", NetherSaplingBlock::new);
 		
 		register("soul_spire", SoulSpirePlantBlock::new);
 		register("soul_spire_block", SoulSpireBlock::new);
@@ -90,6 +94,9 @@ public class BlockListener implements BlockRegister {
 		register("soul_heart", SoulHeartBlock::new);
 		
 		register("umbra_plant", UmbraPlantBlock::new);
+		register("nether_double_plant", NetherDoublePlant::new);
+		
+		register("wall_coral", WallCoralBlock::new);
 		
 		register("spider_cocoon", SpiderCocoonBlock::new);
 		

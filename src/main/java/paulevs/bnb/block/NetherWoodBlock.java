@@ -31,17 +31,21 @@ public class NetherWoodBlock extends MultiBlock implements BlockWithLight {
 		if (meta == NetherWoodType.EMBER_WOOD.getMeta()) {
 			if (BlockUtil.isHorizontalSide(side)) {
 				String name = getVariant(meta).getTexture(side);
-				int type = MHelper.getRandomHash(y, x, z) % 3;
+				int type = MHelper.getRandomHash(y + side, x, z) % 12;
+				type = type < 9 ? type % 3 : type - 7;
+				
 				String texture = type > 0 ? name + "_" + type : name;
+				type = type % 3;
+				String magmaTexture = type > 0 ? name + "_" + type + "_magma" : name + "_magma";
 				if (hasMagma(world, x, y, z)) {
-					texture += "_magma";
+					texture = magmaTexture;
 				}
 				else if (world.getTileId(x, y - 1, z) == id) {
 					if (hasMagma(world, x, y - 1, z)) {
-						texture += "_magma";
+						texture = magmaTexture;
 					}
 					else if (world.getTileId(x, y - 2, z) == id && hasMagma(world, x, y - 2, z)) {
-						texture += "_magma";
+						texture = magmaTexture;
 					}
 				}
 				return TextureListener.getBlockTexture(texture);
@@ -59,7 +63,7 @@ public class NetherWoodBlock extends MultiBlock implements BlockWithLight {
 	private boolean hasMagma(TileView world, int x, int y, int z) {
 		for (BlockDirection dir: BlockDirection.VALUES) {
 			int id = world.getTileId(x + dir.getX(), y + dir.getY(), z + dir.getZ());
-			if (id == STILL_LAVA.id || id == STILL_LAVA.id) {
+			if (BlockUtil.isLava(id)) {
 				return true;
 			}
 		}

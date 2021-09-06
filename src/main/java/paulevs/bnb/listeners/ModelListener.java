@@ -5,6 +5,7 @@ import net.modificationstation.stationloader.api.client.event.model.ModelRegiste
 import net.modificationstation.stationloader.api.client.model.CustomModel;
 import net.modificationstation.stationloader.api.common.util.BlockFaces;
 import paulevs.bnb.block.model.OBJBlockModel;
+import paulevs.bnb.block.types.NetherDoublePlantType;
 import paulevs.bnb.block.types.NetherLeavesType;
 import paulevs.bnb.block.types.NetherPlantType;
 import paulevs.bnb.block.types.NetherTreeFurType;
@@ -57,6 +58,11 @@ public class ModelListener implements ModelRegister {
 				}
 			}
 			
+			model = new OBJBlockModel("/assets/bnb/models/block/tall_plant.obj", 16, 8, 0, 8, BlockFaces.UP);
+			for (NetherDoublePlantType plant: NetherDoublePlantType.values()) {
+				BLOCK_MODELS.put(plant.getName(), model.clone().setTextures(plant.getName() + "_top", plant.getName() + "_bottom"));
+			}
+			
 			BLOCK_MODELS.put("flame_bamboo_sapling", cross.clone().setTextures("flame_bamboo_sapling"));
 			
 			model = new OBJBlockModel("/assets/bnb/models/block/bamboo_stem.obj", 16, 8, 0, 8, null);
@@ -102,6 +108,11 @@ public class ModelListener implements ModelRegister {
 			
 			model = new OBJBlockModel("/assets/bnb/models/block/darkshroom_block_center.obj");
 			BLOCK_MODELS.put("darkshroom_center", model.setTextures("darkshroom_top", "darkshroom_center_side", "darkshroom_bottom"));
+			
+			for (int i = 0; i < 3; i++) {
+				model = new OBJBlockModel("/assets/bnb/models/block/wall_coral_" + i + ".obj", 16, 8, 0, 16, BlockFaces.UP);
+				makeRotated("wall_coral_" + i, model.setTextures("wall_coral"));
+			}
 		}
 	}
 	

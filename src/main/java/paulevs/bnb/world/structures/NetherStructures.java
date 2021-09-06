@@ -2,6 +2,7 @@ package paulevs.bnb.world.structures;
 
 import net.minecraft.level.structure.Structure;
 import paulevs.bnb.block.types.BasaltBlockType;
+import paulevs.bnb.block.types.NetherDoublePlantType;
 import paulevs.bnb.block.types.NetherFungusType;
 import paulevs.bnb.block.types.NetherLanternType;
 import paulevs.bnb.block.types.NetherLeavesType;
@@ -46,6 +47,7 @@ public class NetherStructures {
 	public static final Structure SOUL_SPIRE = new SoulSpireStructure();
 	public static final Structure SOUL_SPIRE_CONDITIONAL = new SoulSpireStructureConditional();
 	public static final Structure FLAME_BAMBOO = new DistortedBambooStructure();
+	public static final Structure EMBER_TREE = new EmberTreeStructure();
 	
 	public static final Structure CRIMSON_ROOTS = makeGrass(NetherPlantType.CRIMSON_ROOTS);
 	public static final Structure LAMELLARIUM = makeGrass(NetherPlantType.LAMELLARIUM);
@@ -68,6 +70,8 @@ public class NetherStructures {
 	public static final Structure BULBINE = new TallPlant(new BlockState(BlockListener.getBlock("tall_glow_nether_plant"),
 		TallGlowNetherPlantType.BULBINE
 	), 3, 5F);
+	
+	public static final Structure RED_CATTAIL = new DoublePlantStructure(new BlockState(BlockListener.getBlock("nether_double_plant"), NetherDoublePlantType.RED_CATTAIL), 2);
 	
 	private static final Function<BlockState, Boolean> SOUL_NYLIUM_CONDITION = blockState -> blockState.getBlockID() == BlockListener.getBlockID("soul_soil") && blockState.getMeta() == SoulTerrainType.SOUL_NYLIUM.getMeta();
 	private static final Function<BlockState, Boolean> SOUL_LAND_CONDITION = blockState -> blockState.getBlockID() == BlockListener.getBlockID("soul_soil") && blockState.getMeta() != SoulTerrainType.SOUL_NYLIUM.getMeta();

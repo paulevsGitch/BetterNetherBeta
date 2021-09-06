@@ -46,22 +46,8 @@ public class SoulValleyBiome extends NetherBiome {
 	
 	@Override
 	public BlockState getTopBlock(Level level, int x, int y, int z) {
-		/*for (int i = 0; i < 3; i++) {
-			for (BlockDirection dir : BlockDirection.HORIZONTAL) {
-				int dist = i + 1;
-				if (!isSolidBlock(level.getTileId(x + dir.getX() * dist, y + dir.getY() * dist, z + dir.getZ() * dist))) {
-					return soilLayers[i];
-				}
-			}
-		}
-		return getBottomBlock(level, x, y, z);*/
 		return getNoiseValue(x, z) > 0 ? topBlock : soilBlock;
 	}
-	
-	/*@Override
-	public BlockState getBottomBlock(Level level, int x, int y, int z) {
-		return getNoiseValue(x, z) > 0 ? topBlock : soilBlock;
-	}*/
 	
 	private float getNoiseValue(int x, int z) {
 		float value = MHelper.getNoiseValue(x * 0.1, z * 0.1);
@@ -69,38 +55,4 @@ public class SoulValleyBiome extends NetherBiome {
 		value += (MHelper.getRandomHash(x, z) & 7) / 28.0F - 0.125F;
 		return value;
 	}
-	
-	/*private float getHeight(Level level, int x, int y, int z) {
-		int height = 0;
-		for (int i = -2; i < 3; i++) {
-			int px = x + i;
-			for (int j = -2; j < 3; j++) {
-				int pz = z + j;
-				height += getColumnHeight(level, px, y, pz);
-			}
-		}
-		return height / 25F;
-	}
-	
-	private int getColumnHeight(Level level, int x, int y, int z) {
-		if (!isSolidBlock(level.getTileId(x, y, z))) {
-			for (int i = 1; i < 8; i++) {
-				if (isSolidBlock(level.getTileId(x, y - i, z))) {
-					return -(i + 1);
-				}
-			}
-		}
-		else {
-			for (int i = 1; i < 8; i++) {
-				if (!isSolidBlock(level.getTileId(x, y + i, z))) {
-					return i - 1;
-				}
-			}
-		}
-		return 0;
-	}
-	
-	private boolean isSolidBlock(int id) {
-		return id == BlockBase.NETHERRACK.id || id == BlockBase.SOUL_SAND.id || id == soilBlock.getBlockID() || id == soilLayers[0].getBlockID();
-	}*/
 }
