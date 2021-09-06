@@ -8,5 +8,6 @@ public class NetherSounds {
 	public static final NetherAmbientSound NETHER_FOREST_AMBIENCE = new NetherAmbientSound("nether_forest");
 	public static final NetherAmbientSound DEEP_DARK_AMBIENCE = new NetherAmbientSound("deep_dark");
 	public static final NetherAmbientSound BAMBOO_FOREST_AMBIENCE = new NetherAmbientSound("bamboo_forest");
-	public static final NetherAmbientSound GRASSLANDS = new NetherAmbientSound("grasslands");
+	public static final NetherAmbientSound GRASSLANDS_AMBIENCE = new NetherAmbientSound("grasslands");
+	public static final NetherAmbientSound SWAMPLAND_AMBIENCE = new NetherAmbientSound("nether_bog");
 }

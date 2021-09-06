@@ -13,7 +13,7 @@ public class BasaltShieldBiome extends NetherBiome {
 		this.setFogColor("a8a8a8");
 		this.setTopBlock(new BlockState(BlockListener.getBlock("basalt")));
 		this.addStructure(NetherStructures.BASALT_PEAK, 1.0F, 5);
-		this.setAmbientSound(NetherSounds.GRASSLANDS);
+		this.setAmbientSound(NetherSounds.GRASSLANDS_AMBIENCE);
 		this.setTopDepth(10);
 		this.setFire(false);
 	}

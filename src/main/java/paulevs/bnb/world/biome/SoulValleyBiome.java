@@ -28,7 +28,7 @@ public class SoulValleyBiome extends NetherBiome {
 		this.addStructure(NetherStructures.SOUL_BULBITE, 1.0F, 2);
 		this.addStructure(NetherStructures.BONE_PEAKS, 0.6F, 2);
 		this.addStructure(NetherStructures.SOUL_HEART, 0.3F, 2);
-		this.setAmbientSound(NetherSounds.GRASSLANDS);
+		this.setAmbientSound(NetherSounds.GRASSLANDS_AMBIENCE);
 		this.addMonsterSpawn(Creeper.class, 5);
 		this.setFire(false);
 		this.setTopDepth(5);

@@ -30,7 +30,7 @@ public class SoulGrasslandBiome extends NetherBiome {
 		this.addStructure(NetherStructures.SOUL_BULBITE_CONDITIONAL, 1.0F, 20);
 		this.addStructure(NetherStructures.BONE_PEAKS_CONDITIONAL, 1.0F, 10);
 		this.addStructure(NetherStructures.SOUL_HEART_CONDITIONAL, 0.3F, 8);
-		this.setAmbientSound(NetherSounds.GRASSLANDS);
+		this.setAmbientSound(NetherSounds.GRASSLANDS_AMBIENCE);
 		this.addMonsterSpawn(Creeper.class, 5);
 		this.setFire(false);
 		this.setTopDepth(5);

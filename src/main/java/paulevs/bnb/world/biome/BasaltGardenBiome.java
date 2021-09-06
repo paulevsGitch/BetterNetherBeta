@@ -15,7 +15,7 @@ public class BasaltGardenBiome extends NetherBiome {
 		this.setTopBlock(new BlockState(BlockListener.getBlock("basalt"), BasaltBlockType.BASALT));
 		this.addStructure(NetherStructures.FLAMING_BASALT_PEAK, 1.0F, 5);
 		this.addStructure(NetherStructures.CRIMSON_ROOTS, 1.0F, 10);
-		this.setAmbientSound(NetherSounds.GRASSLANDS);
+		this.setAmbientSound(NetherSounds.GRASSLANDS_AMBIENCE);
 		this.setTopDepth(10);
 		this.setFire(false);
 	}

@@ -14,16 +14,18 @@ import paulevs.bnb.util.BlockUtil;
 
 public class WallPlantPlaceableTileEntity extends PlaceableTileEntity {
 	private BlockBase block;
+	private String texture;
 	
 	public WallPlantPlaceableTileEntity(int id, BlockBase block) {
 		super(id);
 		this.block = block;
+		this.texture = block.getName().substring(block.getName().indexOf(':') + 1) + "_item";
 	}
 	
 	@Override
 	@Environment(EnvType.CLIENT)
 	public int getTexturePosition(int damage) {
-		return TextureListener.getBlockTexture(block.getName().substring(block.getName().indexOf(':') + 1) + "_item");
+		return TextureListener.getBlockTexture(texture);
 	}
 	
 	@Override

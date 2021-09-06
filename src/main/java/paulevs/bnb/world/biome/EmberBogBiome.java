@@ -26,7 +26,7 @@ public class EmberBogBiome extends NetherBiome {
 		this.addStructure(NetherStructures.BULBINE, 0.1F, 5);
 		this.addStructure(NetherStructures.VIOLEUM, 0.4F, 8);
 		this.addStructure(NetherStructures.SHATTERED_GRASS, 1F, 8);
-		this.setAmbientSound(NetherSounds.NETHER_FOREST_AMBIENCE);
+		this.setAmbientSound(NetherSounds.SWAMPLAND_AMBIENCE);
 		this.setFire(false);
 	}
 	
