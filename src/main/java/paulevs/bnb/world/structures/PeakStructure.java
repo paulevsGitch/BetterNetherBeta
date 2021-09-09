@@ -11,13 +11,19 @@ import java.util.function.Function;
 
 public class PeakStructure extends Structure {
 	protected final Function<BlockState, Boolean> placeFunction;
+	protected final Function<BlockState, Boolean> airFunction;
 	private final BlockState check = new BlockState(0);
 	protected final BlockState block;
 	protected final int height;
 	protected final int radius;
 	
 	public PeakStructure(BlockState block, int height, int radius, Function<BlockState, Boolean> placeFunction) {
+		this(block, height, radius, placeFunction, (state) -> true);
+	}
+	
+	public PeakStructure(BlockState block, int height, int radius, Function<BlockState, Boolean> placeFunction, Function<BlockState, Boolean> airFunction) {
 		this.placeFunction = placeFunction;
+		this.airFunction = airFunction;
 		this.height = height;
 		this.radius = radius;
 		this.block = block;
@@ -42,10 +48,14 @@ public class PeakStructure extends Structure {
 			int pz = z + dz;
 			int minY = y + MathHelper.floor(distance * 0.3F * radius) - rand.nextInt(2);
 			int maxY = minY + MathHelper.floor(height * scale * (distance / radius + rand.nextFloat() * 0.2F));
-			check.setBlockID(level.getTileId(px, minY - 1, pz));
-			check.setBlockMeta(level.getTileMeta(px, minY - 1, pz));
-			if (placeFunction.apply(check)) {
-				generatePillar(level, rand, px, pz, minY, maxY);
+			check.setBlockID(level.getTileId(px, minY, pz));
+			check.setBlockMeta(level.getTileMeta(px, minY, pz));
+			if (airFunction.apply(check)) {
+				check.setBlockID(level.getTileId(px, minY - 1, pz));
+				check.setBlockMeta(level.getTileMeta(px, minY - 1, pz));
+				if (placeFunction.apply(check)) {
+					generatePillar(level, rand, px, pz, minY, maxY);
+				}
 			}
 		}
 		

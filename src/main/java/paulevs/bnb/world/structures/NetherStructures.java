@@ -1,5 +1,6 @@
 package paulevs.bnb.world.structures;
 
+import net.minecraft.block.BlockBase;
 import net.minecraft.level.structure.Structure;
 import paulevs.bnb.block.types.BasaltBlockType;
 import paulevs.bnb.block.types.NetherDoublePlantType;
@@ -130,9 +131,14 @@ public class NetherStructures {
 	);
 	
 	public static final Structure GHOST_PUMPKIN = new BlockScatterConditional(
-		new BlockState(BlockListener.getBlock("nether_lantern"),
-		NetherLanternType.GHOST_PUMPKIN), 3F, 10,
+		new BlockState(BlockListener.getBlock("nether_lantern"), NetherLanternType.GHOST_PUMPKIN), 3F, 10,
 		blockState -> BlockUtil.isTerrain(blockState.getBlockID())
+	);
+	
+	public static final Structure COBWEB_PEAK = new PeakStructure(
+		new BlockState(BlockBase.COBWEB), 3, 6,
+		blockState -> BlockUtil.isTerrain(blockState.getBlockID()),
+		blockState -> blockState.getBlockID() == 0
 	);
 	
 	public static final NetherOre ORICHALCUM_ORE = makeOre(NetherOreType.ORICHALCUM_ORE, 8);
