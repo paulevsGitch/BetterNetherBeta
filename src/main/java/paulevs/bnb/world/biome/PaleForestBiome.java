@@ -13,6 +13,7 @@ public class PaleForestBiome extends NetherBiome {
 		super(name);
 		this.setFogColor("b09f91");
 		this.setTopBlock(new BlockState(BlockListener.getBlockID("soul_soil")));
+		this.addStructure(NetherStructures.PALE_PLATFORM, 0.1F, 10);
 		this.addStructure(NetherStructures.PALE_TREE, 1.0F, 7);
 		this.addStructure(NetherStructures.COBWEB_PEAK, 1.0F, 4);
 		this.addStructure(NetherStructures.GHOST_PUMPKIN, 1.0F, 15);

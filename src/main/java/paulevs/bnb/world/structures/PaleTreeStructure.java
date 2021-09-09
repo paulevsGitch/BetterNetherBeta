@@ -37,7 +37,6 @@ public class PaleTreeStructure extends Structure {
 			lineDown(level, rand, x, y + rand.nextInt(4), z, dx, dz, 4);
 		}
 		
-		System.out.println("Place trunk");
 		for (int py = y; py < h2; py++) {
 			int id = level.getTileId(x, py, z);
 			if (id == 0 || id == WOOD.getBlockID() || id == LEAVES.getBlockID() || id == FUR.getBlockID() || id == SAPLING) {
@@ -48,7 +47,6 @@ public class PaleTreeStructure extends Structure {
 				return true;
 			}
 		}
-		System.out.println("Done!");
 		
 		count = MHelper.randRange(4, 6, rand);
 		offset = rand.nextFloat() * (float) Math.PI * 2;

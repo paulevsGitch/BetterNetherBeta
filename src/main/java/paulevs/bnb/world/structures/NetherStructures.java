@@ -20,6 +20,7 @@ import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.util.BlockState;
 import paulevs.bnb.util.BlockUtil;
 import paulevs.bnb.util.RangedBlockState;
+import paulevs.bnb.world.structures.buildings.PlatformStructure;
 
 import java.util.function.Function;
 
@@ -142,6 +143,8 @@ public class NetherStructures {
 	);
 	
 	public static final NetherOre ORICHALCUM_ORE = makeOre(NetherOreType.ORICHALCUM_ORE, 8);
+	
+	public static final Structure PALE_PLATFORM = new PlatformStructure();
 	
 	private static Structure makeGrass(NetherPlantType variant) {
 		return new BlockScatter(new BlockState(BlockListener.getBlock("nether_grass"), variant), 3F);
