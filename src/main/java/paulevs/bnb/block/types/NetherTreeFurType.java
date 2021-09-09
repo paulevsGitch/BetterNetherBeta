@@ -6,7 +6,8 @@ public enum NetherTreeFurType implements BlockEnum {
 	CRIMSON_GLOWING_FUR(0, "crimson_fur", "crimson_tree_fur"),
 	WARPED_GLOWING_FUR(1, "warped_fur", "warped_tree_fur"),
 	POISON_GLOWING_FUR(2, "poison_fur", "poison_tree_fur"),
-	EMBER_FUR(3, "ember_fur", "ember_tree_fur");
+	PALE_FUR(3, "pale_fur", "pale_tree_fur"),
+	EMBER_FUR(4, "ember_fur", "ember_tree_fur");
 	
 	private final String name;
 	private final String key;

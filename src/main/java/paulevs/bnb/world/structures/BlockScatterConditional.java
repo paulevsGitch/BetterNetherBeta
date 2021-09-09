@@ -14,6 +14,11 @@ public class BlockScatterConditional extends BlockScatter {
 		this.condition = condition;
 	}
 	
+	public BlockScatterConditional(BlockState block, float radius, int count, Function<BlockState, Boolean> condition) {
+		super(block, radius, count);
+		this.condition = condition;
+	}
+	
 	@Override
 	public boolean generate(Level level, Random random, int x, int y, int z) {
 		BlockState check = new BlockState(level.getTileId(x, y - 1, z), level.getTileMeta(x, y - 1, z));

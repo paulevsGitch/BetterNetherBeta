@@ -47,6 +47,7 @@ public class NetherStructures {
 	public static final Structure SOUL_SPIRE = new SoulSpireStructure();
 	public static final Structure SOUL_SPIRE_CONDITIONAL = new SoulSpireStructureConditional();
 	public static final Structure FLAME_BAMBOO = new DistortedBambooStructure();
+	public static final Structure PALE_TREE = new PaleTreeStructure();
 	public static final Structure EMBER_TREE = new EmberTreeStructure();
 	
 	public static final Structure CRIMSON_ROOTS = makeGrass(NetherPlantType.CRIMSON_ROOTS);
@@ -126,6 +127,12 @@ public class NetherStructures {
 		},
 		new BlockState(BlockListener.getBlock("basalt"), BasaltBlockType.FLAMING_BASALT),
 		new BlockState(BlockListener.getBlock("nether_lantern"), NetherLanternType.CRIMSON_LANTERN)
+	);
+	
+	public static final Structure GHOST_PUMPKIN = new BlockScatterConditional(
+		new BlockState(BlockListener.getBlock("nether_lantern"),
+		NetherLanternType.GHOST_PUMPKIN), 3F, 10,
+		blockState -> BlockUtil.isTerrain(blockState.getBlockID())
 	);
 	
 	public static final NetherOre ORICHALCUM_ORE = makeOre(NetherOreType.ORICHALCUM_ORE, 8);

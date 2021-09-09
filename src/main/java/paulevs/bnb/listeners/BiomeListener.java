@@ -11,6 +11,7 @@ import paulevs.bnb.world.biome.CrimsonForestBiome;
 import paulevs.bnb.world.biome.DeepDarkBiome;
 import paulevs.bnb.world.biome.EmberBogBiome;
 import paulevs.bnb.world.biome.FlameBambooForestBiome;
+import paulevs.bnb.world.biome.PaleForestBiome;
 import paulevs.bnb.world.biome.PoisonForestBiome;
 import paulevs.bnb.world.biome.SoulGrasslandBiome;
 import paulevs.bnb.world.biome.SoulValleyBiome;
@@ -35,6 +36,7 @@ public class BiomeListener implements BiomeRegister {
 		register("Soul Grassland", SoulGrasslandBiome::new);
 		register("Deep Dark", DeepDarkBiome::new);
 		register("Flame Bamboo Forest", FlameBambooForestBiome::new);
+		register("Pale Forest", PaleForestBiome::new);
 		register("Ember Bog", EmberBogBiome::new);
 	}
 	

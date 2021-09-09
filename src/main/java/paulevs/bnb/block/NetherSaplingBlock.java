@@ -13,7 +13,6 @@ import paulevs.bnb.block.types.NetherSaplingType;
 import paulevs.bnb.interfaces.Bonemealable;
 import paulevs.bnb.listeners.TextureListener;
 import paulevs.bnb.util.BlockUtil;
-import paulevs.bnb.world.structures.NetherStructures;
 
 import java.util.Random;
 
@@ -46,8 +45,11 @@ public class NetherSaplingBlock extends MultiBlock implements Bonemealable {
 	
 	@Override
 	public boolean onBonemealUse(Level level, int x, int y, int z, int meta) {
-		if (NetherStructures.EMBER_TREE.generate(level, level.rand, x, y, z)) {
-			level.setTile(x, y, z, 0);
+		NetherSaplingType variant = (NetherSaplingType) getVariant(meta);
+		if (variant.getStructure().generate(level, level.rand, x, y, z)) {
+			if (level.getTileId(x, y, z) == id) {
+				level.setTile(x, y, z, 0);
+			}
 			BlockUtil.updateArea(level, x - 15, y - 15, z - 15, x + 15, y + 15, z + 15);
 		}
 		return true;

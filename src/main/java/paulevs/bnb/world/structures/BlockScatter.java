@@ -14,9 +14,13 @@ public class BlockScatter extends Structure {
 	private final int count;
 	
 	public BlockScatter(BlockState block, float radius) {
+		this(block, radius, MathHelper.floor(radius * 10));
+	}
+	
+	public BlockScatter(BlockState block, float radius, int count) {
 		this.block = block;
 		this.radius = radius;
-		this.count = MathHelper.floor(radius * 10);
+		this.count = count;
 	}
 	
 	@Override
