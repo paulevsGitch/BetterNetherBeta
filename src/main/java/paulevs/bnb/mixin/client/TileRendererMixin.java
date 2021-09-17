@@ -240,7 +240,7 @@ public class TileRendererMixin {
 		} else if (renderType == 16) {
 			return this.method_59(block, x, y, z, false);
 		} else {
-			return renderType == 17 ? this.method_64(block, x, y, z, true) : false;
+			return renderType == 17 && this.method_64(block, x, y, z, true);
 		}
 	}
 	
@@ -357,10 +357,7 @@ public class TileRendererMixin {
 							}
 
 							this.field_92 = true;
-							float var9 = this.field_93;
-							float var10 = this.field_93;
-							float var11 = this.field_93;
-							float var12 = this.field_93;
+							float var9, var10, var11, var12;
 							
 							this.field_93 = block.method_1604(this.field_82, x, y, z);
 							this.field_94 = block.method_1604(this.field_82, x - 1, y, z);
@@ -776,10 +773,10 @@ public class TileRendererMixin {
 
 							tessellator.colour(this.field_56, this.field_60, this.field_64);
 							tessellator.vertex(
-								(double) ((float) x + (float) quadPoint.pointVector.x * 0.0625F),
-								(double) ((float) y + (float) quadPoint.pointVector.y * 0.0625F),
-								(double) ((float) z + (float) quadPoint.pointVector.z * 0.0625F),
-								(double) quadPoint.field_1147, (double) quadPoint.field_1148
+								(float) x + (float) quadPoint.pointVector.x * 0.0625F,
+								(float) y + (float) quadPoint.pointVector.y * 0.0625F,
+								(float) z + (float) quadPoint.pointVector.z * 0.0625F,
+								quadPoint.field_1147, quadPoint.field_1148
 							);
 						}
 

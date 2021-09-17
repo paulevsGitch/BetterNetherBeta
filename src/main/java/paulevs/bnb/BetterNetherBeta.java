@@ -1,5 +1,7 @@
 package paulevs.bnb;
 
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.modificationstation.stationloader.api.client.event.model.ModelRegister;
 import net.modificationstation.stationloader.api.client.event.texture.TextureRegister;
 import net.modificationstation.stationloader.api.common.event.block.BlockRegister;
@@ -10,6 +12,7 @@ import net.modificationstation.stationloader.api.common.event.level.biome.BiomeR
 import net.modificationstation.stationloader.api.common.event.recipe.RecipeRegister;
 import net.modificationstation.stationloader.api.common.mod.StationMod;
 import paulevs.bnb.effects.StatusEffects;
+import paulevs.bnb.light.BNColorLights;
 import paulevs.bnb.listeners.BiomeListener;
 import paulevs.bnb.listeners.BlockListener;
 import paulevs.bnb.listeners.ChunkListener;
@@ -34,8 +37,9 @@ public class BetterNetherBeta implements StationMod {
 	public void preInit() {
 		RadialSearch.init();
 		StatusEffects.register();
-		ItemRegister.EVENT.register(new ItemListener());
-		BlockRegister.EVENT.register(new BlockListener());
+		ModMetadata metadata = FabricLoader.getInstance().getModContainer(MOD_ID).get().getMetadata();
+		ItemRegister.EVENT.register(new ItemListener(), metadata);
+		BlockRegister.EVENT.register(new BlockListener(), metadata);
 		RecipeRegister.EVENT.register(new RecipeListener());
 		TextureRegister.EVENT.register(new TextureListener());
 		EffectiveBlocksProvider.EVENT.register(new EffectiveProvider());
@@ -46,6 +50,10 @@ public class BetterNetherBeta implements StationMod {
 		
 		if (CreativeUtil.isCreativeInstalled()) {
 			BNTabInventory.createTab();
+		}
+		
+		if (BNColorLights.isColorLightsInstalled()) {
+			BNColorLights.initColorLights();
 		}
 	}
 	
