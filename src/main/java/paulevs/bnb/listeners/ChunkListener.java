@@ -27,13 +27,16 @@ import java.util.stream.IntStream;
 
 public class ChunkListener implements ChunkPopulator {
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(10);
-	private static final BlockState GRAVEL = new BlockState(BlockBase.GRAVEL);
+	private static final BlockState GRAVEL = new BlockState();
 	private StructureGenerationThread featureGenerator;
 	private Thread main;
 	
 	@Override
 	public void populate(Level level, LevelSource levelSource, Biome biome, int startX, int startZ, Random random) {
 		if (level.dimension instanceof Nether) {
+			if (GRAVEL.getBlockID() == 0) {
+				GRAVEL.setBlock(BlockBase.GRAVEL);
+			}
 			if (main == null) {
 				main = Thread.currentThread();
 			}

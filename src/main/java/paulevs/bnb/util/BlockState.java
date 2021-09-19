@@ -12,6 +12,10 @@ public class BlockState {
 	private int tile;
 	private int meta;
 	
+	public BlockState() {
+		this(0, 0);
+	}
+	
 	public BlockState(int id) {
 		this(id, 0);
 	}
@@ -39,6 +43,10 @@ public class BlockState {
 
 	public void setBlockID(int blockID) {
 		this.tile = blockID;
+	}
+	
+	public void setBlock(BlockBase block) {
+		this.tile = block.id;
 	}
 
 	public int getMeta() {
