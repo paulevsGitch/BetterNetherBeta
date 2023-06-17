@@ -1,5 +1,7 @@
 package paulevs.bnb.block;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
@@ -11,7 +13,7 @@ public class NetherTerrainBlock extends TemplateBlockBase implements MultiTextur
 	private final int[] textures = new int[3];
 	
 	public NetherTerrainBlock(Identifier id, Material material) {
-		super(id, Material.STONE);
+		super(id, material);
 	}
 	
 	public NetherTerrainBlock(Identifier id) {
@@ -21,11 +23,13 @@ public class NetherTerrainBlock extends TemplateBlockBase implements MultiTextur
 	}
 	
 	@Override
+	@Environment(EnvType.CLIENT)
 	public int[] getTextureStorage() {
 		return textures;
 	}
 	
 	@Override
+	@Environment(EnvType.CLIENT)
 	public Identifier[] getTextureNames(Identifier id) {
 		return new Identifier[] {
 			BNB.id("block/netherrack"),

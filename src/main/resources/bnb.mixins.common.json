@@ -2,23 +2,8 @@
 	"required": true,
 	"minVersion": "0.8",
 	"package": "paulevs.bnb.mixin.common",
-	"compatibilityLevel": "JAVA_8",
-	"mixins": [
-		"NetherLevelSourceMixin",
-		"ZombiePigmanAccessor",
-		"EntityRegistryMixin",
-		"ToolBaseAccessor",
-		"PlayerBaseMixin",
-		"LevelAccessor",
-		"CreeperMixin",
-		"LivingMixin",
-		"NetherMixin",
-		"PortalMixin",
-		"SpiderMixin",
-		"DyeMixin"
-	],
-	"server": [],
-	"client": [],
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [],
 	"injectors": {
 		"defaultRequire": 1
 	}

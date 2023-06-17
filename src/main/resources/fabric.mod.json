@@ -28,7 +28,10 @@
 		"stationapi:event_bus_server": []
 	},
 
-	"mixins": [],
+	"mixins": [
+		"bnb.mixins.common.json",
+		"bnb.mixins.client.json"
+	],
 
 	"depends": {
 		"minecraft": "1.0.0-beta.7.3"

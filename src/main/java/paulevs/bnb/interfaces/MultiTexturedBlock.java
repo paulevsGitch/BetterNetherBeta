@@ -1,18 +1,21 @@
 package paulevs.bnb.interfaces;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockBase;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
 import net.modificationstation.stationapi.api.registry.BlockRegistry;
 import net.modificationstation.stationapi.api.registry.Identifier;
 
-import java.util.Arrays;
-
 public interface MultiTexturedBlock extends AutoTextured {
+	@Environment(EnvType.CLIENT)
 	int[] getTextureStorage();
 	
+	@Environment(EnvType.CLIENT)
 	Identifier[] getTextureNames(Identifier id);
 	
 	@Override
+	@Environment(EnvType.CLIENT)
 	default void registerTextures(ExpandableAtlas atlas) {
 		BlockBase block = (BlockBase) this;
 		Identifier id = BlockRegistry.INSTANCE.getId(block);
@@ -22,7 +25,6 @@ public interface MultiTexturedBlock extends AutoTextured {
 		for (int i = 0; i < storage.length; i++) {
 			storage[i] = atlas.addTexture(names[i]).index;
 		}
-		System.out.println("Textures " + Arrays.toString(storage));
 		block.texture = storage[0];
 	}
 }
