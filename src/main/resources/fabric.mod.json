@@ -19,18 +19,14 @@
 
 	"environment": "*",
 	"entrypoints": {
-		"stationmod": [
-			"paulevs.bnb.BetterNetherBeta"
-		]
+		"stationapi:event_bus": [],
+		"stationapi:event_bus_client": [],
+		"stationapi:event_bus_server": []
 	},
 
-	"mixins": [
-		"bnb.mixins.common.json",
-		"bnb.mixins.client.json"
-	],
+	"mixins": [],
 
 	"depends": {
-		"minecraft": "1.0.0-beta.7.3",
-		"stationloader": "1.3.*"
+		"minecraft": "1.0.0-beta.7.3"
 	}
 }

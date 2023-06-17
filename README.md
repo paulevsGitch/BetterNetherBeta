@@ -1,16 +1,12 @@
 https://jitpack.io/#paulevsGitch/BetterNetherBeta
-# BetterNether mod for beta 1.7.3 server + client
+# BetterNetherBeta Mod
 
-This is a not direct port of original BetterNether or MC 1.16 biomes into beta, its something similar arount the same theme.
+**for Minecraft Beta 1.7.3**
+
+This mod will inhance vanilla Nether with new plants, mobs, blocks, biomes and terrain
+generator. It is a not direct port of original BetterNether mod or Minecraft 1.16 biomes
+into beta, but it can have similar vibes.
 
 
-Requires **[Fabric Legacy](https://github.com/calmilamsy/Cursed-Fabric-MultiMC)** and **[Station API](https://github.com/ModificationStation/StationAPI)** (>= 1.3)
-
-## How to install (MultiMC):
-- Download [MultiMC instance](https://github.com/calmilamsy/Cursed-Fabric-MultiMC) and import it as zip
-- Download [Station API](https://github.com/ModificationStation/StationAPI/releases) and import it as a mod in MultiMC
-- Import this mod
-
-## Setup
-Dev: "gradlew eclipse" or "gradlew rebuildLVT genSources eclipse"
-Build: "gradlew build"
+Requires **[Babric Instance (MultiMC/PolyMC/Prism)](https://github.com/babric/prism-instance)**
+and **[Station API 2.0](https://jenkins.glass-launcher.net/job/StationAPI/513/artifact/build/libs/StationAPI-be5f057.jar)**
