@@ -2,27 +2,12 @@
 	"required": true,
 	"minVersion": "0.8",
 	"package": "paulevs.bnb.mixin.client",
-	"compatibilityLevel": "JAVA_8",
-	"mixins": [],
-	"server": [],
+	"compatibilityLevel": "JAVA_17",
 	"client": [
-		"FlowingLavaTextureBinder2Mixin",
-		"EntityRenderDispatcherMixin",
-		"SpiderEyesRendererMixin",
-		"TranslationStorageMixin",
-		"CreeperRendererMixin",
-		"ParticleManagerMixin",
-		"PlayerRendererMixin",
-		"GameRendererMixin",
-		"ItemRendererMixin",
-		"TileRendererMixin",
-		"SoundHelperMixin",
-		"BlockBaseMixin",
-		"Class556Mixin",
-		"SoulSandMixin",
-		"NetherMixin",
-		"SpiderMixin",
-		"InGameMixin"
+		"LightingCalculatorImplMixin",
+		"JsonUnbakedModelMixin",
+		"BakedQuadMixin",
+		"SpriteAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

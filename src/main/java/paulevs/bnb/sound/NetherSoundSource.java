@@ -1,12 +1,5 @@
 package paulevs.bnb.sound;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
-import java.net.URL;
-import java.util.List;
-import java.util.Random;
-
 public class NetherSoundSource {
 	/*private final Map<String, List<class_267>> sounds = Maps.newHashMap();
 	private Random random = new Random();

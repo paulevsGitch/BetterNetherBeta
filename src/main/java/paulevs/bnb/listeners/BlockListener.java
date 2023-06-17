@@ -6,6 +6,7 @@ import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.bnb.BNB;
 import paulevs.bnb.block.NetherTerrainBlock;
+import paulevs.bnb.block.NetherWoodBlock;
 import paulevs.bnb.block.SoulTerrainBlock;
 
 import java.util.HashMap;
@@ -23,6 +24,13 @@ public class BlockListener {
 		register("corrupted_nylium", NetherTerrainBlock::new);
 		register("soul_nylium", SoulTerrainBlock::new);
 		register("dark_nylium", NetherTerrainBlock::new);
+		
+		register("crimson_wood", NetherWoodBlock::new);
+		register("warped_wood", NetherWoodBlock::new);
+		register("poison_wood", NetherWoodBlock::new);
+		register("pale_wood", NetherWoodBlock::new);
+		register("ember_wood", NetherWoodBlock::new);
+		register("flame_bamboo_block", NetherWoodBlock::new);
 	}
 	
 	private void register(String name, Function<Identifier, BlockBase> constructor) {
