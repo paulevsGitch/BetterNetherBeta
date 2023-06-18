@@ -17,3 +17,8 @@ tile.warped_leaves.name=Warped Leaves
 tile.poison_leaves.name=Poison Leaves
 tile.pale_leaves.name=Pale Leaves
 tile.ember_leaves.name=Ember Leaves
+
+tile.crimson_lantern.name=Crimson Lantern
+tile.warped_lantern.name=Warped Lantern
+tile.poison_lantern.name=Poison Lantern
+tile.ghost_pumpkin.name=Ghost Pumpkin

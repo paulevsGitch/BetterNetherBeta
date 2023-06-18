@@ -1,0 +1,7 @@
+{
+	"parent": "bnb:block/emissive_cube_all",
+	"textures": {
+		"all": "bnb:block/poison_lantern",
+		"all_e": "bnb:block/poison_lantern_e"
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"parent": "bnb:block/emissive_cube",
+	"textures": {
+		"north": "#all",
+		"south": "#all",
+		"east":  "#all",
+		"west":  "#all",
+		"up":    "#all",
+		"down":  "#all",
+		"north_e": "#all_e",
+		"south_e": "#all_e",
+		"east_e":  "#all_e",
+		"west_e":  "#all_e",
+		"up_e":    "#all_e",
+		"down_e":  "#all_e"
+	}
+}

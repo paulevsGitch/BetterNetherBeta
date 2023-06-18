@@ -7,6 +7,8 @@ import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.bnb.BNB;
 import paulevs.bnb.NetherLeavesTransparent;
 import paulevs.bnb.block.EmberWoodBlock;
+import paulevs.bnb.block.GhostPumpkinBlock;
+import paulevs.bnb.block.NetherLanternBlock;
 import paulevs.bnb.block.NetherLeavesBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.NetherWoodBlock;
@@ -40,6 +42,11 @@ public class BlockListener {
 		register("poison_leaves", NetherLeavesBlock::new);
 		register("pale_leaves", NetherLeavesTransparent::new);
 		register("ember_leaves", NetherLeavesTransparent::new);
+		
+		register("crimson_lantern", NetherLanternBlock::new);
+		register("warped_lantern", NetherLanternBlock::new);
+		register("poison_lantern", NetherLanternBlock::new);
+		register("ghost_pumpkin", GhostPumpkinBlock::new);
 	}
 	
 	private void register(String name, Function<Identifier, BlockBase> constructor) {
