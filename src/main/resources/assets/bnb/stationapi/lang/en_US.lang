@@ -11,3 +11,9 @@ tile.poison_wood.name=Poison Wood
 tile.pale_wood.name=Pale Wood
 tile.ember_wood.name=Ember Wood
 tile.flame_bamboo_block.name=Flame Bamboo Block
+
+tile.crimson_leaves.name=Crimson Leaves
+tile.warped_leaves.name=Warped Leaves
+tile.poison_leaves.name=Poison Leaves
+tile.pale_leaves.name=Pale Leaves
+tile.ember_leaves.name=Ember Leaves

@@ -5,7 +5,9 @@ import net.minecraft.block.BlockBase;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.bnb.BNB;
+import paulevs.bnb.NetherLeavesTransparent;
 import paulevs.bnb.block.EmberWoodBlock;
+import paulevs.bnb.block.NetherLeavesBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.NetherWoodBlock;
 import paulevs.bnb.block.SoulTerrainBlock;
@@ -32,6 +34,12 @@ public class BlockListener {
 		register("pale_wood", NetherWoodBlock::new);
 		register("ember_wood", EmberWoodBlock::new);
 		register("flame_bamboo_block", NetherWoodBlock::new);
+		
+		register("crimson_leaves", NetherLeavesBlock::new);
+		register("warped_leaves", NetherLeavesBlock::new);
+		register("poison_leaves", NetherLeavesBlock::new);
+		register("pale_leaves", NetherLeavesTransparent::new);
+		register("ember_leaves", NetherLeavesTransparent::new);
 	}
 	
 	private void register(String name, Function<Identifier, BlockBase> constructor) {
