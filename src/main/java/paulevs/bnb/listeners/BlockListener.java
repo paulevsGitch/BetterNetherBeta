@@ -5,6 +5,7 @@ import net.minecraft.block.BlockBase;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.bnb.BNB;
+import paulevs.bnb.block.EmberWoodBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.NetherWoodBlock;
 import paulevs.bnb.block.SoulTerrainBlock;
@@ -29,7 +30,7 @@ public class BlockListener {
 		register("warped_wood", NetherWoodBlock::new);
 		register("poison_wood", NetherWoodBlock::new);
 		register("pale_wood", NetherWoodBlock::new);
-		register("ember_wood", NetherWoodBlock::new);
+		register("ember_wood", EmberWoodBlock::new);
 		register("flame_bamboo_block", NetherWoodBlock::new);
 	}
 	

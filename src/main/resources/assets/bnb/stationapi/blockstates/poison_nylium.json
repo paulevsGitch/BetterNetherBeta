@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"": [
+			{ "model": "bnb:block/poison_nylium" },
+			{ "model": "bnb:block/poison_nylium", "y": 90 },
+			{ "model": "bnb:block/poison_nylium", "y": 180 },
+			{ "model": "bnb:block/poison_nylium", "y": 270 }
+		]
+	}
+}

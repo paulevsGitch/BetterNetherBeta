@@ -1,0 +1,17 @@
+{
+	"parent": "bnb:block/emissive_cube",
+	"textures": {
+		"north":   "bnb:block/flame_bamboo_block_side",
+		"south":   "bnb:block/flame_bamboo_block_side",
+		"east":    "bnb:block/flame_bamboo_block_side",
+		"west":    "bnb:block/flame_bamboo_block_side",
+		"up":      "bnb:block/flame_bamboo_block_top",
+		"down":    "bnb:block/flame_bamboo_block_top",
+		"north_e": "bnb:block/flame_bamboo_block_side_e",
+		"south_e": "bnb:block/flame_bamboo_block_side_e",
+		"east_e":  "bnb:block/flame_bamboo_block_side_e",
+		"west_e":  "bnb:block/flame_bamboo_block_side_e",
+		"up_e":    "bnb:block/flame_bamboo_block_top_e",
+		"down_e":  "bnb:block/flame_bamboo_block_top_e"
+	}
+}

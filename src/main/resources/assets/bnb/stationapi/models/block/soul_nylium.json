@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/cube_bottom_top",
+	"textures": {
+		"side": "bnb:block/soul_nylium_side",
+		"top":  "bnb:block/soul_nylium_top",
+		"bottom": "bnb:block/soul_soil"
+	}
+}

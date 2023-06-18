@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"": [
+			{ "model": "bnb:block/dark_nylium" },
+			{ "model": "bnb:block/dark_nylium", "y": 90 },
+			{ "model": "bnb:block/dark_nylium", "y": 180 },
+			{ "model": "bnb:block/dark_nylium", "y": 270 }
+		]
+	}
+}

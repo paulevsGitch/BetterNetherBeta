@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"axis=x": [
+			{ "model": "bnb:block/warped_wood_1", "x": 90 },
+			{ "model": "bnb:block/warped_wood_2", "x": 90 },
+			{ "model": "bnb:block/warped_wood_3", "x": 90 }
+		],
+		"axis=y": [
+			{ "model": "bnb:block/warped_wood_1" },
+			{ "model": "bnb:block/warped_wood_2" },
+			{ "model": "bnb:block/warped_wood_3" }
+		],
+		"axis=z": [
+			{ "model": "bnb:block/warped_wood_1", "x": 90, "y": 90 },
+			{ "model": "bnb:block/warped_wood_2", "x": 90, "y": 90 },
+			{ "model": "bnb:block/warped_wood_3", "x": 90, "y": 90 }
+		]
+	}
+}

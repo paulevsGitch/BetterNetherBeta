@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"axis=x": { "model": "bnb:block/flame_bamboo_block", "x": 90 },
+		"axis=y": { "model": "bnb:block/flame_bamboo_block" },
+		"axis=z": { "model": "bnb:block/flame_bamboo_block", "x": 90, "y": 90 }
+	}
+}

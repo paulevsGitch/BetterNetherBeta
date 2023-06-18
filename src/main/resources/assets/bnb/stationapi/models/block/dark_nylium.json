@@ -1,0 +1,36 @@
+{
+	"parent": "minecraft:block/block",
+	"textures": {
+		"side": "bnb:block/dark_nylium_side",
+		"side_e": "bnb:block/dark_nylium_side_e",
+		"up": "bnb:block/dark_nylium_top",
+		"up_e": "bnb:block/dark_nylium_top_e",
+		"down": "bnb:block/netherrack",
+		"particle": "#side"
+	},
+	"elements": [
+		{
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"down": { "texture": "#down", "cullface": "down" },
+				"up": { "texture": "#up", "cullface": "up" },
+				"north": { "texture": "#side", "cullface": "north" },
+				"south": { "texture": "#side", "cullface": "south" },
+				"west": { "texture": "#side", "cullface": "west" },
+				"east": { "texture": "#side", "cullface": "east" }
+			}
+		},
+		{
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"up": { "texture": "#up_e", "cullface": "up" },
+				"north": { "texture": "#side_e", "cullface": "north" },
+				"south": { "texture": "#side_e", "cullface": "south" },
+				"west": { "texture": "#side_e", "cullface": "west" },
+				"east": { "texture": "#side_e", "cullface": "east" }
+			}
+		}
+	]
+}
