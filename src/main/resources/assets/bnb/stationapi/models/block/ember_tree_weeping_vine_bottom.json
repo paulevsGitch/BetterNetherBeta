@@ -1,0 +1,6 @@
+{
+	"parent": "bnb:block/crop",
+	"textures": {
+		"crop": "bnb:block/ember_tree_weeping_vine_bottom"
+	}
+}

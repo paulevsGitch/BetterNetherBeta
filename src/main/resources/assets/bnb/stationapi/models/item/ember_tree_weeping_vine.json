@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "bnb:block/ember_tree_weeping_vine_bottom"
+	}
+}

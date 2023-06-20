@@ -22,3 +22,9 @@ tile.crimson_lantern.name=Crimson Lantern
 tile.warped_lantern.name=Warped Lantern
 tile.poison_lantern.name=Poison Lantern
 tile.ghost_pumpkin.name=Ghost Pumpkin
+
+tile.crimson_weeping_vine.name=Crimson Weeping Vine
+tile.warped_weeping_vine.name=Warped Weeping Vine
+tile.poison_weeping_vine.name=Poison Weeping Vine
+tile.pale_tree_weeping_vine.name=Pale Tree Weeping Vine
+tile.ember_tree_weeping_vine.name=Ember Tree Weeping Vine
