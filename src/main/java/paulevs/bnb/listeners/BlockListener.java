@@ -11,6 +11,7 @@ import paulevs.bnb.block.GhostPumpkinBlock;
 import paulevs.bnb.block.NetherLanternBlock;
 import paulevs.bnb.block.NetherLeavesBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
+import paulevs.bnb.block.NetherVineBlock;
 import paulevs.bnb.block.NetherWoodBlock;
 import paulevs.bnb.block.SoulTerrainBlock;
 
@@ -47,6 +48,12 @@ public class BlockListener {
 		register("warped_lantern", NetherLanternBlock::new);
 		register("poison_lantern", NetherLanternBlock::new);
 		register("ghost_pumpkin", GhostPumpkinBlock::new);
+		
+		register("crimson_weeping_vine", NetherVineBlock::new);
+		register("warped_weeping_vine", NetherVineBlock::new);
+		register("poison_weeping_vine", NetherVineBlock::new);
+		register("pale_tree_weeping_vine", NetherVineBlock::new);
+		register("ember_tree_weeping_vine", NetherVineBlock::new);
 	}
 	
 	private void register(String name, Function<Identifier, BlockBase> constructor) {
