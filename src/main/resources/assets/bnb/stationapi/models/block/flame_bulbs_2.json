@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/cross",
+	"textures": {
+		"cross": "bnb:block/flame_bulbs_2"
+	}
+}

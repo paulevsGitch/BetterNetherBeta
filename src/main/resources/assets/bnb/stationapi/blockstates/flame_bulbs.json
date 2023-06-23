@@ -1,0 +1,9 @@
+{
+	"variants": {
+		"": [
+			{ "model": "bnb:block/flame_bulbs_1" },
+			{ "model": "bnb:block/flame_bulbs_2" },
+			{ "model": "bnb:block/flame_bulbs_3" }
+		]
+	}
+}

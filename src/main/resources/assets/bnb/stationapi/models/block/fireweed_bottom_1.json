@@ -1,0 +1,7 @@
+{
+	"parent": "bnb:block/cross_emissive",
+	"textures": {
+		"cross": "bnb:block/fireweed_bottom_1",
+		"cross_e": "bnb:block/fireweed_bottom_1_e"
+	}
+}

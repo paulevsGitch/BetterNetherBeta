@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"shape=top": { "model": "bnb:block/fireweed_top" },
+		"shape=bottom": [
+			{ "model": "bnb:block/fireweed_bottom_1" },
+			{ "model": "bnb:block/fireweed_bottom_2" },
+			{ "model": "bnb:block/fireweed_bottom_3" }
+		]
+	}
+}

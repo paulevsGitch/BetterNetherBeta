@@ -5,7 +5,8 @@ import net.modificationstation.stationapi.api.state.property.EnumProperty;
 import net.modificationstation.stationapi.api.util.StringIdentifiable;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 
-public class NetherBlockProperties {
+public class BNBBlockProperties {
+	public static final EnumProperty<DoubleShape> DOUBLE_SHAPE = EnumProperty.of("shape", DoubleShape.class);
 	public static final EnumProperty<VineShape> VINE_SHAPE = EnumProperty.of("shape", VineShape.class);
 	public static final EnumProperty<Axis> AXIS = EnumProperty.of("axis", Axis.class);
 	public static final BooleanProperty NEAR_LAVA = BooleanProperty.of("near_lava");
@@ -17,6 +18,22 @@ public class NetherBlockProperties {
 		final String name;
 		
 		VineShape(String name) {
+			this.name = name;
+		}
+		
+		@Override
+		public String asString() {
+			return name;
+		}
+	}
+	
+	public enum DoubleShape implements StringIdentifiable {
+		TOP("top"),
+		BOTTOM("bottom");
+		
+		final String name;
+		
+		DoubleShape(String name) {
 			this.name = name;
 		}
 		

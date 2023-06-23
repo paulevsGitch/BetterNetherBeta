@@ -6,8 +6,10 @@ import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.bnb.BNB;
 import paulevs.bnb.NetherLeavesTransparent;
+import paulevs.bnb.block.DoubleFloorPlantBlock;
 import paulevs.bnb.block.EmberWoodBlock;
 import paulevs.bnb.block.GhostPumpkinBlock;
+import paulevs.bnb.block.NetherFloorPlantBlock;
 import paulevs.bnb.block.NetherLanternBlock;
 import paulevs.bnb.block.NetherLeavesBlock;
 import paulevs.bnb.block.NetherTerrainBlock;
@@ -54,6 +56,13 @@ public class BlockListener {
 		register("poison_weeping_vine", NetherVineBlock::new);
 		register("pale_tree_weeping_vine", NetherVineBlock::new);
 		register("ember_tree_weeping_vine", NetherVineBlock::new);
+		
+		register("flame_bulbs", NetherFloorPlantBlock::new);
+		register("crimson_roots", NetherFloorPlantBlock::new);
+		register("fireweed", DoubleFloorPlantBlock::new);
+		register("nether_daisy", NetherFloorPlantBlock::new);
+		
+		BlockBase.PORTAL.setLightEmittance(1F);
 	}
 	
 	private void register(String name, Function<Identifier, BlockBase> constructor) {

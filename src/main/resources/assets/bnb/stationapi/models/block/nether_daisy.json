@@ -1,0 +1,10 @@
+{
+	"parent": "minecraft:block/block",
+	"obj": "block/nether_daisy",
+	"offset": [0.5, 0.0, 0.5],
+	"textures": {
+		"stem": "bnb:block/nether_daisy",
+		"flowers": "bnb:block/nether_daisy_e",
+		"particle": "bnb:block/nether_daisy"
+	}
+}

@@ -3,6 +3,6 @@
 	"textures": {
 		"side": "bnb:block/poison_nylium_side",
 		"top":  "bnb:block/poison_nylium_top",
-		"bottom": "bnb:block/netherack"
+		"bottom": "bnb:block/netherrack"
 	}
 }

@@ -10,7 +10,7 @@ import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
-import paulevs.bnb.block.properties.NetherBlockProperties;
+import paulevs.bnb.block.properties.BNBBlockProperties;
 
 public class EmberWoodBlock extends NetherWoodBlock {
 	public EmberWoodBlock(Identifier id) {
@@ -20,40 +20,41 @@ public class EmberWoodBlock extends NetherWoodBlock {
 	@Override
 	public void appendProperties(Builder<BlockBase, BlockState> builder) {
 		super.appendProperties(builder);
-		builder.add(NetherBlockProperties.NEAR_LAVA);
+		builder.add(BNBBlockProperties.NEAR_LAVA);
 	}
 	
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext context) {
 		BlockState state = super.getPlacementState(context);
-		if (state.get(NetherBlockProperties.AXIS) != Axis.Y) {
-			return state.with(NetherBlockProperties.NEAR_LAVA, false);
+		if (state.get(BNBBlockProperties.AXIS) != Axis.Y) {
+			return state.with(BNBBlockProperties.NEAR_LAVA, false);
 		}
 		Level level = context.getWorld();
 		BlockPos pos = context.getBlockPos();
 		boolean nearLava = isNearLava(level, pos.getX(), pos.getY(), pos.getZ());
 		if (!nearLava) {
 			BlockState below = level.getBlockState(pos.getX(), pos.getY() - 1, pos.getZ());
-			nearLava = below.isOf(this) && below.get(NetherBlockProperties.AXIS) == Axis.Y && below.get(NetherBlockProperties.NEAR_LAVA);
+			nearLava = below.isOf(this) && below.get(BNBBlockProperties.AXIS) == Axis.Y && below.get(BNBBlockProperties.NEAR_LAVA);
 			nearLava &= isNearLava(level, pos.getX(), pos.getY() - 1, pos.getZ());
 		}
-		return state.with(NetherBlockProperties.NEAR_LAVA, nearLava);
+		return state.with(BNBBlockProperties.NEAR_LAVA, nearLava);
 	}
 	
 	@Override
 	public void onAdjacentBlockUpdate(Level level, int x, int y, int z, int l) {
 		BlockState state = level.getBlockState(x, y, z);
 		if (!state.isOf(this)) return;
-		if (state.get(NetherBlockProperties.AXIS) != Axis.Y) return;
-		boolean nearLava = state.get(NetherBlockProperties.NEAR_LAVA);
+		if (state.get(BNBBlockProperties.AXIS) != Axis.Y) return;
+		boolean nearLava = state.get(BNBBlockProperties.NEAR_LAVA);
 		boolean lavaInWorld = isNearLava(level, x, y, z);
 		if (!lavaInWorld) {
 			BlockState below = level.getBlockState(x, y - 1, z);
-			lavaInWorld = below.isOf(this) && below.get(NetherBlockProperties.AXIS) == Axis.Y && below.get(NetherBlockProperties.NEAR_LAVA);
+			lavaInWorld = below.isOf(this) && below.get(BNBBlockProperties.AXIS) == Axis.Y && below.get(
+				BNBBlockProperties.NEAR_LAVA);
 			lavaInWorld &= isNearLava(level, x, y - 1, z);
 		}
 		if (nearLava != lavaInWorld) {
-			level.setBlockState(x, y, z, state.with(NetherBlockProperties.NEAR_LAVA, lavaInWorld));
+			level.setBlockState(x, y, z, state.with(BNBBlockProperties.NEAR_LAVA, lavaInWorld));
 		}
 	}
 	

@@ -23,7 +23,8 @@
 			"paulevs.bnb.listeners.BlockListener"
 		],
 		"stationapi:event_bus_client": [
-			"paulevs.bnb.listeners.TextureListener"
+			"paulevs.bnb.listeners.TextureListener",
+			"paulevs.bnb.listeners.ModelListener"
 		],
 		"stationapi:event_bus_server": []
 	},

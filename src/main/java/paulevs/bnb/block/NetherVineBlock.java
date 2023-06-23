@@ -5,20 +5,20 @@ import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
-import paulevs.bnb.block.properties.NetherBlockProperties;
-import paulevs.bnb.block.properties.NetherBlockProperties.VineShape;
+import paulevs.bnb.block.properties.BNBBlockProperties;
+import paulevs.bnb.block.properties.BNBBlockProperties.VineShape;
 
 public class NetherVineBlock extends NetherCeilPlantBlock {
 	public NetherVineBlock(Identifier id) {
 		super(id);
-		setDefaultState(getDefaultState().with(NetherBlockProperties.VINE_SHAPE, VineShape.BOTTOM));
+		setDefaultState(getDefaultState().with(BNBBlockProperties.VINE_SHAPE, VineShape.BOTTOM));
 		this.setBoundingBox(0.125F, 0.0F, 0.125F, 0.875F, 1.0F, 0.875F);
 	}
 	
 	@Override
 	public void appendProperties(Builder<BlockBase, BlockState> builder) {
 		super.appendProperties(builder);
-		builder.add(NetherBlockProperties.VINE_SHAPE);
+		builder.add(BNBBlockProperties.VINE_SHAPE);
 	}
 	
 	@Override
@@ -27,10 +27,10 @@ public class NetherVineBlock extends NetherCeilPlantBlock {
 		BlockState state = level.getBlockState(x, y, z);
 		if (!state.isOf(this)) return;
 		BlockState bottom = level.getBlockState(x, y - 1, z);
-		boolean normal = state.get(NetherBlockProperties.VINE_SHAPE) == VineShape.NORMAL;
+		boolean normal = state.get(BNBBlockProperties.VINE_SHAPE) == VineShape.NORMAL;
 		boolean hasBottom = bottom.isOf(this);
 		if (hasBottom != normal) {
-			state = state.with(NetherBlockProperties.VINE_SHAPE, hasBottom ? VineShape.NORMAL : VineShape.BOTTOM);
+			state = state.with(BNBBlockProperties.VINE_SHAPE, hasBottom ? VineShape.NORMAL : VineShape.BOTTOM);
 			level.setBlockState(x, y, z, state);
 		}
 	}
