@@ -17,7 +17,7 @@ import paulevs.bnb.rendering.EmissiveQuad;
 @Mixin(value = JsonUnbakedModel.class, remap = false)
 public class JsonUnbakedModelMixin {
 	@Inject(method = "createQuad", at = @At("RETURN"))
-	private static void createQuad(ModelElement element, ModelElementFace elementFace, Sprite sprite, Direction side, ModelBakeSettings settings, Identifier id, CallbackInfoReturnable<BakedQuad> info) {
+	private static void bnb_createQuad(ModelElement element, ModelElementFace elementFace, Sprite sprite, Direction side, ModelBakeSettings settings, Identifier id, CallbackInfoReturnable<BakedQuad> info) {
 		BakedQuad quad = info.getReturnValue();
 		if (sprite.getContents().getId().id.endsWith("_e")) {
 			EmissiveQuad emissiveQuad = EmissiveQuad.cast(quad);

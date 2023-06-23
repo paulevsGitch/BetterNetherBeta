@@ -6,8 +6,7 @@
 	"client": [
 		"LightingCalculatorImplMixin",
 		"JsonUnbakedModelMixin",
-		"BakedQuadMixin",
-		"SpriteAccessor"
+		"BakedQuadMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

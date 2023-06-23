@@ -2,6 +2,7 @@ package paulevs.bnb.listeners;
 
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.BlockBase;
+import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.bnb.BNB;
@@ -59,8 +60,8 @@ public class BlockListener {
 		
 		register("flame_bulbs", NetherFloorPlantBlock::new);
 		register("crimson_roots", NetherFloorPlantBlock::new);
-		register("fireweed", DoubleFloorPlantBlock::new);
 		register("nether_daisy", NetherFloorPlantBlock::new);
+		register("fireweed", DoubleFloorPlantBlock::new);
 		
 		BlockBase.PORTAL.setLightEmittance(1F);
 	}
@@ -70,5 +71,9 @@ public class BlockListener {
 		BlockBase block = constructor.apply(id);
 		block.setTranslationKey(id.toString());
 		BLOCKS.put(id, block);
+	}
+	
+	public static BlockState get(String name) {
+		return BLOCKS.get(BNB.id(name)).getDefaultState();
 	}
 }

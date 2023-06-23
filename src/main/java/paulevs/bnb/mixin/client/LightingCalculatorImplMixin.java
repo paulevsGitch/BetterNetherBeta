@@ -20,7 +20,7 @@ public abstract class LightingCalculatorImplMixin {
 		method = "calculateForQuad(Lnet/modificationstation/stationapi/api/client/render/model/BakedQuad;)V",
 		at = @At("HEAD"), cancellable = true
 	)
-	private void thelimit_processEmissive(BakedQuad quad, CallbackInfo info) {
+	private void bnb_processEmissive(BakedQuad quad, CallbackInfo info) {
 		EmissiveQuad emissiveQuad = EmissiveQuad.cast(quad);
 		if (!emissiveQuad.isEmissive()) return;
 		info.cancel();
@@ -28,7 +28,7 @@ public abstract class LightingCalculatorImplMixin {
 	}
 	
 	@Inject(method = "toIndex", at = @At("RETURN"), cancellable = true)
-	private void toIndex(int x, int y, int z, CallbackInfoReturnable<Integer> info) {
+	private void bnb_toIndex(int x, int y, int z, CallbackInfoReturnable<Integer> info) {
 		int index = info.getReturnValue();
 		if (index < 0 || index >= this.lightCache.length) {
 			info.setReturnValue(0);
