@@ -24,5 +24,6 @@ public class NetherLevelSourceMixin {
 	@Inject(method = "decorate", at = @At("HEAD"), cancellable = true)
 	public void decorate(LevelSource source, int cx, int cz, CallbackInfo info) {
 		BNBLevelSource.decorateChunk(this.level, cx, cz);
+		info.cancel();
 	}
 }

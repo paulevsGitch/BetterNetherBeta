@@ -8,10 +8,15 @@ import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
+import paulevs.bnb.world.structures.placers.StructurePlacer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NetherBiome extends Biome {
 	protected static final BlockState NETHERRACK = BlockBase.NETHERRACK.getDefaultState();
 	private final Vec3f fogColor = new Vec3f(0.2F, 0.03F, 0.03F);
+	private final List<StructurePlacer> placers = new ArrayList<>();
 	public final Identifier id;
 	
 	private float fogDensity = 1F;
@@ -44,11 +49,24 @@ public class NetherBiome extends Biome {
 	
 	public void buildSurfaceColumn(Chunk chunk, BlockPos pos) {}
 	
-	public BlockState getFillBlock(Chunk chunk, BlockPos pos) {
+	public BlockState getFillBlock() {
+		return NETHERRACK;
+	}
+	
+	public BlockState getSurfaceBlock() {
 		return NETHERRACK;
 	}
 	
 	public Vec3f getFogColor() {
 		return fogColor;
+	}
+	
+	public NetherBiome addStructure(StructurePlacer placer) {
+		placers.add(placer);
+		return this;
+	}
+	
+	public List<StructurePlacer> getStructures() {
+		return placers;
 	}
 }

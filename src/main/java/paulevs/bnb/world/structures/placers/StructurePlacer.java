@@ -1,7 +1,6 @@
 package paulevs.bnb.world.structures.placers;
 
 import net.minecraft.level.Level;
-import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 
@@ -23,22 +22,21 @@ public class StructurePlacer {
 		this.count = count;
 	}
 	
-	public void place(Level level, Chunk chunk, Random random, int wx, int wy, int wz) {
+	public void place(Level level, Random random, int wx, int wy, int wz) {
 		for (byte i = 0; i < count; i++) {
 			int px = wx | random.nextInt(16);
 			int pz = wz | random.nextInt(16);
 			for (byte dy = 15; dy >= 0; dy--) {
 				int py = wy | dy;
 				if (!densityFunction.apply(POS.set(px, py, pz))) continue;
-				if (!canPlace(level, chunk, random, px, py, pz)) continue;
+				if (!canPlace(level, px, py, pz)) continue;
 				structure.generate(level, random, px, py, pz);
 			}
 		}
 	}
 	
-	protected boolean canPlace(Level level, Chunk chunk, Random random, int x, int y, int z) {
-		return chunk.getBlockState(x & 15, y, z & 15).getMaterial().isReplaceable() &&
-			!chunk.getBlockState(x & 15, y - 1, z & 15).getMaterial().isReplaceable();
+	protected boolean canPlace(Level level, int x, int y, int z) {
+		return level.getBlockState(x, y, z).getMaterial().isReplaceable() && !level.getBlockState(x, y - 1, z).getMaterial().isReplaceable();
 	}
 	
 	public StructurePlacer setDensityFunction(Function<BlockPos, Boolean> densityFunction) {

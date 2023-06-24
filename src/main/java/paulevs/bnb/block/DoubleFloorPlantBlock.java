@@ -27,11 +27,6 @@ public class DoubleFloorPlantBlock extends NetherFloorPlantBlock {
 	}
 	
 	@Override
-	protected boolean canStay(Level level, int x, int y, int z) {
-		return isGround(level.getBlockState(x, y - 1, z));
-	}
-	
-	@Override
 	protected boolean isGround(BlockState state) {
 		if (state.isOf(this) && state.get(BNBBlockProperties.DOUBLE_SHAPE) == DoubleShape.BOTTOM) return true;
 		return super.isGround(state);

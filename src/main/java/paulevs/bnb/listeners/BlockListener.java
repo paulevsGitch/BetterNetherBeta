@@ -60,17 +60,18 @@ public class BlockListener {
 		
 		register("flame_bulbs", NetherFloorPlantBlock::new);
 		register("crimson_roots", NetherFloorPlantBlock::new);
-		register("nether_daisy", NetherFloorPlantBlock::new);
-		register("fireweed", DoubleFloorPlantBlock::new);
+		register("nether_daisy", NetherFloorPlantBlock::new).setLightEmittance(0.5F);
+		register("fireweed", DoubleFloorPlantBlock::new).setLightEmittance(0.5F);
 		
 		BlockBase.PORTAL.setLightEmittance(1F);
 	}
 	
-	private void register(String name, Function<Identifier, BlockBase> constructor) {
+	private BlockBase register(String name, Function<Identifier, BlockBase> constructor) {
 		Identifier id = BNB.id(name);
 		BlockBase block = constructor.apply(id);
 		block.setTranslationKey(id.toString());
 		BLOCKS.put(id, block);
+		return block;
 	}
 	
 	public static BlockState get(String name) {
