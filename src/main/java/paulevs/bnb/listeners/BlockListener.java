@@ -18,12 +18,15 @@ import paulevs.bnb.block.NetherVineBlock;
 import paulevs.bnb.block.NetherWoodBlock;
 import paulevs.bnb.block.SoulTerrainBlock;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
 public class BlockListener {
 	public static final Map<Identifier, BlockBase> BLOCKS = new HashMap<>();
+	public static final List<BlockBase> BLOCK_LIST = new ArrayList<>();
 	
 	@EventListener
 	public void onBlockRegister(BlockRegistryEvent event) {
@@ -71,6 +74,7 @@ public class BlockListener {
 		BlockBase block = constructor.apply(id);
 		block.setTranslationKey(id.toString());
 		BLOCKS.put(id, block);
+		BLOCK_LIST.add(block);
 		return block;
 	}
 	

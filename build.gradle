@@ -64,16 +64,10 @@ dependencies {
 
 	modImplementation "net.modificationstation:StationAPI:${project.stapi_version}"
 	
-	modImplementation("net.glasslauncher.mods:GlassConfigAPI:${project.gcapi_version}") {
-		exclude module: "StationAPI"
-        exclude module: "fabric-loader"
+	modImplementation("com.github.paulevsGitch:BHCreative:${project.bhcreative_version}") {
 		transitive false
 	}
-	modImplementation("net.glasslauncher:HowManyItems-Fabric-Unofficial:${project.howmanyitems_version}") {
-		exclude module: "StationAPI"
-        exclude module: "fabric-loader"
-		transitive false
-	}
+	
 	modImplementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 

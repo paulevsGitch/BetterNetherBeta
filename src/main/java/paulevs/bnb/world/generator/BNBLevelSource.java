@@ -11,7 +11,6 @@ import net.modificationstation.stationapi.impl.level.chunk.StationFlatteningChun
 import paulevs.bnb.BNB;
 import paulevs.bnb.listeners.BiomeListener;
 import paulevs.bnb.world.biome.NetherBiome;
-import paulevs.bnb.world.structures.BNBStructures;
 
 import java.util.Random;
 import java.util.function.Function;
@@ -63,51 +62,6 @@ public class BNBLevelSource {
 				}
 			}
 		});
-		/*
-		final int lastIndex = sectionCount - 1;
-		IntStream.range(0, sectionCount).parallel().forEach(i -> {
-			InterpolationCell cell = cells[i];
-			ChunkSection section = sections[i];
-			if (cell.isEmpty() || section == null) return;
-			BlockPos.Mutable pos = new BlockPos.Mutable();
-			for (byte bx = 0; bx < 16; bx++) {
-				pos.setX(bx);
-				cell.setX(bx);
-				for (byte bz = 0; bz < 16; bz++) {
-					pos.setZ(bz);
-					cell.setZ(bz);
-					for (byte by = 0; by < 16; by++) {
-						if (cell.get(by) < 0.5F) continue;
-						if (by < 15 && cell.get(by + 1) > 0.5F) continue;
-						if (by == 15 && i < lastIndex && cells[i + 1].get(0) > 0.5F) continue;
-						pos.setY(by | i << 4);
-						sections[i].setBlockState(bx, by, bz, biome.getSurfaceBlock());
-					}
-				}
-			}
-		});*/
-		
-		/*for (byte bx = 0; bx < 16; bx++) {
-			pos.setX(bx);
-			for (byte bz = 0; bz < 16; bz++) {
-				pos.setZ(bz);
-				for (byte by = 0; by < 16; by++) {
-					pos.setY(by);
-					sections[0].setBlockState(bx, by, bz, biome.getFillBlock(chunk, pos));
-					pos.setY(by + 16);
-					sections[1].setBlockState(bx, by, bz, biome.getFillBlock(chunk, pos));
-				}
-			}
-		}*/
-		
-		/*pos.setY(31);
-		for (byte bx = 0; bx < 16; bx++) {
-			pos.setX(bx);
-			for (byte bz = 0; bz < 16; bz++) {
-				pos.setZ(bz);
-				biome.buildSurfaceColumn(chunk, pos);
-			}
-		}*/
 		
 		return chunk;
 	}
@@ -117,24 +71,6 @@ public class BNBLevelSource {
 		final ChunkSection[] sections = chunk.sections;
 		
 		NetherBiome biome = BiomeListener.BIOMES.get(BNB.id("crimson_forest"));
-		
-		/*IntStream.range(0, sectionCount).parallel().forEach(i -> {
-			ChunkSection section = sections[i];
-			if (section == null) return;
-			BlockPos.Mutable pos = new BlockPos.Mutable();
-			for (byte bx = 0; bx < 16; bx++) {
-				pos.setX(bx | cx << 4);
-				for (byte bz = 0; bz < 16; bz++) {
-					pos.setZ(bz | cz << 4);
-					for (byte by = 0; by < 16; by++) {
-						pos.setY(by | i << 4);
-						if (section.getBlockState(bx, by, bz).isAir()) continue;
-						if (!section.getBlockState(bx, by + 1, bz).isAir()) continue;
-						biome.buildSurfaceColumn(level, pos);
-					}
-				}
-			}
-		});*/
 		
 		short maxY = (short) ((sectionCount << 4) - 1);
 		for (short i = 0; i < 256; i++) {

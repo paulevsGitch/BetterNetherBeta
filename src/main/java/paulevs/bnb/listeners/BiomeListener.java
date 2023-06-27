@@ -8,7 +8,6 @@ import paulevs.bnb.BNB;
 import paulevs.bnb.world.biome.NetherBiome;
 import paulevs.bnb.world.biome.SimpleNetherBiome;
 import paulevs.bnb.world.structures.BNBStructures;
-import paulevs.bnb.world.structures.placers.StructurePlacer;
 
 import java.util.HashMap;
 import java.util.Map;

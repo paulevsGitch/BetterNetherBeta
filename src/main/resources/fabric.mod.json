@@ -27,7 +27,9 @@
 			"paulevs.bnb.listeners.TextureListener",
 			"paulevs.bnb.listeners.ModelListener"
 		],
-		"stationapi:event_bus_server": []
+		"bhcreative:event_bus": [
+			"paulevs.bnb.listeners.CreativeTabListener"
+		]
 	},
 
 	"mixins": [
