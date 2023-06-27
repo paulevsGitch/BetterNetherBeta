@@ -7,13 +7,14 @@ import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
 import paulevs.bnb.BNB;
 import paulevs.bnb.interfaces.AutoTextured;
+import paulevs.bnb.registries.BNBBlocks;
 
 public class TextureListener {
 	@EventListener
 	public void registerTextures(TextureRegisterEvent event) {
 		final ExpandableAtlas blockAtlas = Atlases.getTerrain();
 		
-		BlockListener.BLOCKS.values().forEach(block -> {
+		BNBBlocks.BLOCKS_WITH_ITEMS.forEach(block -> {
 			if (block instanceof AutoTextured) {
 				((AutoTextured) block).registerTextures(blockAtlas);
 			}

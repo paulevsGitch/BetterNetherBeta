@@ -5,12 +5,14 @@ import net.minecraft.item.ItemInstance;
 import paulevs.bhcreative.api.SimpleTab;
 import paulevs.bhcreative.registry.TabRegistryEvent;
 import paulevs.bnb.BNB;
+import paulevs.bnb.registries.BNBBlocks;
 
 public class CreativeTabListener {
 	@EventListener
 	public void registerTab(TabRegistryEvent event) {
-		SimpleTab tab = new SimpleTab(BNB.id("bnb_tab"), new ItemInstance(BlockListener.get("crimson_nylium").getBlock()));
+		System.out.println("Adding BNB tab");
+		SimpleTab tab = new SimpleTab(BNB.id("creative_tab"), new ItemInstance(BNBBlocks.CRIMSON_NYLIUM));
 		event.register(tab);
-		BlockListener.BLOCK_LIST.forEach(block -> tab.addItem(new ItemInstance(block)));
+		BNBBlocks.BLOCKS_WITH_ITEMS.forEach(block -> tab.addItem(new ItemInstance(block)));
 	}
 }
