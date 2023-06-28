@@ -16,7 +16,7 @@ import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
-public class BNBLevelSource {
+public class BNBWorldGenerator {
 	private static final Random RANDOM = new Random();
 	private static final Function<BlockPos, Float> DENSITY = pos -> {
 		float dx = (float) Math.sin(pos.getX() * 0.1) * 5;

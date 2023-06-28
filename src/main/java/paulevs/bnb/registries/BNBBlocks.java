@@ -3,7 +3,7 @@ package paulevs.bnb.registries;
 import net.minecraft.block.BlockBase;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.bnb.BNB;
-import paulevs.bnb.NetherLeavesTransparent;
+import paulevs.bnb.block.NetherLeavesTransparent;
 import paulevs.bnb.block.DoubleFloorPlantBlock;
 import paulevs.bnb.block.EmberWoodBlock;
 import paulevs.bnb.block.GhostPumpkinBlock;

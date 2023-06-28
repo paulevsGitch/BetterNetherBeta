@@ -1,4 +1,4 @@
-package paulevs.bnb;
+package paulevs.bnb.block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
