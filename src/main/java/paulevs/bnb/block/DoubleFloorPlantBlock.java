@@ -34,7 +34,7 @@ public class DoubleFloorPlantBlock extends NetherFloorPlantBlock {
 	
 	@Override
 	public boolean canPlaceAt(Level level, int x, int y, int z) {
-		return level.getBlockState(x, y + 1, z).getMaterial().isReplaceable() && super.canPlaceAt(level, x, y, z);
+		return super.canPlaceAt(level, x, y, z) && level.getBlockState(x, y + 1, z).getMaterial().isReplaceable();
 	}
 	
 	@Override

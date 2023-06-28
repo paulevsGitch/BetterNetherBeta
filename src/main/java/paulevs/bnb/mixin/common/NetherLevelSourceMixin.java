@@ -16,6 +16,11 @@ import paulevs.bnb.world.generator.BNBWorldGenerator;
 public class NetherLevelSourceMixin {
 	@Shadow private Level level;
 	
+	@Inject(method = "<init>", at = @At("TAIL"))
+	private void bnb_getChunk(Level level, long seed, CallbackInfo info) {
+		BNBWorldGenerator.setSeed(seed);
+	}
+	
 	@Inject(method = "getChunk", at = @At("HEAD"), cancellable = true)
 	private void bnb_getChunk(int cx, int cz, CallbackInfoReturnable<Chunk> info) {
 		info.setReturnValue(BNBWorldGenerator.makeChunk(this.level, cx, cz));

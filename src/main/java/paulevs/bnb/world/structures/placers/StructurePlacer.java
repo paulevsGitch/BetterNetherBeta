@@ -24,8 +24,8 @@ public class StructurePlacer {
 	
 	public void place(Level level, Random random, int wx, int wy, int wz) {
 		for (byte i = 0; i < count; i++) {
-			int px = wx | random.nextInt(16);
-			int pz = wz | random.nextInt(16);
+			int px = wx + random.nextInt(16);
+			int pz = wz + random.nextInt(16);
 			for (byte dy = 15; dy >= 0; dy--) {
 				int py = wy | dy;
 				if (!densityFunction.apply(POS.set(px, py, pz))) continue;

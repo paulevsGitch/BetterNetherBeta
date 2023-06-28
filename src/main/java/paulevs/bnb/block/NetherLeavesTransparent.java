@@ -7,7 +7,6 @@ import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.world.BlockStateView;
-import paulevs.bnb.block.NetherLeavesBlock;
 
 public class NetherLeavesTransparent extends NetherLeavesBlock {
 	public NetherLeavesTransparent(Identifier id) {

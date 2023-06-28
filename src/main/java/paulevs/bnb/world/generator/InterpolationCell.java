@@ -11,6 +11,7 @@ public class InterpolationCell {
 	private final float[] cell = new float[8];
 	private final int[] offsets = new int[8];
 	private final float[] data;
+	private final int lastIndex;
 	private final int cellSide;
 	private final int side2;
 	private final int side;
@@ -26,6 +27,7 @@ public class InterpolationCell {
 		this.cellSide = cellSide;
 		side = 16 / cellSide + 1;
 		side2 = side * side;
+		lastIndex = side - 2;
 		data = new float[side2 * side];
 		for (byte i = 0; i < 8; i++) {
 			int z = i & 1;
@@ -37,19 +39,19 @@ public class InterpolationCell {
 	
 	public void setX(int x) {
 		dx = (float) x / cellSide;
-		x1 = (int) dx;
+		x1 = MathHelper.clamp((int) dx, 0, lastIndex);
 		dx -= x1;
 	}
 	
 	public void setY(int y) {
 		dy = (float) y / cellSide;
-		y1 = (int) dy;
+		y1 = MathHelper.clamp((int) dy, 0, lastIndex);
 		dy -= y1;
 	}
 	
 	public void setZ(int z) {
 		dz = (float) z / cellSide;
-		z1 = (int) dz;
+		z1 = MathHelper.clamp((int) dz, 0, lastIndex);
 		dz -= z1;
 	}
 	
@@ -68,11 +70,6 @@ public class InterpolationCell {
 			cell[i] = MathHelper.lerp(dy, cell[index], cell[index | 1]);
 		}
 		return MathHelper.lerp(dx, cell[0], cell[1]);
-	}
-	
-	public float get(int y) {
-		setY(y);
-		return get();
 	}
 	
 	public void fill(int x, int y, int z, Function<BlockPos, Float> densityFunction) {
