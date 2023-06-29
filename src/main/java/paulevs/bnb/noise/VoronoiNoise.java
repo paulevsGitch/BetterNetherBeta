@@ -30,9 +30,9 @@ public class VoronoiNoise {
 		for (byte i = -1; i < 2; i++) {
 			for (byte j = -1; j < 2; j++) {
 				for (byte k = -1; k < 2; k++) {
-					float dx = (hash(x1 + i, y1 + j + seed +  5, z1 + k) % 3607) / 3607.0F * 0.5F + i - sdx;
-					float dy = (hash(x1 + i, y1 + j + seed + 13, z1 + k) % 3607) / 3607.0F * 0.5F + j - sdy;
-					float dz = (hash(x1 + i, y1 + j + seed + 23, z1 + k) % 3607) / 3607.0F * 0.5F + k - sdz;
+					float dx = wrap(hash(x1 + i, y1 + j + seed +  5, z1 + k), 3607) / 3607.0F * 0.5F + i - sdx;
+					float dy = wrap(hash(x1 + i, y1 + j + seed + 13, z1 + k), 3607) / 3607.0F * 0.5F + j - sdy;
+					float dz = wrap(hash(x1 + i, y1 + j + seed + 23, z1 + k), 3607) / 3607.0F * 0.5F + k - sdz;
 					float distance = MathHelper.sqrt(dx * dx + dy * dy + dz * dz);
 					buffer[index++] = distance;
 				}
@@ -45,5 +45,10 @@ public class VoronoiNoise {
 	
 	private long hash(int x, int y, int z) {
 		return net.modificationstation.stationapi.api.util.math.MathHelper.hashCode(x, y, z);
+	}
+	
+	private int wrap(long value, int side) {
+		int result = (int) (value - value / side * side);
+		return result < 0 ? result + side : result;
 	}
 }
