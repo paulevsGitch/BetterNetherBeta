@@ -15,7 +15,8 @@ public class VoronoiNoise extends FloatNoise {
 	
 	public float getF1F3(double x, double y, double z) {
 		get(x, y, z);
-		return buffer[0] / buffer[2];
+		Arrays.sort(buffer);
+		return MathHelper.sqrt(buffer[0] / buffer[2]);
 	}
 	
 	@Override
@@ -29,6 +30,7 @@ public class VoronoiNoise extends FloatNoise {
 		float sdz = (float) (z - z1);
 		
 		byte index = 0;
+		float distance = 1000;
 		
 		for (byte i = -1; i < 2; i++) {
 			for (byte j = -1; j < 2; j++) {
@@ -36,13 +38,15 @@ public class VoronoiNoise extends FloatNoise {
 					float dx = wrap(hash(x1 + i, y1 + j + seed +  5, z1 + k), 3607) / 3607.0F * 0.7F + i - sdx;
 					float dy = wrap(hash(x1 + i, y1 + j + seed + 13, z1 + k), 3607) / 3607.0F * 0.7F + j - sdy;
 					float dz = wrap(hash(x1 + i, y1 + j + seed + 23, z1 + k), 3607) / 3607.0F * 0.7F + k - sdz;
-					buffer[index++] = MathHelper.sqrt(dx * dx + dy * dy + dz * dz);
+					float d = dx * dx + dy * dy + dz * dz;
+					if (d < distance) distance = d;
+					buffer[index++] = d;
 				}
 			}
 		}
 		
-		Arrays.sort(buffer);
-		return net.modificationstation.stationapi.api.util.math.MathHelper.clamp(buffer[0], 0, 1);
+		distance = MathHelper.sqrt(distance);
+		return net.modificationstation.stationapi.api.util.math.MathHelper.clamp(distance, 0, 1);
 	}
 	
 	@Override
@@ -53,17 +57,48 @@ public class VoronoiNoise extends FloatNoise {
 		float sdx = (float) (x - x1);
 		float sdy = (float) (y - y1);
 		
-		byte index = 0;
+		// byte index = 0;
+		float distance = 1000;
 		
 		for (byte i = -1; i < 2; i++) {
 			for (byte j = -1; j < 2; j++) {
-				float dx = wrap(hash(x1 + i, y1 + j, seed), 3607) / 3607.0F + i - sdx;
-				float dy = wrap(hash(x1 + i, y1 + j, seed + 13), 3607) / 3607.0F + j - sdy;
-				buffer[index++] = MathHelper.sqrt(dx * dx + dy * dy);
+				float dx = wrap(hash(x1 + i, y1 + j, seed), 3607) / 3607.0F * 0.8F + i - sdx;
+				float dy = wrap(hash(x1 + i, y1 + j, seed + 13), 3607) / 3607.0F * 0.8F + j - sdy;
+				float d = dx * dx + dy * dy;
+				if (d < distance) distance = d;
+				// buffer[index++] = d;
 			}
 		}
 		
-		Arrays.sort(buffer, 0, 9);
-		return net.modificationstation.stationapi.api.util.math.MathHelper.clamp(buffer[0], 0, 1);
+		distance = MathHelper.sqrt(distance);
+		return net.modificationstation.stationapi.api.util.math.MathHelper.clamp(distance, 0, 1);
+	}
+	
+	public float getID(double x, double y) {
+		int x1 = MathHelper.floor(x);
+		int y1 = MathHelper.floor(y);
+		
+		float sdx = (float) (x - x1);
+		float sdy = (float) (y - y1);
+		
+		float distance = 1000;
+		
+		int di = 0;
+		int dj = 0;
+		
+		for (byte i = -1; i < 2; i++) {
+			for (byte j = -1; j < 2; j++) {
+				float dx = wrap(hash(x1 + i, y1 + j, seed), 3607) / 3607.0F * 0.8F + i - sdx;
+				float dy = wrap(hash(x1 + i, y1 + j, seed + 13), 3607) / 3607.0F * 0.8F + j - sdy;
+				float d = dx * dx + dy * dy;
+				if (d < distance) {
+					distance = d;
+					di = i;
+					dj = j;
+				}
+			}
+		}
+		
+		return wrap(hash(x1 + di, y1 + dj, seed + 27), 3607) / 3607.0F;
 	}
 }

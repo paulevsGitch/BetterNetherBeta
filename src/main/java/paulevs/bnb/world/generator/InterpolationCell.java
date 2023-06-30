@@ -19,8 +19,12 @@ public class InterpolationCell {
 	private int z1;
 	
 	public InterpolationCell(int cellSide) {
+		this(cellSide, 16 / cellSide + 1);
+	}
+	
+	public InterpolationCell(int cellSide, int side) {
 		this.cellSide = cellSide;
-		side = 16 / cellSide + 1;
+		this.side = side;
 		side2 = side * side;
 		lastIndex = side - 2;
 		data = new float[side2 * side];

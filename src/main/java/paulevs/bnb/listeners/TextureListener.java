@@ -6,7 +6,8 @@ import net.modificationstation.stationapi.api.client.event.texture.TextureRegist
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
 import paulevs.bnb.BNB;
-import paulevs.bnb.world.generator.terrain.ArchipelagoFeature;
+import paulevs.bnb.noise.PerlinNoise;
+import paulevs.bnb.world.generator.terrain.PillarsFeature;
 import paulevs.bnb.world.generator.terrain.TerrainFeature;
 
 import javax.swing.ImageIcon;
@@ -26,8 +27,9 @@ public class TextureListener {
 		
 		BufferedImage buffer = new BufferedImage(1024, 512, BufferedImage.TYPE_INT_ARGB);
 		int[] pixels = ((DataBufferInt) (buffer.getRaster().getDataBuffer())).getData();
+		PerlinNoise noise = new PerlinNoise();
 		
-		TerrainFeature feature = new ArchipelagoFeature();
+		TerrainFeature feature = new PillarsFeature();
 		feature.setSeed(5);
 		
 		for (int x = 0; x < 1024; x++) {

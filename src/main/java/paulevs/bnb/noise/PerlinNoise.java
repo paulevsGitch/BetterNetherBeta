@@ -89,17 +89,17 @@ public class PerlinNoise extends FloatNoise {
 		dy = smoothStep(dy);
 		dz = smoothStep(dz);
 		
-		a = MathHelper.lerp(a, b, dx);
-		b = MathHelper.lerp(c, d, dx);
-		c = MathHelper.lerp(e, f, dx);
-		d = MathHelper.lerp(g, h, dx);
+		a = MathHelper.lerp(dx, a, b);
+		b = MathHelper.lerp(dx, c, d);
+		c = MathHelper.lerp(dx, e, f);
+		d = MathHelper.lerp(dx, g, h);
 		
-		a = MathHelper.lerp(a, b, dy);
-		b = MathHelper.lerp(c, d, dy);
+		a = MathHelper.lerp(dy, a, b);
+		b = MathHelper.lerp(dy, c, d);
 		
-		a = MathHelper.lerp(a, b, dz);
+		a = MathHelper.lerp(dz, a, b);
 		
-		return MathHelper.clamp(0.0F, 1.0F, a / 1.732F + 0.5F);
+		return MathHelper.clamp(a / 1.732F + 0.5F, 0.0F, 1.0F);
 	}
 	
 	private void fillVector(float[] vector, int x, int y, int z) {
@@ -108,6 +108,7 @@ public class PerlinNoise extends FloatNoise {
 		vector[2] = wrap(hash(x, y + seed + 23, z), 3607) / 3607.0F - 0.5F;
 		float length = vector[0] * vector[0] + vector[1] * vector[1] + vector[2] * vector[2];
 		if (length > 0) {
+			length = MathHelper.sqrt(length);
 			vector[0] /= length;
 			vector[1] /= length;
 			vector[2] /= length;
