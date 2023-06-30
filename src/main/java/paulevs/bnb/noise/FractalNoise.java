@@ -3,14 +3,17 @@ package paulevs.bnb.noise;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
-public class FractalPerlin extends FloatNoise {
+public class FractalNoise extends FloatNoise {
+	private final FloatNoise[] noises = new FloatNoise[2];
 	private final Random random = new Random(0);
-	private final PerlinNoise[] noises = new PerlinNoise[] {
-		new PerlinNoise(), new PerlinNoise()
-	};
-	
 	private int octaves = 1;
+	
+	public FractalNoise(Supplier<FloatNoise> noiseConstructor) {
+		noises[0] = noiseConstructor.get();
+		noises[1] = noiseConstructor.get();
+	}
 	
 	public void setOctaves(int octaves) {
 		this.octaves = octaves;

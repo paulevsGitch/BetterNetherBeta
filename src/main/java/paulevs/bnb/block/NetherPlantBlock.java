@@ -3,6 +3,7 @@ package paulevs.bnb.block;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.Box;
+import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
 
@@ -18,6 +19,8 @@ public abstract class NetherPlantBlock extends TemplateBlockBase {
 	
 	@Override
 	public boolean canPlaceAt(Level level, int x, int y, int z) {
+		BlockState state = level.getBlockState(x, y, z);
+		if (state.getMaterial() == Material.LAVA || !state.getMaterial().isReplaceable()) return false;
 		return canStay(level, x, y, z);
 	}
 	
@@ -34,7 +37,7 @@ public abstract class NetherPlantBlock extends TemplateBlockBase {
 	
 	@Override
 	public boolean canGrow(Level level, int x, int y, int z) {
-		return canPlaceAt(level, x, y, z);
+		return canStay(level, x, y, z);
 	}
 	
 	@Override

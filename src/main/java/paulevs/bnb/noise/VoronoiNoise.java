@@ -42,7 +42,7 @@ public class VoronoiNoise extends FloatNoise {
 		}
 		
 		Arrays.sort(buffer);
-		return buffer[0];
+		return net.modificationstation.stationapi.api.util.math.MathHelper.clamp(buffer[0], 0, 1);
 	}
 	
 	@Override
@@ -57,13 +57,13 @@ public class VoronoiNoise extends FloatNoise {
 		
 		for (byte i = -1; i < 2; i++) {
 			for (byte j = -1; j < 2; j++) {
-				float dx = wrap(hash(x1 + i, y1 + j, seed +  5), 3607) / 3607.0F * 0.7F + i - sdx;
-				float dy = wrap(hash(x1 + i, y1 + j, seed + 13), 3607) / 3607.0F * 0.7F + j - sdy;
+				float dx = wrap(hash(x1 + i, y1 + j, seed), 3607) / 3607.0F + i - sdx;
+				float dy = wrap(hash(x1 + i, y1 + j, seed + 13), 3607) / 3607.0F + j - sdy;
 				buffer[index++] = MathHelper.sqrt(dx * dx + dy * dy);
 			}
 		}
 		
 		Arrays.sort(buffer, 0, 9);
-		return buffer[0];
+		return net.modificationstation.stationapi.api.util.math.MathHelper.clamp(buffer[0], 0, 1);
 	}
 }
