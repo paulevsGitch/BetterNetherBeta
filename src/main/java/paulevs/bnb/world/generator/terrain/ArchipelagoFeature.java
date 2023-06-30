@@ -11,7 +11,6 @@ public class ArchipelagoFeature extends TerrainFeature {
 	private final SphericalVoronoiNoise bigIslands = new SphericalVoronoiNoise();
 	private final SphericalVoronoiNoise smallIslands = new SphericalVoronoiNoise();
 	private final FractalNoise ceilingSpikes = new FractalNoise(PerlinNoise::new);
-	private static final float PI_HALF = (float) (Math.PI * 0.5);
 	
 	public ArchipelagoFeature() {
 		ceilingSpikes.setOctaves(3);

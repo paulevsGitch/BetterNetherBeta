@@ -10,7 +10,6 @@ public class PillarsFeature extends TerrainFeature {
 	private final VoronoiNoise spikes = new VoronoiNoise();
 	private final PerlinNoise details = new PerlinNoise();
 	private final FractalNoise floorAndCeiling = new FractalNoise(PerlinNoise::new);
-	private static final float PI_HALF = (float) (Math.PI * 0.5);
 	
 	public PillarsFeature() {
 		floorAndCeiling.setOctaves(3);
