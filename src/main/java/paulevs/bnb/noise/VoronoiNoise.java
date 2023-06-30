@@ -4,19 +4,22 @@ import net.minecraft.util.maths.MathHelper;
 
 import java.util.Arrays;
 
-public class VoronoiNoise {
-	private final int seed;
+public class VoronoiNoise extends FloatNoise {
+	private final float[] buffer = new float[27];
+	private int seed;
 	
-	public VoronoiNoise(int seed) {
+	@Override
+	public void setSeed(int seed) {
 		this.seed = seed;
 	}
 	
-	public float getF1F3(float[] buffer, double x, double y, double z) {
-		get(buffer, x, y, z);
+	public float getF1F3(double x, double y, double z) {
+		get(x, y, z);
 		return buffer[0] / buffer[2];
 	}
 	
-	public float get(float[] buffer, double x, double y, double z) {
+	@Override
+	public float get(double x, double y, double z) {
 		int x1 = MathHelper.floor(x);
 		int y1 = MathHelper.floor(y);
 		int z1 = MathHelper.floor(z);
@@ -30,11 +33,10 @@ public class VoronoiNoise {
 		for (byte i = -1; i < 2; i++) {
 			for (byte j = -1; j < 2; j++) {
 				for (byte k = -1; k < 2; k++) {
-					float dx = wrap(hash(x1 + i, y1 + j + seed +  5, z1 + k), 3607) / 3607.0F * 0.5F + i - sdx;
-					float dy = wrap(hash(x1 + i, y1 + j + seed + 13, z1 + k), 3607) / 3607.0F * 0.5F + j - sdy;
-					float dz = wrap(hash(x1 + i, y1 + j + seed + 23, z1 + k), 3607) / 3607.0F * 0.5F + k - sdz;
-					float distance = MathHelper.sqrt(dx * dx + dy * dy + dz * dz);
-					buffer[index++] = distance;
+					float dx = wrap(hash(x1 + i, y1 + j + seed +  5, z1 + k), 3607) / 3607.0F * 0.7F + i - sdx;
+					float dy = wrap(hash(x1 + i, y1 + j + seed + 13, z1 + k), 3607) / 3607.0F * 0.7F + j - sdy;
+					float dz = wrap(hash(x1 + i, y1 + j + seed + 23, z1 + k), 3607) / 3607.0F * 0.7F + k - sdz;
+					buffer[index++] = MathHelper.sqrt(dx * dx + dy * dy + dz * dz);
 				}
 			}
 		}
@@ -43,12 +45,25 @@ public class VoronoiNoise {
 		return buffer[0];
 	}
 	
-	private long hash(int x, int y, int z) {
-		return net.modificationstation.stationapi.api.util.math.MathHelper.hashCode(x, y, z);
-	}
-	
-	private int wrap(long value, int side) {
-		int result = (int) (value - value / side * side);
-		return result < 0 ? result + side : result;
+	@Override
+	public float get(double x, double y) {
+		int x1 = MathHelper.floor(x);
+		int y1 = MathHelper.floor(y);
+		
+		float sdx = (float) (x - x1);
+		float sdy = (float) (y - y1);
+		
+		byte index = 0;
+		
+		for (byte i = -1; i < 2; i++) {
+			for (byte j = -1; j < 2; j++) {
+				float dx = wrap(hash(x1 + i, y1 + j, seed +  5), 3607) / 3607.0F * 0.7F + i - sdx;
+				float dy = wrap(hash(x1 + i, y1 + j, seed + 13), 3607) / 3607.0F * 0.7F + j - sdy;
+				buffer[index++] = MathHelper.sqrt(dx * dx + dy * dy);
+			}
+		}
+		
+		Arrays.sort(buffer, 0, 9);
+		return buffer[0];
 	}
 }

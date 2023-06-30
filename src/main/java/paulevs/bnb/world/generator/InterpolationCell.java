@@ -1,13 +1,8 @@
 package paulevs.bnb.world.generator;
 
-import net.modificationstation.stationapi.api.util.math.BlockPos;
-import net.modificationstation.stationapi.api.util.math.BlockPos.Mutable;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 
-import java.util.function.Function;
-
 public class InterpolationCell {
-	private final BlockPos.Mutable pos = new Mutable();
 	private final float[] cell = new float[8];
 	private final int[] offsets = new int[8];
 	private final float[] data;
@@ -72,17 +67,17 @@ public class InterpolationCell {
 		return MathHelper.lerp(dx, cell[0], cell[1]);
 	}
 	
-	public void fill(int x, int y, int z, Function<BlockPos, Float> densityFunction) {
+	public void fill(int x, int y, int z, TerrainSDF sdf) {
 		int count = 0;
 		for (byte dx = 0; dx < side; dx++) {
 			int indexX = dx * side2;
-			pos.setX(x + dx * cellSide);
+			int px = x + dx * cellSide;
 			for (byte dy = 0; dy < side; dy++) {
 				int indexXY = indexX + dy * side;
-				pos.setY(y + dy * cellSide);
+				int py = y + dy * cellSide;
 				for (byte dz = 0; dz < side; dz++) {
-					pos.setZ(z + dz * cellSide);
-					float density = densityFunction.apply(pos);
+					int pz = z + dz * cellSide;
+					float density = sdf.getDensity(px, py, pz);
 					data[indexXY + dz] = density;
 					if (density > 0.5F) count++;
 				}
