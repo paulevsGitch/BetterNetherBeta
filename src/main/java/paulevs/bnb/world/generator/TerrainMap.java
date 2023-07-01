@@ -4,25 +4,22 @@ import net.minecraft.util.maths.Vec2i;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.bnb.noise.FractalNoise;
 import paulevs.bnb.noise.PerlinNoise;
-import paulevs.bnb.world.generator.terrain.TerrainFeature;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class TerrainMap implements TerrainSDF {
+public class TerrainMap {
 	private static final double SIN = Math.sin(0.8);
 	private static final double COS = Math.cos(0.8);
 	private static final Vec2i[] OFFSETS;
 	
-	private final List<TerrainFeature> features = new ArrayList<>();
-	private final Map<Integer, Integer> closestTerrain = new HashMap<>();
 	private final Map<Long, byte[]> chunks = new HashMap<>();
 	private final FractalNoise distortionX = new FractalNoise(PerlinNoise::new);
 	private final FractalNoise distortionZ = new FractalNoise(PerlinNoise::new);
-	private final float[] preData = new float[1];
 	private final Random random = new Random(0);
 	private int seed;
 	
@@ -36,31 +33,21 @@ public class TerrainMap implements TerrainSDF {
 		random.setSeed(seed);
 		distortionX.setSeed(random.nextInt());
 		distortionZ.setSeed(random.nextInt());
-		features.forEach(feature -> feature.setSeed(random.nextInt()));
 	}
 	
-	public void addFeature(TerrainFeature feature) {
-		features.add(feature);
-	}
-	
-	@Override
-	public float getDensity(int x, int y, int z) {
-		closestTerrain.clear();
+	public void getDensity(int x, int z, float[] data, int count) {
+		Arrays.fill(data, 0F);
 		for (Vec2i offset : OFFSETS) {
-			int index = getSDFIndex(x + offset.x, z + offset.z);
-			closestTerrain.put(index, closestTerrain.getOrDefault(index, 0) + 1);
+			int index = getSDFIndex(x + offset.x, z + offset.z, count);
+			data[index] += 1;
 		}
-		
-		preData[0] = 0;
-		closestTerrain.forEach((id, count) -> {
-			float power = (float) count / OFFSETS.length;
-			preData[0] += features.get(id).getDensity(x, y, z) * power;
-		});
-		
-		return preData[0];
+		for (short i = 0; i < data.length; i++) {
+			if (data[i] == 0) continue;
+			data[i] /= (float) OFFSETS.length;
+		}
 	}
 	
-	private int getSDFIndex(int x, int z) {
+	private int getSDFIndex(int x, int z, int count) {
 		double preX = COS * x - SIN * z;
 		double preZ = SIN * x + COS * z;
 		int px = (int) Math.round(preX / 256.0 + (double) distortionX.get(preX * 0.0075, preZ * 0.0075) * 1.5F);
@@ -70,7 +57,7 @@ public class TerrainMap implements TerrainSDF {
 			byte[] data = new byte[256];
 			random.setSeed(MathHelper.hashCode(px >> 4, seed, pz >> 4));
 			for (short i = 0; i < 256; i++) {
-				data[i] = (byte) random.nextInt(features.size());
+				data[i] = (byte) random.nextInt(count);
 			}
 			return data;
 		});

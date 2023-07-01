@@ -21,8 +21,7 @@ import java.util.stream.IntStream;
 
 public class BNBWorldGenerator {
 	private static final BlockState LAVA = BlockBase.STILL_LAVA.getDefaultState();
-	private static final List<TerrainMap> TERRAIN_MAPS = new ArrayList<>();
-	//private static final TerrainMap TERRAIN_MAP = new TerrainMap();
+	private static final List<ChunkFeatureMap> FEATURE_MAPS = new ArrayList<>();
 	private static final Random RANDOM = new Random();
 	private static CrossInterpolationCell[] cells;
 	private static int sectionCount;
@@ -30,16 +29,7 @@ public class BNBWorldGenerator {
 	
 	public static void setSeed(long seed) {
 		BNBWorldGenerator.seed = new Random(seed).nextInt();
-		TERRAIN_MAPS.forEach(map -> map.setSeed(BNBWorldGenerator.seed));
-	}
-	
-	private static TerrainMap makeMap() {
-		TerrainMap map = new TerrainMap();
-		map.addFeature(new ArchipelagoFeature());
-		map.addFeature(new PillarsFeature());
-		map.addFeature(new SpikesFeature());
-		map.setSeed(seed);
-		return map;
+		ChunkFeatureMap.setSeed(BNBWorldGenerator.seed);
 	}
 	
 	public static Chunk makeChunk(Level level, int cx, int cz) {
@@ -51,17 +41,13 @@ public class BNBWorldGenerator {
 			cells = new CrossInterpolationCell[sectionCount];
 			for (int i = 0; i < sectionCount; i++) {
 				cells[i] = new CrossInterpolationCell(4);
-				if (i >= TERRAIN_MAPS.size()) TERRAIN_MAPS.add(makeMap());
+				if (i >= FEATURE_MAPS.size()) FEATURE_MAPS.add(new ChunkFeatureMap());
 			}
 		}
 		
-		/*for (short i = 0; i < sectionCount; i++) {
-			cells[i].fill(cx << 4, i << 4, cz << 4, TERRAIN_MAPS.get(i));
-			if (i < 2 || !cells[i].isEmpty()) sections[i] = new ChunkSection(i);
-		}*/
-		
+		ChunkFeatureMap.prepare();
 		IntStream.range(0, sectionCount).parallel().forEach(i -> {
-			cells[i].fill(cx << 4, i << 4, cz << 4, TERRAIN_MAPS.get(i));
+			cells[i].fill(cx << 4, i << 4, cz << 4, FEATURE_MAPS.get(i));
 			if (i < 2 || !cells[i].isEmpty()) sections[i] = new ChunkSection(i);
 		});
 		
@@ -116,9 +102,9 @@ public class BNBWorldGenerator {
 		return (x, y, z) -> 1.0F - (1.3F - NOISE.getF1F3(x * 0.02, y * 0.02, z * 0.02));
 	}*/
 	
-	/*static {
-		TERRAIN_MAP.addFeature(new ArchipelagoFeature());
-		TERRAIN_MAP.addFeature(new PillarsFeature());
-		TERRAIN_MAP.addFeature(new SpikesFeature());
-	}*/
+	static {
+		ChunkFeatureMap.addFeature(ArchipelagoFeature::new);
+		ChunkFeatureMap.addFeature(PillarsFeature::new);
+		ChunkFeatureMap.addFeature(SpikesFeature::new);
+	}
 }
