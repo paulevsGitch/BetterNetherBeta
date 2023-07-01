@@ -1,13 +1,13 @@
 package paulevs.bnb.sound;
 
 public class NetherSoundSource {
-	/*private final Map<String, List<class_267>> sounds = Maps.newHashMap();
-	private Random random = new Random();
+	/*private final Map<String, List<SoundEntry>> sounds = new HashMap<>();
+	private final Random random = new Random();
 	
-	public class_267 getSound(String name) {
-		List<class_267> list = sounds.get(name);
+	public SoundEntry getSound(String name) {
+		List<SoundEntry> list = sounds.get(name);
 		if (list == null) {
-			list = Lists.newArrayList();
+			list = new ArrayList<>();
 			sounds.put(name, list);
 			String path = "assets/" + name.replace('.', '/');
 			List<String> resources = ResourceUtil.getResourceFiles(path);
@@ -21,9 +21,9 @@ public class NetherSoundSource {
 		return list.isEmpty() ? null : list.get(random.nextInt(list.size()));
 	}
 	
-	public class_267 getSoundDirectly(String name) {
-		String path = "assets/" + name.replace('.', '/') + ".ogg";
-		URL url = ResourceUtil.getURL(path);
-		return new class_267(path, url);
+	public SoundEntry getSoundDirectly(String name) {
+		String path = "assets/bnb/stationapi/sounds/" + name + ".ogg";
+		URL url = Thread.currentThread().getContextClassLoader().getResource(path);
+		return new SoundEntry(path, url);
 	}*/
 }

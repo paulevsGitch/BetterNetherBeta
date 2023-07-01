@@ -21,7 +21,7 @@ public class TextureListener {
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			TerrainFeature feature = new TheHiveFeature();
 			feature.setSeed(5);
-			feature.debugImage();
+			//feature.debugImage();
 		}
 	}
 }

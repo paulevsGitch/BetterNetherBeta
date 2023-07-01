@@ -8,6 +8,7 @@
 		"JsonUnbakedModelMixin",
 		"WorldRendererMixin",
 		"GameRendererMixin",
+		"SoundHelperMixin",
 		"BakedQuadMixin"
 	],
 	"injectors": {

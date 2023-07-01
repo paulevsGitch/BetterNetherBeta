@@ -11,7 +11,6 @@ public class ChunkFeatureMap implements TerrainSDF {
 	private static final List<Supplier<TerrainFeature>> CONSTRUCTORS = new ArrayList<>();
 	private static final TerrainFeature[][] FEATURES = new TerrainFeature[16][];
 	private static final float[][] FEATURE_DENSITY = new float[1024][];
-	private static final boolean[] FILLED = new boolean[1024];
 	private static final TerrainMap TERRAIN_MAP = new TerrainMap();
 	private static final Random RANDOM = new Random(0);
 	private final int sectionIndex;
