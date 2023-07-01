@@ -79,6 +79,5 @@ public class TerrainMap {
 			}
 		}
 		OFFSETS = offsets.toArray(Vec2i[]::new);
-		System.out.println("OFFSETS: " + offsets.size());
 	}
 }
