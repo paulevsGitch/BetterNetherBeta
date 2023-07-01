@@ -54,7 +54,7 @@ public class SoundHelperMixin {
 		
 		if (!soundSystem.playing(BNB_MUSIC_KEY) && !soundSystem.playing(BNB_STREAMING_KEY)) {
 			if (--musicCountdown > 0) return;
-			SoundEntry soundEntry = NetherSounds.MUSIC[rand.nextInt(NetherSounds.MUSIC.length)];
+			SoundEntry soundEntry = NetherSounds.getRandomMusic(rand);
 			this.musicCountdown = 50 + rand.nextInt(100);
 			soundSystem.backgroundMusic(BNB_MUSIC_KEY, soundEntry.soundUrl, soundEntry.soundName, false);
 			soundSystem.setVolume(BNB_MUSIC_KEY, this.gameOptions.music * 0.25F);
