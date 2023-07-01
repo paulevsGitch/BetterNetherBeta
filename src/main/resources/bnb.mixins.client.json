@@ -9,7 +9,8 @@
 		"WorldRendererMixin",
 		"GameRendererMixin",
 		"SoundHelperMixin",
-		"BakedQuadMixin"
+		"BakedQuadMixin",
+		"LevelMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

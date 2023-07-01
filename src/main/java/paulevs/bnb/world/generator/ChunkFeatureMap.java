@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 public class ChunkFeatureMap implements TerrainSDF {
 	private static final List<Supplier<TerrainFeature>> CONSTRUCTORS = new ArrayList<>();
 	private static final TerrainFeature[][] FEATURES = new TerrainFeature[16][];
-	private static final float[][] FEATURE_DENSITY = new float[1024][];
+	private static final float[][] FEATURE_DENSITY = new float[72][];
 	private static final TerrainMap TERRAIN_MAP = new TerrainMap();
 	private static final Random RANDOM = new Random(0);
 	private final int sectionIndex;
@@ -58,17 +58,26 @@ public class ChunkFeatureMap implements TerrainSDF {
 		
 		int count = CONSTRUCTORS.size();
 		
-		for (byte x = -2; x < 22; x += 2) {
+		for (short i = 0; i < 144; i++) {
+			byte dx = (byte) (i / 12);
+			byte dz = (byte) (i % 12);
+			if ((dx + dz & 1) == 1) continue;
+			dx = (byte) ((dx << 1) - 2);
+			dz = (byte) ((dz << 1) - 2);
+			TERRAIN_MAP.getDensity(dx + posX, dz + posZ, FEATURE_DENSITY[i >> 1], count);
+		}
+		
+		/*for (byte x = -2; x < 22; x += 2) {
 			for (byte z = -2; z < 22; z += 2) {
 				short index = (short) ((x & 31) << 5 | (z & 31));
 				TERRAIN_MAP.getDensity(x + posX, z + posZ, FEATURE_DENSITY[index], count);
 			}
-		}
+		}*/
 	}
 	
 	@Override
 	public float getDensity(int x, int y, int z) {
-		short index = (short) (((x - posX) & 31) << 5 | ((z - posZ) & 31));
+		short index = getIndex(x, z);
 		float[] density = FEATURE_DENSITY[index];
 		
 		TerrainFeature[] sectionFeatures = FEATURES[sectionIndex];
@@ -80,5 +89,11 @@ public class ChunkFeatureMap implements TerrainSDF {
 		}
 		
 		return result;
+	}
+	
+	private short getIndex(int x, int z) {
+		byte dx = (byte) ((x - posX + 2) >> 1);
+		byte dz = (byte) ((z - posZ + 2) >> 1);
+		return (short) ((dx * 12 + dz) >> 1);
 	}
 }
