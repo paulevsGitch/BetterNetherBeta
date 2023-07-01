@@ -13,6 +13,7 @@ public class SpikesFeature extends TerrainFeature {
 	private final VoronoiNoise bigSpikesCeiling = new VoronoiNoise();
 	private final VoronoiNoise smallSpikesCeiling = new VoronoiNoise();
 	private final FractalNoise noise = new FractalNoise(PerlinNoise::new);
+	private final VoronoiNoise pillars = new VoronoiNoise();
 	
 	public SpikesFeature() {
 		noise.setOctaves(3);
@@ -25,7 +26,7 @@ public class SpikesFeature extends TerrainFeature {
 		float spikes = 1.0F - this.hugeSpikesFloor.get(x * 0.01, z * 0.01);
 		float height = spikes;
 		spikes = spikes * spikes;
-		spikes = spikes + gradient(y, 0, 400, 0.01F, -1.0F);
+		spikes = spikes + gradient(y, 0, 300, 0.005F, -1.0F);
 		density = Math.max(density, spikes);
 		
 		spikes = MathHelper.cos(this.bigSpikesFloor.get(x * 0.1, z * 0.1) * PI_HALF) * 0.5F + 0.5F;
@@ -41,7 +42,7 @@ public class SpikesFeature extends TerrainFeature {
 		spikes = 1.0F - this.hugeSpikesCeiling.get(x * 0.01, z * 0.01);
 		height = spikes;
 		spikes = spikes * spikes;
-		spikes = spikes + gradient(y, -144, 256, -1.0F, 0.01F);
+		spikes = spikes + gradient(y, -44, 256, -1.0F, 0.005F);
 		density = Math.max(density, spikes);
 		
 		spikes = MathHelper.cos(this.bigSpikesCeiling.get(x * 0.1, z * 0.1) * PI_HALF) * 0.5F + 0.5F;
@@ -56,6 +57,13 @@ public class SpikesFeature extends TerrainFeature {
 		
 		density += noise.get(x * 0.03, y * 0.03, z * 0.03) * 0.2F;
 		
+		spikes = this.pillars.get(x * 0.003, z * 0.003);
+		spikes += noise.get(x * 0.03, y * 0.03, z * 0.03) * 0.1F;
+		spikes = 0.6F - spikes;
+		float topBottom = Math.max(gradient(y, 0, 127, 1.0F, 0.0F), gradient(y, 127, 255, 0.0F, 1.0F));
+		spikes += topBottom * topBottom * 0.2F;
+		density = smoothMax(density, spikes, 0.5F);
+		
 		return density;
 	}
 	
@@ -69,5 +77,6 @@ public class SpikesFeature extends TerrainFeature {
 		bigSpikesCeiling.setSeed(RANDOM.nextInt());
 		smallSpikesCeiling.setSeed(RANDOM.nextInt());
 		noise.setSeed(RANDOM.nextInt());
+		pillars.setSeed(RANDOM.nextInt());
 	}
 }

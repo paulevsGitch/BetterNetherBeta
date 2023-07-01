@@ -23,6 +23,15 @@ public abstract class TerrainFeature implements TerrainSDF {
 		return MathHelper.lerp((y - minY) / (maxY - minY), minValue, maxValue);
 	}
 	
+	protected float smoothMax(float a, float b, float k) {
+		return -smoothMin(-a, -b, k);
+	}
+	
+	protected float smoothMin(float a, float b, float k) {
+		float h = Math.max(k - Math.abs(a - b), 0.0F) / k;
+		return Math.min(a, b) - h * h * k * 0.25F;
+	}
+	
 	public void debugImage() {
 		BufferedImage buffer = new BufferedImage(1024, 512, BufferedImage.TYPE_INT_ARGB);
 		int[] pixels = ((DataBufferInt) (buffer.getRaster().getDataBuffer())).getData();
