@@ -14,6 +14,7 @@ import paulevs.bnb.world.generator.terrain.ArchipelagoFeature;
 import paulevs.bnb.world.generator.terrain.ContinentsFeature;
 import paulevs.bnb.world.generator.terrain.PillarsFeature;
 import paulevs.bnb.world.generator.terrain.SpikesFeature;
+import paulevs.bnb.world.generator.terrain.TheHiveFeature;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +43,11 @@ public class BNBWorldGenerator {
 			cells = new CrossInterpolationCell[sectionCount];
 			for (int i = 0; i < sectionCount; i++) {
 				cells[i] = new CrossInterpolationCell(4);
-				if (i >= FEATURE_MAPS.size()) FEATURE_MAPS.add(new ChunkFeatureMap());
+				if (i >= FEATURE_MAPS.size()) FEATURE_MAPS.add(new ChunkFeatureMap(i));
 			}
 		}
 		
-		ChunkFeatureMap.prepare();
+		ChunkFeatureMap.prepare(cx, cz);
 		IntStream.range(0, sectionCount).parallel().forEach(i -> {
 			cells[i].fill(cx << 4, i << 4, cz << 4, FEATURE_MAPS.get(i));
 			if (i < 2 || !cells[i].isEmpty()) sections[i] = new ChunkSection(i);
@@ -99,14 +100,11 @@ public class BNBWorldGenerator {
 		}
 	}
 	
-	/*private static TerrainSDF makeF1F3() {
-		return (x, y, z) -> 1.0F - (1.3F - NOISE.getF1F3(x * 0.02, y * 0.02, z * 0.02));
-	}*/
-	
 	static {
 		ChunkFeatureMap.addFeature(ArchipelagoFeature::new);
 		ChunkFeatureMap.addFeature(PillarsFeature::new);
 		ChunkFeatureMap.addFeature(SpikesFeature::new);
 		ChunkFeatureMap.addFeature(ContinentsFeature::new);
+		ChunkFeatureMap.addFeature(TheHiveFeature::new);
 	}
 }

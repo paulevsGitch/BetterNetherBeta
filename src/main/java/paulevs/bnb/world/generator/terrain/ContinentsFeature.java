@@ -1,6 +1,5 @@
 package paulevs.bnb.world.generator.terrain;
 
-import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.bnb.noise.FractalNoise;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.noise.VoronoiNoise;
@@ -64,6 +63,7 @@ public class ContinentsFeature extends TerrainFeature {
 		density = smoothMax(density, feature, 0.5F);
 		
 		//density = feature;
+		//if (density < 0.5) density = -1;
 		
 		return density;
 	}
