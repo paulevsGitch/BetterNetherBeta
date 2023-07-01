@@ -59,7 +59,9 @@ public class BNBBlocks {
 	public static final BlockBase FIREWEED = make("fireweed", DoubleFloorPlantBlock::new).setLightEmittance(0.5F);
 	
 	private static BlockBase make(String name, Function<Identifier, BlockBase> constructor) {
-		BlockBase block = constructor.apply(BNB.id(name));
+		Identifier id = BNB.id(name);
+		BlockBase block = constructor.apply(id);
+		block.setTranslationKey(id.toString());
 		BLOCKS_WITH_ITEMS.add(block);
 		return block;
 	}
