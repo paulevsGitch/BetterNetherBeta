@@ -17,8 +17,8 @@ public class NetherLevelSourceMixin {
 	@Shadow private Level level;
 	
 	@Inject(method = "<init>", at = @At("TAIL"))
-	private void bnb_getChunk(Level level, long seed, CallbackInfo info) {
-		BNBWorldGenerator.setSeed(seed);
+	private void bnb_updateGenerator(Level level, long seed, CallbackInfo info) {
+		BNBWorldGenerator.updateData(((LevelAccessor) level).bnb_getDimData(), seed);
 	}
 	
 	@Inject(method = "getChunk", at = @At("HEAD"), cancellable = true)

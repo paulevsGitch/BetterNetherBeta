@@ -4,18 +4,22 @@ import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import net.minecraft.level.LightType;
 import net.minecraft.level.chunk.Chunk;
+import net.minecraft.level.dimension.DimensionData;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.impl.level.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.level.chunk.StationFlatteningChunk;
 import paulevs.bnb.BNB;
 import paulevs.bnb.listeners.BiomeListener;
 import paulevs.bnb.world.biome.NetherBiome;
+import paulevs.bnb.world.generator.terrain.ArchesFeature;
 import paulevs.bnb.world.generator.terrain.ArchipelagoFeature;
 import paulevs.bnb.world.generator.terrain.ContinentsFeature;
 import paulevs.bnb.world.generator.terrain.CubesFeature;
+import paulevs.bnb.world.generator.terrain.LavaOceanFeature;
 import paulevs.bnb.world.generator.terrain.PillarsFeature;
 import paulevs.bnb.world.generator.terrain.SpikesFeature;
 import paulevs.bnb.world.generator.terrain.TheHiveFeature;
+import paulevs.bnb.world.generator.terrain.VolumetricNoiseFeature;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,7 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 public class BNBWorldGenerator {
+	private static final BlockState BEDROCK = BlockBase.BEDROCK.getDefaultState();
 	private static final BlockState LAVA = BlockBase.STILL_LAVA.getDefaultState();
 	private static final List<ChunkFeatureMap> FEATURE_MAPS = new ArrayList<>();
 	private static final Random RANDOM = new Random();
@@ -30,9 +35,9 @@ public class BNBWorldGenerator {
 	private static int sectionCount;
 	private static int seed;
 	
-	public static void setSeed(long seed) {
+	public static void updateData(DimensionData dimensionData, long seed) {
 		BNBWorldGenerator.seed = new Random(seed).nextInt();
-		ChunkFeatureMap.setSeed(BNBWorldGenerator.seed);
+		ChunkFeatureMap.setData(dimensionData, BNBWorldGenerator.seed);
 	}
 	
 	public static Chunk makeChunk(Level level, int cx, int cz) {
@@ -51,14 +56,14 @@ public class BNBWorldGenerator {
 		ChunkFeatureMap.prepare(cx, cz);
 		IntStream.range(0, sectionCount).parallel().forEach(i -> {
 			cells[i].fill(cx << 4, i << 4, cz << 4, FEATURE_MAPS.get(i));
-			if (i < 2 || !cells[i].isEmpty()) sections[i] = new ChunkSection(i);
+			if (forceSection(i) || !cells[i].isEmpty()) sections[i] = new ChunkSection(i);
 		});
 		
 		NetherBiome biome = BiomeListener.BIOMES.get(BNB.id("crimson_forest"));
 		
 		IntStream.range(0, sectionCount).parallel().forEach(i -> {
 			CrossInterpolationCell cell = cells[i];
-			if (i > 1 && cell.isEmpty()) return;
+			if (!forceSection(i) && cell.isEmpty()) return;
 			for (byte bx = 0; bx < 16; bx++) {
 				cell.setX(bx);
 				for (byte bz = 0; bz < 16; bz++) {
@@ -83,6 +88,15 @@ public class BNBWorldGenerator {
 			}
 		});
 		
+		for (byte bx = 0; bx < 16; bx++) {
+			for (byte bz = 0; bz < 16; bz++) {
+				sections[0].setBlockState(bx, 0, bz, BEDROCK);
+				sections[15].setBlockState(bx, 15, bz, BEDROCK);
+				if (RANDOM.nextInt(2) == 0) sections[0].setBlockState(bx, 1, bz, BEDROCK);
+				if (RANDOM.nextInt(2) == 0) sections[15].setBlockState(bx, 14, bz, BEDROCK);
+			}
+		}
+		
 		return chunk;
 	}
 	
@@ -101,6 +115,10 @@ public class BNBWorldGenerator {
 		}
 	}
 	
+	private static boolean forceSection(int index) {
+		return index == 15 || index < 2;
+	}
+	
 	static {
 		ChunkFeatureMap.addFeature(ArchipelagoFeature::new);
 		ChunkFeatureMap.addFeature(PillarsFeature::new);
@@ -108,5 +126,8 @@ public class BNBWorldGenerator {
 		ChunkFeatureMap.addFeature(ContinentsFeature::new);
 		ChunkFeatureMap.addFeature(TheHiveFeature::new);
 		ChunkFeatureMap.addFeature(CubesFeature::new);
+		ChunkFeatureMap.addFeature(ArchesFeature::new);
+		ChunkFeatureMap.addFeature(VolumetricNoiseFeature::new);
+		ChunkFeatureMap.addFeature(LavaOceanFeature::new);
 	}
 }

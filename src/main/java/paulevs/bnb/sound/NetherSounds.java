@@ -19,7 +19,9 @@ public class NetherSounds {
 		getSound("music/faultlines-asher_fulero"),
 		getSound("music/glimpsing_infinity-asher_fulero"),
 		getSound("music/lament_of_the_ancients-asher_fulero"),
-		getSound("music/sinister_cathedral-asher_fulero")
+		getSound("music/sinister_cathedral-asher_fulero"),
+		getSound("music/an_excuse_to_do_less_not_more-patches"),
+		getSound("music/those_things_are_more_fun_with_other_people-patches")
 	};
 	
 	private static final byte[] MUSIC_INDEX_DATA = new byte[MUSIC.length];

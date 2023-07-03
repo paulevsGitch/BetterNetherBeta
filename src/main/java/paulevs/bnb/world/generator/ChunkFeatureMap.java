@@ -1,5 +1,6 @@
 package paulevs.bnb.world.generator;
 
+import net.minecraft.level.dimension.DimensionData;
 import paulevs.bnb.world.generator.terrain.TerrainFeature;
 
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ public class ChunkFeatureMap implements TerrainSDF {
 		this.sectionIndex = sectionIndex;
 	}
 	
-	public static void setSeed(int seed) {
-		TERRAIN_MAP.setSeed(seed);
+	public static void setData(DimensionData dimensionData, int seed) {
+		TERRAIN_MAP.setData(dimensionData, seed);
 		final int count = CONSTRUCTORS.size();
 		
 		if (FEATURE_DENSITY[0] == null || FEATURE_DENSITY[0].length != count) {
