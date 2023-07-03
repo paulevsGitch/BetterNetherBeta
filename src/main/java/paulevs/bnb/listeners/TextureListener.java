@@ -7,8 +7,8 @@ import net.modificationstation.stationapi.api.client.event.texture.TextureRegist
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
 import paulevs.bnb.BNB;
+import paulevs.bnb.world.generator.terrain.CubesFeature;
 import paulevs.bnb.world.generator.terrain.TerrainFeature;
-import paulevs.bnb.world.generator.terrain.TheHiveFeature;
 
 public class TextureListener {
 	@EventListener
@@ -19,9 +19,9 @@ public class TextureListener {
 		BlockBase.SOUL_SAND.texture = blockAtlas.addTexture(BNB.id("block/soul_sand")).index;
 		// TODO remove that after release
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-			TerrainFeature feature = new TheHiveFeature();
+			TerrainFeature feature = new CubesFeature();
 			feature.setSeed(5);
-			//feature.debugImage();
+			feature.debugImage();
 		}
 	}
 }
