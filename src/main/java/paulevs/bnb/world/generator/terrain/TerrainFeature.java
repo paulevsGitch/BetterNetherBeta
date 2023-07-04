@@ -13,6 +13,7 @@ import java.util.Random;
 
 public abstract class TerrainFeature implements TerrainSDF {
 	protected static final float PI_HALF = (float) (Math.PI * 0.5);
+	protected static final float PI = (float) Math.PI;
 	protected static final Random RANDOM = new Random(0);
 	
 	public abstract void setSeed(int seed);

@@ -5,6 +5,7 @@ import net.minecraft.util.maths.MathHelper;
 import java.util.Arrays;
 
 public class VoronoiNoise extends FloatNoise {
+	private final float[] buffer = new float[27];
 	private int seed;
 	
 	@Override
@@ -12,7 +13,7 @@ public class VoronoiNoise extends FloatNoise {
 		this.seed = seed;
 	}
 	
-	public float getF1F3(double x, double y, double z, float[] buffer) {
+	public float getF1F3(double x, double y, double z) {
 		get(x, y, z, buffer);
 		Arrays.sort(buffer);
 		return MathHelper.sqrt(buffer[0] / buffer[2]);
