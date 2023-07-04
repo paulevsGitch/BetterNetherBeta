@@ -20,6 +20,7 @@ import paulevs.bnb.world.generator.terrain.PancakesFeature;
 import paulevs.bnb.world.generator.terrain.PillarsFeature;
 import paulevs.bnb.world.generator.terrain.SpikesFeature;
 import paulevs.bnb.world.generator.terrain.TheHiveFeature;
+import paulevs.bnb.world.generator.terrain.TheWallFeature;
 import paulevs.bnb.world.generator.terrain.VolumetricNoiseFeature;
 
 import java.util.ArrayList;
@@ -131,5 +132,6 @@ public class BNBWorldGenerator {
 		ChunkFeatureMap.addFeature(VolumetricNoiseFeature::new);
 		ChunkFeatureMap.addFeature(LavaOceanFeature::new);
 		ChunkFeatureMap.addFeature(PancakesFeature::new);
+		ChunkFeatureMap.addFeature(TheWallFeature::new);
 	}
 }
