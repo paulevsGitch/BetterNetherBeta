@@ -18,6 +18,7 @@ import paulevs.bnb.world.generator.terrain.CubesFeature;
 import paulevs.bnb.world.generator.terrain.LavaOceanFeature;
 import paulevs.bnb.world.generator.terrain.PancakesFeature;
 import paulevs.bnb.world.generator.terrain.PillarsFeature;
+import paulevs.bnb.world.generator.terrain.SmallPillarsFeature;
 import paulevs.bnb.world.generator.terrain.SpikesFeature;
 import paulevs.bnb.world.generator.terrain.TheHiveFeature;
 import paulevs.bnb.world.generator.terrain.TheWallFeature;
@@ -133,5 +134,6 @@ public class BNBWorldGenerator {
 		ChunkFeatureMap.addFeature(LavaOceanFeature::new);
 		ChunkFeatureMap.addFeature(PancakesFeature::new);
 		ChunkFeatureMap.addFeature(TheWallFeature::new);
+		ChunkFeatureMap.addFeature(SmallPillarsFeature::new);
 	}
 }

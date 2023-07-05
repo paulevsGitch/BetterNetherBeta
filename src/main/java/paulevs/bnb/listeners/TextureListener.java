@@ -7,9 +7,8 @@ import net.modificationstation.stationapi.api.client.event.texture.TextureRegist
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
 import paulevs.bnb.BNB;
-import paulevs.bnb.world.generator.terrain.PancakesFeature;
+import paulevs.bnb.world.generator.terrain.SmallPillarsFeature;
 import paulevs.bnb.world.generator.terrain.TerrainFeature;
-import paulevs.bnb.world.generator.terrain.TheWallFeature;
 
 public class TextureListener {
 	@EventListener
@@ -20,7 +19,7 @@ public class TextureListener {
 		BlockBase.SOUL_SAND.texture = blockAtlas.addTexture(BNB.id("block/soul_sand")).index;
 		// TODO remove that after release
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-			TerrainFeature feature = new TheWallFeature();
+			TerrainFeature feature = new SmallPillarsFeature();
 			feature.setSeed(2);
 			feature.debugImage();
 		}

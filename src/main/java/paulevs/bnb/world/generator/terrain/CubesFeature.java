@@ -52,6 +52,7 @@ public class CubesFeature extends TerrainFeature {
 		RANDOM.setSeed(seed);
 		scatter1.setSeed(RANDOM.nextInt());
 		scatter2.setSeed(RANDOM.nextInt());
+		scatter3.setSeed(RANDOM.nextInt());
 		floor.setSeed(RANDOM.nextInt());
 		ceiling.setSeed(RANDOM.nextInt());
 	}
