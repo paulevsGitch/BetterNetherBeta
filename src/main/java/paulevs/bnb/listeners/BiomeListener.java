@@ -4,7 +4,7 @@ import net.mine_diver.unsafeevents.listener.EventListener;
 import net.modificationstation.stationapi.api.event.level.biome.BiomeRegisterEvent;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.bnb.BNB;
-import paulevs.bnb.registries.BNBBlocks;
+import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.world.biome.NetherBiome;
 import paulevs.bnb.world.biome.SimpleNetherBiome;
 import paulevs.bnb.world.structures.BNBStructures;

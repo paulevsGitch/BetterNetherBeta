@@ -30,9 +30,12 @@ public class NetherMixin extends Dimension implements StationDimension {
 	protected void pregenLight(CallbackInfo info) {
 		info.cancel();
 		for (byte i = 0; i < 16; i++) {
-			float delta = i / 15F * 1.2F;
-			if (delta > 1.0F) delta = 1.0F;
-			this.lightTable[i] = MathHelper.lerp(delta, 0.25F, 1.0F);
+			//float delta = i / 15F * 1.2F;
+			//if (delta > 1.0F) delta = 1.0F;
+			//this.lightTable[i] = MathHelper.lerp(delta, 0.25F, 1.0F);
+			
+			float delta = i / 15F;
+			this.lightTable[i] = MathHelper.lerp(delta, 0.3F, 1.0F);
 		}
 	}
 	

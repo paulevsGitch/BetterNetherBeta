@@ -1,7 +1,7 @@
 package paulevs.bnb.world.structures;
 
 import net.minecraft.level.structure.Structure;
-import paulevs.bnb.registries.BNBBlocks;
+import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.world.structures.placers.StructurePlacer;
 import paulevs.bnb.world.structures.scatters.DoublePlantScatterStructure;
 import paulevs.bnb.world.structures.scatters.SimpleScatterStructure;

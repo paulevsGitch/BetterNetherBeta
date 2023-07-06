@@ -5,7 +5,7 @@ import net.minecraft.item.ItemInstance;
 import paulevs.bhcreative.api.SimpleTab;
 import paulevs.bhcreative.registry.TabRegistryEvent;
 import paulevs.bnb.BNB;
-import paulevs.bnb.registries.BNBBlocks;
+import paulevs.bnb.block.BNBBlocks;
 
 public class CreativeTabListener {
 	@EventListener

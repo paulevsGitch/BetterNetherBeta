@@ -1,19 +1,8 @@
-package paulevs.bnb.registries;
+package paulevs.bnb.block;
 
 import net.minecraft.block.BlockBase;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.bnb.BNB;
-import paulevs.bnb.block.DoubleFloorPlantBlock;
-import paulevs.bnb.block.EmberWoodBlock;
-import paulevs.bnb.block.GhostPumpkinBlock;
-import paulevs.bnb.block.NetherFloorPlantBlock;
-import paulevs.bnb.block.NetherLanternBlock;
-import paulevs.bnb.block.NetherLeavesBlock;
-import paulevs.bnb.block.NetherLeavesTransparent;
-import paulevs.bnb.block.NetherTerrainBlock;
-import paulevs.bnb.block.NetherVineBlock;
-import paulevs.bnb.block.NetherWoodBlock;
-import paulevs.bnb.block.SoulTerrainBlock;
 
 import java.util.ArrayList;
 import java.util.List;

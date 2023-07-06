@@ -13,6 +13,7 @@ import paulevs.bnb.listeners.BiomeListener;
 import paulevs.bnb.world.biome.NetherBiome;
 import paulevs.bnb.world.generator.terrain.ArchesFeature;
 import paulevs.bnb.world.generator.terrain.ArchipelagoFeature;
+import paulevs.bnb.world.generator.terrain.BridgesFeature;
 import paulevs.bnb.world.generator.terrain.ContinentsFeature;
 import paulevs.bnb.world.generator.terrain.CubesFeature;
 import paulevs.bnb.world.generator.terrain.LavaOceanFeature;
@@ -135,5 +136,6 @@ public class BNBWorldGenerator {
 		ChunkFeatureMap.addFeature(PancakesFeature::new);
 		ChunkFeatureMap.addFeature(TheWallFeature::new);
 		ChunkFeatureMap.addFeature(SmallPillarsFeature::new);
+		ChunkFeatureMap.addFeature(BridgesFeature::new);
 	}
 }

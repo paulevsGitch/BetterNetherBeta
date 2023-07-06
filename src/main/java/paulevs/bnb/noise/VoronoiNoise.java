@@ -19,6 +19,12 @@ public class VoronoiNoise extends FloatNoise {
 		return MathHelper.sqrt(buffer[0] / buffer[2]);
 	}
 	
+	public float getF1F2(double x, double y) {
+		get(x, y, buffer);
+		Arrays.sort(buffer, 0, 9);
+		return MathHelper.sqrt(buffer[0] / buffer[1]);
+	}
+	
 	@Override
 	public float get(double x, double y, double z) {
 		int x1 = MathHelper.floor(x);
@@ -93,6 +99,24 @@ public class VoronoiNoise extends FloatNoise {
 		
 		distance = MathHelper.sqrt(distance);
 		return net.modificationstation.stationapi.api.util.math.MathHelper.clamp(distance, 0, 1);
+	}
+	
+	public void get(double x, double y, float[] buffer) {
+		int x1 = MathHelper.floor(x);
+		int y1 = MathHelper.floor(y);
+		
+		float sdx = (float) (x - x1);
+		float sdy = (float) (y - y1);
+		
+		byte index = 0;
+		
+		for (byte i = -1; i < 2; i++) {
+			for (byte j = -1; j < 2; j++) {
+				float dx = wrap(hash(x1 + i, y1 + j, seed), 3607) / 3607.0F * 0.8F + i - sdx;
+				float dy = wrap(hash(x1 + i, y1 + j, seed + 13), 3607) / 3607.0F * 0.8F + j - sdy;
+				buffer[index++] = dx * dx + dy * dy;
+			}
+		}
 	}
 	
 	public float getID(double x, double y) {
