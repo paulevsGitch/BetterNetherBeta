@@ -9,11 +9,11 @@ import java.util.Random;
 public class NetherSounds {
 	public static final BlockSounds NYLIUM_BLOCK = new NetherBlockSound("nylium", 1.0F, 1.0F);
 	
-	/*public static final NetherAmbientSound NETHER_FOREST_AMBIENCE = new NetherAmbientSound("nether_forest");
-	public static final NetherAmbientSound DEEP_DARK_AMBIENCE = new NetherAmbientSound("deep_dark");
-	public static final NetherAmbientSound BAMBOO_FOREST_AMBIENCE = new NetherAmbientSound("bamboo_forest");
-	public static final NetherAmbientSound GRASSLANDS_AMBIENCE = new NetherAmbientSound("grasslands");
-	public static final NetherAmbientSound SWAMPLAND_AMBIENCE = new NetherAmbientSound("nether_bog");*/
+	public static final SoundEntry NETHER_FOREST_AMBIENCE = getSound("ambient/nether_forest");
+	public static final SoundEntry DEEP_DARK_AMBIENCE = getSound("ambient/deep_dark");
+	public static final SoundEntry BAMBOO_FOREST_AMBIENCE = getSound("ambient/bamboo_forest");
+	public static final SoundEntry GRASSLANDS_AMBIENCE = getSound("ambient/grasslands");
+	public static final SoundEntry SWAMPLAND_AMBIENCE = getSound("ambient/nether_bog");
 	
 	private static final SoundEntry[] MUSIC = new SoundEntry[] {
 		getSound("music/faultlines-asher_fulero"),

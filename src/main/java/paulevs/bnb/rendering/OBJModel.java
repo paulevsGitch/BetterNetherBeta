@@ -3,6 +3,8 @@ package paulevs.bnb.rendering;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.modificationstation.stationapi.api.client.render.model.BakedModel;
 import net.modificationstation.stationapi.api.client.render.model.BakedQuad;
 import net.modificationstation.stationapi.api.client.render.model.Baker;
@@ -29,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+@Environment(EnvType.CLIENT)
 public class OBJModel implements UnbakedModel {
 	private static final SpriteIdentifier MISSING = SpriteIdentifier.of(Atlases.GAME_ATLAS_TEXTURE, Identifier.of("missingno"));
 	private final List<QuadData> quads = new ArrayList<>();
