@@ -54,6 +54,8 @@ public class BNBBlocks {
 	public static final BaseBlock NETHER_DAISY = make("nether_daisy", NetherFloorPlantBlock::new).setLightEmittance(0.5F);
 	public static final BaseBlock FIREWEED = make("fireweed", DoubleFloorPlantBlock::new).setLightEmittance(0.5F);
 	
+	public static final BaseBlock CRIMSON_MOSS = make("crimson_moss", MossBlock::new);
+	
 	private static BaseBlock make(String name, Function<Identifier, BaseBlock> constructor) {
 		Identifier id = BNB.id(name);
 		BaseBlock block = constructor.apply(id);

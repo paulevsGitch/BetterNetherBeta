@@ -22,12 +22,11 @@ public class BNBSoundManager {
 		if (BNBSoundManager.inTheNether != inTheNether) {
 			soundSystem.stop(MUSIC_KEY);
 			soundSystem.stop(AMBIENT_KEY);
-			musicCountdown = 0;
+			musicCountdown = 50;
 		}
 		BNBSoundManager.inTheNether = inTheNether;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static void init(GameOptions gameOptions, SoundSystem soundSystem) {
 		BNBSoundManager.gameOptions = gameOptions;
 		BNBSoundManager.soundSystem = soundSystem;

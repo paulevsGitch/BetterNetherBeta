@@ -1,4 +1,4 @@
-package paulevs.bnb.mixin.common;
+package paulevs.bnb.mixin.server;
 
 import net.minecraft.server.ServerPlayerConnectionManager;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,0 +1,6 @@
+{
+	"parent": "bnb:block/wall_moss",
+	"textures": {
+		"all": "bnb:block/flame_bulbs_3"
+	}
+}
