@@ -6,7 +6,7 @@ import net.minecraft.client.sound.SoundEntry;
 import java.net.URL;
 import java.util.Random;
 
-public class NetherSounds {
+public class BNBSounds {
 	public static final BlockSounds NYLIUM_BLOCK = new NetherBlockSound("nylium", 1.0F, 1.0F);
 	
 	public static final SoundEntry NETHER_FOREST_AMBIENCE = getSound("ambient/nether_forest");

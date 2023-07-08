@@ -4,10 +4,7 @@
 	"package": "paulevs.bnb.mixin.common",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"StationFlatteningChunkMixin",
-		"NetherLevelSourceMixin",
-		"NetherDimensionMixin",
-		"LevelAccessor"
+		"ServerPlayerConnectionManagerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

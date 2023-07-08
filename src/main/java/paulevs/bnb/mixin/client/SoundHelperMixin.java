@@ -32,6 +32,7 @@ public class SoundHelperMixin {
 		BNBSoundManager.setInTheNether(isNether);
 		if (isNether) {
 			BNBSoundManager.playBackgroundMusic();
+			BNBSoundManager.playAmbience();
 			info.cancel();
 		}
 	}

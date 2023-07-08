@@ -33,7 +33,8 @@
 
 	"mixins": [
 		"bnb.mixins.common.json",
-		"bnb.mixins.client.json"
+		"bnb.mixins.client.json",
+		"bnb.mixins.server.json"
 	],
 	
 	"suggests": {
