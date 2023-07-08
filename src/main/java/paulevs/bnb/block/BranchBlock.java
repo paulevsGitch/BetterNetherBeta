@@ -1,6 +1,6 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BlockBase;
+import net.minecraft.block.BaseBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.BlockView;
 import net.minecraft.level.Level;
@@ -30,7 +30,7 @@ public class BranchBlock extends TemplateBlockBase {
 	}
 	
 	@Override
-	public void appendProperties(Builder<BlockBase, BlockState> builder) {
+	public void appendProperties(Builder<BaseBlock, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(BNBBlockProperties.FACES);
 	}
@@ -126,7 +126,7 @@ public class BranchBlock extends TemplateBlockBase {
 	}
 	
 	private boolean canConnect(BlockState state, Direction dir) {
-		BlockBase block = state.getBlock();
+		BaseBlock block = state.getBlock();
 		if (block instanceof StemBlock) return state.get(BNBBlockProperties.AXIS) == dir.getAxis();
 		return block instanceof BranchBlock || (block.isFullOpaque() && block.isFullCube());
 	}

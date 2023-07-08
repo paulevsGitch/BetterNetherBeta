@@ -1,7 +1,7 @@
 package paulevs.bnb.mixin.client;
 
 import net.minecraft.level.Level;
-import net.minecraft.level.dimension.Dimension;
+import net.minecraft.level.dimension.BaseDimension;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,16 +12,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Level.class)
 public class LevelMixin {
-	@Shadow @Final public Dimension dimension;
-	@Shadow private int field_195;
+	@Shadow @Final public BaseDimension dimension;
+	@Shadow private int caveSoundTicks;
 	
-	@Inject(method = "method_248", at = @At(
+	@Inject(method = "processLoadedChunks", at = @At(
 		value = "INVOKE",
 		target = "Lnet/minecraft/level/Level;getChunkFromCache(II)Lnet/minecraft/level/chunk/Chunk;",
 		ordinal = 0,
 		shift = Shift.AFTER
 	))
 	private void bnb_cancelCaveSound(CallbackInfo info) {
-		if (dimension.id == -1) field_195 = 1000;
+		if (dimension.id == -1) caveSoundTicks = 1000;
 	}
 }

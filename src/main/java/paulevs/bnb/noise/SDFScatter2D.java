@@ -6,7 +6,7 @@ import net.minecraft.util.maths.Vec3f;
 import java.util.function.BiFunction;
 
 public class SDFScatter2D extends FloatNoise {
-	private final Vec3f pos = Vec3f.method_1293(0, 0, 0);
+	private final Vec3f pos = Vec3f.make(0, 0, 0);
 	private final BiFunction<Integer, Vec3f, Float> sdf;
 	private int seed;
 	

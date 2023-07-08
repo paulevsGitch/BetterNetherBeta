@@ -1,6 +1,6 @@
 package paulevs.bnb.world.structures.trees;
 
-import net.minecraft.block.BlockBase;
+import net.minecraft.block.BaseBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
@@ -22,7 +22,7 @@ public class CommonTreeStructure extends Structure {
 	private final int minHeight;
 	private final int dHeight;
 	
-	public CommonTreeStructure(BlockBase trunk, BlockBase leaves, BlockBase stem, BlockBase branch, BlockBase vine, int minHeight, int maxHeight) {
+	public CommonTreeStructure(BaseBlock trunk, BaseBlock leaves, BaseBlock stem, BaseBlock branch, BaseBlock vine, int minHeight, int maxHeight) {
 		this.trunk = trunk.getDefaultState();
 		this.leaves = leaves.getDefaultState();
 		this.stem = stem.getDefaultState();
@@ -37,7 +37,7 @@ public class CommonTreeStructure extends Structure {
 		int height = random.nextInt(dHeight) + minHeight;
 		
 		if (level.getBlockState(x, y - 1, z).getBlock() instanceof NetherTerrainBlock) {
-			level.setBlockState(x, y - 1, z, BlockBase.NETHERRACK.getDefaultState());
+			level.setBlockState(x, y - 1, z, BaseBlock.NETHERRACK.getDefaultState());
 		}
 		else return false;
 		
@@ -152,7 +152,7 @@ public class CommonTreeStructure extends Structure {
 	
 	private void placeLantern(Level level, Random random, int x, int y, int z) {
 		while (level.getBlockState(x, y - 1, z) == leaves) y--;
-		BlockState lamp = BlockBase.GLOWSTONE.getDefaultState();
+		BlockState lamp = BaseBlock.GLOWSTONE.getDefaultState();
 		if (canReplace(level.getBlockState(x, y, z))) level.setBlockState(x, y, z, lamp);
 		if (random.nextBoolean() && canReplace(level.getBlockState(x, --y, z))) level.setBlockState(x, y, z, lamp);
 	}

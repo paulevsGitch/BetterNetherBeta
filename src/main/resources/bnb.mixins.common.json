@@ -6,8 +6,8 @@
 	"mixins": [
 		"StationFlatteningChunkMixin",
 		"NetherLevelSourceMixin",
-		"LevelAccessor",
-		"NetherMixin"
+		"NetherDimensionMixin",
+		"LevelAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

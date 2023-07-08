@@ -1,7 +1,7 @@
 package paulevs.bnb.mixin.client;
 
+import net.minecraft.client.render.LevelRenderer;
 import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.MathHelper;
@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.rendering.FogInfo;
 
-@Mixin(WorldRenderer.class)
-public class WorldRendererMixin {
+@Mixin(LevelRenderer.class)
+public class LevelRendererMixin {
 	@Unique private static final int BNB_SKY = bnb_makeSkyGradient();
 	@Unique private static int bnb_gradient;
 	

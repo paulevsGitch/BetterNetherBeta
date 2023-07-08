@@ -1,6 +1,6 @@
 package paulevs.bnb.item;
 
-import net.minecraft.item.ItemBase;
+import net.minecraft.item.BaseItem;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.bnb.BNB;
@@ -13,23 +13,23 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BNBItems {
-	public static final List<ItemBase> ITEMS = new ArrayList<>();
+	public static final List<BaseItem> ITEMS = new ArrayList<>();
 	
-	public static final ItemBase CRIMSON_TREE_PLACER = make(
+	public static final BaseItem CRIMSON_TREE_PLACER = make(
 		"crimson_tree_placer", () -> BNBStructures.CRIMSON_TREE, StructurePlacerItem::new
 	);
 	
-	private static ItemBase make(String name, Function<Identifier, ItemBase> constructor) {
+	private static BaseItem make(String name, Function<Identifier, BaseItem> constructor) {
 		Identifier id = BNB.id(name);
-		ItemBase item = constructor.apply(id);
+		BaseItem item = constructor.apply(id);
 		item.setTranslationKey(id.toString());
 		ITEMS.add(item);
 		return item;
 	}
 	
-	private static ItemBase make(String name, Supplier<Structure> structure, BiFunction<Identifier, Supplier<Structure>, ItemBase> constructor) {
+	private static BaseItem make(String name, Supplier<Structure> structure, BiFunction<Identifier, Supplier<Structure>, BaseItem> constructor) {
 		Identifier id = BNB.id(name);
-		ItemBase item = constructor.apply(id, structure);
+		BaseItem item = constructor.apply(id, structure);
 		item.setTranslationKey(id.toString());
 		ITEMS.add(item);
 		return item;

@@ -1,6 +1,6 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BlockBase;
+import net.minecraft.block.BaseBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
@@ -18,7 +18,7 @@ public class NetherFloorPlantBlock extends NetherPlantBlock {
 	}
 	
 	protected boolean isGround(BlockState state) {
-		BlockBase block = state.getBlock();
-		return block == BlockBase.NETHERRACK || block instanceof NetherTerrainBlock;
+		BaseBlock block = state.getBlock();
+		return block == BaseBlock.NETHERRACK || block instanceof NetherTerrainBlock;
 	}
 }

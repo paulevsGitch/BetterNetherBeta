@@ -1,8 +1,8 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BlockBase;
-import net.minecraft.entity.Living;
-import net.minecraft.item.ItemInstance;
+import net.minecraft.block.BaseBlock;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.block.States;
@@ -21,7 +21,7 @@ public class DoubleFloorPlantBlock extends NetherFloorPlantBlock {
 	}
 	
 	@Override
-	public void appendProperties(Builder<BlockBase, BlockState> builder) {
+	public void appendProperties(Builder<BaseBlock, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(BNBBlockProperties.DOUBLE_SHAPE);
 	}
@@ -44,13 +44,13 @@ public class DoubleFloorPlantBlock extends NetherFloorPlantBlock {
 	}
 	
 	@Override
-	public List<ItemInstance> getDropList(Level level, int x, int y, int z, BlockState state, int meta) {
+	public List<ItemStack> getDropList(Level level, int x, int y, int z, BlockState state, int meta) {
 		if (state.get(BNBBlockProperties.DOUBLE_SHAPE) == DoubleShape.TOP) return Collections.emptyList();
-		return Collections.singletonList(new ItemInstance(this));
+		return Collections.singletonList(new ItemStack(this));
 	}
 	
 	@Override
-	public void afterPlaced(Level level, int x, int y, int z, Living entity) {
+	public void afterPlaced(Level level, int x, int y, int z, LivingEntity entity) {
 		super.afterPlaced(level, x, y, z, entity);
 		level.setBlockState(x, y + 1, z, getDefaultState().with(BNBBlockProperties.DOUBLE_SHAPE, DoubleShape.TOP));
 	}

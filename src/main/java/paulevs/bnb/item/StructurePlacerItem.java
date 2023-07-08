@@ -1,7 +1,7 @@
 package paulevs.bnb.item;
 
 import net.minecraft.entity.player.PlayerBase;
-import net.minecraft.item.ItemInstance;
+import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.registry.Identifier;
@@ -19,16 +19,16 @@ public class StructurePlacerItem extends TemplateItemBase {
 	}
 	
 	@Override
-	public boolean useOnTile(ItemInstance item, PlayerBase player, Level level, int x, int y, int z, int face) {
+	public boolean useOnBlock(ItemStack item, PlayerBase player, Level level, int x, int y, int z, int face) {
 		Direction d = Direction.byId(face);
 		boolean result = structure.get().generate(
 			level,
-			level.rand,
+			level.random,
 			x + d.getOffsetX(),
 			y + d.getOffsetY(),
 			z + d.getOffsetZ()
 		);
-		if (result) level.method_202(x - 16, y - 16, z - 16, x + 16, y + 16, z + 16);
+		if (result) level.callAreaEvents(x - 16, y - 16, z - 16, x + 16, y + 16, z + 16);
 		return result;
 	}
 }

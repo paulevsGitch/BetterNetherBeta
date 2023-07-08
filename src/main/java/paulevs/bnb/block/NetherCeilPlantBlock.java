@@ -1,6 +1,6 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BlockBase;
+import net.minecraft.block.BaseBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
@@ -18,7 +18,7 @@ public class NetherCeilPlantBlock extends NetherPlantBlock {
 	}
 	
 	protected boolean isCeil(BlockState state) {
-		BlockBase block = state.getBlock();
+		BaseBlock block = state.getBlock();
 		return (block.isFullCube() && block.isFullOpaque()) || block instanceof NetherLeavesBlock;
 	}
 }

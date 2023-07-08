@@ -1,6 +1,6 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BlockBase;
+import net.minecraft.block.BaseBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
@@ -18,7 +18,7 @@ public class EmberWoodBlock extends NetherWoodBlock {
 	}
 	
 	@Override
-	public void appendProperties(Builder<BlockBase, BlockState> builder) {
+	public void appendProperties(Builder<BaseBlock, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(BNBBlockProperties.NEAR_LAVA);
 	}

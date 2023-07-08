@@ -22,22 +22,22 @@ public abstract class StationFlatteningChunkMixin extends Chunk {
 	
 	@ModifyVariable(method = "getOrCreateSection", at = @At("HEAD"), argsOnly = true)
 	private boolean bnb_disableSkylight(boolean fillSkyLight) {
-		return !level.dimension.halvesMapping;
+		return !level.dimension.noSkyLight;
 	}
 	
-	@Inject(method = "method_864", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "getLight(Lnet/minecraft/level/LightType;III)I", at = @At("HEAD"), cancellable = true)
 	private void bnb_disableSkylight1(LightType type, int x, int y, int z, CallbackInfoReturnable<Integer> info) {
-		if (level.dimension.halvesMapping && type == LightType.field_2757) {
+		if (level.dimension.noSkyLight && type == LightType.SKY) {
 			info.setReturnValue(0);
 		}
 	}
 	
-	@Inject(method = "method_880", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "getLight(IIII)I", at = @At("HEAD"), cancellable = true)
 	private void bnb_disableSkylight2(int x, int y, int z, int light, CallbackInfoReturnable<Integer> info) {
-		if (level.dimension.halvesMapping) {
+		if (level.dimension.noSkyLight) {
 			int lightLevel = -light;
 			ChunkSection section = getSection(y);
-			int blockLight = section == null ? 0 : section.getLight(LightType.field_2758, x, y & 15, z);
+			int blockLight = section == null ? 0 : section.getLight(LightType.BLOCK, x, y & 15, z);
 			if (blockLight > lightLevel) {
 				lightLevel = blockLight;
 			}

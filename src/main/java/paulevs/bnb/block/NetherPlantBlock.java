@@ -4,6 +4,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.Box;
 import net.modificationstation.stationapi.api.block.BlockState;
+import net.modificationstation.stationapi.api.block.States;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
 
@@ -59,8 +60,8 @@ public abstract class NetherPlantBlock extends TemplateBlockBase {
 	
 	protected void tick(Level level, int x, int y, int z) {
 		if (!this.canStay(level, x, y, z)) {
-			this.drop(level, x, y, z, level.getTileMeta(x, y, z));
-			level.setTile(x, y, z, 0);
+			this.drop(level, x, y, z, 0);
+			level.setBlockState(x, y, z, States.AIR.get());
 		}
 	}
 }

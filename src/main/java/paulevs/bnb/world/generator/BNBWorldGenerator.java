@@ -1,6 +1,6 @@
 package paulevs.bnb.world.generator;
 
-import net.minecraft.block.BlockBase;
+import net.minecraft.block.BaseBlock;
 import net.minecraft.level.Level;
 import net.minecraft.level.LightType;
 import net.minecraft.level.chunk.Chunk;
@@ -31,8 +31,8 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 public class BNBWorldGenerator {
-	private static final BlockState BEDROCK = BlockBase.BEDROCK.getDefaultState();
-	private static final BlockState LAVA = BlockBase.STILL_LAVA.getDefaultState();
+	private static final BlockState BEDROCK = BaseBlock.BEDROCK.getDefaultState();
+	private static final BlockState LAVA = BaseBlock.STILL_LAVA.getDefaultState();
 	private static final List<ChunkFeatureMap> FEATURE_MAPS = new ArrayList<>();
 	private static final Random RANDOM = new Random();
 	private static CrossInterpolationCell[] cells;
@@ -77,7 +77,7 @@ public class BNBWorldGenerator {
 						if (cell.get() < 0.5F) {
 							if (i > 1) continue;
 							sections[i].setBlockState(bx, by, bz, LAVA);
-							sections[i].setLight(LightType.field_2758, bx, by, bz, 15);
+							sections[i].setLight(LightType.BLOCK, bx, by, bz, 15);
 						}
 						else {
 							if ((by | i << 4) < 31) sections[i].setBlockState(bx, by, bz, biome.getFillBlock());

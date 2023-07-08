@@ -1,8 +1,8 @@
 package paulevs.bnb.world.biome;
 
-import net.minecraft.block.BlockBase;
+import net.minecraft.block.BaseBlock;
 import net.minecraft.entity.EntityEntry;
-import net.minecraft.level.biome.Biome;
+import net.minecraft.level.biome.BaseBiome;
 import net.minecraft.level.chunk.Chunk;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
@@ -13,8 +13,8 @@ import paulevs.bnb.world.structures.placers.StructurePlacer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NetherBiome extends Biome {
-	protected static final BlockState NETHERRACK = BlockBase.NETHERRACK.getDefaultState();
+public class NetherBiome extends BaseBiome {
+	protected static final BlockState NETHERRACK = BaseBlock.NETHERRACK.getDefaultState();
 	private final Vec3f fogColor = new Vec3f(0.2F, 0.03F, 0.03F);
 	private final List<StructurePlacer> placers = new ArrayList<>();
 	public final Identifier id;

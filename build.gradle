@@ -56,7 +56,7 @@ repositories {
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.glasslauncher:bin:${project.yarn_mappings}"
+	mappings "com.github.paulevsGitch:BIN-Mappings-BH:${project.mappings}"
 	modImplementation "babric:fabric-loader:${project.loader_version}"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"

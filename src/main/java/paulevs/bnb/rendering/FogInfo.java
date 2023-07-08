@@ -12,6 +12,6 @@ public class FogInfo {
 	}
 	
 	public static Vec3f getVector() {
-		return Vec3f.from(COLOR[0], COLOR[1], COLOR[2]);
+		return Vec3f.getFromCacheAndSet(COLOR[0], COLOR[1], COLOR[2]);
 	}
 }

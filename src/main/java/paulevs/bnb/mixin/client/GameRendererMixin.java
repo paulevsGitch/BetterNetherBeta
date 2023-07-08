@@ -2,7 +2,7 @@ package paulevs.bnb.mixin.client;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
-import net.minecraft.sortme.GameRenderer;
+import net.minecraft.client.render.GameRenderer;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,21 +17,21 @@ import paulevs.bnb.rendering.FogInfo;
 public class GameRendererMixin {
 	@Unique private static final boolean BNB_FARVIEW = FabricLoader.getInstance().isModLoaded("farview");
 	@Shadow private Minecraft minecraft;
-	@Shadow private float field_2350;
-	@Shadow float field_2346;
-	@Shadow float field_2347;
-	@Shadow float field_2348;
+	@Shadow private float fogDistance;
+	@Shadow float fogColorR;
+	@Shadow float fogColorG;
+	@Shadow float fogColorB;
 	
-	@Inject(method = "method_1842", at = @At("HEAD"))
+	@Inject(method = "setupFog", at = @At("HEAD"))
 	private void bnb_changeFogColor(int i, float par2, CallbackInfo info) {
 		if (this.minecraft.level.dimension.id != -1) return;
 		FogInfo.setColor(0.2F, 0.03F, 0.03F);
-		this.field_2346 = FogInfo.COLOR[0];
-		this.field_2347 = FogInfo.COLOR[1];
-		this.field_2348 = FogInfo.COLOR[2];
+		this.fogColorR = FogInfo.COLOR[0];
+		this.fogColorG = FogInfo.COLOR[1];
+		this.fogColorB = FogInfo.COLOR[2];
 	}
 	
-	@Inject(method = "method_1852", at = @At(
+	@Inject(method = "renderFog", at = @At(
 		value = "INVOKE",
 		target = "Lorg/lwjgl/opengl/GL11;glClearColor(FFFF)V",
 		shift = Shift.AFTER
@@ -47,7 +47,7 @@ public class GameRendererMixin {
 		);
 	}
 	
-	@Inject(method = "method_1842", at = @At(
+	@Inject(method = "setupFog", at = @At(
 		value = "INVOKE",
 		target = "Lorg/lwjgl/opengl/GL11;glFogf(IF)V",
 		ordinal = 7,
@@ -60,7 +60,7 @@ public class GameRendererMixin {
 			GL11.glFogf(GL11.GL_FOG_END, 375F);
 			return;
 		}
-		GL11.glFogf(GL11.GL_FOG_START, this.field_2350 * 0.5F);
-		GL11.glFogf(GL11.GL_FOG_END, this.field_2350);
+		GL11.glFogf(GL11.GL_FOG_START, this.fogDistance * 0.5F);
+		GL11.glFogf(GL11.GL_FOG_END, this.fogDistance);
 	}
 }

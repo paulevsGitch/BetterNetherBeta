@@ -1,6 +1,6 @@
 package paulevs.bnb.world.structures.scatters;
 
-import net.minecraft.block.BlockBase;
+import net.minecraft.block.BaseBlock;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
@@ -13,7 +13,7 @@ public class DoublePlantScatterStructure extends ScatterStructure {
 	protected final BlockState bottom;
 	protected final BlockState top;
 	
-	public DoublePlantScatterStructure(int radius, int count, BlockBase block) {
+	public DoublePlantScatterStructure(int radius, int count, BaseBlock block) {
 		super(radius, count);
 		this.bottom = block.getDefaultState().with(BNBBlockProperties.DOUBLE_SHAPE, DoubleShape.BOTTOM);
 		this.top = block.getDefaultState().with(BNBBlockProperties.DOUBLE_SHAPE, DoubleShape.TOP);

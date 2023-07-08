@@ -1,6 +1,6 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BlockBase;
+import net.minecraft.block.BaseBlock;
 import net.minecraft.block.material.Material;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.item.ItemPlacementContext;
@@ -17,7 +17,7 @@ public class PillarBlock extends TemplateBlockBase {
 	}
 	
 	@Override
-	public void appendProperties(Builder<BlockBase, BlockState> builder) {
+	public void appendProperties(Builder<BaseBlock, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(BNBBlockProperties.AXIS);
 	}
