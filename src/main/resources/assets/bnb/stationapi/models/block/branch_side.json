@@ -1,0 +1,20 @@
+{
+	"parent": "minecraft:block/block",
+	"textures": {
+		"particle": "#all"
+	},
+	"elements": [
+		{
+			"name": "stem",
+			"from": [4, 0, 4],
+			"to": [12, 4, 12],
+			"faces": {
+				"north": {"uv": [8, 12, 16, 16], "texture": "#all"},
+				"east": {"uv": [8, 12, 16, 16], "texture": "#all"},
+				"south": {"uv": [8, 12, 16, 16], "texture": "#all"},
+				"west": {"uv": [8, 12, 16, 16], "texture": "#all"},
+				"down": {"uv": [0, 0, 8, 8], "texture": "#all", "cullface": "down"}
+			}
+		}
+	]
+}

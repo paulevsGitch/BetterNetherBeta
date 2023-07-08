@@ -8,8 +8,7 @@ import net.minecraft.level.dimension.DimensionData;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.impl.level.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.level.chunk.StationFlatteningChunk;
-import paulevs.bnb.BNB;
-import paulevs.bnb.listeners.BiomeListener;
+import paulevs.bnb.world.biome.BNBBiomes;
 import paulevs.bnb.world.biome.NetherBiome;
 import paulevs.bnb.world.generator.terrain.ArchesFeature;
 import paulevs.bnb.world.generator.terrain.ArchipelagoFeature;
@@ -64,7 +63,7 @@ public class BNBWorldGenerator {
 			if (forceSection(i) || !cells[i].isEmpty()) sections[i] = new ChunkSection(i);
 		});
 		
-		NetherBiome biome = BiomeListener.BIOMES.get(BNB.id("crimson_forest"));
+		NetherBiome biome = BNBBiomes.CRIMSON_FOREST;
 		
 		IntStream.range(0, sectionCount).parallel().forEach(i -> {
 			CrossInterpolationCell cell = cells[i];
@@ -109,7 +108,7 @@ public class BNBWorldGenerator {
 		StationFlatteningChunk chunk = (StationFlatteningChunk) level.getChunkFromCache(cx, cz);
 		final ChunkSection[] sections = chunk.sections;
 		
-		NetherBiome biome = BiomeListener.BIOMES.get(BNB.id("crimson_forest"));
+		NetherBiome biome = BNBBiomes.CRIMSON_FOREST;
 		
 		int wx = cx << 4 | 8;
 		int wz = cz << 4 | 8;

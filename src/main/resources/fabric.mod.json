@@ -20,8 +20,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"stationapi:event_bus": [
-			"paulevs.bnb.listeners.BlockListener",
-			"paulevs.bnb.listeners.BiomeListener"
+			"paulevs.bnb.listeners.CommonListener"
 		],
 		"stationapi:event_bus_client": [
 			"paulevs.bnb.listeners.TextureListener",

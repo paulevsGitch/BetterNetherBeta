@@ -19,17 +19,24 @@ public class BNBBlocks {
 	public static final BlockBase DARK_NYLIUM = make("dark_nylium", NetherTerrainBlock::new);
 	
 	public static final BlockBase CRIMSON_WOOD = make("crimson_wood", NetherWoodBlock::new);
-	public static final BlockBase WARPED_WOOD = make("warped_wood", NetherWoodBlock::new);
-	public static final BlockBase POISON_WOOD = make("poison_wood", NetherWoodBlock::new);
-	public static final BlockBase PALE_WOOD = make("pale_wood", NetherWoodBlock::new);
-	public static final BlockBase EMBER_WOOD = make("ember_wood", EmberWoodBlock::new);
-	public static final BlockBase FLAME_BAMBOO_BLOCK = make("flame_bamboo_block", NetherWoodBlock::new);
-	
+	public static final BlockBase CRIMSON_STEM = make("crimson_stem", StemBlock::new);
+	public static final BlockBase CRIMSON_BRANCH = make("crimson_branch", BranchBlock::new);
 	public static final BlockBase CRIMSON_LEAVES = make("crimson_leaves", NetherLeavesBlock::new);
+	public static final BlockBase CRIMSON_PLANKS = make("crimson_planks", NetherPlanksBlock::new);
+	
+	public static final BlockBase WARPED_WOOD = make("warped_wood", NetherWoodBlock::new);
 	public static final BlockBase WARPED_LEAVES = make("warped_leaves", NetherLeavesBlock::new);
+	
+	public static final BlockBase POISON_WOOD = make("poison_wood", NetherWoodBlock::new);
 	public static final BlockBase POISON_LEAVES = make("poison_leaves", NetherLeavesBlock::new);
+	
+	public static final BlockBase PALE_WOOD = make("pale_wood", NetherWoodBlock::new);
 	public static final BlockBase PALE_LEAVES = make("pale_leaves", NetherLeavesTransparent::new);
+	
+	public static final BlockBase EMBER_WOOD = make("ember_wood", EmberWoodBlock::new);
 	public static final BlockBase EMBER_LEAVES = make("ember_leaves", NetherLeavesTransparent::new);
+	
+	public static final BlockBase FLAME_BAMBOO_BLOCK = make("flame_bamboo_block", NetherWoodBlock::new);
 	
 	public static final BlockBase CRIMSON_LANTERN = make("crimson_lantern", NetherLanternBlock::new);
 	public static final BlockBase WARPED_LANTERN = make("warped_lantern", NetherLanternBlock::new);

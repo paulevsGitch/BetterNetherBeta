@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"axis=x": {
+			"model": "bnb:block/crimson_stem", "x": 90
+		},
+		"axis=y": [
+			{ "model": "bnb:block/crimson_stem" }
+		],
+		"axis=z": {
+			"model": "bnb:block/crimson_stem", "x": 90, "y": 90
+		}
+	}
+}

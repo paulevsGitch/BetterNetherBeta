@@ -19,6 +19,6 @@ public class NetherFloorPlantBlock extends NetherPlantBlock {
 	
 	protected boolean isGround(BlockState state) {
 		BlockBase block = state.getBlock();
-		return block.isFullCube() && block.isFullOpaque();
+		return block == BlockBase.NETHERRACK || block instanceof NetherTerrainBlock;
 	}
 }

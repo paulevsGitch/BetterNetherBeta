@@ -1,0 +1,22 @@
+{
+	"credit": "Made by paulevs",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"particle": "#all"
+	},
+	"elements": [
+		{
+			"name": "stem",
+			"from": [4, 4, 4],
+			"to": [12, 12, 12],
+			"faces": {
+				"north": {"uv": [0, 8, 8, 16], "texture": "#all"},
+				"east": {"uv": [0, 8, 8, 16], "texture": "#all"},
+				"south": {"uv": [0, 8, 8, 16], "texture": "#all"},
+				"west": {"uv": [0, 8, 8, 16], "texture": "#all"},
+				"up": {"uv": [0, 8, 8, 16], "texture": "#all"},
+				"down": {"uv": [0, 8, 8, 16], "texture": "#all"}
+			}
+		}
+	]
+}

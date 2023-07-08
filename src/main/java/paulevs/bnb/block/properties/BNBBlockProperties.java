@@ -3,6 +3,7 @@ package paulevs.bnb.block.properties;
 import net.modificationstation.stationapi.api.state.property.BooleanProperty;
 import net.modificationstation.stationapi.api.state.property.EnumProperty;
 import net.modificationstation.stationapi.api.util.StringIdentifiable;
+import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 
 public class BNBBlockProperties {
@@ -10,6 +11,11 @@ public class BNBBlockProperties {
 	public static final EnumProperty<VineShape> VINE_SHAPE = EnumProperty.of("shape", VineShape.class);
 	public static final EnumProperty<Axis> AXIS = EnumProperty.of("axis", Axis.class);
 	public static final BooleanProperty NEAR_LAVA = BooleanProperty.of("near_lava");
+	public static final BooleanProperty[] FACES = new BooleanProperty[6];
+	
+	public static BooleanProperty getByFace(Direction dir) {
+		return FACES[dir.getId()];
+	}
 	
 	public enum VineShape implements StringIdentifiable {
 		NORMAL("normal"),
@@ -40,6 +46,12 @@ public class BNBBlockProperties {
 		@Override
 		public String asString() {
 			return name;
+		}
+	}
+	
+	static {
+		for (int i = 0; i < 6; i++) {
+			FACES[i] = BooleanProperty.of(Direction.byId(i).getName());
 		}
 	}
 }
