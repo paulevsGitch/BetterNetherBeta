@@ -1,7 +1,7 @@
-package paulevs.bnb.world.generator;
+package paulevs.bnb.world.generator.terrain;
 
 import net.minecraft.level.dimension.DimensionData;
-import paulevs.bnb.world.generator.terrain.TerrainFeature;
+import paulevs.bnb.world.generator.terrain.features.TerrainFeature;
 
 import java.util.ArrayList;
 import java.util.List;

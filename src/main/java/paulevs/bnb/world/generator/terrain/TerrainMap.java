@@ -1,4 +1,4 @@
-package paulevs.bnb.world.generator;
+package paulevs.bnb.world.generator.terrain;
 
 import net.minecraft.level.dimension.DimensionData;
 import net.minecraft.util.io.CompoundTag;

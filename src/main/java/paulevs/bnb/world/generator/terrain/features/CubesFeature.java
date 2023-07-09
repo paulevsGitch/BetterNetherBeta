@@ -1,4 +1,4 @@
-package paulevs.bnb.world.generator.terrain;
+package paulevs.bnb.world.generator.terrain.features;
 
 import net.minecraft.util.maths.Vec3f;
 import net.modificationstation.stationapi.api.util.math.MathHelper;

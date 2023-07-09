@@ -22,6 +22,14 @@ public class BNBBiomes {
 		.addStructure(BNBStructures.FLAME_BULBS_PLACER)
 		.setAmbientSound(BNBSounds.NETHER_FOREST_AMBIENCE);
 	
+	public static final NetherBiome WARPED_FOREST = make("warped_forest", SimpleNetherBiome::new)
+		.setSurface(BNBBlocks.WARPED_NYLIUM.getDefaultState())
+		.setAmbientSound(BNBSounds.NETHER_FOREST_AMBIENCE);
+	
+	public static final NetherBiome POISON_FOREST = make("poison_forest", SimpleNetherBiome::new)
+		.setSurface(BNBBlocks.POISON_NYLIUM.getDefaultState())
+		.setAmbientSound(BNBSounds.NETHER_FOREST_AMBIENCE);
+	
 	private static <B extends NetherBiome> B make(String name, Function<Identifier, B> constructor) {
 		Identifier id = BNB.id(name);
 		B biome = constructor.apply(id);

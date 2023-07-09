@@ -7,8 +7,8 @@ import net.modificationstation.stationapi.api.client.event.texture.TextureRegist
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
 import paulevs.bnb.BNB;
-import paulevs.bnb.world.generator.terrain.DoubleBridgesFeature;
-import paulevs.bnb.world.generator.terrain.TerrainFeature;
+import paulevs.bnb.world.generator.terrain.features.DoubleBridgesFeature;
+import paulevs.bnb.world.generator.terrain.features.TerrainFeature;
 
 public class TextureListener {
 	@EventListener

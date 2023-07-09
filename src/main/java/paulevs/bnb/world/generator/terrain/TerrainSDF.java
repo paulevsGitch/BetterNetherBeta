@@ -1,4 +1,4 @@
-package paulevs.bnb.world.generator;
+package paulevs.bnb.world.generator.terrain;
 
 @FunctionalInterface
 public interface TerrainSDF {

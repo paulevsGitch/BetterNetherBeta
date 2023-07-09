@@ -7,23 +7,25 @@ import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.dimension.DimensionData;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.impl.level.chunk.ChunkSection;
-import net.modificationstation.stationapi.impl.level.chunk.StationFlatteningChunk;
+import net.modificationstation.stationapi.impl.level.chunk.FlattenedChunk;
 import paulevs.bnb.world.biome.BNBBiomes;
 import paulevs.bnb.world.biome.NetherBiome;
-import paulevs.bnb.world.generator.terrain.ArchesFeature;
-import paulevs.bnb.world.generator.terrain.ArchipelagoFeature;
-import paulevs.bnb.world.generator.terrain.BridgesFeature;
-import paulevs.bnb.world.generator.terrain.ContinentsFeature;
-import paulevs.bnb.world.generator.terrain.CubesFeature;
-import paulevs.bnb.world.generator.terrain.DoubleBridgesFeature;
-import paulevs.bnb.world.generator.terrain.LavaOceanFeature;
-import paulevs.bnb.world.generator.terrain.PancakesFeature;
-import paulevs.bnb.world.generator.terrain.PillarsFeature;
-import paulevs.bnb.world.generator.terrain.SmallPillarsFeature;
-import paulevs.bnb.world.generator.terrain.SpikesFeature;
-import paulevs.bnb.world.generator.terrain.TheHiveFeature;
-import paulevs.bnb.world.generator.terrain.TheWallFeature;
-import paulevs.bnb.world.generator.terrain.VolumetricNoiseFeature;
+import paulevs.bnb.world.generator.terrain.ChunkFeatureMap;
+import paulevs.bnb.world.generator.terrain.CrossInterpolationCell;
+import paulevs.bnb.world.generator.terrain.features.ArchesFeature;
+import paulevs.bnb.world.generator.terrain.features.ArchipelagoFeature;
+import paulevs.bnb.world.generator.terrain.features.BridgesFeature;
+import paulevs.bnb.world.generator.terrain.features.ContinentsFeature;
+import paulevs.bnb.world.generator.terrain.features.CubesFeature;
+import paulevs.bnb.world.generator.terrain.features.DoubleBridgesFeature;
+import paulevs.bnb.world.generator.terrain.features.LavaOceanFeature;
+import paulevs.bnb.world.generator.terrain.features.PancakesFeature;
+import paulevs.bnb.world.generator.terrain.features.PillarsFeature;
+import paulevs.bnb.world.generator.terrain.features.SmallPillarsFeature;
+import paulevs.bnb.world.generator.terrain.features.SpikesFeature;
+import paulevs.bnb.world.generator.terrain.features.TheHiveFeature;
+import paulevs.bnb.world.generator.terrain.features.TheWallFeature;
+import paulevs.bnb.world.generator.terrain.features.VolumetricNoiseFeature;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,7 @@ public class BNBWorldGenerator {
 	}
 	
 	public static Chunk makeChunk(Level level, int cx, int cz) {
-		StationFlatteningChunk chunk = new StationFlatteningChunk(level, cx, cz);
+		FlattenedChunk chunk = new FlattenedChunk(level, cx, cz);
 		final ChunkSection[] sections = chunk.sections;
 		sectionCount = sections.length;
 		
@@ -105,7 +107,7 @@ public class BNBWorldGenerator {
 	}
 	
 	public static void decorateChunk(Level level, int cx, int cz) {
-		StationFlatteningChunk chunk = (StationFlatteningChunk) level.getChunkFromCache(cx, cz);
+		FlattenedChunk chunk = (FlattenedChunk) level.getChunkFromCache(cx, cz);
 		final ChunkSection[] sections = chunk.sections;
 		
 		NetherBiome biome = BNBBiomes.CRIMSON_FOREST;

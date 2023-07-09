@@ -1,7 +1,7 @@
-package paulevs.bnb.world.generator.terrain;
+package paulevs.bnb.world.generator.terrain.features;
 
 import net.modificationstation.stationapi.api.util.math.MathHelper;
-import paulevs.bnb.world.generator.TerrainSDF;
+import paulevs.bnb.world.generator.terrain.TerrainSDF;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
