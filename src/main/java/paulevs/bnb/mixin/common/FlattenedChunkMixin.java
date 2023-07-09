@@ -12,15 +12,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = FlattenedChunk.class, remap = false)
-public abstract class StationFlatteningChunkMixin extends Chunk {
+@Mixin(FlattenedChunk.class)
+public abstract class FlattenedChunkMixin extends Chunk {
 	@Shadow protected abstract ChunkSection getSection(int y);
 	
-	public StationFlatteningChunkMixin(Level arg, int i, int j) {
+	public FlattenedChunkMixin(Level arg, int i, int j) {
 		super(arg, i, j);
 	}
 	
-	@ModifyVariable(method = "getOrCreateSection", at = @At("HEAD"), argsOnly = true)
+	@ModifyVariable(method = "getOrCreateSection", at = @At("HEAD"), argsOnly = true, remap = false)
 	private boolean bnb_disableSkylight(boolean fillSkyLight) {
 		return !level.dimension.noSkyLight;
 	}
