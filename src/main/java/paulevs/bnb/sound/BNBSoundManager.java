@@ -2,6 +2,7 @@ package paulevs.bnb.sound;
 
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.sound.SoundEntry;
+import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.bnb.world.biome.BNBBiomes;
 import paulscode.sound.SoundSystem;
 
@@ -36,7 +37,7 @@ public class BNBSoundManager {
 		if (gameOptions.music == 0.0f) return;
 		if (soundSystem.playing(MUSIC_KEY) || soundSystem.playing(STREAMING_KEY)) return;
 		if (--musicCountdown > 0) return;
-		SoundEntry soundEntry = BNBSounds.getRandomMusic(RANDOM);
+		SoundEntry soundEntry = BNBClientSounds.getRandomMusic(RANDOM);
 		musicCountdown = 50 + RANDOM.nextInt(100);
 		soundSystem.backgroundMusic(MUSIC_KEY, soundEntry.soundUrl, soundEntry.soundName, false);
 		soundSystem.setVolume(MUSIC_KEY, gameOptions.music * 0.25F);
@@ -52,8 +53,9 @@ public class BNBSoundManager {
 	public static void playAmbience() {
 		if (gameOptions.sound == 0.0f) return;
 		if (soundSystem.playing(AMBIENT_KEY) || soundSystem.playing(STREAMING_KEY)) return;
-		SoundEntry soundEntry = BNBBiomes.CRIMSON_FOREST.getAmbientSound();
-		soundSystem.backgroundMusic(AMBIENT_KEY, soundEntry.soundUrl, soundEntry.soundName, false);
+		Identifier soundID = BNBBiomes.CRIMSON_FOREST.getAmbientSound();
+		SoundEntry ambientSound = BNBClientSounds.getSound(soundID);
+		soundSystem.backgroundMusic(AMBIENT_KEY, ambientSound.soundUrl, ambientSound.soundName, false);
 		soundSystem.setVolume(AMBIENT_KEY, gameOptions.sound);
 		soundSystem.play(AMBIENT_KEY);
 	}

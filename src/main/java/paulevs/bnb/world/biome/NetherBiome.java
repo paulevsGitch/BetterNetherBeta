@@ -1,7 +1,6 @@
 package paulevs.bnb.world.biome;
 
 import net.minecraft.block.BaseBlock;
-import net.minecraft.client.sound.SoundEntry;
 import net.minecraft.entity.EntityEntry;
 import net.minecraft.level.biome.BaseBiome;
 import net.minecraft.level.chunk.Chunk;
@@ -21,7 +20,7 @@ public class NetherBiome extends BaseBiome {
 	public final Identifier id;
 	
 	private float fogDensity = 1F;
-	private SoundEntry ambientSound;
+	private Identifier ambientSound;
 	
 	public NetherBiome(Identifier id) {
 		this.setName(id.toString());
@@ -72,11 +71,11 @@ public class NetherBiome extends BaseBiome {
 		return placers;
 	}
 	
-	public SoundEntry getAmbientSound() {
+	public Identifier getAmbientSound() {
 		return ambientSound;
 	}
 	
-	public NetherBiome setAmbientSound(SoundEntry ambientSound) {
+	public NetherBiome setAmbientSound(Identifier ambientSound) {
 		this.ambientSound = ambientSound;
 		return this;
 	}
