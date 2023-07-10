@@ -19,7 +19,7 @@ public class BNBClientSounds {
 		if (id == null) return null;
 		return SOUNDS.computeIfAbsent(id, key -> {
 			String path = "assets/" + key.modID + "/stationapi/sounds/" + key.id + ".ogg";
-			URL url = Thread.currentThread().getContextClassLoader().getResource(path);
+			URL url = BNB.getURL(path);
 			if (url == null) {
 				BNB.LOGGER.warn("Sound " + path + " is missing!");
 				return null;

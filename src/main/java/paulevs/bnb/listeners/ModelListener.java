@@ -43,7 +43,10 @@ public class ModelListener {
 		
 		String path = obj.get("obj").getAsString();
 		stream = getAsStream(path);
-		if (stream == null) return;
+		if (stream == null) {
+			BNB.LOGGER.warn("Missing OBJ model: " + path);
+			return;
+		}
 		
 		inputStreamReader = new InputStreamReader(stream);
 		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -74,11 +77,11 @@ public class ModelListener {
 	
 	private InputStream getAsStream(Identifier id) {
 		String path = "assets/bnb/stationapi/models/" + id.id + ".json";
-		return Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
+		return BNB.getStream(path);
 	}
 	
 	private InputStream getAsStream(String path) {
 		path = "assets/bnb/stationapi/models/" + path + ".obj";
-		return Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
+		return BNB.getStream(path);
 	}
 }

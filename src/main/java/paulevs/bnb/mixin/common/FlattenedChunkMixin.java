@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FlattenedChunk.class)
 public abstract class FlattenedChunkMixin extends Chunk {
-	@Shadow protected abstract ChunkSection getSection(int y);
+	@Shadow(remap = false) protected abstract ChunkSection getSection(int y);
 	
 	public FlattenedChunkMixin(Level arg, int i, int j) {
 		super(arg, i, j);

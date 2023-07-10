@@ -1,8 +1,5 @@
 package paulevs.bnb.rendering;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMap.Builder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.modificationstation.stationapi.api.client.render.model.BakedModel;
@@ -22,8 +19,6 @@ import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
 import paulevs.bnb.BNB;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -52,20 +47,14 @@ public class OBJModel implements UnbakedModel {
 	
 	@Override
 	public BakedModel bake(Baker baker, Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings rotationContainer, Identifier modelId) {
-		ImmutableList<BakedQuad> quads = this.quads.stream().map(quad -> quad.bake(textureGetter)).collect(ImmutableList.toImmutableList());
-		Builder<Direction, ImmutableList<BakedQuad>> builder = ImmutableMap.builder();
-		Direction.stream().forEach(dir -> builder.put(dir, ImmutableList.of()));
-		ImmutableMap<Direction, ImmutableList<BakedQuad>> faceQuads = builder.build();
-		Sprite particles = textureGetter.apply(particleTexture);
-		try {
-			Constructor<?> constructor = BasicBakedModel.class.getDeclaredConstructors()[0];
-			constructor.setAccessible(true);
-			return (BakedModel) constructor.newInstance(quads, faceQuads, false, false, false, particles, ModelTransformation.NONE, ModelOverrideList.EMPTY);
-		}
-		catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-			return null;
-		}
+		BasicBakedModel.Builder builder = new BasicBakedModel.Builder(
+			false, false, false,
+			ModelTransformation.NONE,
+			ModelOverrideList.EMPTY
+		);
+		this.quads.forEach(quad -> builder.addQuad(quad.bake(textureGetter)));
+		builder.setParticle(textureGetter.apply(particleTexture));
+		return builder.build();
 	}
 	
 	private void loadData(String modelName, String[] data, Map<String, SpriteIdentifier> textures, Vec3f offset) {

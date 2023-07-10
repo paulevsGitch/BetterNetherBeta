@@ -36,7 +36,7 @@ public class GameRendererMixin {
 		value = "INVOKE",
 		target = "Lorg/lwjgl/opengl/GL11;glClearColor(FFFF)V",
 		shift = Shift.AFTER
-	))
+	), remap = false)
 	private void method_1852(float f, CallbackInfo info) {
 		if (minecraft.level.dimension.id != -1) return;
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
@@ -53,7 +53,7 @@ public class GameRendererMixin {
 		target = "Lorg/lwjgl/opengl/GL11;glFogf(IF)V",
 		ordinal = 7,
 		shift = Shift.AFTER
-	))
+	), remap = false)
 	private void bnb_changeNetherFog(int i, float par2, CallbackInfo info) {
 		if (this.minecraft.level.dimension.id != -1) return;
 		if (BNB_FARVIEW) {
