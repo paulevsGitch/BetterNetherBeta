@@ -8,9 +8,9 @@ import net.minecraft.level.dimension.DimensionData;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.impl.level.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.level.chunk.FlattenedChunk;
-import paulevs.bnb.world.biome.BNBBiomes;
 import paulevs.bnb.world.biome.NetherBiome;
-import paulevs.bnb.world.generator.terrain.ChunkFeatureMap;
+import paulevs.bnb.world.generator.biome.BNBBiomeSource;
+import paulevs.bnb.world.generator.terrain.ChunkTerrainMap;
 import paulevs.bnb.world.generator.terrain.CrossInterpolationCell;
 import paulevs.bnb.world.generator.terrain.features.ArchesFeature;
 import paulevs.bnb.world.generator.terrain.features.ArchipelagoFeature;
@@ -35,7 +35,8 @@ import java.util.stream.IntStream;
 public class BNBWorldGenerator {
 	private static final BlockState BEDROCK = BaseBlock.BEDROCK.getDefaultState();
 	private static final BlockState LAVA = BaseBlock.STILL_LAVA.getDefaultState();
-	private static final List<ChunkFeatureMap> FEATURE_MAPS = new ArrayList<>();
+	private static final List<ChunkTerrainMap> FEATURE_MAPS = new ArrayList<>();
+	private static final NetherBiome[] BIOMES = new NetherBiome[256];
 	private static final Random RANDOM = new Random();
 	private static CrossInterpolationCell[] cells;
 	private static int sectionCount;
@@ -43,7 +44,7 @@ public class BNBWorldGenerator {
 	
 	public static void updateData(DimensionData dimensionData, long seed) {
 		BNBWorldGenerator.seed = new Random(seed).nextInt();
-		ChunkFeatureMap.setData(dimensionData, BNBWorldGenerator.seed);
+		ChunkTerrainMap.setData(dimensionData, BNBWorldGenerator.seed);
 	}
 	
 	public static Chunk makeChunk(Level level, int cx, int cz) {
@@ -55,17 +56,18 @@ public class BNBWorldGenerator {
 			cells = new CrossInterpolationCell[sectionCount];
 			for (int i = 0; i < sectionCount; i++) {
 				cells[i] = new CrossInterpolationCell(4);
-				if (i >= FEATURE_MAPS.size()) FEATURE_MAPS.add(new ChunkFeatureMap(i));
+				if (i >= FEATURE_MAPS.size()) FEATURE_MAPS.add(new ChunkTerrainMap(i));
 			}
 		}
 		
-		ChunkFeatureMap.prepare(cx, cz);
+		ChunkTerrainMap.prepare(cx, cz);
 		IntStream.range(0, sectionCount).parallel().forEach(i -> {
 			cells[i].fill(cx << 4, i << 4, cz << 4, FEATURE_MAPS.get(i));
 			if (forceSection(i) || !cells[i].isEmpty()) sections[i] = new ChunkSection(i);
 		});
 		
-		NetherBiome biome = BNBBiomes.CRIMSON_FOREST;
+		BNBBiomeSource biomeSource = (BNBBiomeSource) level.dimension.biomeSource;
+		biomeSource.fillBiomes(BIOMES, cx << 4, cz << 4, RANDOM);
 		
 		IntStream.range(0, sectionCount).parallel().forEach(i -> {
 			CrossInterpolationCell cell = cells[i];
@@ -74,6 +76,7 @@ public class BNBWorldGenerator {
 				cell.setX(bx);
 				for (byte bz = 0; bz < 16; bz++) {
 					cell.setZ(bz);
+					NetherBiome biome = BIOMES[bx << 4 | bz];
 					for (byte by = 0; by < 16; by++) {
 						cell.setY(by);
 						if (cell.get() < 0.5F) {
@@ -110,7 +113,7 @@ public class BNBWorldGenerator {
 		FlattenedChunk chunk = (FlattenedChunk) level.getChunkFromCache(cx, cz);
 		final ChunkSection[] sections = chunk.sections;
 		
-		NetherBiome biome = BNBBiomes.CRIMSON_FOREST;
+		NetherBiome biome = (NetherBiome) level.dimension.biomeSource.getBiome((cx + 1) << 4, (cz + 1) << 4);
 		
 		int wx = cx << 4 | 8;
 		int wz = cz << 4 | 8;
@@ -126,19 +129,19 @@ public class BNBWorldGenerator {
 	}
 	
 	static {
-		ChunkFeatureMap.addFeature(ArchipelagoFeature::new);
-		ChunkFeatureMap.addFeature(PillarsFeature::new);
-		ChunkFeatureMap.addFeature(SpikesFeature::new);
-		ChunkFeatureMap.addFeature(ContinentsFeature::new);
-		ChunkFeatureMap.addFeature(TheHiveFeature::new);
-		ChunkFeatureMap.addFeature(CubesFeature::new);
-		ChunkFeatureMap.addFeature(ArchesFeature::new);
-		ChunkFeatureMap.addFeature(VolumetricNoiseFeature::new);
-		ChunkFeatureMap.addFeature(LavaOceanFeature::new);
-		ChunkFeatureMap.addFeature(PancakesFeature::new);
-		ChunkFeatureMap.addFeature(TheWallFeature::new);
-		ChunkFeatureMap.addFeature(SmallPillarsFeature::new);
-		ChunkFeatureMap.addFeature(BridgesFeature::new);
-		ChunkFeatureMap.addFeature(DoubleBridgesFeature::new);
+		ChunkTerrainMap.addFeature(ArchipelagoFeature::new);
+		ChunkTerrainMap.addFeature(PillarsFeature::new);
+		ChunkTerrainMap.addFeature(SpikesFeature::new);
+		ChunkTerrainMap.addFeature(ContinentsFeature::new);
+		ChunkTerrainMap.addFeature(TheHiveFeature::new);
+		ChunkTerrainMap.addFeature(CubesFeature::new);
+		ChunkTerrainMap.addFeature(ArchesFeature::new);
+		ChunkTerrainMap.addFeature(VolumetricNoiseFeature::new);
+		ChunkTerrainMap.addFeature(LavaOceanFeature::new);
+		ChunkTerrainMap.addFeature(PancakesFeature::new);
+		ChunkTerrainMap.addFeature(TheWallFeature::new);
+		ChunkTerrainMap.addFeature(SmallPillarsFeature::new);
+		ChunkTerrainMap.addFeature(BridgesFeature::new);
+		ChunkTerrainMap.addFeature(DoubleBridgesFeature::new);
 	}
 }

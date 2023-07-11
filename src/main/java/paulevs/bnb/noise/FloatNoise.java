@@ -15,4 +15,14 @@ public abstract class FloatNoise {
 		int result = (int) (value - value / side * side);
 		return result < 0 ? result + side : result;
 	}
+	
+	public float getRange(double x, double y, float min, float max) {
+		float value = get(x, y);
+		return MathHelper.lerp(value, min, max);
+	}
+	
+	public float getRange(double x, double y, double z, float min, float max) {
+		float value = get(x, y, z);
+		return MathHelper.lerp(value, min, max);
+	}
 }

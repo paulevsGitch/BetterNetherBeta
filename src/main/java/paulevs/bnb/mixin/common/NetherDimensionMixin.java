@@ -27,7 +27,7 @@ public class NetherDimensionMixin extends BaseDimension implements StationDimens
 	}
 	
 	@Inject(method = "pregenLight", at = @At("HEAD"), cancellable = true)
-	protected void pregenLight(CallbackInfo info) {
+	private void bnb_pregenLight(CallbackInfo info) {
 		info.cancel();
 		for (byte i = 0; i < 16; i++) {
 			float delta = i / 15F;

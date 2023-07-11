@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class ChunkFeatureMap implements TerrainSDF {
+public class ChunkTerrainMap implements TerrainSDF {
 	private static final List<Supplier<TerrainFeature>> CONSTRUCTORS = new ArrayList<>();
 	private static final TerrainFeature[][] FEATURES = new TerrainFeature[16][];
 	private static final float[][] FEATURE_DENSITY = new float[72][];
@@ -18,7 +18,7 @@ public class ChunkFeatureMap implements TerrainSDF {
 	private static int posX;
 	private static int posZ;
 	
-	public ChunkFeatureMap(int sectionIndex) {
+	public ChunkTerrainMap(int sectionIndex) {
 		this.sectionIndex = sectionIndex;
 	}
 	

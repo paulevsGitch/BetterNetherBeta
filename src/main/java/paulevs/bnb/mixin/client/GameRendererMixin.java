@@ -26,7 +26,11 @@ public class GameRendererMixin {
 	@Inject(method = "setupFog", at = @At("HEAD"))
 	private void bnb_changeFogColor(int i, float par2, CallbackInfo info) {
 		if (minecraft.level.dimension.id != -1) return;
-		FogInfo.setColor(0.2F, 0.03F, 0.03F);
+		FogInfo.setColor(
+			minecraft.player.x,
+			minecraft.player.z,
+			minecraft.level.dimension.biomeSource
+		);
 		fogColorR = FogInfo.COLOR[0];
 		fogColorG = FogInfo.COLOR[1];
 		fogColorB = FogInfo.COLOR[2];

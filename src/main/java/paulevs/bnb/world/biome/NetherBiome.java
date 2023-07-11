@@ -79,4 +79,12 @@ public class NetherBiome extends BaseBiome {
 		this.ambientSound = ambientSound;
 		return this;
 	}
+	
+	public NetherBiome setFogColor(int rgb) {
+		float r = ((rgb >> 16) & 255) / 255.0F;
+		float g = ((rgb >> 8) & 255) / 255.0F;
+		float b = (rgb & 255) / 255.0F;
+		fogColor.set(r, g, b);
+		return this;
+	}
 }

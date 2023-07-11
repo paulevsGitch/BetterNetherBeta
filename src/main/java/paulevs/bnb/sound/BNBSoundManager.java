@@ -2,8 +2,11 @@ package paulevs.bnb.sound;
 
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.sound.SoundEntry;
+import net.minecraft.entity.player.PlayerBase;
+import net.minecraft.level.gen.BiomeSource;
+import net.minecraft.util.maths.MathHelper;
 import net.modificationstation.stationapi.api.registry.Identifier;
-import paulevs.bnb.world.biome.BNBBiomes;
+import paulevs.bnb.world.biome.NetherBiome;
 import paulscode.sound.SoundSystem;
 
 import java.util.Random;
@@ -19,10 +22,20 @@ public class BNBSoundManager {
 	private static GameOptions gameOptions;
 	private static SoundSystem soundSystem;
 	
+	private static Identifier currentAmbientSoundID;
+	private static Identifier nextAmbientSoundID;
+	private static String currentAmbientKey;
+	private static String nextAmbientKey;
+	private static int ambientTicks = 10;
+	private static SoundState state;
+	
 	public static void setInTheNether(boolean inTheNether) {
 		if (BNBSoundManager.inTheNether != inTheNether) {
 			soundSystem.stop(MUSIC_KEY);
-			soundSystem.stop(AMBIENT_KEY);
+			if (soundSystem.playing(currentAmbientKey)) soundSystem.stop(currentAmbientKey);
+			if (soundSystem.playing(nextAmbientKey)) soundSystem.stop(nextAmbientKey);
+			currentAmbientSoundID = null;
+			nextAmbientSoundID = null;
 			musicCountdown = 50;
 		}
 		BNBSoundManager.inTheNether = inTheNether;
@@ -50,13 +63,78 @@ public class BNBSoundManager {
 		return true;
 	}
 	
-	public static void playAmbience() {
-		if (gameOptions.sound == 0.0f) return;
-		if (soundSystem.playing(AMBIENT_KEY) || soundSystem.playing(STREAMING_KEY)) return;
-		Identifier soundID = BNBBiomes.CRIMSON_FOREST.getAmbientSound();
-		SoundEntry ambientSound = BNBClientSounds.getSound(soundID);
-		soundSystem.backgroundMusic(AMBIENT_KEY, ambientSound.soundUrl, ambientSound.soundName, false);
-		soundSystem.setVolume(AMBIENT_KEY, gameOptions.sound);
-		soundSystem.play(AMBIENT_KEY);
+	public static void playAmbience(PlayerBase player, BiomeSource biomeSource) {
+		if (gameOptions.sound == 0.0f) {
+			if (soundSystem.playing(currentAmbientKey)) soundSystem.stop(currentAmbientKey);
+			if (soundSystem.playing(nextAmbientKey)) soundSystem.stop(nextAmbientKey);
+			return;
+		}
+		
+		if (ambientTicks == 81) {
+			currentAmbientSoundID = nextAmbientSoundID;
+			nextAmbientSoundID = getSound(player, biomeSource);
+			
+			if (nextAmbientSoundID == null) {
+				if (currentAmbientSoundID != null) state = SoundState.FADE_DOWN;
+				else state = null;
+			}
+			else {
+				if (currentAmbientSoundID != null) {
+					if (currentAmbientSoundID == nextAmbientSoundID) state = null;
+					else state = SoundState.FADE_BETWEEN;
+				}
+				else state = SoundState.FADE_UP;
+			}
+			
+			ambientTicks = 0;
+			
+			if (currentAmbientSoundID != null) currentAmbientKey = currentAmbientSoundID.toString();
+			if (nextAmbientSoundID != null) nextAmbientKey = nextAmbientSoundID.toString();
+		}
+		else ambientTicks++;
+		
+		if (state == null) return;
+		
+		float delta = ambientTicks / 80F;
+		
+		switch (state) {
+			case FADE_UP -> {
+				if (!soundSystem.playing(nextAmbientKey)) {
+					SoundEntry soundEntry = BNBClientSounds.getSound(nextAmbientSoundID);
+					soundSystem.backgroundMusic(nextAmbientKey, soundEntry.soundUrl, soundEntry.soundName, true);
+					soundSystem.play(nextAmbientKey);
+				}
+				soundSystem.setVolume(nextAmbientKey, gameOptions.sound * delta);
+			}
+			case FADE_DOWN -> {
+				float volume = gameOptions.sound * (1.0F - delta);
+				soundSystem.setVolume(currentAmbientKey, volume);
+				if (volume == 0) soundSystem.stop(currentAmbientKey);
+			}
+			case FADE_BETWEEN -> {
+				float volume1 = gameOptions.sound * delta;
+				float volume2 = gameOptions.sound * (1.0F - delta);
+				
+				soundSystem.setVolume(currentAmbientKey, volume1);
+				if (volume1 == 0) soundSystem.stop(currentAmbientKey);
+				
+				if (!soundSystem.playing(nextAmbientKey)) {
+					SoundEntry soundEntry = BNBClientSounds.getSound(nextAmbientSoundID);
+					soundSystem.backgroundMusic(nextAmbientKey, soundEntry.soundUrl, soundEntry.soundName, true);
+					soundSystem.play(nextAmbientKey);
+				}
+				soundSystem.setVolume(nextAmbientKey, volume2);
+			}
+		}
+	}
+	
+	private static Identifier getSound(PlayerBase player, BiomeSource source) {
+		int x = MathHelper.floor(player.x);
+		int z = MathHelper.floor(player.z);
+		return source.getBiome(x, z) instanceof NetherBiome biome ? biome.getAmbientSound() : null;
+	}
+	
+	private enum SoundState {
+		FADE_UP, FADE_DOWN, FADE_BETWEEN
 	}
 }
