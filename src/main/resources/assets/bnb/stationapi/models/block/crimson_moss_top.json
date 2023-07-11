@@ -1,0 +1,6 @@
+{
+	"parent": "bnb:block/crop",
+	"textures": {
+		"crop": "bnb:block/crimson_moss_top"
+	}
+}

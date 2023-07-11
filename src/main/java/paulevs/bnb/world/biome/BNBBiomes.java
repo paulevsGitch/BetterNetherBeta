@@ -21,17 +21,19 @@ public class BNBBiomes {
 		.addStructure(BNBStructures.NETHER_DAISY_PLACER)
 		.addStructure(BNBStructures.CRIMSON_ROOTS_PLACER)
 		.addStructure(BNBStructures.FLAME_BULBS_PLACER)
+		.addStructure(BNBStructures.CRIMSON_MOSS_BLOCK_PLACER)
+		.addStructure(BNBStructures.CRIMSON_MOSS_PLACER)
 		.setAmbientSound(BNBSounds.NETHER_FOREST_AMBIENCE)
 		.setFogColor(0x951922);
 	
 	public static final NetherBiome WARPED_FOREST = make("warped_forest", SimpleNetherBiome::new)
 		.setSurface(BNBBlocks.WARPED_NYLIUM.getDefaultState())
-		//.setAmbientSound(BNBSounds.NETHER_FOREST_AMBIENCE)
+		.setAmbientSound(BNBSounds.NETHER_FOREST_AMBIENCE)
 		.setFogColor(0x119b85);
 	
 	public static final NetherBiome POISON_FOREST = make("poison_forest", SimpleNetherBiome::new)
 		.setSurface(BNBBlocks.POISON_NYLIUM.getDefaultState())
-		//.setAmbientSound(BNBSounds.NETHER_FOREST_AMBIENCE)
+		.setAmbientSound(BNBSounds.NETHER_FOREST_AMBIENCE)
 		.setFogColor(0x7db33d);
 	
 	private static <B extends NetherBiome> B make(String name, Function<Identifier, B> constructor) {

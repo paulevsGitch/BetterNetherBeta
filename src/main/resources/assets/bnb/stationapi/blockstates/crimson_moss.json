@@ -17,7 +17,7 @@
 			"when": { "west": "true" }
 		},
 		{
-			"apply": { "model": "bnb:block/crimson_moss", "y": 90 },
+			"apply": { "model": "bnb:block/crimson_moss_top" },
 			"when": { "up": "true" }
 		},
 		{

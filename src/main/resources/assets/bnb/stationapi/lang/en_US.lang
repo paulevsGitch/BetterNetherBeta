@@ -6,6 +6,10 @@ tile.soul_nylium.name=Soul Nylium
 tile.dark_nylium.name=Dark Nylium
 
 tile.crimson_wood.name=Crimson Wood
+tile.crimson_stem.name=Crimson Stem
+tile.crimson_branch.name=Crimson Branch
+tile.crimson_planks.name=Crimson Planks
+
 tile.warped_wood.name=Warped Wood
 tile.poison_wood.name=Poison Wood
 tile.pale_wood.name=Pale Wood
@@ -33,5 +37,8 @@ tile.flame_bulbs.name=Flame Bulbs
 tile.crimson_roots.name=Crimson Roots
 tile.fireweed.name=Fireweed
 tile.nether_daisy.name=Nether Daisy
+tile.crimson_moss.name=Crimson Moss
+
+tile.crimson_tree_placer.name=Crimson Tree Placer
 
 tab.creative_tab.name=Better Nether Beta

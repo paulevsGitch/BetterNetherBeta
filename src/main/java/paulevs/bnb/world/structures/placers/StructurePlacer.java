@@ -8,13 +8,13 @@ import java.util.Random;
 import java.util.function.Function;
 
 public class StructurePlacer {
-	private static final Function<BlockPos, Boolean> DEFAULT_DENSITY = pos -> true;
-	private static final BlockPos.Mutable POS = new BlockPos.Mutable();
+	protected static final Function<BlockPos, Boolean> DEFAULT_DENSITY = pos -> true;
+	protected static final BlockPos.Mutable POS = new BlockPos.Mutable();
 	
-	private final Structure structure;
-	private final int count;
+	protected final Structure structure;
+	protected final int count;
 	
-	private Function<BlockPos, Boolean> densityFunction;
+	protected Function<BlockPos, Boolean> densityFunction;
 	
 	public StructurePlacer(Structure structure, int count) {
 		this.densityFunction = DEFAULT_DENSITY;

@@ -124,4 +124,9 @@ public class MossBlock extends NetherPlantBlock {
 		}
 		return true;
 	}
+	
+	public BlockState getStructureState(Level level, BlockPos pos) {
+		BlockState state = getFacingState(level, pos.getX(), pos.getY(), pos.getZ());
+		return isEmpty(state) ? null : state;
+	}
 }
