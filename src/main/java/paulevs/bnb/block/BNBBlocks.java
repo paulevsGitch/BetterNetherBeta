@@ -55,6 +55,7 @@ public class BNBBlocks {
 	public static final BaseBlock FIREWEED = make("fireweed", DoubleFloorPlantBlock::new).setLightEmittance(0.5F);
 	
 	public static final BaseBlock CRIMSON_MOSS = make("crimson_moss", MossBlock::new);
+	public static final BaseBlock CRIMSON_MOSS_BLOCK = make("crimson_moss_block", NetherLeavesBlock::new);
 	
 	private static BaseBlock make(String name, Function<Identifier, BaseBlock> constructor) {
 		Identifier id = BNB.id(name);
