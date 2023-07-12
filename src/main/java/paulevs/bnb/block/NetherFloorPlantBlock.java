@@ -18,7 +18,6 @@ public class NetherFloorPlantBlock extends NetherPlantBlock {
 	}
 	
 	protected boolean isGround(BlockState state) {
-		BaseBlock block = state.getBlock();
-		return block == BaseBlock.NETHERRACK || block instanceof NetherTerrainBlock;
+		return state.isIn(BNBBlockTags.NETHERRACK_TERRAIN);
 	}
 }

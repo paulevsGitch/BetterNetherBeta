@@ -7,6 +7,7 @@ import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.MathHelper;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
+import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.block.properties.BNBBlockProperties.VineShape;
@@ -36,7 +37,7 @@ public class CommonTreeStructure extends Structure {
 	public boolean generate(Level level, Random random, int x, int y, int z) {
 		int height = random.nextInt(dHeight) + minHeight;
 		
-		if (level.getBlockState(x, y - 1, z).getBlock() instanceof NetherTerrainBlock) {
+		if (level.getBlockState(x, y - 1, z).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) {
 			level.setBlockState(x, y - 1, z, BaseBlock.NETHERRACK.getDefaultState());
 		}
 		else return false;
