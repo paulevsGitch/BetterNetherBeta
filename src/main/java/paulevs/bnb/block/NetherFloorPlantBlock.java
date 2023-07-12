@@ -1,6 +1,5 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BaseBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;

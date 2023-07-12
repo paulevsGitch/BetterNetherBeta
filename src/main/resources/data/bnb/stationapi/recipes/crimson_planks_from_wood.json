@@ -1,0 +1,10 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "bnb:crimson_wood" }
+	],
+	"result": {
+		"item": "bnb:crimson_planks",
+		"count": 4
+	}
+}

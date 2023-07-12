@@ -8,7 +8,6 @@ import net.minecraft.util.maths.MathHelper;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.block.BNBBlockTags;
-import paulevs.bnb.block.NetherTerrainBlock;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.block.properties.BNBBlockProperties.VineShape;
 

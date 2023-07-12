@@ -5,6 +5,7 @@ import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.Direction;
+import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.MossBlock;
 
 import java.util.Random;
@@ -37,6 +38,6 @@ public class BlockMossScatterStructure extends VolumeScatterStructure {
 	
 	@Override
 	protected boolean canPlaceAt(Level level, BlockPos pos) {
-		return level.getBlockState(pos.getX(), pos.getY(), pos.getZ()).isOf(BaseBlock.NETHERRACK);
+		return level.getBlockState(pos.getX(), pos.getY(), pos.getZ()).isIn(BNBBlockTags.NETHERRACK_TERRAIN);
 	}
 }

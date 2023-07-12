@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"X",
+		"X"
+	],
+	"key": {
+		"X": { "item": "bnb:crimson_wood" }
+	},
+	"result": {
+		"item": "bnb:crimson_stem",
+		"count": 8
+	}
+}

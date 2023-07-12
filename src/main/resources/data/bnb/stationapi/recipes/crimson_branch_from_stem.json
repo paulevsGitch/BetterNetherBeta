@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "bnb:crimson_stem" }
+	],
+	"result": {
+		"item": "bnb:crimson_branch"
+	}
+}

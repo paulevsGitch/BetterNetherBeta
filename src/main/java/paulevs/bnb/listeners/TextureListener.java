@@ -6,6 +6,7 @@ import net.modificationstation.stationapi.api.client.event.texture.TextureRegist
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
 import paulevs.bnb.BNB;
+import paulevs.bnb.block.BNBBlocks;
 
 public class TextureListener {
 	@EventListener
@@ -14,6 +15,8 @@ public class TextureListener {
 		BaseBlock.NETHERRACK.texture = blockAtlas.addTexture(BNB.id("block/netherrack")).index;
 		BaseBlock.GLOWSTONE.texture = blockAtlas.addTexture(BNB.id("block/glowstone")).index;
 		BaseBlock.SOUL_SAND.texture = blockAtlas.addTexture(BNB.id("block/soul_sand")).index;
+		
+		BNBBlocks.CRIMSON_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/crimson_planks")).index;
 		
 		// TODO remove that after release
 		/*if (FabricLoader.getInstance().isDevelopmentEnvironment()) {

@@ -2,7 +2,6 @@ package paulevs.bnb.block;
 
 import net.minecraft.block.BaseBlock;
 import net.modificationstation.stationapi.api.registry.BlockRegistry;
-import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.tag.TagKey;
 import paulevs.bnb.BNB;
 
