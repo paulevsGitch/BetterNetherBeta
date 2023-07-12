@@ -2,6 +2,7 @@ package paulevs.bnb.block;
 
 import net.minecraft.block.BaseBlock;
 import net.modificationstation.stationapi.api.registry.Identifier;
+import net.modificationstation.stationapi.api.template.block.TemplateFence;
 import net.modificationstation.stationapi.api.template.block.TemplateStairs;
 import paulevs.bnb.BNB;
 
@@ -27,6 +28,7 @@ public class BNBBlocks {
 	public static final BaseBlock CRIMSON_PLANKS = make("crimson_planks", NetherPlanksBlock::new);
 	public static final BaseBlock CRIMSON_STAIRS = make("crimson_stairs", TemplateStairs::new, CRIMSON_PLANKS);
 	public static final BaseBlock CRIMSON_SLAB = make("crimson_slab", SlabBlock::new, CRIMSON_PLANKS);
+	public static final BaseBlock CRIMSON_FENCE = make("crimson_fence", FenceBlock::new, CRIMSON_PLANKS);
 	
 	public static final BaseBlock WARPED_WOOD = make("warped_wood", NetherWoodBlock::new);
 	public static final BaseBlock WARPED_LEAVES = make("warped_leaves", NetherLeavesBlock::new);

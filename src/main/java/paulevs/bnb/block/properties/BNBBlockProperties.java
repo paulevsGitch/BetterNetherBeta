@@ -76,7 +76,7 @@ public class BNBBlockProperties {
 		}
 		
 		public Direction getDirection() {
-			if (this == FULL) return null;
+			if (this == FULL) return Direction.DOWN;
 			return Direction.byId(this.ordinal());
 		}
 	}

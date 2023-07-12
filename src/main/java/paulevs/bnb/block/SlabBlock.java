@@ -23,6 +23,7 @@ import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 import net.modificationstation.stationapi.api.world.BlockStateView;
+import paulevs.bnb.CreativeUtil;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.block.properties.BNBBlockProperties.SlabShape;
 
@@ -55,7 +56,7 @@ public class SlabBlock extends TemplateBlockBase {
 			SlabShape slab = state.get(BNBBlockProperties.SLAB);
 			if (slab != SlabShape.FULL && slab.getDirection().getAxis() != face.getAxis()) {
 				PlayerBase player = context.getPlayer();
-				if (player != null) {
+				if (player != null && !player.isChild()) {
 					return state;
 				}
 			}
@@ -168,7 +169,11 @@ public class SlabBlock extends TemplateBlockBase {
 		
 		level.setBlockState(x, y, z, state.with(BNBBlockProperties.SLAB, SlabShape.FULL));
 		level.playSound(x + 0.5, y + 0.5, z + 0.5, this.sounds.getWalkSound(), 1.0F, 1.0F);
-		stack.count--;
+		level.callAreaEvents(x, y, z);
+		
+		if (!CreativeUtil.isCreative(player)) {
+			stack.count--;
+		}
 		
 		return true;
 	}
