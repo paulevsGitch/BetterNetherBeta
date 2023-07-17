@@ -2,9 +2,10 @@ package paulevs.bnb.block;
 
 import net.minecraft.block.BaseBlock;
 import net.modificationstation.stationapi.api.registry.Identifier;
-import net.modificationstation.stationapi.api.template.block.TemplateFence;
 import net.modificationstation.stationapi.api.template.block.TemplateStairs;
 import paulevs.bnb.BNB;
+import paulevs.vbe.block.VBEFullSlabBlock;
+import paulevs.vbe.block.VBEHalfSlabBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,8 @@ public class BNBBlocks {
 	public static final BaseBlock CRIMSON_LEAVES = make("crimson_leaves", NetherLeavesBlock::new);
 	public static final BaseBlock CRIMSON_PLANKS = make("crimson_planks", NetherPlanksBlock::new);
 	public static final BaseBlock CRIMSON_STAIRS = make("crimson_stairs", TemplateStairs::new, CRIMSON_PLANKS);
-	public static final BaseBlock CRIMSON_SLAB = make("crimson_slab", SlabBlock::new, CRIMSON_PLANKS);
+	public static final VBEHalfSlabBlock CRIMSON_SLAB_HALF = make("crimson_slab_half", VBEHalfSlabBlock::new, CRIMSON_PLANKS);
+	public static final VBEFullSlabBlock CRIMSON_SLAB_FULL = makeNI("crimson_slab_full", VBEFullSlabBlock::new, CRIMSON_PLANKS);
 	public static final BaseBlock CRIMSON_FENCE = make("crimson_fence", FenceBlock::new, CRIMSON_PLANKS);
 	
 	public static final BaseBlock WARPED_WOOD = make("warped_wood", NetherWoodBlock::new);
@@ -71,13 +73,21 @@ public class BNBBlocks {
 		return block;
 	}
 	
-	private static BaseBlock make(String name, BiFunction<Identifier, BaseBlock, BaseBlock> constructor, BaseBlock sourceBlock) {
-		Identifier id = BNB.id(name);
-		BaseBlock block = constructor.apply(id, sourceBlock);
-		block.setTranslationKey(id.toString());
+	private static <B extends BaseBlock> B make(String name, BiFunction<Identifier, BaseBlock, B> constructor, BaseBlock sourceBlock) {
+		B block = makeNI(name, constructor, sourceBlock);
 		BLOCKS_WITH_ITEMS.add(block);
 		return block;
 	}
 	
-	public static void init() {}
+	private static <B extends BaseBlock> B makeNI(String name, BiFunction<Identifier, BaseBlock, B> constructor, BaseBlock sourceBlock) {
+		Identifier id = BNB.id(name);
+		B block = constructor.apply(id, sourceBlock);
+		block.setTranslationKey(id.toString());
+		return block;
+	}
+	
+	public static void init() {
+		CRIMSON_SLAB_HALF.setFullBlock(CRIMSON_SLAB_FULL);
+		CRIMSON_SLAB_FULL.setHalfBlock(CRIMSON_SLAB_HALF);
+	}
 }

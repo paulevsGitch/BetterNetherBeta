@@ -2,14 +2,15 @@ package paulevs.bnb.world.structures.placers;
 
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
-import net.modificationstation.stationapi.api.util.math.BlockPos;
+import net.minecraft.util.maths.BlockPos;
+import net.modificationstation.stationapi.api.util.maths.MutableBlockPos;
 
 import java.util.Random;
 import java.util.function.Function;
 
 public class StructurePlacer {
 	protected static final Function<BlockPos, Boolean> DEFAULT_DENSITY = pos -> true;
-	protected static final BlockPos.Mutable POS = new BlockPos.Mutable();
+	protected static final MutableBlockPos POS = new MutableBlockPos(0, 0, 0);
 	
 	protected final Structure structure;
 	protected final int count;

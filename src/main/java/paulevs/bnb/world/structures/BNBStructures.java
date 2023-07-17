@@ -1,7 +1,7 @@
 package paulevs.bnb.world.structures;
 
 import net.minecraft.level.structure.Structure;
-import net.modificationstation.stationapi.api.util.math.BlockPos;
+import net.minecraft.util.maths.BlockPos;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.MossBlock;
 import paulevs.bnb.noise.PerlinNoise;
@@ -54,6 +54,6 @@ public class BNBStructures {
 	private static Function<BlockPos, Boolean> getDensity() {
 		PerlinNoise noise = new PerlinNoise();
 		noise.setSeed(RANDOM.nextInt());
-		return pos -> noise.get(pos.getX() * 0.03, pos.getY() * 0.03, pos.getZ() * 0.03) > 0.5F;
+		return pos -> noise.get(pos.x * 0.03, pos.y * 0.03, pos.z * 0.03) > 0.5F;
 	}
 }

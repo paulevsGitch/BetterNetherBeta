@@ -99,6 +99,7 @@ public class BNBSoundManager {
 		
 		switch (state) {
 			case FADE_UP -> {
+				if (nextAmbientSoundID == null) return;
 				if (!soundSystem.playing(nextAmbientKey)) {
 					SoundEntry soundEntry = BNBClientSounds.getSound(nextAmbientSoundID);
 					soundSystem.backgroundMusic(nextAmbientKey, soundEntry.soundUrl, soundEntry.soundName, true);

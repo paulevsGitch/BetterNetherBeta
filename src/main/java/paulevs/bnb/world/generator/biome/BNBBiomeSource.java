@@ -14,6 +14,10 @@ public class BNBBiomeSource extends BiomeSource {
 	
 	public BNBBiomeSource(long seed, DimensionData data) {
 		map = new BiomeMap(BNBBiomes.getBiomes(), seed, data);
+		temperatureNoises = new double[256];
+		rainfallNoises = new double[256];
+		detailNoises = new double[256];
+		Arrays.fill(temperatureNoises, 1.0);
 	}
 	
 	@Override

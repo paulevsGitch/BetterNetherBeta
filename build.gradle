@@ -47,6 +47,18 @@ repositories {
 		name = 'Jitpack'
 		url = 'https://jitpack.io'
 	}
+	// Used for another StationAPI dependency
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "Modrinth"
+				url = "https://api.modrinth.com/maven"
+			}
+		}
+		filter {
+			includeGroup "maven.modrinth"
+		}
+	}
 	mavenCentral()
 	flatDir {
 		dirs 'libs'
@@ -65,6 +77,9 @@ dependencies {
 	modImplementation "net.modificationstation:StationAPI:${project.stapi_version}"
 	
 	modImplementation("com.github.paulevsGitch:BHCreative:${project.bhcreative_version}") {
+		transitive false
+	}
+	modImplementation("com.github.paulevsGitch:VanillaBlockEnhancements:${project.vbe_version}") {
 		transitive false
 	}
 	
