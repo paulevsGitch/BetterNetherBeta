@@ -41,6 +41,8 @@ public class CommonTreeStructure extends Structure {
 		}
 		else return false;
 		
+		if (level.getBlockState(x, y, z).getMaterial() == Material.LAVA) return false;
+		
 		for (byte i = 1; i < height; i++) {
 			if (!canReplace(level.getBlockState(x, y + i, z))) {
 				height = i - 1;
