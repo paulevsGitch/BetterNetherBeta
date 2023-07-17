@@ -3,10 +3,13 @@ package paulevs.bnb.block;
 import net.minecraft.block.BaseBlock;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
+import net.modificationstation.stationapi.api.block.States;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.block.properties.BNBBlockProperties.VineShape;
+
+import java.util.Random;
 
 public class NetherVineBlock extends NetherCeilPlantBlock {
 	public NetherVineBlock(Identifier id) {
@@ -36,7 +39,25 @@ public class NetherVineBlock extends NetherCeilPlantBlock {
 	}
 	
 	@Override
+	public void onScheduledTick(Level level, int x, int y, int z, Random rand) {
+		tick(level, x, y, z);
+	}
+	
+	@Override
 	protected boolean isCeil(BlockState state) {
 		return state.isOf(this) || super.isCeil(state);
+	}
+	
+	@Override
+	protected void tick(Level level, int x, int y, int z) {
+		if (!this.canStay(level, x, y, z)) {
+			int y1 = y;
+			while (level.getBlockState(x, y1, z).isOf(this)) {
+				this.drop(level, x, y1, z, 0);
+				level.setBlockState(x, y1, z, States.AIR.get());
+				y1--;
+			}
+			level.callAreaEvents(x, y1, z, x, y, z);
+		}
 	}
 }

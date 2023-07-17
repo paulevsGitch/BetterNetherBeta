@@ -42,7 +42,7 @@
 	},
 	"depends": {
 		"minecraft": "1.0.0-beta.7.3",
-		"vbe": ">=0.1.1",
+		"vbe": ">=0.1.2",
 		"stationapi": "*"
 	}
 }
