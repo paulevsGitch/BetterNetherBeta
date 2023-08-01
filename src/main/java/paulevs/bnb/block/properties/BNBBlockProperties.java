@@ -2,6 +2,7 @@ package paulevs.bnb.block.properties;
 
 import net.modificationstation.stationapi.api.state.property.BooleanProperty;
 import net.modificationstation.stationapi.api.state.property.EnumProperty;
+import net.modificationstation.stationapi.api.state.property.IntProperty;
 import net.modificationstation.stationapi.api.util.StringIdentifiable;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
@@ -12,6 +13,7 @@ public class BNBBlockProperties {
 	public static final EnumProperty<SlabShape> SLAB = EnumProperty.of("shape", SlabShape.class);
 	public static final EnumProperty<Axis> AXIS = EnumProperty.of("axis", Axis.class);
 	public static final BooleanProperty NEAR_LAVA = BooleanProperty.of("near_lava");
+	public static final IntProperty STAGE_4 = IntProperty.of("stage", 0, 3);
 	public static final BooleanProperty[] FACES = new BooleanProperty[6];
 	
 	public static BooleanProperty getByFace(Direction dir) {
