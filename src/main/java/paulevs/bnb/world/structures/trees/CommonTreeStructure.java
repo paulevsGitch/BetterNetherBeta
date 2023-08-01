@@ -8,6 +8,7 @@ import net.minecraft.util.maths.MathHelper;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.block.BNBBlockTags;
+import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.block.properties.BNBBlockProperties.VineShape;
 
@@ -155,7 +156,7 @@ public class CommonTreeStructure extends Structure {
 	
 	private void placeLantern(Level level, Random random, int x, int y, int z) {
 		while (level.getBlockState(x, y - 1, z) == leaves) y--;
-		BlockState lamp = BaseBlock.GLOWSTONE.getDefaultState();
+		BlockState lamp = BNBBlocks.TREE_LANTERN.getDefaultState();
 		if (canReplace(level.getBlockState(x, y, z))) level.setBlockState(x, y, z, lamp);
 		if (random.nextBoolean() && canReplace(level.getBlockState(x, --y, z))) level.setBlockState(x, y, z, lamp);
 	}

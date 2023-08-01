@@ -1,7 +1,0 @@
-{
-	"parent": "bnb:block/emissive_cube_all",
-	"textures": {
-		"all": "bnb:block/warped_lantern",
-		"all_e": "bnb:block/warped_lantern_e"
-	}
-}

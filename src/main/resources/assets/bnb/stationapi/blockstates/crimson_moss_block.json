@@ -1,5 +1,22 @@
 {
 	"variants": {
-		"": { "model": "bnb:block/crimson_moss_block" }
+		"": [
+			{ "model": "bnb:block/crimson_moss_block" },
+			{ "model": "bnb:block/crimson_moss_block", "x": 90 },
+			{ "model": "bnb:block/crimson_moss_block", "x": 180 },
+			{ "model": "bnb:block/crimson_moss_block", "x": 270 },
+			{ "model": "bnb:block/crimson_moss_block", "y": 90 },
+			{ "model": "bnb:block/crimson_moss_block", "x": 90, "y": 90 },
+			{ "model": "bnb:block/crimson_moss_block", "x": 180, "y": 90 },
+			{ "model": "bnb:block/crimson_moss_block", "x": 270, "y": 90 },
+			{ "model": "bnb:block/crimson_moss_block", "y": 180 },
+			{ "model": "bnb:block/crimson_moss_block", "x": 90, "y": 180 },
+			{ "model": "bnb:block/crimson_moss_block", "x": 180, "y": 180 },
+			{ "model": "bnb:block/crimson_moss_block", "x": 270, "y": 180 },
+			{ "model": "bnb:block/crimson_moss_block", "y": 270 },
+			{ "model": "bnb:block/crimson_moss_block", "x": 90, "y": 270 },
+			{ "model": "bnb:block/crimson_moss_block", "x": 180, "y": 270 },
+			{ "model": "bnb:block/crimson_moss_block", "x": 270, "y": 270 }
+		]
 	}
 }

@@ -10,8 +10,12 @@ tile.crimson_stem.name=Crimson Stem
 tile.crimson_branch.name=Crimson Branch
 tile.crimson_planks.name=Crimson Planks
 tile.crimson_stairs.name=Crimson Stairs
-tile.crimson_slab.name=Crimson Slab
+tile.crimson_slab_half.name=Crimson Slab
+tile.crimson_slab_full.name=Crimson Slab
 tile.crimson_fence.name=Crimson Fence
+tile.crimson_leaves.name=Crimson Leaves
+tile.crimson_sapling.name=Crimson Sapling
+item.crimson_tree_placer.name=Crimson Tree Placer
 
 tile.warped_wood.name=Warped Wood
 tile.poison_wood.name=Poison Wood
@@ -19,15 +23,12 @@ tile.pale_wood.name=Pale Wood
 tile.ember_wood.name=Ember Wood
 tile.flame_bamboo_block.name=Flame Bamboo Block
 
-tile.crimson_leaves.name=Crimson Leaves
 tile.warped_leaves.name=Warped Leaves
 tile.poison_leaves.name=Poison Leaves
 tile.pale_leaves.name=Pale Leaves
 tile.ember_leaves.name=Ember Leaves
 
-tile.crimson_lantern.name=Crimson Lantern
-tile.warped_lantern.name=Warped Lantern
-tile.poison_lantern.name=Poison Lantern
+tile.tree_lantern.name=Tree Lantern
 tile.ghost_pumpkin.name=Ghost Pumpkin
 
 tile.crimson_weeping_vine.name=Crimson Weeping Vine

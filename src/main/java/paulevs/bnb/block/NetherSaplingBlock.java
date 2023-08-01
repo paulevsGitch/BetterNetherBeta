@@ -1,0 +1,39 @@
+package paulevs.bnb.block;
+
+import net.minecraft.level.Level;
+import net.minecraft.level.structure.Structure;
+import net.modificationstation.stationapi.api.block.States;
+import net.modificationstation.stationapi.api.registry.Identifier;
+
+import java.util.Random;
+import java.util.function.Supplier;
+
+public class NetherSaplingBlock extends NetherFloorPlantBlock {
+	private final Supplier<Structure> structure;
+	
+	public NetherSaplingBlock(Identifier id, Supplier<Structure> structure) {
+		super(id);
+		this.structure = structure;
+		setTicksRandomly(true);
+		disableNotifyOnMetaDataChange();
+	}
+	
+	@Override
+	public void onScheduledTick(Level level, int x, int y, int z, Random rand) {
+		super.onScheduledTick(level, x, y, z, rand);
+		grow(level, x, y, z);
+	}
+	
+	@Override
+	protected void tick(Level level, int x, int y, int z) {
+		super.tick(level, x, y, z);
+		grow(level, x, y, z);
+	}
+	
+	public void grow(Level level, int x, int y, int z) {
+		if (!level.getBlockState(x, y, z).isOf(this)) return;
+		if (structure.get().generate(level, level.random, x, y, z) && level.getBlockState(x, y, z).isOf(this)) {
+			level.setBlockState(x, y, z, States.AIR.get());
+		}
+	}
+}

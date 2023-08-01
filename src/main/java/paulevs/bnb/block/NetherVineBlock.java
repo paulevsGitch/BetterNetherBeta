@@ -1,6 +1,7 @@
 package paulevs.bnb.block;
 
 import net.minecraft.block.BaseBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.block.States;
@@ -9,6 +10,8 @@ import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.block.properties.BNBBlockProperties.VineShape;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class NetherVineBlock extends NetherCeilPlantBlock {
@@ -59,5 +62,10 @@ public class NetherVineBlock extends NetherCeilPlantBlock {
 			}
 			level.updateArea(x, y1, z, x, y, z);
 		}
+	}
+	
+	@Override
+	public List<ItemStack> getDropList(Level level, int x, int y, int z, BlockState state, int meta) {
+		return Collections.emptyList();
 	}
 }

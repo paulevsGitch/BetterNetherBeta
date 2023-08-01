@@ -6,8 +6,8 @@
 	"mixins": [
 		"NetherLevelSourceMixin",
 		"NetherDimensionMixin",
-		"FlattenedChunkMixin",
-		"LevelAccessor"
+		"LevelAccessor",
+		"DyeItemMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
