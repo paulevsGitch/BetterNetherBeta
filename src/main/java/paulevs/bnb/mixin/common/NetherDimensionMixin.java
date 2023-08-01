@@ -21,11 +21,6 @@ public class NetherDimensionMixin extends BaseDimension implements StationDimens
 		return 256;
 	}
 	
-	@Override
-	public short getSectionCount() {
-		return (short) (this.getActualLevelHeight() >> 4);
-	}
-	
 	@Inject(method = "pregenLight", at = @At("HEAD"), cancellable = true)
 	private void bnb_pregenLight(CallbackInfo info) {
 		info.cancel();

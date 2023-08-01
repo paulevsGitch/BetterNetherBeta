@@ -57,7 +57,7 @@ public class NetherVineBlock extends NetherCeilPlantBlock {
 				level.setBlockState(x, y1, z, States.AIR.get());
 				y1--;
 			}
-			level.callAreaEvents(x, y1, z, x, y, z);
+			level.updateArea(x, y1, z, x, y, z);
 		}
 	}
 }

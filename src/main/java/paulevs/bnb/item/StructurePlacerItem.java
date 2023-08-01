@@ -28,7 +28,7 @@ public class StructurePlacerItem extends TemplateItemBase {
 			y + d.getOffsetY(),
 			z + d.getOffsetZ()
 		);
-		if (result) level.callAreaEvents(x - 16, y - 16, z - 16, x + 16, y + 16, z + 16);
+		if (result) level.updateArea(x - 16, y - 16, z - 16, x + 16, y + 16, z + 16);
 		return result;
 	}
 }
