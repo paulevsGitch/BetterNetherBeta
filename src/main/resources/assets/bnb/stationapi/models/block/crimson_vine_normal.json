@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/cross",
+	"textures": {
+		"cross": "bnb:block/crimson_vine_normal"
+	}
+}

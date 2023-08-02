@@ -8,6 +8,7 @@ import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
+import paulevs.bnb.world.structures.placers.FloorPlacer;
 import paulevs.bnb.world.structures.placers.StructurePlacer;
 
 import java.util.ArrayList;

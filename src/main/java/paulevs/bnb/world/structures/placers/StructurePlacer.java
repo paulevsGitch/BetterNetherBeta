@@ -8,37 +8,19 @@ import net.modificationstation.stationapi.api.util.maths.MutableBlockPos;
 import java.util.Random;
 import java.util.function.Function;
 
-public class StructurePlacer {
+public abstract class StructurePlacer {
 	protected static final Function<BlockPos, Boolean> DEFAULT_DENSITY = pos -> true;
 	protected static final MutableBlockPos POS = new MutableBlockPos(0, 0, 0);
 	
-	protected final Structure structure;
-	protected final int count;
-	
 	protected Function<BlockPos, Boolean> densityFunction;
+	protected final Structure structure;
 	
-	public StructurePlacer(Structure structure, int count) {
+	public StructurePlacer(Structure structure) {
 		this.densityFunction = DEFAULT_DENSITY;
 		this.structure = structure;
-		this.count = count;
 	}
 	
-	public void place(Level level, Random random, int wx, int wy, int wz) {
-		for (byte i = 0; i < count; i++) {
-			int px = wx + random.nextInt(16);
-			int pz = wz + random.nextInt(16);
-			for (byte dy = 15; dy >= 0; dy--) {
-				int py = wy | dy;
-				if (!densityFunction.apply(POS.set(px, py, pz))) continue;
-				if (!canPlace(level, px, py, pz)) continue;
-				structure.generate(level, random, px, py, pz);
-			}
-		}
-	}
-	
-	protected boolean canPlace(Level level, int x, int y, int z) {
-		return level.getBlockState(x, y, z).getMaterial().isReplaceable() && !level.getBlockState(x, y - 1, z).getMaterial().isReplaceable();
-	}
+	public abstract void place(Level level, Random random, int wx, int wy, int wz);
 	
 	public StructurePlacer setDensityFunction(Function<BlockPos, Boolean> densityFunction) {
 		this.densityFunction = densityFunction;

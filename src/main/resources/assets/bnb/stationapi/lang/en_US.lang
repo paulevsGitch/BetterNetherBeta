@@ -44,6 +44,10 @@ tile.nether_daisy.name=Nether Daisy
 tile.crimson_moss.name=Crimson Moss
 tile.crimson_moss_block.name=Crimson Moss Block
 
+tile.crimson_vine.name=Crimson Vine
+tile.crimson_vine_with_berries.name=Crimson Vine
+item.crimson_vine_berries.name=Crimson Berries
+
 tile.crimson_tree_placer.name=Crimson Tree Placer
 
 tab.creative_tab.name=Better Nether Beta

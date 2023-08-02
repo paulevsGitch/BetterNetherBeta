@@ -6,8 +6,11 @@ import net.minecraft.level.structure.Structure;
 import java.util.Random;
 
 public class VolumetricPlacer extends StructurePlacer {
+	protected final int count;
+	
 	public VolumetricPlacer(Structure structure, int count) {
-		super(structure, count);
+		super(structure);
+		this.count = count;
 	}
 	
 	@Override

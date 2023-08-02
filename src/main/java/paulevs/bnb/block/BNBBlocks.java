@@ -67,10 +67,11 @@ public class BNBBlocks {
 	public static final BaseBlock CRIMSON_MOSS = make("crimson_moss", MossBlock::new);
 	public static final BaseBlock CRIMSON_MOSS_BLOCK = make("crimson_moss_block", NetherMossBlock::new);
 	
+	public static final GrowingNetherVineBlock CRIMSON_VINE = make("crimson_vine", GrowingNetherVineBlock::new);
+	public static final CollectableNetherVineBlock CRIMSON_VINE_WITH_BERRIES = (CollectableNetherVineBlock) makeNI("crimson_vine_with_berries", CollectableNetherVineBlock::new).setLightEmittance(0.5F);
+	
 	private static <B extends BaseBlock> B make(String name, Function<Identifier, B> constructor) {
-		Identifier id = BNB.id(name);
-		B block = constructor.apply(id);
-		block.setTranslationKey(id.toString());
+		B block = makeNI(name, constructor);
 		BLOCKS_WITH_ITEMS.add(block);
 		return block;
 	}
@@ -81,11 +82,16 @@ public class BNBBlocks {
 		return block;
 	}
 	
-	private static BaseBlock make(String name, BiFunction<Identifier, Supplier<Structure>, BaseBlock> constructor, Supplier<Structure> structure) {
-		Identifier id = BNB.id(name);
-		BaseBlock block = constructor.apply(id, structure);
-		block.setTranslationKey(id.toString());
+	private static <B extends BaseBlock> B make(String name, BiFunction<Identifier, Supplier<Structure>, B> constructor, Supplier<Structure> structure) {
+		B block = makeNI(name, constructor, structure);
 		BLOCKS_WITH_ITEMS.add(block);
+		return block;
+	}
+	
+	private static <B extends BaseBlock> B makeNI(String name, Function<Identifier, B> constructor) {
+		Identifier id = BNB.id(name);
+		B block = constructor.apply(id);
+		block.setTranslationKey(id.toString());
 		return block;
 	}
 	
@@ -96,9 +102,18 @@ public class BNBBlocks {
 		return block;
 	}
 	
+	private static <B extends BaseBlock> B makeNI(String name, BiFunction<Identifier, Supplier<Structure>, B> constructor, Supplier<Structure> structure) {
+		Identifier id = BNB.id(name);
+		B block = constructor.apply(id, structure);
+		block.setTranslationKey(id.toString());
+		return block;
+	}
+	
 	public static void init() {
 		CRIMSON_SLAB_HALF.setFullBlock(CRIMSON_SLAB_FULL);
 		CRIMSON_SLAB_FULL.setHalfBlock(CRIMSON_SLAB_HALF);
 		CRIMSON_LEAVES.setSapling(CRIMSON_SAPLING);
+		CRIMSON_VINE.setGrown(CRIMSON_VINE_WITH_BERRIES);
+		CRIMSON_VINE_WITH_BERRIES.setBasic(CRIMSON_VINE);
 	}
 }
