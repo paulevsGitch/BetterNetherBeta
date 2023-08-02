@@ -7,6 +7,7 @@ import paulevs.bnb.BNB;
 
 public class BNBBlockTags {
 	public static final TagKey<BaseBlock> NETHERRACK_TERRAIN = get("netherrack_terrain");
+	public static final TagKey<BaseBlock> ORGANIC_TERRAIN = get("organic_terrain");
 	
 	private static TagKey<BaseBlock> get(String name) {
 		return TagKey.of(BlockRegistry.KEY, BNB.id(name));

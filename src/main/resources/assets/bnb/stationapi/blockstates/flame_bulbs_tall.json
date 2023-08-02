@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"shape=top": { "model": "bnb:block/flame_bulbs_tall_top" },
+		"shape=bottom": { "model": "bnb:block/flame_bulbs_tall_bottom" }
+	}
+}

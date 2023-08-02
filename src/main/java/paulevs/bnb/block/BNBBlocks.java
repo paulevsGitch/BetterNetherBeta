@@ -60,6 +60,7 @@ public class BNBBlocks {
 	public static final BaseBlock EMBER_TREE_WEEPING_VINE = make("ember_tree_weeping_vine", NetherVineBlock::new);
 	
 	public static final BaseBlock FLAME_BULBS = make("flame_bulbs", NetherFloorPlantBlock::new);
+	public static final BaseBlock FLAME_BULBS_TALL = make("flame_bulbs_tall", DoubleFloorPlantBlock::new);
 	public static final BaseBlock CRIMSON_ROOTS = make("crimson_roots", NetherFloorPlantBlock::new);
 	public static final BaseBlock NETHER_DAISY = make("nether_daisy", NetherFloorPlantBlock::new).setLightEmittance(0.5F);
 	public static final BaseBlock FIREWEED = make("fireweed", DoubleFloorPlantBlock::new).setLightEmittance(0.5F);

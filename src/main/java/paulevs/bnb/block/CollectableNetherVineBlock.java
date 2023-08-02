@@ -37,14 +37,15 @@ public class CollectableNetherVineBlock extends NetherVineBlock {
 	
 	@Override
 	public boolean canUse(Level level, int x, int y, int z, PlayerBase player) {
-		boolean canUse = player.getHeldItem().itemId == BaseItem.shears.id;
+		ItemStack stack = player.getHeldItem();
+		boolean canUse = stack != null && stack.itemId == BaseItem.shears.id;
 		if (level.isRemote) return canUse;
 		if (!canUse) return false;
 		
 		VineShape shape = level.getBlockState(x, y, z).get(BNBBlockProperties.VINE_SHAPE);
 		level.setBlockState(x, y, z, basic.getDefaultState().with(BNBBlockProperties.VINE_SHAPE, shape));
 		
-		ItemStack stack = new ItemStack(collectableItem, 1 + level.random.nextInt(3));
+		stack = new ItemStack(collectableItem, 1 + level.random.nextInt(3));
 		if (!player.inventory.addStack(stack)) player.dropItem(stack);
 		
 		return true;
