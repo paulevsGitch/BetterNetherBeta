@@ -25,7 +25,7 @@ public class BNBStructures {
 	public static final Structure NETHER_DAISY_STRUCTURE = new SimpleScatterStructure(3, 5, BNBBlocks.NETHER_DAISY);
 	public static final Structure FIREWEED_STRUCTURE = new DoublePlantScatterStructure(2, 3, BNBBlocks.FIREWEED);
 	public static final Structure CRIMSON_MOSS_STRUCTURE = new MossScatterStructure(
-		3, 0.6F,
+		3, 0.4F,
 		(MossBlock) BNBBlocks.CRIMSON_MOSS
 	);
 	public static final Structure CRIMSON_MOSS_BLOCK_STRUCTURE = new BlockMossScatterStructure(
@@ -60,8 +60,9 @@ public class BNBStructures {
 	public static final StructurePlacer CRIMSON_ROOTS_PLACER = new FloorPlacer(CRIMSON_ROOTS_STRUCTURE, 1).setDensityFunction(getDensity());
 	public static final StructurePlacer NETHER_DAISY_PLACER = new FloorPlacer(NETHER_DAISY_STRUCTURE, 1).setDensityFunction(getDensity());
 	public static final StructurePlacer FIREWEED_STRUCTURE_PLACER = new FloorPlacer(FIREWEED_STRUCTURE, 1).setDensityFunction(getDensity());
-	public static final StructurePlacer CRIMSON_MOSS_PLACER = new VolumetricPlacer(CRIMSON_MOSS_STRUCTURE, 3).setDensityFunction(getDensity());
+	public static final StructurePlacer CRIMSON_MOSS_PLACER = new VolumetricPlacer(CRIMSON_MOSS_STRUCTURE, 4).setDensityFunction(getDensity());
 	public static final StructurePlacer CRIMSON_MOSS_BLOCK_PLACER = new VolumetricPlacer(CRIMSON_MOSS_BLOCK_STRUCTURE, 3).setDensityFunction(getDensity());
+	public static final StructurePlacer CRIMSON_MOSS_CEILING_PLACER = new CeilingPlacer(CRIMSON_MOSS_BLOCK_STRUCTURE, 5).setDensityFunction(getDensity());
 	public static final StructurePlacer CRIMSON_VINE_SHORT_PLACER = new CeilingPlacer(CRIMSON_VINE_SHORT_STRUCTURE, 10).setDensityFunction(getDensity());
 	public static final StructurePlacer CRIMSON_VINE_LONG_PLACER = new CeilingPlacer(CRIMSON_VINE_LONG_STRUCTURE, 5).setDensityFunction(getDensity());
 	public static final StructurePlacer CRIMSON_TREE_PLACER = new FloorPlacer(CRIMSON_TREE, 2);

@@ -21,6 +21,7 @@ public class BNBBiomes {
 		.addStructure(BNBStructures.NETHER_DAISY_PLACER)
 		.addStructure(BNBStructures.CRIMSON_ROOTS_PLACER)
 		.addStructure(BNBStructures.FLAME_BULBS_PLACER)
+		.addStructure(BNBStructures.CRIMSON_MOSS_CEILING_PLACER)
 		.addStructure(BNBStructures.CRIMSON_VINE_SHORT_PLACER)
 		.addStructure(BNBStructures.CRIMSON_VINE_LONG_PLACER)
 		.addStructure(BNBStructures.CRIMSON_MOSS_BLOCK_PLACER)
