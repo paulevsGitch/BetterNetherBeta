@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"direction=north": { "model": "bnb:block/glowstone_shards", "x": 90, "y": 180 },
+		"direction=south": { "model": "bnb:block/glowstone_shards", "x": 90 },
+		"direction=east": { "model": "bnb:block/glowstone_shards", "x": 90, "y": 270 },
+		"direction=west": { "model": "bnb:block/glowstone_shards", "x": 90, "y": 90 },
+		"direction=down": { "model": "bnb:block/glowstone_shards" },
+		"direction=up": { "model": "bnb:block/glowstone_shards", "x": 180 }
+	}
+}

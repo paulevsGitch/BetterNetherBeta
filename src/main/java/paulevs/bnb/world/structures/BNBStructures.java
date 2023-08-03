@@ -78,7 +78,7 @@ public class BNBStructures {
 	public static final StructurePlacer CRIMSON_VINE_LONG_PLACER = new CeilingPlacer(CRIMSON_VINE_LONG_STRUCTURE, 5).setDensityFunction(getDensity());
 	public static final StructurePlacer CRIMSON_TREE_PLACER = new FloorPlacer(CRIMSON_TREE, 3).setDensityFunction(getDensity());
 	public static final StructurePlacer CRIMSON_BUSH_PLACER = new FloorPlacer(CRIMSON_TREE_BUSH, 3).setDensityFunction(getDensity());
-	public static final StructurePlacer LAVA_LAKE_PLACER = new FloorPlacer(LAVA_LAKE, 1).setDensityFunction(pos -> RANDOM.nextInt(7) == 0);
+	public static final StructurePlacer LAVA_LAKE_PLACER = new FloorPlacer(LAVA_LAKE, 1).setCentered(true).setDensityFunction(pos -> RANDOM.nextInt(7) == 0);
 	
 	private static Function<BlockPos, Boolean> getDensity() {
 		PerlinNoise noise = new PerlinNoise();

@@ -3,6 +3,7 @@ package paulevs.bnb.world.structures.common;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
+import paulevs.bnb.block.BNBBlockTags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,7 @@ public class PillarStructure extends Structure {
 	
 	@Override
 	public boolean generate(Level level, Random random, int x, int y, int z) {
-		BlockState state = level.getBlockState(x, y - 1, z);
-		if (!state.getBlock().isFullCube() || !state.getBlock().isFullOpaque()) return false;
+		if (!level.getBlockState(x, y - 1, z).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) return false;
 		if (!level.getBlockState(x, y, z).isAir()) return false;
 		for (PillarEntry entry : entries) {
 			int height = entry.minHeight;

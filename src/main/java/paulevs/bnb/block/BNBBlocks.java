@@ -71,6 +71,7 @@ public class BNBBlocks {
 	
 	public static final GrowingNetherVineBlock CRIMSON_VINE = make("crimson_vine", GrowingNetherVineBlock::new);
 	public static final CollectableNetherVineBlock CRIMSON_VINE_WITH_BERRIES = (CollectableNetherVineBlock) makeNI("crimson_vine_with_berries", CollectableNetherVineBlock::new).setLightEmittance(0.5F);
+	public static final BaseBlock GLOWSTONE_SHARDS = make("glowstone_shards", GlowstoneShards::new).setLightEmittance(1F);
 	
 	private static <B extends BaseBlock> B make(String name, Function<Identifier, B> constructor) {
 		B block = makeNI(name, constructor);

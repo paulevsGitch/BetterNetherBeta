@@ -1,5 +1,10 @@
 {
 	"variants": {
-		"": { "model": "bnb:block/nether_daisy" }
+		"": [
+			{ "model": "bnb:block/nether_daisy" },
+			{ "model": "bnb:block/nether_daisy", "y": 90 },
+			{ "model": "bnb:block/nether_daisy", "y": 180 },
+			{ "model": "bnb:block/nether_daisy", "y": 270 }
+		]
 	}
 }

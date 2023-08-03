@@ -9,6 +9,7 @@ import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 
 public class BNBBlockProperties {
 	public static final EnumProperty<DoubleShape> DOUBLE_SHAPE = EnumProperty.of("shape", DoubleShape.class);
+	public static final EnumProperty<Direction> DIRECTION = EnumProperty.of("direction", Direction.class);
 	public static final EnumProperty<VineShape> VINE_SHAPE = EnumProperty.of("shape", VineShape.class);
 	public static final EnumProperty<Axis> AXIS = EnumProperty.of("axis", Axis.class);
 	public static final BooleanProperty NEAR_LAVA = BooleanProperty.of("near_lava");

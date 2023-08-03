@@ -17,9 +17,11 @@ import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
+import net.modificationstation.stationapi.api.util.math.Vector4f;
 import paulevs.bnb.BNB;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -46,13 +48,13 @@ public class OBJModel implements UnbakedModel {
 	public void setParents(Function<Identifier, UnbakedModel> parents) {}
 	
 	@Override
-	public BakedModel bake(Baker baker, Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings rotationContainer, Identifier modelId) {
+	public BakedModel bake(Baker baker, Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings settings, Identifier modelId) {
 		BasicBakedModel.Builder builder = new BasicBakedModel.Builder(
 			false, false, false,
 			ModelTransformation.NONE,
 			ModelOverrideList.EMPTY
 		);
-		this.quads.forEach(quad -> builder.addQuad(quad.bake(textureGetter)));
+		this.quads.forEach(quad -> builder.addQuad(quad.bake(textureGetter, settings)));
 		builder.setParticle(textureGetter.apply(particleTexture));
 		return builder.build();
 	}
@@ -139,42 +141,44 @@ public class OBJModel implements UnbakedModel {
 		}
 	}
 	
-	private static class QuadData {
-		final int[] vertexData;
-		final int colorIndex;
-		final Direction face;
-		final SpriteIdentifier texture;
-		final boolean shade;
-		final int[] bakedData;
-		
-		QuadData(int[] vertexData, int colorIndex, Direction face, SpriteIdentifier texture, boolean shade) {
-			this.vertexData = vertexData;
-			this.colorIndex = colorIndex;
-			this.face = face;
-			this.texture = texture;
-			this.shade = shade;
-			this.bakedData = new int[32];
-			System.arraycopy(this.vertexData, 0, this.bakedData, 0, 32);
-		}
-		
-		BakedQuad bake(Function<SpriteIdentifier, Sprite> textureGetter) {
+	private record QuadData(int[] vertexData, int colorIndex, Direction face, SpriteIdentifier texture, boolean shade) {
+		BakedQuad bake(Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings settings) {
+			int[] bakedData = Arrays.copyOf(this.vertexData, 32);
 			Sprite sprite = textureGetter.apply(texture);
+			Vector4f pos = new Vector4f();
+			
 			for (byte i = 0; i < 4; i++) {
-				int index = (i << 3) + 3;
+				int index = i << 3;
+				
+				pos.set(
+					Float.intBitsToFloat(this.vertexData[index]) - 0.5F,
+					Float.intBitsToFloat(this.vertexData[index + 1]) - 0.5F,
+					Float.intBitsToFloat(this.vertexData[index + 2]) - 0.5F,
+					1F
+				);
+				pos.transform(settings.getRotation().getMatrix());
+				bakedData[index] = Float.floatToIntBits(pos.getX() + 0.5F);
+				bakedData[index + 1] = Float.floatToIntBits(pos.getY() + 0.5F);
+				bakedData[index + 2] = Float.floatToIntBits(pos.getZ() + 0.5F);
+				
+				index += 3;
 				
 				float delta = Float.intBitsToFloat(this.vertexData[index]);
 				delta = MathHelper.lerp(delta, sprite.getMinU(), sprite.getMaxU());
-				this.bakedData[index] = Float.floatToIntBits(delta);
+				bakedData[index] = Float.floatToIntBits(delta);
 				
 				index++;
 				delta = Float.intBitsToFloat(this.vertexData[index]);
 				delta = MathHelper.lerp(delta, sprite.getMinV(), sprite.getMaxV());
-				this.bakedData[index] = Float.floatToIntBits(delta);
+				bakedData[index] = Float.floatToIntBits(delta);
 			}
+			
 			BakedQuad quad = new BakedQuad(bakedData, colorIndex, face, sprite, shade);
+			
 			if (texture.texture.id.endsWith("_e")) {
 				EmissiveQuad.cast(quad).setEmissive(true);
 			}
+			
 			return quad;
 		}
 	}

@@ -2,10 +2,12 @@ package paulevs.bnb.listeners;
 
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.BaseBlock;
+import net.modificationstation.stationapi.api.event.block.BlockEvent.BeforePlacedByItem;
 import net.modificationstation.stationapi.api.event.level.biome.BiomeRegisterEvent;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
 import paulevs.bnb.block.BNBBlocks;
+import paulevs.bnb.block.GlowstoneShards;
 import paulevs.bnb.item.BNBItems;
 import paulevs.bnb.world.biome.BNBBiomes;
 
@@ -24,6 +26,14 @@ public class CommonListener {
 	@EventListener
 	public void onBiomeRegister(BiomeRegisterEvent event) {
 		BNBBiomes.init();
+	}
+	
+	@EventListener
+	public void beforeItemPlace(BeforePlacedByItem event) {
+		if (!(event.block instanceof GlowstoneShards shards)) return;
+		if (!shards.isSupport(event.world, event.x, event.y, event.z, event.side.getOpposite())) {
+			event.placeFunction = () -> false;
+		}
 	}
 	
 	/*@SuppressWarnings("unchecked")
