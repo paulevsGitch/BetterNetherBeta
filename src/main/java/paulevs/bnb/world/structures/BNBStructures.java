@@ -1,10 +1,12 @@
 package paulevs.bnb.world.structures;
 
+import net.minecraft.block.BaseBlock;
 import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.BlockPos;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.MossBlock;
 import paulevs.bnb.noise.PerlinNoise;
+import paulevs.bnb.world.structures.common.CrystalStructure;
 import paulevs.bnb.world.structures.common.NetherLake;
 import paulevs.bnb.world.structures.common.PillarStructure;
 import paulevs.bnb.world.structures.placers.CeilingPlacer;
@@ -61,7 +63,17 @@ public class BNBStructures {
 		.addSection(BNBBlocks.CRIMSON_STEM.getDefaultState(), 1, 2)
 		.addSection(BNBBlocks.CRIMSON_LEAVES.getDefaultState(), 2, 3);
 	
-	public static final Structure LAVA_LAKE = new NetherLake();
+	public static final Structure LAVA_LAKE_STRUCTURE = new NetherLake();
+	public static final Structure GLOWSTONE_CRYSTAL_FLOOR_STRUCTURE = new CrystalStructure(
+		BaseBlock.GLOWSTONE,
+		BNBBlocks.GLOWSTONE_SHARDS,
+		false, 5, 3
+	);
+	public static final Structure GLOWSTONE_CRYSTAL_CEILING_STRUCTURE = new CrystalStructure(
+		BaseBlock.GLOWSTONE,
+		BNBBlocks.GLOWSTONE_SHARDS,
+		true, 5, 3
+	);
 	
 	private static final Random RANDOM = new Random(0);
 	
@@ -78,7 +90,9 @@ public class BNBStructures {
 	public static final StructurePlacer CRIMSON_VINE_LONG_PLACER = new CeilingPlacer(CRIMSON_VINE_LONG_STRUCTURE, 5).setDensityFunction(getDensity());
 	public static final StructurePlacer CRIMSON_TREE_PLACER = new FloorPlacer(CRIMSON_TREE, 3).setDensityFunction(getDensity());
 	public static final StructurePlacer CRIMSON_BUSH_PLACER = new FloorPlacer(CRIMSON_TREE_BUSH, 3).setDensityFunction(getDensity());
-	public static final StructurePlacer LAVA_LAKE_PLACER = new FloorPlacer(LAVA_LAKE, 1).setCentered(true).setDensityFunction(pos -> RANDOM.nextInt(7) == 0);
+	public static final StructurePlacer LAVA_LAKE_PLACER = new FloorPlacer(LAVA_LAKE_STRUCTURE, 1).setCentered(true).setDensityFunction(pos -> RANDOM.nextInt(7) == 0);
+	public static final StructurePlacer GLOWSTONE_CRYSTAL_FLOOR_PLACER = new FloorPlacer(GLOWSTONE_CRYSTAL_FLOOR_STRUCTURE, 1).setDensityFunction(pos -> RANDOM.nextInt(15) == 0);
+	public static final StructurePlacer GLOWSTONE_CRYSTAL_CEILING_PLACER = new CeilingPlacer(GLOWSTONE_CRYSTAL_CEILING_STRUCTURE, 1).setDensityFunction(pos -> RANDOM.nextInt(15) == 0);
 	
 	private static Function<BlockPos, Boolean> getDensity() {
 		PerlinNoise noise = new PerlinNoise();

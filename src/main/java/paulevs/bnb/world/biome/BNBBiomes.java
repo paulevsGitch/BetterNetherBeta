@@ -17,6 +17,8 @@ public class BNBBiomes {
 	public static final NetherBiome CRIMSON_FOREST = make("crimson_forest", SimpleNetherBiome::new)
 		.setSurface(BNBBlocks.CRIMSON_NYLIUM.getDefaultState())
 		.addStructure(BNBStructures.LAVA_LAKE_PLACER)
+		.addStructure(BNBStructures.GLOWSTONE_CRYSTAL_FLOOR_PLACER)
+		.addStructure(BNBStructures.GLOWSTONE_CRYSTAL_CEILING_PLACER)
 		.addStructure(BNBStructures.CRIMSON_TREE_PLACER)
 		.addStructure(BNBStructures.CRIMSON_BUSH_PLACER)
 		.addStructure(BNBStructures.FIREWEED_STRUCTURE_PLACER)

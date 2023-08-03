@@ -1,5 +1,7 @@
 package paulevs.bnb.block;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.BaseBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
@@ -11,6 +13,7 @@ import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
 import net.modificationstation.stationapi.api.util.math.Direction;
+import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 
 import java.util.Random;
@@ -58,6 +61,22 @@ public class GlowstoneShards extends TemplateBlockBase {
 	@Override
 	public boolean isFullCube() {
 		return false;
+	}
+	
+	@Override
+	@Environment(EnvType.CLIENT)
+	public Box getOutlineShape(Level level, int x, int y, int z) {
+		Direction direction = level.getBlockState(x, y, z).get(BNBBlockProperties.DIRECTION);
+		Axis axis = direction.getAxis();
+		setBoundingBox(
+			axis == Axis.X ? (direction.getOffsetX() < 0 ? 0.0F : 0.125F) : 0.125F,
+			axis == Axis.Y ? (direction.getOffsetY() < 0 ? 0.0F : 0.125F) : 0.125F,
+			axis == Axis.Z ? (direction.getOffsetZ() < 0 ? 0.0F : 0.125F) : 0.125F,
+			axis == Axis.X ? (direction.getOffsetX() < 0 ? 0.875F : 1.0F) : 0.875F,
+			axis == Axis.Y ? (direction.getOffsetY() < 0 ? 0.875F : 1.0F) : 0.875F,
+			axis == Axis.Z ? (direction.getOffsetZ() < 0 ? 0.875F : 1.0F) : 0.875F
+		);
+		return super.getOutlineShape(level, x, y, z);
 	}
 	
 	protected void tick(Level level, int x, int y, int z) {
