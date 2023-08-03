@@ -9,9 +9,6 @@ import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.block.properties.BNBBlockProperties.VineShape;
 
-import java.util.List;
-import java.util.Random;
-
 public class CollectableNetherVineBlock extends NetherVineBlock {
 	private NetherVineBlock basic;
 	private BaseItem collectableItem;

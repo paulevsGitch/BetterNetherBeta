@@ -2,11 +2,8 @@ package paulevs.bnb.world.structures.placers;
 
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
-import net.minecraft.util.maths.BlockPos;
-import net.modificationstation.stationapi.api.util.maths.MutableBlockPos;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class FloorPlacer extends StructurePlacer {
 	protected final int count;

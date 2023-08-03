@@ -64,6 +64,7 @@ public class BNBBlocks {
 	public static final BaseBlock CRIMSON_ROOTS = make("crimson_roots", NetherFloorPlantBlock::new);
 	public static final BaseBlock NETHER_DAISY = make("nether_daisy", NetherFloorPlantBlock::new).setLightEmittance(0.5F);
 	public static final BaseBlock FIREWEED = make("fireweed", DoubleFloorPlantBlock::new).setLightEmittance(0.5F);
+	public static final BaseBlock LANTERN_GRASS = make("lantern_grass", DoubleFloorPlantBlock::new).setLightEmittance(0.75F);
 	
 	public static final BaseBlock CRIMSON_MOSS = make("crimson_moss", MossBlock::new);
 	public static final BaseBlock CRIMSON_MOSS_BLOCK = make("crimson_moss_block", NetherMossBlock::new);

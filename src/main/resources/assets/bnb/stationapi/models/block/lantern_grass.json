@@ -1,0 +1,10 @@
+{
+	"parent": "minecraft:block/block",
+	"obj": "block/lantern_grass",
+	"offset": [0.5, 0.0, 0.5],
+	"textures": {
+		"Material": "bnb:block/lantern_grass",
+		"Emissive": "bnb:block/lantern_grass_e",
+		"particle": "bnb:block/lantern_grass"
+	}
+}

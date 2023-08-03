@@ -30,7 +30,6 @@ public class BNBClientSounds {
 	
 	private static final SoundEntry[] MUSIC = new SoundEntry[] {
 		getSound(BNB.id("music/faultlines-asher_fulero")),
-		getSound(BNB.id("music/glimpsing_infinity-asher_fulero")),
 		getSound(BNB.id("music/lament_of_the_ancients-asher_fulero")),
 		getSound(BNB.id("music/sinister_cathedral-asher_fulero")),
 		getSound(BNB.id("music/an_excuse_to_do_less_not_more-patches")),

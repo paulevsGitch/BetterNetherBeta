@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"shape=bottom": { "model": "bnb:block/lantern_grass" },
+		"shape=top": { "model": "bnb:block/lantern_grass_top" }
+	}
+}
