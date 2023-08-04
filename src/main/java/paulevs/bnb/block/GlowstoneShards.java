@@ -96,7 +96,10 @@ public class GlowstoneShards extends TemplateBlockBase {
 		y += direction.getOffsetY();
 		z += direction.getOffsetZ();
 		
-		BaseBlock block = level.getBlockState(x, y, z).getBlock();
+		BlockState state = level.getBlockState(x, y, z);
+		if (state.isAir()) return false;
+		
+		BaseBlock block = state.getBlock();
 		if (block.isFullCube()) return true;
 		
 		Box shape = block.getCollisionShape(level, x, y, z);

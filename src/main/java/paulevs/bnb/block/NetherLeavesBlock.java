@@ -9,6 +9,7 @@ import net.minecraft.level.BlockView;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
+import paulevs.bnb.block.properties.BNBBlockMaterials;
 import paulevs.vbe.block.VBELeavesBlock;
 
 import java.util.Collections;
@@ -19,7 +20,7 @@ public class NetherLeavesBlock extends VBELeavesBlock {
 	private BaseBlock sapling;
 	
 	public NetherLeavesBlock(Identifier id) {
-		super(id, Material.LEAVES, 9);
+		super(id, BNBBlockMaterials.NETHER_LEAVES, 9);
 		setHardness(LEAVES.getHardness());
 		setLightOpacity(255);
 	}

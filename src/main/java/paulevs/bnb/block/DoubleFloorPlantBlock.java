@@ -4,10 +4,12 @@ import net.minecraft.block.BaseBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
+import net.minecraft.util.maths.Box;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.block.States;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
+import paulevs.bnb.block.properties.BNBBlockMaterials;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.block.properties.BNBBlockProperties.DoubleShape;
 
@@ -16,7 +18,7 @@ import java.util.List;
 
 public class DoubleFloorPlantBlock extends NetherFloorPlantBlock {
 	public DoubleFloorPlantBlock(Identifier id) {
-		super(id);
+		super(id, BNBBlockMaterials.NETHER_PLANT);
 		setDefaultState(getDefaultState().with(BNBBlockProperties.DOUBLE_SHAPE, DoubleShape.BOTTOM));
 	}
 	
@@ -62,5 +64,12 @@ public class DoubleFloorPlantBlock extends NetherFloorPlantBlock {
 			level.setBlockState(x, y - 1, z, States.AIR.get());
 		}
 		super.onBlockRemoved(level, x, y, z);
+	}
+	
+	@Override
+	public Box getOutlineShape(Level level, int x, int y, int z) {
+		BlockState state = level.getBlockState(x, y, z);
+		this.maxY = state.get(BNBBlockProperties.DOUBLE_SHAPE) == DoubleShape.BOTTOM ? 1F : 0.875F;
+		return super.getOutlineShape(level, x, y, z);
 	}
 }

@@ -15,14 +15,16 @@ import java.util.Random;
 public class CrystalStructure extends Structure {
 	private final BlockState fullBlock;
 	private final Direction direction;
-	private final BlockState shards;
+	private final BlockState shardsFront;
+	private final BlockState shardsBack;
 	private final int height;
 	private final int radius;
 	
 	public CrystalStructure(BaseBlock fullBlock, GlowstoneShards shards, boolean ceiling, int height, int radius) {
 		this.fullBlock = fullBlock.getDefaultState();
 		this.direction = ceiling ? Direction.UP : Direction.DOWN;
-		this.shards = shards.getDefaultState().with(BNBBlockProperties.DIRECTION, this.direction);
+		this.shardsFront = shards.getDefaultState().with(BNBBlockProperties.DIRECTION, this.direction);
+		this.shardsBack = shardsFront.with(BNBBlockProperties.DIRECTION, this.direction.getOpposite());
 		this.height = height;
 		this.radius = radius;
 	}
@@ -48,23 +50,29 @@ public class CrystalStructure extends Structure {
 							int py = y + dy * sign;
 							if (!level.getBlockState(px, py, pz).isAir()) continue;
 							if (!level.getBlockState(px, py - sign, pz).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) continue;
-							level.setBlockState(px, py, pz, shards);
+							level.setBlockState(px, py, pz, shardsFront);
 							break;
 						}
 					}
 					continue;
 				}
 				
-				int start = random.nextInt(3) + 2;
+				int start = random.nextInt(3) + 1;
 				for (int dy = -start; dy < height; dy++) {
 					int py = y + dy * sign;
-					if (!level.getBlockState(px, py, pz).isAir()) continue;
+					BlockState state = level.getBlockState(px, py, pz);
+					if (!state.isAir() && !state.isIn(BNBBlockTags.NETHERRACK_TERRAIN)) continue;
 					level.setBlockState(px, py, pz, fullBlock);
 				}
 				
-				int py = y + height * sign;
+				int py = y - start * sign - sign;
+				if (level.getBlockState(px, py, pz).isAir() && level.getBlockState(px, py + sign, pz) == fullBlock) {
+					level.setBlockState(px, py, pz, shardsBack);
+				}
+				
+				py = y + height * sign;
 				if (!level.getBlockState(px, py, pz).isAir()) continue;
-				level.setBlockState(px, py, pz, shards);
+				level.setBlockState(px, py, pz, shardsFront);
 			}
 		}
 		

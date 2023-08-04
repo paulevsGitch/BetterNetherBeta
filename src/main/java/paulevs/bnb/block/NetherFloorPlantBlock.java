@@ -4,10 +4,15 @@ import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
+import paulevs.bnb.block.properties.BNBBlockMaterials;
 
 public class NetherFloorPlantBlock extends NetherPlantBlock {
 	public NetherFloorPlantBlock(Identifier id) {
-		super(id, Material.PLANT);
+		this(id, BNBBlockMaterials.NETHER_PLANT_REPLACEABLE);
+	}
+	
+	public NetherFloorPlantBlock(Identifier id, Material material) {
+		super(id, material);
 		this.setBoundingBox(0.125F, 0.0F, 0.125F, 0.875F, 0.875F, 0.875F);
 	}
 	

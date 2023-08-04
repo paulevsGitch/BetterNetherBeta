@@ -5,10 +5,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
+import paulevs.bnb.block.properties.BNBBlockMaterials;
 
 public class NetherCeilPlantBlock extends NetherPlantBlock {
 	public NetherCeilPlantBlock(Identifier id) {
-		super(id, Material.PLANT);
+		super(id, BNBBlockMaterials.NETHER_PLANT);
 		this.setBoundingBox(0.125F, 0.25F, 0.125F, 0.875F, 1.0F, 0.875F);
 	}
 	

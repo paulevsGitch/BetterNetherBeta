@@ -11,12 +11,13 @@ import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.Direction;
+import paulevs.bnb.block.properties.BNBBlockMaterials;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.sound.BNBSounds;
 
 public class MossBlock extends NetherPlantBlock {
 	public MossBlock(Identifier id) {
-		super(id, Material.PLANT);
+		super(id, BNBBlockMaterials.NETHER_PLANT);
 		setSounds(BNBSounds.MOSS_BLOCK);
 		BlockState state = getDefaultState();
 		for (byte i = 0; i < 6; i++) {
