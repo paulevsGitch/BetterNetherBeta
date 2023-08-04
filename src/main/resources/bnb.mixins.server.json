@@ -3,7 +3,7 @@
 	"minVersion": "0.8",
 	"package": "paulevs.bnb.mixin.server",
 	"compatibilityLevel": "JAVA_17",
-	"client": [
+	"server": [
 		"ServerPlayerConnectionManagerMixin"
 	],
 	"injectors": {
