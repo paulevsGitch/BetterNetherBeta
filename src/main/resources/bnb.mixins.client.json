@@ -6,12 +6,12 @@
 	"client": [
 		"LightingCalculatorImplMixin",
 		"JsonUnbakedModelMixin",
+		"MainMenuScreenMixin",
 		"LevelRendererMixin",
 		"GameRendererMixin",
 		"SoundHelperMixin",
 		"BakedQuadMixin",
 		"MinecraftMixin",
-		"MainMenuMixin",
 		"LevelMixin"
 	],
 	"injectors": {
