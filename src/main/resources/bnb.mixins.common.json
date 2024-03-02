@@ -6,7 +6,8 @@
 	"mixins": [
 		"NetherLevelSourceMixin",
 		"NetherDimensionMixin",
-		"LevelAccessor"
+		"LevelAccessor",
+		"BiomeMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

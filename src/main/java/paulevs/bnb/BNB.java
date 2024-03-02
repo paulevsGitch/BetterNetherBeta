@@ -5,7 +5,6 @@ import net.modificationstation.stationapi.api.util.Namespace;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.InputStream;
 import java.net.URL;
 
 public class BNB {

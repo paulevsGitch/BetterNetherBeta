@@ -44,5 +44,13 @@
 		"minecraft": "1.0.0-beta.7.3",
 		"vbe": ">=0.2.0",
 		"stationapi": "*"
+	},
+	
+	"custom": {
+		"loom:injected_interfaces": {
+			"net/minecraft/class_153": [
+				"paulevs/bnb/world/biome/BNBBiomeData"
+			]
+		}
 	}
 }

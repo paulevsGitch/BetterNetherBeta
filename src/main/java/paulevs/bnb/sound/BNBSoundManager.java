@@ -12,7 +12,6 @@ import java.util.Random;
 
 public class BNBSoundManager {
 	private static final String STREAMING_KEY = "streaming";
-	private static final String AMBIENT_KEY = "BNBAmbience";
 	private static final String MUSIC_KEY = "BgMusic";
 	private static final Random RANDOM = new Random();
 	
@@ -131,8 +130,7 @@ public class BNBSoundManager {
 	private static Identifier getSound(PlayerEntity player, BiomeSource source) {
 		int x = MathHelper.floor(player.x);
 		int z = MathHelper.floor(player.z);
-		//return source.getBiome(x, z) instanceof NetherBiome biome ? biome.getAmbientSound() : null;
-		return null;
+		return source.getBiome(x, z).bnb_getBiomeAmbience();
 	}
 	
 	private enum SoundState {
