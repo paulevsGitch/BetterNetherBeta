@@ -12,18 +12,17 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import paulevs.bnb.rendering.FogInfo;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
 	@Unique private static final boolean BNB_FARVIEW = FabricLoader.getInstance().isModLoaded("farview");
 	@Shadow private Minecraft minecraft;
 	@Shadow private float fogDistance;
-	@Shadow float fogColorR;
+	/*@Shadow float fogColorR;
 	@Shadow float fogColorG;
-	@Shadow float fogColorB;
+	@Shadow float fogColorB;*/
 	
-	@Inject(method = "setupFog(IF)V", at = @At("HEAD"))
+	/*@Inject(method = "setupFog(IF)V", at = @At("HEAD"))
 	private void bnb_changeFogColor(int i, float par2, CallbackInfo info) {
 		if (minecraft.level.dimension.id != -1) return;
 		FogInfo.setColor(
@@ -51,7 +50,7 @@ public class GameRendererMixin {
 			FogInfo.COLOR[2],
 			1F
 		);
-	}
+	}*/
 	
 	@Inject(method = "setupFog(IF)V", at = @At(
 		value = "INVOKE",

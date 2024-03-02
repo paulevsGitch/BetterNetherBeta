@@ -1,13 +1,13 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
+import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.item.ItemPlacementContext;
-import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
-import net.modificationstation.stationapi.api.util.math.BlockPos;
+import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 import paulevs.bnb.block.properties.BNBBlockProperties;
@@ -18,7 +18,7 @@ public class EmberWoodBlock extends NetherWoodBlock {
 	}
 	
 	@Override
-	public void appendProperties(Builder<BaseBlock, BlockState> builder) {
+	public void appendProperties(Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(BNBBlockProperties.NEAR_LAVA);
 	}

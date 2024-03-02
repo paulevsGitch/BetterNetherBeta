@@ -2,30 +2,30 @@ package paulevs.bnb.block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.Box;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.block.States;
 import net.modificationstation.stationapi.api.item.ItemPlacementContext;
-import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
-import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
+import net.modificationstation.stationapi.api.template.block.TemplateBlock;
+import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 
 import java.util.Random;
 
-public class GlowstoneShards extends TemplateBlockBase {
+public class GlowstoneShards extends TemplateBlock {
 	public GlowstoneShards(Identifier id) {
 		super(id, Material.GLASS);
 		this.setSounds(GLASS_SOUNDS);
 	}
 	
 	@Override
-	public void appendProperties(Builder<BaseBlock, BlockState> builder) {
+	public void appendProperties(Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(BNBBlockProperties.DIRECTION);
 	}
@@ -99,7 +99,7 @@ public class GlowstoneShards extends TemplateBlockBase {
 		BlockState state = level.getBlockState(x, y, z);
 		if (state.isAir()) return false;
 		
-		BaseBlock block = state.getBlock();
+		Block block = state.getBlock();
 		if (block.isFullCube()) return true;
 		
 		Box shape = block.getCollisionShape(level, x, y, z);

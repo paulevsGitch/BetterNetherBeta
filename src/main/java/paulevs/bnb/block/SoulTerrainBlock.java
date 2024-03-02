@@ -1,7 +1,7 @@
 package paulevs.bnb.block;
 
 import net.minecraft.block.material.Material;
-import net.modificationstation.stationapi.api.registry.Identifier;
+import net.modificationstation.stationapi.api.util.Identifier;
 
 public class SoulTerrainBlock extends NetherTerrainBlock {
 	public SoulTerrainBlock(Identifier id) {

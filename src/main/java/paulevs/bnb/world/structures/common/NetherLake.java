@@ -1,6 +1,6 @@
 package paulevs.bnb.world.structures.common;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class NetherLake extends Structure {
-	private static final BlockState LAVA = BaseBlock.STILL_LAVA.getDefaultState();
+	private static final BlockState LAVA = Block.STILL_LAVA.getDefaultState();
 	private static final BlockState AIR = States.AIR.get();
 	private final boolean[] mask = new boolean[2048];
 	

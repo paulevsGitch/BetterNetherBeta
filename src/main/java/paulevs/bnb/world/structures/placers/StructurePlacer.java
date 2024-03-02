@@ -3,7 +3,7 @@ package paulevs.bnb.world.structures.placers;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.BlockPos;
-import net.modificationstation.stationapi.api.util.maths.MutableBlockPos;
+import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
 
 import java.util.Random;
 import java.util.function.Function;

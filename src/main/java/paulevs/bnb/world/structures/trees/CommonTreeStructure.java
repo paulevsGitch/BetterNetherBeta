@@ -1,6 +1,6 @@
 package paulevs.bnb.world.structures.trees;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
@@ -23,7 +23,7 @@ public class CommonTreeStructure extends Structure {
 	private final int minHeight;
 	private final int dHeight;
 	
-	public CommonTreeStructure(BaseBlock trunk, BaseBlock leaves, BaseBlock stem, BaseBlock branch, BaseBlock vine, int minHeight, int maxHeight) {
+	public CommonTreeStructure(Block trunk, Block leaves, Block stem, Block branch, Block vine, int minHeight, int maxHeight) {
 		this.trunk = trunk.getDefaultState();
 		this.leaves = leaves.getDefaultState();
 		this.stem = stem.getDefaultState();
@@ -38,7 +38,7 @@ public class CommonTreeStructure extends Structure {
 		int height = random.nextInt(dHeight) + minHeight;
 		
 		if (level.getBlockState(x, y - 1, z).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) {
-			level.setBlockState(x, y - 1, z, BaseBlock.NETHERRACK.getDefaultState());
+			level.setBlockState(x, y - 1, z, Block.NETHERRACK.getDefaultState());
 		}
 		else return false;
 		

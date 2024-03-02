@@ -1,12 +1,12 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.block.States;
-import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
+import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 
 import java.util.Random;
@@ -23,7 +23,7 @@ public class NetherSaplingBlock extends NetherFloorPlantBlock {
 	}
 	
 	@Override
-	public void appendProperties(Builder<BaseBlock, BlockState> builder) {
+	public void appendProperties(Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(BNBBlockProperties.STAGE_4);
 	}
@@ -38,6 +38,12 @@ public class NetherSaplingBlock extends NetherFloorPlantBlock {
 	protected void tick(Level level, int x, int y, int z) {
 		super.tick(level, x, y, z);
 		grow(level, x, y, z);
+	}
+	
+	@Override
+	public boolean onBonemealUse(Level level, int x, int y, int z, BlockState state) {
+		if (!level.isRemote) grow(level, x, y, z);
+		return true;
 	}
 	
 	public void grow(Level level, int x, int y, int z) {

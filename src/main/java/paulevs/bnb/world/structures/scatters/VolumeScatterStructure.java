@@ -2,7 +2,8 @@ package paulevs.bnb.world.structures.scatters;
 
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
-import net.modificationstation.stationapi.api.util.math.BlockPos;
+import net.minecraft.util.maths.BlockPos;
+import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
 
 import java.util.Random;
 
@@ -17,7 +18,7 @@ public abstract class VolumeScatterStructure extends Structure {
 	
 	@Override
 	public boolean generate(Level level, Random random, int x, int y, int z) {
-		BlockPos.Mutable pos = new BlockPos.Mutable();
+		MutableBlockPos pos = new MutableBlockPos();
 		BlockPos center = new BlockPos(x, y, z);
 		int r2 = radius * radius;
 		

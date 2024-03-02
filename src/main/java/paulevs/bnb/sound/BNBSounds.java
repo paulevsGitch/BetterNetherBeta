@@ -1,7 +1,7 @@
 package paulevs.bnb.sound;
 
 import net.minecraft.block.BlockSounds;
-import net.modificationstation.stationapi.api.registry.Identifier;
+import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
 
 public class BNBSounds {

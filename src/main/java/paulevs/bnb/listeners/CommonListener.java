@@ -1,11 +1,11 @@
 package paulevs.bnb.listeners;
 
 import net.mine_diver.unsafeevents.listener.EventListener;
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.modificationstation.stationapi.api.event.block.BlockEvent.BeforePlacedByItem;
-import net.modificationstation.stationapi.api.event.level.biome.BiomeRegisterEvent;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
+import net.modificationstation.stationapi.api.event.world.biome.BiomeRegisterEvent;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.GlowstoneShards;
 import paulevs.bnb.item.BNBItems;
@@ -15,7 +15,7 @@ public class CommonListener {
 	@EventListener
 	public void onBlockRegister(BlockRegistryEvent event) {
 		BNBBlocks.init();
-		BaseBlock.PORTAL.setLightEmittance(1F);
+		Block.PORTAL.setLightEmittance(1F);
 	}
 	
 	@EventListener

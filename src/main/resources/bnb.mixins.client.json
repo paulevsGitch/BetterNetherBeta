@@ -4,13 +4,10 @@
 	"package": "paulevs.bnb.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
-		"LightingCalculatorImplMixin",
-		"JsonUnbakedModelMixin",
 		"MainMenuScreenMixin",
 		"LevelRendererMixin",
 		"GameRendererMixin",
 		"SoundHelperMixin",
-		"BakedQuadMixin",
 		"MinecraftMixin",
 		"LevelMixin"
 	],

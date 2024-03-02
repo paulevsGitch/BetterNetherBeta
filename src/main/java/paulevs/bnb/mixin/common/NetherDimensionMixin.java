@@ -1,25 +1,26 @@
 package paulevs.bnb.mixin.common;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.level.dimension.BaseDimension;
+import net.minecraft.level.dimension.Dimension;
 import net.minecraft.level.dimension.NetherDimension;
-import net.minecraft.util.maths.Vec3f;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
-import net.modificationstation.stationapi.impl.level.StationDimension;
+import net.modificationstation.stationapi.impl.world.StationDimension;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import paulevs.bnb.rendering.FogInfo;
 
 @Mixin(NetherDimension.class)
-public class NetherDimensionMixin extends BaseDimension implements StationDimension {
+public class NetherDimensionMixin extends Dimension implements StationDimension {
 	@Override
-	public short getDefaultLevelHeight() {
+	public short getDefaultWorldHeight() {
 		return 256;
 	}
+	
+	// Unlock when new API
+	/*@Override
+	public int getHeight() {
+		return 256;
+	}*/
 	
 	@Inject(method = "pregenLight", at = @At("HEAD"), cancellable = true)
 	private void bnb_pregenLight(CallbackInfo info) {
@@ -30,9 +31,9 @@ public class NetherDimensionMixin extends BaseDimension implements StationDimens
 		}
 	}
 	
-	@Environment(value= EnvType.CLIENT)
+	/*@Environment(value= EnvType.CLIENT)
 	@Inject(method = "getSkyColor", at = @At("HEAD"), cancellable = true)
 	protected void bnb_getSkyColor(CallbackInfoReturnable<Vec3f> info) {
 		info.setReturnValue(FogInfo.getVector());
-	}
+	}*/
 }

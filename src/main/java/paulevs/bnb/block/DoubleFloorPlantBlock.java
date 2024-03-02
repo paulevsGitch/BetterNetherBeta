@@ -1,14 +1,14 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BaseBlock;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.block.Block;
+import net.minecraft.entity.living.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.Box;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.block.States;
-import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
+import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.block.properties.BNBBlockMaterials;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.block.properties.BNBBlockProperties.DoubleShape;
@@ -23,7 +23,7 @@ public class DoubleFloorPlantBlock extends NetherFloorPlantBlock {
 	}
 	
 	@Override
-	public void appendProperties(Builder<BaseBlock, BlockState> builder) {
+	public void appendProperties(Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(BNBBlockProperties.DOUBLE_SHAPE);
 	}

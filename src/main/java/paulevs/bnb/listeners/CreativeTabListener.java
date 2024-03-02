@@ -2,9 +2,9 @@ package paulevs.bnb.listeners;
 
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.item.ItemStack;
+import paulevs.bhcreative.api.BlockSelectAPI;
 import paulevs.bhcreative.api.SimpleTab;
 import paulevs.bhcreative.registry.TabRegistryEvent;
-import paulevs.bhcreative.util.BlockSelectAPI;
 import paulevs.bnb.BNB;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.item.BNBItems;
@@ -19,6 +19,6 @@ public class CreativeTabListener {
 		BNBBlocks.BLOCKS_WITH_ITEMS.forEach(block -> tab.addItem(new ItemStack(block)));
 		BNBItems.ITEMS.forEach(item -> tab.addItem(new ItemStack(item)));
 		
-		BlockSelectAPI.registerConverter(BNBBlocks.CRIMSON_VINE_WITH_BERRIES, state -> BNBBlocks.CRIMSON_VINE.asItem());
+		BlockSelectAPI.registerConverter(BNBBlocks.CRIMSON_VINE_WITH_BERRIES, state -> new ItemStack(BNBBlocks.CRIMSON_VINE.asItem()));
 	}
 }

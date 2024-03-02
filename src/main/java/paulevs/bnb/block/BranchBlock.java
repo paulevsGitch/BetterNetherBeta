@@ -1,22 +1,23 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.BlockView;
 import net.minecraft.level.Level;
+import net.minecraft.util.maths.BlockPos;
 import net.minecraft.util.maths.Box;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.item.ItemPlacementContext;
-import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
-import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
-import net.modificationstation.stationapi.api.util.math.BlockPos;
+import net.modificationstation.stationapi.api.template.block.TemplateBlock;
+import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
+import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 
 import java.util.ArrayList;
 
-public class BranchBlock extends TemplateBlockBase {
+public class BranchBlock extends TemplateBlock {
 	public BranchBlock(Identifier identifier) {
 		super(identifier, Material.WOOD);
 		setSounds(WOOD_SOUNDS);
@@ -30,7 +31,7 @@ public class BranchBlock extends TemplateBlockBase {
 	}
 	
 	@Override
-	public void appendProperties(Builder<BaseBlock, BlockState> builder) {
+	public void appendProperties(Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(BNBBlockProperties.FACES);
 	}
@@ -115,7 +116,7 @@ public class BranchBlock extends TemplateBlockBase {
 	}
 	
 	private BlockState getFacingState(Level level, int x, int y, int z) {
-		BlockPos.Mutable pos = new BlockPos.Mutable();
+		MutableBlockPos pos = new MutableBlockPos();
 		BlockState self = getDefaultState();
 		for (byte i = 0; i < 6; i++) {
 			Direction dir = Direction.byId(i);
@@ -126,7 +127,7 @@ public class BranchBlock extends TemplateBlockBase {
 	}
 	
 	private boolean canConnect(BlockState state, Direction dir) {
-		BaseBlock block = state.getBlock();
+		Block block = state.getBlock();
 		if (block instanceof StemBlock) return state.get(BNBBlockProperties.AXIS) == dir.getAxis();
 		return block instanceof BranchBlock || (block.isFullOpaque() && block.isFullCube());
 	}

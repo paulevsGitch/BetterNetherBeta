@@ -1,14 +1,14 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.level.BlockView;
-import net.modificationstation.stationapi.api.registry.Identifier;
-import net.modificationstation.stationapi.api.template.block.TemplateFence;
+import net.modificationstation.stationapi.api.template.block.TemplateFenceBlock;
+import net.modificationstation.stationapi.api.util.Identifier;
 
-public class FenceBlock extends TemplateFence {
-	private final BaseBlock source;
+public class FenceBlock extends TemplateFenceBlock {
+	private final Block source;
 	
-	public FenceBlock(Identifier id, BaseBlock source) {
+	public FenceBlock(Identifier id, Block source) {
 		super(id, 0);
 		setHardness(source.getHardness());
 		setSounds(source.sounds);
@@ -16,17 +16,17 @@ public class FenceBlock extends TemplateFence {
 	}
 	
 	@Override
-	public int getTextureForSide(BlockView arg, int i, int j, int k, int l) {
-		return source.getTextureForSide(arg, i, j, k, l);
+	public int getTexture(BlockView arg, int i, int j, int k, int l) {
+		return source.getTexture(arg, i, j, k, l);
 	}
 	
 	@Override
-	public int getTextureForSide(int i, int j) {
-		return source.getTextureForSide(i, j);
+	public int getTexture(int i, int j) {
+		return source.getTexture(i, j);
 	}
 	
 	@Override
-	public int getTextureForSide(int i) {
-		return source.getTextureForSide(i);
+	public int getTexture(int i) {
+		return source.getTexture(i);
 	}
 }

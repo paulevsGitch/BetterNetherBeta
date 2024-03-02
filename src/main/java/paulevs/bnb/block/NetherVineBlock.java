@@ -1,12 +1,12 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.block.States;
-import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
+import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.block.properties.BNBBlockProperties.VineShape;
 
@@ -22,7 +22,7 @@ public class NetherVineBlock extends NetherCeilPlantBlock {
 	}
 	
 	@Override
-	public void appendProperties(Builder<BaseBlock, BlockState> builder) {
+	public void appendProperties(Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(BNBBlockProperties.VINE_SHAPE);
 	}

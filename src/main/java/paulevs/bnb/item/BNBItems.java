@@ -1,9 +1,9 @@
 package paulevs.bnb.item;
 
-import net.minecraft.item.BaseItem;
+import net.minecraft.item.Item;
 import net.minecraft.level.structure.Structure;
-import net.modificationstation.stationapi.api.registry.Identifier;
-import net.modificationstation.stationapi.api.template.item.food.TemplateFoodBase;
+import net.modificationstation.stationapi.api.template.item.TemplateFoodItem;
+import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.world.structures.BNBStructures;
@@ -15,32 +15,32 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BNBItems {
-	public static final List<BaseItem> ITEMS = new ArrayList<>();
+	public static final List<Item> ITEMS = new ArrayList<>();
 	
-	public static final BaseItem CRIMSON_TREE_PLACER = make(
+	public static final Item CRIMSON_TREE_PLACER = make(
 		"crimson_tree_placer", () -> BNBStructures.CRIMSON_TREE, StructurePlacerItem::new
 	);
-	public static final BaseItem CRIMSON_VINE_BERRIES = makeFood("crimson_vine_berries", 1, false).setMaxStackSize(8);
+	public static final Item CRIMSON_VINE_BERRIES = makeFood("crimson_vine_berries", 1, false).setMaxStackSize(8);
 	
-	private static BaseItem makeFood(String name, int healAmount, boolean isWolfFood) {
+	private static Item makeFood(String name, int healAmount, boolean isWolfFood) {
 		Identifier id = BNB.id(name);
-		TemplateFoodBase item = new TemplateFoodBase(id, healAmount, isWolfFood);
+		TemplateFoodItem item = new TemplateFoodItem(id, healAmount, isWolfFood);
 		item.setTranslationKey(id.toString());
 		ITEMS.add(item);
 		return item;
 	}
 	
-	private static BaseItem make(String name, Function<Identifier, BaseItem> constructor) {
+	private static Item make(String name, Function<Identifier, Item> constructor) {
 		Identifier id = BNB.id(name);
-		BaseItem item = constructor.apply(id);
+		Item item = constructor.apply(id);
 		item.setTranslationKey(id.toString());
 		ITEMS.add(item);
 		return item;
 	}
 	
-	private static BaseItem make(String name, Supplier<Structure> structure, BiFunction<Identifier, Supplier<Structure>, BaseItem> constructor) {
+	private static Item make(String name, Supplier<Structure> structure, BiFunction<Identifier, Supplier<Structure>, Item> constructor) {
 		Identifier id = BNB.id(name);
-		BaseItem item = constructor.apply(id, structure);
+		Item item = constructor.apply(id, structure);
 		item.setTranslationKey(id.toString());
 		ITEMS.add(item);
 		return item;

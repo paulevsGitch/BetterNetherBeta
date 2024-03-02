@@ -1,10 +1,9 @@
 package paulevs.bnb.world.generator.biome;
 
-import net.minecraft.level.biome.BaseBiome;
+import net.minecraft.level.biome.Biome;
 import net.minecraft.level.dimension.DimensionData;
 import net.minecraft.level.gen.BiomeSource;
 import paulevs.bnb.world.biome.BNBBiomes;
-import paulevs.bnb.world.biome.NetherBiome;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -36,10 +35,10 @@ public class BNBBiomeSource extends BiomeSource {
 	}
 	
 	@Override
-	public BaseBiome[] getBiomes(BaseBiome[] biomes, int x, int z, int dx, int dz) {
+	public Biome[] getBiomes(Biome[] biomes, int x, int z, int dx, int dz) {
 		int size = dx * dz;
 		if (biomes == null || biomes.length != size) {
-			biomes = new BaseBiome[size];
+			biomes = new Biome[size];
 		}
 		
 		int index = 0;
@@ -52,7 +51,7 @@ public class BNBBiomeSource extends BiomeSource {
 		return biomes;
 	}
 	
-	public NetherBiome[] fillBiomes(NetherBiome[] biomes, int x, int z, Random random) {
+	public Biome[] fillBiomes(Biome[] biomes, int x, int z, Random random) {
 		for (byte i = 0; i < 16; i++) {
 			for (byte j = 0; j < 16; j++) {
 				biomes[i << 4 | j] = map.getBiome(x + i + random.nextInt(7) - 3, z + j + random.nextInt(7) - 3);

@@ -1,11 +1,11 @@
 package paulevs.bnb.world.generator.biome;
 
+import net.minecraft.level.biome.Biome;
 import net.minecraft.level.dimension.DimensionData;
 import net.minecraft.util.io.CompoundTag;
 import net.minecraft.util.io.NBTIO;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.bnb.noise.PerlinNoise;
-import paulevs.bnb.world.biome.NetherBiome;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,11 +25,11 @@ public class BiomeMap {
 	private final PerlinNoise distortionX = new PerlinNoise();
 	private final PerlinNoise distortionZ = new PerlinNoise();
 	private final Random random = new Random(0);
-	private final NetherBiome[] biomes;
-	private File folder;
-	private int seed;
+	private final Biome[] biomes;
+	private final File folder;
+	private final int seed;
 	
-	public BiomeMap(NetherBiome[] biomes, long seed, DimensionData data) {
+	public BiomeMap(Biome[] biomes, long seed, DimensionData data) {
 		this.biomes = biomes;
 		random.setSeed(seed);
 		this.seed = random.nextInt();
@@ -39,7 +39,7 @@ public class BiomeMap {
 		if (!folder.exists()) folder.mkdirs();
 	}
 	
-	public NetherBiome getBiome(int x, int z) {
+	public Biome getBiome(int x, int z) {
 		double preX = COS * x / 24.0 - SIN * z / 24.0;
 		double preZ = SIN * x / 24.0 + COS * z / 24.0;
 		preX += distortionX.getRange(x * 0.1, z * 0.1, -0.15F, 0.15F);

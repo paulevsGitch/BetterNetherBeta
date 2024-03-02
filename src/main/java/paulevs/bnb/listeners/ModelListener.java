@@ -9,7 +9,7 @@ import net.mine_diver.unsafeevents.listener.EventListener;
 import net.modificationstation.stationapi.api.client.event.render.model.LoadUnbakedModelEvent;
 import net.modificationstation.stationapi.api.client.texture.SpriteIdentifier;
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
-import net.modificationstation.stationapi.api.registry.Identifier;
+import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
 import paulevs.bnb.BNB;
 import paulevs.bnb.rendering.OBJModel;
@@ -26,8 +26,8 @@ public class ModelListener {
 	
 	@EventListener
 	public void onModelLoad(LoadUnbakedModelEvent event) throws IOException {
-		if (event.identifier.modID != BNB.MOD_ID) return;
-		if (!event.identifier.id.startsWith("block/")) return;
+		if (event.identifier.namespace != BNB.NAMESPACE) return;
+		if (!event.identifier.path.startsWith("block/")) return;
 		
 		InputStream stream = getAsStream(event.identifier);
 		if (stream == null) return;
@@ -76,12 +76,12 @@ public class ModelListener {
 	}
 	
 	private InputStream getAsStream(Identifier id) {
-		String path = "assets/bnb/stationapi/models/" + id.id + ".json";
-		return BNB.getStream(path);
+		String path = "assets/bnb/stationapi/models/" + id.path + ".json";
+		return Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
 	}
 	
 	private InputStream getAsStream(String path) {
 		path = "assets/bnb/stationapi/models/" + path + ".obj";
-		return BNB.getStream(path);
+		return Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
 	}
 }

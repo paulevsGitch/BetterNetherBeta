@@ -1,14 +1,15 @@
 package paulevs.bnb.world.generator;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.level.Level;
 import net.minecraft.level.LightType;
+import net.minecraft.level.biome.Biome;
 import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.dimension.DimensionData;
 import net.modificationstation.stationapi.api.block.BlockState;
-import net.modificationstation.stationapi.impl.level.chunk.ChunkSection;
-import net.modificationstation.stationapi.impl.level.chunk.FlattenedChunk;
-import paulevs.bnb.world.biome.NetherBiome;
+import net.modificationstation.stationapi.impl.world.chunk.ChunkSection;
+import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
+import net.modificationstation.stationapi.impl.worldgen.WorldDecoratorImpl;
 import paulevs.bnb.world.generator.biome.BNBBiomeSource;
 import paulevs.bnb.world.generator.terrain.ChunkTerrainMap;
 import paulevs.bnb.world.generator.terrain.CrossInterpolationCell;
@@ -33,10 +34,11 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 public class BNBWorldGenerator {
-	private static final BlockState BEDROCK = BaseBlock.BEDROCK.getDefaultState();
-	private static final BlockState LAVA = BaseBlock.STILL_LAVA.getDefaultState();
+	private static final BlockState BEDROCK = Block.BEDROCK.getDefaultState();
+	private static final BlockState LAVA = Block.STILL_LAVA.getDefaultState();
+	private static final BlockState NETHERRACK = Block.NETHERRACK.getDefaultState();
 	private static final List<ChunkTerrainMap> FEATURE_MAPS = new ArrayList<>();
-	private static final NetherBiome[] BIOMES = new NetherBiome[256];
+	private static final Biome[] BIOMES = new Biome[256];
 	private static final Random RANDOM = new Random();
 	private static CrossInterpolationCell[] cells;
 	private static int sectionCount;
@@ -76,7 +78,7 @@ public class BNBWorldGenerator {
 				cell.setX(bx);
 				for (byte bz = 0; bz < 16; bz++) {
 					cell.setZ(bz);
-					NetherBiome biome = BIOMES[bx << 4 | bz];
+					Biome biome = BIOMES[bx << 4 | bz];
 					for (byte by = 0; by < 16; by++) {
 						cell.setY(by);
 						if (cell.get() < 0.5F) {
@@ -85,12 +87,13 @@ public class BNBWorldGenerator {
 							sections[i].setLight(LightType.BLOCK, bx, by, bz, 15);
 						}
 						else {
-							if ((by | i << 4) < 31) sections[i].setBlockState(bx, by, bz, biome.getFillBlock());
+							sections[i].setBlockState(bx, by, bz, NETHERRACK);
+							/*if ((by | i << 4) < 31) sections[i].setBlockState(bx, by, bz, biome.getFillBlock());
 							else {
 								cell.setY(by + 1);
 								BlockState block = cell.get() < 0.5F ? biome.getSurfaceBlock() : biome.getFillBlock();
 								sections[i].setBlockState(bx, by, bz, block);
-							}
+							}*/
 						}
 					}
 				}
@@ -110,7 +113,8 @@ public class BNBWorldGenerator {
 	}
 	
 	public static void decorateChunk(Level level, int cx, int cz) {
-		FlattenedChunk chunk = (FlattenedChunk) level.getChunkFromCache(cx, cz);
+		WorldDecoratorImpl.decorate(level, cx, cz);
+		/*FlattenedChunk chunk = (FlattenedChunk) level.getChunkFromCache(cx, cz);
 		final ChunkSection[] sections = chunk.sections;
 		
 		NetherBiome biome = (NetherBiome) level.dimension.biomeSource.getBiome((cx + 1) << 4, (cz + 1) << 4);
@@ -121,7 +125,7 @@ public class BNBWorldGenerator {
 			if (sections[cy] == null) continue;
 			int wy = cy << 4;
 			biome.getStructures().forEach(placer -> placer.place(level, RANDOM, wx, wy, wz));
-		}
+		}*/
 	}
 	
 	private static boolean forceSection(int index) {

@@ -1,6 +1,6 @@
 package paulevs.bnb.world.generator.terrain.features;
 
-import net.minecraft.util.maths.Vec3f;
+import net.minecraft.util.maths.Vec3D;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
@@ -57,7 +57,7 @@ public class CubesFeature extends TerrainFeature {
 		ceiling.setSeed(RANDOM.nextInt());
 	}
 	
-	private float getCubesBig(int seed, Vec3f pos) {
+	private float getCubesBig(int seed, Vec3D pos) {
 		random.setSeed(seed);
 		
 		float size = MathHelper.lerp(random.nextFloat(), 0.75F, 1.0F);
@@ -91,7 +91,7 @@ public class CubesFeature extends TerrainFeature {
 		return size - d;
 	}
 	
-	private float getCubesSmall(int seed, Vec3f pos) {
+	private float getCubesSmall(int seed, Vec3D pos) {
 		random.setSeed(seed);
 		
 		float size = MathHelper.lerp(random.nextFloat(), 0.75F, 1.0F);
@@ -125,7 +125,7 @@ public class CubesFeature extends TerrainFeature {
 		return size - d;
 	}
 	
-	private float getCubesCeiling(int seed, Vec3f pos) {
+	private float getCubesCeiling(int seed, Vec3D pos) {
 		random.setSeed(seed);
 		
 		float size = MathHelper.lerp(random.nextFloat(), 0.75F, 1.0F);

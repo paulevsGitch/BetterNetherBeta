@@ -1,7 +1,7 @@
 package paulevs.bnb.mixin.client;
 
 import net.minecraft.level.Level;
-import net.minecraft.level.dimension.BaseDimension;
+import net.minecraft.level.dimension.Dimension;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Level.class)
 public class LevelMixin {
-	@Shadow @Final public BaseDimension dimension;
+	@Shadow @Final public Dimension dimension;
 	@Shadow private int caveSoundTicks;
 	
 	@Inject(method = "processLoadedChunks", at = @At(

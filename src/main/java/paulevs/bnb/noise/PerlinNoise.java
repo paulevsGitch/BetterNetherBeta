@@ -2,11 +2,8 @@ package paulevs.bnb.noise;
 
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 
-import java.util.Random;
-
 public class PerlinNoise extends FloatNoise {
 	private final float[][] cell = new float[8][3];
-	private final Random random = new Random(0);
 	private byte usageType;
 	private int lastX;
 	private int lastY;

@@ -3,7 +3,7 @@ package paulevs.bnb.sound;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.sound.SoundEntry;
-import net.modificationstation.stationapi.api.registry.Identifier;
+import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
 
 import java.net.URL;
@@ -18,7 +18,7 @@ public class BNBClientSounds {
 	public static SoundEntry getSound(Identifier id) {
 		if (id == null) return null;
 		return SOUNDS.computeIfAbsent(id, key -> {
-			String path = "assets/" + key.modID + "/stationapi/sounds/" + key.id + ".ogg";
+			String path = "assets/" + key.namespace + "/stationapi/sounds/" + key.path + ".ogg";
 			URL url = BNB.getURL(path);
 			if (url == null) {
 				BNB.LOGGER.warn("Sound " + path + " is missing!");

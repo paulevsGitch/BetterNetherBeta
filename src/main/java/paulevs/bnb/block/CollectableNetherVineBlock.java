@@ -1,17 +1,17 @@
 package paulevs.bnb.block;
 
-import net.minecraft.entity.player.PlayerBase;
-import net.minecraft.item.BaseItem;
+import net.minecraft.entity.living.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
-import net.modificationstation.stationapi.api.registry.Identifier;
+import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.block.properties.BNBBlockProperties.VineShape;
 
 public class CollectableNetherVineBlock extends NetherVineBlock {
 	private NetherVineBlock basic;
-	private BaseItem collectableItem;
+	private Item collectableItem;
 	
 	public CollectableNetherVineBlock(Identifier id) {
 		super(id);
@@ -21,7 +21,7 @@ public class CollectableNetherVineBlock extends NetherVineBlock {
 		this.basic = basic;
 	}
 	
-	public void setCollectableItem(BaseItem item) {
+	public void setCollectableItem(Item item) {
 		this.collectableItem = item;
 	}
 	
@@ -33,9 +33,9 @@ public class CollectableNetherVineBlock extends NetherVineBlock {
 	}
 	
 	@Override
-	public boolean canUse(Level level, int x, int y, int z, PlayerBase player) {
+	public boolean canUse(Level level, int x, int y, int z, PlayerEntity player) {
 		ItemStack stack = player.getHeldItem();
-		boolean canUse = stack != null && stack.itemId == BaseItem.shears.id;
+		boolean canUse = stack != null && stack.itemId == Item.shears.id;
 		if (level.isRemote) return canUse;
 		if (!canUse) return false;
 		

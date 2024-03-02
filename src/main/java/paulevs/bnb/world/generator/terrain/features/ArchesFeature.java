@@ -1,6 +1,6 @@
 package paulevs.bnb.world.generator.terrain.features;
 
-import net.minecraft.util.maths.Vec3f;
+import net.minecraft.util.maths.Vec3D;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
@@ -52,7 +52,7 @@ public class ArchesFeature extends TerrainFeature {
 		distortionZ.setSeed(RANDOM.nextInt());
 	}
 	
-	private float getArches(int seed, Vec3f pos) {
+	private float getArches(int seed, Vec3D pos) {
 		random.setSeed(seed);
 		
 		float radiusBig = MathHelper.lerp(random.nextFloat(), 0.1F, 0.5F);

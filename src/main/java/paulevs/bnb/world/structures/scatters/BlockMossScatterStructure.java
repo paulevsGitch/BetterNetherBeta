@@ -1,21 +1,22 @@
 package paulevs.bnb.world.structures.scatters;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.level.Level;
+import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.block.BlockState;
-import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.Direction;
+import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
 import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.MossBlock;
 
 import java.util.Random;
 
 public class BlockMossScatterStructure extends VolumeScatterStructure {
-	private final BlockPos.Mutable bp = new BlockPos.Mutable();
+	private final MutableBlockPos bp = new MutableBlockPos();
 	private final BlockState mossBlock;
 	private final MossBlock moss;
 	
-	public BlockMossScatterStructure(int radius, float density, BaseBlock mossBlock, MossBlock moss) {
+	public BlockMossScatterStructure(int radius, float density, Block mossBlock, MossBlock moss) {
 		super(radius, density);
 		this.mossBlock = mossBlock.getDefaultState();
 		this.moss = moss;
@@ -27,7 +28,7 @@ public class BlockMossScatterStructure extends VolumeScatterStructure {
 		for (byte i = 0; i < 6; i++) {
 			if (random.nextBoolean()) continue;
 			Direction dir = Direction.byId(i);
-			bp.set(pos).move(dir);
+			bp.set(pos.x, pos.y, pos.z).move(dir);
 			if (!level.getBlockState(bp.getX(), bp.getY(), bp.getZ()).isAir()) continue;
 			BlockState state = moss.getStructureState(level, bp);
 			if (state != null) {

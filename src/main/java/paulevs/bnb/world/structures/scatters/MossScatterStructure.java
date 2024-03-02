@@ -1,8 +1,8 @@
 package paulevs.bnb.world.structures.scatters;
 
 import net.minecraft.level.Level;
+import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.block.BlockState;
-import net.modificationstation.stationapi.api.util.math.BlockPos;
 import paulevs.bnb.block.MossBlock;
 
 import java.util.Random;

@@ -1,6 +1,6 @@
 package paulevs.bnb.world.structures.common;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.MathHelper;
@@ -20,7 +20,7 @@ public class CrystalStructure extends Structure {
 	private final int height;
 	private final int radius;
 	
-	public CrystalStructure(BaseBlock fullBlock, GlowstoneShards shards, boolean ceiling, int height, int radius) {
+	public CrystalStructure(Block fullBlock, GlowstoneShards shards, boolean ceiling, int height, int radius) {
 		this.fullBlock = fullBlock.getDefaultState();
 		this.direction = ceiling ? Direction.UP : Direction.DOWN;
 		this.shardsFront = shards.getDefaultState().with(BNBBlockProperties.DIRECTION, this.direction);

@@ -1,16 +1,16 @@
 package paulevs.bnb.noise;
 
 import net.minecraft.util.maths.MathHelper;
-import net.minecraft.util.maths.Vec3f;
+import net.minecraft.util.maths.Vec3D;
 
 import java.util.function.BiFunction;
 
 public class SDFScatter2D extends FloatNoise {
-	private final Vec3f pos = Vec3f.make(0, 0, 0);
-	private final BiFunction<Integer, Vec3f, Float> sdf;
+	private final Vec3D pos = Vec3D.make(0, 0, 0);
+	private final BiFunction<Integer, Vec3D, Float> sdf;
 	private int seed;
 	
-	public SDFScatter2D(BiFunction<Integer, Vec3f, Float> sdf) {
+	public SDFScatter2D(BiFunction<Integer, Vec3D, Float> sdf) {
 		this.sdf = sdf;
 	}
 	

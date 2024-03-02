@@ -1,16 +1,17 @@
 package paulevs.bnb.block;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.BlockView;
 import net.minecraft.level.Level;
+import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.block.States;
 import net.modificationstation.stationapi.api.item.ItemPlacementContext;
-import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
-import net.modificationstation.stationapi.api.util.math.BlockPos;
+import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
+import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
 import paulevs.bnb.block.properties.BNBBlockMaterials;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 import paulevs.bnb.sound.BNBSounds;
@@ -27,7 +28,7 @@ public class MossBlock extends NetherPlantBlock {
 	}
 	
 	@Override
-	public void appendProperties(Builder<BaseBlock, BlockState> builder) {
+	public void appendProperties(Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(BNBBlockProperties.FACES);
 	}
@@ -57,7 +58,7 @@ public class MossBlock extends NetherPlantBlock {
 	
 	@Override
 	protected boolean canStay(Level level, int x, int y, int z) {
-		BlockPos.Mutable mpos = new BlockPos.Mutable();
+		MutableBlockPos mpos = new MutableBlockPos();
 		for (byte i = 0; i < 6; i++) {
 			Direction dir = Direction.byId(i);
 			mpos.set(x, y, z).move(dir);
@@ -110,7 +111,7 @@ public class MossBlock extends NetherPlantBlock {
 	}
 	
 	private BlockState getFacingState(Level level, int x, int y, int z) {
-		BlockPos.Mutable pos = new BlockPos.Mutable();
+		MutableBlockPos pos = new MutableBlockPos();
 		BlockState self = getDefaultState();
 		for (byte i = 0; i < 6; i++) {
 			Direction dir = Direction.byId(i);

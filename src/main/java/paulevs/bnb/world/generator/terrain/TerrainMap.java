@@ -3,7 +3,7 @@ package paulevs.bnb.world.generator.terrain;
 import net.minecraft.level.dimension.DimensionData;
 import net.minecraft.util.io.CompoundTag;
 import net.minecraft.util.io.NBTIO;
-import net.minecraft.util.maths.Vec2i;
+import net.minecraft.util.maths.Vec2I;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.bnb.noise.FractalNoise;
 import paulevs.bnb.noise.PerlinNoise;
@@ -22,7 +22,7 @@ import java.util.Random;
 public class TerrainMap {
 	private static final double SIN = Math.sin(0.8);
 	private static final double COS = Math.cos(0.8);
-	private static final Vec2i[] OFFSETS;
+	private static final Vec2I[] OFFSETS;
 	
 	private final Map<Long, byte[]> chunks = new HashMap<>();
 	private final FractalNoise distortionX = new FractalNoise(PerlinNoise::new);
@@ -47,7 +47,7 @@ public class TerrainMap {
 	
 	public void getDensity(int x, int z, float[] data, int count) {
 		Arrays.fill(data, 0F);
-		for (Vec2i offset : OFFSETS) {
+		for (Vec2I offset : OFFSETS) {
 			int index = getSDFIndex(x + offset.x, z + offset.z, count);
 			data[index] += 1;
 		}
@@ -113,14 +113,14 @@ public class TerrainMap {
 	
 	static {
 		int radius = 5;
-		List<Vec2i> offsets = new ArrayList<>();
+		List<Vec2I> offsets = new ArrayList<>();
 		for (int x = -radius; x <= radius; x++) {
 			for (int z = -radius; z <= radius; z++) {
 				if (x * x + z * z <= radius) {
-					offsets.add(new Vec2i(x << 2, z << 2));
+					offsets.add(new Vec2I(x << 2, z << 2));
 				}
 			}
 		}
-		OFFSETS = offsets.toArray(Vec2i[]::new);
+		OFFSETS = offsets.toArray(Vec2I[]::new);
 	}
 }

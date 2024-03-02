@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.util.maths.MathHelper;
+import net.modificationstation.stationapi.impl.worldgen.FogRendererImpl;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL14;
 
@@ -32,9 +33,9 @@ public class SkyRenderer {
 		GL11.glDepthMask(false);
 		
 		GL11.glColor4f(
-			FogInfo.COLOR[0] * 0.75F,
-			FogInfo.COLOR[1] * 0.75F,
-			FogInfo.COLOR[2] * 0.75F,
+			FogRendererImpl.getR() * 0.75F,
+			FogRendererImpl.getG() * 0.75F,
+			FogRendererImpl.getB() * 0.75F,
 			1F
 		);
 		
@@ -71,7 +72,7 @@ public class SkyRenderer {
 			cos1 = cos2;
 		}
 		
-		tessellator.draw();
+		tessellator.render();
 		GL11.glEndList();
 		
 		return list;

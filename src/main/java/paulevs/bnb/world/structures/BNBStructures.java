@@ -1,6 +1,6 @@
 package paulevs.bnb.world.structures;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.BlockPos;
 import paulevs.bnb.block.BNBBlocks;
@@ -65,12 +65,12 @@ public class BNBStructures {
 	
 	public static final Structure LAVA_LAKE_STRUCTURE = new NetherLake();
 	public static final Structure GLOWSTONE_CRYSTAL_FLOOR_STRUCTURE = new CrystalStructure(
-		BaseBlock.GLOWSTONE,
+		Block.GLOWSTONE,
 		BNBBlocks.GLOWSTONE_SHARDS,
 		false, 5, 3
 	);
 	public static final Structure GLOWSTONE_CRYSTAL_CEILING_STRUCTURE = new CrystalStructure(
-		BaseBlock.GLOWSTONE,
+		Block.GLOWSTONE,
 		BNBBlocks.GLOWSTONE_SHARDS,
 		true, 5, 3
 	);

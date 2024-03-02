@@ -1,6 +1,6 @@
 package paulevs.bnb.mixin.common;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.GlowstoneBlock;
 import net.minecraft.block.material.Material;
 import net.modificationstation.stationapi.api.block.BlockState;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.block.properties.BNBBlockProperties;
 
 @Mixin(GlowstoneBlock.class)
-public class GlowstoneBlockMixin extends BaseBlock {
+public class GlowstoneBlockMixin extends Block {
 	public GlowstoneBlockMixin(int i, Material arg) {
 		super(i, arg);
 	}
@@ -25,7 +25,7 @@ public class GlowstoneBlockMixin extends BaseBlock {
 	}
 	
 	@Override
-	public void appendProperties(Builder<BaseBlock, BlockState> builder) {
+	public void appendProperties(Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(BNBBlockProperties.DIRECTION);
 	}

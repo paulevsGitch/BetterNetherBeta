@@ -1,16 +1,16 @@
 package paulevs.bnb.world.structures.scatters;
 
-import net.minecraft.block.BaseBlock;
+import net.minecraft.block.Block;
 import net.minecraft.level.Level;
+import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.block.BlockState;
-import net.modificationstation.stationapi.api.util.math.BlockPos;
 
 import java.util.Random;
 
 public class SimpleScatterStructure extends ScatterStructure {
 	protected final BlockState state;
 	
-	public SimpleScatterStructure(int radius, int count, BaseBlock block) {
+	public SimpleScatterStructure(int radius, int count, Block block) {
 		this(radius, count, block.getDefaultState());
 	}
 	

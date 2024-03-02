@@ -4,7 +4,7 @@ import net.minecraft.level.BlockView;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.Box;
 import net.modificationstation.stationapi.api.block.BlockState;
-import net.modificationstation.stationapi.api.registry.Identifier;
+import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 import paulevs.bnb.block.properties.BNBBlockMaterials;
 import paulevs.bnb.block.properties.BNBBlockProperties;

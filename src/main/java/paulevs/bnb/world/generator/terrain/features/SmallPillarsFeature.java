@@ -1,7 +1,7 @@
 package paulevs.bnb.world.generator.terrain.features;
 
 import net.minecraft.util.maths.MathHelper;
-import net.minecraft.util.maths.Vec3f;
+import net.minecraft.util.maths.Vec3D;
 import paulevs.bnb.noise.FractalNoise;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.noise.SDFScatter2D;
@@ -40,7 +40,7 @@ public class SmallPillarsFeature extends TerrainFeature {
 		ceiling.setSeed(RANDOM.nextInt());
 	}
 	
-	private float getPillar(int seed, Vec3f pos) {
+	private float getPillar(int seed, Vec3D pos) {
 		random.setSeed(seed);
 		
 		float height = (40 + random.nextFloat() * 80) * 0.03F;

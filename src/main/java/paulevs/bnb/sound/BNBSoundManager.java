@@ -2,11 +2,10 @@ package paulevs.bnb.sound;
 
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.sound.SoundEntry;
-import net.minecraft.entity.player.PlayerBase;
+import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.gen.BiomeSource;
 import net.minecraft.util.maths.MathHelper;
-import net.modificationstation.stationapi.api.registry.Identifier;
-import paulevs.bnb.world.biome.NetherBiome;
+import net.modificationstation.stationapi.api.util.Identifier;
 import paulscode.sound.SoundSystem;
 
 import java.util.Random;
@@ -63,7 +62,7 @@ public class BNBSoundManager {
 		return true;
 	}
 	
-	public static void playAmbience(PlayerBase player, BiomeSource biomeSource) {
+	public static void playAmbience(PlayerEntity player, BiomeSource biomeSource) {
 		if (gameOptions.sound == 0.0f) {
 			if (soundSystem.playing(currentAmbientKey)) soundSystem.stop(currentAmbientKey);
 			if (soundSystem.playing(nextAmbientKey)) soundSystem.stop(nextAmbientKey);
@@ -129,10 +128,11 @@ public class BNBSoundManager {
 		}
 	}
 	
-	private static Identifier getSound(PlayerBase player, BiomeSource source) {
+	private static Identifier getSound(PlayerEntity player, BiomeSource source) {
 		int x = MathHelper.floor(player.x);
 		int z = MathHelper.floor(player.z);
-		return source.getBiome(x, z) instanceof NetherBiome biome ? biome.getAmbientSound() : null;
+		//return source.getBiome(x, z) instanceof NetherBiome biome ? biome.getAmbientSound() : null;
+		return null;
 	}
 	
 	private enum SoundState {

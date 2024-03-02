@@ -26,7 +26,7 @@ public class SoundHelperMixin {
 	@Inject(method = "handleBackgroundMusic", at = @At("HEAD"), cancellable = true)
 	private void bnb_handleBackgroundMusic(CallbackInfo info) {
 		if (!initialized) return;
-		@SuppressWarnings("deprecated")
+		@SuppressWarnings("deprecation")
 		Minecraft minecraft = (Minecraft) FabricLoader.getInstance().getGameInstance();
 		boolean isNether = minecraft != null && minecraft.level != null && minecraft.level.dimension.id == -1;
 		BNBSoundManager.setInTheNether(isNether);

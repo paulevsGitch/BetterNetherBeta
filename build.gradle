@@ -1,5 +1,5 @@
 plugins {
-	id 'babric-loom' version '0.12.10'
+	id 'babric-loom' version '1.5.3'
 	id 'maven-publish'
 }
 
@@ -70,6 +70,7 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "com.github.paulevsGitch:BIN-Mappings-BH:${project.mappings}"
 	modImplementation "babric:fabric-loader:${project.loader_version}"
+	implementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:${project.mixinextras_version}"))
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
 	implementation 'org.apache.logging.log4j:log4j-slf4j18-impl:2.17.2'
@@ -82,8 +83,6 @@ dependencies {
 	modImplementation("com.github.paulevsGitch:VanillaBlockEnhancements:${project.vbe_version}") {
 		transitive false
 	}
-	
-	modImplementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 processResources {

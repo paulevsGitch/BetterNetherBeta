@@ -13,7 +13,7 @@ import net.modificationstation.stationapi.api.client.render.model.json.ModelTran
 import net.modificationstation.stationapi.api.client.texture.Sprite;
 import net.modificationstation.stationapi.api.client.texture.SpriteIdentifier;
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
-import net.modificationstation.stationapi.api.registry.Identifier;
+import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
@@ -66,7 +66,7 @@ public class OBJModel implements UnbakedModel {
 		List<Integer> vertexIndex = new ArrayList<>(4);
 		List<Integer> uvIndex = new ArrayList<>(4);
 		
-		SpriteIdentifier activeMaterial = MISSING;
+		SpriteIdentifier spriteID = MISSING;
 		
 		boolean triangleWarning = false;
 		boolean ngonsWarning = false;
@@ -74,7 +74,7 @@ public class OBJModel implements UnbakedModel {
 		for (String line : data) {
 			if (line.startsWith("usemtl ")) {
 				line = line.substring(7);
-				activeMaterial = textures.getOrDefault(line, MISSING);
+				spriteID = textures.getOrDefault(line, MISSING);
 			}
 			else if (line.startsWith("vt ")) {
 				String[] uv = line.split(" ");
@@ -136,15 +136,15 @@ public class OBJModel implements UnbakedModel {
 					}
 				}
 				
-				quads.add(new QuadData(vertexData, 0, Direction.UP, activeMaterial, false));
+				quads.add(new QuadData(vertexData, 0, Direction.UP, spriteID, false));
 			}
 		}
 	}
 	
-	private record QuadData(int[] vertexData, int colorIndex, Direction face, SpriteIdentifier texture, boolean shade) {
+	private record QuadData(int[] vertexData, int colorIndex, Direction face, SpriteIdentifier spriteID, boolean shade) {
 		BakedQuad bake(Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings settings) {
 			int[] bakedData = Arrays.copyOf(this.vertexData, 32);
-			Sprite sprite = textureGetter.apply(texture);
+			Sprite sprite = textureGetter.apply(spriteID);
 			Vector4f pos = new Vector4f();
 			
 			for (byte i = 0; i < 4; i++) {
@@ -173,13 +173,8 @@ public class OBJModel implements UnbakedModel {
 				bakedData[index] = Float.floatToIntBits(delta);
 			}
 			
-			BakedQuad quad = new BakedQuad(bakedData, colorIndex, face, sprite, shade);
-			
-			if (texture.texture.id.endsWith("_e")) {
-				EmissiveQuad.cast(quad).setEmissive(true);
-			}
-			
-			return quad;
+			float emission = spriteID.texture.path.endsWith("_e") ? 1.0F : 0.0F;
+			return new BakedQuad(bakedData, colorIndex, face, sprite, shade, emission);
 		}
 	}
 }

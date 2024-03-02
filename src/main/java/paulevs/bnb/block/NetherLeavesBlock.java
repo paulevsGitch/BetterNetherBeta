@@ -2,13 +2,12 @@ package paulevs.bnb.block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BaseBlock;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.level.BlockView;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
-import net.modificationstation.stationapi.api.registry.Identifier;
+import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.block.properties.BNBBlockMaterials;
 import paulevs.vbe.block.VBELeavesBlock;
 
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 public class NetherLeavesBlock extends VBELeavesBlock {
-	private BaseBlock sapling;
+	private Block sapling;
 	
 	public NetherLeavesBlock(Identifier id) {
 		super(id, BNBBlockMaterials.NETHER_LEAVES, 9);
@@ -55,7 +54,7 @@ public class NetherLeavesBlock extends VBELeavesBlock {
 		return Collections.singletonList(new ItemStack(sapling, count, 0));
 	}
 	
-	public void setSapling(BaseBlock sapling) {
+	public void setSapling(Block sapling) {
 		this.sapling = sapling;
 	}
 	
