@@ -5,6 +5,7 @@ import net.minecraft.level.biome.Biome;
 import net.modificationstation.stationapi.api.worldgen.biome.BiomeBuilder;
 import net.modificationstation.stationapi.api.worldgen.surface.SurfaceBuilder;
 import paulevs.bnb.block.BNBBlocks;
+import paulevs.bnb.world.structures.BNBStructures;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class BNBBiomes {
 		.start("bnb_crimson_forest")
 		.fogColor(0x951922)
 		.surfaceRule(SurfaceBuilder.start(BNBBlocks.CRIMSON_NYLIUM).replace(Block.NETHERRACK).ground(1).build())
-		/*.feature(BNBStructures.LAVA_LAKE_PLACER)
+		.feature(BNBStructures.LAVA_LAKE_PLACER)
 		.feature(BNBStructures.GLOWSTONE_CRYSTAL_FLOOR_PLACER)
 		.feature(BNBStructures.GLOWSTONE_CRYSTAL_CEILING_PLACER)
 		.feature(BNBStructures.CRIMSON_TREE_PLACER)
@@ -33,7 +34,7 @@ public class BNBBiomes {
 		.feature(BNBStructures.CRIMSON_VINE_LONG_PLACER)
 		.feature(BNBStructures.CRIMSON_MOSS_BLOCK_PLACER)
 		.feature(BNBStructures.CRIMSON_MOSS_PLACER)
-		.setAmbientSound(BNBSounds.NETHER_FOREST_AMBIENCE)*/
+		//.setAmbientSound(BNBSounds.NETHER_FOREST_AMBIENCE)
 		.build());
 	
 		/*make("crimson_forest", SimpleNetherBiome::new)

@@ -8,7 +8,7 @@ import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
 import java.util.Random;
 import java.util.function.Function;
 
-public abstract class StructurePlacer {
+public abstract class StructurePlacer extends Structure {
 	protected static final Function<BlockPos, Boolean> DEFAULT_DENSITY = pos -> true;
 	protected static final MutableBlockPos POS = new MutableBlockPos(0, 0, 0);
 	
@@ -21,6 +21,14 @@ public abstract class StructurePlacer {
 	}
 	
 	public abstract void place(Level level, Random random, int wx, int wy, int wz);
+	
+	@Override
+	public boolean generate(Level level, Random random, int wx, int wy, int wz) {
+		for (int y = level.getBottomSectionCoord(); y < level.getTopSectionCoord(); y++) {
+			place(level, random, wx, y << 4, wz);
+		}
+		return true;
+	}
 	
 	public StructurePlacer setDensityFunction(Function<BlockPos, Boolean> densityFunction) {
 		this.densityFunction = densityFunction;
