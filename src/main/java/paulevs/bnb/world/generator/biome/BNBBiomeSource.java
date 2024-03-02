@@ -3,12 +3,14 @@ package paulevs.bnb.world.generator.biome;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.dimension.DimensionData;
 import net.minecraft.level.gen.BiomeSource;
+import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.bnb.world.biome.BNBBiomes;
 
 import java.util.Arrays;
 import java.util.Random;
 
 public class BNBBiomeSource extends BiomeSource {
+	private final Random random = new Random();
 	private final BiomeMap map;
 	
 	public BNBBiomeSource(long seed, DimensionData data) {
@@ -42,21 +44,15 @@ public class BNBBiomeSource extends BiomeSource {
 		}
 		
 		int index = 0;
+		random.setSeed(MathHelper.hashCode(x, 0, z));
 		for (int i = 0; i < dx; i++) {
 			for (int j = 0; j < dz; j++) {
-				biomes[index++] = map.getBiome(x + i, z + j);
+				int px = x + i + random.nextInt(7) - 3;
+				int pz = z + j + random.nextInt(7) - 3;
+				biomes[index++] = map.getBiome(px, pz);
 			}
 		}
 		
-		return biomes;
-	}
-	
-	public Biome[] fillBiomes(Biome[] biomes, int x, int z, Random random) {
-		for (byte i = 0; i < 16; i++) {
-			for (byte j = 0; j < 16; j++) {
-				biomes[i << 4 | j] = map.getBiome(x + i + random.nextInt(7) - 3, z + j + random.nextInt(7) - 3);
-			}
-		}
 		return biomes;
 	}
 }

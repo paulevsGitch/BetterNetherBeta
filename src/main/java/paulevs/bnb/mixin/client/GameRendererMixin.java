@@ -18,39 +18,6 @@ public class GameRendererMixin {
 	@Unique private static final boolean BNB_FARVIEW = FabricLoader.getInstance().isModLoaded("farview");
 	@Shadow private Minecraft minecraft;
 	@Shadow private float fogDistance;
-	/*@Shadow float fogColorR;
-	@Shadow float fogColorG;
-	@Shadow float fogColorB;*/
-	
-	/*@Inject(method = "setupFog(IF)V", at = @At("HEAD"))
-	private void bnb_changeFogColor(int i, float par2, CallbackInfo info) {
-		if (minecraft.level.dimension.id != -1) return;
-		FogInfo.setColor(
-			minecraft.player.x,
-			minecraft.player.z,
-			minecraft.level.dimension.biomeSource
-		);
-		fogColorR = FogInfo.COLOR[0];
-		fogColorG = FogInfo.COLOR[1];
-		fogColorB = FogInfo.COLOR[2];
-	}
-	
-	@Inject(method = "renderFog(F)V", at = @At(
-		value = "INVOKE",
-		target = "Lorg/lwjgl/opengl/GL11;glClearColor(FFFF)V",
-		remap = false,
-		shift = Shift.AFTER
-	))
-	private void bnb_renderDistantFog(float f, CallbackInfo info) {
-		if (minecraft.level.dimension.id != -1) return;
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-		GL11.glClearColor(
-			FogInfo.COLOR[0],
-			FogInfo.COLOR[1],
-			FogInfo.COLOR[2],
-			1F
-		);
-	}*/
 	
 	@Inject(method = "setupFog(IF)V", at = @At(
 		value = "INVOKE",

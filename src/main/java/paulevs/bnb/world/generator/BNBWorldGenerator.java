@@ -7,10 +7,10 @@ import net.minecraft.level.biome.Biome;
 import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.dimension.DimensionData;
 import net.modificationstation.stationapi.api.block.BlockState;
+import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.impl.world.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
 import net.modificationstation.stationapi.impl.worldgen.WorldDecoratorImpl;
-import paulevs.bnb.world.generator.biome.BNBBiomeSource;
 import paulevs.bnb.world.generator.terrain.ChunkTerrainMap;
 import paulevs.bnb.world.generator.terrain.CrossInterpolationCell;
 import paulevs.bnb.world.generator.terrain.features.ArchesFeature;
@@ -38,10 +38,11 @@ public class BNBWorldGenerator {
 	private static final BlockState LAVA = Block.STILL_LAVA.getDefaultState();
 	private static final BlockState NETHERRACK = Block.NETHERRACK.getDefaultState();
 	private static final List<ChunkTerrainMap> FEATURE_MAPS = new ArrayList<>();
-	private static final Biome[] BIOMES = new Biome[256];
 	private static final Random RANDOM = new Random();
 	private static CrossInterpolationCell[] cells;
-	private static int sectionCount;
+	private static ChunkSection[] sections;
+	private static int startX;
+	private static int startZ;
 	private static int seed;
 	
 	public static void updateData(DimensionData dimensionData, long seed) {
@@ -51,55 +52,23 @@ public class BNBWorldGenerator {
 	
 	public static Chunk makeChunk(Level level, int cx, int cz) {
 		FlattenedChunk chunk = new FlattenedChunk(level, cx, cz);
-		final ChunkSection[] sections = chunk.sections;
-		sectionCount = sections.length;
+		sections = chunk.sections;
+		startX = cx << 4;
+		startZ = cz << 4;
 		
-		if (cells == null || cells.length != sectionCount) {
-			cells = new CrossInterpolationCell[sectionCount];
-			for (int i = 0; i < sectionCount; i++) {
+		if (cells == null || cells.length != sections.length) {
+			cells = new CrossInterpolationCell[sections.length];
+			for (int i = 0; i < sections.length; i++) {
 				cells[i] = new CrossInterpolationCell(4);
 				if (i >= FEATURE_MAPS.size()) FEATURE_MAPS.add(new ChunkTerrainMap(i));
 			}
 		}
 		
 		ChunkTerrainMap.prepare(cx, cz);
-		IntStream.range(0, sectionCount).parallel().forEach(i -> {
-			cells[i].fill(cx << 4, i << 4, cz << 4, FEATURE_MAPS.get(i));
-			if (forceSection(i) || !cells[i].isEmpty()) sections[i] = new ChunkSection(i);
-		});
+		IntStream.range(0, sections.length).parallel().forEach(BNBWorldGenerator::initSection);
+		IntStream.range(0, sections.length).parallel().forEach(BNBWorldGenerator::fillSection);
 		
-		BNBBiomeSource biomeSource = (BNBBiomeSource) level.dimension.biomeSource;
-		biomeSource.fillBiomes(BIOMES, cx << 4, cz << 4, RANDOM);
-		
-		IntStream.range(0, sectionCount).parallel().forEach(i -> {
-			CrossInterpolationCell cell = cells[i];
-			if (!forceSection(i) && cell.isEmpty()) return;
-			for (byte bx = 0; bx < 16; bx++) {
-				cell.setX(bx);
-				for (byte bz = 0; bz < 16; bz++) {
-					cell.setZ(bz);
-					Biome biome = BIOMES[bx << 4 | bz];
-					for (byte by = 0; by < 16; by++) {
-						cell.setY(by);
-						if (cell.get() < 0.5F) {
-							if (i > 1) continue;
-							sections[i].setBlockState(bx, by, bz, LAVA);
-							sections[i].setLight(LightType.BLOCK, bx, by, bz, 15);
-						}
-						else {
-							sections[i].setBlockState(bx, by, bz, NETHERRACK);
-							/*if ((by | i << 4) < 31) sections[i].setBlockState(bx, by, bz, biome.getFillBlock());
-							else {
-								cell.setY(by + 1);
-								BlockState block = cell.get() < 0.5F ? biome.getSurfaceBlock() : biome.getFillBlock();
-								sections[i].setBlockState(bx, by, bz, block);
-							}*/
-						}
-					}
-				}
-			}
-		});
-		
+		RANDOM.setSeed(MathHelper.hashCode(cx, 0, cz));
 		for (byte bx = 0; bx < 16; bx++) {
 			for (byte bz = 0; bz < 16; bz++) {
 				sections[0].setBlockState(bx, 0, bz, BEDROCK);
@@ -110,6 +79,35 @@ public class BNBWorldGenerator {
 		}
 		
 		return chunk;
+	}
+	
+	private static void initSection(int index) {
+		cells[index].fill(startX, index << 4, startZ, FEATURE_MAPS.get(index));
+		if (forceSection(index) || !cells[index].isEmpty()) sections[index] = new ChunkSection(index);
+	}
+	
+	private static void fillSection(int index) {
+		CrossInterpolationCell cell = cells[index];
+		if (!forceSection(index) && cell.isEmpty()) return;
+		ChunkSection section = sections[index];
+		for (byte bx = 0; bx < 16; bx++) {
+			cell.setX(bx);
+			for (byte bz = 0; bz < 16; bz++) {
+				cell.setZ(bz);
+				for (byte by = 0; by < 16; by++) {
+					cell.setY(by);
+					section.setLight(LightType.SKY, bx, by, bz, 0);
+					if (cell.get() < 0.5F) {
+						if (index > 1) continue;
+						section.setBlockState(bx, by, bz, LAVA);
+						section.setLight(LightType.BLOCK, bx, by, bz, 15);
+					}
+					else {
+						section.setBlockState(bx, by, bz, NETHERRACK);
+					}
+				}
+			}
+		}
 	}
 	
 	public static void decorateChunk(Level level, int cx, int cz) {
