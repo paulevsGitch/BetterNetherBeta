@@ -1,19 +1,19 @@
 {
 	"multipart": [
 		{
-			"apply": { "model": "bnb:block/crimson_moss" },
+			"apply": { "model": "bnb:block/crimson_moss", "y": 270 },
 			"when": { "north": "true" }
 		},
 		{
-			"apply": { "model": "bnb:block/crimson_moss", "y": 180 },
+			"apply": { "model": "bnb:block/crimson_moss", "y": 90 },
 			"when": { "south": "true" }
 		},
 		{
-			"apply": { "model": "bnb:block/crimson_moss", "y": 90 },
+			"apply": { "model": "bnb:block/crimson_moss" },
 			"when": { "east": "true" }
 		},
 		{
-			"apply": { "model": "bnb:block/crimson_moss", "y": 270 },
+			"apply": { "model": "bnb:block/crimson_moss", "y": 180 },
 			"when": { "west": "true" }
 		},
 		{
