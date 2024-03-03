@@ -43,6 +43,7 @@ public class ClientListener {
 		
 		BNBBlocks.CRIMSON_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/crimson_planks")).index;
 		BNBBlocks.WARPED_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/warped_planks")).index;
+		BNBBlocks.POISON_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/poison_planks")).index;
 		
 		debugTerrain();
 		printTranslations();

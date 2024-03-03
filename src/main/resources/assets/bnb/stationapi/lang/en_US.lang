@@ -30,6 +30,16 @@ tile.warped_roots.name=Warped Roots
 item.warped_tree_placer.name=Warped Tree Placer
 
 tile.poison_wood.name=Poison Wood
+tile.poison_stem.name=Poison Stem
+tile.poison_branch.name=Poison Branch
+tile.poison_sapling.name=Poison Sapling
+tile.poison_planks.name=Poison Planks
+tile.poison_stairs.name=Poison Stairs
+tile.poison_slab_half.name=Poison Slab
+tile.poison_slab_full.name=Poison Slab
+tile.poison_fence.name=Poison Fence
+item.poison_tree_placer.name=Poison Tree Placer
+
 tile.pale_wood.name=Pale Wood
 tile.ember_wood.name=Ember Wood
 tile.flame_bamboo_block.name=Flame Bamboo Block

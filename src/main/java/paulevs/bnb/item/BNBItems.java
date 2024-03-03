@@ -23,6 +23,9 @@ public class BNBItems {
 	public static final Item WARPED_TREE_PLACER = make(
 		"warped_tree_placer", () -> BNBStructures.WARPED_TREE, StructurePlacerItem::new
 	);
+	public static final Item POISON_TREE_PLACER = make(
+		"poison_tree_placer", () -> BNBStructures.POISON_TREE, StructurePlacerItem::new
+	);
 	public static final Item CRIMSON_VINE_BERRIES = makeFood("crimson_vine_berries", 1, false).setMaxStackSize(8);
 	
 	private static Item makeFood(String name, int healAmount, boolean isWolfFood) {

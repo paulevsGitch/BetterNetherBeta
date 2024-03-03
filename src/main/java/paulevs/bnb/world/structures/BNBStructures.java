@@ -50,12 +50,9 @@ public class BNBStructures {
 		BNBBlocks.CRIMSON_BRANCH,
 		BNBBlocks.CRIMSON_WEEPING_VINE,
 		7, 11,
-		0.75F, 1.7F
+		0.75F, 1.7F,
+		1.0F
 	);
-	public static final Structure CRIMSON_TREE_BUSH = new PillarStructure()
-		.addSection(BNBBlocks.CRIMSON_STEM.getDefaultState(), 1, 2)
-		.addSection(BNBBlocks.CRIMSON_LEAVES.getDefaultState(), 2, 3);
-	
 	public static final Structure WARPED_TREE = new CommonTreeStructure(
 		BNBBlocks.WARPED_WOOD,
 		BNBBlocks.WARPED_LEAVES,
@@ -63,8 +60,26 @@ public class BNBStructures {
 		BNBBlocks.WARPED_BRANCH,
 		BNBBlocks.WARPED_WEEPING_VINE,
 		7, 11,
-		4.0F, 2.5F
+		2.5F, 1.5F,
+		1.25F
 	);
+	public static final Structure POISON_TREE = new CommonTreeStructure(
+		BNBBlocks.POISON_WOOD,
+		BNBBlocks.POISON_LEAVES,
+		BNBBlocks.POISON_STEM,
+		BNBBlocks.POISON_BRANCH,
+		BNBBlocks.POISON_WEEPING_VINE,
+		7, 11,
+		1.5F, 1.5F,
+		0.25F
+	);
+	
+	public static final Structure CRIMSON_TREE_BUSH = new PillarStructure()
+		.addSection(BNBBlocks.CRIMSON_STEM.getDefaultState(), 1, 2)
+		.addSection(BNBBlocks.CRIMSON_LEAVES.getDefaultState(), 2, 3);
+	public static final Structure WARPED_TREE_BUSH = new PillarStructure()
+		.addSection(BNBBlocks.WARPED_STEM.getDefaultState(), 1, 1)
+		.addSection(BNBBlocks.WARPED_LEAVES.getDefaultState(), 1, 2);
 	
 	public static final Structure LAVA_LAKE_STRUCTURE = new NetherLake();
 	public static final Structure GLOWSTONE_CRYSTAL_FLOOR_STRUCTURE = new CrystalStructure(

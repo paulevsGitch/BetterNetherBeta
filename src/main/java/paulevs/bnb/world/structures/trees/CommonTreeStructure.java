@@ -24,8 +24,9 @@ public class CommonTreeStructure extends Structure {
 	private final int dHeight;
 	private final float capWAspect;
 	private final float capHAspect;
+	private final float noise;
 	
-	public CommonTreeStructure(Block trunk, Block leaves, Block stem, Block branch, Block vine, int minHeight, int maxHeight, float capWAspect, float capHAspect) {
+	public CommonTreeStructure(Block trunk, Block leaves, Block stem, Block branch, Block vine, int minHeight, int maxHeight, float capWAspect, float capHAspect, float noise) {
 		this.trunk = trunk.getDefaultState();
 		this.leaves = leaves.getDefaultState();
 		this.stem = stem.getDefaultState();
@@ -35,6 +36,7 @@ public class CommonTreeStructure extends Structure {
 		this.dHeight = maxHeight - minHeight + 1;
 		this.capWAspect = capWAspect;
 		this.capHAspect = capHAspect;
+		this.noise = noise;
 	}
 	
 	@Override
@@ -60,9 +62,9 @@ public class CommonTreeStructure extends Structure {
 		
 		growTrunk(level, x, y, z, height);
 		growRoots(level, random, x, y, z, height);
-		growCap(level, random, x, y + height, z, height * capWAspect, height * capHAspect);
 		growBranches(level, random, x, y, z, height);
-		growVines(level, random, x, y + height, z, height * capWAspect);
+		growCap(level, random, x, y + height, z, height * capWAspect, height * capHAspect);
+		//growVines(level, random, x, y + height, z, height * capWAspect);
 		
 		return true;
 	}
@@ -137,14 +139,22 @@ public class CommonTreeStructure extends Structure {
 				pz = dz * dz;
 				float distance = MathHelper.sqrt(px + pz) * 0.3F;
 				float noise = (float) Math.sin(Math.atan2(dx, dz) + angle) * distance * 0.5F + distance;
+				noise *= this.noise;
+				byte ry = (byte) random.nextInt(2);
 				for (byte dy = minY; dy < maxY; dy++) {
 					py = dy * aspect + noise;
+					if (py < 1) py -= ry;
 					if (py < 0) continue;
 					if (px + pz + py * py > radius) continue;
 					wy = y + dy;
 					
 					if (!canReplace(level.getBlockState(wx, wy, wz))) continue;
 					level.setBlockState(wx, wy, wz, leaves);
+					
+					if (level.getBlockState(wx, wy - 1, wz).getMaterial().isReplaceable()) {
+						int length = random.nextInt(3) + 2;
+						placeVine(level, wx, wy - 1, wz, length);
+					}
 					
 					if (!canReplace(level.getBlockState(wx, ++wy, wz))) continue;
 					level.setBlockState(wx, wy, wz, leaves);

@@ -33,7 +33,10 @@ public class BNBPlacers {
 	public static final StructurePlacer CRIMSON_BUSH_PLACER = new FloorPlacer(BNBStructures.CRIMSON_TREE_BUSH, 3).setDensityFunction(getDensity());
 	
 	public static final StructurePlacer WARPED_TREE_PLACER = new FloorPlacer(BNBStructures.WARPED_TREE, 2).setDensityFunction(getDensity());
+	public static final StructurePlacer WARPED_BUSH_PLACER = new FloorPlacer(BNBStructures.WARPED_TREE_BUSH, 3).setDensityFunction(getDensity());
 	public static final StructurePlacer WARPED_ROOTS_PLACER = new FloorPlacer(BNBStructures.WARPED_ROOTS_STRUCTURE, 1).setDensityFunction(getDensity());
+	
+	public static final StructurePlacer POISON_TREE_PLACER = new FloorPlacer(BNBStructures.POISON_TREE, 2).setDensityFunction(getDensity());
 	
 	private static Function<BlockPos, Boolean> getDensity() {
 		PerlinNoise noise = new PerlinNoise();

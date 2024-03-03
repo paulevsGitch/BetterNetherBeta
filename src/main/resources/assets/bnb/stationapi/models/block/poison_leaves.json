@@ -1,0 +1,7 @@
+{
+	"parent": "bnb:block/leaves",
+	"textures": {
+		"leaves_bottom": "bnb:block/poison_leaves_bottom",
+		"leaves": "bnb:block/poison_leaves"
+	}
+}

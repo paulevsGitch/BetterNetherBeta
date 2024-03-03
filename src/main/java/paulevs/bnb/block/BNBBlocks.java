@@ -51,7 +51,15 @@ public class BNBBlocks {
 	public static final Block WARPED_FENCE = make("warped_fence", FenceBlock::new, WARPED_PLANKS);
 	
 	public static final Block POISON_WOOD = make("poison_wood", NetherWoodBlock::new);
+	public static final Block POISON_STEM = make("poison_stem", StemBlock::new);
+	public static final Block POISON_BRANCH = make("poison_branch", BranchBlock::new);
 	public static final Block POISON_LEAVES = make("poison_leaves", NetherLeavesBlock::new);
+	public static final Block POISON_SAPLING = make("poison_sapling", NetherSaplingBlock::new, () -> BNBStructures.POISON_TREE);
+	public static final Block POISON_PLANKS = make("poison_planks", NetherPlanksBlock::new);
+	public static final Block POISON_STAIRS = make("poison_stairs", TemplateStairsBlock::new, POISON_PLANKS);
+	public static final VBEHalfSlabBlock POISON_SLAB_HALF = make("poison_slab_half", VBEHalfSlabBlock::new, POISON_PLANKS);
+	public static final VBEFullSlabBlock POISON_SLAB_FULL = makeNI("poison_slab_full", VBEFullSlabBlock::new, POISON_PLANKS);
+	public static final Block POISON_FENCE = make("poison_fence", FenceBlock::new, POISON_PLANKS);
 	
 	public static final Block PALE_WOOD = make("pale_wood", NetherWoodBlock::new);
 	public static final Block PALE_LEAVES = make("pale_leaves", NetherLeavesTransparent::new);

@@ -1,8 +1,7 @@
 {
-	"parent": "bnb:block/emissive_column",
+	"parent": "minecraft:block/cube_column",
 	"textures": {
-		"side": "bnb:block/poison_wood_side_3",
-		"side_e": "bnb:block/poison_wood_side_3_e",
+		"side": "bnb:block/blank_wood_side_3",
 		"end": "bnb:block/poison_wood_top"
 	}
 }

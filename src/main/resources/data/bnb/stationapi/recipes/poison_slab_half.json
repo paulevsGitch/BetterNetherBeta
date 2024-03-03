@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"XXX"
+	],
+	"key": {
+		"X": { "item": "bnb:poison_planks" }
+	},
+	"result": {
+		"item": "bnb:poison_slab_half",
+		"count": 6
+	}
+}
