@@ -67,9 +67,9 @@ public class BNBBlocks {
 	public static final Block PALE_TREE_WEEPING_VINE = make("pale_tree_weeping_vine", NetherVineBlock::new);
 	public static final Block EMBER_TREE_WEEPING_VINE = make("ember_tree_weeping_vine", NetherVineBlock::new);
 	
-	public static final Block FLAME_BULBS = make("flame_bulbs", NetherFloorPlantBlock::new);
-	public static final Block FLAME_BULBS_TALL = make("flame_bulbs_tall", DoubleFloorPlantBlock::new);
-	public static final Block CRIMSON_ROOTS = make("crimson_roots", NetherFloorPlantBlock::new);
+	public static final Block FLAME_BULBS = make("flame_bulbs", NetherGrassBlock::new);
+	public static final Block FLAME_BULBS_TALL = make("flame_bulbs_tall", DoubleGrassPlantBlock::new);
+	public static final Block CRIMSON_ROOTS = make("crimson_roots", NetherRootsBlock::new);
 	public static final Block NETHER_DAISY = make("nether_daisy", NetherFloorPlantBlock::new).setLightEmittance(0.5F);
 	public static final Block FIREWEED = make("fireweed", DoubleFloorPlantBlock::new).setLightEmittance(0.5F);
 	public static final Block LANTERN_GRASS = make("lantern_grass", DoubleFloorPlantBlock::new).setLightEmittance(0.75F);
@@ -79,6 +79,9 @@ public class BNBBlocks {
 	
 	public static final GrowingNetherVineBlock CRIMSON_VINE = make("crimson_vine", GrowingNetherVineBlock::new);
 	public static final CollectableNetherVineBlock CRIMSON_VINE_WITH_BERRIES = (CollectableNetherVineBlock) makeNI("crimson_vine_with_berries", CollectableNetherVineBlock::new).setLightEmittance(0.5F);
+	
+	public static final Block WARPED_ROOTS = make("warped_roots", NetherRootsBlock::new);
+	
 	public static final GlowstoneShards GLOWSTONE_SHARDS = (GlowstoneShards) make("glowstone_shards", GlowstoneShards::new).setLightEmittance(1F);
 	
 	private static <B extends Block> B make(String name, Function<Identifier, B> constructor) {

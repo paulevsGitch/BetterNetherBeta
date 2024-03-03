@@ -18,6 +18,17 @@ tile.crimson_sapling.name=Crimson Sapling
 item.crimson_tree_placer.name=Crimson Tree Placer
 
 tile.warped_wood.name=Warped Wood
+tile.warped_stem.name=Warped Stem
+tile.warped_branch.name=Warped Branch
+tile.warped_sapling.name=Warped Sapling
+tile.warped_planks.name=Warped Planks
+tile.warped_stairs.name=Warped Stairs
+tile.warped_slab_half.name=Warped Slab
+tile.warped_slab_full.name=Warped Slab
+tile.warped_fence.name=Warped Fence
+tile.warped_roots.name=Warped Roots
+item.warped_tree_placer.name=Warped Tree Placer
+
 tile.poison_wood.name=Poison Wood
 tile.pale_wood.name=Pale Wood
 tile.ember_wood.name=Ember Wood

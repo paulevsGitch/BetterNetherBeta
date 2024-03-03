@@ -1,6 +1,7 @@
 {
-	"parent": "minecraft:block/cross",
+	"parent": "bnb:block/cross_emissive",
 	"textures": {
-		"cross": "bnb:block/crimson_roots_2"
+		"cross": "bnb:block/crimson_roots_2",
+		"cross_e": "bnb:block/crimson_roots_2_e"
 	}
 }

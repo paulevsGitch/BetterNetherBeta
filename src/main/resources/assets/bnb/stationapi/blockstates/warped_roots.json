@@ -1,0 +1,9 @@
+{
+	"variants": {
+		"": [
+			{ "model": "bnb:block/warped_roots_1" },
+			{ "model": "bnb:block/warped_roots_2" },
+			{ "model": "bnb:block/warped_roots_3" }
+		]
+	}
+}

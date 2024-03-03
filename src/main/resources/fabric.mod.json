@@ -23,8 +23,7 @@
 			"paulevs.bnb.listeners.CommonListener"
 		],
 		"stationapi:event_bus_client": [
-			"paulevs.bnb.listeners.TextureListener",
-			"paulevs.bnb.listeners.ModelListener"
+			"paulevs.bnb.listeners.ClientListener"
 		],
 		"bhcreative:event_bus": [
 			"paulevs.bnb.listeners.CreativeTabListener"
