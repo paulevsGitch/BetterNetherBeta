@@ -1,6 +1,7 @@
 {
-	"parent": "bnb:block/crop",
+	"parent": "bnb:block/crop_emissive",
 	"textures": {
-		"crop": "bnb:block/warped_weeping_vine_bottom"
+		"crop": "bnb:block/warped_weeping_vine_bottom",
+		"crop_e": "bnb:block/warped_weeping_vine_bottom_e"
 	}
 }

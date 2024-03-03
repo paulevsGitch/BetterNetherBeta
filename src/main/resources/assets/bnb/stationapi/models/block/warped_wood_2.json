@@ -1,8 +1,7 @@
 {
-	"parent": "bnb:block/emissive_column",
+	"parent": "minecraft:block/cube_column",
 	"textures": {
-		"side": "bnb:block/warped_wood_side_2",
-		"side_e": "bnb:block/warped_wood_side_2_e",
+		"side": "bnb:block/blank_wood_side_2",
 		"end": "bnb:block/warped_wood_top"
 	}
 }

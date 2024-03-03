@@ -1,6 +1,7 @@
 {
-	"parent": "minecraft:block/cube_all",
+	"parent": "bnb:block/leaves",
 	"textures": {
-		"all": "bnb:block/crimson_leaves"
+		"leaves_bottom": "bnb:block/crimson_leaves_bottom",
+		"leaves": "bnb:block/crimson_leaves"
 	}
 }

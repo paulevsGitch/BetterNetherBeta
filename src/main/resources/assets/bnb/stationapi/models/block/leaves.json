@@ -1,9 +1,7 @@
 {
 	"credit": "Made by paulevs",
 	"textures": {
-		"leaves_bottom": "bnb:block/crimson_leaves_bottom",
-		"particle": "bnb:block/crimson_leaves",
-		"leaves": "bnb:block/crimson_leaves"
+		"particle": "#leaves"
 	},
 	"elements": [
 		{

@@ -19,7 +19,7 @@ public class NetherLeavesBlock extends VBELeavesBlock {
 	private Block sapling;
 	
 	public NetherLeavesBlock(Identifier id) {
-		super(id, BNBBlockMaterials.NETHER_LEAVES, 9);
+		super(id, BNBBlockMaterials.NETHER_LEAVES, 15);
 		setHardness(LEAVES.getHardness());
 		setLightOpacity(255);
 	}
@@ -49,9 +49,8 @@ public class NetherLeavesBlock extends VBELeavesBlock {
 	
 	@Override
 	public List<ItemStack> getDropList(Level level, int x, int y, int z, BlockState state, int meta) {
-		int count = LEAVES.getDropCount(level.random);
-		if (count == 0) return Collections.emptyList();
-		return Collections.singletonList(new ItemStack(sapling, count, 0));
+		if (level.random.nextInt(31) == 0) return Collections.emptyList();
+		return Collections.singletonList(new ItemStack(sapling));
 	}
 	
 	public void setSapling(Block sapling) {

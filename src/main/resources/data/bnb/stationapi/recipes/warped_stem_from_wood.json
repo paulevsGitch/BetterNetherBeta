@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"X",
+		"X"
+	],
+	"key": {
+		"X": { "item": "bnb:warped_wood" }
+	},
+	"result": {
+		"item": "bnb:warped_stem",
+		"count": 8
+	}
+}

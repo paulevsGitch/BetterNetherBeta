@@ -42,7 +42,11 @@ public class BNBBiomes {
 		.start("bnb_warped_forest")
 		.fogColor(0x119b85)
 		.surfaceRule(SurfaceBuilder.start(BNBBlocks.WARPED_NYLIUM).replace(Block.NETHERRACK).ground(1).build())
-		.build()).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);;
+		.feature(BNBStructures.LAVA_LAKE_PLACER)
+		.feature(BNBStructures.GLOWSTONE_CRYSTAL_FLOOR_PLACER)
+		.feature(BNBStructures.GLOWSTONE_CRYSTAL_CEILING_PLACER)
+		.feature(BNBStructures.WARPED_TREE_PLACER)
+		.build()).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
 	
 	public static final Biome POISON_FOREST = add(BiomeBuilder
 		.start("bnb_poison_forest")

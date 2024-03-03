@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"  X",
+		" XX",
+		"XXX"
+	],
+	"key": {
+		"X": { "item": "bnb:warped_planks" }
+	},
+	"result": {
+		"item": "bnb:warped_stairs",
+		"count": 6
+	}
+}

@@ -17,6 +17,7 @@ public class TextureListener {
 		Block.SOUL_SAND.texture = blockAtlas.addTexture(BNB.id("block/soul_sand")).index;
 		
 		BNBBlocks.CRIMSON_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/crimson_planks")).index;
+		BNBBlocks.WARPED_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/warped_planks")).index;
 		
 		// TODO remove that after release
 		/*if (FabricLoader.getInstance().isDevelopmentEnvironment()) {

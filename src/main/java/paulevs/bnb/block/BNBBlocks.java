@@ -40,7 +40,15 @@ public class BNBBlocks {
 	public static final Block CRIMSON_FENCE = make("crimson_fence", FenceBlock::new, CRIMSON_PLANKS);
 	
 	public static final Block WARPED_WOOD = make("warped_wood", NetherWoodBlock::new);
-	public static final Block WARPED_LEAVES = make("warped_leaves", NetherLeavesBlock::new);
+	public static final Block WARPED_STEM = make("warped_stem", StemBlock::new);
+	public static final Block WARPED_BRANCH = make("warped_branch", BranchBlock::new);
+	public static final NetherLeavesBlock WARPED_LEAVES = make("warped_leaves", NetherLeavesBlock::new);
+	public static final Block WARPED_SAPLING = make("warped_sapling", NetherSaplingBlock::new, () -> BNBStructures.WARPED_TREE);
+	public static final Block WARPED_PLANKS = make("warped_planks", NetherPlanksBlock::new);
+	public static final Block WARPED_STAIRS = make("warped_stairs", TemplateStairsBlock::new, WARPED_PLANKS);
+	public static final VBEHalfSlabBlock WARPED_SLAB_HALF = make("warped_slab_half", VBEHalfSlabBlock::new, WARPED_PLANKS);
+	public static final VBEFullSlabBlock WARPED_SLAB_FULL = makeNI("warped_slab_full", VBEFullSlabBlock::new, WARPED_PLANKS);
+	public static final Block WARPED_FENCE = make("warped_fence", FenceBlock::new, WARPED_PLANKS);
 	
 	public static final Block POISON_WOOD = make("poison_wood", NetherWoodBlock::new);
 	public static final Block POISON_LEAVES = make("poison_leaves", NetherLeavesBlock::new);
@@ -115,7 +123,10 @@ public class BNBBlocks {
 	public static void init() {
 		CRIMSON_SLAB_HALF.setFullBlock(CRIMSON_SLAB_FULL);
 		CRIMSON_SLAB_FULL.setHalfBlock(CRIMSON_SLAB_HALF);
+		WARPED_SLAB_HALF.setFullBlock(WARPED_SLAB_FULL);
+		WARPED_SLAB_FULL.setHalfBlock(WARPED_SLAB_HALF);
 		CRIMSON_LEAVES.setSapling(CRIMSON_SAPLING);
+		WARPED_LEAVES.setSapling(WARPED_SAPLING);
 		CRIMSON_VINE.setGrown(CRIMSON_VINE_WITH_BERRIES);
 		CRIMSON_VINE_WITH_BERRIES.setBasic(CRIMSON_VINE);
 	}

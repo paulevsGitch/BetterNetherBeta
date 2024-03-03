@@ -57,11 +57,22 @@ public class BNBStructures {
 		BNBBlocks.CRIMSON_STEM,
 		BNBBlocks.CRIMSON_BRANCH,
 		BNBBlocks.CRIMSON_WEEPING_VINE,
-		7, 11
+		7, 11,
+		0.75F, 1.7F
 	);
 	public static final Structure CRIMSON_TREE_BUSH = new PillarStructure()
 		.addSection(BNBBlocks.CRIMSON_STEM.getDefaultState(), 1, 2)
 		.addSection(BNBBlocks.CRIMSON_LEAVES.getDefaultState(), 2, 3);
+	
+	public static final Structure WARPED_TREE = new CommonTreeStructure(
+		BNBBlocks.WARPED_WOOD,
+		BNBBlocks.WARPED_LEAVES,
+		BNBBlocks.WARPED_STEM,
+		BNBBlocks.WARPED_BRANCH,
+		BNBBlocks.WARPED_WEEPING_VINE,
+		7, 11,
+		4.0F, 2.5F
+	);
 	
 	public static final Structure LAVA_LAKE_STRUCTURE = new NetherLake();
 	public static final Structure GLOWSTONE_CRYSTAL_FLOOR_STRUCTURE = new CrystalStructure(
@@ -93,6 +104,8 @@ public class BNBStructures {
 	public static final StructurePlacer LAVA_LAKE_PLACER = new FloorPlacer(LAVA_LAKE_STRUCTURE, 1).setCentered(true).setDensityFunction(pos -> RANDOM.nextInt(7) == 0);
 	public static final StructurePlacer GLOWSTONE_CRYSTAL_FLOOR_PLACER = new FloorPlacer(GLOWSTONE_CRYSTAL_FLOOR_STRUCTURE, 1).setDensityFunction(pos -> RANDOM.nextInt(15) == 0);
 	public static final StructurePlacer GLOWSTONE_CRYSTAL_CEILING_PLACER = new CeilingPlacer(GLOWSTONE_CRYSTAL_CEILING_STRUCTURE, 1).setDensityFunction(pos -> RANDOM.nextInt(15) == 0);
+	
+	public static final StructurePlacer WARPED_TREE_PLACER = new FloorPlacer(WARPED_TREE, 2).setDensityFunction(getDensity());
 	
 	private static Function<BlockPos, Boolean> getDensity() {
 		PerlinNoise noise = new PerlinNoise();

@@ -22,8 +22,10 @@ public class CommonTreeStructure extends Structure {
 	private final BlockState vine;
 	private final int minHeight;
 	private final int dHeight;
+	private final float capWAspect;
+	private final float capHAspect;
 	
-	public CommonTreeStructure(Block trunk, Block leaves, Block stem, Block branch, Block vine, int minHeight, int maxHeight) {
+	public CommonTreeStructure(Block trunk, Block leaves, Block stem, Block branch, Block vine, int minHeight, int maxHeight, float capWAspect, float capHAspect) {
 		this.trunk = trunk.getDefaultState();
 		this.leaves = leaves.getDefaultState();
 		this.stem = stem.getDefaultState();
@@ -31,6 +33,8 @@ public class CommonTreeStructure extends Structure {
 		this.vine = vine.getDefaultState();
 		this.minHeight = minHeight;
 		this.dHeight = maxHeight - minHeight + 1;
+		this.capWAspect = capWAspect;
+		this.capHAspect = capHAspect;
 	}
 	
 	@Override
@@ -56,9 +60,9 @@ public class CommonTreeStructure extends Structure {
 		
 		growTrunk(level, x, y, z, height);
 		growRoots(level, random, x, y, z, height);
-		growCap(level, random, x, y + height, z, height * 0.75F, height * 1.7F);
+		growCap(level, random, x, y + height, z, height * capWAspect, height * capHAspect);
 		growBranches(level, random, x, y, z, height);
-		growVines(level, random, x, y + height, z, height * 0.75F);
+		growVines(level, random, x, y + height, z, height * capWAspect);
 		
 		return true;
 	}

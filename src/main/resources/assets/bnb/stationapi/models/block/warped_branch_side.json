@@ -1,0 +1,6 @@
+{
+	"parent": "bnb:block/branch_side",
+	"textures": {
+		"all": "bnb:block/warped_stem"
+	}
+}
