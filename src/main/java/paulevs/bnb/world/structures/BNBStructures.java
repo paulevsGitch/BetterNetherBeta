@@ -82,7 +82,7 @@ public class BNBStructures {
 		.addSection(BNBBlocks.WARPED_STEM.getDefaultState(), 1, 1)
 		.addSection(BNBBlocks.WARPED_LEAVES.getDefaultState(), 1, 2);
 	public static final Structure POISON_TREE_BUSH = new PillarStructure()
-		.addSection(BNBBlocks.POISON_STEM.getDefaultState(), 2, 3)
+		.addSection(BNBBlocks.POISON_STEM.getDefaultState(), 2, 4)
 		.addSection(BNBBlocks.POISON_LEAVES.getDefaultState(), 1, 1);
 	
 	public static final Structure LAVA_LAKE_STRUCTURE = new NetherLake();
