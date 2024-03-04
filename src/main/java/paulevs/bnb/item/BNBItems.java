@@ -1,8 +1,17 @@
 package paulevs.bnb.item;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.material.ToolMaterial;
 import net.minecraft.level.structure.Structure;
+import net.modificationstation.stationapi.api.item.tool.ToolMaterialFactory;
+import net.modificationstation.stationapi.api.template.item.TemplateAxeItem;
 import net.modificationstation.stationapi.api.template.item.TemplateFoodItem;
+import net.modificationstation.stationapi.api.template.item.TemplateHoeItem;
+import net.modificationstation.stationapi.api.template.item.TemplateItem;
+import net.modificationstation.stationapi.api.template.item.TemplatePickaxeItem;
+import net.modificationstation.stationapi.api.template.item.TemplateShearsItem;
+import net.modificationstation.stationapi.api.template.item.TemplateShovelItem;
+import net.modificationstation.stationapi.api.template.item.TemplateSwordItem;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
 import paulevs.bnb.block.BNBBlocks;
@@ -17,6 +26,8 @@ import java.util.function.Supplier;
 public class BNBItems {
 	public static final List<Item> ITEMS = new ArrayList<>();
 	
+	private static final ToolMaterial ORICHALCUM = ToolMaterialFactory.create("bnb_orichalcum", 2, 750, 6.0F, 2);
+	
 	public static final Item CRIMSON_TREE_PLACER = make(
 		"crimson_tree_placer", () -> BNBStructures.CRIMSON_TREE, StructurePlacerItem::new
 	);
@@ -28,10 +39,48 @@ public class BNBItems {
 	);
 	public static final Item CRIMSON_VINE_BERRIES = makeFood("crimson_vine_berries", 1, false).setMaxStackSize(8);
 	
+	public static final Item ORICHALCUM_INGOT = make("orichalcum_ingot", TemplateItem::new);
+	
+	public static final Item ORICHALCUM_HELMET = makeArmor("orichalcum_helmet", 3, 2, 0);
+	public static final Item ORICHALCUM_CHESTPLATE = makeArmor("orichalcum_chestplate", 3, 2, 1);
+	public static final Item ORICHALCUM_LEGGINGS = makeArmor("orichalcum_leggings", 3, 2, 2);
+	public static final Item ORICHALCUM_BOOTS = makeArmor("orichalcum_boots", 3, 2, 3);
+	
+	public static final Item ORICHALCUM_SWORD = makeTool("orichalcum_sword", TemplateSwordItem::new, ORICHALCUM);
+	public static final Item ORICHALCUM_SHOVEL = makeTool("orichalcum_shovel", TemplateShovelItem::new, ORICHALCUM);
+	public static final Item ORICHALCUM_PICKAXE = makeTool("orichalcum_pickaxe", TemplatePickaxeItem::new, ORICHALCUM);
+	public static final Item ORICHALCUM_AXE = makeTool("orichalcum_axe", TemplateAxeItem::new, ORICHALCUM);
+	public static final Item ORICHALCUM_HOE = makeTool("orichalcum_hoe", TemplateHoeItem::new, ORICHALCUM);
+	public static final Item ORICHALCUM_SHEARS = makeShears("orichalcum_shears", ORICHALCUM);
+	
 	private static Item makeFood(String name, int healAmount, boolean isWolfFood) {
 		Identifier id = BNB.id(name);
-		TemplateFoodItem item = new TemplateFoodItem(id, healAmount, isWolfFood);
-		item.setTranslationKey(id.toString());
+		Item item = new TemplateFoodItem(id, healAmount, isWolfFood);
+		item.setTranslationKey(id);
+		ITEMS.add(item);
+		return item;
+	}
+	
+	private static Item makeArmor(String name, int level, int protection, int slot) {
+		Identifier id = BNB.id(name);
+		Item item = new NetherArmorItem(id, level, protection, slot);
+		ITEMS.add(item);
+		return item;
+	}
+	
+	private static Item makeTool(String name, BiFunction<Identifier, ToolMaterial, Item> constructor, ToolMaterial material) {
+		Identifier id = BNB.id(name);
+		Item item = constructor.apply(id, material);
+		item.setTranslationKey(id);
+		ITEMS.add(item);
+		return item;
+	}
+	
+	private static Item makeShears(String name, ToolMaterial material) {
+		Identifier id = BNB.id(name);
+		TemplateShearsItem item = new TemplateShearsItem(id);
+		item.setDurability(material.getDurability());
+		item.setTranslationKey(id);
 		ITEMS.add(item);
 		return item;
 	}

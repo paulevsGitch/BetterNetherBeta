@@ -75,4 +75,17 @@ tile.glowstone_shards.name=Glowstone Shards
 
 tile.spider_net.name=Spider Net
 
+tile.orichalcum_ore.name=Orichalcum Ore
+item.orichalcum_ingot.name=Orichalcum Ingot
+item.orichalcum_helmet.name=Orichalcum Helmet
+item.orichalcum_chestplate.name=Orichalcum Chestplate
+item.orichalcum_leggings.name=Orichalcum Leggings
+item.orichalcum_boots.name=Orichalcum Boots
+item.orichalcum_sword.name=Orichalcum Sword
+item.orichalcum_shovel.name=Orichalcum Shovel
+item.orichalcum_pickaxe.name=Orichalcum Pickaxe
+item.orichalcum_axe.name=Orichalcum Axe
+item.orichalcum_hoe.name=Orichalcum Hoe
+item.orichalcum_shears.name=Orichalcum Shears
+
 tab.creative_tab.name=Better Nether Beta

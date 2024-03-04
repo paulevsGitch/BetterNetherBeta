@@ -6,6 +6,7 @@ import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.MossBlock;
 import paulevs.bnb.world.structures.common.CrystalStructure;
 import paulevs.bnb.world.structures.common.NetherLake;
+import paulevs.bnb.world.structures.common.NetherOreStructure;
 import paulevs.bnb.world.structures.common.PillarStructure;
 import paulevs.bnb.world.structures.plants.BerriesVineStructure;
 import paulevs.bnb.world.structures.scatters.BlockMossScatterStructure;
@@ -15,30 +16,30 @@ import paulevs.bnb.world.structures.scatters.SimpleScatterStructure;
 import paulevs.bnb.world.structures.trees.CommonTreeStructure;
 
 public class BNBStructures {
-	public static final Structure FLAME_BULBS_STRUCTURE = new SimpleScatterStructure(3, 15, BNBBlocks.FLAME_BULBS);
-	public static final Structure CRIMSON_ROOTS_STRUCTURE = new SimpleScatterStructure(3, 5, BNBBlocks.CRIMSON_ROOTS);
-	public static final Structure WARPED_ROOTS_STRUCTURE = new SimpleScatterStructure(3, 5, BNBBlocks.WARPED_ROOTS);
-	public static final Structure POISON_ROOTS_STRUCTURE = new SimpleScatterStructure(3, 5, BNBBlocks.POISON_ROOTS);
-	public static final Structure NETHER_DAISY_STRUCTURE = new SimpleScatterStructure(3, 5, BNBBlocks.NETHER_DAISY);
-	public static final Structure FIREWEED_STRUCTURE = new DoublePlantScatterStructure(2, 3, BNBBlocks.FIREWEED);
-	public static final Structure FLAME_BULBS_TALL_STRUCTURE = new DoublePlantScatterStructure(2, 5, BNBBlocks.FLAME_BULBS_TALL);
-	public static final Structure LANTERN_GRASS_STRUCTURE = new DoublePlantScatterStructure(2, 4, BNBBlocks.LANTERN_GRASS);
-	public static final Structure CRIMSON_MOSS_STRUCTURE = new MossScatterStructure(
+	public static final Structure FLAME_BULBS = new SimpleScatterStructure(3, 15, BNBBlocks.FLAME_BULBS);
+	public static final Structure CRIMSON_ROOTS = new SimpleScatterStructure(3, 5, BNBBlocks.CRIMSON_ROOTS);
+	public static final Structure WARPED_ROOTS = new SimpleScatterStructure(3, 5, BNBBlocks.WARPED_ROOTS);
+	public static final Structure POISON_ROOTS = new SimpleScatterStructure(3, 5, BNBBlocks.POISON_ROOTS);
+	public static final Structure NETHER_DAISY = new SimpleScatterStructure(3, 5, BNBBlocks.NETHER_DAISY);
+	public static final Structure FIREWEED = new DoublePlantScatterStructure(2, 3, BNBBlocks.FIREWEED);
+	public static final Structure FLAME_BULBS_TALL = new DoublePlantScatterStructure(2, 5, BNBBlocks.FLAME_BULBS_TALL);
+	public static final Structure LANTERN_GRASS = new DoublePlantScatterStructure(2, 4, BNBBlocks.LANTERN_GRASS);
+	public static final Structure CRIMSON_MOSS = new MossScatterStructure(
 		3, 0.4F,
 		(MossBlock) BNBBlocks.CRIMSON_MOSS
 	);
-	public static final Structure CRIMSON_MOSS_BLOCK_STRUCTURE = new BlockMossScatterStructure(
+	public static final Structure CRIMSON_MOSS_BLOCK = new BlockMossScatterStructure(
 		3, 0.75F,
 		BNBBlocks.CRIMSON_MOSS_BLOCK,
 		(MossBlock) BNBBlocks.CRIMSON_MOSS
 	);
 	
-	public static final Structure CRIMSON_VINE_SHORT_STRUCTURE = new BerriesVineStructure(
+	public static final Structure CRIMSON_VINE_SHORT = new BerriesVineStructure(
 		BNBBlocks.CRIMSON_VINE,
 		BNBBlocks.CRIMSON_VINE_WITH_BERRIES,
 		3, 9
 	);
-	public static final Structure CRIMSON_VINE_LONG_STRUCTURE = new BerriesVineStructure(
+	public static final Structure CRIMSON_VINE_LONG = new BerriesVineStructure(
 		BNBBlocks.CRIMSON_VINE,
 		BNBBlocks.CRIMSON_VINE_WITH_BERRIES,
 		9, 32
@@ -85,15 +86,17 @@ public class BNBStructures {
 		.addSection(BNBBlocks.POISON_STEM.getDefaultState(), 2, 4)
 		.addSection(BNBBlocks.POISON_LEAVES.getDefaultState(), 1, 1);
 	
-	public static final Structure LAVA_LAKE_STRUCTURE = new NetherLake();
-	public static final Structure GLOWSTONE_CRYSTAL_FLOOR_STRUCTURE = new CrystalStructure(
+	public static final Structure LAVA_LAKE = new NetherLake();
+	public static final Structure GLOWSTONE_CRYSTAL_FLOOR = new CrystalStructure(
 		Block.GLOWSTONE,
 		BNBBlocks.GLOWSTONE_SHARDS,
 		false, 5, 3
 	);
-	public static final Structure GLOWSTONE_CRYSTAL_CEILING_STRUCTURE = new CrystalStructure(
+	public static final Structure GLOWSTONE_CRYSTAL_CEILING = new CrystalStructure(
 		Block.GLOWSTONE,
 		BNBBlocks.GLOWSTONE_SHARDS,
 		true, 5, 3
 	);
+	
+	public static final NetherOreStructure ORICHALCUM = new NetherOreStructure(BNBBlocks.ORICHALCUM_ORE, 2);
 }

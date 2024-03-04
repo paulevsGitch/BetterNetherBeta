@@ -93,7 +93,9 @@ public class BNBBlocks {
 	
 	public static final GlowstoneShards GLOWSTONE_SHARDS = (GlowstoneShards) make("glowstone_shards", GlowstoneShards::new).setLightEmittance(1F);
 	
-	public static final Block SPIDER_NET =make("spider_net", SpiderNetBlock::new);
+	public static final Block SPIDER_NET = make("spider_net", SpiderNetBlock::new);
+	
+	public static final Block ORICHALCUM_ORE = make("orichalcum_ore", NetherOre::new);
 	
 	private static <B extends Block> B make(String name, Function<Identifier, B> constructor) {
 		B block = makeNI(name, constructor);

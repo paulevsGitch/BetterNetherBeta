@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"X X",
+		"X X"
+	],
+	"key": {
+		"X": { "item": "bnb:orichalcum_ingot" }
+	},
+	"result": {
+		"item": "bnb:orichalcum_boots"
+	}
+}

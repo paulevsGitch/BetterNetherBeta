@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient": {
+		"item": "bnb:orichalcum_ore"
+	},
+	"result": {
+		"item": "bnb:orichalcum_ingot"
+	}
+}
