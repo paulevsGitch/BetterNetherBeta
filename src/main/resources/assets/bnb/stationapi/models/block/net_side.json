@@ -1,0 +1,29 @@
+{
+	"credit": "Made by paulevs",
+	"textures": {
+		"0": "bnb:block/net_side",
+		"particle": "bnb:block/net_side"
+	},
+	"elements": [
+		{
+			"from": [9, 0, 0],
+			"to": [9, 16, 17.5],
+			"shade": false,
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [9, 0, 0]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 0, 0],
+			"to": [7, 16, 17.5],
+			"shade": false,
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [7, 0, 0]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#0"}
+			}
+		}
+	]
+}

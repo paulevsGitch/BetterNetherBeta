@@ -39,6 +39,7 @@ tile.poison_slab_half.name=Poison Slab
 tile.poison_slab_full.name=Poison Slab
 tile.poison_fence.name=Poison Fence
 item.poison_tree_placer.name=Poison Tree Placer
+tile.poison_roots.name=Poison Roots
 
 tile.pale_wood.name=Pale Wood
 tile.ember_wood.name=Ember Wood
@@ -72,6 +73,6 @@ tile.crimson_vine_with_berries.name=Crimson Vine
 item.crimson_vine_berries.name=Crimson Berries
 tile.glowstone_shards.name=Glowstone Shards
 
-tile.crimson_tree_placer.name=Crimson Tree Placer
+tile.spider_net.name=Spider Net
 
 tab.creative_tab.name=Better Nether Beta

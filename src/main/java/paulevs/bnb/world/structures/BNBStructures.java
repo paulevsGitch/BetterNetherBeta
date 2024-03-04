@@ -18,6 +18,7 @@ public class BNBStructures {
 	public static final Structure FLAME_BULBS_STRUCTURE = new SimpleScatterStructure(3, 15, BNBBlocks.FLAME_BULBS);
 	public static final Structure CRIMSON_ROOTS_STRUCTURE = new SimpleScatterStructure(3, 5, BNBBlocks.CRIMSON_ROOTS);
 	public static final Structure WARPED_ROOTS_STRUCTURE = new SimpleScatterStructure(3, 5, BNBBlocks.WARPED_ROOTS);
+	public static final Structure POISON_ROOTS_STRUCTURE = new SimpleScatterStructure(3, 5, BNBBlocks.POISON_ROOTS);
 	public static final Structure NETHER_DAISY_STRUCTURE = new SimpleScatterStructure(3, 5, BNBBlocks.NETHER_DAISY);
 	public static final Structure FIREWEED_STRUCTURE = new DoublePlantScatterStructure(2, 3, BNBBlocks.FIREWEED);
 	public static final Structure FLAME_BULBS_TALL_STRUCTURE = new DoublePlantScatterStructure(2, 5, BNBBlocks.FLAME_BULBS_TALL);
@@ -80,6 +81,9 @@ public class BNBStructures {
 	public static final Structure WARPED_TREE_BUSH = new PillarStructure()
 		.addSection(BNBBlocks.WARPED_STEM.getDefaultState(), 1, 1)
 		.addSection(BNBBlocks.WARPED_LEAVES.getDefaultState(), 1, 2);
+	public static final Structure POISON_TREE_BUSH = new PillarStructure()
+		.addSection(BNBBlocks.POISON_STEM.getDefaultState(), 2, 3)
+		.addSection(BNBBlocks.POISON_LEAVES.getDefaultState(), 1, 1);
 	
 	public static final Structure LAVA_LAKE_STRUCTURE = new NetherLake();
 	public static final Structure GLOWSTONE_CRYSTAL_FLOOR_STRUCTURE = new CrystalStructure(

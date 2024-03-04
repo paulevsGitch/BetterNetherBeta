@@ -6,7 +6,6 @@ import net.modificationstation.stationapi.api.worldgen.biome.BiomeBuilder;
 import net.modificationstation.stationapi.api.worldgen.surface.SurfaceBuilder;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.sound.BNBSounds;
-import paulevs.bnb.world.structures.BNBStructures;
 import paulevs.bnb.world.structures.placers.BNBPlacers;
 
 import java.util.ArrayList;
@@ -59,6 +58,8 @@ public class BNBBiomes {
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR_PLACER)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING_PLACER)
 		.feature(BNBPlacers.POISON_TREE_PLACER)
+		.feature(BNBPlacers.POISON_BUSH_PLACER)
+		.feature(BNBPlacers.POISON_ROOTS_PLACER)
 		.build()).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
 	
 	private static Biome add(Biome biome) {

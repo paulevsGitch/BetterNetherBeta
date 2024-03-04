@@ -7,8 +7,6 @@ import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.vbe.utils.CreativeUtil;
 
-import java.util.Random;
-
 public class NetherRootsBlock extends NetherFloorPlantBlock {
 	public NetherRootsBlock(Identifier id) {
 		super(id);

@@ -1,0 +1,7 @@
+{
+	"parent": "bnb:block/cross_emissive",
+	"textures": {
+		"cross": "bnb:block/poison_roots_2",
+		"cross_e": "bnb:block/poison_roots_2_e"
+	}
+}

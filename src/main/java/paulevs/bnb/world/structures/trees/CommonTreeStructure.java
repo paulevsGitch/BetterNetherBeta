@@ -140,13 +140,23 @@ public class CommonTreeStructure extends Structure {
 				float distance = MathHelper.sqrt(px + pz) * 0.3F;
 				float noise = (float) Math.sin(Math.atan2(dx, dz) + angle) * distance * 0.5F + distance;
 				noise *= this.noise;
-				byte ry = (byte) random.nextInt(2);
 				for (byte dy = minY; dy < maxY; dy++) {
 					py = dy * aspect + noise;
-					if (py < 1) py -= ry;
 					if (py < 0) continue;
 					if (px + pz + py * py > radius) continue;
 					wy = y + dy;
+					
+					if (py < 1 && random.nextBoolean()) {
+						if (!canReplace(level.getBlockState(wx, wy + 1, wz))) continue;
+						level.setBlockState(wx, wy + 1, wz, leaves);
+						
+						if (level.getBlockState(wx, wy, wz).getMaterial().isReplaceable()) {
+							int length = random.nextInt(3) + 2;
+							placeVine(level, wx, wy, wz, length);
+						}
+						
+						continue;
+					}
 					
 					if (!canReplace(level.getBlockState(wx, wy, wz))) continue;
 					level.setBlockState(wx, wy, wz, leaves);

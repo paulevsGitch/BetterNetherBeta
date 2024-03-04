@@ -89,8 +89,11 @@ public class BNBBlocks {
 	public static final CollectableNetherVineBlock CRIMSON_VINE_WITH_BERRIES = (CollectableNetherVineBlock) makeNI("crimson_vine_with_berries", CollectableNetherVineBlock::new).setLightEmittance(0.5F);
 	
 	public static final Block WARPED_ROOTS = make("warped_roots", NetherRootsBlock::new);
+	public static final Block POISON_ROOTS = make("poison_roots", NetherRootsBlock::new);
 	
 	public static final GlowstoneShards GLOWSTONE_SHARDS = (GlowstoneShards) make("glowstone_shards", GlowstoneShards::new).setLightEmittance(1F);
+	
+	public static final Block SPIDER_NET =make("spider_net", SpiderNetBlock::new);
 	
 	private static <B extends Block> B make(String name, Function<Identifier, B> constructor) {
 		B block = makeNI(name, constructor);
