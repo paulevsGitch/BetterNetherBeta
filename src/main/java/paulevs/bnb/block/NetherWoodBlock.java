@@ -1,7 +1,7 @@
 package paulevs.bnb.block;
 
 import net.modificationstation.stationapi.api.util.Identifier;
-import paulevs.bnb.block.properties.BNBBlockMaterials;
+import paulevs.bnb.block.property.BNBBlockMaterials;
 
 public class NetherWoodBlock extends PillarBlock {
 	public NetherWoodBlock(Identifier id) {

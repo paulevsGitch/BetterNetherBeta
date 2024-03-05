@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.Identifier;
-import paulevs.bnb.block.properties.BNBBlockMaterials;
+import paulevs.bnb.block.property.BNBBlockMaterials;
 
 public class NetherCeilPlantBlock extends NetherPlantBlock {
 	public NetherCeilPlantBlock(Identifier id) {

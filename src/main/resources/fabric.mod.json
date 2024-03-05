@@ -20,13 +20,13 @@
 	"environment": "*",
 	"entrypoints": {
 		"stationapi:event_bus": [
-			"paulevs.bnb.listeners.CommonListener"
+			"paulevs.bnb.listener.CommonListener"
 		],
 		"stationapi:event_bus_client": [
-			"paulevs.bnb.listeners.ClientListener"
+			"paulevs.bnb.listener.ClientListener"
 		],
 		"bhcreative:event_bus": [
-			"paulevs.bnb.listeners.CreativeTabListener"
+			"paulevs.bnb.listener.CreativeTabListener"
 		]
 	},
 

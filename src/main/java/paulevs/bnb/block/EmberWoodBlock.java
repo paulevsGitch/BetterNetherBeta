@@ -10,7 +10,7 @@ import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
-import paulevs.bnb.block.properties.BNBBlockProperties;
+import paulevs.bnb.block.property.BNBBlockProperties;
 
 public class EmberWoodBlock extends NetherWoodBlock {
 	public EmberWoodBlock(Identifier id) {

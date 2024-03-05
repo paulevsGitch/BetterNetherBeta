@@ -12,8 +12,8 @@ import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
-import paulevs.bnb.block.properties.BNBBlockMaterials;
-import paulevs.bnb.block.properties.BNBBlockProperties;
+import paulevs.bnb.block.property.BNBBlockMaterials;
+import paulevs.bnb.block.property.BNBBlockProperties;
 import paulevs.bnb.sound.BNBSounds;
 
 public class MossBlock extends NetherPlantBlock {

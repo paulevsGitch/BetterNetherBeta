@@ -15,7 +15,7 @@ import net.modificationstation.stationapi.api.template.item.TemplateSwordItem;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
 import paulevs.bnb.block.BNBBlocks;
-import paulevs.bnb.world.structures.BNBStructures;
+import paulevs.bnb.world.structure.BNBStructures;
 
 import java.util.ArrayList;
 import java.util.List;

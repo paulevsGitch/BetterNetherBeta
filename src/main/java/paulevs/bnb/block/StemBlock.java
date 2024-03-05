@@ -6,8 +6,8 @@ import net.minecraft.util.maths.Box;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
-import paulevs.bnb.block.properties.BNBBlockMaterials;
-import paulevs.bnb.block.properties.BNBBlockProperties;
+import paulevs.bnb.block.property.BNBBlockMaterials;
+import paulevs.bnb.block.property.BNBBlockProperties;
 
 import java.util.ArrayList;
 

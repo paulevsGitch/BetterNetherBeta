@@ -6,6 +6,7 @@
 	"client": [
 		"MainMenuScreenMixin",
 		"PlayerRendererMixin",
+		"FurnaceScreenMixin",
 		"LevelRendererMixin",
 		"GameRendererMixin",
 		"SoundHelperMixin",

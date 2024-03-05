@@ -13,7 +13,7 @@ import net.modificationstation.stationapi.api.template.block.TemplateBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
-import paulevs.bnb.block.properties.BNBBlockProperties;
+import paulevs.bnb.block.property.BNBBlockProperties;
 
 import java.util.ArrayList;
 

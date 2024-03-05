@@ -5,7 +5,7 @@ import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.template.block.TemplateStairsBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
-import paulevs.bnb.world.structures.BNBStructures;
+import paulevs.bnb.world.structure.BNBStructures;
 import paulevs.vbe.block.VBEFullSlabBlock;
 import paulevs.vbe.block.VBEHalfSlabBlock;
 
@@ -96,6 +96,8 @@ public class BNBBlocks {
 	public static final Block SPIDER_NET = make("spider_net", SpiderNetBlock::new);
 	
 	public static final Block ORICHALCUM_ORE = make("orichalcum_ore", NetherOre::new);
+	
+	public static final Block NETHERRACK_FURNACE = make("netherrack_furnace", NetherrackFurnaceBlock::new);
 	
 	private static <B extends Block> B make(String name, Function<Identifier, B> constructor) {
 		B block = makeNI(name, constructor);

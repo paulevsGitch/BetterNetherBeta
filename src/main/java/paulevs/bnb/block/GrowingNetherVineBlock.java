@@ -3,7 +3,7 @@ package paulevs.bnb.block;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.Identifier;
-import paulevs.bnb.block.properties.BNBBlockProperties;
+import paulevs.bnb.block.property.BNBBlockProperties;
 
 import java.util.Random;
 

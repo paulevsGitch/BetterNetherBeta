@@ -88,4 +88,7 @@ item.orichalcum_axe.name=Orichalcum Axe
 item.orichalcum_hoe.name=Orichalcum Hoe
 item.orichalcum_shears.name=Orichalcum Shears
 
+tile.netherrack_furnace.name=Netherrack Furnace
+
 tab.creative_tab.name=Better Nether Beta
+gui.netherrack_furnace=Netherrack Furnace

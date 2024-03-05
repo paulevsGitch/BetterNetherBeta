@@ -6,7 +6,7 @@ import net.modificationstation.stationapi.api.worldgen.biome.BiomeBuilder;
 import net.modificationstation.stationapi.api.worldgen.surface.SurfaceBuilder;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.sound.BNBSounds;
-import paulevs.bnb.world.structures.placers.BNBPlacers;
+import paulevs.bnb.world.structure.placer.BNBPlacers;
 
 import java.util.ArrayList;
 import java.util.List;
