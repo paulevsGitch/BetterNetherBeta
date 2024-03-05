@@ -5,7 +5,7 @@
 		"south": "bnb:block/netherrack_furnace_side",
 		"east": "bnb:block/netherrack_furnace_side",
 		"west": "bnb:block/netherrack_furnace_side",
-		"up": "bnb:block/netherrack_furnace_side",
-		"down": "bnb:block/netherrack_furnace_side"
+		"up": "bnb:block/netherrack_furnace_top",
+		"down": "bnb:block/netherrack_furnace_top"
 	}
 }

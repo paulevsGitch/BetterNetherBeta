@@ -4,12 +4,15 @@ import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
 import net.modificationstation.stationapi.api.event.block.BlockEvent.BeforePlacedByItem;
 import net.modificationstation.stationapi.api.event.block.entity.BlockEntityRegisterEvent;
+import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
 import net.modificationstation.stationapi.api.event.world.biome.BiomeRegisterEvent;
+import net.modificationstation.stationapi.api.recipe.FuelRegistry;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.GlowstoneShards;
 import paulevs.bnb.block.entity.NetherrackFurnaceBlockEntity;
+import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.item.BNBItems;
 import paulevs.bnb.world.biome.BNBBiomes;
 
@@ -33,6 +36,19 @@ public class CommonListener {
 	@EventListener
 	public void onBlockEntityRegister(BlockEntityRegisterEvent event) {
 		event.register(NetherrackFurnaceBlockEntity.class, "bnb_netherrack_furnace");
+	}
+	
+	@EventListener
+	public void onRecipesRegister(RecipeRegisterEvent event) {
+		if (event.recipeId != RecipeRegisterEvent.Vanilla.SMELTING.type()) return;
+		for (Block block : BNBBlocks.BLOCKS_WITH_ITEMS) {
+			if (block.material == BNBBlockMaterials.NETHER_WOOD) {
+				FuelRegistry.addFuelItem(block.asItem(), block.isFullCube() ? 300 : 100);
+			}
+			if (block.material == BNBBlockMaterials.NETHER_PLANT || block.material == BNBBlockMaterials.NETHER_LEAVES) {
+				FuelRegistry.addFuelItem(block.asItem(), block.isFullCube() ? 100 : 50);
+			}
+		}
 	}
 	
 	@EventListener
