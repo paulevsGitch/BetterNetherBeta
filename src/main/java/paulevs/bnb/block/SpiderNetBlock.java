@@ -19,13 +19,14 @@ import net.modificationstation.stationapi.api.template.block.TemplateBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
+import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.block.property.BNBBlockProperties;
 import paulevs.bnb.sound.BNBSounds;
 import paulevs.vbe.utils.CreativeUtil;
 
 public class SpiderNetBlock extends TemplateBlock {
 	public SpiderNetBlock(Identifier id) {
-		super(id, Material.COBWEB);
+		super(id, BNBBlockMaterials.SPIDER_NET);
 		setSounds(BNBSounds.MOSS_BLOCK);
 		BlockState state = getDefaultState();
 		for (byte i = 0; i < 6; i++) {

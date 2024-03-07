@@ -1,5 +1,11 @@
 {
 	"values": [
-		"bnb:spider_net"
+		"bnb:spider_net",
+		"bnb:crimson_spider_cocoon",
+		"bnb:warped_spider_cocoon",
+		"bnb:poison_spider_cocoon",
+		"bnb:crimson_leaves",
+		"bnb:warped_leaves",
+		"bnb:poison_leaves"
 	]
 }

@@ -4,12 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.BlockPos;
-import net.minecraft.util.maths.MathHelper;
 import net.modificationstation.stationapi.api.block.BlockState;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.SpiderNetBlock;
-import paulevs.bnb.block.property.BNBBlockProperties;
-import paulevs.bnb.block.property.BNBBlockProperties.DoubleShape;
 
 import java.util.Random;
 

@@ -111,18 +111,6 @@ public class BNBWorldGenerator {
 	
 	public static void decorateChunk(Level level, int cx, int cz) {
 		WorldDecoratorImpl.decorate(level, cx, cz);
-		/*FlattenedChunk chunk = (FlattenedChunk) level.getChunkFromCache(cx, cz);
-		final ChunkSection[] sections = chunk.sections;
-		
-		NetherBiome biome = (NetherBiome) level.dimension.biomeSource.getBiome((cx + 1) << 4, (cz + 1) << 4);
-		
-		int wx = cx << 4 | 8;
-		int wz = cz << 4 | 8;
-		for (short cy = 0; cy < sectionCount; cy++) {
-			if (sections[cy] == null) continue;
-			int wy = cy << 4;
-			biome.getStructures().forEach(placer -> placer.place(level, RANDOM, wx, wy, wz));
-		}*/
 	}
 	
 	private static boolean forceSection(int index) {
