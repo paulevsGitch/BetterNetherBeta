@@ -9,6 +9,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
 import net.minecraft.client.resource.language.I18n;
+import net.modificationstation.stationapi.api.client.event.render.entity.EntityRendererRegisterEvent;
 import net.modificationstation.stationapi.api.client.event.render.model.LoadUnbakedModelEvent;
 import net.modificationstation.stationapi.api.client.event.texture.TextureRegisterEvent;
 import net.modificationstation.stationapi.api.client.texture.SpriteIdentifier;
@@ -21,6 +22,10 @@ import net.modificationstation.stationapi.api.util.math.Vec3f;
 import paulevs.bnb.BNB;
 import paulevs.bnb.achievement.BNBAchievementPage;
 import paulevs.bnb.block.BNBBlocks;
+import paulevs.bnb.entity.CrimsonSpiderEntity;
+import paulevs.bnb.entity.NetherSpiderRenderer;
+import paulevs.bnb.entity.PoisonSpiderEntity;
+import paulevs.bnb.entity.WarpedSpiderEntity;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
 
@@ -106,6 +111,13 @@ public class ClientListener {
 		}
 		
 		event.model = new OBJModel(path, data, textures, offset);
+	}
+	
+	@EventListener
+	public void onEntityRenderRegister(EntityRendererRegisterEvent event) {
+		event.renderers.put(CrimsonSpiderEntity.class, new NetherSpiderRenderer("crimson_spider_e"));
+		event.renderers.put(WarpedSpiderEntity.class, new NetherSpiderRenderer("warped_spider_e"));
+		event.renderers.put(PoisonSpiderEntity.class, new NetherSpiderRenderer("poison_spider_e"));
 	}
 	
 	private InputStream getAsStream(Identifier id) {

@@ -7,6 +7,7 @@ import net.minecraft.stat.Stat;
 import net.modificationstation.stationapi.api.event.achievement.AchievementRegisterEvent;
 import net.modificationstation.stationapi.api.event.block.BlockEvent.BeforePlacedByItem;
 import net.modificationstation.stationapi.api.event.block.entity.BlockEntityRegisterEvent;
+import net.modificationstation.stationapi.api.event.entity.EntityRegister;
 import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
@@ -19,6 +20,9 @@ import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.GlowstoneShards;
 import paulevs.bnb.block.entity.NetherrackFurnaceBlockEntity;
 import paulevs.bnb.block.property.BNBBlockMaterials;
+import paulevs.bnb.entity.CrimsonSpiderEntity;
+import paulevs.bnb.entity.PoisonSpiderEntity;
+import paulevs.bnb.entity.WarpedSpiderEntity;
 import paulevs.bnb.item.BNBItems;
 import paulevs.bnb.world.biome.BNBBiomes;
 
@@ -42,6 +46,13 @@ public class CommonListener {
 	@EventListener
 	public void onBlockEntityRegister(BlockEntityRegisterEvent event) {
 		event.register(NetherrackFurnaceBlockEntity.class, "bnb_netherrack_furnace");
+	}
+	
+	@EventListener
+	public void onEntityRegister(EntityRegister event) {
+		event.register(CrimsonSpiderEntity.class, "bnb_crimson_spider");
+		event.register(WarpedSpiderEntity.class, "bnb_warped_spider");
+		event.register(PoisonSpiderEntity.class, "bnb_poison_spider");
 	}
 	
 	@EventListener

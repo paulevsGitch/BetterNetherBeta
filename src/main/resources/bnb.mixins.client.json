@@ -12,6 +12,7 @@
 		"LevelRendererMixin",
 		"GameRendererMixin",
 		"SoundHelperMixin",
+		"SpiderModelMixin",
 		"FluidBlockMixin",
 		"MinecraftMixin",
 		"LevelMixin"

@@ -3,6 +3,7 @@ package paulevs.bnb.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.living.monster.SpiderEntity;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -124,6 +125,8 @@ public class SpiderNetBlock extends TemplateBlock {
 	
 	@Override
 	public void onEntityCollision(Level level, int x, int y, int z, Entity entity) {
+		if (entity instanceof SpiderEntity) return;
+		if (entity instanceof PlayerEntity player && CreativeUtil.isCreative(player)) return;
 		entity.inCobweb = true;
 	}
 	

@@ -1,6 +1,5 @@
 package paulevs.bnb.mixin.client;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.sound.SoundHelper;
@@ -9,6 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import paulevs.bnb.BNBClient;
 import paulevs.bnb.sound.BNBSoundManager;
 import paulscode.sound.SoundSystem;
 
@@ -26,8 +26,7 @@ public class SoundHelperMixin {
 	@Inject(method = "handleBackgroundMusic", at = @At("HEAD"), cancellable = true)
 	private void bnb_handleBackgroundMusic(CallbackInfo info) {
 		if (!initialized) return;
-		@SuppressWarnings("deprecation")
-		Minecraft minecraft = (Minecraft) FabricLoader.getInstance().getGameInstance();
+		Minecraft minecraft = BNBClient.getMinecraft();
 		boolean isNether = minecraft != null && minecraft.level != null && minecraft.level.dimension.id == -1;
 		BNBSoundManager.setInTheNether(isNether);
 		if (isNether) {

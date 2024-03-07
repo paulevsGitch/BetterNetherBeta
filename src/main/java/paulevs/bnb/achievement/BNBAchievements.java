@@ -4,11 +4,11 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.achievement.Achievement;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stat.RegisteringStat;
 import net.minecraft.stat.Stat;
+import paulevs.bnb.BNBClient;
 import paulevs.bnb.block.BNBBlocks;
 
 import java.util.ArrayList;
@@ -53,10 +53,9 @@ public class BNBAchievements {
 		return 0;
 	}
 	
-	@SuppressWarnings({"deprecation", "unchecked"})
+	@SuppressWarnings("unchecked")
 	private static int getStatClient(Stat stat) {
-		Minecraft minecraft = (Minecraft) FabricLoader.getInstance().getGameInstance();
-		return (int) minecraft.statFileWriter.getHashMapOfStats().getOrDefault(stat, 0);
+		return (int) BNBClient.getMinecraft().statFileWriter.getHashMapOfStats().getOrDefault(stat, 0);
 	}
 	
 	public static ItemStack getRGBIcon() {
