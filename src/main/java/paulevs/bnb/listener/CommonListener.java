@@ -18,6 +18,7 @@ import paulevs.bnb.achievement.BNBAchievementPage;
 import paulevs.bnb.achievement.BNBAchievements;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.GlowstoneShards;
+import paulevs.bnb.block.entity.CocoonSpawnerBlockEntity;
 import paulevs.bnb.block.entity.NetherrackFurnaceBlockEntity;
 import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.entity.CrimsonSpiderEntity;
@@ -46,6 +47,7 @@ public class CommonListener {
 	@EventListener
 	public void onBlockEntityRegister(BlockEntityRegisterEvent event) {
 		event.register(NetherrackFurnaceBlockEntity.class, "bnb_netherrack_furnace");
+		event.register(CocoonSpawnerBlockEntity.class, "bnb_cocoon_spawner");
 	}
 	
 	@EventListener

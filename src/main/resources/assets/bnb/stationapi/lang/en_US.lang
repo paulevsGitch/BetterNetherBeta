@@ -88,6 +88,10 @@ item.orichalcum_axe.name=Orichalcum Axe
 item.orichalcum_hoe.name=Orichalcum Hoe
 item.orichalcum_shears.name=Orichalcum Shears
 
+tile.crimson_spider_cocoon.name=Crimson Spider Cocoon
+tile.warped_spider_cocoon.name=Warped Spider Cocoon
+tile.poison_spider_cocoon.name=Poison Spider Cocoon
+
 tile.netherrack_furnace.name=Netherrack Furnace
 
 tab.creative_tab.name=Better Nether Beta

@@ -93,7 +93,10 @@ public class BNBBlocks {
 	
 	public static final GlowstoneShards GLOWSTONE_SHARDS = (GlowstoneShards) make("glowstone_shards", GlowstoneShards::new).setLightEmittance(1F);
 	
-	public static final Block SPIDER_NET = make("spider_net", SpiderNetBlock::new);
+	public static final SpiderNetBlock SPIDER_NET = make("spider_net", SpiderNetBlock::new);
+	public static final Block CRIMSON_SPIDER_COCOON = make("crimson_spider_cocoon", SpiderCocoonBlock::new);
+	public static final Block WARPED_SPIDER_COCOON = make("warped_spider_cocoon", SpiderCocoonBlock::new);
+	public static final Block POISON_SPIDER_COCOON = make("poison_spider_cocoon", SpiderCocoonBlock::new);
 	
 	public static final Block ORICHALCUM_ORE = make("orichalcum_ore", NetherOre::new);
 	

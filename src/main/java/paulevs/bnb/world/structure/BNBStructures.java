@@ -10,6 +10,7 @@ import paulevs.bnb.world.structure.common.NetherOreStructure;
 import paulevs.bnb.world.structure.common.PillarStructure;
 import paulevs.bnb.world.structure.plant.BerriesVineStructure;
 import paulevs.bnb.world.structure.scatter.BlockMossScatterStructure;
+import paulevs.bnb.world.structure.scatter.CocoonStructure;
 import paulevs.bnb.world.structure.scatter.DoublePlantScatterStructure;
 import paulevs.bnb.world.structure.scatter.MossScatterStructure;
 import paulevs.bnb.world.structure.scatter.SimpleScatterStructure;
@@ -98,5 +99,9 @@ public class BNBStructures {
 		true, 5, 3
 	);
 	
-	public static final NetherOreStructure ORICHALCUM = new NetherOreStructure(BNBBlocks.ORICHALCUM_ORE, 2);
+	public static final Structure CRIMSON_SPIDER_COCOON = new CocoonStructure(BNBBlocks.CRIMSON_SPIDER_COCOON);
+	public static final Structure WARPED_SPIDER_COCOON = new CocoonStructure(BNBBlocks.WARPED_SPIDER_COCOON);
+	public static final Structure POISON_SPIDER_COCOON = new CocoonStructure(BNBBlocks.POISON_SPIDER_COCOON);
+	
+	public static final Structure ORICHALCUM = new NetherOreStructure(BNBBlocks.ORICHALCUM_ORE, 2);
 }

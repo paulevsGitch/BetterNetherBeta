@@ -149,7 +149,7 @@ public class SpiderNetBlock extends TemplateBlock {
 		return (state.getMaterial() == Material.LEAVES || state.isOpaque()) && state.getBlock().isFullCube();
 	}
 	
-	private BlockState getFacingState(Level level, int x, int y, int z) {
+	public BlockState getFacingState(Level level, int x, int y, int z) {
 		MutableBlockPos pos = new MutableBlockPos();
 		BlockState self = getDefaultState();
 		for (byte i = 0; i < 6; i++) {
@@ -161,7 +161,7 @@ public class SpiderNetBlock extends TemplateBlock {
 		return self;
 	}
 	
-	private boolean isEmpty(BlockState state) {
+	public static boolean isEmpty(BlockState state) {
 		for (byte i = 0; i < 6; i++) {
 			if (state.get(BNBBlockProperties.FACES[i])) return false;
 		}

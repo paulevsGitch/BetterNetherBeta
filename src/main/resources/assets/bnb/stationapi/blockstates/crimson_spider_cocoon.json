@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"": [
+			{ "model": "bnb:block/crimson_spider_cocoon" },
+			{ "model": "bnb:block/crimson_spider_cocoon", "y": 90 },
+			{ "model": "bnb:block/crimson_spider_cocoon", "y": 180 },
+			{ "model": "bnb:block/crimson_spider_cocoon", "y": 270 }
+		]
+	}
+}
