@@ -41,6 +41,7 @@ public class NetherOreStructure extends Structure {
 					int zsq = dz + random.nextInt(randomRange) - randomMin;
 					if (xsq * xsq + ysq * ysq + zsq * zsq > radiusSqr) continue;
 					if (!level.getBlockState(wx, wy, wz).isOf(Block.NETHERRACK)) continue;
+					if (level.getBlockState(wx, wy + 1, wz).getMaterial().isReplaceable()) continue;
 					level.setBlockState(wx, wy, wz, state);
 				}
 			}

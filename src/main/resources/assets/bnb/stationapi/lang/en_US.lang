@@ -92,3 +92,13 @@ tile.netherrack_furnace.name=Netherrack Furnace
 
 tab.creative_tab.name=Better Nether Beta
 gui.netherrack_furnace=Netherrack Furnace
+
+stationapi\:achievementPage.achievements=Better Nether B.
+achievement.the_ways=The Ways
+achievement.the_ways.desc=Make a portal to The Nether
+achievement.warm_welcome=Warm Welcome
+achievement.warm_welcome.desc=Successfully travel to the Nether
+achievement.rgb=RGB
+achievement.rgb.desc=Collect 3 main wood colors: crimson, poison and warped
+achievement.almost_the_same=Almost The Same
+achievement.almost_the_same.desc=Make Netherrack Furnace

@@ -4,12 +4,15 @@
 	"package": "paulevs.bnb.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
+		"AchievementScreenMixin",
 		"MainMenuScreenMixin",
 		"PlayerRendererMixin",
+		"BlockRendererMixin",
 		"FurnaceScreenMixin",
 		"LevelRendererMixin",
 		"GameRendererMixin",
 		"SoundHelperMixin",
+		"FluidBlockMixin",
 		"MinecraftMixin",
 		"LevelMixin"
 	],

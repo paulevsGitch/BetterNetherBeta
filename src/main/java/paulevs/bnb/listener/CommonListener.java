@@ -1,7 +1,10 @@
 package paulevs.bnb.listener;
 
 import net.mine_diver.unsafeevents.listener.EventListener;
+import net.minecraft.achievement.Achievement;
 import net.minecraft.block.Block;
+import net.minecraft.stat.Stat;
+import net.modificationstation.stationapi.api.event.achievement.AchievementRegisterEvent;
 import net.modificationstation.stationapi.api.event.block.BlockEvent.BeforePlacedByItem;
 import net.modificationstation.stationapi.api.event.block.entity.BlockEntityRegisterEvent;
 import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent;
@@ -9,6 +12,9 @@ import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
 import net.modificationstation.stationapi.api.event.world.biome.BiomeRegisterEvent;
 import net.modificationstation.stationapi.api.recipe.FuelRegistry;
+import paulevs.bnb.BNB;
+import paulevs.bnb.achievement.BNBAchievementPage;
+import paulevs.bnb.achievement.BNBAchievements;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.GlowstoneShards;
 import paulevs.bnb.block.entity.NetherrackFurnaceBlockEntity;
@@ -36,6 +42,14 @@ public class CommonListener {
 	@EventListener
 	public void onBlockEntityRegister(BlockEntityRegisterEvent event) {
 		event.register(NetherrackFurnaceBlockEntity.class, "bnb_netherrack_furnace");
+	}
+	
+	@EventListener
+	public void registerAchievements(AchievementRegisterEvent event) {
+		BNBAchievementPage page = new BNBAchievementPage(BNB.id("achievements"));
+		event.achievements.addAll(BNBAchievements.ACHIEVEMENTS);
+		page.addAchievements(BNBAchievements.ACHIEVEMENTS.toArray(Achievement[]::new));
+		BNBAchievements.ACHIEVEMENTS.forEach(Stat::register);
 	}
 	
 	@EventListener

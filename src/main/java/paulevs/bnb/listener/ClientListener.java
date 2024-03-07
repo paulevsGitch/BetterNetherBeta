@@ -19,7 +19,9 @@ import net.modificationstation.stationapi.api.registry.ItemRegistry;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
 import paulevs.bnb.BNB;
+import paulevs.bnb.achievement.BNBAchievementPage;
 import paulevs.bnb.block.BNBBlocks;
+import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
 
 import java.io.BufferedReader;
@@ -39,9 +41,17 @@ public class ClientListener {
 		Block.GLOWSTONE.texture = blockAtlas.addTexture(BNB.id("block/glowstone")).index;
 		Block.SOUL_SAND.texture = blockAtlas.addTexture(BNB.id("block/soul_sand")).index;
 		
+		LavaRenderer.flowTexture = blockAtlas.addTexture(BNB.id("block/lava_flow")).index;
+		for (int i = 0; i < 16; i++) {
+			Identifier id = BNB.id("block/lava_still_" + i);
+			LavaRenderer.STILL_TEXTURES[i] = blockAtlas.addTexture(id).index;
+		}
+		
 		BNBBlocks.CRIMSON_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/crimson_planks")).index;
 		BNBBlocks.WARPED_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/warped_planks")).index;
 		BNBBlocks.POISON_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/poison_planks")).index;
+		
+		BNBAchievementPage.getInstance().updateTextures(blockAtlas);
 		
 		debugTerrain();
 		printTranslations();

@@ -1,6 +1,6 @@
 plugins {
-	id 'babric-loom' version '1.5.3'
-	id 'maven-publish'
+	id "babric-loom" version "1.5.3"
+	id "maven-publish"
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -11,6 +11,9 @@ version = project.mod_version
 group = project.maven_group
 
 loom {
+	mixin {
+		useLegacyMixinAp = true
+	}
 	gluedMinecraftJar()
 	customMinecraftManifest.set("https://babric.github.io/manifest-polyfill/${minecraft_version}.json")
 }
@@ -24,28 +27,28 @@ repositories {
 
 	// Used for the fabric toolchain in this project.
 	maven {
-		name = 'Babric'
-		url = 'https://maven.glass-launcher.net/babric'
+		name = "Babric"
+		url = "https://maven.glass-launcher.net/babric"
 	}
 	// Used for mappings.
 	maven {
-		name = 'Glass Releases'
-		url = 'https://maven.glass-launcher.net/releases'
+		name = "Glass Releases"
+		url = "https://maven.glass-launcher.net/releases"
 	}
 	// Used for StationAPI and HowManyItems.
 	maven {
-		name = 'Glass Snapshots'
-		url = 'https://maven.glass-launcher.net/snapshots'
+		name = "Glass Snapshots"
+		url = "https://maven.glass-launcher.net/snapshots"
 	}
 	// Used for a StationAPI dependency.
 	maven {
-		name = 'Froge'
-		url 'https://maven.minecraftforge.net/'
+		name = "Froge"
+		url "https://maven.minecraftforge.net/"
 	}
 	// Used for projects that do not have a maven repository, but do have a GitHub repository with working build scripts.
 	maven {
-		name = 'Jitpack'
-		url = 'https://jitpack.io'
+		name = "Jitpack"
+		url = "https://jitpack.io"
 	}
 	// Used for another StationAPI dependency
 	exclusiveContent {
@@ -61,7 +64,7 @@ repositories {
 	}
 	mavenCentral()
 	flatDir {
-		dirs 'libs'
+		dirs "libs"
 	}
 }
 
@@ -73,9 +76,11 @@ dependencies {
 	implementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:${project.mixinextras_version}"))
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
-	implementation 'org.apache.logging.log4j:log4j-slf4j18-impl:2.17.2'
+	implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.17.2"
 
-	modImplementation "net.modificationstation:StationAPI:${project.stapi_version}"
+	modImplementation ("net.modificationstation:StationAPI:${project.stapi_version}") {
+		exclude group: "com.github.llamalad7.mixinextras"
+	}
 	
 	modImplementation("com.github.paulevsGitch:BHCreative:${project.bhcreative_version}") {
 		transitive false
