@@ -12,6 +12,7 @@ import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
 import net.modificationstation.stationapi.impl.worldgen.WorldDecoratorImpl;
 import paulevs.bnb.world.generator.terrain.ChunkTerrainMap;
 import paulevs.bnb.world.generator.terrain.CrossInterpolationCell;
+import paulevs.bnb.world.generator.terrain.TerrainRegion;
 import paulevs.bnb.world.generator.terrain.features.ArchesFeature;
 import paulevs.bnb.world.generator.terrain.features.ArchipelagoFeature;
 import paulevs.bnb.world.generator.terrain.features.BridgesFeature;
@@ -95,7 +96,6 @@ public class BNBWorldGenerator {
 				cell.setZ(bz);
 				for (byte by = 0; by < 16; by++) {
 					cell.setY(by);
-					section.setLight(LightType.SKY, bx, by, bz, 0);
 					if (cell.get() < 0.5F) {
 						if (index > 1) continue;
 						section.setBlockState(bx, by, bz, LAVA);
@@ -118,19 +118,19 @@ public class BNBWorldGenerator {
 	}
 	
 	static {
-		ChunkTerrainMap.addFeature(ArchipelagoFeature::new);
-		ChunkTerrainMap.addFeature(PillarsFeature::new);
-		ChunkTerrainMap.addFeature(SpikesFeature::new);
-		ChunkTerrainMap.addFeature(ContinentsFeature::new);
-		ChunkTerrainMap.addFeature(TheHiveFeature::new);
-		ChunkTerrainMap.addFeature(CubesFeature::new);
-		ChunkTerrainMap.addFeature(ArchesFeature::new);
-		ChunkTerrainMap.addFeature(VolumetricNoiseFeature::new);
-		ChunkTerrainMap.addFeature(LavaOceanFeature::new);
-		ChunkTerrainMap.addFeature(PancakesFeature::new);
-		ChunkTerrainMap.addFeature(TheWallFeature::new);
-		ChunkTerrainMap.addFeature(SmallPillarsFeature::new);
-		ChunkTerrainMap.addFeature(BridgesFeature::new);
-		ChunkTerrainMap.addFeature(DoubleBridgesFeature::new);
+		ChunkTerrainMap.addFeature(ArchipelagoFeature::new, TerrainRegion.OCEAN_NORMAL);
+		ChunkTerrainMap.addFeature(PillarsFeature::new, TerrainRegion.OCEAN_MOUNTAINS, TerrainRegion.SHORE_MOUNTAINS);
+		ChunkTerrainMap.addFeature(SpikesFeature::new, TerrainRegion.MOUNTAINS);
+		ChunkTerrainMap.addFeature(ContinentsFeature::new, TerrainRegion.PLAINS, TerrainRegion.HILLS, TerrainRegion.MOUNTAINS, TerrainRegion.SHORE_NORMAL, TerrainRegion.SHORE_MOUNTAINS);
+		ChunkTerrainMap.addFeature(TheHiveFeature::new, TerrainRegion.MOUNTAINS);
+		ChunkTerrainMap.addFeature(CubesFeature::new, TerrainRegion.MOUNTAINS);
+		ChunkTerrainMap.addFeature(ArchesFeature::new, TerrainRegion.PLAINS, TerrainRegion.SHORE_NORMAL);
+		ChunkTerrainMap.addFeature(VolumetricNoiseFeature::new, TerrainRegion.MOUNTAINS);
+		ChunkTerrainMap.addFeature(LavaOceanFeature::new, TerrainRegion.OCEAN_NORMAL, TerrainRegion.OCEAN_MOUNTAINS);
+		ChunkTerrainMap.addFeature(PancakesFeature::new, TerrainRegion.HILLS, TerrainRegion.MOUNTAINS);
+		ChunkTerrainMap.addFeature(TheWallFeature::new, TerrainRegion.MOUNTAINS);
+		ChunkTerrainMap.addFeature(SmallPillarsFeature::new, TerrainRegion.OCEAN_MOUNTAINS, TerrainRegion.SHORE_MOUNTAINS);
+		ChunkTerrainMap.addFeature(BridgesFeature::new, TerrainRegion.BRIDGES);
+		ChunkTerrainMap.addFeature(DoubleBridgesFeature::new, TerrainRegion.BRIDGES);
 	}
 }

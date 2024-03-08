@@ -47,17 +47,42 @@ public class ChunkTerrainMap implements TerrainSDF {
 				feature.setSeed(RANDOM.nextInt());
 			}
 		}
+		
+		// Debug
+		/*Int2IntMap colors2 = new Int2IntOpenHashMap();
+		Random random = new Random();
+		
+		BufferedImage buffer = new BufferedImage(800, 800, BufferedImage.TYPE_INT_ARGB);
+		for (int x = 0; x < 800; x++) {
+			for (int z = 0; z < 800; z++) {
+				int color = colors2.computeIfAbsent(TERRAIN_MAP.getSDFIndex(x, z), c -> {
+					random.setSeed(c);
+					return random.nextInt() | 255 << 24;
+				});
+				buffer.setRGB(x, z, color);
+			}
+		}
+		
+		JFrame frame = new JFrame();
+		frame.add(new JLabel(new ImageIcon(buffer)));
+		frame.setResizable(false);
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);*/
 	}
 	
-	public static void addFeature(Supplier<TerrainFeature> constructor) {
+	public static void addFeature(Supplier<TerrainFeature> constructor, TerrainRegion... regions) {
+		byte id = (byte) CONSTRUCTORS.size();
 		CONSTRUCTORS.add(constructor);
+		for (TerrainRegion region : regions) {
+			TERRAIN_MAP.addTerrain(id, region);
+		}
 	}
 	
 	public static void prepare(int cx, int cz) {
 		posX = cx << 4;
 		posZ = cz << 4;
-		
-		int count = CONSTRUCTORS.size();
 		
 		for (short i = 0; i < 144; i++) {
 			byte dx = (byte) (i / 12);
@@ -65,15 +90,8 @@ public class ChunkTerrainMap implements TerrainSDF {
 			if ((dx + dz & 1) == 1) continue;
 			dx = (byte) ((dx << 1) - 2);
 			dz = (byte) ((dz << 1) - 2);
-			TERRAIN_MAP.getDensity(dx + posX, dz + posZ, FEATURE_DENSITY[i >> 1], count);
+			TERRAIN_MAP.getDensity(dx + posX, dz + posZ, FEATURE_DENSITY[i >> 1]);
 		}
-		
-		/*for (byte x = -2; x < 22; x += 2) {
-			for (byte z = -2; z < 22; z += 2) {
-				short index = (short) ((x & 31) << 5 | (z & 31));
-				TERRAIN_MAP.getDensity(x + posX, z + posZ, FEATURE_DENSITY[index], count);
-			}
-		}*/
 	}
 	
 	@Override

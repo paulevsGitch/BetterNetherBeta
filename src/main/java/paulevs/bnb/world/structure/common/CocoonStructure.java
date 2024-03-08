@@ -1,12 +1,12 @@
-package paulevs.bnb.world.structure.scatter;
+package paulevs.bnb.world.structure.common;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.block.BlockState;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.SpiderNetBlock;
+import paulevs.bnb.world.structure.scatter.VolumeScatterStructure;
 
 import java.util.Random;
 
@@ -26,6 +26,7 @@ public class CocoonStructure extends VolumeScatterStructure {
 			int px = x + random.nextInt(3) - 1;
 			int py = y + random.nextInt(3) - 1;
 			int pz = z + random.nextInt(3) - 1;
+			if (!level.getBlockState(px, py, pz).isAir()) continue;
 			if (!cocoon.getBlock().canPlaceAt(level, px, py, pz)) continue;
 			level.setBlockState(px, py, pz, cocoon);
 			count++;
@@ -43,7 +44,6 @@ public class CocoonStructure extends VolumeScatterStructure {
 	
 	@Override
 	protected boolean canPlaceAt(Level level, BlockPos pos) {
-		BlockState state = level.getBlockState(pos);
-		return state.getMaterial().isReplaceable() && state.getMaterial() != Material.LAVA;
+		return level.getBlockState(pos).isAir();
 	}
 }
