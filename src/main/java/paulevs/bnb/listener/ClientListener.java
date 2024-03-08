@@ -23,7 +23,7 @@ import paulevs.bnb.BNB;
 import paulevs.bnb.achievement.BNBAchievementPage;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.entity.CrimsonSpiderEntity;
-import paulevs.bnb.entity.NetherSpiderRenderer;
+import paulevs.bnb.entity.renderer.NetherSpiderRenderer;
 import paulevs.bnb.entity.PoisonSpiderEntity;
 import paulevs.bnb.entity.WarpedSpiderEntity;
 import paulevs.bnb.rendering.LavaRenderer;

@@ -14,7 +14,7 @@ import paulevs.bnb.block.property.BNBBlockProperties.VineShape;
 
 import java.util.Random;
 
-public class CommonTreeStructure extends Structure {
+public class CommonLargeTreeStructure extends Structure {
 	private final BlockState trunk;
 	private final BlockState leaves;
 	private final BlockState stem;
@@ -26,7 +26,7 @@ public class CommonTreeStructure extends Structure {
 	private final float capHAspect;
 	private final float noise;
 	
-	public CommonTreeStructure(Block trunk, Block leaves, Block stem, Block branch, Block vine, int minHeight, int maxHeight, float capWAspect, float capHAspect, float noise) {
+	public CommonLargeTreeStructure(Block trunk, Block leaves, Block stem, Block branch, Block vine, int minHeight, int maxHeight, float capWAspect, float capHAspect, float noise) {
 		this.trunk = trunk.getDefaultState();
 		this.leaves = leaves.getDefaultState();
 		this.stem = stem.getDefaultState();
@@ -69,49 +69,113 @@ public class CommonTreeStructure extends Structure {
 	}
 	
 	private void growTrunk(Level level, int x, int y, int z, int height) {
-		for (byte i = 0; i < height; i++) {
-			level.setBlockState(x, y + i, z, trunk);
+		for (byte i = -2; i < height; i++) {
+			for (byte j = 0; j < 9; j++) {
+				int px = x + (j % 3) - 1;
+				int py = y + i;
+				int pz = z + (j / 3) - 1;
+				if (!canReplace(level.getBlockState(px, py, pz))) continue;
+				level.setBlockState(px, py, pz, trunk);
+			}
 		}
 	}
 	
 	private void growRoots(Level level, Random random, int x, int y, int z, int height) {
-		for (byte i = 0; i < 4; i++) {
-			Direction side = Direction.fromHorizontal(i);
-			int px = x + side.getOffsetX();
-			int pz = z + side.getOffsetZ();
+		for (byte i = 0; i < 12; i++) {
+			Direction side = Direction.fromHorizontal(i / 3);
+			Direction right = side.rotateYClockwise();
+			byte offset = (byte) (3 - Math.abs(i % 3 - 1));
+			int px = x + side.getOffsetX() * offset + right.getOffsetX() * (i % 3 - 1);
+			int pz = z + side.getOffsetZ() * offset + right.getOffsetZ() * (i % 3 - 1);
 			if (canReplace(level.getBlockState(px, y - 1, pz)) && canReplace(level.getBlockState(px, y - 2, pz))) {
 				continue;
 			}
 			byte length = height > 3 ? (byte) random.nextInt(height / 3) : 1;
 			int py = y + length;
 			if (!canReplace(level.getBlockState(px, py, pz))) continue;
+			BlockState stemSide = this.stem.with(BNBBlockProperties.AXIS, side.getAxis());
+			int sx = px;
+			int sz = pz;
+			for (byte j = 2; j < offset; j++) {
+				sx -= side.getOffsetX();
+				sz -= side.getOffsetZ();
+				if (!canReplace(level.getBlockState(sx, py, sz))) continue;
+				level.setBlockState(sx, py, sz, stemSide);
+			}
 			BlockState branch = this.branch
 				.with(BNBBlockProperties.getByFace(side.getOpposite()), true)
 				.with(BNBBlockProperties.getByFace(Direction.DOWN), true);
 			level.setBlockState(px, py, pz, branch);
 			for (byte j = (byte) (length - 1); j >= -1; j--) {
-				if (!canReplace(level.getBlockState(px, y + j, pz))) break;
-				level.setBlockState(px, y + j, pz, stem);
+				py = y + j;
+				if (!canReplace(level.getBlockState(px, py, pz))) break;
+				level.setBlockState(px, py, pz, stem);
+				if (random.nextBoolean() || j == length - 1) continue;
+				sx = px + side.getOffsetX();
+				sz = pz + side.getOffsetZ();
+				if (!canReplace(level.getBlockState(sx, py, sz))) continue;
+				branch = this.branch
+					.with(BNBBlockProperties.getByFace(Direction.UP), true)
+					.with(BNBBlockProperties.getByFace(Direction.DOWN), true);
+				level.setBlockState(px, py, pz, branch.with(BNBBlockProperties.getByFace(side), true));
+				level.setBlockState(sx, py, sz, this.branch
+					.with(BNBBlockProperties.getByFace(side.getOpposite()), true)
+					.with(BNBBlockProperties.getByFace(Direction.DOWN), true)
+				);
+				int sy = py;
+				for (byte k = j; k >= -1; k--) {
+					if (!canReplace(level.getBlockState(sx, --sy, sz))) break;
+					level.setBlockState(sx, sy, sz, stem);
+				}
 			}
 		}
 	}
 	
 	private void growBranches(Level level, Random random, int x, int y, int z, int height) {
-		for (byte i = 0; i < 4; i++) {
+		for (byte i = 0; i < 12; i++) {
+			Direction side = Direction.fromHorizontal(i / 3);
+			Direction right = side.rotateYClockwise();
+			byte offset = (byte) (3 - Math.abs(i % 3 - 1));
+			int px = x + side.getOffsetX() * offset + right.getOffsetX() * (i % 3 - 1);
+			int pz = z + side.getOffsetZ() * offset + right.getOffsetZ() * (i % 3 - 1);
 			int start = height / 3;
 			byte length = start > 1 ? (byte) (random.nextInt(start) + start) : 1;
-			Direction side = Direction.fromHorizontal(i);
-			int px = x + side.getOffsetX();
-			int pz = z + side.getOffsetZ();
 			int py = y + height - length;
 			if (!canReplace(level.getBlockState(px, py, pz))) continue;
+			BlockState stemSide = this.stem.with(BNBBlockProperties.AXIS, side.getAxis());
+			int sx = px;
+			int sz = pz;
+			for (byte j = 2; j < offset; j++) {
+				sx -= side.getOffsetX();
+				sz -= side.getOffsetZ();
+				if (!canReplace(level.getBlockState(sx, py, sz))) continue;
+				level.setBlockState(sx, py, sz, stemSide);
+			}
 			BlockState branch = this.branch
 				.with(BNBBlockProperties.getByFace(side.getOpposite()), true)
 				.with(BNBBlockProperties.getByFace(Direction.UP), true);
 			level.setBlockState(px, py, pz, branch);
 			for (byte j = 1; j < length; j++) {
-				if (!canReplace(level.getBlockState(px, py + j, pz))) break;
-				level.setBlockState(px, py + j, pz, stem);
+				int by = py + j;
+				if (!canReplace(level.getBlockState(px, by, pz))) break;
+				level.setBlockState(px, by, pz, stem);
+				if (random.nextBoolean() || j == length - 1) continue;
+				sx = px + side.getOffsetX();
+				sz = pz + side.getOffsetZ();
+				if (!canReplace(level.getBlockState(sx, by, sz))) continue;
+				branch = this.branch
+					.with(BNBBlockProperties.getByFace(Direction.UP), true)
+					.with(BNBBlockProperties.getByFace(Direction.DOWN), true);
+				level.setBlockState(px, by, pz, branch.with(BNBBlockProperties.getByFace(side), true));
+				level.setBlockState(sx, by, sz, this.branch
+					.with(BNBBlockProperties.getByFace(side.getOpposite()), true)
+					.with(BNBBlockProperties.getByFace(Direction.UP), true)
+				);
+				int sy = by;
+				for (byte k = (byte) (j + 1); k < length; k++) {
+					if (!canReplace(level.getBlockState(sx, ++sy, sz))) break;
+					level.setBlockState(sx, sy, sz, stem);
+				}
 			}
 		}
 	}
@@ -171,10 +235,18 @@ public class CommonTreeStructure extends Structure {
 			}
 		}
 		
-		placeLantern(level, random, x + 1, y, z - 1);
-		placeLantern(level, random, x + 1, y, z + 1);
-		placeLantern(level, random, x - 1, y, z - 1);
-		placeLantern(level, random, x - 1, y, z + 1);
+		placeLantern(level, random, x + 2, y, z - 2);
+		placeLantern(level, random, x + 2, y, z + 2);
+		placeLantern(level, random, x - 2, y, z - 2);
+		placeLantern(level, random, x - 2, y, z + 2);
+		placeLantern(level, random, x + 2, y, z - 1);
+		placeLantern(level, random, x + 2, y, z + 1);
+		placeLantern(level, random, x - 2, y, z - 1);
+		placeLantern(level, random, x - 2, y, z + 1);
+		placeLantern(level, random, x + 1, y, z - 2);
+		placeLantern(level, random, x + 1, y, z + 2);
+		placeLantern(level, random, x - 1, y, z - 2);
+		placeLantern(level, random, x - 1, y, z + 2);
 	}
 	
 	private void placeLantern(Level level, Random random, int x, int y, int z) {
@@ -182,35 +254,6 @@ public class CommonTreeStructure extends Structure {
 		BlockState lamp = BNBBlocks.TREE_LANTERN.getDefaultState();
 		if (canReplace(level.getBlockState(x, y, z))) level.setBlockState(x, y, z, lamp);
 		if (random.nextBoolean() && canReplace(level.getBlockState(x, --y, z))) level.setBlockState(x, y, z, lamp);
-	}
-	
-	private void growVines(Level level, Random random, int x, int y, int z, float radius) {
-		float sqrt = MathHelper.sqrt(radius);
-		byte minXZ = (byte) MathHelper.floor(-sqrt);
-		byte maxXZ = (byte) MathHelper.floor(sqrt + 2);
-		
-		int wx, wy, wz;
-		float px, pz;
-		
-		for (byte dx = minXZ; dx < maxXZ; dx++) {
-			wx = x + dx;
-			px = dx * dx;
-			for (byte dz = minXZ; dz < maxXZ; dz++) {
-				wz = z + dz;
-				pz = dz * dz;
-				if (px + pz > radius) continue;
-				
-				wy = y;
-				BlockState state = level.getBlockState(wx, wy, wz);
-				if (state != leaves) continue;
-				
-				while (state == leaves) state = level.getBlockState(wx, --wy, wz);
-				if (!canReplace(state)) continue;
-				
-				int length = random.nextInt(3) + 2;
-				placeVine(level, wx, wy, wz, length);
-			}
-		}
 	}
 	
 	private void placeVine(Level level, int x, int y, int z, int length) {

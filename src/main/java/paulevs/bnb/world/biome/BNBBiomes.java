@@ -6,7 +6,7 @@ import net.modificationstation.stationapi.api.worldgen.biome.BiomeBuilder;
 import net.modificationstation.stationapi.api.worldgen.surface.SurfaceBuilder;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.sound.BNBSounds;
-import paulevs.bnb.world.structure.placer.BNBPlacers;
+import paulevs.bnb.world.structure.BNBPlacers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.LAVA_LAKE_PLACER)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR_PLACER)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING_PLACER)
+		.feature(BNBPlacers.LARGE_CRIMSON_TREE_PLACER)
 		.feature(BNBPlacers.CRIMSON_TREE_PLACER)
 		.feature(BNBPlacers.CRIMSON_BUSH_PLACER)
 		.feature(BNBPlacers.CRIMSON_SPIDER_COCOON)
@@ -50,6 +51,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.LAVA_LAKE_PLACER)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR_PLACER)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING_PLACER)
+		.feature(BNBPlacers.LARGE_WARPED_TREE_PLACER)
 		.feature(BNBPlacers.WARPED_TREE_PLACER)
 		.feature(BNBPlacers.WARPED_BUSH_PLACER)
 		.feature(BNBPlacers.WARPED_SPIDER_COCOON)
@@ -65,6 +67,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.LAVA_LAKE_PLACER)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR_PLACER)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING_PLACER)
+		.feature(BNBPlacers.LARGE_POISON_TREE_PLACER)
 		.feature(BNBPlacers.POISON_TREE_PLACER)
 		.feature(BNBPlacers.POISON_BUSH_PLACER)
 		.feature(BNBPlacers.POISON_SPIDER_COCOON)

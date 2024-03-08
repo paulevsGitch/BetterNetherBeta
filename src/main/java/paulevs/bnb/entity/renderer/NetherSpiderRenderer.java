@@ -1,4 +1,4 @@
-package paulevs.bnb.entity;
+package paulevs.bnb.entity.renderer;
 
 import net.minecraft.client.render.entity.SpiderEyesRenderer;
 import net.minecraft.client.render.entity.model.SpiderModel;
@@ -28,7 +28,7 @@ public class NetherSpiderRenderer extends SpiderEyesRenderer {
 	protected boolean method_2021(SpiderEntity entity, int i, float f) {
 		if (i != 0) return false;
 		this.bindTexture(texture);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GL11.glColor4f(2.0F, 2.0F, 2.0F, 1.0F);
 		return true;
 	}
 }

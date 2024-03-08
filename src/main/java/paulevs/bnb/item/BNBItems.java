@@ -37,6 +37,17 @@ public class BNBItems {
 	public static final Item POISON_TREE_PLACER = make(
 		"poison_tree_placer", () -> BNBStructures.POISON_TREE, StructurePlacerItem::new
 	);
+	
+	public static final Item LARGE_CRIMSON_TREE_PLACER = make(
+		"large_crimson_tree_placer", () -> BNBStructures.LARGE_CRIMSON_TREE, StructurePlacerItem::new
+	);
+	public static final Item LARGE_WARPED_TREE_PLACER = make(
+		"large_warped_tree_placer", () -> BNBStructures.LARGE_WARPED_TREE, StructurePlacerItem::new
+	);
+	public static final Item LARGE_POISON_TREE_PLACER = make(
+		"large_poison_tree_placer", () -> BNBStructures.LARGE_POISON_TREE, StructurePlacerItem::new
+	);
+	
 	public static final Item CRIMSON_VINE_BERRIES = makeFood("crimson_vine_berries", 1, false).setMaxStackSize(8);
 	
 	public static final Item ORICHALCUM_INGOT = make("orichalcum_ingot", TemplateItem::new);

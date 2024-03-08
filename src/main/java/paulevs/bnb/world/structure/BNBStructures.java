@@ -14,6 +14,7 @@ import paulevs.bnb.world.structure.scatter.BlockMossScatterStructure;
 import paulevs.bnb.world.structure.scatter.DoublePlantScatterStructure;
 import paulevs.bnb.world.structure.scatter.MossScatterStructure;
 import paulevs.bnb.world.structure.scatter.SimpleScatterStructure;
+import paulevs.bnb.world.structure.tree.CommonLargeTreeStructure;
 import paulevs.bnb.world.structure.tree.CommonTreeStructure;
 
 public class BNBStructures {
@@ -74,6 +75,37 @@ public class BNBStructures {
 		BNBBlocks.POISON_WEEPING_VINE,
 		7, 11,
 		1.5F, 1.5F,
+		0.25F
+	);
+	
+	public static final Structure LARGE_CRIMSON_TREE = new CommonLargeTreeStructure(
+		BNBBlocks.CRIMSON_WOOD,
+		BNBBlocks.CRIMSON_LEAVES,
+		BNBBlocks.CRIMSON_STEM,
+		BNBBlocks.CRIMSON_BRANCH,
+		BNBBlocks.CRIMSON_WEEPING_VINE,
+		10, 16,
+		0.75F * 2.5F, 1.7F * 2.0F,
+		1.0F
+	);
+	public static final Structure LARGE_WARPED_TREE = new CommonLargeTreeStructure(
+		BNBBlocks.WARPED_WOOD,
+		BNBBlocks.WARPED_LEAVES,
+		BNBBlocks.WARPED_STEM,
+		BNBBlocks.WARPED_BRANCH,
+		BNBBlocks.WARPED_WEEPING_VINE,
+		7, 11,
+		2.5F * 2.5F, 1.5F * 2.0F,
+		1.25F
+	);
+	public static final Structure LARGE_POISON_TREE = new CommonLargeTreeStructure(
+		BNBBlocks.POISON_WOOD,
+		BNBBlocks.POISON_LEAVES,
+		BNBBlocks.POISON_STEM,
+		BNBBlocks.POISON_BRANCH,
+		BNBBlocks.POISON_WEEPING_VINE,
+		7, 11,
+		1.5F * 2.5F, 1.5F * 2.0F,
 		0.25F
 	);
 	

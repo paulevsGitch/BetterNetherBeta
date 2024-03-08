@@ -14,7 +14,7 @@
 		"issues": "https://github.com/paulevsGitch/BetterNetherBeta/issues"
 	},
 
-	"license": "MIT",
+	"license": "LGPLv2.1",
 	"icon": "assets/bnb/icon.png",
 
 	"environment": "*",
@@ -37,7 +37,7 @@
 	],
 	
 	"suggests": {
-		"bhcreative": ">=0.2.3"
+		"bhcreative": ">=0.4.5"
 	},
 	"depends": {
 		"minecraft": "1.0.0-beta.7.3",
