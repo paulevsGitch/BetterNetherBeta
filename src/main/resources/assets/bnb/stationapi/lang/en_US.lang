@@ -97,6 +97,8 @@ tile.poison_spider_cocoon.name=Poison Spider Cocoon
 
 tile.netherrack_furnace.name=Netherrack Furnace
 
+item.obsidian_boat.name=Obsidian Boat
+
 tab.creative_tab.name=Better Nether Beta
 gui.netherrack_furnace=Netherrack Furnace
 
@@ -109,3 +111,5 @@ achievement.rgb=RGB
 achievement.rgb.desc=Collect 3 main wood colors: crimson, poison and warped
 achievement.almost_the_same=Almost The Same
 achievement.almost_the_same.desc=Make Netherrack Furnace
+achievement.archimedes_law=Archimedes Law
+achievement.archimedes_law.desc=Craft an Obsidian Boat that can float on lava

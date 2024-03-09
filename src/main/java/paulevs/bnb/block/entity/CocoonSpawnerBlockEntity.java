@@ -4,6 +4,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityRegistry;
 import net.minecraft.entity.living.LivingEntity;
 import net.minecraft.util.maths.Box;
+import net.minecraft.util.maths.MathHelper;
 import net.modificationstation.stationapi.api.registry.BlockRegistry;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.entity.NetherSpiderEntity;
@@ -38,7 +39,11 @@ public class CocoonSpawnerBlockEntity extends BlockEntity {
 		for(byte i = 0; i < count; ++i) {
 			LivingEntity spider = (LivingEntity) EntityRegistry.create(entity, level);
 			spider.setPosition(x + random.nextGaussian(), y, z + random.nextGaussian());
-			if (!level.canSpawnEntity(spider.boundingBox)) continue;
+			if (level.canSuffocate(
+				MathHelper.floor(spider.x),
+				MathHelper.floor(spider.y),
+				MathHelper.floor(spider.z)
+			)) continue;
 			if (level.containsLiquids(spider.boundingBox)) continue;
 			level.spawnEntity(spider);
 		}

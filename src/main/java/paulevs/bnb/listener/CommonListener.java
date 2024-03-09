@@ -22,6 +22,7 @@ import paulevs.bnb.block.entity.CocoonSpawnerBlockEntity;
 import paulevs.bnb.block.entity.NetherrackFurnaceBlockEntity;
 import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.entity.CrimsonSpiderEntity;
+import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.entity.PoisonSpiderEntity;
 import paulevs.bnb.entity.WarpedSpiderEntity;
 import paulevs.bnb.item.BNBItems;
@@ -55,6 +56,7 @@ public class CommonListener {
 		event.register(CrimsonSpiderEntity.class, "bnb_crimson_spider");
 		event.register(WarpedSpiderEntity.class, "bnb_warped_spider");
 		event.register(PoisonSpiderEntity.class, "bnb_poison_spider");
+		event.register(ObsidianBoatEntity.class, "bnb_obsidian_boat");
 	}
 	
 	@EventListener

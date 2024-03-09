@@ -9,9 +9,11 @@
 		"NetherLevelSourceMixin",
 		"NetherDimensionMixin",
 		"CraftingResultMixin",
+		"BoatEntityMixin",
 		"ItemEntityMixin",
 		"FireBlockMixin",
 		"LevelAccessor",
+		"EntityMixin",
 		"BiomeMixin"
 	],
 	"injectors": {

@@ -7,12 +7,12 @@
 		"AchievementScreenMixin",
 		"MainMenuScreenMixin",
 		"PlayerRendererMixin",
+		"EntityRendererMixin",
 		"BlockRendererMixin",
 		"FurnaceScreenMixin",
 		"LevelRendererMixin",
 		"GameRendererMixin",
 		"SoundHelperMixin",
-		"SpiderModelMixin",
 		"FluidBlockMixin",
 		"MinecraftMixin",
 		"LevelMixin"

@@ -1,6 +1,5 @@
 package paulevs.bnb.block;
 
-import com.mojang.datafixers.util.Function4;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.level.structure.Structure;
@@ -73,7 +72,7 @@ public class BNBBlocks {
 	public static final Block POISON_WOOD = make("poison_wood", NetherWoodBlock::new);
 	public static final Block POISON_STEM = make("poison_stem", StemBlock::new);
 	public static final Block POISON_BRANCH = make("poison_branch", BranchBlock::new);
-	public static final Block POISON_LEAVES = make("poison_leaves", NetherLeavesBlock::new);
+	public static final NetherLeavesBlock POISON_LEAVES = make("poison_leaves", NetherLeavesBlock::new);
 	public static final Block POISON_SAPLING = makeSapling(
 		"poison_sapling",
 		() -> BNBStructures.POISON_TREE,
@@ -187,10 +186,13 @@ public class BNBBlocks {
 	public static void init() {
 		CRIMSON_SLAB_HALF.setFullBlock(CRIMSON_SLAB_FULL);
 		CRIMSON_SLAB_FULL.setHalfBlock(CRIMSON_SLAB_HALF);
+		POISON_SLAB_FULL.setHalfBlock(POISON_SLAB_HALF);
 		WARPED_SLAB_HALF.setFullBlock(WARPED_SLAB_FULL);
 		WARPED_SLAB_FULL.setHalfBlock(WARPED_SLAB_HALF);
+		POISON_SLAB_FULL.setHalfBlock(POISON_SLAB_HALF);
 		CRIMSON_LEAVES.setSapling(CRIMSON_SAPLING);
 		WARPED_LEAVES.setSapling(WARPED_SAPLING);
+		POISON_LEAVES.setSapling(POISON_SAPLING);
 		CRIMSON_VINE.setGrown(CRIMSON_VINE_WITH_BERRIES);
 		CRIMSON_VINE_WITH_BERRIES.setBasic(CRIMSON_VINE);
 	}

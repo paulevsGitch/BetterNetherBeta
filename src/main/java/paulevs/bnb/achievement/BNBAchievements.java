@@ -10,6 +10,7 @@ import net.minecraft.stat.RegisteringStat;
 import net.minecraft.stat.Stat;
 import paulevs.bnb.BNBClient;
 import paulevs.bnb.block.BNBBlocks;
+import paulevs.bnb.item.BNBItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class BNBAchievements {
 	public static final Achievement WARM_WELCOME = make("warm_welcome", Block.FIRE, 2, 0, THE_WAYS);
 	public static final Achievement RGB = make("rgb", BNBBlocks.WARPED_WOOD, 1, 2, WARM_WELCOME);
 	public static final Achievement ALMOST_THE_SAME = make("almost_the_same", BNBBlocks.NETHERRACK_FURNACE, 3, 2, WARM_WELCOME);
+	public static final Achievement ARCHIMEDES_LAW = make("archimedes_law", BNBItems.OBSIDIAN_BOAT, 1, -2, WARM_WELCOME);
 	
 	public static final Stat COLLECT_CRIMSON_WOOD = new RegisteringStat(9990, "stat.bnb:collectRedWood").register();
 	public static final Stat COLLECT_WARPED_WOOD = new RegisteringStat(9991, "stat.bnb:collectRedWood").register();

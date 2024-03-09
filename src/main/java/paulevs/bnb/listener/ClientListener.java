@@ -23,9 +23,11 @@ import paulevs.bnb.BNB;
 import paulevs.bnb.achievement.BNBAchievementPage;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.entity.CrimsonSpiderEntity;
-import paulevs.bnb.entity.renderer.NetherSpiderRenderer;
+import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.entity.PoisonSpiderEntity;
 import paulevs.bnb.entity.WarpedSpiderEntity;
+import paulevs.bnb.entity.renderer.NetherSpiderRenderer;
+import paulevs.bnb.entity.renderer.ObsidianBoatRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
 
@@ -118,6 +120,7 @@ public class ClientListener {
 		event.renderers.put(CrimsonSpiderEntity.class, new NetherSpiderRenderer("crimson_spider_e"));
 		event.renderers.put(WarpedSpiderEntity.class, new NetherSpiderRenderer("warped_spider_e"));
 		event.renderers.put(PoisonSpiderEntity.class, new NetherSpiderRenderer("poison_spider_e"));
+		event.renderers.put(ObsidianBoatEntity.class, new ObsidianBoatRenderer());
 	}
 	
 	private InputStream getAsStream(Identifier id) {

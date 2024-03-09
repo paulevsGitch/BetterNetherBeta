@@ -64,6 +64,8 @@ public class BNBItems {
 	public static final Item ORICHALCUM_HOE = makeTool("orichalcum_hoe", TemplateHoeItem::new, ORICHALCUM);
 	public static final Item ORICHALCUM_SHEARS = makeShears("orichalcum_shears", ORICHALCUM);
 	
+	public static final Item OBSIDIAN_BOAT = make("obsidian_boat", ObsidianBoatItem::new);
+	
 	private static Item makeFood(String name, int healAmount, boolean isWolfFood) {
 		Identifier id = BNB.id(name);
 		Item item = new TemplateFoodItem(id, healAmount, isWolfFood);

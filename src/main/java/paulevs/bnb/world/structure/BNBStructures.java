@@ -6,6 +6,7 @@ import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.MossBlock;
 import paulevs.bnb.world.structure.common.CocoonStructure;
 import paulevs.bnb.world.structure.common.CrystalStructure;
+import paulevs.bnb.world.structure.common.FallenTreeStructure;
 import paulevs.bnb.world.structure.common.NetherLake;
 import paulevs.bnb.world.structure.common.NetherOreStructure;
 import paulevs.bnb.world.structure.common.PillarStructure;
@@ -118,6 +119,10 @@ public class BNBStructures {
 	public static final Structure POISON_TREE_BUSH = new PillarStructure()
 		.addSection(BNBBlocks.POISON_STEM.getDefaultState(), 2, 4)
 		.addSection(BNBBlocks.POISON_LEAVES.getDefaultState(), 1, 1);
+	
+	public static final Structure FALLEN_CRIMSON_TREE = new FallenTreeStructure(BNBBlocks.CRIMSON_WOOD, 5, 7);
+	public static final Structure FALLEN_WARPED_TREE = new FallenTreeStructure(BNBBlocks.WARPED_WOOD, 5, 7);
+	public static final Structure FALLEN_POISON_TREE = new FallenTreeStructure(BNBBlocks.POISON_WOOD, 5, 7);
 	
 	public static final Structure LAVA_LAKE = new NetherLake();
 	public static final Structure GLOWSTONE_CRYSTAL_FLOOR = new CrystalStructure(
