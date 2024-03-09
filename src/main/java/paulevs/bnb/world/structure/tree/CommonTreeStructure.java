@@ -43,10 +43,9 @@ public class CommonTreeStructure extends Structure {
 	public boolean generate(Level level, Random random, int x, int y, int z) {
 		int height = random.nextInt(dHeight) + minHeight;
 		
-		if (level.getBlockState(x, y - 1, z).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) {
-			level.setBlockState(x, y - 1, z, Block.NETHERRACK.getDefaultState());
+		if (!level.getBlockState(x, y - 1, z).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) {
+			return false;
 		}
-		else return false;
 		
 		if (level.getBlockState(x, y, z).getMaterial() == Material.LAVA) return false;
 		
@@ -64,6 +63,8 @@ public class CommonTreeStructure extends Structure {
 		growRoots(level, random, x, y, z, height);
 		growBranches(level, random, x, y, z, height);
 		growCap(level, random, x, y + height, z, height * capWAspect, height * capHAspect);
+		
+		level.setBlockState(x, y - 1, z, Block.NETHERRACK.getDefaultState());
 		
 		return true;
 	}

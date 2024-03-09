@@ -1,6 +1,8 @@
 package paulevs.bnb.block;
 
+import com.mojang.datafixers.util.Function4;
 import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.template.block.TemplateStairsBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
@@ -32,7 +34,16 @@ public class BNBBlocks {
 	public static final Block CRIMSON_STEM = make("crimson_stem", StemBlock::new);
 	public static final Block CRIMSON_BRANCH = make("crimson_branch", BranchBlock::new);
 	public static final NetherLeavesBlock CRIMSON_LEAVES = make("crimson_leaves", NetherLeavesBlock::new);
-	public static final Block CRIMSON_SAPLING = make("crimson_sapling", NetherSaplingBlock::new, () -> BNBStructures.CRIMSON_TREE);
+	public static final Block CRIMSON_SAPLING = makeSapling(
+		"crimson_sapling",
+		() -> BNBStructures.CRIMSON_TREE,
+		new String[] {
+			" # ",
+			"###",
+			" # "
+		},
+		() -> BNBStructures.LARGE_CRIMSON_TREE
+	);
 	public static final Block CRIMSON_PLANKS = make("crimson_planks", NetherPlanksBlock::new);
 	public static final Block CRIMSON_STAIRS = make("crimson_stairs", TemplateStairsBlock::new, CRIMSON_PLANKS);
 	public static final VBEHalfSlabBlock CRIMSON_SLAB_HALF = make("crimson_slab_half", VBEHalfSlabBlock::new, CRIMSON_PLANKS);
@@ -43,7 +54,16 @@ public class BNBBlocks {
 	public static final Block WARPED_STEM = make("warped_stem", StemBlock::new);
 	public static final Block WARPED_BRANCH = make("warped_branch", BranchBlock::new);
 	public static final NetherLeavesBlock WARPED_LEAVES = make("warped_leaves", NetherLeavesBlock::new);
-	public static final Block WARPED_SAPLING = make("warped_sapling", NetherSaplingBlock::new, () -> BNBStructures.WARPED_TREE);
+	public static final Block WARPED_SAPLING = makeSapling(
+		"warped_sapling",
+		() -> BNBStructures.WARPED_TREE,
+		new String[] {
+			" # ",
+			"###",
+			" # "
+		},
+		() -> BNBStructures.LARGE_WARPED_TREE
+	);
 	public static final Block WARPED_PLANKS = make("warped_planks", NetherPlanksBlock::new);
 	public static final Block WARPED_STAIRS = make("warped_stairs", TemplateStairsBlock::new, WARPED_PLANKS);
 	public static final VBEHalfSlabBlock WARPED_SLAB_HALF = make("warped_slab_half", VBEHalfSlabBlock::new, WARPED_PLANKS);
@@ -54,7 +74,16 @@ public class BNBBlocks {
 	public static final Block POISON_STEM = make("poison_stem", StemBlock::new);
 	public static final Block POISON_BRANCH = make("poison_branch", BranchBlock::new);
 	public static final Block POISON_LEAVES = make("poison_leaves", NetherLeavesBlock::new);
-	public static final Block POISON_SAPLING = make("poison_sapling", NetherSaplingBlock::new, () -> BNBStructures.POISON_TREE);
+	public static final Block POISON_SAPLING = makeSapling(
+		"poison_sapling",
+		() -> BNBStructures.POISON_TREE,
+		new String[] {
+			" # ",
+			"###",
+			" # "
+		},
+		() -> BNBStructures.LARGE_POISON_TREE
+	);
 	public static final Block POISON_PLANKS = make("poison_planks", NetherPlanksBlock::new);
 	public static final Block POISON_STAIRS = make("poison_stairs", TemplateStairsBlock::new, POISON_PLANKS);
 	public static final VBEHalfSlabBlock POISON_SLAB_HALF = make("poison_slab_half", VBEHalfSlabBlock::new, POISON_PLANKS);
@@ -103,19 +132,38 @@ public class BNBBlocks {
 	public static final Block NETHERRACK_FURNACE = make("netherrack_furnace", NetherrackFurnaceBlock::new);
 	
 	private static <B extends Block> B make(String name, Function<Identifier, B> constructor) {
-		B block = makeNI(name, constructor);
+		Identifier id = BNB.id(name);
+		B block = constructor.apply(id);
+		block.setTranslationKey(id.toString());
 		BLOCKS_WITH_ITEMS.add(block);
 		return block;
 	}
 	
 	private static <B extends Block> B make(String name, BiFunction<Identifier, Block, B> constructor, Block sourceBlock) {
-		B block = makeNI(name, constructor, sourceBlock);
+		Identifier id = BNB.id(name);
+		B block = constructor.apply(id, sourceBlock);
+		block.setTranslationKey(id.toString());
 		BLOCKS_WITH_ITEMS.add(block);
 		return block;
 	}
 	
 	private static <B extends Block> B make(String name, BiFunction<Identifier, Supplier<Structure>, B> constructor, Supplier<Structure> structure) {
-		B block = makeNI(name, constructor, structure);
+		Identifier id = BNB.id(name);
+		B block = constructor.apply(id, structure);
+		block.setTranslationKey(id.toString());
+		BLOCKS_WITH_ITEMS.add(block);
+		return block;
+	}
+	
+	private static TreeSaplingBlock makeSapling(
+		String name,
+		Supplier<Structure> normalTree,
+		String[] bigTreeShape,
+		Supplier<Structure> bigTree
+	) {
+		Identifier id = BNB.id(name);
+		TreeSaplingBlock block = new TreeSaplingBlock(id, normalTree, bigTreeShape, bigTree);
+		block.setTranslationKey(id.toString());
 		BLOCKS_WITH_ITEMS.add(block);
 		return block;
 	}
@@ -124,6 +172,7 @@ public class BNBBlocks {
 		Identifier id = BNB.id(name);
 		B block = constructor.apply(id);
 		block.setTranslationKey(id.toString());
+		BlockItem.BLOCK_ITEMS.remove(block);
 		return block;
 	}
 	
@@ -131,13 +180,7 @@ public class BNBBlocks {
 		Identifier id = BNB.id(name);
 		B block = constructor.apply(id, sourceBlock);
 		block.setTranslationKey(id.toString());
-		return block;
-	}
-	
-	private static <B extends Block> B makeNI(String name, BiFunction<Identifier, Supplier<Structure>, B> constructor, Supplier<Structure> structure) {
-		Identifier id = BNB.id(name);
-		B block = constructor.apply(id, structure);
-		block.setTranslationKey(id.toString());
+		BlockItem.BLOCK_ITEMS.remove(block);
 		return block;
 	}
 	
