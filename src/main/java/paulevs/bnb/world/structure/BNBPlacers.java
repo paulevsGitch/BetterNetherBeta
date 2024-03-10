@@ -42,4 +42,5 @@ public class BNBPlacers {
 	public static final StructurePlacer FALLEN_POISON_TREE_PLACER = new FloorPlacer(BNBStructures.FALLEN_POISON_TREE, 1).setRandomDensityFunction(4, 7);
 	
 	public static final StructurePlacer ORICHALCUM_PLACER = new VolumetricPlacer(BNBStructures.ORICHALCUM, 1);
+	public static final StructurePlacer LAVA_STREAM_PLACER = new CeilingPlacer(BNBStructures.LAVA_STREAM, 1).setRandomDensityFunction(5, 15);
 }
