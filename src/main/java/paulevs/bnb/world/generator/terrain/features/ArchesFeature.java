@@ -2,8 +2,7 @@ package paulevs.bnb.world.generator.terrain.features;
 
 import net.minecraft.util.maths.Vec3D;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
+import paulevs.bnb.math.Matrix3F;
 import paulevs.bnb.noise.FractalNoise;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.noise.SDFScatter2D;
@@ -17,8 +16,8 @@ public class ArchesFeature extends TerrainFeature {
 	private final PerlinNoise distortionX = new PerlinNoise();
 	private final PerlinNoise distortionY = new PerlinNoise();
 	private final PerlinNoise distortionZ = new PerlinNoise();
-	private final Matrix4f matrix = new Matrix4f();
-	private final Vector3f axis = new Vector3f();
+	private final Matrix3F matrix = new Matrix3F();
+	private final Vec3D axis = Vec3D.make(0, 0, 0);
 	private final Random random = new Random();
 	private int lastSeed;
 	
@@ -61,31 +60,22 @@ public class ArchesFeature extends TerrainFeature {
 		
 		pos.y -= (random.nextFloat() * 30 + 40) * 0.01;
 		
-		float x = (float) pos.x;
-		float y = (float) pos.y;
-		float z = (float) pos.z;
-		
 		if (seed != lastSeed) {
 			lastSeed = seed;
-			
-			axis.set(random.nextFloat() * 0.2F - 0.1F, 1F, random.nextFloat() * 0.2F - 0.1F);
-			axis.normalise();
-			
-			matrix.setIdentity();
-			Matrix4f.rotate(angle, axis, matrix, matrix);
-			
-			x = matrix.m00 * (float) pos.x + matrix.m10 * (float) pos.y + matrix.m20 * (float) pos.z;
-			y = matrix.m01 * (float) pos.x + matrix.m11 * (float) pos.y + matrix.m21 * (float) pos.z;
-			z = matrix.m02 * (float) pos.x + matrix.m12 * (float) pos.y + matrix.m22 * (float) pos.z;
+			set(axis, random.nextFloat() * 0.2F - 0.1F, 1F, random.nextFloat() * 0.2F - 0.1F);
+			normalize(axis);
+			matrix.rotation(axis, angle);
 		}
+		
+		matrix.transform(pos);
 		
 		float dx = seed / 300.0F;
 		float dy = seed / 600.0F;
 		float dz = seed / 900.0F;
 		
-		x += distortionX.get(pos.x + dx, pos.y + dy, pos.z + dz) * 0.3F - 0.15F;
-		y += distortionY.get(pos.x + dx, pos.y + dy, pos.z + dz) * 0.3F - 0.15F;
-		z += distortionZ.get(pos.x + dx, pos.y + dy, pos.z + dz) * 0.3F - 0.15F;
+		float x = (float) (pos.x + distortionX.get(pos.x + dx, pos.y + dy, pos.z + dz) * 0.3F - 0.15F);
+		float y = (float) (pos.y + distortionY.get(pos.x + dx, pos.y + dy, pos.z + dz) * 0.3F - 0.15F);
+		float z = (float) (pos.z + distortionZ.get(pos.x + dx, pos.y + dy, pos.z + dz) * 0.3F - 0.15F);
 		
 		return 0.5F - torus(x, y, z, radiusBig, radiusSmall);
 	}
@@ -95,5 +85,20 @@ public class ArchesFeature extends TerrainFeature {
 		l = l - radiusBig;
 		l = net.minecraft.util.maths.MathHelper.sqrt(l * l + z * z);
 		return l - radiusSmall;
+	}
+	
+	private static void set(Vec3D v, float x, float y, float z) {
+		v.x = x;
+		v.y = y;
+		v.z = z;
+	}
+	
+	private static void normalize(Vec3D v) {
+		double l = v.x * v.x + v.y * v.y + v.z * v.z;
+		if (l < 1E-6) return;
+		l = Math.sqrt(l);
+		v.x /= l;
+		v.y /= l;
+		v.z /= l;
 	}
 }

@@ -136,7 +136,7 @@ public class ClientListener {
 	// TODO remove that after release
 	private void debugTerrain() {
 		/*if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-			TerrainFeature feature = new CubesFeature();
+			TerrainFeature feature = new ArchesFeature();
 			feature.setSeed(2);
 			feature.debugImage();
 		}*/
