@@ -2,8 +2,7 @@ package paulevs.bnb.world.generator.terrain.features;
 
 import net.minecraft.util.maths.Vec3D;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
+import paulevs.bnb.math.Matrix3F;
 import paulevs.bnb.noise.FractalNoise;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.noise.SDFScatter2D;
@@ -16,10 +15,10 @@ public class CubesFeature extends TerrainFeature {
 	private final SDFScatter2D scatter3 = new SDFScatter2D(this::getCubesCeiling);
 	private final FractalNoise floor = new FractalNoise(PerlinNoise::new);
 	private final FractalNoise ceiling = new FractalNoise(PerlinNoise::new);
-	private final Matrix4f matrix1 = new Matrix4f();
-	private final Matrix4f matrix2 = new Matrix4f();
-	private final Matrix4f matrix3 = new Matrix4f();
-	private final Vector3f axis = new Vector3f();
+	private final Matrix3F matrix1 = new Matrix3F();
+	private final Matrix3F matrix2 = new Matrix3F();
+	private final Matrix3F matrix3 = new Matrix3F();
+	private final Vec3D axis = Vec3D.make(0, 0, 0);
 	private final Random random = new Random();
 	private int lastSeed1;
 	private int lastSeed2;
@@ -65,27 +64,17 @@ public class CubesFeature extends TerrainFeature {
 		
 		pos.y -= (random.nextFloat() * 100 + 30) * 0.01;
 		
-		float x = (float) pos.x;
-		float y = (float) pos.y;
-		float z = (float) pos.z;
-		
 		if (seed != lastSeed1) {
 			lastSeed1 = seed;
-			
-			axis.set(random.nextFloat() - 0.5F, random.nextFloat() - 0.5F, random.nextFloat() - 0.5F);
-			axis.normalise();
-			
-			matrix1.setIdentity();
-			Matrix4f.rotate(angle, axis, matrix1, matrix1);
-			
-			x = matrix1.m00 * (float) pos.x + matrix1.m10 * (float) pos.y + matrix1.m20 * (float) pos.z;
-			y = matrix1.m01 * (float) pos.x + matrix1.m11 * (float) pos.y + matrix1.m21 * (float) pos.z;
-			z = matrix1.m02 * (float) pos.x + matrix1.m12 * (float) pos.y + matrix1.m22 * (float) pos.z;
+			set(axis, random.nextFloat() - 0.5F, random.nextFloat() - 0.5F, random.nextFloat() - 0.5F);
+			normalize(axis);
+			matrix1.rotation(axis, angle);
 		}
 		
-		float dx = Math.abs(x);
-		float dy = Math.abs(y);
-		float dz = Math.abs(z);
+		matrix1.transform(pos);
+		float dx = Math.abs((float) pos.x);
+		float dy = Math.abs((float) pos.y);
+		float dz = Math.abs((float) pos.z);
 		
 		float d = Math.max(Math.max(dx, dy), dz);
 		return size - d;
@@ -99,27 +88,17 @@ public class CubesFeature extends TerrainFeature {
 		
 		pos.y -= (random.nextFloat() * 30 + 30) * 0.04;
 		
-		float x = (float) pos.x;
-		float y = (float) pos.y;
-		float z = (float) pos.z;
-		
 		if (seed != lastSeed2) {
 			lastSeed2 = seed;
-			
-			axis.set(random.nextFloat() - 0.5F, random.nextFloat() - 0.5F, random.nextFloat() - 0.5F);
-			axis.normalise();
-			
-			matrix2.setIdentity();
-			Matrix4f.rotate(angle, axis, matrix2, matrix2);
-			
-			x = matrix2.m00 * (float) pos.x + matrix2.m10 * (float) pos.y + matrix2.m20 * (float) pos.z;
-			y = matrix2.m01 * (float) pos.x + matrix2.m11 * (float) pos.y + matrix2.m21 * (float) pos.z;
-			z = matrix2.m02 * (float) pos.x + matrix2.m12 * (float) pos.y + matrix2.m22 * (float) pos.z;
+			set(axis, random.nextFloat() - 0.5F, random.nextFloat() - 0.5F, random.nextFloat() - 0.5F);
+			normalize(axis);
+			matrix2.rotation(axis, angle);
 		}
 		
-		float dx = Math.abs(x);
-		float dy = Math.abs(y);
-		float dz = Math.abs(z);
+		matrix2.transform(pos);
+		float dx = Math.abs((float) pos.x);
+		float dy = Math.abs((float) pos.y);
+		float dz = Math.abs((float) pos.z);
 		
 		float d = Math.max(Math.max(dx, dy), dz);
 		return size - d;
@@ -133,29 +112,34 @@ public class CubesFeature extends TerrainFeature {
 		
 		pos.y -= (240 - random.nextFloat() * 20) * 0.03;
 		
-		float x = (float) pos.x;
-		float y = (float) pos.y;
-		float z = (float) pos.z;
-		
 		if (seed != lastSeed3) {
 			lastSeed3 = seed;
-			
-			axis.set(random.nextFloat() - 0.5F, random.nextFloat() - 0.5F, random.nextFloat() - 0.5F);
-			axis.normalise();
-			
-			matrix3.setIdentity();
-			Matrix4f.rotate(angle, axis, matrix3, matrix3);
-			
-			x = matrix3.m00 * (float) pos.x + matrix3.m10 * (float) pos.y + matrix3.m20 * (float) pos.z;
-			y = matrix3.m01 * (float) pos.x + matrix3.m11 * (float) pos.y + matrix3.m21 * (float) pos.z;
-			z = matrix3.m02 * (float) pos.x + matrix3.m12 * (float) pos.y + matrix3.m22 * (float) pos.z;
+			set(axis, random.nextFloat() - 0.5F, random.nextFloat() - 0.5F, random.nextFloat() - 0.5F);
+			normalize(axis);
+			matrix3.rotation(axis, angle);
 		}
 		
-		float dx = Math.abs(x);
-		float dy = Math.abs(y);
-		float dz = Math.abs(z);
+		matrix3.transform(pos);
+		float dx = Math.abs((float) pos.x);
+		float dy = Math.abs((float) pos.y);
+		float dz = Math.abs((float) pos.z);
 		
 		float d = Math.max(Math.max(dx, dy), dz);
 		return size - d;
+	}
+	
+	private static void set(Vec3D v, float x, float y, float z) {
+		v.x = x;
+		v.y = y;
+		v.z = z;
+	}
+	
+	private static void normalize(Vec3D v) {
+		double l = v.x * v.x + v.y * v.y + v.z * v.z;
+		if (l < 1E-6) return;
+		l = Math.sqrt(l);
+		v.x /= l;
+		v.y /= l;
+		v.z /= l;
 	}
 }

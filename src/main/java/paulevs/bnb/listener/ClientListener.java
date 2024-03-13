@@ -136,9 +136,9 @@ public class ClientListener {
 	// TODO remove that after release
 	private void debugTerrain() {
 		/*if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-			TerrainFeature feature = new DoubleBridgesFeature();
+			TerrainFeature feature = new CubesFeature();
 			feature.setSeed(2);
-			//feature.debugImage();
+			feature.debugImage();
 		}*/
 		
 		/*NetherBiome[] biomes = new NetherBiome[] {
