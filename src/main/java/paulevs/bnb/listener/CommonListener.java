@@ -8,6 +8,7 @@ import net.modificationstation.stationapi.api.event.achievement.AchievementRegis
 import net.modificationstation.stationapi.api.event.block.BlockEvent.BeforePlacedByItem;
 import net.modificationstation.stationapi.api.event.block.entity.BlockEntityRegisterEvent;
 import net.modificationstation.stationapi.api.event.entity.EntityRegister;
+import net.modificationstation.stationapi.api.event.mod.InitEvent;
 import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
@@ -26,9 +27,15 @@ import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.entity.PoisonSpiderEntity;
 import paulevs.bnb.entity.WarpedSpiderEntity;
 import paulevs.bnb.item.BNBItems;
+import paulevs.bnb.packet.BNBWeatherPacket;
 import paulevs.bnb.world.biome.BNBBiomes;
 
 public class CommonListener {
+	@EventListener
+	public void onInit(InitEvent event) {
+		BNBWeatherPacket.register();
+	}
+	
 	@EventListener
 	public void onBlockRegister(BlockRegistryEvent event) {
 		BNBBlocks.init();

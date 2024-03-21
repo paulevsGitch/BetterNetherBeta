@@ -8,6 +8,7 @@
 		"MainMenuScreenMixin",
 		"PlayerRendererMixin",
 		"EntityRendererMixin",
+		"FogRendererImplImpl",
 		"BlockRendererMixin",
 		"FurnaceScreenMixin",
 		"LevelRendererMixin",

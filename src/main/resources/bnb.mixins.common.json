@@ -14,7 +14,8 @@
 		"FireBlockMixin",
 		"LevelAccessor",
 		"EntityMixin",
-		"BiomeMixin"
+		"BiomeMixin",
+		"LevelMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
