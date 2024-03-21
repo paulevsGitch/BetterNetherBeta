@@ -19,7 +19,6 @@ import paulevs.bnb.mixin.common.EntityAccessor;
 import paulevs.bnb.packet.BNBWeatherPacket;
 import paulevs.vbe.utils.CreativeUtil;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 

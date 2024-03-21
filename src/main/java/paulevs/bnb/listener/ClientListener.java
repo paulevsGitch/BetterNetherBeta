@@ -20,6 +20,7 @@ import net.modificationstation.stationapi.api.registry.ItemRegistry;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
 import paulevs.bnb.BNB;
+import paulevs.bnb.BNBClient;
 import paulevs.bnb.achievement.BNBAchievementPage;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.entity.CrimsonSpiderEntity;
@@ -30,6 +31,7 @@ import paulevs.bnb.entity.renderer.NetherSpiderRenderer;
 import paulevs.bnb.entity.renderer.ObsidianBoatRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
+import paulevs.bnb.weather.BNBWeatherRenderer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -59,6 +61,7 @@ public class ClientListener {
 		BNBBlocks.POISON_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/poison_planks")).index;
 		
 		BNBAchievementPage.getInstance().updateTextures(blockAtlas);
+		BNBWeatherRenderer.updateTextures(BNBClient.getMinecraft().textureManager);
 		
 		debugTerrain();
 		printTranslations();
