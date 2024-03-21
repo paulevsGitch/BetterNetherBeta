@@ -12,6 +12,7 @@
 		"BoatEntityMixin",
 		"ItemEntityMixin",
 		"FireBlockMixin",
+		"EntityAccessor",
 		"LevelAccessor",
 		"EntityMixin",
 		"BiomeMixin",

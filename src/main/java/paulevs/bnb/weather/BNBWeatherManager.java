@@ -6,15 +6,20 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;
+import net.minecraft.util.maths.MathHelper;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.network.packet.PacketHelper;
 import paulevs.bnb.BNB;
 import paulevs.bnb.BNBClient;
+import paulevs.bnb.mixin.common.EntityAccessor;
 import paulevs.bnb.packet.BNBWeatherPacket;
+import paulevs.vbe.utils.CreativeUtil;
 
+import java.util.List;
 import java.util.Random;
 
 public class BNBWeatherManager {
@@ -28,7 +33,7 @@ public class BNBWeatherManager {
 	
 	public static void tick(Level level) {
 		updateWeather();
-		processBlocks(level);
+		processBlocksAndEntities(level);
 	}
 	
 	private static void updateWeather() {
@@ -58,7 +63,7 @@ public class BNBWeatherManager {
 		}
 	}
 	
-	private static void processBlocks(Level level) {
+	private static void processBlocksAndEntities(Level level) {
 		if (currentWeather != WeatherType.LAVA_RAIN) return;
 		
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
@@ -92,14 +97,32 @@ public class BNBWeatherManager {
 			int x = (int) (pos >> 32);
 			int z = (int) (pos & 0xFFFFFFFFL);
 			Chunk chunk = level.getChunkFromCache(x, z);
+			
 			for (int i = 0; i < 256; i++) {
 				if (RANDOM.nextInt(2000) > 0) continue;
-				int px = (x << 4) | (i & 15);
-				int pz = (z << 4) | (i >> 4);
-				int py = getWeatherBottom(level, chunk, px & 15, pz & 15);
-				BlockState state = chunk.getBlockState(px & 15, py, pz & 15);
-				if (state.getMaterial().isBurnable() && chunk.getBlockState(px & 15, py + 1, pz & 15).isAir()) {
-					chunk.setBlockState(px & 15, py + 1, pz & 15, Block.FIRE.getDefaultState());
+				x = i & 15;
+				z = i >> 4;
+				int y = getWeatherBottom(level, chunk, x, z);
+				BlockState state = chunk.getBlockState(x, y, z);
+				if (state.getMaterial().isBurnable() && chunk.getBlockState(x, y + 1, z).isAir()) {
+					chunk.setBlockState(x, y + 1, z, Block.FIRE.getDefaultState());
+				}
+			}
+			
+			for (Object list : chunk.entities) {
+				for (Object obj : (List<?>) list) {
+					EntityAccessor accessor = (EntityAccessor) obj;
+					if (accessor.bnb_immuneToFire()) continue;
+					Entity entity = (Entity) obj;
+					if (entity.fire > 0) continue;
+					if (obj instanceof PlayerEntity player) {
+						if (CreativeUtil.isCreative(player)) continue;
+					}
+					x = MathHelper.floor(entity.x) & 15;
+					z = MathHelper.floor(entity.z) & 15;
+					int y = getWeatherBottom(level, chunk, x, z);
+					if (y > entity.y + entity.height) continue;
+					accessor.bnb_setOnFire();
 				}
 			}
 		}
