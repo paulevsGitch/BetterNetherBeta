@@ -1,5 +1,7 @@
 package paulevs.bnb.weather;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.entity.living.LivingEntity;
@@ -10,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
+@Environment(EnvType.CLIENT)
 public class BNBWeatherRenderer {
 	private static final float TO_RADIANS = (float) (Math.PI / 180);
 	private static final float[] RANDOM_OFFSET;
@@ -38,14 +41,14 @@ public class BNBWeatherRenderer {
 		return 1.0F;
 	}
 	
-	private static boolean isCurrentWeather(WeatherType type) {
+	public static boolean isCurrentWeather(WeatherType type) {
 		return prevWeather == type || weather == type;
 	}
 	
-	private static float getIntensity(WeatherType type) {
+	public static float getIntensity(WeatherType type) {
 		float intensity = 1.0F;
-		if (prevWeather != WeatherType.LAVA_RAIN) intensity = weatherDelta;
-		else if (weather != WeatherType.LAVA_RAIN) intensity = 1.0F - weatherDelta;
+		if (prevWeather != type) intensity = weatherDelta;
+		else if (weather != type) intensity = 1.0F - weatherDelta;
 		return intensity;
 	}
 	
@@ -56,7 +59,7 @@ public class BNBWeatherRenderer {
 			weatherDelta = 0.0F;
 			return;
 		}
-		weatherDelta = Math.min(weatherDelta + delta * 0.02F, 1.0F);
+		weatherDelta = Math.min(weatherDelta + delta * 0.01F, 1.0F);
 		if (weatherDelta == 1.0F) {
 			prevWeather = weather;
 			weather = BNBWeatherManager.getCurrentWeather();

@@ -6,11 +6,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.sound.BNBSoundManager;
+import paulevs.bnb.weather.BNBWeatherSounds;
 
 @Mixin(MainMenuScreen.class)
 public class MainMenuScreenMixin {
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void bnb_onInit(CallbackInfo info) {
 		BNBSoundManager.setInTheNether(false);
+		BNBWeatherSounds.stop();
 	}
 }

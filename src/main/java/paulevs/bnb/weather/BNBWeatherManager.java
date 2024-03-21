@@ -139,19 +139,34 @@ public class BNBWeatherManager {
 		currentWeather = weather;
 	}
 	
+	public static void setWeather(WeatherType weather, int length) {
+		currentWeather = weather;
+		weatherLength = length;
+	}
+	
 	public static int getWeatherTop(Level level, int x, int z) {
 		int y = level.getTopY() - 1;
 		int minY = level.getBottomY();
-		BlockState state = level.getBlockState(x, y, z);
-		while (!state.isAir() && y > minY) state = level.getBlockState(x, --y, z);
+		Chunk chunk = level.getChunkFromCache(x >> 4, z >> 4);
+		x &= 15;
+		z &= 15;
+		BlockState state = chunk.getBlockState(x, y, z);
+		while (!state.isAir() && y > minY) state = chunk.getBlockState(x, --y, z);
 		return y;
 	}
 	
 	public static int getWeatherBottom(Level level, int x, int y, int z) {
 		int minY = level.getBottomY();
-		BlockState state = level.getBlockState(x, y, z);
-		while (state.isAir() && y > minY) state = level.getBlockState(x, --y, z);
+		Chunk chunk = level.getChunkFromCache(x >> 4, z >> 4);
+		x &= 15;
+		z &= 15;
+		BlockState state = chunk.getBlockState(x, y, z);
+		while (state.isAir() && y > minY) state = chunk.getBlockState(x, --y, z);
 		return y;
+	}
+	
+	public static int getWeatherBottom(Level level, int x, int z) {
+		return getWeatherBottom(level, level.getChunkFromCache(x >> 4, z >> 4), x & 15, z & 15);
 	}
 	
 	private static int getWeatherBottom(Level level, Chunk chunk, int x, int z) {
@@ -161,5 +176,9 @@ public class BNBWeatherManager {
 		while (!state.isAir() && y > minY) state = chunk.getBlockState(x, --y, z);
 		while (state.isAir() && y > minY) state = chunk.getBlockState(x, --y, z);
 		return y;
+	}
+	
+	public static int getCurrentWeatherLength() {
+		return weatherLength;
 	}
 }

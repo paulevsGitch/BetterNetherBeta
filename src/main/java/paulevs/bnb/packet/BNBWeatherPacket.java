@@ -15,7 +15,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class BNBWeatherPacket extends AbstractPacket implements IdentifiablePacket {
-	private static final WeatherType[] WEATHER_VALUES = WeatherType.values();
 	private static final Identifier ID = BNB.id("weather");
 	private byte weatherID;
 	
@@ -48,7 +47,7 @@ public class BNBWeatherPacket extends AbstractPacket implements IdentifiablePack
 	@Override
 	public void apply(PacketHandler handler) {
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-			BNBWeatherManager.setWeather(WEATHER_VALUES[weatherID]);
+			BNBWeatherManager.setWeather(WeatherType.getByID(weatherID));
 		}
 	}
 	

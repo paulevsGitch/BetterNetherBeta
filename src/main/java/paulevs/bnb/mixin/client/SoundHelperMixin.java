@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.BNBClient;
 import paulevs.bnb.sound.BNBSoundManager;
+import paulevs.bnb.weather.BNBWeatherSounds;
 import paulscode.sound.SoundSystem;
 
 @Mixin(SoundHelper.class)
@@ -32,6 +33,7 @@ public class SoundHelperMixin {
 		if (isNether) {
 			BNBSoundManager.playBackgroundMusic();
 			BNBSoundManager.playAmbience(minecraft.player, minecraft.level.dimension.biomeSource);
+			BNBWeatherSounds.updateSound(minecraft.level, minecraft.player, soundSystem, gameOptions.sound);
 			info.cancel();
 		}
 	}
