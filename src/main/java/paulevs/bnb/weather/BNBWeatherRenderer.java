@@ -37,8 +37,15 @@ public class BNBWeatherRenderer {
 	}
 	
 	public static float getFogDensity() {
-		if (isCurrentWeather(WeatherType.LAVA_RAIN)) return 1.0F - getIntensity(WeatherType.LAVA_RAIN) * 0.5F;
-		return 1.0F;
+		/*if (isCurrentWeather(WeatherType.LAVA_RAIN)) return 1.0F - getIntensity(WeatherType.LAVA_RAIN) * 0.5F;
+		if (isCurrentWeather(WeatherType.FOG)) return 1.0F - getIntensity(WeatherType.FOG) * 0.5F;
+		return 1.0F;*/
+		if (prevWeather == null) return 1.0F;
+		return net.modificationstation.stationapi.api.util.math.MathHelper.lerp(
+			weatherDelta,
+			prevWeather.fogIntensity,
+			weather.fogIntensity
+		);
 	}
 	
 	public static boolean isCurrentWeather(WeatherType type) {
@@ -59,7 +66,7 @@ public class BNBWeatherRenderer {
 			weatherDelta = 0.0F;
 			return;
 		}
-		weatherDelta = Math.min(weatherDelta + delta * 0.01F, 1.0F);
+		weatherDelta = Math.min(weatherDelta + delta * 0.002F, 1.0F);
 		if (weatherDelta == 1.0F) {
 			prevWeather = weather;
 			weather = BNBWeatherManager.getCurrentWeather();

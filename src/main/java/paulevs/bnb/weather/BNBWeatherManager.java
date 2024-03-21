@@ -19,11 +19,13 @@ import paulevs.bnb.mixin.common.EntityAccessor;
 import paulevs.bnb.packet.BNBWeatherPacket;
 import paulevs.vbe.utils.CreativeUtil;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class BNBWeatherManager {
-	private static final WeatherType[] WEATHER_ORDER = WeatherType.values();
+	private static final WeatherType[] WEATHER_SEQUENCE = new WeatherType[16];
+	private static final WeatherType[] WEATHER_TYPES = WeatherType.values();
 	private static final LongSet CHUNKS = new LongOpenHashSet(4096);
 	private static final Random RANDOM = new Random();
 	
@@ -38,21 +40,13 @@ public class BNBWeatherManager {
 	
 	private static void updateWeather() {
 		if (weatherLength-- > 0) return;
-		currentWeather = WEATHER_ORDER[weatherIndex];
-		if (++weatherIndex == WEATHER_ORDER.length) {
-			for (int i = 0; i < WEATHER_ORDER.length; i++) {
-				int j = RANDOM.nextInt(WEATHER_ORDER.length);
-				WeatherType t = WEATHER_ORDER[j];
-				WEATHER_ORDER[j] = WEATHER_ORDER[i];
-				WEATHER_ORDER[i] = t;
-			}
-			if (WEATHER_ORDER[0] == currentWeather) {
-				int j = WEATHER_ORDER.length - 1;
-				WeatherType t = WEATHER_ORDER[j];
-				WEATHER_ORDER[j] = WEATHER_ORDER[0];
-				WEATHER_ORDER[0] = t;
-			}
-			weatherIndex = 0;
+		currentWeather = WEATHER_SEQUENCE[weatherIndex];
+		if (currentWeather == null) {
+			currentWeather = WEATHER_TYPES[RANDOM.nextInt(WEATHER_TYPES.length)];
+			fillSequence();
+		}
+		if (++weatherIndex == WEATHER_SEQUENCE.length) {
+			fillSequence();
 		}
 		weatherLength = currentWeather.getTime(RANDOM);
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
@@ -61,6 +55,28 @@ public class BNBWeatherManager {
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
 			PacketHelper.send(new BNBWeatherPacket(currentWeather));
 		}
+	}
+	
+	private static WeatherType getWeather(WeatherType prev1, WeatherType prev2) {
+		if (prev1 == WeatherType.LAVA_RAIN) return WeatherType.FOG;
+		if (prev1 == WeatherType.FOG) {
+			return prev2 == null || prev2 == WeatherType.LAVA_RAIN ? WeatherType.CLEAR : WeatherType.LAVA_RAIN;
+		}
+		int index = RANDOM.nextInt(WEATHER_TYPES.length);
+		WeatherType weather = WEATHER_TYPES[index];
+		if (weather == prev1) weather = WEATHER_TYPES[(index + 1) % WEATHER_TYPES.length];
+		return weather;
+	}
+	
+	private static void fillSequence() {
+		WeatherType prev2 = WEATHER_SEQUENCE[WEATHER_SEQUENCE.length - 2];
+		WeatherType prev1 = currentWeather;
+		for (int i = 0; i < WEATHER_SEQUENCE.length; i++) {
+			WEATHER_SEQUENCE[i] = getWeather(prev1, prev2);
+			prev2 = prev1;
+			prev1 = WEATHER_SEQUENCE[i];
+		}
+		weatherIndex = 0;
 	}
 	
 	private static void processBlocksAndEntities(Level level) {
@@ -140,6 +156,7 @@ public class BNBWeatherManager {
 	}
 	
 	public static void setWeather(WeatherType weather, int length) {
+		if (currentWeather != weather || WEATHER_SEQUENCE[0] == null) fillSequence();
 		currentWeather = weather;
 		weatherLength = length;
 	}
