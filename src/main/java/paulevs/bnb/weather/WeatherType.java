@@ -3,9 +3,9 @@ package paulevs.bnb.weather;
 import java.util.Random;
 
 public enum WeatherType {
-	CLEAR(5, 10, 1.0F),
-	FOG(5, 10, 0.55F),
-	LAVA_RAIN(5, 10, 0.5F);
+	CLEAR(300, 1200, 1.0F),
+	FOG(30, 120, 0.55F),
+	LAVA_RAIN(60, 300, 0.5F);
 	
 	private static final WeatherType[] VALUES = values();
 	private final int minTicks;
