@@ -7,6 +7,7 @@ import net.modificationstation.stationapi.api.worldgen.surface.SurfaceBuilder;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.sound.BNBSounds;
 import paulevs.bnb.world.structure.BNBPlacers;
+import paulevs.bnb.world.structure.BNBStructures;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +86,14 @@ public class BNBBiomes {
 		return biome;
 	}
 	
-	public static void init() {}
+	public static void init() {
+		BNBBlocks.CRIMSON_NYLIUM.setTargetBiome(CRIMSON_FOREST);
+		BNBBlocks.CRIMSON_NYLIUM.addBonemealStructure(BNBStructures.FLAME_BULBS);
+		BNBBlocks.CRIMSON_NYLIUM.addBonemealStructure(BNBStructures.FLAME_BULBS_TALL);
+		
+		BNBBlocks.WARPED_NYLIUM.setTargetBiome(WARPED_FOREST);
+		BNBBlocks.POISON_NYLIUM.setTargetBiome(POISON_FOREST);
+	}
 	
 	public static Biome[] getBiomes() {
 		if (biomes == null) {

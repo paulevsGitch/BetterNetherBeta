@@ -19,12 +19,12 @@ import java.util.function.Supplier;
 public class BNBBlocks {
 	public static final List<Block> BLOCKS_WITH_ITEMS = new ArrayList<>();
 	
-	public static final Block CRIMSON_NYLIUM = make("crimson_nylium", NetherTerrainBlock::new);
-	public static final Block WARPED_NYLIUM = make("warped_nylium", NetherTerrainBlock::new);
-	public static final Block POISON_NYLIUM = make("poison_nylium", NetherTerrainBlock::new);
-	public static final Block CORRUPTED_NYLIUM = make("corrupted_nylium", NetherTerrainBlock::new);
-	public static final Block SOUL_NYLIUM = make("soul_nylium", SoulTerrainBlock::new);
-	public static final Block DARK_NYLIUM = make("dark_nylium", NetherTerrainBlock::new);
+	public static final NetherTerrainBlock CRIMSON_NYLIUM = make("crimson_nylium", NetherTerrainBlock::new);
+	public static final NetherTerrainBlock WARPED_NYLIUM = make("warped_nylium", NetherTerrainBlock::new);
+	public static final NetherTerrainBlock POISON_NYLIUM = make("poison_nylium", NetherTerrainBlock::new);
+	public static final NetherTerrainBlock CORRUPTED_NYLIUM = make("corrupted_nylium", NetherTerrainBlock::new);
+	public static final NetherTerrainBlock SOUL_NYLIUM = make("soul_nylium", SoulTerrainBlock::new);
+	public static final NetherTerrainBlock DARK_NYLIUM = make("dark_nylium", NetherTerrainBlock::new);
 	
 	public static final Block TREE_LANTERN = make("tree_lantern", NetherLanternBlock::new);
 	public static final Block GHOST_PUMPKIN = make("ghost_pumpkin", GhostPumpkinBlock::new);

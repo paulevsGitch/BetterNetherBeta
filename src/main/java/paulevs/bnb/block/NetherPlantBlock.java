@@ -13,9 +13,10 @@ import java.util.Random;
 public abstract class NetherPlantBlock extends TemplateBlock {
 	public NetherPlantBlock(Identifier id, Material material) {
 		super(id, material);
-		this.disableNotifyOnMetaDataChange();
-		this.setSounds(GRASS_SOUNDS);
-		this.disableStat();
+		disableNotifyOnMetaDataChange();
+		setSounds(GRASS_SOUNDS);
+		disableStat();
+		setLightOpacity(0);
 	}
 	
 	@Override

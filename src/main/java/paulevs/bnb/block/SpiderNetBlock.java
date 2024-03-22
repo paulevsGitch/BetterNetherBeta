@@ -34,6 +34,7 @@ public class SpiderNetBlock extends TemplateBlock {
 		}
 		setDefaultState(state);
 		setHardness(0.2F);
+		setLightOpacity(1);
 	}
 	
 	@Override

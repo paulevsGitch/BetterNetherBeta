@@ -20,6 +20,7 @@ public class SpiderCocoonBlock extends TemplateBlockWithEntity {
 		setHardness(0.75F);
 		setSounds(BNBSounds.MOSS_BLOCK);
 		setBoundingBox(0.125F, 0F, 0.125F, 0.875F, 0.75F, 0.875F);
+		setLightOpacity(2);
 	}
 	
 	@Override

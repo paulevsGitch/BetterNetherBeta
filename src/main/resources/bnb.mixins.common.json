@@ -9,6 +9,7 @@
 		"NetherLevelSourceMixin",
 		"LevelPropertiesMixin",
 		"NetherDimensionMixin",
+		"NetherrackBlockMixin",
 		"CraftingResultMixin",
 		"BoatEntityMixin",
 		"ItemEntityMixin",
