@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.weather.BNBWeatherRenderer;
 
-@Mixin(FogRendererImpl.class)
+@Mixin(value = FogRendererImpl.class, remap = false)
 public class FogRendererImplImpl {
 	@Shadow @Final private static float[] FOG_COLOR;
 	

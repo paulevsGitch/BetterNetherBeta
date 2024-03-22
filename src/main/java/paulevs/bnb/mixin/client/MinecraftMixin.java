@@ -23,7 +23,11 @@ public class MinecraftMixin {
 		return 1.0;
 	}
 	
-	@Inject(method = "tick", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBindTexture(II)V"))
+	@Inject(method = "tick", at = @At(
+		value = "INVOKE",
+		target = "Lorg/lwjgl/opengl/GL11;glBindTexture(II)V",
+		remap = false
+	))
 	private void bnb_animateTextures(CallbackInfo info) {
 		if (paused && currentScreen instanceof AchievementsScreen) {
 			textureManager.tick();
