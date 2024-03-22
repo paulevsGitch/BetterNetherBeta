@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.weather.BNBWeatherRenderer;
 
-@Mixin(GameRenderer.class)
+@Mixin(value = GameRenderer.class, priority = 500)
 public class GameRendererMixin {
 	@Shadow private Minecraft minecraft;
 	@Shadow private float fogDistance;
@@ -24,7 +24,7 @@ public class GameRendererMixin {
 		shift = Shift.AFTER
 	))
 	private void bnb_changeNetherFog(int i, float par2, CallbackInfo info) {
-		if (this.minecraft.level.dimension.id != -1) return;
+		if (minecraft.level == null || this.minecraft.level.dimension.id != -1) return;
 		float fog = BNBWeatherRenderer.getFogDensity();
 		GL11.glFogf(GL11.GL_FOG_START, fogDistance * 0.5F * fog);
 		GL11.glFogf(GL11.GL_FOG_END, fogDistance * fog);
@@ -32,6 +32,7 @@ public class GameRendererMixin {
 	
 	@Inject(method = "renderWeather", at = @At("HEAD"))
 	private void bnb_renderWeather(float delta, CallbackInfo info) {
+		if (minecraft.level == null || minecraft.level.dimension.id != -1) return;
 		BNBWeatherRenderer.render(minecraft, delta);
 	}
 }
