@@ -35,12 +35,16 @@ public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpaw
 	
 	@Override
 	protected void tryAttack(Entity target, float distance) {
-		if (!this.onGround || distance < 2.0F || distance > 6.0F || random.nextInt(10) != 0) return;
-		float dx = (float) (target.x - this.x);
-		float dz = (float) (target.z - this.z);
-		float dist = MathHelper.sqrt(dx * dx + dz * dz);
-		this.velocityX = dx / dist * 0.4F + this.velocityX * 0.2F;
-		this.velocityZ = dz / dist * 0.4F + this.velocityZ * 0.2F;
-		this.velocityY = 0.15F;
+		if (distance < 2.0F || distance > 6.0F || random.nextInt(10) != 0) {
+			super.tryAttack(target, distance);
+		}
+		else if (onGround) {
+			float dx = (float) (target.x - x);
+			float dz = (float) (target.z - z);
+			float dist = MathHelper.sqrt(dx * dx + dz * dz);
+			velocityX = dx / dist * 0.4F + velocityX * 0.2F;
+			velocityZ = dz / dist * 0.4F + velocityZ * 0.2F;
+			velocityY = 0.15F;
+		}
 	}
 }
