@@ -15,6 +15,7 @@ import net.modificationstation.stationapi.api.client.event.texture.TextureRegist
 import net.modificationstation.stationapi.api.client.texture.SpriteIdentifier;
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
+import net.modificationstation.stationapi.api.event.registry.GuiHandlerRegistryEvent;
 import net.modificationstation.stationapi.api.registry.BlockRegistry;
 import net.modificationstation.stationapi.api.registry.ItemRegistry;
 import net.modificationstation.stationapi.api.util.Identifier;
@@ -23,15 +24,19 @@ import paulevs.bnb.BNB;
 import paulevs.bnb.BNBClient;
 import paulevs.bnb.achievement.BNBAchievementPage;
 import paulevs.bnb.block.BNBBlocks;
+import paulevs.bnb.block.SpinningWheelBlock;
 import paulevs.bnb.entity.CrimsonSpiderEntity;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.entity.PoisonSpiderEntity;
 import paulevs.bnb.entity.WarpedSpiderEntity;
 import paulevs.bnb.entity.renderer.NetherSpiderRenderer;
 import paulevs.bnb.entity.renderer.ObsidianBoatRenderer;
+import paulevs.bnb.gui.container.SpinningWheelContainer;
+import paulevs.bnb.gui.screen.SpinningWheelScreen;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
 import paulevs.bnb.weather.BNBWeatherRenderer;
+import uk.co.benjiweber.expressions.tuple.BiTuple;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -42,6 +47,15 @@ import java.util.Map;
 
 public class ClientListener {
 	private static final Gson GSON = new GsonBuilder().create();
+	
+	@EventListener
+	public void onGUIRegister(GuiHandlerRegistryEvent event) {
+		event.registry.registerValueNoMessage(
+			SpinningWheelBlock.GUI_ID, BiTuple.of((player, inventory) -> new SpinningWheelScreen(
+				new SpinningWheelContainer(player.inventory, SpinningWheelBlock.currentEntity)
+			), null)
+		);
+	}
 	
 	@EventListener
 	public void onTextureRegister(TextureRegisterEvent event) {

@@ -90,17 +90,21 @@ item.orichalcum_pickaxe.name=Orichalcum Pickaxe
 item.orichalcum_axe.name=Orichalcum Axe
 item.orichalcum_hoe.name=Orichalcum Hoe
 item.orichalcum_shears.name=Orichalcum Shears
+tile.orichalcum_block.name=Orichalcum Block
 
 tile.crimson_spider_cocoon.name=Crimson Spider Cocoon
 tile.warped_spider_cocoon.name=Warped Spider Cocoon
 tile.poison_spider_cocoon.name=Poison Spider Cocoon
 
 tile.netherrack_furnace.name=Netherrack Furnace
+tile.spinning_wheel.name=Spinning Wheel
 
 item.obsidian_boat.name=Obsidian Boat
 
 tab.creative_tab.name=Better Nether Beta
 gui.netherrack_furnace=Netherrack Furnace
+gui.spinning_wheel=Spinning Wheel
+item.nether_fiber.name=Nether Fiber
 
 stationapi\:achievementPage.achievements=Better Nether B.
 achievement.the_ways=The Ways

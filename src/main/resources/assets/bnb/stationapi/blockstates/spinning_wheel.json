@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"direction=north": { "model": "bnb:block/spinning_wheel", "y": 90 },
+		"direction=south": { "model": "bnb:block/spinning_wheel", "y": 270 },
+		"direction=east": { "model": "bnb:block/spinning_wheel", "y": 180 },
+		"direction=west": { "model": "bnb:block/spinning_wheel" }
+	}
+}

@@ -66,6 +66,8 @@ public class BNBItems {
 	
 	public static final Item OBSIDIAN_BOAT = make("obsidian_boat", ObsidianBoatItem::new);
 	
+	public static final Item NETHER_FIBER = make("nether_fiber", TemplateItem::new);
+	
 	private static Item makeFood(String name, int healAmount, boolean isWolfFood) {
 		Identifier id = BNB.id(name);
 		Item item = new TemplateFoodItem(id, healAmount, isWolfFood);

@@ -127,8 +127,10 @@ public class BNBBlocks {
 	public static final Block POISON_SPIDER_COCOON = make("poison_spider_cocoon", SpiderCocoonBlock::new);
 	
 	public static final Block ORICHALCUM_ORE = make("orichalcum_ore", NetherOre::new);
+	public static final Block ORICHALCUM_BLOCK = make("orichalcum_block", NetherMetalBlock::new);
 	
 	public static final Block NETHERRACK_FURNACE = make("netherrack_furnace", NetherrackFurnaceBlock::new);
+	public static final Block SPINNING_WHEEL = make("spinning_wheel", SpinningWheelBlock::new);
 	
 	private static <B extends Block> B make(String name, Function<Identifier, B> constructor) {
 		Identifier id = BNB.id(name);
