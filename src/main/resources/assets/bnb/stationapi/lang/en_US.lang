@@ -127,6 +127,11 @@ tile.nether_cloth_magenta.name=Magenta Nether Cloth
 tile.nether_cloth_orange.name=Orange Nether Cloth
 tile.nether_cloth_white.name=White Nether Cloth
 
+item.fiber_helmet.name=Fiber Helmet
+item.fiber_chestplate.name=Fiber Chestplate
+item.fiber_leggings.name=Fiber Leggings
+item.fiber_boots.name=Fiber Boots
+
 stationapi\:achievementPage.achievements=Better Nether B.
 achievement.the_ways=The Ways
 achievement.the_ways.desc=Make a portal to The Nether

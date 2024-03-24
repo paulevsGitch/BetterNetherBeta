@@ -68,6 +68,11 @@ public class BNBItems {
 	
 	public static final Item NETHER_FIBER = make("nether_fiber", TemplateItem::new);
 	
+	public static final Item FIBER_HELMET = makeArmor("fiber_helmet", 0, 1, 0).setDurability(256);
+	public static final Item FIBER_CHESTPLATE = makeArmor("fiber_chestplate", 0, 1, 1).setDurability(256);
+	public static final Item FIBER_LEGGINGS = makeArmor("fiber_leggings", 0, 1, 2).setDurability(256);
+	public static final Item FIBER_BOOTS = makeArmor("fiber_boots", 0, 1, 3).setDurability(256);
+	
 	private static Item makeFood(String name, int healAmount, boolean isWolfFood) {
 		Identifier id = BNB.id(name);
 		Item item = new TemplateFoodItem(id, healAmount, isWolfFood);

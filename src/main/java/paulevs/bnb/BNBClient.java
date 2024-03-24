@@ -4,9 +4,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
-import net.modificationstation.stationapi.api.registry.BlockRegistry;
-import net.modificationstation.stationapi.api.util.Identifier;
-import paulevs.bnb.block.BNBBlocks;
 
 @Environment(EnvType.CLIENT)
 public class BNBClient {
