@@ -91,6 +91,9 @@ item.orichalcum_axe.name=Orichalcum Axe
 item.orichalcum_hoe.name=Orichalcum Hoe
 item.orichalcum_shears.name=Orichalcum Shears
 tile.orichalcum_block.name=Orichalcum Block
+tile.orichalcum_stairs.name=Orichalcum Stairs
+tile.orichalcum_slab_half.name=Orichalcum Slab
+tile.orichalcum_slab_full.name=Orichalcum Slab
 
 tile.crimson_spider_cocoon.name=Crimson Spider Cocoon
 tile.warped_spider_cocoon.name=Warped Spider Cocoon
@@ -105,6 +108,24 @@ tab.creative_tab.name=Better Nether Beta
 gui.netherrack_furnace=Netherrack Furnace
 gui.spinning_wheel=Spinning Wheel
 item.nether_fiber.name=Nether Fiber
+
+tile.nether_cloth.name=Nether Cloth
+tile.nether_cloth_black.name=Black Nether Cloth
+tile.nether_cloth_red.name=Red Nether Cloth
+tile.nether_cloth_green.name=Green Nether Cloth
+tile.nether_cloth_brown.name=Brown Nether Cloth
+tile.nether_cloth_blue.name=Blue Nether Cloth
+tile.nether_cloth_purple.name=Purple Nether Cloth
+tile.nether_cloth_cyan.name=Cyan Nether Cloth
+tile.nether_cloth_light_gray.name=Light Gray Nether Cloth
+tile.nether_cloth_gray.name=Gray Nether Cloth
+tile.nether_cloth_pink.name=Pink Nether Cloth
+tile.nether_cloth_lime.name=Lime Nether Cloth
+tile.nether_cloth_yellow.name=Yellow Nether Cloth
+tile.nether_cloth_light_blue.name=Light Blue Nether Cloth
+tile.nether_cloth_magenta.name=Magenta Nether Cloth
+tile.nether_cloth_orange.name=Orange Nether Cloth
+tile.nether_cloth_white.name=White Nether Cloth
 
 stationapi\:achievementPage.achievements=Better Nether B.
 achievement.the_ways=The Ways

@@ -73,6 +73,7 @@ public class ClientListener {
 		BNBBlocks.CRIMSON_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/crimson_planks")).index;
 		BNBBlocks.WARPED_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/warped_planks")).index;
 		BNBBlocks.POISON_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/poison_planks")).index;
+		BNBBlocks.ORICHALCUM_BLOCK.texture = blockAtlas.addTexture(BNB.id("block/orichalcum_block")).index;
 		
 		BNBAchievementPage.getInstance().updateTextures(blockAtlas);
 		BNBWeatherRenderer.updateTextures(BNBClient.getMinecraft().textureManager);

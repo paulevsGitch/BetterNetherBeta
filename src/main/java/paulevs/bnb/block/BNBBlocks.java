@@ -128,9 +128,30 @@ public class BNBBlocks {
 	
 	public static final Block ORICHALCUM_ORE = make("orichalcum_ore", NetherOre::new);
 	public static final Block ORICHALCUM_BLOCK = make("orichalcum_block", NetherMetalBlock::new);
+	public static final Block ORICHALCUM_STAIRS = make("orichalcum_stairs", TemplateStairsBlock::new, ORICHALCUM_BLOCK);
+	public static final VBEHalfSlabBlock ORICHALCUM_SLAB_HALF = make("orichalcum_slab_half", VBEHalfSlabBlock::new, ORICHALCUM_BLOCK);
+	public static final VBEFullSlabBlock ORICHALCUM_SLAB_FULL = makeNI("orichalcum_slab_full", VBEFullSlabBlock::new, ORICHALCUM_BLOCK);
 	
 	public static final Block NETHERRACK_FURNACE = make("netherrack_furnace", NetherrackFurnaceBlock::new);
 	public static final Block SPINNING_WHEEL = make("spinning_wheel", SpinningWheelBlock::new);
+	
+	public static final Block NETHER_CLOTH = make("nether_cloth", NetherCloth::new);
+	public static final Block NETHER_CLOTH_BLACK = make("nether_cloth_black", NetherCloth::new);
+	public static final Block NETHER_CLOTH_RED = make("nether_cloth_red", NetherCloth::new);
+	public static final Block NETHER_CLOTH_GREEN = make("nether_cloth_green", NetherCloth::new);
+	public static final Block NETHER_CLOTH_BROWN = make("nether_cloth_brown", NetherCloth::new);
+	public static final Block NETHER_CLOTH_BLUE = make("nether_cloth_blue", NetherCloth::new);
+	public static final Block NETHER_CLOTH_PURPLE = make("nether_cloth_purple", NetherCloth::new);
+	public static final Block NETHER_CLOTH_CYAN = make("nether_cloth_cyan", NetherCloth::new);
+	public static final Block NETHER_CLOTH_LIGHT_GRAY = make("nether_cloth_light_gray", NetherCloth::new);
+	public static final Block NETHER_CLOTH_GRAY = make("nether_cloth_gray", NetherCloth::new);
+	public static final Block NETHER_CLOTH_PINK = make("nether_cloth_pink", NetherCloth::new);
+	public static final Block NETHER_CLOTH_LIME = make("nether_cloth_lime", NetherCloth::new);
+	public static final Block NETHER_CLOTH_YELLOW = make("nether_cloth_yellow", NetherCloth::new);
+	public static final Block NETHER_CLOTH_LIGHT_BLUE = make("nether_cloth_light_blue", NetherCloth::new);
+	public static final Block NETHER_CLOTH_MAGENTA = make("nether_cloth_magenta", NetherCloth::new);
+	public static final Block NETHER_CLOTH_ORANGE = make("nether_cloth_orange", NetherCloth::new);
+	public static final Block NETHER_CLOTH_WHITE = make("nether_cloth_white", NetherCloth::new);
 	
 	private static <B extends Block> B make(String name, Function<Identifier, B> constructor) {
 		Identifier id = BNB.id(name);
@@ -188,13 +209,17 @@ public class BNBBlocks {
 	public static void init() {
 		CRIMSON_SLAB_HALF.setFullBlock(CRIMSON_SLAB_FULL);
 		CRIMSON_SLAB_FULL.setHalfBlock(CRIMSON_SLAB_HALF);
-		POISON_SLAB_FULL.setHalfBlock(POISON_SLAB_HALF);
 		WARPED_SLAB_HALF.setFullBlock(WARPED_SLAB_FULL);
 		WARPED_SLAB_FULL.setHalfBlock(WARPED_SLAB_HALF);
+		POISON_SLAB_HALF.setFullBlock(POISON_SLAB_FULL);
 		POISON_SLAB_FULL.setHalfBlock(POISON_SLAB_HALF);
+		ORICHALCUM_SLAB_HALF.setFullBlock(ORICHALCUM_SLAB_FULL);
+		ORICHALCUM_SLAB_FULL.setHalfBlock(ORICHALCUM_SLAB_HALF);
+		
 		CRIMSON_LEAVES.setSapling(CRIMSON_SAPLING);
 		WARPED_LEAVES.setSapling(WARPED_SAPLING);
 		POISON_LEAVES.setSapling(POISON_SAPLING);
+		
 		CRIMSON_VINE.setGrown(CRIMSON_VINE_WITH_BERRIES);
 		CRIMSON_VINE_WITH_BERRIES.setBasic(CRIMSON_VINE);
 	}

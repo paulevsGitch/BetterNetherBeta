@@ -8,6 +8,7 @@ public class BNBBlockMaterials {
 	public static final Material NETHER_WOOD = new Material(MaterialColor.WOOD);
 	public static final Material NETHER_LEAVES = new Material(MaterialColor.FOLIAGE);
 	public static final Material NETHER_PLANT = new Material(MaterialColor.FOLIAGE);
+	public static final Material NETHER_CLOTH = new Material(MaterialColor.WHITE);
 	public static final Material NETHER_PLANT_REPLACEABLE = new ReplaceableMaterial(MaterialColor.FOLIAGE).replaceable();
 	public static final Material SPIDER_NET = new NetMaterial();
 	

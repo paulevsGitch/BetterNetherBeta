@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"XXX",
+		"XDX",
+		"XXX"
+	],
+	"key": {
+		"X": { "tag": "bnb:nether_cloth" },
+		"D": {
+			"item": "minecraft:dye",
+			"damage": 14
+		}
+	},
+	"result": {
+		"item": "bnb:nether_cloth_orange",
+		"count": 8
+	}
+}
