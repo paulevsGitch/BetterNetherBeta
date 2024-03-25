@@ -16,7 +16,8 @@
 		"SoundHelperMixin",
 		"FluidBlockMixin",
 		"MinecraftMixin",
-		"LevelMixin"
+		"LevelMixin",
+		"ItemMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

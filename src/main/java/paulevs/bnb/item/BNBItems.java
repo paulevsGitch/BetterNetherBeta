@@ -73,6 +73,8 @@ public class BNBItems {
 	public static final Item FIBER_LEGGINGS = makeArmor("fiber_leggings", 0, 1, 2).setDurability(2000);
 	public static final Item FIBER_BOOTS = makeArmor("fiber_boots", 0, 1, 3).setDurability(2000);
 	
+	public static final Item PORTAL_COMPASS = make("portal_compass", PortalCompassItem::new);
+	
 	private static Item makeFood(String name, int healAmount, boolean isWolfFood) {
 		Identifier id = BNB.id(name);
 		Item item = new TemplateFoodItem(id, healAmount, isWolfFood);

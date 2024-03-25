@@ -131,6 +131,7 @@ item.fiber_helmet.name=Fiber Helmet
 item.fiber_chestplate.name=Fiber Chestplate
 item.fiber_leggings.name=Fiber Leggings
 item.fiber_boots.name=Fiber Boots
+item.portal_compass.name=Portal Compass
 
 stationapi\:achievementPage.achievements=Better Nether B.
 achievement.the_ways=The Ways

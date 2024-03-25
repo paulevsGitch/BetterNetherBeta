@@ -33,6 +33,7 @@ import paulevs.bnb.entity.renderer.NetherSpiderRenderer;
 import paulevs.bnb.entity.renderer.ObsidianBoatRenderer;
 import paulevs.bnb.gui.container.SpinningWheelContainer;
 import paulevs.bnb.gui.screen.SpinningWheelScreen;
+import paulevs.bnb.item.PortalCompassItem;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
 import paulevs.bnb.weather.BNBWeatherRenderer;
@@ -59,7 +60,8 @@ public class ClientListener {
 	
 	@EventListener
 	public void onTextureRegister(TextureRegisterEvent event) {
-		final ExpandableAtlas blockAtlas = Atlases.getTerrain();
+		ExpandableAtlas blockAtlas = Atlases.getTerrain();
+		
 		Block.NETHERRACK.texture = blockAtlas.addTexture(BNB.id("block/netherrack")).index;
 		Block.GLOWSTONE.texture = blockAtlas.addTexture(BNB.id("block/glowstone")).index;
 		Block.SOUL_SAND.texture = blockAtlas.addTexture(BNB.id("block/soul_sand")).index;
@@ -77,6 +79,12 @@ public class ClientListener {
 		
 		BNBAchievementPage.getInstance().updateTextures(blockAtlas);
 		BNBWeatherRenderer.updateTextures(BNBClient.getMinecraft().textureManager);
+		
+		ExpandableAtlas itemAtlas = Atlases.getGuiItems();
+		
+		for (byte i = 0; i < 64; i++) {
+			PortalCompassItem.TEXTURES[i] = itemAtlas.addTexture(BNB.id("item/portal_compass_" + i)).index;
+		}
 		
 		debugTerrain();
 		printTranslations();
