@@ -4,12 +4,15 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.LivingEntity;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
+import net.minecraft.level.chunk.Chunk;
 import net.minecraft.util.io.CompoundTag;
 import net.minecraft.util.maths.MathHelper;
+import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.template.item.TemplateItem;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNBClient;
@@ -23,15 +26,31 @@ public class PortalCompassItem extends TemplateItem implements CustomStackTextur
 	}
 	
 	@Override
+	public void inventoryTick(ItemStack stack, Level level, Entity entity, int i, boolean bl) {
+		CompoundTag nbt = stack.getStationNbt();
+		if (!nbt.containsKey("bnb_center")) return;
+		CompoundTag center = nbt.getCompoundTag("bnb_center");
+		if (!center.containsKey("dim") || level.dimension.id != center.getInt("dim")) return;
+		int x = center.getInt("x");
+		int z = center.getInt("z");
+		Chunk chunk = level.getChunkFromCache(x >> 4, z >> 4);
+		if (chunk == null) return;
+		int y = center.getInt("y");
+		BlockState state = chunk.getBlockState(x & 15, y, z & 15);
+		if (!state.isOf(Block.PORTAL)) {
+			nbt.put("bnb_center", new CompoundTag());
+		}
+	}
+	
+	@Override
 	public boolean useOnBlock(ItemStack stack, PlayerEntity player, Level level, int x, int y, int z, int side) {
-		System.out.println("Test: " + x + " " + z + " " + level.getBlockState(x, y, z));
 		if (!level.getBlockState(x, y, z).isOf(Block.PORTAL)) return false;
-		System.out.println("Set center at " + x + " " + z);
 		CompoundTag nbt = stack.getStationNbt();
 		CompoundTag center = new CompoundTag();
 		nbt.put("bnb_center", center);
 		center.put("dim", level.dimension.id);
 		center.put("x", x);
+		center.put("y", y);
 		center.put("z", z);
 		
 		if (!level.isRemote) {
@@ -70,9 +89,8 @@ public class PortalCompassItem extends TemplateItem implements CustomStackTextur
 			index = ((int) System.currentTimeMillis() / 20 + stack.hashCode()) & 63;
 		}
 		else {
-			
 			CompoundTag center = nbt.getCompoundTag("bnb_center");
-			if (center.getInt("dim") != minecraft.level.dimension.id) {
+			if (!center.containsKey("dim") || center.getInt("dim") != minecraft.level.dimension.id) {
 				index = ((int) System.currentTimeMillis() / 20 + stack.hashCode()) & 63;
 			}
 			else {

@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"IRI",
+		"RDR",
+		"IRI"
+	],
+	"key": {
+		"I": { "item": "bnb:orichalcum_ingot" },
+		"R": { "item": "minecraft:redstone" },
+		"D": { "item": "minecraft:diamond" }
+	},
+	"result": {
+		"item": "bnb:portal_compass"
+	}
+}

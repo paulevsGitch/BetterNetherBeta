@@ -11,6 +11,8 @@
 		"NetherDimensionMixin",
 		"NetherrackBlockMixin",
 		"CraftingResultMixin",
+		"FurnaceOutputMixin",
+		"PlayerEntityMixin",
 		"BoatEntityMixin",
 		"ItemEntityMixin",
 		"FireBlockMixin",

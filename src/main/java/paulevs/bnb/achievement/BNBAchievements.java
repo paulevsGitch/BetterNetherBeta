@@ -24,6 +24,8 @@ public class BNBAchievements {
 	public static final Achievement RGB = make("rgb", BNBBlocks.WARPED_WOOD, 1, 2, WARM_WELCOME);
 	public static final Achievement ALMOST_THE_SAME = make("almost_the_same", BNBBlocks.NETHERRACK_FURNACE, 3, 2, WARM_WELCOME);
 	public static final Achievement ARCHIMEDES_LAW = make("archimedes_law", BNBItems.OBSIDIAN_BOAT, 1, -2, WARM_WELCOME);
+	public static final Achievement ORICHALCUM = make("orichalcum", BNBItems.ORICHALCUM_INGOT, 5, 1, WARM_WELCOME);
+	public static final Achievement ARIADNES_STRING = make("ariadnes_string", BNBItems.PORTAL_COMPASS, 4, 4, ORICHALCUM);
 	
 	public static final Stat COLLECT_CRIMSON_WOOD = new RegisteringStat(9990, "stat.bnb:collectRedWood").register();
 	public static final Stat COLLECT_WARPED_WOOD = new RegisteringStat(9991, "stat.bnb:collectRedWood").register();

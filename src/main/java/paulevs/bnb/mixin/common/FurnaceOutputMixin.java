@@ -1,9 +1,7 @@
 package paulevs.bnb.mixin.common;
 
-import net.minecraft.block.Block;
-import net.minecraft.container.slot.CraftingResult;
+import net.minecraft.container.slot.FurnaceOutput;
 import net.minecraft.entity.living.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,11 +11,10 @@ import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.achievement.BNBAchievements;
-import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.item.BNBItems;
 
-@Mixin(CraftingResult.class)
-public class CraftingResultMixin {
+@Mixin(FurnaceOutput.class)
+public class FurnaceOutputMixin {
 	@Shadow private PlayerEntity player;
 	
 	@Inject(method = "onCrafted", at = @At(
@@ -26,20 +23,9 @@ public class CraftingResultMixin {
 		shift = Shift.AFTER
 	))
 	private void bnb_craftAchievements(ItemStack stack, CallbackInfo info) {
-		if ((stack.getType() instanceof BlockItem item)) {
-			Block block = item.getBlock();
-			if (block == BNBBlocks.NETHERRACK_FURNACE) {
-				player.incrementStat(BNBAchievements.ALMOST_THE_SAME);
-			}
-		}
-		else {
-			Item item = stack.getType();
-			if (item == BNBItems.OBSIDIAN_BOAT) {
-				player.incrementStat(BNBAchievements.ARCHIMEDES_LAW);
-			}
-			else if (item == BNBItems.PORTAL_COMPASS) {
-				player.incrementStat(BNBAchievements.ARIADNES_STRING);
-			}
+		Item item = stack.getType();
+		if (item == BNBItems.ORICHALCUM_INGOT) {
+			player.incrementStat(BNBAchievements.ORICHALCUM);
 		}
 	}
 }
