@@ -5,11 +5,11 @@
 		"SXS"
 	],
 	"key": {
-		"X": { "item": "bnb:warped_planks" },
+		"X": { "item": "bnb:pirozen_planks" },
 		"S": { "item": "minecraft:stick" }
 	},
 	"result": {
-		"item": "bnb:warped_fence",
+		"item": "bnb:pirozen_fence",
 		"count": 4
 	}
 }

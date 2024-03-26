@@ -5,10 +5,10 @@
 		"X"
 	],
 	"key": {
-		"X": { "item": "bnb:warped_log" }
+		"X": { "item": "bnb:pirozen_log" }
 	},
 	"result": {
-		"item": "bnb:warped_stem",
+		"item": "bnb:pirozen_stem",
 		"count": 8
 	}
 }

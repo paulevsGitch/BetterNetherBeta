@@ -1,10 +1,10 @@
 {
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
-		{ "item": "bnb:warped_log" }
+		{ "item": "bnb:pirozen_log" }
 	],
 	"result": {
-		"item": "bnb:warped_planks",
+		"item": "bnb:pirozen_planks",
 		"count": 4
 	}
 }

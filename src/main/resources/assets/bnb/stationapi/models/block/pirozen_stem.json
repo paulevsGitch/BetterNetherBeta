@@ -1,0 +1,6 @@
+{
+	"parent": "bnb:block/stem",
+	"textures": {
+		"all": "bnb:block/pirozen_stem"
+	}
+}

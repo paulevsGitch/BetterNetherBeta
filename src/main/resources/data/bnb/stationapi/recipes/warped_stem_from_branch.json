@@ -1,9 +1,9 @@
 {
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
-		{ "item": "bnb:warped_branch" }
+		{ "item": "bnb:pirozen_branch" }
 	],
 	"result": {
-		"item": "bnb:warped_stem"
+		"item": "bnb:pirozen_stem"
 	}
 }

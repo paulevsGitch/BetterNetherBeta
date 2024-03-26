@@ -1,7 +1,0 @@
-{
-	"parent": "minecraft:item/generated",
-	"textures": {
-		"layer0": "bnb:block/warped_sapling",
-		"layer1": "bnb:item/placer_overlay"
-	}
-}

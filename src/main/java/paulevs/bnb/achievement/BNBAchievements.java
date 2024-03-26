@@ -21,19 +21,19 @@ public class BNBAchievements {
 	
 	public static final Achievement THE_WAYS = make("the_ways", Block.PORTAL, 0, 0, null);
 	public static final Achievement WARM_WELCOME = make("warm_welcome", Block.FIRE, 2, 0, THE_WAYS);
-	public static final Achievement RGB = make("rgb", BNBBlocks.WARPED_LOG, 1, 2, WARM_WELCOME);
+	public static final Achievement RGB = make("rgb", BNBBlocks.PIROZEN_LOG, 1, 2, WARM_WELCOME);
 	public static final Achievement ALMOST_THE_SAME = make("almost_the_same", BNBBlocks.NETHERRACK_FURNACE, 3, 2, WARM_WELCOME);
 	public static final Achievement ARCHIMEDES_LAW = make("archimedes_law", BNBItems.OBSIDIAN_BOAT, 1, -2, WARM_WELCOME);
 	public static final Achievement ORICHALCUM = make("orichalcum", BNBItems.ORICHALCUM_INGOT, 5, 1, WARM_WELCOME);
 	public static final Achievement ARIADNES_STRING = make("ariadnes_string", BNBItems.PORTAL_COMPASS, 4, 4, ORICHALCUM);
 	
 	public static final Stat COLLECT_FALUN_LOG = new RegisteringStat(9990, "stat.bnb:collectRedLog").register();
-	public static final Stat COLLECT_WARPED_LOG = new RegisteringStat(9991, "stat.bnb:collectRedLog").register();
+	public static final Stat COLLECT_PIROZEN_LOG = new RegisteringStat(9991, "stat.bnb:collectRedLog").register();
 	public static final Stat COLLECT_POISON_LOG = new RegisteringStat(9992, "stat.bnb:collectRedLog").register();
 	
 	private static final ItemStack[] RGB_ICONS = new ItemStack[] {
 		new ItemStack(BNBBlocks.FALUN_LOG),
-		new ItemStack(BNBBlocks.WARPED_LOG),
+		new ItemStack(BNBBlocks.PIROZEN_LOG),
 		new ItemStack(BNBBlocks.POISON_LOG)
 	};
 	

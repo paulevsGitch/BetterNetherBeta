@@ -31,8 +31,8 @@ public class BNBItems {
 	public static final Item FALUN_TREE_PLACER = make(
 		"falurian_tree_placer", () -> BNBStructures.FALUN_TREE, StructurePlacerItem::new
 	);
-	public static final Item WARPED_TREE_PLACER = make(
-		"warped_tree_placer", () -> BNBStructures.WARPED_TREE, StructurePlacerItem::new
+	public static final Item PIROZEN_TREE_PLACER = make(
+		"pirozen_tree_placer", () -> BNBStructures.PIROZEN_TREE, StructurePlacerItem::new
 	);
 	public static final Item POISON_TREE_PLACER = make(
 		"poison_tree_placer", () -> BNBStructures.POISON_TREE, StructurePlacerItem::new
@@ -41,8 +41,8 @@ public class BNBItems {
 	public static final Item LARGE_FALUN_TREE_PLACER = make(
 		"large_falurian_tree_placer", () -> BNBStructures.LARGE_FALUN_TREE, StructurePlacerItem::new
 	);
-	public static final Item LARGE_WARPED_TREE_PLACER = make(
-		"large_warped_tree_placer", () -> BNBStructures.LARGE_WARPED_TREE, StructurePlacerItem::new
+	public static final Item LARGE_PIROZEN_TREE_PLACER = make(
+		"large_pirozen_tree_placer", () -> BNBStructures.LARGE_PIROZEN_TREE, StructurePlacerItem::new
 	);
 	public static final Item LARGE_POISON_TREE_PLACER = make(
 		"large_poison_tree_placer", () -> BNBStructures.LARGE_POISON_TREE, StructurePlacerItem::new

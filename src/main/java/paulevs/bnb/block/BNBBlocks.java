@@ -20,7 +20,7 @@ public class BNBBlocks {
 	public static final List<Block> BLOCKS_WITH_ITEMS = new ArrayList<>();
 	
 	public static final NetherTerrainBlock MAROON_NYLIUM = make("maroon_nylium", NetherTerrainBlock::new);
-	public static final NetherTerrainBlock WARPED_NYLIUM = make("warped_nylium", NetherTerrainBlock::new);
+	public static final NetherTerrainBlock TURQUOISE_NYLIUM = make("turquoise_nylium", NetherTerrainBlock::new);
 	public static final NetherTerrainBlock POISON_NYLIUM = make("poison_nylium", NetherTerrainBlock::new);
 	public static final NetherTerrainBlock CORRUPTED_NYLIUM = make("corrupted_nylium", NetherTerrainBlock::new);
 	public static final NetherTerrainBlock SOUL_NYLIUM = make("soul_nylium", SoulTerrainBlock::new);
@@ -49,25 +49,25 @@ public class BNBBlocks {
 	public static final VBEFullSlabBlock FALUN_SLAB_FULL = makeNI("falurian_slab_full", VBEFullSlabBlock::new, FALUN_PLANKS);
 	public static final Block FALUN_FENCE = make("falurian_fence", FenceBlock::new, FALUN_PLANKS);
 	
-	public static final Block WARPED_LOG = make("warped_log", NetherLogBlock::new);
-	public static final Block WARPED_STEM = make("warped_stem", StemBlock::new);
-	public static final Block WARPED_BRANCH = make("warped_branch", BranchBlock::new);
-	public static final NetherLeavesBlock WARPED_LEAVES = make("warped_leaves", NetherLeavesBlock::new);
-	public static final Block WARPED_SAPLING = makeSapling(
-		"warped_sapling",
-		() -> BNBStructures.WARPED_TREE,
+	public static final Block PIROZEN_LOG = make("pirozen_log", NetherLogBlock::new);
+	public static final Block PIROZEN_STEM = make("pirozen_stem", StemBlock::new);
+	public static final Block PIROZEN_BRANCH = make("pirozen_branch", BranchBlock::new);
+	public static final NetherLeavesBlock PIROZEN_LEAVES = make("pirozen_leaves", NetherLeavesBlock::new);
+	public static final Block PIROZEN_SAPLING = makeSapling(
+		"pirozen_sapling",
+		() -> BNBStructures.PIROZEN_TREE,
 		new String[] {
 			" # ",
 			"###",
 			" # "
 		},
-		() -> BNBStructures.LARGE_WARPED_TREE
+		() -> BNBStructures.LARGE_PIROZEN_TREE
 	);
-	public static final Block WARPED_PLANKS = make("warped_planks", NetherPlanksBlock::new);
-	public static final Block WARPED_STAIRS = make("warped_stairs", TemplateStairsBlock::new, WARPED_PLANKS);
-	public static final VBEHalfSlabBlock WARPED_SLAB_HALF = make("warped_slab_half", VBEHalfSlabBlock::new, WARPED_PLANKS);
-	public static final VBEFullSlabBlock WARPED_SLAB_FULL = makeNI("warped_slab_full", VBEFullSlabBlock::new, WARPED_PLANKS);
-	public static final Block WARPED_FENCE = make("warped_fence", FenceBlock::new, WARPED_PLANKS);
+	public static final Block PIROZEN_PLANKS = make("pirozen_planks", NetherPlanksBlock::new);
+	public static final Block PIROZEN_STAIRS = make("pirozen_stairs", TemplateStairsBlock::new, PIROZEN_PLANKS);
+	public static final VBEHalfSlabBlock PIROZEN_SLAB_HALF = make("pirozen_slab_half", VBEHalfSlabBlock::new, PIROZEN_PLANKS);
+	public static final VBEFullSlabBlock PIROZEN_SLAB_FULL = makeNI("pirozen_slab_full", VBEFullSlabBlock::new, PIROZEN_PLANKS);
+	public static final Block PIROZEN_FENCE = make("pirozen_fence", FenceBlock::new, PIROZEN_PLANKS);
 	
 	public static final Block POISON_LOG = make("poison_log", NetherLogBlock::new);
 	public static final Block POISON_STEM = make("poison_stem", StemBlock::new);
@@ -98,7 +98,7 @@ public class BNBBlocks {
 	public static final Block FLAME_BAMBOO_BLOCK = make("flame_bamboo_block", NetherLogBlock::new);
 	
 	public static final Block FALUN_WEEPING_VINE = make("falurian_weeping_vine", NetherVineBlock::new);
-	public static final Block WARPED_WEEPING_VINE = make("warped_weeping_vine", NetherVineBlock::new);
+	public static final Block PIROZEN_WEEPING_VINE = make("pirozen_weeping_vine", NetherVineBlock::new);
 	public static final Block POISON_WEEPING_VINE = make("poison_weeping_vine", NetherVineBlock::new);
 	public static final Block PALE_TREE_WEEPING_VINE = make("pale_tree_weeping_vine", NetherVineBlock::new);
 	public static final Block EMBER_TREE_WEEPING_VINE = make("ember_tree_weeping_vine", NetherVineBlock::new);
@@ -116,14 +116,14 @@ public class BNBBlocks {
 	public static final GrowingNetherVineBlock FALUN_VINE = make("falurian_vine", GrowingNetherVineBlock::new);
 	public static final CollectableNetherVineBlock FALUN_VINE_WITH_BERRIES = (CollectableNetherVineBlock) makeNI("falurian_vine_with_berries", CollectableNetherVineBlock::new).setLightEmittance(0.5F);
 	
-	public static final Block WARPED_ROOTS = make("warped_roots", NetherRootsBlock::new);
+	public static final Block PIROZEN_ROOTS = make("pirozen_roots", NetherRootsBlock::new);
 	public static final Block POISON_ROOTS = make("poison_roots", NetherRootsBlock::new);
 	
 	public static final GlowstoneShards GLOWSTONE_SHARDS = (GlowstoneShards) make("glowstone_shards", GlowstoneShards::new).setLightEmittance(1F);
 	
 	public static final SpiderNetBlock SPIDER_NET = make("spider_net", SpiderNetBlock::new);
 	public static final Block FALUN_SPIDER_COCOON = make("falurian_spider_cocoon", SpiderCocoonBlock::new);
-	public static final Block WARPED_SPIDER_COCOON = make("warped_spider_cocoon", SpiderCocoonBlock::new);
+	public static final Block PIROZEN_SPIDER_COCOON = make("pirozen_spider_cocoon", SpiderCocoonBlock::new);
 	public static final Block POISON_SPIDER_COCOON = make("poison_spider_cocoon", SpiderCocoonBlock::new);
 	
 	public static final Block ORICHALCUM_ORE = make("orichalcum_ore", NetherOre::new);
@@ -209,15 +209,15 @@ public class BNBBlocks {
 	public static void init() {
 		FALUN_SLAB_HALF.setFullBlock(FALUN_SLAB_FULL);
 		FALUN_SLAB_FULL.setHalfBlock(FALUN_SLAB_HALF);
-		WARPED_SLAB_HALF.setFullBlock(WARPED_SLAB_FULL);
-		WARPED_SLAB_FULL.setHalfBlock(WARPED_SLAB_HALF);
+		PIROZEN_SLAB_HALF.setFullBlock(PIROZEN_SLAB_FULL);
+		PIROZEN_SLAB_FULL.setHalfBlock(PIROZEN_SLAB_HALF);
 		POISON_SLAB_HALF.setFullBlock(POISON_SLAB_FULL);
 		POISON_SLAB_FULL.setHalfBlock(POISON_SLAB_HALF);
 		ORICHALCUM_SLAB_HALF.setFullBlock(ORICHALCUM_SLAB_FULL);
 		ORICHALCUM_SLAB_FULL.setHalfBlock(ORICHALCUM_SLAB_HALF);
 		
 		FALUN_LEAVES.setSapling(FALUN_SAPLING);
-		WARPED_LEAVES.setSapling(WARPED_SAPLING);
+		PIROZEN_LEAVES.setSapling(PIROZEN_SAPLING);
 		POISON_LEAVES.setSapling(POISON_SAPLING);
 		
 		FALUN_VINE.setGrown(FALUN_VINE_WITH_BERRIES);

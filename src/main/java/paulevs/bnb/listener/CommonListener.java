@@ -26,7 +26,7 @@ import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.entity.CrimsonSpiderEntity;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.entity.PoisonSpiderEntity;
-import paulevs.bnb.entity.WarpedSpiderEntity;
+import paulevs.bnb.entity.PirozenSpiderEntity;
 import paulevs.bnb.item.BNBItems;
 import paulevs.bnb.packet.BNBWeatherPacket;
 import paulevs.bnb.world.biome.BNBBiomes;
@@ -63,7 +63,7 @@ public class CommonListener {
 	@EventListener
 	public void onEntityRegister(EntityRegister event) {
 		event.register(CrimsonSpiderEntity.class, "bnb_falurian_spider");
-		event.register(WarpedSpiderEntity.class, "bnb_warped_spider");
+		event.register(PirozenSpiderEntity.class, "bnb_pirozen_spider");
 		event.register(PoisonSpiderEntity.class, "bnb_poison_spider");
 		event.register(ObsidianBoatEntity.class, "bnb_obsidian_boat");
 	}

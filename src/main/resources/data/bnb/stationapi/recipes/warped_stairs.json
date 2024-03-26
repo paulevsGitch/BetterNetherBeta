@@ -6,10 +6,10 @@
 		"XXX"
 	],
 	"key": {
-		"X": { "item": "bnb:warped_planks" }
+		"X": { "item": "bnb:pirozen_planks" }
 	},
 	"result": {
-		"item": "bnb:warped_stairs",
+		"item": "bnb:pirozen_stairs",
 		"count": 6
 	}
 }

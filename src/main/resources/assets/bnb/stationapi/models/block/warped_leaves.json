@@ -1,7 +1,0 @@
-{
-	"parent": "bnb:block/leaves",
-	"textures": {
-		"leaves_bottom": "bnb:block/warped_leaves_bottom",
-		"leaves": "bnb:block/warped_leaves"
-	}
-}

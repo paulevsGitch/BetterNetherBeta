@@ -45,22 +45,22 @@ public class BNBBiomes {
 		.build()).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
 	
 	
-	public static final Biome WARPED_FOREST = add(BiomeBuilder
-		.start("bnb_warped_forest")
+	public static final Biome PIROZEN_FOREST = add(BiomeBuilder
+		.start("bnb_pirozen_forest")
 		.fogColor(0x119b85)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.WARPED_NYLIUM).replace(Block.NETHERRACK).ground(1).build())
+		.surfaceRule(SurfaceBuilder.start(BNBBlocks.TURQUOISE_NYLIUM).replace(Block.NETHERRACK).ground(1).build())
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM_PLACER)
 		//.feature(BNBPlacers.LAVA_STREAM_PLACER)
 		.feature(BNBPlacers.LAVA_LAKE_PLACER)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR_PLACER)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING_PLACER)
-		.feature(BNBPlacers.LARGE_WARPED_TREE_PLACER)
-		.feature(BNBPlacers.FALLEN_WARPED_TREE_PLACER)
-		.feature(BNBPlacers.WARPED_TREE_PLACER)
-		.feature(BNBPlacers.WARPED_BUSH_PLACER)
-		.feature(BNBPlacers.WARPED_SPIDER_COCOON)
-		.feature(BNBPlacers.WARPED_ROOTS_PLACER)
+		.feature(BNBPlacers.LARGE_PIROZEN_TREE_PLACER)
+		.feature(BNBPlacers.FALLEN_PIROZEN_TREE_PLACER)
+		.feature(BNBPlacers.PIROZEN_TREE_PLACER)
+		.feature(BNBPlacers.PIROZEN_BUSH_PLACER)
+		.feature(BNBPlacers.PIROZEN_SPIDER_COCOON)
+		.feature(BNBPlacers.PIROZEN_ROOTS_PLACER)
 		.build()).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
 	
 	public static final Biome POISON_FOREST = add(BiomeBuilder
@@ -91,7 +91,7 @@ public class BNBBiomes {
 		BNBBlocks.MAROON_NYLIUM.addBonemealStructure(BNBStructures.FLAME_BULBS);
 		BNBBlocks.MAROON_NYLIUM.addBonemealStructure(BNBStructures.FLAME_BULBS_TALL);
 		
-		BNBBlocks.WARPED_NYLIUM.setTargetBiome(WARPED_FOREST);
+		BNBBlocks.TURQUOISE_NYLIUM.setTargetBiome(PIROZEN_FOREST);
 		BNBBlocks.POISON_NYLIUM.setTargetBiome(POISON_FOREST);
 	}
 	

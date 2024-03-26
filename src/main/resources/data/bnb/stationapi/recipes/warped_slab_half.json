@@ -4,10 +4,10 @@
 		"XXX"
 	],
 	"key": {
-		"X": { "item": "bnb:warped_planks" }
+		"X": { "item": "bnb:pirozen_planks" }
 	},
 	"result": {
-		"item": "bnb:warped_slab_half",
+		"item": "bnb:pirozen_slab_half",
 		"count": 6
 	}
 }

@@ -28,7 +28,7 @@ import paulevs.bnb.block.SpinningWheelBlock;
 import paulevs.bnb.entity.CrimsonSpiderEntity;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.entity.PoisonSpiderEntity;
-import paulevs.bnb.entity.WarpedSpiderEntity;
+import paulevs.bnb.entity.PirozenSpiderEntity;
 import paulevs.bnb.entity.renderer.NetherSpiderRenderer;
 import paulevs.bnb.entity.renderer.ObsidianBoatRenderer;
 import paulevs.bnb.gui.container.SpinningWheelContainer;
@@ -73,7 +73,7 @@ public class ClientListener {
 		}
 		
 		BNBBlocks.FALUN_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/falurian_planks")).index;
-		BNBBlocks.WARPED_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/warped_planks")).index;
+		BNBBlocks.PIROZEN_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/pirozen_planks")).index;
 		BNBBlocks.POISON_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/poison_planks")).index;
 		BNBBlocks.ORICHALCUM_BLOCK.texture = blockAtlas.addTexture(BNB.id("block/orichalcum_block")).index;
 		
@@ -144,7 +144,7 @@ public class ClientListener {
 	@EventListener
 	public void onEntityRenderRegister(EntityRendererRegisterEvent event) {
 		event.renderers.put(CrimsonSpiderEntity.class, new NetherSpiderRenderer("falurian_spider_e"));
-		event.renderers.put(WarpedSpiderEntity.class, new NetherSpiderRenderer("warped_spider_e"));
+		event.renderers.put(PirozenSpiderEntity.class, new NetherSpiderRenderer("pirozen_spider_e"));
 		event.renderers.put(PoisonSpiderEntity.class, new NetherSpiderRenderer("poison_spider_e"));
 		event.renderers.put(ObsidianBoatEntity.class, new ObsidianBoatRenderer());
 	}
@@ -169,7 +169,7 @@ public class ClientListener {
 		
 		/*NetherBiome[] biomes = new NetherBiome[] {
 			BNBBiomes.FALUN_FOREST,
-			BNBBiomes.WARPED_FOREST,
+			BNBBiomes.PIROZEN_FOREST,
 			BNBBiomes.POISON_FOREST,
 			new NetherBiome(BNB.id("b")),
 			new NetherBiome(BNB.id("b")),

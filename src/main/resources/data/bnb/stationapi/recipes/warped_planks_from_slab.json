@@ -5,10 +5,10 @@
 		"XX"
 	],
 	"key": {
-		"X": { "item": "bnb:warped_slab_half" }
+		"X": { "item": "bnb:pirozen_slab_half" }
 	},
 	"result": {
-		"item": "bnb:warped_planks",
+		"item": "bnb:pirozen_planks",
 		"count": 2
 	}
 }
