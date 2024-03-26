@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"XX",
+		"XX"
+	],
+	"key": {
+		"X": { "item": "bnb:falun_slab_half" }
+	},
+	"result": {
+		"item": "bnb:falun_planks",
+		"count": 2
+	}
+}

@@ -1,6 +1,0 @@
-{
-	"parent": "bnb:block/branch_side",
-	"textures": {
-		"all": "bnb:block/crimson_stem"
-	}
-}

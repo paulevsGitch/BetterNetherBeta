@@ -27,13 +27,13 @@ public class ItemEntityMixin {
 		if (!(stack.getType() instanceof BlockItem item)) return;
 		Block block = item.getBlock();
 		
-		if (block == BNBBlocks.CRIMSON_WOOD) player.incrementStat(BNBAchievements.COLLECT_CRIMSON_WOOD);
-		if (block == BNBBlocks.WARPED_WOOD) player.incrementStat(BNBAchievements.COLLECT_WARPED_WOOD);
-		if (block == BNBBlocks.POISON_WOOD) player.incrementStat(BNBAchievements.COLLECT_POISON_WOOD);
+		if (block == BNBBlocks.FALUN_LOG) player.incrementStat(BNBAchievements.COLLECT_FALUN_LOG);
+		if (block == BNBBlocks.WARPED_LOG) player.incrementStat(BNBAchievements.COLLECT_WARPED_LOG);
+		if (block == BNBBlocks.POISON_LOG) player.incrementStat(BNBAchievements.COLLECT_POISON_LOG);
 		
-		int summ = BNBAchievements.readStat(BNBAchievements.COLLECT_CRIMSON_WOOD) > 0 ? 1 : 0;
-		summ += BNBAchievements.readStat(BNBAchievements.COLLECT_WARPED_WOOD) > 0 ? 1 : 0;
-		summ += BNBAchievements.readStat(BNBAchievements.COLLECT_POISON_WOOD) > 0 ? 1 : 0;
+		int summ = BNBAchievements.readStat(BNBAchievements.COLLECT_FALUN_LOG) > 0 ? 1 : 0;
+		summ += BNBAchievements.readStat(BNBAchievements.COLLECT_WARPED_LOG) > 0 ? 1 : 0;
+		summ += BNBAchievements.readStat(BNBAchievements.COLLECT_POISON_LOG) > 0 ? 1 : 0;
 		
 		if (summ == 3) {
 			player.incrementStat(BNBAchievements.RGB);

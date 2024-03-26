@@ -62,7 +62,7 @@ public class CommonListener {
 	
 	@EventListener
 	public void onEntityRegister(EntityRegister event) {
-		event.register(CrimsonSpiderEntity.class, "bnb_crimson_spider");
+		event.register(CrimsonSpiderEntity.class, "bnb_falun_spider");
 		event.register(WarpedSpiderEntity.class, "bnb_warped_spider");
 		event.register(PoisonSpiderEntity.class, "bnb_poison_spider");
 		event.register(ObsidianBoatEntity.class, "bnb_obsidian_boat");
@@ -80,7 +80,7 @@ public class CommonListener {
 	public void onRecipesRegister(RecipeRegisterEvent event) {
 		if (event.recipeId != RecipeRegisterEvent.Vanilla.SMELTING.type()) return;
 		for (Block block : BNBBlocks.BLOCKS_WITH_ITEMS) {
-			if (block.material == BNBBlockMaterials.NETHER_WOOD) {
+			if (block.material == BNBBlockMaterials.NETHER_LOG) {
 				FuelRegistry.addFuelItem(block.asItem(), block.isFullCube() ? 300 : 100);
 			}
 			if (block.material == BNBBlockMaterials.NETHER_PLANT || block.material == BNBBlockMaterials.NETHER_LEAVES) {
@@ -100,7 +100,7 @@ public class CommonListener {
 	/*@SuppressWarnings("unchecked")
 	@EventListener(priority = ListenerPriority.LOWEST)
 	public void afterRecipeRegister(AfterBlockAndItemRegisterEvent event) {
-		final int planksID = BaseBlock.WOOD.asItem().id;
+		final int planksID = BaseBlock.LOG.asItem().id;
 		Field[] fields = ShapedRecipe.class.getDeclaredFields();
 		List<Recipe> recipes = new ArrayList<>();
 		
@@ -138,7 +138,7 @@ public class CommonListener {
 					ItemStack stack = ingredients[i];
 					if (stack == null) continue;
 					if (stack.itemId == planksID) {
-						stack = new ItemStack(BNBBlocks.CRIMSON_PLANKS);
+						stack = new ItemStack(BNBBlocks.FALUN_PLANKS);
 					}
 					else stack = stack.copy();
 					newIngredients[i] = stack;

@@ -1,0 +1,7 @@
+{
+	"parent": "bnb:block/crop_emissive",
+	"textures": {
+		"crop": "bnb:block/falun_weeping_vine_bottom",
+		"crop_e": "bnb:block/falun_weeping_vine_bottom_e"
+	}
+}

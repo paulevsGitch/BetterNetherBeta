@@ -16,32 +16,32 @@ public class BNBBiomes {
 	private static final List<Biome> BIOMES = new ArrayList<>();
 	private static Biome[] biomes;
 	
-	public static final Biome CRIMSON_FOREST = add(BiomeBuilder
-		.start("bnb_crimson_forest")
+	public static final Biome FALUN_FOREST = add(BiomeBuilder
+		.start("bnb_falun_forest")
 		.fogColor(0x951922)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.CRIMSON_NYLIUM).replace(Block.NETHERRACK).ground(1).build())
+		.surfaceRule(SurfaceBuilder.start(BNBBlocks.FALUN_NYLIUM).replace(Block.NETHERRACK).ground(1).build())
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM_PLACER)
 		//.feature(BNBPlacers.LAVA_STREAM_PLACER)
 		.feature(BNBPlacers.LAVA_LAKE_PLACER)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR_PLACER)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING_PLACER)
-		.feature(BNBPlacers.LARGE_CRIMSON_TREE_PLACER)
-		.feature(BNBPlacers.FALLEN_CRIMSON_TREE_PLACER)
-		.feature(BNBPlacers.CRIMSON_TREE_PLACER)
-		.feature(BNBPlacers.CRIMSON_BUSH_PLACER)
-		.feature(BNBPlacers.CRIMSON_SPIDER_COCOON)
+		.feature(BNBPlacers.LARGE_FALUN_TREE_PLACER)
+		.feature(BNBPlacers.FALLEN_FALUN_TREE_PLACER)
+		.feature(BNBPlacers.FALUN_TREE_PLACER)
+		.feature(BNBPlacers.FALUN_BUSH_PLACER)
+		.feature(BNBPlacers.FALUN_SPIDER_COCOON)
 		.feature(BNBPlacers.FIREWEED_STRUCTURE_PLACER)
 		.feature(BNBPlacers.NETHER_DAISY_PLACER)
-		.feature(BNBPlacers.CRIMSON_ROOTS_PLACER)
+		.feature(BNBPlacers.FALUN_ROOTS_PLACER)
 		.feature(BNBPlacers.LANTERN_GRASS_PLACER)
 		.feature(BNBPlacers.FLAME_BULBS_TALL_PLACER)
 		.feature(BNBPlacers.FLAME_BULBS_PLACER)
-		.feature(BNBPlacers.CRIMSON_MOSS_CEILING_PLACER)
-		.feature(BNBPlacers.CRIMSON_VINE_SHORT_PLACER)
-		.feature(BNBPlacers.CRIMSON_VINE_LONG_PLACER)
-		.feature(BNBPlacers.CRIMSON_MOSS_BLOCK_PLACER)
-		.feature(BNBPlacers.CRIMSON_MOSS_PLACER)
+		.feature(BNBPlacers.FALUN_MOSS_CEILING_PLACER)
+		.feature(BNBPlacers.FALUN_VINE_SHORT_PLACER)
+		.feature(BNBPlacers.FALUN_VINE_LONG_PLACER)
+		.feature(BNBPlacers.FALUN_MOSS_BLOCK_PLACER)
+		.feature(BNBPlacers.FALUN_MOSS_PLACER)
 		.build()).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
 	
 	
@@ -87,9 +87,9 @@ public class BNBBiomes {
 	}
 	
 	public static void init() {
-		BNBBlocks.CRIMSON_NYLIUM.setTargetBiome(CRIMSON_FOREST);
-		BNBBlocks.CRIMSON_NYLIUM.addBonemealStructure(BNBStructures.FLAME_BULBS);
-		BNBBlocks.CRIMSON_NYLIUM.addBonemealStructure(BNBStructures.FLAME_BULBS_TALL);
+		BNBBlocks.FALUN_NYLIUM.setTargetBiome(FALUN_FOREST);
+		BNBBlocks.FALUN_NYLIUM.addBonemealStructure(BNBStructures.FLAME_BULBS);
+		BNBBlocks.FALUN_NYLIUM.addBonemealStructure(BNBStructures.FLAME_BULBS_TALL);
 		
 		BNBBlocks.WARPED_NYLIUM.setTargetBiome(WARPED_FOREST);
 		BNBBlocks.POISON_NYLIUM.setTargetBiome(POISON_FOREST);

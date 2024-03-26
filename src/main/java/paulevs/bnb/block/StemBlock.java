@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class StemBlock extends PillarBlock {
 	public StemBlock(Identifier identifier) {
-		super(identifier, BNBBlockMaterials.NETHER_WOOD);
+		super(identifier, BNBBlockMaterials.NETHER_LOG);
 		setHardness(LOG.getHardness());
 		setSounds(WOOD_SOUNDS);
 	}

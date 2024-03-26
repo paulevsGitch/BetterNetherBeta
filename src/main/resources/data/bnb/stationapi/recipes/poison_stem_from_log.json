@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"X",
+		"X"
+	],
+	"key": {
+		"X": { "item": "bnb:poison_log" }
+	},
+	"result": {
+		"item": "bnb:poison_stem",
+		"count": 8
+	}
+}

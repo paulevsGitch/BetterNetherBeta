@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"axis=x": { "model": "bnb:block/pale_log", "x": 90 },
+		"axis=y": { "model": "bnb:block/pale_log" },
+		"axis=z": { "model": "bnb:block/pale_log", "x": 90, "y": 90 }
+	}
+}

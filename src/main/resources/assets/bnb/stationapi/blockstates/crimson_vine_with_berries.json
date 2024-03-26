@@ -1,9 +1,0 @@
-{
-	"variants": {
-		"shape=normal": [
-			{ "model": "bnb:block/crimson_vine_normal_berries_1" },
-			{ "model": "bnb:block/crimson_vine_normal_berries_2" }
-		],
-		"shape=bottom": { "model": "bnb:block/crimson_vine_bottom_berries" }
-	}
-}

@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/cube_column",
+	"textures": {
+		"side": "bnb:block/pale_log_side",
+		"end": "bnb:block/pale_log_top"
+	}
+}

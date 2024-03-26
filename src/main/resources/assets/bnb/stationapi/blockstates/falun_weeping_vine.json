@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"shape=normal": { "model": "bnb:block/falun_weeping_vine_normal" },
+		"shape=bottom": { "model": "bnb:block/falun_weeping_vine_bottom" }
+	}
+}

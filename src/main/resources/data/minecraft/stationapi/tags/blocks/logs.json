@@ -1,15 +1,15 @@
 {
 	"values": [
-		"bnb:crimson_wood",
-		"bnb:crimson_stem",
-		"bnb:crimson_branch",
-		"bnb:warped_wood",
+		"bnb:falun_log",
+		"bnb:falun_stem",
+		"bnb:falun_branch",
+		"bnb:warped_log",
 		"bnb:warped_stem",
 		"bnb:warped_branch",
-		"bnb:poison_wood",
+		"bnb:poison_log",
 		"bnb:poison_stem",
 		"bnb:poison_branch",
-		"bnb:pale_wood",
-		"bnb:ember_wood"
+		"bnb:pale_log",
+		"bnb:ember_log"
 	]
 }

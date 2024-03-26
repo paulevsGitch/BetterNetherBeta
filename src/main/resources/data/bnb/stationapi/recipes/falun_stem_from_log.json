@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"X",
+		"X"
+	],
+	"key": {
+		"X": { "item": "bnb:falun_log" }
+	},
+	"result": {
+		"item": "bnb:falun_stem",
+		"count": 8
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "bnb:block/leaves",
+	"textures": {
+		"leaves_bottom": "bnb:block/falun_leaves_bottom",
+		"leaves": "bnb:block/falun_leaves"
+	}
+}

@@ -14,11 +14,11 @@ public class CreativeTabListener {
 	public void registerTab(TabRegistryEvent event) {
 		BNB.LOGGER.info("Adding BNB tab");
 		
-		SimpleTab tab = new SimpleTab(BNB.id("creative_tab"), new ItemStack(BNBBlocks.CRIMSON_NYLIUM));
+		SimpleTab tab = new SimpleTab(BNB.id("creative_tab"), new ItemStack(BNBBlocks.FALUN_NYLIUM));
 		event.register(tab);
 		BNBBlocks.BLOCKS_WITH_ITEMS.forEach(block -> tab.addItem(new ItemStack(block)));
 		BNBItems.ITEMS.forEach(item -> tab.addItem(new ItemStack(item)));
 		
-		BlockSelectAPI.registerConverter(BNBBlocks.CRIMSON_VINE_WITH_BERRIES, state -> new ItemStack(BNBBlocks.CRIMSON_VINE.asItem()));
+		BlockSelectAPI.registerConverter(BNBBlocks.FALUN_VINE_WITH_BERRIES, state -> new ItemStack(BNBBlocks.FALUN_VINE.asItem()));
 	}
 }

@@ -6,8 +6,8 @@ import paulevs.bnb.block.property.BNBBlockMaterials;
 
 public class NetherPlanksBlock extends TemplateBlock {
 	public NetherPlanksBlock(Identifier id) {
-		super(id, BNBBlockMaterials.NETHER_WOOD);
-		setHardness(WOOD.getHardness());
+		super(id, BNBBlockMaterials.NETHER_LOG);
+		setHardness(LOG.getHardness());
 		setSounds(WOOD_SOUNDS);
 	}
 }

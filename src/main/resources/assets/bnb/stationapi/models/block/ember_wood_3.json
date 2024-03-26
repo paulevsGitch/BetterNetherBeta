@@ -1,7 +1,0 @@
-{
-	"parent": "minecraft:block/cube_column",
-	"textures": {
-		"side": "bnb:block/ember_wood_side_3",
-		"end": "bnb:block/ember_wood_top"
-	}
-}

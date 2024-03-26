@@ -36,7 +36,6 @@ public class BNBWeatherRenderer {
 	private static int smokeDensityWidth;
 	private static int smokeDensityHeight;
 	private static float weatherDelta;
-	private static float smokeTime;
 	private static WeatherType prevWeather;
 	private static WeatherType weather;
 	private static int rainTexture;
@@ -161,8 +160,7 @@ public class BNBWeatherRenderer {
 	private static void renderSmoke(Minecraft minecraft, float delta) {
 		Entity entity = minecraft.viewEntity;
 		
-		smokeTime += delta * 0.001F;
-		if (smokeTime > PI2) smokeTime -= PI2;
+		float smokeTime = ((int) (minecraft.level.getLevelTime() % 24000) + delta) / 24000.0F * 30.0F * PI2;
 		
 		double ex = net.modificationstation.stationapi.api.util.math.MathHelper.lerp(delta, entity.prevRenderX, entity.x);
 		double ey = net.modificationstation.stationapi.api.util.math.MathHelper.lerp(delta, entity.prevRenderY, entity.y);

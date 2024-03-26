@@ -1,0 +1,8 @@
+{
+	"parent": "bnb:block/emissive_column",
+	"textures": {
+		"side": "bnb:block/warped_log_side_3",
+		"side_e": "bnb:block/warped_log_side_3_e",
+		"end": "bnb:block/warped_log_top"
+	}
+}

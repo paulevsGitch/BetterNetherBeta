@@ -1,0 +1,6 @@
+{
+	"parent": "bnb:block/stem",
+	"textures": {
+		"all": "bnb:block/falun_stem"
+	}
+}
