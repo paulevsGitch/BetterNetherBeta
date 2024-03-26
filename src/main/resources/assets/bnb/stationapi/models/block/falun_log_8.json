@@ -1,8 +1,0 @@
-{
-	"parent": "bnb:block/emissive_column",
-	"textures": {
-		"side": "bnb:block/falun_log_side_4",
-		"side_e": "bnb:block/falun_log_side_4_e",
-		"end": "bnb:block/falun_log_top"
-	}
-}

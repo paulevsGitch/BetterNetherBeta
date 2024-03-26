@@ -1,0 +1,7 @@
+{
+	"parent": "bnb:block/cross_emissive",
+	"textures": {
+		"cross": "bnb:block/falurian_vine_bottom_berries",
+		"cross_e": "bnb:block/falurian_vine_bottom_berries_e"
+	}
+}

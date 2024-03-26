@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 public class BNBBlocks {
 	public static final List<Block> BLOCKS_WITH_ITEMS = new ArrayList<>();
 	
-	public static final NetherTerrainBlock FALUN_NYLIUM = make("falun_nylium", NetherTerrainBlock::new);
+	public static final NetherTerrainBlock MAROON_NYLIUM = make("maroon_nylium", NetherTerrainBlock::new);
 	public static final NetherTerrainBlock WARPED_NYLIUM = make("warped_nylium", NetherTerrainBlock::new);
 	public static final NetherTerrainBlock POISON_NYLIUM = make("poison_nylium", NetherTerrainBlock::new);
 	public static final NetherTerrainBlock CORRUPTED_NYLIUM = make("corrupted_nylium", NetherTerrainBlock::new);
@@ -29,12 +29,12 @@ public class BNBBlocks {
 	public static final Block TREE_LANTERN = make("tree_lantern", NetherLanternBlock::new);
 	public static final Block GHOST_PUMPKIN = make("ghost_pumpkin", GhostPumpkinBlock::new);
 	
-	public static final Block FALUN_LOG = make("falun_log", NetherLogBlock::new);
-	public static final Block FALUN_STEM = make("falun_stem", StemBlock::new);
-	public static final Block FALUN_BRANCH = make("falun_branch", BranchBlock::new);
-	public static final NetherLeavesBlock FALUN_LEAVES = make("falun_leaves", NetherLeavesBlock::new);
+	public static final Block FALUN_LOG = make("falurian_log", NetherLogBlock::new);
+	public static final Block FALUN_STEM = make("falurian_stem", StemBlock::new);
+	public static final Block FALUN_BRANCH = make("falurian_branch", BranchBlock::new);
+	public static final NetherLeavesBlock FALUN_LEAVES = make("falurian_leaves", NetherLeavesBlock::new);
 	public static final Block FALUN_SAPLING = makeSapling(
-		"falun_sapling",
+		"falurian_sapling",
 		() -> BNBStructures.FALUN_TREE,
 		new String[] {
 			" # ",
@@ -43,11 +43,11 @@ public class BNBBlocks {
 		},
 		() -> BNBStructures.LARGE_FALUN_TREE
 	);
-	public static final Block FALUN_PLANKS = make("falun_planks", NetherPlanksBlock::new);
-	public static final Block FALUN_STAIRS = make("falun_stairs", TemplateStairsBlock::new, FALUN_PLANKS);
-	public static final VBEHalfSlabBlock FALUN_SLAB_HALF = make("falun_slab_half", VBEHalfSlabBlock::new, FALUN_PLANKS);
-	public static final VBEFullSlabBlock FALUN_SLAB_FULL = makeNI("falun_slab_full", VBEFullSlabBlock::new, FALUN_PLANKS);
-	public static final Block FALUN_FENCE = make("falun_fence", FenceBlock::new, FALUN_PLANKS);
+	public static final Block FALUN_PLANKS = make("falurian_planks", NetherPlanksBlock::new);
+	public static final Block FALUN_STAIRS = make("falurian_stairs", TemplateStairsBlock::new, FALUN_PLANKS);
+	public static final VBEHalfSlabBlock FALUN_SLAB_HALF = make("falurian_slab_half", VBEHalfSlabBlock::new, FALUN_PLANKS);
+	public static final VBEFullSlabBlock FALUN_SLAB_FULL = makeNI("falurian_slab_full", VBEFullSlabBlock::new, FALUN_PLANKS);
+	public static final Block FALUN_FENCE = make("falurian_fence", FenceBlock::new, FALUN_PLANKS);
 	
 	public static final Block WARPED_LOG = make("warped_log", NetherLogBlock::new);
 	public static final Block WARPED_STEM = make("warped_stem", StemBlock::new);
@@ -97,7 +97,7 @@ public class BNBBlocks {
 	
 	public static final Block FLAME_BAMBOO_BLOCK = make("flame_bamboo_block", NetherLogBlock::new);
 	
-	public static final Block FALUN_WEEPING_VINE = make("falun_weeping_vine", NetherVineBlock::new);
+	public static final Block FALUN_WEEPING_VINE = make("falurian_weeping_vine", NetherVineBlock::new);
 	public static final Block WARPED_WEEPING_VINE = make("warped_weeping_vine", NetherVineBlock::new);
 	public static final Block POISON_WEEPING_VINE = make("poison_weeping_vine", NetherVineBlock::new);
 	public static final Block PALE_TREE_WEEPING_VINE = make("pale_tree_weeping_vine", NetherVineBlock::new);
@@ -105,16 +105,16 @@ public class BNBBlocks {
 	
 	public static final Block FLAME_BULBS = make("flame_bulbs", NetherGrassBlock::new);
 	public static final Block FLAME_BULBS_TALL = make("flame_bulbs_tall", DoubleGrassPlantBlock::new);
-	public static final Block FALUN_ROOTS = make("falun_roots", NetherRootsBlock::new);
+	public static final Block FALUN_ROOTS = make("falurian_roots", NetherRootsBlock::new);
 	public static final Block NETHER_DAISY = make("nether_daisy", NetherFloorPlantBlock::new).setLightEmittance(0.5F);
 	public static final Block FIREWEED = make("fireweed", DoubleFloorPlantBlock::new).setLightEmittance(0.5F);
 	public static final Block LANTERN_GRASS = make("lantern_grass", DoubleFloorPlantBlock::new).setLightEmittance(0.75F);
 	
-	public static final Block FALUN_MOSS = make("falun_moss", MossBlock::new);
-	public static final Block FALUN_MOSS_BLOCK = make("falun_moss_block", NetherMossBlock::new);
+	public static final Block FALUN_MOSS = make("falurian_moss", MossBlock::new);
+	public static final Block FALUN_MOSS_BLOCK = make("falurian_moss_block", NetherMossBlock::new);
 	
-	public static final GrowingNetherVineBlock FALUN_VINE = make("falun_vine", GrowingNetherVineBlock::new);
-	public static final CollectableNetherVineBlock FALUN_VINE_WITH_BERRIES = (CollectableNetherVineBlock) makeNI("falun_vine_with_berries", CollectableNetherVineBlock::new).setLightEmittance(0.5F);
+	public static final GrowingNetherVineBlock FALUN_VINE = make("falurian_vine", GrowingNetherVineBlock::new);
+	public static final CollectableNetherVineBlock FALUN_VINE_WITH_BERRIES = (CollectableNetherVineBlock) makeNI("falurian_vine_with_berries", CollectableNetherVineBlock::new).setLightEmittance(0.5F);
 	
 	public static final Block WARPED_ROOTS = make("warped_roots", NetherRootsBlock::new);
 	public static final Block POISON_ROOTS = make("poison_roots", NetherRootsBlock::new);
@@ -122,7 +122,7 @@ public class BNBBlocks {
 	public static final GlowstoneShards GLOWSTONE_SHARDS = (GlowstoneShards) make("glowstone_shards", GlowstoneShards::new).setLightEmittance(1F);
 	
 	public static final SpiderNetBlock SPIDER_NET = make("spider_net", SpiderNetBlock::new);
-	public static final Block FALUN_SPIDER_COCOON = make("falun_spider_cocoon", SpiderCocoonBlock::new);
+	public static final Block FALUN_SPIDER_COCOON = make("falurian_spider_cocoon", SpiderCocoonBlock::new);
 	public static final Block WARPED_SPIDER_COCOON = make("warped_spider_cocoon", SpiderCocoonBlock::new);
 	public static final Block POISON_SPIDER_COCOON = make("poison_spider_cocoon", SpiderCocoonBlock::new);
 	

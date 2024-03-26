@@ -1,22 +1,22 @@
-tile.falun_nylium.name=Falun Nylium
+tile.maroon_nylium.name=Maroon Nylium
 tile.warped_nylium.name=Warped Nylium
 tile.poison_nylium.name=Poison Nylium
 tile.corrupted_nylium.name=Corrupted Nylium
 tile.soul_nylium.name=Soul Nylium
 tile.dark_nylium.name=Dark Nylium
 
-tile.falun_log.name=Falun Log
-tile.falun_stem.name=Falun Stem
-tile.falun_branch.name=Falun Branch
-tile.falun_planks.name=Falun Planks
-tile.falun_stairs.name=Falun Stairs
-tile.falun_slab_half.name=Falun Slab
-tile.falun_slab_full.name=Falun Slab
-tile.falun_fence.name=Falun Fence
-tile.falun_leaves.name=Falun Leaves
-tile.falun_sapling.name=Falun Sapling
-item.falun_tree_placer.name=Falun Tree Placer
-item.large_falun_tree_placer.name=Large Falun Tree Placer
+tile.falurian_log.name=Falurian Log
+tile.falurian_stem.name=Falurian Stem
+tile.falurian_branch.name=Falurian Branch
+tile.falurian_planks.name=Falurian Planks
+tile.falurian_stairs.name=Falurian Stairs
+tile.falurian_slab_half.name=Falurian Slab
+tile.falurian_slab_full.name=Falurian Slab
+tile.falurian_fence.name=Falurian Fence
+tile.falurian_leaves.name=Falurian Leaves
+tile.falurian_sapling.name=Falurian Sapling
+item.falurian_tree_placer.name=Falurian Tree Placer
+item.large_falurian_tree_placer.name=Large Falurian Tree Placer
 
 tile.warped_log.name=Warped Log
 tile.warped_stem.name=Warped Stem
@@ -56,7 +56,7 @@ tile.ember_leaves.name=Ember Leaves
 tile.tree_lantern.name=Tree Lantern
 tile.ghost_pumpkin.name=Ghost Pumpkin
 
-tile.falun_weeping_vine.name=Falun Weeping Vine
+tile.falurian_weeping_vine.name=Falurian Weeping Vine
 tile.warped_weeping_vine.name=Warped Weeping Vine
 tile.poison_weeping_vine.name=Poison Weeping Vine
 tile.pale_tree_weeping_vine.name=Pale Tree Weeping Vine
@@ -64,16 +64,16 @@ tile.ember_tree_weeping_vine.name=Ember Tree Weeping Vine
 
 tile.flame_bulbs.name=Flame Bulbs
 tile.flame_bulbs_tall.name=Tall Flame Bulbs
-tile.falun_roots.name=Falun Roots
+tile.falurian_roots.name=Falurian Roots
 tile.fireweed.name=Fireweed
 tile.lantern_grass.name=Lantern Grass
 tile.nether_daisy.name=Nether Daisy
-tile.falun_moss.name=Falun Moss
-tile.falun_moss_block.name=Falun Moss Block
+tile.falurian_moss.name=Falurian Moss
+tile.falurian_moss_block.name=Falurian Moss Block
 
-tile.falun_vine.name=Falun Vine
-tile.falun_vine_with_berries.name=Falun Vine
-item.falun_vine_berries.name=Falun Berries
+tile.falurian_vine.name=Falurian Vine
+tile.falurian_vine_with_berries.name=Falurian Vine
+item.falurian_vine_berries.name=Falurian Berries
 tile.glowstone_shards.name=Glowstone Shards
 
 tile.spider_net.name=Spider Net
@@ -95,7 +95,7 @@ tile.orichalcum_stairs.name=Orichalcum Stairs
 tile.orichalcum_slab_half.name=Orichalcum Slab
 tile.orichalcum_slab_full.name=Orichalcum Slab
 
-tile.falun_spider_cocoon.name=Falun Spider Cocoon
+tile.falurian_spider_cocoon.name=Falurian Spider Cocoon
 tile.warped_spider_cocoon.name=Warped Spider Cocoon
 tile.poison_spider_cocoon.name=Poison Spider Cocoon
 
@@ -139,7 +139,7 @@ achievement.the_ways.desc=Make a portal to The Nether
 achievement.warm_welcome=Warm Welcome
 achievement.warm_welcome.desc=Successfully travel to the Nether
 achievement.rgb=RGB
-achievement.rgb.desc=Collect 3 main log colors: falun, poison and warped
+achievement.rgb.desc=Collect 3 main log colors: falurian, poison and warped
 achievement.almost_the_same=Almost The Same
 achievement.almost_the_same.desc=Make Netherrack Furnace
 achievement.archimedes_law=Archimedes Law

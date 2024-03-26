@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"XXX"
+	],
+	"key": {
+		"X": { "item": "bnb:falurian_planks" }
+	},
+	"result": {
+		"item": "bnb:falurian_slab_half",
+		"count": 6
+	}
+}

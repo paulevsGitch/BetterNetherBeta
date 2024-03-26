@@ -29,7 +29,7 @@ public class BNBItems {
 	private static final ToolMaterial ORICHALCUM = ToolMaterialFactory.create("bnb_orichalcum", 2, 750, 6.0F, 2);
 	
 	public static final Item FALUN_TREE_PLACER = make(
-		"falun_tree_placer", () -> BNBStructures.FALUN_TREE, StructurePlacerItem::new
+		"falurian_tree_placer", () -> BNBStructures.FALUN_TREE, StructurePlacerItem::new
 	);
 	public static final Item WARPED_TREE_PLACER = make(
 		"warped_tree_placer", () -> BNBStructures.WARPED_TREE, StructurePlacerItem::new
@@ -39,7 +39,7 @@ public class BNBItems {
 	);
 	
 	public static final Item LARGE_FALUN_TREE_PLACER = make(
-		"large_falun_tree_placer", () -> BNBStructures.LARGE_FALUN_TREE, StructurePlacerItem::new
+		"large_falurian_tree_placer", () -> BNBStructures.LARGE_FALUN_TREE, StructurePlacerItem::new
 	);
 	public static final Item LARGE_WARPED_TREE_PLACER = make(
 		"large_warped_tree_placer", () -> BNBStructures.LARGE_WARPED_TREE, StructurePlacerItem::new
@@ -48,7 +48,7 @@ public class BNBItems {
 		"large_poison_tree_placer", () -> BNBStructures.LARGE_POISON_TREE, StructurePlacerItem::new
 	);
 	
-	public static final Item FALUN_VINE_BERRIES = makeFood("falun_vine_berries", 1, false).setMaxStackSize(8);
+	public static final Item FALUN_VINE_BERRIES = makeFood("falurian_vine_berries", 1, false).setMaxStackSize(8);
 	
 	public static final Item ORICHALCUM_INGOT = make("orichalcum_ingot", TemplateItem::new);
 	

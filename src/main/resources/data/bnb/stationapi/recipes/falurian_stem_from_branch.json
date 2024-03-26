@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "bnb:falurian_branch" }
+	],
+	"result": {
+		"item": "bnb:falurian_stem"
+	}
+}

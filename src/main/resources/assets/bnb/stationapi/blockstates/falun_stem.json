@@ -1,7 +1,0 @@
-{
-	"variants": {
-		"axis=x": { "model": "bnb:block/falun_stem", "x": 90, "y": 90 },
-		"axis=y": { "model": "bnb:block/falun_stem" },
-		"axis=z": { "model": "bnb:block/falun_stem", "x": 90 }
-	}
-}

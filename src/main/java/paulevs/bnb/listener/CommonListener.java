@@ -62,7 +62,7 @@ public class CommonListener {
 	
 	@EventListener
 	public void onEntityRegister(EntityRegister event) {
-		event.register(CrimsonSpiderEntity.class, "bnb_falun_spider");
+		event.register(CrimsonSpiderEntity.class, "bnb_falurian_spider");
 		event.register(WarpedSpiderEntity.class, "bnb_warped_spider");
 		event.register(PoisonSpiderEntity.class, "bnb_poison_spider");
 		event.register(ObsidianBoatEntity.class, "bnb_obsidian_boat");

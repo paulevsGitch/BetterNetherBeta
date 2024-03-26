@@ -17,9 +17,9 @@ public class BNBBiomes {
 	private static Biome[] biomes;
 	
 	public static final Biome FALUN_FOREST = add(BiomeBuilder
-		.start("bnb_falun_forest")
+		.start("bnb_falurian_forest")
 		.fogColor(0x951922)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.FALUN_NYLIUM).replace(Block.NETHERRACK).ground(1).build())
+		.surfaceRule(SurfaceBuilder.start(BNBBlocks.MAROON_NYLIUM).replace(Block.NETHERRACK).ground(1).build())
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM_PLACER)
 		//.feature(BNBPlacers.LAVA_STREAM_PLACER)
@@ -87,9 +87,9 @@ public class BNBBiomes {
 	}
 	
 	public static void init() {
-		BNBBlocks.FALUN_NYLIUM.setTargetBiome(FALUN_FOREST);
-		BNBBlocks.FALUN_NYLIUM.addBonemealStructure(BNBStructures.FLAME_BULBS);
-		BNBBlocks.FALUN_NYLIUM.addBonemealStructure(BNBStructures.FLAME_BULBS_TALL);
+		BNBBlocks.MAROON_NYLIUM.setTargetBiome(FALUN_FOREST);
+		BNBBlocks.MAROON_NYLIUM.addBonemealStructure(BNBStructures.FLAME_BULBS);
+		BNBBlocks.MAROON_NYLIUM.addBonemealStructure(BNBStructures.FLAME_BULBS_TALL);
 		
 		BNBBlocks.WARPED_NYLIUM.setTargetBiome(WARPED_FOREST);
 		BNBBlocks.POISON_NYLIUM.setTargetBiome(POISON_FOREST);

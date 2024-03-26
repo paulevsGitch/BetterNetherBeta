@@ -1,7 +1,0 @@
-{
-	"parent": "minecraft:block/cube_column",
-	"textures": {
-		"side": "bnb:block/blank_log_side_4",
-		"end": "bnb:block/falun_log_top"
-	}
-}

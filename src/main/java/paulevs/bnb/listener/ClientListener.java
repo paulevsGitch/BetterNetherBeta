@@ -72,7 +72,7 @@ public class ClientListener {
 			LavaRenderer.STILL_TEXTURES[i] = blockAtlas.addTexture(id).index;
 		}
 		
-		BNBBlocks.FALUN_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/falun_planks")).index;
+		BNBBlocks.FALUN_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/falurian_planks")).index;
 		BNBBlocks.WARPED_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/warped_planks")).index;
 		BNBBlocks.POISON_PLANKS.texture = blockAtlas.addTexture(BNB.id("block/poison_planks")).index;
 		BNBBlocks.ORICHALCUM_BLOCK.texture = blockAtlas.addTexture(BNB.id("block/orichalcum_block")).index;
@@ -143,7 +143,7 @@ public class ClientListener {
 	
 	@EventListener
 	public void onEntityRenderRegister(EntityRendererRegisterEvent event) {
-		event.renderers.put(CrimsonSpiderEntity.class, new NetherSpiderRenderer("falun_spider_e"));
+		event.renderers.put(CrimsonSpiderEntity.class, new NetherSpiderRenderer("falurian_spider_e"));
 		event.renderers.put(WarpedSpiderEntity.class, new NetherSpiderRenderer("warped_spider_e"));
 		event.renderers.put(PoisonSpiderEntity.class, new NetherSpiderRenderer("poison_spider_e"));
 		event.renderers.put(ObsidianBoatEntity.class, new ObsidianBoatRenderer());

@@ -1,0 +1,7 @@
+{
+	"parent": "bnb:block/cross_emissive",
+	"textures": {
+		"cross": "bnb:block/falurian_roots_1",
+		"cross_e": "bnb:block/falurian_roots_1_e"
+	}
+}
