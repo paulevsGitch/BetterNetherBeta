@@ -1,6 +1,6 @@
 plugins {
-	id "fabric-loom" version "1.6.2"
-	id "babric-loom-extension" version "1.6.9"
+	id "fabric-loom" version "1.8.12"
+	id "babric-loom-extension" version "1.8.9"
 	id "maven-publish"
 }
 

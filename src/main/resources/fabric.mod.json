@@ -43,7 +43,7 @@
 	"depends": {
 		"minecraft": "1.0.0-beta.7.3",
 		"vbe": ">=0.2.2",
-		"stationapi": ">=2.0-alpha.2",
+		"stationapi": ">=2.0.0-alpha.3",
 		"fabricloader": ">=0.15.6-babric.1"
 	},
 	

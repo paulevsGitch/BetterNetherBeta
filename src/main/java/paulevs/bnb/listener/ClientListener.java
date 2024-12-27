@@ -12,6 +12,8 @@ import net.minecraft.client.resource.language.I18n;
 import net.modificationstation.stationapi.api.client.event.render.entity.EntityRendererRegisterEvent;
 import net.modificationstation.stationapi.api.client.event.render.model.LoadUnbakedModelEvent;
 import net.modificationstation.stationapi.api.client.event.texture.TextureRegisterEvent;
+import net.modificationstation.stationapi.api.client.gui.screen.GuiHandler;
+import net.modificationstation.stationapi.api.client.registry.GuiHandlerRegistry;
 import net.modificationstation.stationapi.api.client.render.model.UnbakedModel;
 import net.modificationstation.stationapi.api.client.texture.SpriteIdentifier;
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
@@ -19,6 +21,7 @@ import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtl
 import net.modificationstation.stationapi.api.event.registry.GuiHandlerRegistryEvent;
 import net.modificationstation.stationapi.api.registry.BlockRegistry;
 import net.modificationstation.stationapi.api.registry.ItemRegistry;
+import net.modificationstation.stationapi.api.registry.Registry;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
@@ -41,7 +44,6 @@ import paulevs.bnb.rendering.BNBConnectedTextures;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
-import uk.co.benjiweber.expressions.tuple.BiTuple;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -55,11 +57,10 @@ public class ClientListener {
 	
 	@EventListener
 	public void onGUIRegister(GuiHandlerRegistryEvent event) {
-		event.registry.registerValueNoMessage(
-			SpinningWheelBlock.GUI_ID, BiTuple.of((player, inventory) -> new SpinningWheelScreen(
-				new SpinningWheelContainer(player.inventory, SpinningWheelBlock.currentEntity)
-			), null)
-		);
+		Registry.register(GuiHandlerRegistry.INSTANCE, SpinningWheelBlock.GUI_ID, new GuiHandler(
+			(player, inventory, packet) -> new SpinningWheelScreen(new SpinningWheelContainer(player.inventory, SpinningWheelBlock.currentEntity)),
+			() -> null
+		));
 	}
 	
 	@EventListener

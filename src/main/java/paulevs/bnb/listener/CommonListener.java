@@ -8,12 +8,14 @@ import net.modificationstation.stationapi.api.event.achievement.AchievementRegis
 import net.modificationstation.stationapi.api.event.block.BlockEvent.BeforePlacedByItem;
 import net.modificationstation.stationapi.api.event.block.entity.BlockEntityRegisterEvent;
 import net.modificationstation.stationapi.api.event.entity.EntityRegister;
-import net.modificationstation.stationapi.api.event.mod.InitEvent;
+import net.modificationstation.stationapi.api.event.network.packet.PacketRegisterEvent;
 import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
 import net.modificationstation.stationapi.api.event.world.biome.BiomeRegisterEvent;
 import net.modificationstation.stationapi.api.recipe.FuelRegistry;
+import net.modificationstation.stationapi.api.registry.PacketTypeRegistry;
+import net.modificationstation.stationapi.api.registry.Registry;
 import paulevs.bnb.BNB;
 import paulevs.bnb.achievement.BNBAchievementPage;
 import paulevs.bnb.achievement.BNBAchievements;
@@ -32,11 +34,6 @@ import paulevs.bnb.packet.BNBWeatherPacket;
 import paulevs.bnb.world.biome.BNBBiomes;
 
 public class CommonListener {
-	@EventListener
-	public void onInit(InitEvent event) {
-		BNBWeatherPacket.register();
-	}
-	
 	@EventListener
 	public void onBlockRegister(BlockRegistryEvent event) {
 		BNBBlocks.init();
@@ -95,6 +92,11 @@ public class CommonListener {
 		if (!shards.isSupport(event.world, event.x, event.y, event.z, event.side.getOpposite())) {
 			event.placeFunction = () -> false;
 		}
+	}
+	
+	@EventListener
+	public void registerPackets(PacketRegisterEvent event) {
+		Registry.register(PacketTypeRegistry.INSTANCE, BNBWeatherPacket.ID, BNBWeatherPacket.TYPE);
 	}
 	
 	/*@SuppressWarnings("unchecked")

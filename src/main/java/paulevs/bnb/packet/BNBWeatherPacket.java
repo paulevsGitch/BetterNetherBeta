@@ -4,8 +4,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.packet.AbstractPacket;
 import net.minecraft.packet.PacketHandler;
-import net.modificationstation.stationapi.api.network.packet.IdentifiablePacket;
+import net.modificationstation.stationapi.api.network.packet.ManagedPacket;
+import net.modificationstation.stationapi.api.network.packet.PacketType;
 import net.modificationstation.stationapi.api.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 import paulevs.bnb.BNB;
 import paulevs.bnb.weather.BNBWeatherManager;
 import paulevs.bnb.weather.WeatherType;
@@ -14,8 +16,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class BNBWeatherPacket extends AbstractPacket implements IdentifiablePacket {
-	private static final Identifier ID = BNB.id("weather");
+public class BNBWeatherPacket extends AbstractPacket implements ManagedPacket<BNBWeatherPacket> {
+	public static final PacketType<BNBWeatherPacket> TYPE = PacketType.builder(true, true, BNBWeatherPacket::new).build();
+	public static final Identifier ID = BNB.id("weather");
 	private byte weatherID;
 	
 	public  BNBWeatherPacket() {}
@@ -57,11 +60,7 @@ public class BNBWeatherPacket extends AbstractPacket implements IdentifiablePack
 	}
 	
 	@Override
-	public Identifier getId() {
-		return ID;
-	}
-	
-	public static void register() {
-		IdentifiablePacket.register(ID, true, true, BNBWeatherPacket::new);
+	public @NotNull PacketType<BNBWeatherPacket> getType() {
+		return TYPE;
 	}
 }
