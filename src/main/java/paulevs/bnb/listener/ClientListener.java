@@ -31,6 +31,7 @@ import paulevs.bnb.achievement.BNBAchievementPage;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.SoulSandstoneTexturedBlock;
 import paulevs.bnb.block.SpinningWheelBlock;
+import paulevs.bnb.block.entity.SpinningWheelBlockEntity;
 import paulevs.bnb.entity.CrimsonSpiderEntity;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.entity.PirozenSpiderEntity;
@@ -58,7 +59,9 @@ public class ClientListener {
 	@EventListener
 	public void onGUIRegister(GuiHandlerRegistryEvent event) {
 		Registry.register(GuiHandlerRegistry.INSTANCE, SpinningWheelBlock.GUI_ID, new GuiHandler(
-			(player, inventory, packet) -> new SpinningWheelScreen(new SpinningWheelContainer(player.inventory, SpinningWheelBlock.currentEntity)),
+			(player, inventory, packet) -> new SpinningWheelScreen(
+				new SpinningWheelContainer(player.inventory, (SpinningWheelBlockEntity) inventory
+			)),
 			() -> null
 		));
 	}

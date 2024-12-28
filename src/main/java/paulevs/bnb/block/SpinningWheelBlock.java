@@ -22,7 +22,6 @@ import paulevs.bnb.gui.container.SpinningWheelContainer;
 
 public class SpinningWheelBlock extends TemplateBlockWithEntity {
 	public static final Identifier GUI_ID = BNB.id("spinning_wheel");
-	public static SpinningWheelBlockEntity currentEntity;
 	
 	public SpinningWheelBlock(Identifier identifier) {
 		super(identifier, Material.STONE);
@@ -52,8 +51,7 @@ public class SpinningWheelBlock extends TemplateBlockWithEntity {
 		if (level.isRemote) return true;
 		SpinningWheelBlockEntity entity = (SpinningWheelBlockEntity) level.getBlockEntity(x, y, z);
 		if (entity == null) return false;
-		currentEntity = entity;
-		GuiHelper.openGUI(player, GUI_ID, null, new SpinningWheelContainer(player.inventory, entity));
+		GuiHelper.openGUI(player, GUI_ID, entity, new SpinningWheelContainer(player.inventory, entity));
 		return true;
 	}
 	
