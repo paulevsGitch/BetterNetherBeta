@@ -35,7 +35,7 @@ import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.SoulSandstoneTexturedBlock;
 import paulevs.bnb.block.SpinningWheelBlock;
 import paulevs.bnb.block.entity.SpinningWheelBlockEntity;
-import paulevs.bnb.command.BNBCommands;
+import paulevs.bnb.command.BNBCommandManager;
 import paulevs.bnb.entity.CrimsonSpiderEntity;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.entity.PirozenSpiderEntity;
@@ -187,7 +187,7 @@ public class ClientListener {
 	
 	@EventListener
 	public void onInit(InitEvent event) {
-		BNBCommands.registerClient();
+		BNBCommandManager.registerClient();
 	}
 	
 	private InputStream getAsStream(Identifier id) {

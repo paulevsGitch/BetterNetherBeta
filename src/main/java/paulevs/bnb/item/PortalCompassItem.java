@@ -125,7 +125,7 @@ public class PortalCompassItem extends TemplateItem implements CustomStackTextur
 			if (optional.isPresent()) {
 				Identifier id = DimensionRegistry.INSTANCE.getId(optional.get());
 				if (id != null) {
-					TOOLTIP[1] = I18n.translate("tooltip.bnb:portal_compass_linked") + " " + NAME_CACHE.computeIfAbsent(id, k -> {
+					TOOLTIP[1] = I18n.translate("tooltip.bnb.portal_compass_linked") + " " + NAME_CACHE.computeIfAbsent(id, k -> {
 						char[] name = id.path.toCharArray();
 						name[0] = Character.toUpperCase(name[0]);
 						for (int i = 1; i < name.length; i++) {
@@ -141,7 +141,7 @@ public class PortalCompassItem extends TemplateItem implements CustomStackTextur
 			}
 		}
 		
-		TOOLTIP[1] = I18n.translate("tooltip.bnb:portal_compass_not_linked");
+		TOOLTIP[1] = I18n.translate("tooltip.bnb.portal_compass_not_linked");
 		return TOOLTIP;
 	}
 }
