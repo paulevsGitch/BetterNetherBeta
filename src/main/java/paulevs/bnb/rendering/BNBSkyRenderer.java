@@ -2,6 +2,7 @@ package paulevs.bnb.rendering;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.util.maths.MCMath;
@@ -24,7 +25,7 @@ public class BNBSkyRenderer {
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL14.GL_GENERATE_MIPMAP, GL11.GL_FALSE);
 	}
 	
-	public static void renderSky() {
+	public static void renderSky(Minecraft minecraft) {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		
 		GL11.glEnable(GL11.GL_BLEND);
@@ -32,11 +33,21 @@ public class BNBSkyRenderer {
 		GL11.glDepthMask(false);
 		
 		GL11.glColor4f(
-			FogRendererImpl.getR() * 0.75F,
-			FogRendererImpl.getG() * 0.75F,
-			FogRendererImpl.getB() * 0.75F,
+			1, 0, 0,
 			1F
 		);
+		
+		if (minecraft.viewEntity.isInLava()) {
+			GL11.glColor4f(0.6F, 0.1F, 0.0F, 1.0F);
+		}
+		else {
+			GL11.glColor4f(
+				FogRendererImpl.getR() * 0.75F,
+				FogRendererImpl.getG() * 0.75F,
+				FogRendererImpl.getB() * 0.75F,
+				1F
+			);
+		}
 		
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, gradientTexture);
 		GL11.glCallList(GRADIENT);

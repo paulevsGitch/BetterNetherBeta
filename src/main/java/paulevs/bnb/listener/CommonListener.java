@@ -99,6 +99,25 @@ public class CommonListener {
 		Registry.register(PacketTypeRegistry.INSTANCE, BNBWeatherPacket.ID, BNBWeatherPacket.TYPE);
 	}
 	
+	/*@EventListener
+	public void registerGen(ChunkDecoration decoration) {
+		if (decoration.world.dimension.id != -1) return;
+		int px = decoration.x;
+		int pz = decoration.z;
+		Biome[] biomes = decoration.world.getBiomeSource().getBiomes(px, pz, 16, 16);
+		int index = 0;
+		for (int i = 0; i < 16; i++) {
+			for (int j = 0; j < 16; j++) {
+				Biome biome = biomes[index++];
+				if (i == 0 || j == 0 || i == 15 || j == 15) continue;
+				int color = biome.name.hashCode() & 15;
+				decoration.world.setBlockStateWithMetadataWithNotify(
+					px + i, 100, pz + j, Block.WOOL.getDefaultState(), color
+				);
+			}
+		}
+	}*/
+	
 	/*@SuppressWarnings("unchecked")
 	@EventListener(priority = ListenerPriority.LOWEST)
 	public void afterRecipeRegister(AfterBlockAndItemRegisterEvent event) {

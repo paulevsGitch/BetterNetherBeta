@@ -13,6 +13,7 @@ import paulevs.bnb.rendering.BNBSkyRenderer;
 
 @Mixin(LevelRenderer.class)
 public class LevelRendererMixin {
+	@Shadow private Minecraft minecraft;
 	@Shadow private Level level;
 	
 	@Inject(method = "<init>", at = @At("TAIL"))
@@ -22,8 +23,8 @@ public class LevelRendererMixin {
 	
 	@Inject(method = "renderSky", at = @At("HEAD"), cancellable = true)
 	public void bnb_renderSky(float delta, CallbackInfo info) {
-		if (this.level.dimension.id == -1) {
-			BNBSkyRenderer.renderSky();
+		if (level.dimension.id == -1) {
+			BNBSkyRenderer.renderSky(minecraft);
 			info.cancel();
 		}
 	}

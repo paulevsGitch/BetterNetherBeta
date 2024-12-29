@@ -45,7 +45,6 @@ public class BNBWorldGenerator {
 	private static final CrossInterpolationCell[] CELLS = new CrossInterpolationCell[16];
 	private static final ChunkTerrainMap[] FEATURE_MAPS = new ChunkTerrainMap[16];
 	private static final byte[][] BLOCKS = new byte[16][4096];
-	private static final boolean[] EMPTY = new boolean[16];
 	
 	private static final List<Pair<Identifier, TerrainRegion>> MAP_FEATURES = new ArrayList<>();
 	private static final BlockState NETHERRACK = Block.NETHERRACK.getDefaultState();
@@ -141,7 +140,6 @@ public class BNBWorldGenerator {
 	
 	private static void fixGenerationErrors() {
 		for (byte i = 0; i < 16; i++) {
-			if (EMPTY[i]) continue;
 			byte[] blocks = BLOCKS[i];
 			for (short n = 0; n < 4096; n++) {
 				if (blocks[n] != 1) continue;
@@ -158,7 +156,6 @@ public class BNBWorldGenerator {
 		}
 		
 		for (byte i = 15; i >= 0; i--) {
-			if (EMPTY[i]) continue;
 			byte[] blocks = BLOCKS[i];
 			for (short n = 4095; n >= 0; n--) {
 				if (blocks[n] != 1) continue;
@@ -176,7 +173,6 @@ public class BNBWorldGenerator {
 	}
 	
 	private static void fillSection(int index) {
-		if (EMPTY[index]) return;
 		byte[] blocks = BLOCKS[index];
 		
 		ChunkSection section = new ChunkSection(index);
