@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.living.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.level.BlockView;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
@@ -19,6 +20,7 @@ import paulevs.bnb.BNB;
 import paulevs.bnb.block.entity.SpinningWheelBlockEntity;
 import paulevs.bnb.block.property.BNBBlockProperties;
 import paulevs.bnb.gui.container.SpinningWheelContainer;
+import paulevs.bnb.item.BNBItems;
 
 public class SpinningWheelBlock extends TemplateBlockWithEntity {
 	public static final Identifier GUI_ID = BNB.id("spinning_wheel");
@@ -76,4 +78,19 @@ public class SpinningWheelBlock extends TemplateBlockWithEntity {
 			setBoundingBox(0.3125F, 0.0F, 0.0625F, 0.6875F, 0.9375F, 0.9375F);
 		}
 	}
+	
+	@Override
+	public void onBlockRemoved(Level level, int x, int y, int z) {
+		SpinningWheelBlockEntity entity = (SpinningWheelBlockEntity) level.getBlockEntity(x, y, z);
+		if (entity != null) {
+			if (entity.getProcess() > 0) drop(level, x, y, z, new ItemStack(BNBItems.NETHER_FIBER));
+			for (byte i = 0; i < entity.getInventorySize(); i++) {
+				ItemStack stack = entity.getItem(i);
+				if (stack == null) continue;
+				drop(level, x, y, z, stack);
+			}
+		}
+	}
+	
+	
 }

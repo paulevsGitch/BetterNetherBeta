@@ -74,6 +74,10 @@ dependencies {
 	modImplementation("com.github.paulevsGitch:VanillaBlockEnhancements:${project.vbe_version}") {
 		transitive false
 	}
+
+	modImplementation("com.github.matthewperiut:retrocommands:${project.retrocommands_version}") {
+		transitive false
+	}
 }
 
 processResources {

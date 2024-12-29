@@ -303,6 +303,7 @@ public class BNBWeatherRenderer {
 			int wx = ix + dx;
 			for (byte dz = (byte) -radius; dz <= radius; dz++) {
 				int wz = iz + dz;
+				if (((wx + wz) & 1) == 0) continue;
 				renderNormalSection(level, wx, wz, pos, dir, tessellator, vOffset);
 			}
 		}

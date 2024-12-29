@@ -13,7 +13,7 @@ import paulevs.bnb.weather.BNBWeatherManager;
 @Mixin(TrackedEntity.class)
 public class TrackedEntityMixin {
 	@Inject(method = "sync", at = @At("HEAD"))
-	private void pumpkin_moon_sync(ServerPlayer player, CallbackInfo info) {
+	private void bnb_syncWeather(ServerPlayer player, CallbackInfo info) {
 		PacketHelper.sendTo(player, new BNBWeatherPacket(BNBWeatherManager.getCurrentWeather()));
 	}
 }

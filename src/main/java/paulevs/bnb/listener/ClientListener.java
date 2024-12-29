@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
@@ -18,6 +20,7 @@ import net.modificationstation.stationapi.api.client.render.model.UnbakedModel;
 import net.modificationstation.stationapi.api.client.texture.SpriteIdentifier;
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
+import net.modificationstation.stationapi.api.event.mod.InitEvent;
 import net.modificationstation.stationapi.api.event.registry.GuiHandlerRegistryEvent;
 import net.modificationstation.stationapi.api.registry.BlockRegistry;
 import net.modificationstation.stationapi.api.registry.ItemRegistry;
@@ -32,6 +35,7 @@ import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.SoulSandstoneTexturedBlock;
 import paulevs.bnb.block.SpinningWheelBlock;
 import paulevs.bnb.block.entity.SpinningWheelBlockEntity;
+import paulevs.bnb.command.BNBCommands;
 import paulevs.bnb.entity.CrimsonSpiderEntity;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.entity.PirozenSpiderEntity;
@@ -53,6 +57,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+@Environment(EnvType.CLIENT)
 public class ClientListener {
 	private static final Gson GSON = new GsonBuilder().create();
 	
@@ -178,6 +183,11 @@ public class ClientListener {
 		event.renderers.put(PirozenSpiderEntity.class, new NetherSpiderRenderer("pirozen_spider_e"));
 		event.renderers.put(PoisonSpiderEntity.class, new NetherSpiderRenderer("poison_spider_e"));
 		event.renderers.put(ObsidianBoatEntity.class, new ObsidianBoatRenderer());
+	}
+	
+	@EventListener
+	public void onInit(InitEvent event) {
+		BNBCommands.registerClient();
 	}
 	
 	private InputStream getAsStream(Identifier id) {

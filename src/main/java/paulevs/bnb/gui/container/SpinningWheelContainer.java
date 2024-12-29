@@ -6,6 +6,7 @@ import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.inventory.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import paulevs.bnb.block.entity.SpinningWheelBlockEntity;
+import paulevs.bnb.item.BNBItemTags;
 
 public class SpinningWheelContainer extends Container {
 	public final SpinningWheelBlockEntity entity;
@@ -49,18 +50,6 @@ public class SpinningWheelContainer extends Container {
 	
 	@Override
 	public ItemStack transferSlot(int slotIndex) {
-		/*ItemStack source = ((Slot) this.slots.get(slotIndex)).getItem();
-		if (source == null) return null;
-		if (slotIndex < 8) {
-			playerInventory.addStack(source);
-		}
-		else {
-			entity.addStack(source, true);
-		}
-		playerInventory.markDirty();
-		tick();
-		return null;*/
-		
 		ItemStack result = null;
 		Slot source = (Slot) slots.get(slotIndex);
 		
@@ -68,10 +57,8 @@ public class SpinningWheelContainer extends Container {
 			ItemStack stored = source.getItem();
 			result = stored.copy();
 			
-			System.out.println(stored + " " + slotIndex);
-			
-			if (slotIndex > 8) insertItem(stored, 0, 4, false);
-			else insertItem(stored, 8, slots.size(), false);
+			if (slotIndex > 7 && stored.isIn(BNBItemTags.NETHER_FIBER_SOURCE)) insertItem(stored, 0, 4, false);
+			else if (slotIndex < 8) insertItem(stored, 8, slots.size(), false);
 			
 			if (stored.count == 0) source.setStack(null);
 			else source.markDirty();
