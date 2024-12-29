@@ -11,7 +11,12 @@ public class BNBWeatherCommand extends BNBCommand {
 	
 	@Override
 	void execute(Object commandSource, String[] args) {
-		WeatherType type = WeatherType.getByName(name);
+		if (args.length < 1) {
+			showUsage(commandSource);
+			return;
+		}
+		
+		WeatherType type = WeatherType.getByName(args[0]);
 		
 		if (type == null) {
 			sendMessage(commandSource, "Invalid weather type");

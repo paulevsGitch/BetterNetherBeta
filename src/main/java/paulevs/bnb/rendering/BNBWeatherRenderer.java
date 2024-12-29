@@ -2,6 +2,7 @@ package paulevs.bnb.rendering;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.texture.TextureManager;
@@ -44,11 +45,14 @@ public class BNBWeatherRenderer {
 	private static int rainTexture;
 	private static int smokeTexture1;
 	private static int smokeTexture2;
+	private static int lavaPuddle;
 	
 	public static void updateTextures(TextureManager manager) {
 		rainTexture = manager.getTextureId("/assets/bnb/stationapi/textures/environment/lava_rain.png");
 		smokeTexture1 = manager.getTextureId("/assets/bnb/stationapi/textures/environment/smoke_1.png");
 		smokeTexture2 = manager.getTextureId("/assets/bnb/stationapi/textures/environment/smoke_2.png");
+		lavaPuddle = manager.getTextureId("/assets/bnb/stationapi/textures/environment/lava_puddle.png");
+		
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, smokeTexture1);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
@@ -295,6 +299,7 @@ public class BNBWeatherRenderer {
 			for (byte dz = (byte) -radius; dz <= radius; dz++) {
 				if (Math.abs(dx) < radiusCenter && Math.abs(dz) < radiusCenter) continue;
 				int wz = (iz & -4) + (dz << 2);
+				if (((wx + wz) & 1) == 0) continue;
 				renderLargeSection(level, wx, wz, pos, dir, tessellator, vOffset);
 			}
 		}
@@ -308,8 +313,24 @@ public class BNBWeatherRenderer {
 			}
 		}
 		
-		tessellator.setOffset(0.0, 0.0, 0.0);
 		tessellator.render();
+		
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, lavaPuddle);
+		vOffset = (float) (((double) level.getLevelTime() + delta) * 0.03);
+		
+		tessellator.start();
+		
+		radius = minecraft.options.fancyGraphics ? 15 : 7;
+		for (byte dx = (byte) -radius; dx <= radius; dx++) {
+			int wx = ix + dx;
+			for (byte dz = (byte) -radius; dz <= radius; dz++) {
+				int wz = iz + dz;
+				renderLavaPuddles(level, wx, wz, pos, dir, tessellator, vOffset, radius);
+			}
+		}
+		
+		tessellator.render();
+		tessellator.setOffset(0.0, 0.0, 0.0);
 		
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glDisable(GL11.GL_BLEND);
@@ -402,6 +423,60 @@ public class BNBWeatherRenderer {
 		tessellator.vertex(x1, y2, z1, u1, v1);
 		tessellator.vertex(x2, y2, z2, u2, v1);
 		tessellator.vertex(x2, y1, z2, u2, v2);
+	}
+	
+	private static void renderLavaPuddles(Level level, int x, int z, Vec3D pos, Vec3D dir, Tessellator tessellator, float vOffset, float radius) {
+		int top = BNBWeatherManager.getWeatherTop(level, x, z);
+		int height = BNBWeatherManager.getWeatherBottom(level, x, top, z);
+		
+		if (!pointIsVisible(pos, dir, x + 0.5, height + 1, z + 0.5)) return;
+		
+		Block block = level.getBlockState(x, height, z).getBlock();
+		if (!block.isFullCube()) return;
+		
+		float dx = (float) (x - pos.x);
+		float dy = (float) (height - pos.y) * 0.5F;
+		float dz = (float) (z - pos.z);
+		float alpha = 1F - MCMath.sqrt(dx * dx + dy * dy + dz * dz) / radius;
+		alpha = alpha * 4F;
+		if (alpha <= 0.01F) return;
+		if (alpha > 1F) alpha = 1F;
+		
+		int randomIndex = (x & 15) << 4 | (z & 15);
+		float randomOffsetV = RANDOM_OFFSET[randomIndex];
+		
+		vOffset += randomOffsetV;
+		float delta = (vOffset) % 1.0F * 4.0F;
+		if (delta > 2.0F) return;
+		
+		int tableOffset = MCMath.floor(vOffset) * 3;
+		
+		float randomOffsetX = RANDOM_OFFSET[(randomIndex + 17 + tableOffset) & 255] * 0.625F - 0.3125F;
+		float randomOffsetZ = RANDOM_OFFSET[(randomIndex + 13 + tableOffset) & 255] * 0.625F - 0.3125F;
+		
+		float v1 = MCMath.floor(Math.min(delta * 5.0, 4.0F)) * 0.2F;
+		float v2 = v1 + 0.2F;
+		
+		alpha *= 1.0F - delta * 0.5F;
+		tessellator.color(1.0F, 1.0F, 1.0F, alpha);
+		
+		float scale = Math.min(delta, 1.0F);
+		if (scale < 0.01F) return;
+		
+		float scaleMin = MathHelper.lerp(scale, 0.5F, 0.375F);
+		float scaleMax = MathHelper.lerp(scale, 0.5F, 0.625F);
+		float px = Math.round((x + randomOffsetX) * 16.0F) * 0.0625F;
+		float pz = Math.round((z + randomOffsetZ) * 16.0F) * 0.0625F;
+		float x1 = px + scaleMin;
+		float x2 = px + scaleMax;
+		float z1 = pz + scaleMin;
+		float z2 = pz + scaleMax;
+		float h = height + 1.01F;
+		
+		tessellator.vertex(x1, h, z1, 0.0F, v1);
+		tessellator.vertex(x1, h, z2, 0.0F, v2);
+		tessellator.vertex(x2, h, z2, 1.0F, v2);
+		tessellator.vertex(x2, h, z1, 1.0F, v1);
 	}
 	
 	private static Vec3D getPosition(LivingEntity entity) {
