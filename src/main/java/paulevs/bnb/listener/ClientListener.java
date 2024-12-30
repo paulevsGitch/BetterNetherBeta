@@ -26,7 +26,6 @@ import net.modificationstation.stationapi.api.registry.BlockRegistry;
 import net.modificationstation.stationapi.api.registry.ItemRegistry;
 import net.modificationstation.stationapi.api.registry.Registry;
 import net.modificationstation.stationapi.api.util.Identifier;
-import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
 import paulevs.bnb.BNB;
 import paulevs.bnb.BNBClient;
@@ -45,7 +44,6 @@ import paulevs.bnb.entity.renderer.ObsidianBoatRenderer;
 import paulevs.bnb.gui.container.SpinningWheelContainer;
 import paulevs.bnb.gui.screen.SpinningWheelScreen;
 import paulevs.bnb.item.PortalCompassItem;
-import paulevs.bnb.rendering.BNBConnectedTextures;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
@@ -89,16 +87,6 @@ public class ClientListener {
 		SoulSandstoneTexturedBlock.TEXTURES[0] = blockAtlas.addTexture(BNB.id("block/soul_sandstone_top")).index;
 		SoulSandstoneTexturedBlock.TEXTURES[1] = blockAtlas.addTexture(BNB.id("block/soul_sandstone_bottom")).index;
 		SoulSandstoneTexturedBlock.TEXTURES[2] = blockAtlas.addTexture(BNB.id("block/soul_sandstone_side")).index;
-		
-		Direction[] direction = Direction.values();
-		BNBConnectedTextures.add4SideTextures(BNBBlocks.FALURIAN_MOSS_BLOCK, BNB.id("block/falurian_moss_side"), direction);
-		BNBConnectedTextures.add4SideTextures(BNBBlocks.PIROZEN_MOSS_BLOCK, BNB.id("block/pirozen_moss_side"), direction);
-		BNBConnectedTextures.add4SideTextures(BNBBlocks.OBSIDIAN_GRAVEL, BNB.id("block/obsidian_gravel_side"), direction);
-		BNBConnectedTextures.add4SideTextures(Block.GRAVEL, BNB.id("block/gravel_side"), direction);
-		BNBConnectedTextures.add4SideTextures(BNBBlocks.MAROON_NYLIUM, BNB.id("block/maroon_nylium_side"), Direction.UP);
-		BNBConnectedTextures.add4SideTextures(BNBBlocks.TURQUOISE_NYLIUM, BNB.id("block/turquoise_nylium_side"), Direction.UP);
-		BNBConnectedTextures.add4SideTextures(BNBBlocks.POISON_NYLIUM, BNB.id("block/poison_nylium_side"), Direction.UP);
-		BNBConnectedTextures.add4SideTextures(BNBBlocks.GRAPE_NYLIUM, BNB.id("block/grape_nylium_side"), Direction.UP);
 		
 		BNBBlocks.UPDATE_TEXTURE_SINGLE.forEach(block -> {
 			Identifier id = BlockRegistry.INSTANCE.getId(block);

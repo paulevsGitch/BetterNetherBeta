@@ -6,10 +6,12 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import paulevs.bnb.BNBClient;
 import paulevs.bnb.rendering.LavaRenderer;
 
 @Mixin(FluidBlock.class)
@@ -18,9 +20,13 @@ public abstract class FluidBlockMixin extends Block {
 		super(i, arg);
 	}
 	
+	@Environment(EnvType.CLIENT)
 	@Inject(method = "getTexture", at = @At("HEAD"), cancellable = true)
 	private void bnb_changeLavaTexture(int side, CallbackInfoReturnable<Integer> info) {
 		if (this != STILL_LAVA && this != FLOWING_LAVA) return;
+		Minecraft minecraft = BNBClient.getMinecraft();
+		if (minecraft == null) return;
+		if (minecraft.level == null || minecraft.level.dimension.id != -1) return;
 		int texture = switch (side) {
 			case 0, 1 -> LavaRenderer.STILL_TEXTURES[((LavaRenderer.POS.z & 3) << 2) | (LavaRenderer.POS.x & 3)];
 			default -> LavaRenderer.flowTexture;

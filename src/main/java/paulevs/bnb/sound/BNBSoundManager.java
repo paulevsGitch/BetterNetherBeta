@@ -50,7 +50,7 @@ public class BNBSoundManager {
 		if (soundSystem.playing(MUSIC_KEY) || soundSystem.playing(STREAMING_KEY)) return;
 		if (--musicCountdown > 0) return;
 		SoundEntry soundEntry = BNBClientSounds.getRandomMusic(RANDOM);
-		musicCountdown = 50 + RANDOM.nextInt(100);
+		musicCountdown = 400 + RANDOM.nextInt(800);
 		soundSystem.backgroundMusic(MUSIC_KEY, soundEntry.soundUrl, soundEntry.soundName, false);
 		soundSystem.setVolume(MUSIC_KEY, gameOptions.music * 0.25F);
 		soundSystem.play(MUSIC_KEY);

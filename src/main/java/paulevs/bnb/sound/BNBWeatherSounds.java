@@ -42,6 +42,7 @@ public class BNBWeatherSounds {
 		if (!BNBWeatherRenderer.isCurrentWeather(WeatherType.RAIN)) volume = 0.0F;
 		volume *= BNBWeatherRenderer.getIntensity(WeatherType.RAIN);
 		volume *= getWeatherVolume(level, entity);
+		
 		if (volume == 0) {
 			stop();
 			return;
@@ -54,8 +55,8 @@ public class BNBWeatherSounds {
 		int x = MCMath.floor(entity.x);
 		int z = MCMath.floor(entity.z);
 		boolean underRoof = entity.y + entity.height < BNBWeatherManager.getWeatherBottom(level, x, z);
-		soundSystem.setPitch(RAIN_KEY, underRoof ? 0.25F : 1.0F);
 		
+		soundSystem.setPitch(RAIN_KEY, underRoof ? 0.25F : 1.0F);
 		soundSystem.setVolume(RAIN_KEY, volume);
 	}
 	
