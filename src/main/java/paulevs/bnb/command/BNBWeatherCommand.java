@@ -44,7 +44,7 @@ public class BNBWeatherCommand extends BNBCommand {
 			// Send packet from server
 		}
 		
-		sendMessage(commandSource, "Weather set to §a" + type.name() + "§r");
+		sendMessage(commandSource, "Weather set to §a" + type.name + "§r");
 	}
 	
 	@Override

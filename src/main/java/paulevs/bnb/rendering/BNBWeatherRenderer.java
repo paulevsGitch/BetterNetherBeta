@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.entity.Entity;
@@ -28,7 +29,6 @@ import java.util.Random;
 
 @Environment(EnvType.CLIENT)
 public class BNBWeatherRenderer {
-	private static final float TO_RADIANS = (float) (Math.PI / 180);
 	private static final float PI2 = (float) (Math.PI * 2.0);
 	private static final float[] SMOKE_COLOR = new float[3];
 	private static final float[] HSV = new float[3];
@@ -43,20 +43,16 @@ public class BNBWeatherRenderer {
 	private static WeatherType prevWeather;
 	private static WeatherType weather;
 	private static int rainTexture;
-	private static int smokeTexture1;
-	private static int smokeTexture2;
-	private static int lavaPuddle;
+	private static int smokeTexture;
+	private static int lavaPuddleTexture;
+	private static Frustum frustum;
 	
 	public static void updateTextures(TextureManager manager) {
 		rainTexture = manager.getTextureId("/assets/bnb/stationapi/textures/environment/lava_rain.png");
-		smokeTexture1 = manager.getTextureId("/assets/bnb/stationapi/textures/environment/smoke_1.png");
-		smokeTexture2 = manager.getTextureId("/assets/bnb/stationapi/textures/environment/smoke_2.png");
-		lavaPuddle = manager.getTextureId("/assets/bnb/stationapi/textures/environment/lava_puddle.png");
+		smokeTexture = manager.getTextureId("/assets/bnb/stationapi/textures/environment/smoke.png");
+		lavaPuddleTexture = manager.getTextureId("/assets/bnb/stationapi/textures/environment/lava_puddle.png");
 		
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, smokeTexture1);
-		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
-		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, smokeTexture2);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, smokeTexture);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
@@ -83,16 +79,18 @@ public class BNBWeatherRenderer {
 	}
 	
 	public static void render(Minecraft minecraft, float delta) {
+		frustum = (Frustum) Frustum.getInstance();
 		updateWeather(delta);
-		renderSmoke(minecraft, delta);
-		if (prevWeather == WeatherType.LAVA_RAIN || weather == WeatherType.LAVA_RAIN) {
-			renderRain(minecraft, delta);
+		Vec3D cameraPos = getPosition(minecraft.viewEntity);
+		renderSmoke(minecraft, delta, cameraPos);
+		if (prevWeather == WeatherType.RAIN || weather == WeatherType.RAIN) {
+			renderRain(minecraft, delta, cameraPos);
 		}
 	}
 	
 	public static void updateFog(float[] fogColor) {
-		if (isCurrentWeather(WeatherType.LAVA_RAIN)) {
-			float alpha = getIntensity(WeatherType.LAVA_RAIN);
+		if (isCurrentWeather(WeatherType.RAIN)) {
+			float alpha = getIntensity(WeatherType.RAIN);
 			fogColor[0] = MathHelper.lerp(alpha, fogColor[0], 0.5F);
 			fogColor[1] = MathHelper.lerp(alpha, fogColor[1], 0.01F);
 			fogColor[2] = MathHelper.lerp(alpha, fogColor[2], 0.0F);
@@ -126,10 +124,9 @@ public class BNBWeatherRenderer {
 	}
 	
 	public static float getIntensity(WeatherType type) {
-		float intensity = 1.0F;
-		if (prevWeather != type) intensity = weatherDelta;
-		else if (weather != type) intensity = 1.0F - weatherDelta;
-		return intensity;
+		if (type == prevWeather && type == weather) return 1.0F;
+		if (type != prevWeather && type != weather) return 0.0F;
+		return prevWeather != type ? weatherDelta : 1.0F - weatherDelta;
 	}
 	
 	private static void updateWeather(float delta) {
@@ -158,7 +155,7 @@ public class BNBWeatherRenderer {
 		return smokeDensity[z * smokeDensityWidth + x];
 	}
 	
-	private static void renderSmoke(Minecraft minecraft, float delta) {
+	private static void renderSmoke(Minecraft minecraft, float delta, Vec3D cameraPos) {
 		Entity entity = minecraft.viewEntity;
 		
 		float smokeTime = ((int) (minecraft.level.getLevelTime() % 24000) + delta) / 24000.0F * 30.0F * PI2;
@@ -170,8 +167,7 @@ public class BNBWeatherRenderer {
 		int cx = MCMath.floor(entity.x / 32.0);
 		int cz = MCMath.floor(entity.z / 32.0);
 		
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, smokeTexture1);
-		int lastTerxture = smokeTexture1;
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, smokeTexture);
 		
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glDisable(GL11.GL_FOG);
@@ -182,11 +178,12 @@ public class BNBWeatherRenderer {
 		GL11.glDepthMask(false);
 		
 		Tessellator tessellator = Tessellator.INSTANCE;
-		tessellator.start();
 		tessellator.setOffset(-ex, -ey, -ez);
+		tessellator.start();
 		
-		int y1 = 96;
-		int y2 = 250;
+		final int y1 = 96;
+		final int y2 = 250;
+		float intensity = MathHelper.lerp(getIntensity(WeatherType.CLEAR), 0.1F, 0.5F);
 		
 		for (Vec2I offset : SMOKE_OFFSETS) {
 			int sx = cx + offset.x;
@@ -199,32 +196,28 @@ public class BNBWeatherRenderer {
 			float fz = (float) (ez - pz);
 			float l = fx * fx + fz * fz;
 			float alpha;
-			if (l > 0) {
-				l = MCMath.sqrt(l) / 0.5F;
-				fx /= l;
-				fz /= l;
-				float v = fx;
-				fx = -fz;
-				fz = v;
-				alpha = l / 512.0F;
-				alpha = alpha < 0.625F ? alpha * 1.75F - 0.125F : -2.666F * alpha + 2.666F;
-				alpha *= getSmokeDensity(sx, sz);// * 0.5F;
-				if (alpha < 0.01F) continue;
-			}
-			else {
-				continue;
-			}
+			
+			if (l < 0.001F) continue;
+			
+			l = MCMath.sqrt(l) * 2.0F;
+			fx /= l;
+			fz /= l;
+			float v = fx;
+			fx = -fz;
+			fz = v;
+			alpha = l / 512.0F;
+			alpha = alpha < 0.625F ? alpha * 1.75F - 0.125F : -2.666F * alpha + 2.666F;
+			alpha *= intensity * getSmokeDensity(sx, sz);
+			if (alpha < 0.01F) continue;
 			
 			int randomIndex = ((sx & 15) << 4 | (sz & 15)) * 7;
-			int texture = SMOKE_RANDOM[randomIndex++] < 1.0F ? smokeTexture1 : smokeTexture2;
 			float offsetY = MCMath.sin(SMOKE_RANDOM[randomIndex++] + smokeTime) * 32.0F;
 			float offsetX = SMOKE_RANDOM[randomIndex++];
 			float offsetZ = SMOKE_RANDOM[randomIndex++];
 			float scaleH = SMOKE_RANDOM[randomIndex++];
 			float u1 = SMOKE_RANDOM[randomIndex++];
+			float u2 = SMOKE_RANDOM[randomIndex++];
 			float v1 = SMOKE_RANDOM[randomIndex];
-			
-			float u2 = 1.0F - u1;
 			float v2 = 1.0F - v1;
 			
 			float scale = 40.0F * scaleH;
@@ -232,24 +225,21 @@ public class BNBWeatherRenderer {
 			double x2 = px + offsetX - fx * scale;
 			double z1 = pz + offsetZ + fz * scale;
 			double z2 = pz + offsetZ - fz * scale;
+			double py1 = y1 + offsetY;
+			double py2 = y2 + offsetY;
 			
-			if (texture != lastTerxture) {
-				GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
-				lastTerxture = texture;
-				tessellator.render();
-				tessellator.start();
-			}
+			if (areIsInvisible(cameraPos, x1, py1, z1, x2, py2, z2)) continue;
 			
 			tessellator.color(SMOKE_COLOR[0], SMOKE_COLOR[1], SMOKE_COLOR[2], alpha);
 			
-			tessellator.vertex(x1, y1 + offsetY, z1, u1, v2);
-			tessellator.vertex(x1, y2 + offsetY, z1, u1, v1);
-			tessellator.vertex(x2, y2 + offsetY, z2, u2, v1);
-			tessellator.vertex(x2, y1 + offsetY, z2, u2, v2);
+			tessellator.vertex(x1, py1, z1, u1, v2);
+			tessellator.vertex(x1, py2, z1, u1, v1);
+			tessellator.vertex(x2, py2, z2, u2, v1);
+			tessellator.vertex(x2, py1, z2, u2, v2);
 		}
 		
-		tessellator.setOffset(0.0, 0.0, 0.0);
 		tessellator.render();
+		tessellator.setOffset(0.0, 0.0, 0.0);
 		
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glEnable(GL11.GL_FOG);
@@ -258,7 +248,7 @@ public class BNBWeatherRenderer {
 		GL11.glDepthMask(true);
 	}
 	
-	private static void renderRain(Minecraft minecraft, float delta) {
+	private static void renderRain(Minecraft minecraft, float delta, Vec3D cameraPos) {
 		LivingEntity entity = minecraft.viewEntity;
 		double x = MathHelper.lerp(delta, entity.prevRenderX, entity.x);
 		double y = MathHelper.lerp(delta, entity.prevRenderY, entity.y);
@@ -276,8 +266,6 @@ public class BNBWeatherRenderer {
 		if (iy - rainTop > 40) return;
 		
 		float vOffset = (float) (((double) level.getLevelTime() + delta) * 0.03 % 1.0);
-		Vec3D pos = getPosition(entity);
-		Vec3D dir = getViewDirection(entity);
 		
 		Tessellator tessellator = Tessellator.INSTANCE;
 		
@@ -291,7 +279,7 @@ public class BNBWeatherRenderer {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, rainTexture);
 		
 		tessellator.start();
-		tessellator.color(1F, 1F, 1F, getIntensity(WeatherType.LAVA_RAIN));
+		tessellator.color(1F, 1F, 1F, getIntensity(WeatherType.RAIN));
 		tessellator.setOffset(-x, -y, -z);
 		
 		for (byte dx = (byte) -radius; dx <= radius; dx++) {
@@ -299,8 +287,7 @@ public class BNBWeatherRenderer {
 			for (byte dz = (byte) -radius; dz <= radius; dz++) {
 				if (Math.abs(dx) < radiusCenter && Math.abs(dz) < radiusCenter) continue;
 				int wz = (iz & -4) + (dz << 2);
-				if (((wx + wz) & 1) == 0) continue;
-				renderLargeSection(level, wx, wz, pos, dir, tessellator, vOffset);
+				renderLargeSection(level, wx, wz, cameraPos, tessellator, vOffset);
 			}
 		}
 		
@@ -309,13 +296,13 @@ public class BNBWeatherRenderer {
 			for (byte dz = (byte) -radius; dz <= radius; dz++) {
 				int wz = iz + dz;
 				if (((wx + wz) & 1) == 0) continue;
-				renderNormalSection(level, wx, wz, pos, dir, tessellator, vOffset);
+				renderNormalSection(level, wx, wz, cameraPos, tessellator, vOffset);
 			}
 		}
 		
 		tessellator.render();
 		
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, lavaPuddle);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, lavaPuddleTexture);
 		vOffset = (float) (((double) level.getLevelTime() + delta) * 0.03);
 		
 		tessellator.start();
@@ -325,7 +312,7 @@ public class BNBWeatherRenderer {
 			int wx = ix + dx;
 			for (byte dz = (byte) -radius; dz <= radius; dz++) {
 				int wz = iz + dz;
-				renderLavaPuddles(level, wx, wz, pos, dir, tessellator, vOffset, radius);
+				renderLavaPuddles(level, wx, wz, cameraPos, tessellator, vOffset, radius);
 			}
 		}
 		
@@ -337,16 +324,12 @@ public class BNBWeatherRenderer {
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1f);
 	}
 	
-	private static void renderLargeSection(Level level, int x, int z, Vec3D pos, Vec3D dir, Tessellator tessellator, float vOffset) {
+	private static void renderLargeSection(Level level, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset) {
 		int y1 = BNBWeatherManager.getWeatherTop(level, x, z);
 		int y2 = BNBWeatherManager.getWeatherBottom(level, x, y1, z);
 		
 		if (y2 - y1 == 0) return;
-		
-		boolean visible = pointIsVisible(pos, dir, x + 0.5, y1, z + 0.5);
-		visible |= pointIsVisible(pos, dir, x + 0.5, y1 + ((y2 - y1) >> 1), z + 0.5);
-		visible |= pointIsVisible(pos, dir, x + 0.5, y2, z + 0.5);
-		if (!visible) return;
+		if (areIsInvisible(pos, x - 2, y1, z - 2, x + 3, y2, z + 3)) return;
 		
 		float v1 = RANDOM_OFFSET[(x & 15) << 4 | (z & 15)] - vOffset;
 		float v2 = (y2 - y1) * 0.0625F + v1;
@@ -381,16 +364,12 @@ public class BNBWeatherRenderer {
 		tessellator.vertex(x2, y1, z2, u2, v2);
 	}
 	
-	private static void renderNormalSection(Level level, int x, int z, Vec3D pos, Vec3D dir, Tessellator tessellator, float vOffset) {
+	private static void renderNormalSection(Level level, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset) {
 		int y1 = BNBWeatherManager.getWeatherTop(level, x, z);
 		int y2 = BNBWeatherManager.getWeatherBottom(level, x, y1, z);
 		
 		if (y2 - y1 == 0) return;
-		
-		boolean visible = pointIsVisible(pos, dir, x + 0.5, y1, z + 0.5);
-		visible |= pointIsVisible(pos, dir, x + 0.5, y1 + ((y2 - y1) >> 1), z + 0.5);
-		visible |= pointIsVisible(pos, dir, x + 0.5, y2, z + 0.5);
-		if (!visible) return;
+		if (areIsInvisible(pos, x, y1, z, x + 1, y2, z + 1)) return;
 		
 		float v1 = RANDOM_OFFSET[(x & 15) << 4 | (z & 15)] - vOffset;
 		float v2 = (y2 - y1) * 0.0625F + v1;
@@ -425,11 +404,9 @@ public class BNBWeatherRenderer {
 		tessellator.vertex(x2, y1, z2, u2, v2);
 	}
 	
-	private static void renderLavaPuddles(Level level, int x, int z, Vec3D pos, Vec3D dir, Tessellator tessellator, float vOffset, float radius) {
+	private static void renderLavaPuddles(Level level, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset, float radius) {
 		int top = BNBWeatherManager.getWeatherTop(level, x, z);
 		int height = BNBWeatherManager.getWeatherBottom(level, x, top, z);
-		
-		if (!pointIsVisible(pos, dir, x + 0.5, height + 1, z + 0.5)) return;
 		
 		Block block = level.getBlockState(x, height, z).getBlock();
 		if (!block.isFullCube()) return;
@@ -438,7 +415,7 @@ public class BNBWeatherRenderer {
 		float dy = (float) (height - pos.y) * 0.5F;
 		float dz = (float) (z - pos.z);
 		float alpha = 1F - MCMath.sqrt(dx * dx + dy * dy + dz * dz) / radius;
-		alpha = alpha * 4F;
+		alpha = alpha * 4F * getIntensity(WeatherType.RAIN);
 		if (alpha <= 0.01F) return;
 		if (alpha > 1F) alpha = 1F;
 		
@@ -473,6 +450,8 @@ public class BNBWeatherRenderer {
 		float z2 = pz + scaleMax;
 		float h = height + 1.01F;
 		
+		if (areIsInvisible(pos, x1, h, z1, x2, h, z2)) return;
+		
 		tessellator.vertex(x1, h, z1, 0.0F, v1);
 		tessellator.vertex(x1, h, z2, 0.0F, v2);
 		tessellator.vertex(x2, h, z2, 1.0F, v2);
@@ -483,24 +462,14 @@ public class BNBWeatherRenderer {
 		return Vec3D.getFromCacheAndSet(entity.x, entity.y, entity.z);
 	}
 	
-	private static Vec3D getViewDirection(LivingEntity entity) {
-		float yaw = entity.prevYaw + (entity.yaw - entity.prevYaw);
-		float pitch = entity.prevPitch + (entity.pitch - entity.prevPitch);
-		
-		yaw = -yaw * TO_RADIANS - (float) Math.PI;
-		float cosYaw = MCMath.cos(yaw);
-		float sinYaw = MCMath.sin(yaw);
-		float cosPitch = -MCMath.cos(-pitch * TO_RADIANS);
-		
-		return Vec3D.getFromCacheAndSet(
-			sinYaw * cosPitch,
-			(MCMath.sin(-pitch * ((float) Math.PI / 180))),
-			cosYaw * cosPitch
-		);
-	}
-	
-	private static boolean pointIsVisible(Vec3D position, Vec3D normal, double x, double y, double z) {
-		return normal.x * (x - position.x) + normal.y * (y - position.y) + normal.z * (z - position.z) > 0;
+	private static boolean areIsInvisible(Vec3D cameraPos, double x1, double y1, double z1, double x2, double y2, double z2) {
+		x1 -= cameraPos.x;
+		y1 -= cameraPos.y;
+		z1 -= cameraPos.z;
+		x2 -= cameraPos.x;
+		y2 -= cameraPos.y;
+		z2 -= cameraPos.z;
+		return !frustum.isInside(x1, y1, z1, x2, y2, z2);
 	}
 	
 	static {
@@ -525,12 +494,21 @@ public class BNBWeatherRenderer {
 		
 		SMOKE_RANDOM = new float[256 * 7];
 		for (int i = 0; i < SMOKE_RANDOM.length; i += 7) {
-			SMOKE_RANDOM[i] = random.nextFloat() * 2.0F;
-			SMOKE_RANDOM[i + 1] = random.nextFloat() * PI2;
+			float u1 = random.nextBoolean() ? 0.0F : 0.5F;
+			float u2 = u1 + 0.5F;
+			
+			if (random.nextBoolean()) {
+				float u = u1;
+				u1 = u2;
+				u2 = u;
+			}
+			
+			SMOKE_RANDOM[i] = random.nextFloat() * PI2;
+			SMOKE_RANDOM[i + 1] = random.nextFloat() * 16.0F - 8.0F;
 			SMOKE_RANDOM[i + 2] = random.nextFloat() * 16.0F - 8.0F;
-			SMOKE_RANDOM[i + 3] = random.nextFloat() * 16.0F - 8.0F;
-			SMOKE_RANDOM[i + 4] = random.nextFloat() * 0.8F + 0.8F;
-			SMOKE_RANDOM[i + 5] = random.nextBoolean() ? 1.0F : 0.0F;
+			SMOKE_RANDOM[i + 3] = random.nextFloat() * 0.8F + 0.8F;
+			SMOKE_RANDOM[i + 4] = u1;
+			SMOKE_RANDOM[i + 5] = u2;
 			SMOKE_RANDOM[i + 6] = random.nextBoolean() ? 1.0F : 0.0F;
 		}
 	}

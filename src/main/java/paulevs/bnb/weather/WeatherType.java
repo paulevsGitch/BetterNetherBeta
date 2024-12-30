@@ -8,12 +8,12 @@ import java.util.Random;
 public enum WeatherType {
 	CLEAR("clear", 300, 1200, 1.0F),
 	FOG("fog", 30, 120, 0.55F),
-	LAVA_RAIN("lava_rain", 60, 300, 0.5F);
+	RAIN("rain", 60, 300, 0.5F);
 	
 	private static final Map<String, WeatherType> BY_NAME = new Object2ReferenceOpenHashMap<>();
 	private static final WeatherType[] VALUES = values();
 	
-	private final String name;
+	public final String name;
 	private final int minTicks;
 	private final int deltaTicks;
 	public final float fogIntensity;

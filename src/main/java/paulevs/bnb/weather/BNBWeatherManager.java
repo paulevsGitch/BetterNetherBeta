@@ -57,9 +57,9 @@ public class BNBWeatherManager {
 	}
 	
 	private static WeatherType getWeather(WeatherType prev1, WeatherType prev2) {
-		if (prev1 == WeatherType.LAVA_RAIN) return WeatherType.FOG;
+		if (prev1 == WeatherType.RAIN) return WeatherType.FOG;
 		if (prev1 == WeatherType.FOG) {
-			return prev2 == null || prev2 == WeatherType.LAVA_RAIN ? WeatherType.CLEAR : WeatherType.LAVA_RAIN;
+			return prev2 == null || prev2 == WeatherType.RAIN ? WeatherType.CLEAR : WeatherType.RAIN;
 		}
 		int index = RANDOM.nextInt(WEATHER_TYPES.length);
 		WeatherType weather = WEATHER_TYPES[index];
@@ -79,7 +79,7 @@ public class BNBWeatherManager {
 	}
 	
 	private static void processBlocksAndEntities(Level level) {
-		if (currentWeather != WeatherType.LAVA_RAIN) return;
+		if (currentWeather != WeatherType.RAIN) return;
 		
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
 			updateOnClient(level);

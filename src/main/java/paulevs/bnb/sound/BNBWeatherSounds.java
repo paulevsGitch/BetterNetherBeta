@@ -39,8 +39,8 @@ public class BNBWeatherSounds {
 			return;
 		}
 		
-		if (!BNBWeatherRenderer.isCurrentWeather(WeatherType.LAVA_RAIN)) volume = 0.0F;
-		volume *= BNBWeatherRenderer.getIntensity(WeatherType.LAVA_RAIN);
+		if (!BNBWeatherRenderer.isCurrentWeather(WeatherType.RAIN)) volume = 0.0F;
+		volume *= BNBWeatherRenderer.getIntensity(WeatherType.RAIN);
 		volume *= getWeatherVolume(level, entity);
 		if (volume == 0) {
 			stop();
