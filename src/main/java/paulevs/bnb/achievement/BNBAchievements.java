@@ -28,8 +28,8 @@ public class BNBAchievements {
 	public static final Achievement ARIADNES_STRING = make("ariadnes_string", BNBItems.PORTAL_COMPASS, 4, 4, ORICHALCUM);
 	
 	public static final Stat COLLECT_FALURIAN_LOG = new RegisteringStat(9990, "stat.bnb:collectRedLog").register();
-	public static final Stat COLLECT_PIROZEN_LOG = new RegisteringStat(9991, "stat.bnb:collectRedLog").register();
-	public static final Stat COLLECT_CHLOROPHATE_LOG = new RegisteringStat(9992, "stat.bnb:collectRedLog").register();
+	public static final Stat COLLECT_PIROZEN_LOG = new RegisteringStat(9991, "stat.bnb:collectBlueLog").register();
+	public static final Stat COLLECT_CHLOROPHATE_LOG = new RegisteringStat(9992, "stat.bnb:collectGreenLog").register();
 	
 	private static final ItemStack[] RGB_ICONS = new ItemStack[] {
 		new ItemStack(BNBBlocks.FALURIAN_LOG),
