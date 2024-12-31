@@ -4,6 +4,7 @@ import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
+import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.noise.PerlinNoise;
 
 import java.util.Random;
@@ -22,7 +23,9 @@ public class BoulderStructure extends Structure {
 	
 	@Override
 	public boolean generate(Level level, Random random, int x, int y, int z) {
-		if (level.getBlockState(x, y - 1, z) == state) {
+		BlockState below = level.getBlockState(x, y - 1, z);
+		if (below == state) return false;
+		if (!below.isIn(BNBBlockTags.NETHERRACK_TERRAIN) && !below.isIn(BNBBlockTags.SOUL_TERRAIN)) {
 			return false;
 		}
 		

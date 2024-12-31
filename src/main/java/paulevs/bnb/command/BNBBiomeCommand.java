@@ -5,11 +5,16 @@ import net.minecraft.level.biome.Biome;
 import net.minecraft.level.biome.BiomeSource;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
+import paulevs.bnb.world.biome.BNBBiomes;
+
+import java.util.Arrays;
 
 public class BNBBiomeCommand extends BNBCommand {
 	private static final Direction[] DIRECTIONS = new Direction[] {
 		Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST
 	};
+	
+	private String[] biomeNames;
 	
 	protected BNBBiomeCommand() {
 		super("biome");
@@ -67,5 +72,17 @@ public class BNBBiomeCommand extends BNBCommand {
 	@Override
 	String getDescription() {
 		return "find the closest biome location";
+	}
+	
+	@Override
+	public String[] getArgumentSuggestions(int index, String input) {
+		if (biomeNames == null) {
+			biomeNames = new String[BNBBiomes.BIOMES.size()];
+			for (int i = 0; i < BNBBiomes.BIOMES.size(); i++) {
+				biomeNames[i] = BNBBiomes.BIOMES.get(i).name;
+			}
+			Arrays.sort(biomeNames);
+		}
+		return getPossibleVariants(input, biomeNames);
 	}
 }

@@ -35,6 +35,15 @@ public class BNBCommandManager {
 	private static void registerRetroCommands() {
 		if (!hasRetroCommands) return;
 		CommandRegistry.add(new com.matthewperiut.retrocommands.api.Command() {
+			private static final String[] COMMAND_NAMES;
+			
+			static {
+				COMMAND_NAMES = new String[COMMAND_LIST.size()];
+				for (int i = 0; i < COMMAND_LIST.size(); i++) {
+					COMMAND_NAMES[i] = COMMAND_LIST.get(i).name;
+				}
+			}
+			
 			@Override
 			public void command(SharedCommandSource commandSource, String[] parameters) {
 				BNBCommand bnbCommand = parameters.length < 2 ? COMMANDS.get("help") : COMMANDS.get(parameters[1]);
@@ -53,6 +62,16 @@ public class BNBCommandManager {
 			
 			@Override
 			public void manual(SharedCommandSource commandSource) {}
+			
+			@Override
+			public String[] suggestion(SharedCommandSource source, int parameterNum, String currentInput, String totalInput) {
+				if (parameterNum == 1) {
+					return BNBCommand.getPossibleVariants(currentInput, COMMAND_NAMES);
+				}
+				BNBCommand command = COMMANDS.get(totalInput.split(" ")[1]);
+				if (command == null) return BNBCommand.EMPTY;
+				return command.getArgumentSuggestions(parameterNum - 2, currentInput);
+			}
 		});
 	}
 	

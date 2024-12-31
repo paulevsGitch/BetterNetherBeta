@@ -51,6 +51,8 @@ import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
+import paulevs.bnb.world.generator.terrain.features.CubesFeature;
+import paulevs.bnb.world.generator.terrain.features.TerrainFeature;
 
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -111,6 +113,7 @@ public class ClientListener {
 		}
 		
 		printTranslations();
+		debugTerrain();
 	}
 	
 	@EventListener
@@ -279,5 +282,17 @@ public class ClientListener {
 			result = result.substring(0, result.lastIndexOf(' '));
 		}
 		return result;
+	}
+	
+	// TODO remove that after release
+	private void debugTerrain() {
+		if (!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
+		
+		long t = System.currentTimeMillis();
+		TerrainFeature feature = new CubesFeature();
+		feature.setSeed(2);
+		feature.debugImage();
+		t = System.currentTimeMillis() - t;
+		System.out.println("\n\nF: " + t + "\n\n");
 	}
 }

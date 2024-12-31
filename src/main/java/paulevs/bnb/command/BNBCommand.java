@@ -7,7 +7,12 @@ import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.server.command.CommandSource;
 import paulevs.bnb.BNB;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class BNBCommand {
+	private static final List<String> PRE_LIST = new ArrayList<>();
+	protected static final String[] EMPTY = new String[0];
 	protected final String name;
 	
 	protected BNBCommand(String name) {
@@ -26,6 +31,10 @@ public abstract class BNBCommand {
 	
 	protected void showUsage(Object commandSource) {
 		sendMessage(commandSource, "Usage: /bnb " + getUsage());
+	}
+	
+	protected String[] getArgumentSuggestions(int index, String input) {
+		return EMPTY;
 	}
 	
 	protected static void sendMessage(Object commandSource, String message) {
@@ -50,5 +59,16 @@ public abstract class BNBCommand {
 		if (commandSource instanceof CommandSource source) {
 			source.sendFeedback(message);
 		}
+	}
+	
+	protected static String[] getPossibleVariants(String input, String[] names) {
+		if (input.isEmpty()) return names;
+		for (String name : names) {
+			if (!name.startsWith(input)) continue;
+			PRE_LIST.add(name.substring(input.length()));
+		}
+		String[] result = PRE_LIST.toArray(String[]::new);
+		PRE_LIST.clear();
+		return result;
 	}
 }

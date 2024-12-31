@@ -8,8 +8,6 @@ import net.modificationstation.stationapi.api.template.block.TemplateBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.sound.BNBSounds;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class NetherTerrainBlock extends TemplateBlock {

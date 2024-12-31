@@ -74,7 +74,7 @@ public class BNBItems {
 	
 	public static final Item OBSIDIAN_SWORD = makeTool("obsidian_sword", TemplateSwordItem::new, OBSIDIAN);
 	public static final Item OBSIDIAN_SHOVEL = makeTool("obsidian_shovel", TemplateShovelItem::new, OBSIDIAN);
-	public static final Item OBSIDIAN_PICKAXE = makeTool("obsidian_pickaxe", TemplatePickaxeItem::new, OBSIDIAN);
+	public static final Item OBSIDIAN_PICKAXE = makeTool("obsidian_pickaxe", ObsidianPickaxeItem::new, OBSIDIAN);
 	public static final Item OBSIDIAN_AXE = makeTool("obsidian_axe", TemplateAxeItem::new, OBSIDIAN);
 	public static final Item OBSIDIAN_HOE = makeTool("obsidian_hoe", TemplateHoeItem::new, OBSIDIAN);
 	
