@@ -11,12 +11,11 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.item.BNBItems;
 
 public class ObsidianGravelBlock extends TemplateSandBlock {
-	public static final int[] CTM_TEXTURES = new int[4];
-	
 	public ObsidianGravelBlock(Identifier id) {
 		super(id, 0);
 		setHardness(2.0F);
 		setBlastResistance(1000.0f);
+		setSounds(GRAVEL_SOUNDS);
 	}
 	
 	@Override

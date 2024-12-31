@@ -6,10 +6,10 @@
 		"XXX"
 	],
 	"key": {
-		"X": { "item": "bnb:poison_planks" }
+		"X": { "item": "bnb:chlorophate_planks" }
 	},
 	"result": {
-		"item": "bnb:poison_stairs",
+		"item": "bnb:chlorophate_stairs",
 		"count": 6
 	}
 }

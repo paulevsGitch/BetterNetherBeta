@@ -36,8 +36,8 @@ public class BNBItems {
 	public static final Item PIROZEN_TREE_PLACER = make(
 		"pirozen_tree_placer", () -> BNBStructures.PIROZEN_TREE, StructurePlacerItem::new
 	);
-	public static final Item POISON_TREE_PLACER = make(
-		"poison_tree_placer", () -> BNBStructures.POISON_TREE, StructurePlacerItem::new
+	public static final Item CHLOROPHATE_TREE_PLACER = make(
+		"chlorophate_tree_placer", () -> BNBStructures.CHLOROPHATE_TREE, StructurePlacerItem::new
 	);
 	public static final Item JALUMINE_TREE_PLACER = make(
 		"jalumine_tree_placer", () -> BNBStructures.JALUMINE_TREE, StructurePlacerItem::new
@@ -49,8 +49,8 @@ public class BNBItems {
 	public static final Item LARGE_PIROZEN_TREE_PLACER = make(
 		"large_pirozen_tree_placer", () -> BNBStructures.LARGE_PIROZEN_TREE, StructurePlacerItem::new
 	);
-	public static final Item LARGE_POISON_TREE_PLACER = make(
-		"large_poison_tree_placer", () -> BNBStructures.LARGE_POISON_TREE, StructurePlacerItem::new
+	public static final Item LARGE_CHLOROPHATE_TREE_PLACER = make(
+		"large_chlorophate_tree_placer", () -> BNBStructures.LARGE_CHLOROPHATE_TREE, StructurePlacerItem::new
 	);
 	
 	public static final Item FALURIAN_VINE_BERRIES = makeFood("falurian_vine_berries", 1, false).setMaxStackSize(8);

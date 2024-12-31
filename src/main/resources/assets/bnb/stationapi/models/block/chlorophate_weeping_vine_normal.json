@@ -1,0 +1,6 @@
+{
+	"parent": "bnb:block/crop",
+	"textures": {
+		"crop": "bnb:block/chlorophate_weeping_vine_normal"
+	}
+}

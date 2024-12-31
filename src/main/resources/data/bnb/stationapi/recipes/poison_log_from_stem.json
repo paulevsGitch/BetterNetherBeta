@@ -5,9 +5,9 @@
 		"XX"
 	],
 	"key": {
-		"X": { "item": "bnb:poison_stem" }
+		"X": { "item": "bnb:chlorophate_stem" }
 	},
 	"result": {
-		"item": "bnb:poison_log"
+		"item": "bnb:chlorophate_log"
 	}
 }

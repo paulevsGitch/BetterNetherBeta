@@ -43,12 +43,12 @@ public class BNBPlacers {
 	public static final StructurePlacer PIROZEN_MOSS_BLOCK_PLACER = new VolumetricPlacer(BNBStructures.PIROZEN_MOSS_BLOCK, 3).setNoiseDensityFunction(6);
 	public static final StructurePlacer PIROZEN_MOSS_CEILING_PLACER = new CeilingPlacer(BNBStructures.PIROZEN_MOSS_BLOCK, 5).setNoiseDensityFunction(7);
 	
-	public static final StructurePlacer POISON_TREE_PLACER = new FloorPlacer(BNBStructures.POISON_TREE, 2).setNoiseDensityFunction(0);
-	public static final StructurePlacer POISON_BUSH_PLACER = new FloorPlacer(BNBStructures.POISON_TREE_BUSH, 3).setNoiseDensityFunction(1);
-	public static final StructurePlacer POISON_ROOTS_PLACER = new FloorPlacer(BNBStructures.POISON_ROOTS, 1).setNoiseDensityFunction(2);
-	public static final StructurePlacer POISON_SPIDER_COCOON = new FloorPlacer(BNBStructures.POISON_SPIDER_COCOON, 1).setRandomNoiseDensityFunction(1, 5);
-	public static final StructurePlacer LARGE_POISON_TREE_PLACER = new FloorPlacer(BNBStructures.LARGE_POISON_TREE, 1).setRandomDensityFunction(3, 15);
-	public static final StructurePlacer FALLEN_POISON_TREE_PLACER = new FloorPlacer(BNBStructures.FALLEN_POISON_TREE, 1).setRandomDensityFunction(4, 7);
+	public static final StructurePlacer CHLOROPHATE_TREE_PLACER = new FloorPlacer(BNBStructures.CHLOROPHATE_TREE, 2).setNoiseDensityFunction(0);
+	public static final StructurePlacer CHLOROPHATE_BUSH_PLACER = new FloorPlacer(BNBStructures.CHLOROPHATE_TREE_BUSH, 3).setNoiseDensityFunction(1);
+	public static final StructurePlacer CHLOROPHATE_ROOTS_PLACER = new FloorPlacer(BNBStructures.CHLOROPHATE_ROOTS, 1).setNoiseDensityFunction(2);
+	public static final StructurePlacer CHLOROPHATE_SPIDER_COCOON = new FloorPlacer(BNBStructures.CHLOROPHATE_SPIDER_COCOON, 1).setRandomNoiseDensityFunction(1, 5);
+	public static final StructurePlacer LARGE_CHLOROPHATE_TREE_PLACER = new FloorPlacer(BNBStructures.LARGE_CHLOROPHATE_TREE, 1).setRandomDensityFunction(3, 15);
+	public static final StructurePlacer FALLEN_CHLOROPHATE_TREE_PLACER = new FloorPlacer(BNBStructures.FALLEN_CHLOROPHATE_TREE, 1).setRandomDensityFunction(4, 7);
 	
 	public static final StructurePlacer ORICHALCUM_PLACER = new VolumetricPlacer(BNBStructures.ORICHALCUM, 1);
 	public static final StructurePlacer LAVA_STREAM_PLACER = new CeilingPlacer(BNBStructures.LAVA_STREAM, 1).setRandomDensityFunction(5, 15);

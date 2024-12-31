@@ -11,12 +11,13 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
 import net.minecraft.client.resource.language.I18n;
+import net.modificationstation.stationapi.api.client.event.color.block.BlockColorsRegisterEvent;
+import net.modificationstation.stationapi.api.client.event.color.item.ItemColorsRegisterEvent;
 import net.modificationstation.stationapi.api.client.event.render.entity.EntityRendererRegisterEvent;
 import net.modificationstation.stationapi.api.client.event.render.model.LoadUnbakedModelEvent;
 import net.modificationstation.stationapi.api.client.event.texture.TextureRegisterEvent;
 import net.modificationstation.stationapi.api.client.gui.screen.GuiHandler;
 import net.modificationstation.stationapi.api.client.registry.GuiHandlerRegistry;
-import net.modificationstation.stationapi.api.client.render.model.UnbakedModel;
 import net.modificationstation.stationapi.api.client.texture.SpriteIdentifier;
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
@@ -27,6 +28,7 @@ import net.modificationstation.stationapi.api.registry.ItemRegistry;
 import net.modificationstation.stationapi.api.registry.Registry;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
+import net.modificationstation.stationapi.impl.worldgen.BiomeColorsImpl;
 import paulevs.bnb.BNB;
 import paulevs.bnb.BNBClient;
 import paulevs.bnb.achievement.BNBAchievementPage;
@@ -44,10 +46,13 @@ import paulevs.bnb.entity.renderer.ObsidianBoatRenderer;
 import paulevs.bnb.gui.container.SpinningWheelContainer;
 import paulevs.bnb.gui.screen.SpinningWheelScreen;
 import paulevs.bnb.item.PortalCompassItem;
+import paulevs.bnb.noise.FloatNoise;
+import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -76,7 +81,6 @@ public class ClientListener {
 		Block.NETHERRACK.texture = blockAtlas.addTexture(BNB.id("block/netherrack")).index;
 		Block.GLOWSTONE.texture = blockAtlas.addTexture(BNB.id("block/glowstone")).index;
 		Block.SOUL_SAND.texture = blockAtlas.addTexture(BNB.id("block/soul_sand")).index;
-		Block.GRAVEL.texture = blockAtlas.addTexture(BNB.id("block/gravel")).index;
 		
 		LavaRenderer.flowTexture = blockAtlas.addTexture(BNB.id("block/lava_flow")).index;
 		for (byte i = 0; i < 16; i++) {
@@ -106,7 +110,6 @@ public class ClientListener {
 			PortalCompassItem.TEXTURES[i] = itemAtlas.addTexture(BNB.id("item/portal_compass_" + i)).index;
 		}
 		
-		debugTerrain();
 		printTranslations();
 	}
 	
@@ -114,10 +117,6 @@ public class ClientListener {
 	public void onModelLoad(LoadUnbakedModelEvent event) throws IOException {
 		if (event.identifier.namespace != BNB.NAMESPACE) return;
 		if (!event.identifier.path.startsWith("block/")) return;
-		
-		if (event.identifier.path.contains("moss_cover")) {
-			UnbakedModel model = event.model;
-		}
 		
 		InputStream stream = getAsStream(event.identifier);
 		if (stream == null) return;
@@ -169,13 +168,49 @@ public class ClientListener {
 	public void onEntityRenderRegister(EntityRendererRegisterEvent event) {
 		event.renderers.put(CrimsonSpiderEntity.class, new NetherSpiderRenderer("falurian_spider_e"));
 		event.renderers.put(PirozenSpiderEntity.class, new NetherSpiderRenderer("pirozen_spider_e"));
-		event.renderers.put(PoisonSpiderEntity.class, new NetherSpiderRenderer("poison_spider_e"));
+		event.renderers.put(PoisonSpiderEntity.class, new NetherSpiderRenderer("chlorophate_spider_e"));
 		event.renderers.put(ObsidianBoatEntity.class, new ObsidianBoatRenderer());
 	}
 	
 	@EventListener
 	public void onInit(InitEvent event) {
 		BNBCommandManager.registerClient();
+	}
+	
+	@EventListener
+	public void onBlockColorsRegister(BlockColorsRegisterEvent event) {
+		final FloatNoise noiseR = new PerlinNoise();
+		final FloatNoise noiseG = new PerlinNoise();
+		final FloatNoise noiseB = new PerlinNoise();
+		
+		noiseR.setSeed(13);
+		noiseG.setSeed(17);
+		noiseB.setSeed(19);
+		
+		event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
+			if (tintIndex != 0 || world == null || pos == null) return 0xFFFFFFFF;
+			int color = BiomeColorsImpl.GRASS_INTERPOLATOR.getColor(world.getBiomeSource(), pos.x, pos.z);
+			
+			double px = pos.x * 0.1;
+			double py = pos.y * 0.1;
+			double pz = pos.z * 0.1;
+			
+			float nr = noiseR.get(px, py, pz) * 0.4F + 0.6F;
+			float ng = noiseG.get(px, py, pz) * 0.4F + 0.6F;
+			float nb = noiseB.get(px, py, pz) * 0.4F + 0.6F;
+			
+			int cr = Math.round(((color >> 16) & 255) * nr) << 16;
+			int cg = Math.round(((color >> 8) & 255) * ng) << 8;
+			int cb = Math.round((color & 255) * nb);
+			
+			return 0xFF000000 | cr | cg | cb;
+		}, BNBBlocks.NETHERRACK_MYCORRUM, BNBBlocks.SOUL_MYCORRUM);
+	}
+	
+	@EventListener
+	public void onItemColorsRegister(ItemColorsRegisterEvent event) {
+		event.itemColors.register((stack, tintIndex) -> tintIndex == 0 ? 0xFF511515 : 0xFFFFFFFF, BNBBlocks.NETHERRACK_MYCORRUM);
+		event.itemColors.register((stack, tintIndex) -> tintIndex == 0 ? Color.CYAN.getRGB() : 0xFFFFFFFF, BNBBlocks.SOUL_MYCORRUM);
 	}
 	
 	private InputStream getAsStream(Identifier id) {
@@ -186,94 +221,6 @@ public class ClientListener {
 	private InputStream getAsStream(String path) {
 		path = "assets/bnb/stationapi/models/" + path + ".obj";
 		return Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
-	}
-	
-	// TODO remove that after release
-	private void debugTerrain() {
-		if (!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
-		
-		/*TerrainMap map = BNBWorldGenerator.getMapCopy();
-		BufferedImage buffer = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
-		for (int x = 0; x < 512; x++) {
-			for (int z = 0; z < 512; z++) {
-				TerrainRegion region = map.getRegion(x << 2, z << 2);
-				int color = switch (region) {
-					case OCEAN_NORMAL -> 0xFFFF0000;
-					case OCEAN_MOUNTAINS -> 0xFFFF3333;
-					case SHORE_NORMAL -> 0xFFFFFF00;
-					case SHORE_MOUNTAINS -> 0xFFFFFF00;
-					case PLAINS -> 0xFF333333;
-					case HILLS -> 0xFFcccccc;
-					case MOUNTAINS -> 0xFFFFFFFF;
-					case BRIDGES -> 0xFFFF00FF;
-				};
-				buffer.setRGB(x, z, color);
-			}
-		}
-		
-		JFrame frame = new JFrame();
-		frame.add(new JLabel(new ImageIcon(buffer)));
-		frame.setResizable(false);
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);*/
-		
-		/*BNBWorldGenerator g = new BNBWorldGenerator();
-		buffer = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
-		
-		for (int x = 0; x < 512; x++) {
-			for (int z = 0; z < 512; z++) {
-				//int index = terrainMap.getSDFIndex(x, z);
-				//System.out.println(index);
-				Identifier id = BNBWorldGenerator.TERRAIN_MAP.getData(x << 2, z << 2);
-				System.out.println(id);
-				buffer.setRGB(x, z, id.hashCode() | 0xFF000000);
-			}
-		}
-		
-		frame = new JFrame();
-		frame.add(new JLabel(new ImageIcon(buffer)));
-		frame.setResizable(false);
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);*/
-		
-		/*long t = System.currentTimeMillis();
-		TerrainFeature feature = new StraightThinPillarsFeature();
-		feature.setSeed(2);
-		feature.debugImage();
-		t = System.currentTimeMillis() - t;
-		System.out.println("\n\nF: " + t + "\n\n");*/
-		
-		/*NetherBiome[] biomes = new NetherBiome[] {
-			BNBBiomes.FALURIAN_FOREST,
-			BNBBiomes.PIROZEN_FOREST,
-			BNBBiomes.POISON_FOREST,
-			new NetherBiome(BNB.id("b")),
-			new NetherBiome(BNB.id("b")),
-			new NetherBiome(BNB.id("b"))
-		};
-		BiomeMap map = new BiomeMap(biomes);
-		
-		int scale = 1;
-		BufferedImage buffer = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
-		for (int x = 0; x < 512; x++) {
-			for (int z = 0; z < 512; z++) {
-				NetherBiome biome = map.getBiome((x) * scale, (z) * scale);
-				int color = biome.hashCode() | 255 << 24;
-				buffer.setRGB(x, z, color);
-			}
-		}
-		
-		JFrame frame = new JFrame();
-		frame.add(new JLabel(new ImageIcon(buffer)));
-		frame.setResizable(false);
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);*/
 	}
 	
 	private void printTranslations() {

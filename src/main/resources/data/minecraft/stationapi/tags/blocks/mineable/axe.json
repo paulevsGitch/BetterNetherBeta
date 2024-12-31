@@ -16,17 +16,13 @@
 		"bnb:pirozen_slab_half",
 		"bnb:pirozen_slab_full",
 		"bnb:pirozen_fence",
-		"bnb:poison_log",
-		"bnb:poison_stem",
-		"bnb:poison_branch",
-		"bnb:poison_planks",
-		"bnb:poison_stairs",
-		"bnb:poison_slab_half",
-		"bnb:poison_slab_full",
-		"bnb:poison_fence",
-		"bnb:pale_log",
-		"bnb:ember_log",
-		"bnb:flame_bamboo_block",
-		"bnb:ghost_pumpkin"
+		"bnb:chlorophate_log",
+		"bnb:chlorophate_stem",
+		"bnb:chlorophate_branch",
+		"bnb:chlorophate_planks",
+		"bnb:chlorophate_stairs",
+		"bnb:chlorophate_slab_half",
+		"bnb:chlorophate_slab_full",
+		"bnb:chlorophate_fence"
 	]
 }

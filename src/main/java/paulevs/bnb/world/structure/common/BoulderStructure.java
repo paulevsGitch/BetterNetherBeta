@@ -1,6 +1,5 @@
 package paulevs.bnb.world.structure.common;
 
-import net.minecraft.block.Block;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
@@ -23,7 +22,7 @@ public class BoulderStructure extends Structure {
 	
 	@Override
 	public boolean generate(Level level, Random random, int x, int y, int z) {
-		if (level.getBlockState(x, y - 1, z).isOf(Block.OBSIDIAN)) {
+		if (level.getBlockState(x, y - 1, z) == state) {
 			return false;
 		}
 		

@@ -1,9 +1,9 @@
 {
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
-		{ "item": "bnb:poison_stem" }
+		{ "item": "bnb:chlorophate_stem" }
 	],
 	"result": {
-		"item": "bnb:poison_branch"
+		"item": "bnb:chlorophate_branch"
 	}
 }

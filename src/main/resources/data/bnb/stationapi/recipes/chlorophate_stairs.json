@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"  X",
+		" XX",
+		"XXX"
+	],
+	"key": {
+		"X": {
+			"item": "bnb:chlorophate_planks"
+		}
+	},
+	"result": {
+		"item": "bnb:chlorophate_stairs",
+		"count": 6
+	}
+}

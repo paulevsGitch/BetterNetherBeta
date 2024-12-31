@@ -1,0 +1,9 @@
+{
+	"parent": "bnb:block/terrain_block",
+	"textures": {
+		"bottom": "bnb:block/soul_sand",
+		"side": "bnb:block/soul_mycorrum_side",
+		"top": "bnb:block/mycorrum_top",
+		"cover": "bnb:block/mycorrum_overlay"
+	}
+}

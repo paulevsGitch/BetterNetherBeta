@@ -1,0 +1,30 @@
+{
+	"parent": "minecraft:block/block",
+	"textures": {
+		"particle": "#side"
+	},
+	"elements": [
+		{
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"down": { "texture": "#bottom", "cullface": "down" },
+				"north": { "texture": "#side", "cullface": "north" },
+				"south": { "texture": "#side", "cullface": "south" },
+				"west": { "texture": "#side", "cullface": "west" },
+				"east": { "texture": "#side", "cullface": "east" }
+			}
+		},
+		{
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"up": { "texture": "#top", "cullface": "up", "tintindex": 0 },
+				"north": { "texture": "#cover", "cullface": "north", "tintindex": 0 },
+				"south": { "texture": "#cover", "cullface": "south", "tintindex": 0 },
+				"west": { "texture": "#cover", "cullface": "west", "tintindex": 0 },
+				"east": { "texture": "#cover", "cullface": "east", "tintindex": 0 }
+			}
+		}
+	]
+}

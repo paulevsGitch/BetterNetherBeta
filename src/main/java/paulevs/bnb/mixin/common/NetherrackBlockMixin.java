@@ -8,7 +8,7 @@ import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
-import paulevs.bnb.block.NetherTerrainBlock;
+import paulevs.bnb.block.BNBBlocks;
 
 @Mixin(NetherrackBlock.class)
 public abstract class NetherrackBlockMixin extends Block {
@@ -35,9 +35,8 @@ public abstract class NetherrackBlockMixin extends Block {
 			int px = x + dir.getOffsetX();
 			int pz = z + dir.getOffsetZ();
 			BlockState neighbour = level.getBlockState(px, y, pz);
-			if (neighbour.getBlock() instanceof NetherTerrainBlock) {
-				level.setBlockState(x, y, z, neighbour);
-				level.updateBlock(x, y, z);
+			if (neighbour.isOf(BNBBlocks.NETHERRACK_MYCORRUM)) {
+				level.setBlockStateWithNotify(x, y, z, neighbour);
 				return true;
 			}
 		}

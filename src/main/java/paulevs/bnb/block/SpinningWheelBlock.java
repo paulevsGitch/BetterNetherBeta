@@ -91,6 +91,4 @@ public class SpinningWheelBlock extends TemplateBlockWithEntity {
 			}
 		}
 	}
-	
-	
 }

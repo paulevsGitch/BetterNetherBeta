@@ -5,11 +5,11 @@
 		"SXS"
 	],
 	"key": {
-		"X": { "item": "bnb:poison_planks" },
+		"X": { "item": "bnb:chlorophate_planks" },
 		"S": { "item": "minecraft:stick" }
 	},
 	"result": {
-		"item": "bnb:poison_fence",
+		"item": "bnb:chlorophate_fence",
 		"count": 4
 	}
 }

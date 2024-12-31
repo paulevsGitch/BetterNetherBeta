@@ -5,10 +5,10 @@
 		"XX"
 	],
 	"key": {
-		"X": { "item": "bnb:poison_slab_half" }
+		"X": { "item": "bnb:chlorophate_slab_half" }
 	},
 	"result": {
-		"item": "bnb:poison_planks",
+		"item": "bnb:chlorophate_planks",
 		"count": 2
 	}
 }

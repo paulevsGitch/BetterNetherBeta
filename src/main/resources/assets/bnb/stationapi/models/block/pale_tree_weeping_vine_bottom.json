@@ -1,6 +1,0 @@
-{
-	"parent": "bnb:block/crop",
-	"textures": {
-		"crop": "bnb:block/pale_tree_weeping_vine_bottom"
-	}
-}

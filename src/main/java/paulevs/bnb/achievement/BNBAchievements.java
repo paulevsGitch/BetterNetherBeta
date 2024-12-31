@@ -29,12 +29,12 @@ public class BNBAchievements {
 	
 	public static final Stat COLLECT_FALURIAN_LOG = new RegisteringStat(9990, "stat.bnb:collectRedLog").register();
 	public static final Stat COLLECT_PIROZEN_LOG = new RegisteringStat(9991, "stat.bnb:collectRedLog").register();
-	public static final Stat COLLECT_POISON_LOG = new RegisteringStat(9992, "stat.bnb:collectRedLog").register();
+	public static final Stat COLLECT_CHLOROPHATE_LOG = new RegisteringStat(9992, "stat.bnb:collectRedLog").register();
 	
 	private static final ItemStack[] RGB_ICONS = new ItemStack[] {
 		new ItemStack(BNBBlocks.FALURIAN_LOG),
 		new ItemStack(BNBBlocks.PIROZEN_LOG),
-		new ItemStack(BNBBlocks.POISON_LOG)
+		new ItemStack(BNBBlocks.CHLOROPHATE_LOG)
 	};
 	
 	private static Achievement make(String name, Block icon, int x, int y, Achievement parent) {

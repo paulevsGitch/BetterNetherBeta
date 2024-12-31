@@ -1,0 +1,9 @@
+{
+	"parent": "bnb:block/terrain_block",
+	"textures": {
+		"bottom": "bnb:block/netherrack",
+		"side": "bnb:block/netherrack_mycorrum_side",
+		"top": "bnb:block/mycorrum_top",
+		"cover": "bnb:block/mycorrum_overlay"
+	}
+}

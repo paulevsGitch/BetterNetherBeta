@@ -27,7 +27,7 @@ public class BNBBiomeCommand extends BNBCommand {
 		PlayerEntity player = (PlayerEntity) commandSource;
 		BiomeSource source = player.level.getBiomeSource();
 		final String biomeName = args[0];
-		final int radius = 64;
+		final int radius = 128;
 		int cx = player.chunkX;
 		int cz = player.chunkZ;
 		byte dirIndex = 0;

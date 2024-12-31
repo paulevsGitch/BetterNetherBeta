@@ -16,6 +16,7 @@
 		"FireballEntityMixin",
 		"StairsBlockAccessor",
 		"FurnaceOutputMixin",
+		"SoulSandBlockMixin",
 		"PlayerEntityMixin",
 		"GhastEntityMixin",
 		"BoatEntityMixin",

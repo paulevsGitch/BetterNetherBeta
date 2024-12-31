@@ -1,8 +1,0 @@
-{
-	"parent": "minecraft:block/cube_bottom_top",
-	"textures": {
-		"side": "bnb:block/turquoise_nylium_side",
-		"top":  "bnb:block/turquoise_nylium_top",
-		"bottom": "bnb:block/netherrack"
-	}
-}

@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.block.BlockState;
+import net.modificationstation.stationapi.api.block.States;
 import net.modificationstation.stationapi.api.item.ItemPlacementContext;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.util.Identifier;
@@ -30,12 +31,18 @@ public class FerruminePlantBlock extends BNBFloorSoulPlantBlock {
 	@Override
 	public void onAdjacentBlockUpdate(Level level, int x, int y, int z, int id) {
 		BlockState oldState = level.getBlockState(x, y, z);
-		BlockState newState = getTerrainState(level, x, y, z);
+		BlockState newState = getTerrainState(oldState, level, x, y, z);
 		if (newState != oldState) level.setBlockState(x, y, z, newState);
 	}
 	
 	public BlockState getTerrainState(BlockStateView level, int x, int y, int z) {
-		boolean grape = level.getBlockState(x, y - 1, z).isOf(BNBBlocks.GRAPE_NYLIUM);
-		return getDefaultState().with(BNBBlockProperties.GRAPE, grape);
+		return getTerrainState(getDefaultState(), level, x, y, z);
+	}
+	
+	private BlockState getTerrainState(BlockState oldState, BlockStateView level, int x, int y, int z) {
+		BlockState below = level.getBlockState(x, y - 1, z);
+		if (!below.isIn(BNBBlockTags.SOUL_TERRAIN)) return States.AIR.get();
+		boolean grape = below.isOf(BNBBlocks.SOUL_MYCORRUM);
+		return oldState.with(BNBBlockProperties.GRAPE, grape);
 	}
 }

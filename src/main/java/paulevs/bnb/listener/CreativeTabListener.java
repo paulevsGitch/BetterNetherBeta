@@ -13,7 +13,7 @@ public class CreativeTabListener {
 	public void registerTab(TabRegistryEvent event) {
 		BNB.LOGGER.info("Adding BNB tab");
 		
-		SimpleTab tab = new SimpleTab(BNB.id("creative_tab"), new ItemStack(BNBBlocks.MAROON_NYLIUM));
+		SimpleTab tab = new SimpleTab(BNB.id("creative_tab"), new ItemStack(BNBBlocks.NETHERRACK_MYCORRUM));
 		event.register(tab);
 		BNBBlocks.BLOCKS_WITH_ITEMS.forEach(block -> tab.addItem(new ItemStack(block)));
 		BNBItems.ITEMS.forEach(item -> tab.addItem(new ItemStack(item)));

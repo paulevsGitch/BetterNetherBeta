@@ -1,7 +1,5 @@
 package paulevs.bnb.world.generator.terrain;
 
-import net.modificationstation.stationapi.api.util.math.MathHelper;
-
 public class CrossInterpolationCell {
 	private final InterpolationCell cell1;
 	private final InterpolationCell cell2;
@@ -10,7 +8,7 @@ public class CrossInterpolationCell {
 	public CrossInterpolationCell(int cellSide) {
 		cell1 = new InterpolationCell(cellSide);
 		cell2 = new InterpolationCell(cellSide, 16 / cellSide + 2);
-		offset = cellSide / 2;
+		offset = cellSide >> 1;
 	}
 	
 	public void setX(int x) {
@@ -29,7 +27,7 @@ public class CrossInterpolationCell {
 	}
 	
 	public float get() {
-		return MathHelper.lerp(0.5F, cell1.get(), cell2.get());
+		return (cell1.get() + cell2.get()) * 0.5F;
 	}
 	
 	public void fill(int x, int y, int z, TerrainSDF sdf) {

@@ -1,0 +1,22 @@
+{
+	"variants": {
+		"": [
+			{ "model": "bnb:block/netherrack_gravel" },
+			{ "model": "bnb:block/netherrack_gravel", "x": 90 },
+			{ "model": "bnb:block/netherrack_gravel", "x": 180 },
+			{ "model": "bnb:block/netherrack_gravel", "x": 270 },
+			{ "model": "bnb:block/netherrack_gravel", "y": 90 },
+			{ "model": "bnb:block/netherrack_gravel", "x": 90, "y": 90 },
+			{ "model": "bnb:block/netherrack_gravel", "x": 180, "y": 90 },
+			{ "model": "bnb:block/netherrack_gravel", "x": 270, "y": 90 },
+			{ "model": "bnb:block/netherrack_gravel", "y": 180 },
+			{ "model": "bnb:block/netherrack_gravel", "x": 90, "y": 180 },
+			{ "model": "bnb:block/netherrack_gravel", "x": 180, "y": 180 },
+			{ "model": "bnb:block/netherrack_gravel", "x": 270, "y": 180 },
+			{ "model": "bnb:block/netherrack_gravel", "y": 270 },
+			{ "model": "bnb:block/netherrack_gravel", "x": 90, "y": 270 },
+			{ "model": "bnb:block/netherrack_gravel", "x": 180, "y": 270 },
+			{ "model": "bnb:block/netherrack_gravel", "x": 270, "y": 270 }
+		]
+	}
+}

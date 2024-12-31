@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"": [
+			{ "model": "bnb:block/netherrack_mycorrum" },
+			{ "model": "bnb:block/netherrack_mycorrum", "y": 90 },
+			{ "model": "bnb:block/netherrack_mycorrum", "y": 180 },
+			{ "model": "bnb:block/netherrack_mycorrum", "y": 270 }
+		]
+	}
+}
