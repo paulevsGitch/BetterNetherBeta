@@ -52,7 +52,9 @@ import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
 import paulevs.bnb.world.generator.terrain.features.CubesFeature;
+import paulevs.bnb.world.generator.terrain.features.RiversFeature;
 import paulevs.bnb.world.generator.terrain.features.TerrainFeature;
+import paulevs.bnb.world.generator.terrain.features.TunnelsFeature;
 
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -289,7 +291,7 @@ public class ClientListener {
 		if (!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
 		
 		long t = System.currentTimeMillis();
-		TerrainFeature feature = new CubesFeature();
+		TerrainFeature feature = new RiversFeature();
 		feature.setSeed(2);
 		feature.debugImage();
 		t = System.currentTimeMillis() - t;

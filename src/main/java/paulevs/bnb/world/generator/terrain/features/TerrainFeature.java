@@ -26,6 +26,10 @@ public abstract class TerrainFeature implements TerrainSDF {
 	
 	protected float gradient(float y, float minY, float maxY, float minValue, float midValue, float maxValue) {
 		float midY = MathHelper.lerp(0.5F, minY, maxY);
+		return gradient(y, minY, midY, maxY, minValue, midValue, maxValue);
+	}
+	
+	protected float gradient(float y, float minY, float midY, float maxY, float minValue, float midValue, float maxValue) {
 		return Math.max(
 			gradient(y, minY, midY, minValue, midValue),
 			gradient(y, midY, maxY, midValue, maxValue)

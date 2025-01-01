@@ -62,16 +62,15 @@ public class ChunkTerrainMap implements TerrainSDF {
 	
 	@Override
 	public float getDensity(int x, int y, int z) {
+		float result = -100.0F;
+		
 		Reference2FloatMap<Identifier> density = FEATURE_DENSITY[getIndex(x, z)];
-		
-		float result = 0;
-		
 		for (Identifier id : density.keySet()) {
-			result += features.get(id).getDensity(x, y, z) * density.getFloat(id);
+			result = features.get(id).getAndMixDensity(result, x, y, z, density.getFloat(id));
 		}
 		
 		for (TerrainFeature feature : commonFeatures) {
-			result = Math.max(result, feature.getDensity(x, y, z));
+			result = feature.getAndMixDensity(result, x, y, z, 1.0F);
 		}
 		
 		return result;

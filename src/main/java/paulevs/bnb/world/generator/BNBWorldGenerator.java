@@ -28,11 +28,13 @@ import paulevs.bnb.world.generator.terrain.features.FlatOceanFeature;
 import paulevs.bnb.world.generator.terrain.features.LandPillarsFeature;
 import paulevs.bnb.world.generator.terrain.features.OceanPillarsFeature;
 import paulevs.bnb.world.generator.terrain.features.PlainsFeature;
+import paulevs.bnb.world.generator.terrain.features.RiversFeature;
 import paulevs.bnb.world.generator.terrain.features.ShoreFeature;
 import paulevs.bnb.world.generator.terrain.features.StalactitesFeature;
 import paulevs.bnb.world.generator.terrain.features.StraightThinPillarsFeature;
 import paulevs.bnb.world.generator.terrain.features.TerrainFeature;
 import paulevs.bnb.world.generator.terrain.features.ThinPillarsFeature;
+import paulevs.bnb.world.generator.terrain.features.TunnelsFeature;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,7 +97,7 @@ public class BNBWorldGenerator {
 		
 		CrossInterpolationCell cell = CELLS[index];
 		cell.fill(startX, index << 4, startZ, FEATURE_MAPS[index]);
-		if (cell.isEmpty()) return;
+		if (cell.isEmpty() && index > 5) return;
 		
 		for (byte bx = 0; bx < 16; bx++) {
 			cell.setX(bx);
@@ -139,10 +141,56 @@ public class BNBWorldGenerator {
 	}
 	
 	private static void fixGenerationErrors() {
+		TerrainMap map = getMapCopy();
+		
+		/*TerrainRegion[] regions = new TerrainRegion[64];
+		
+		for (byte i = 0; i < 64; i++) {
+			int x = ((i & 7) << 1) + startX;
+			int z = ((i >> 3) << 1) + startZ;
+			regions[i] = map.getRegion(x, z);
+		}*/
+		
 		for (byte i = 0; i < 16; i++) {
 			byte[] blocks = BLOCKS[i];
 			for (short n = 0; n < 4096; n++) {
+				// Fix lava in caves
+				/*if (i < 6 && blocks[n] == 3) {
+					int px = (n >> 1) & 7;
+					int pz = (n >> 4) & 7;
+					TerrainRegion region = regions[pz << 3 | px];
+					
+					if (
+						region != TerrainRegion.OCEAN_NORMAL &&
+						region != TerrainRegion.OCEAN_MOUNTAINS &&
+						region != TerrainRegion.SHORE_NORMAL &&
+						region != TerrainRegion.SHORE_MOUNTAINS
+					) {
+						blocks[n] = 0;
+						continue;
+					}
+					
+					short y1 = (short) (i << 4 | n >> 8);
+					int xz = 0xFF & n;
+					int y2 = -1;
+					
+					for (short y = y1; y < 96; y++) {
+						byte[] blocks2 = BLOCKS[y >> 4];
+						byte block = blocks2[(y & 15) << 8 | xz];
+						if (block == 1) {
+							y2 = y;
+							break;
+						}
+					}
+					
+					for (short y = y1; y < y2; y++) {
+						byte[] blocks2 = BLOCKS[y >> 4];
+						blocks2[(y & 15) << 8 | xz] = 0;
+					}
+				}*/
+				
 				if (blocks[n] != 1) continue;
+				
 				byte x = (byte) (n & 15);
 				byte z = (byte) ((n >> 4) & 15);
 				boolean	hasSupport = n >= 256 ? blocks[n - 256] > 1 : i == 0 || BLOCKS[i - 1][n + 3840] > 1;
@@ -236,6 +284,8 @@ public class BNBWorldGenerator {
 		ChunkTerrainMap.addCommonFeature(ThinPillarsFeature::new);
 		ChunkTerrainMap.addCommonFeature(StalactitesFeature::new);
 		ChunkTerrainMap.addCommonFeature(StraightThinPillarsFeature::new);
+		//ChunkTerrainMap.addCommonFeature(TunnelsFeature::new);
+		ChunkTerrainMap.addCommonFeature(RiversFeature::new);
 		
 		mapCopies = ThreadLocal.withInitial(() -> {
 			TerrainMap map = new TerrainMap();
