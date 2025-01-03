@@ -3,6 +3,8 @@ package paulevs.bnb.world.structure.common;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
+import net.minecraft.level.LightType;
+import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
@@ -11,35 +13,32 @@ import paulevs.bnb.block.BNBBlockTags;
 import java.util.Random;
 
 public class StreamStructure extends Structure {
+	private static final BlockState LAVA = Block.STILL_LAVA.getDefaultState();
+	
 	@Override
 	public boolean generate(Level level, Random random, int x, int y, int z) {
-		Direction offset = Direction.UP;
-		if (random.nextBoolean()) {
-			offset = Direction.fromHorizontal(random.nextInt(4));
-		}
+		Chunk chunk = level.getChunkFromCache(x >> 4, z >> 4);
+		x &= 15;
+		z &= 15;
 		
-		int sx = x + offset.getOffsetX();
-		int sy = y + offset.getOffsetY();
-		int sz = z + offset.getOffsetZ();
+		if (!chunk.getBlockState(x, y + 1, z).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) return false;
 		
-		if (!level.getBlockState(sx, sy, sz).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) return false;
-		
-		int ey;
-		
-		for (ey = y - 1; ey > 95; ey--) {
-			BlockState state = level.getBlockState(x, ey, z);
+		int minY;
+		for (minY = y - 1; minY > 95; minY--) {
+			BlockState state = chunk.getBlockState(x, minY, z);
 			if (state.getMaterial() == Material.LAVA) {
-				ey++;
+				minY++;
 				break;
 			}
 			if (!state.getMaterial().isReplaceable()) return false;
 		}
 		
-		BlockState state = Block.STILL_LAVA.getDefaultState();
-		level.setBlockState(sx, sy, sz, state);
+		chunk.setBlockState(x, y, z, LAVA);
+		chunk.setLight(LightType.BLOCK, x, y, z, 15);
 		
-		for (int py = ey; py <= y; py++) {
-			level.setBlockState(x, py, z, state);
+		for (int py = minY; py <= y; py++) {
+			chunk.setBlockStateWithMetadata(x, py, z, LAVA, 1);
+			chunk.setLight(LightType.BLOCK, x, py, z, 15);
 		}
 		
 		return false;

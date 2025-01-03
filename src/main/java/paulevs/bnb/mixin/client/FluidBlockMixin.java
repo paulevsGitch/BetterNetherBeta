@@ -37,6 +37,8 @@ public abstract class FluidBlockMixin extends Block {
 	@Environment(EnvType.CLIENT)
 	@ModifyReturnValue(method = "getBrightness", at = @At("RETURN"))
 	private float bnb_changeLavaBrightness(float original) {
+		Minecraft minecraft = BNBClient.getMinecraft();
+		if (minecraft.level == null || minecraft.level.dimension.id != -1) return original;
 		return this == STILL_LAVA || this == FLOWING_LAVA ? original * 2.0F : original;
 	}
 }
