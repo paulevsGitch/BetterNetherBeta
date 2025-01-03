@@ -27,7 +27,9 @@ import net.modificationstation.stationapi.api.registry.BlockRegistry;
 import net.modificationstation.stationapi.api.registry.ItemRegistry;
 import net.modificationstation.stationapi.api.registry.Registry;
 import net.modificationstation.stationapi.api.util.Identifier;
+import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
+import net.modificationstation.stationapi.api.world.BlockStateView;
 import net.modificationstation.stationapi.impl.worldgen.BiomeColorsImpl;
 import paulevs.bnb.BNB;
 import paulevs.bnb.BNBClient;
@@ -51,10 +53,8 @@ import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
-import paulevs.bnb.world.generator.terrain.features.CubesFeature;
 import paulevs.bnb.world.generator.terrain.features.RiversFeature;
 import paulevs.bnb.world.generator.terrain.features.TerrainFeature;
-import paulevs.bnb.world.generator.terrain.features.TunnelsFeature;
 
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -62,6 +62,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 @Environment(EnvType.CLIENT)
@@ -115,7 +116,8 @@ public class ClientListener {
 		}
 		
 		printTranslations();
-		debugTerrain();
+		//debugTerrain();
+		biomeColors();
 	}
 	
 	@EventListener
@@ -209,13 +211,51 @@ public class ClientListener {
 			int cb = Math.round((color & 255) * nb);
 			
 			return 0xFF000000 | cr | cg | cb;
-		}, BNBBlocks.NETHERRACK_MYCORRUM, BNBBlocks.SOUL_MYCORRUM);
+		}, BNBBlocks.NETHERRACK_MYCORRUM, BNBBlocks.SOUL_MYCORRUM, BNBBlocks.MOSSY_NETHERRACK);
+		
+		event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
+			if (world == null || pos == null) return 0xFF9A4545;
+			
+			int rnd = (int) MathHelper.hashCode(pos.x, pos.y, pos.z);
+			
+			BlockStateView view = (BlockStateView) world;
+			state = view.getBlockState(pos.x, pos.y - 1, pos.z);
+			if (state.isOf(Block.NETHERRACK)) {
+				float delta = (rnd & 7) / 7.0F;
+				return mixColor(0xFF9A4545, 0xFFC03939, delta);
+			}
+			
+			int color = BiomeColorsImpl.GRASS_INTERPOLATOR.getColor(world.getBiomeSource(), pos.x, pos.z);
+			
+			double px = pos.x * 0.1;
+			double py = pos.y * 0.1;
+			double pz = pos.z * 0.1;
+			
+			int dr = ((rnd % 5) & 15) - 7;
+			int dg = ((rnd >> 5) & 15) - 7;
+			int db = ((rnd >> 10) & 15) - 7;
+			
+			float nr = noiseR.get(px, py, pz) * 0.4F + 0.6F;
+			float ng = noiseG.get(px, py, pz) * 0.4F + 0.6F;
+			float nb = noiseB.get(px, py, pz) * 0.4F + 0.6F;
+			
+			int cr = (color >> 16) & 255;
+			int cg = (color >> 8) & 255;
+			int cb = color & 255;
+			
+			cr = MathHelper.clamp(Math.round(cr * nr) + dr, 0, 255) << 16;
+			cg = MathHelper.clamp(Math.round(cg * ng) + dg, 0, 255) << 8;
+			cb = MathHelper.clamp(Math.round(cb * nb) + db, 0, 255);
+			
+			return 0xFF000000 | cr | cg | cb;
+		}, BNBBlocks.NETHER_SPROUTS);
 	}
 	
 	@EventListener
 	public void onItemColorsRegister(ItemColorsRegisterEvent event) {
-		event.itemColors.register((stack, tintIndex) -> tintIndex == 0 ? 0xFF511515 : 0xFFFFFFFF, BNBBlocks.NETHERRACK_MYCORRUM);
+		event.itemColors.register((stack, tintIndex) -> tintIndex == 0 ? 0xFFC03939 : 0xFFFFFFFF, BNBBlocks.NETHERRACK_MYCORRUM, BNBBlocks.MOSSY_NETHERRACK);
 		event.itemColors.register((stack, tintIndex) -> tintIndex == 0 ? Color.CYAN.getRGB() : 0xFFFFFFFF, BNBBlocks.SOUL_MYCORRUM);
+		event.itemColors.register((stack, tintIndex) -> 0xFFB02921, BNBBlocks.NETHER_SPROUTS);
 	}
 	
 	private InputStream getAsStream(Identifier id) {
@@ -296,5 +336,57 @@ public class ClientListener {
 		feature.debugImage();
 		t = System.currentTimeMillis() - t;
 		System.out.println("\n\nF: " + t + "\n\n");
+	}
+	
+	// TODO remove that after release
+	private void biomeColors() {
+		biomeColor(0xB4223D, 0xB6C8CA);
+		biomeColor(0x158E7E, 0xB6C8CA);
+		biomeColor(0xf99221, 0xB6C8CA);
+		biomeColor(0xed5c24, 0xB6C8CA);
+	}
+	
+	// TODO remove that after release
+	private void biomeColor(int color, int grassColor) {
+		float r = ((color >> 16) & 255) / 255.0F;
+		float g = ((color >> 8) & 255) / 255.0F;
+		float b = (color & 255) / 255.0F;
+		
+		float grassR = ((grassColor >> 16) & 255) / 255.0F;
+		float grassG = ((grassColor >> 8) & 255) / 255.0F;
+		float grassB = (grassColor & 255) / 255.0F;
+		
+		r /= grassR;
+		g /= grassG;
+		b /= grassB;
+		
+		float mx = Math.max(r, Math.max(g, b));
+		if (mx > 1.0F) {
+			r = r / mx;
+			g = g / mx;
+			b = b / mx;
+		}
+		
+		int ir = MathHelper.clamp((int) Math.ceil(r * 255.0F), 0, 255);
+		int ig = MathHelper.clamp((int) Math.ceil(g * 255.0F), 0, 255);
+		int ib = MathHelper.clamp((int) Math.ceil(b * 255.0F), 0, 255);
+		
+		System.out.println("Color: 0xFF" + Integer.toHexString(ir << 16 | ig << 8 | ib).toUpperCase(Locale.ROOT));
+	}
+	
+	private static int mixColor(int colorA, int colorB, float delta) {
+		int cr1 = (colorA >> 16) & 255;
+		int cg1 = (colorA >> 8) & 255;
+		int cb1 = colorA & 255;
+		
+		int cr2 = (colorB >> 16) & 255;
+		int cg2 = (colorB >> 8) & 255;
+		int cb2 = colorB & 255;
+		
+		cr1 = MathHelper.lerp(delta, cr1, cr2);
+		cg1 = MathHelper.lerp(delta, cg1, cg2);
+		cb1 = MathHelper.lerp(delta, cb1, cb2);
+		
+		return 0xFF000000 | cr1 << 16 | cg1 << 8 | cb1;
 	}
 }

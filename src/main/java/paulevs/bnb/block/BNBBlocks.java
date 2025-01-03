@@ -37,6 +37,7 @@ public class BNBBlocks {
 	public static final NetherTerrainBlock NETHERRACK_MYCORRUM = make("netherrack_mycorrum", NetherTerrainBlock::new);
 	public static final NetherTerrainBlock SOUL_MYCORRUM = make("soul_mycorrum", SoulTerrainBlock::new);
 	public static final Block NETHERRACK_GRAVEL = make("netherrack_gravel", NetherrackGravelBlock::new);
+	public static final Block MOSSY_NETHERRACK = make("mossy_netherrack", NetherTerrainBlock::new);
 	
 	public static final Block TREE_LANTERN = make("tree_lantern", NetherLanternBlock::new);
 	
@@ -122,6 +123,7 @@ public class BNBBlocks {
 	public static final Block LANTERN_GRASS = make("lantern_grass", BNBDoubleFloorPlantBlock::new).setLightEmittance(0.75F);
 	
 	public static final FerruminePlantBlock FERRUMINE_PLANT = make("ferrumine_plant", FerruminePlantBlock::new);
+	public static final Block NETHER_SPROUTS = make("nether_sprouts", BNBFloorPlantBlock::new);
 	
 	public static final Block FALURIAN_MOSS = make("falurian_moss_cover", CoverMossBlock::new);
 	public static final Block FALURIAN_MOSS_BLOCK = make("falurian_moss_block", NetherMossBlock::new);

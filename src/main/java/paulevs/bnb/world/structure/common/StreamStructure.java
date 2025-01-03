@@ -7,7 +7,6 @@ import net.minecraft.level.LightType;
 import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
-import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.block.BNBBlockTags;
 
 import java.util.Random;

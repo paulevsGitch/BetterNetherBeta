@@ -1,6 +1,7 @@
 tile.bnb.netherrack_mycorrum.name=Netherrack Mycorrum
 tile.bnb.soul_mycorrum.name=Soul Mycorrum
 tile.bnb.netherrack_gravel.name=Netherrack Gravel
+tile.bnb.mossy_netherrack.name=Mossy Netherrack
 
 tile.bnb.falurian_log.name=Falurian Log
 tile.bnb.falurian_stem.name=Falurian Stem
@@ -232,6 +233,8 @@ tile.bnb.jalumine_fence.name=Jalumine Fence
 tile.bnb.grape_nylium.name=Grape Nylium
 tile.bnb.ferrumine_plant.name=Ferrumine Plant
 item.bnb.jalumine_tree_placer.name=Jalumine Tree Placer
+
+tile.bnb.nether_sprouts.name=Nether Sprouts
 
 item.bnb.fiber_helmet.name=Fiber Helmet
 item.bnb.fiber_chestplate.name=Fiber Chestplate

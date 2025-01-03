@@ -34,7 +34,6 @@ import paulevs.bnb.world.generator.terrain.features.StalactitesFeature;
 import paulevs.bnb.world.generator.terrain.features.StraightThinPillarsFeature;
 import paulevs.bnb.world.generator.terrain.features.TerrainFeature;
 import paulevs.bnb.world.generator.terrain.features.ThinPillarsFeature;
-import paulevs.bnb.world.generator.terrain.features.TunnelsFeature;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -141,7 +140,7 @@ public class BNBWorldGenerator {
 	}
 	
 	private static void fixGenerationErrors() {
-		TerrainMap map = getMapCopy();
+		//TerrainMap map = getMapCopy();
 		
 		/*TerrainRegion[] regions = new TerrainRegion[64];
 		

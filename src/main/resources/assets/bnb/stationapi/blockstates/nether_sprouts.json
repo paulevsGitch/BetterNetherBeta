@@ -1,0 +1,9 @@
+{
+	"variants": {
+		"": [
+			{ "model": "bnb:block/nether_sprouts_1" },
+			{ "model": "bnb:block/nether_sprouts_2" },
+			{ "model": "bnb:block/nether_sprouts_3" }
+		]
+	}
+}

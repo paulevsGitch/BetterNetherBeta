@@ -1,0 +1,17 @@
+{
+	"parent": "bnb:block/tinted_overlay_cube",
+	"textures": {
+		"north": "#all",
+		"south": "#all",
+		"east": "#all",
+		"west": "#all",
+		"up":  "#all",
+		"down": "#all",
+		"north_overlay": "#all_overlay",
+		"south_overlay": "#all_overlay",
+		"east_overlay": "#all_overlay",
+		"west_overlay": "#all_overlay",
+		"up_overlay":  "#all_overlay",
+		"down_overlay": "#all_overlay"
+	}
+}

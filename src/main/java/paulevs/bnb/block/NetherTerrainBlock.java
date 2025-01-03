@@ -13,7 +13,7 @@ import java.util.List;
 public class NetherTerrainBlock extends TemplateBlock {
 	public NetherTerrainBlock(Identifier id, Material material) {
 		super(id, material);
-		setTicksRandomly(true);
+		//setTicksRandomly(true);
 		setHardness(NETHERRACK.getHardness() * 1.5F);
 	}
 	

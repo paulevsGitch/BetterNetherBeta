@@ -3,7 +3,10 @@ package paulevs.bnb.listener;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.achievement.Achievement;
 import net.minecraft.block.Block;
+import net.minecraft.level.Level;
+import net.minecraft.level.chunk.Chunk;
 import net.minecraft.stat.Stat;
+import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.event.achievement.AchievementRegisterEvent;
 import net.modificationstation.stationapi.api.event.block.BlockEvent.BeforePlacedByItem;
 import net.modificationstation.stationapi.api.event.block.entity.BlockEntityRegisterEvent;
@@ -13,6 +16,7 @@ import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
 import net.modificationstation.stationapi.api.event.world.biome.BiomeRegisterEvent;
+import net.modificationstation.stationapi.api.event.world.gen.WorldGenEvent.ChunkDecoration;
 import net.modificationstation.stationapi.api.recipe.FuelRegistry;
 import net.modificationstation.stationapi.api.registry.PacketTypeRegistry;
 import net.modificationstation.stationapi.api.registry.Registry;
@@ -97,6 +101,52 @@ public class CommonListener {
 	@EventListener
 	public void registerPackets(PacketRegisterEvent event) {
 		Registry.register(PacketTypeRegistry.INSTANCE, BNBWeatherPacket.ID, BNBWeatherPacket.TYPE);
+	}
+	
+	@EventListener
+	public void registerDecoration(ChunkDecoration decoration) {
+		if (decoration.world.dimension.id != -1) return;
+		int minX = decoration.x | 8;
+		int minZ = decoration.z | 8;
+		int maxX = minX + 16;
+		int maxZ = minZ + 16;
+		
+		final BlockState netherrack = Block.NETHERRACK.getDefaultState();
+		final BlockState mossy_netherrack = BNBBlocks.MOSSY_NETHERRACK.getDefaultState();
+		
+		for (int x = minX; x < maxX; x++) {
+			for (int z = minZ; z < maxZ; z++) {
+				Chunk chunk = decoration.world.getChunkFromCache(x >> 4, z >> 4);
+				int cx = x & 15;
+				int cz = z & 15;
+				for (int y = 94; y < 256; y++) {
+					BlockState state = chunk.getBlockState(cx, y, cz);
+					if (state.isOf(BNBBlocks.NETHERRACK_MYCORRUM)) {
+						fillCube(decoration.world, x, y, z, netherrack, mossy_netherrack);
+					}
+				}
+			}
+		}
+	}
+	
+	private static void fillCube(Level level, int x, int y, int z, BlockState filter, BlockState fill) {
+		for (byte dx = -2; dx <= 2; dx++) {
+			int wx = x + dx;
+			byte cx = (byte) (wx & 15);
+			for (byte dz = -2; dz <= 2; dz++) {
+				int wz = z + dz;
+				byte cz = (byte) (wz & 15);
+				Chunk chunk2 = level.getChunkFromCache(wx >> 4, wz >> 4);
+				for (int dy = -1; dy <= 1; dy++) {
+					int cy = y + dy;
+					BlockState above = chunk2.getBlockState(cx, cy + 1, cz);
+					if (!above.isAir() && above.isOpaque()) continue;
+					if (chunk2.getBlockState(cx, cy, cz) == filter) {
+						chunk2.setBlockState(cx, cy, cz, fill);
+					}
+				}
+			}
+		}
 	}
 	
 	/*@EventListener

@@ -1,0 +1,7 @@
+{
+	"parent": "bnb:block/tinted_overlay_cube_all",
+	"textures": {
+		"all": "bnb:block/mossy_netherrack",
+		"all_overlay": "bnb:block/mossy_netherrack_overlay"
+	}
+}

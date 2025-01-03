@@ -176,4 +176,7 @@ public class BNBStructures {
 	);
 	
 	public static final Structure FERRUMINE_PLANT = new FerruminePlantScatterStructure(3, 15);
+	public static final Structure NETHER_SPROUTS = new SimpleScatterStructure(5, 30, BNBBlocks.NETHER_SPROUTS);
+	
+	public static final Structure MOSSY_NETHERRACK = new NetherOreStructure(BNBBlocks.MOSSY_NETHERRACK, 4);
 }
