@@ -3,7 +3,6 @@ package paulevs.bnb.world.structure;
 import net.minecraft.block.Block;
 import net.minecraft.level.structure.Structure;
 import paulevs.bnb.block.BNBBlocks;
-import paulevs.bnb.block.MossCoverBlock;
 import paulevs.bnb.world.structure.common.BoulderStructure;
 import paulevs.bnb.world.structure.common.CocoonStructure;
 import paulevs.bnb.world.structure.common.CrystalStructure;

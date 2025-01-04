@@ -41,7 +41,7 @@ public class BNBWeatherManager {
 		if (weatherLength-- > 0) return;
 		currentWeather = WEATHER_SEQUENCE[weatherIndex];
 		if (currentWeather == null) {
-			currentWeather = WEATHER_TYPES[RANDOM.nextInt(WEATHER_TYPES.length)];
+			currentWeather = WeatherType.CLEAR;
 			fillSequence();
 		}
 		if (++weatherIndex == WEATHER_SEQUENCE.length) {
@@ -49,7 +49,7 @@ public class BNBWeatherManager {
 		}
 		weatherLength = currentWeather.getTime(RANDOM);
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-			BNB.LOGGER.info("Weather " + currentWeather + " for " + weatherLength + " ticks");
+			BNB.LOGGER.info("Weather '" + currentWeather.name + "' for " + weatherLength + " ticks");
 		}
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
 			PacketHelper.send(new BNBWeatherPacket(currentWeather));
@@ -57,14 +57,13 @@ public class BNBWeatherManager {
 	}
 	
 	private static WeatherType getWeather(WeatherType prev1, WeatherType prev2) {
-		if (prev1 == WeatherType.RAIN) return WeatherType.FOG;
-		if (prev1 == WeatherType.FOG) {
-			return prev2 == null || prev2 == WeatherType.RAIN ? WeatherType.CLEAR : WeatherType.RAIN;
-		}
-		int index = RANDOM.nextInt(WEATHER_TYPES.length);
-		WeatherType weather = WEATHER_TYPES[index];
-		if (weather == prev1) weather = WEATHER_TYPES[(index + 1) % WEATHER_TYPES.length];
-		return weather;
+		if (prev1 == null) return WeatherType.CLEAR;
+		return switch (prev1) {
+			case CLEAR -> RANDOM.nextInt(5) == 0 ? WeatherType.DRIZZLE : WeatherType.FOG;
+			case FOG -> RANDOM.nextInt(3) == 0 ? WeatherType.DRIZZLE : WeatherType.CLEAR;
+			case DRIZZLE -> prev2 == WeatherType.RAIN ? WeatherType.CLEAR : WeatherType.RAIN;
+			case RAIN -> WeatherType.DRIZZLE;
+		};
 	}
 	
 	private static void fillSequence() {

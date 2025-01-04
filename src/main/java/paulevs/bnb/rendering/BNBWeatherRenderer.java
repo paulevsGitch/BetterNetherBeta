@@ -86,6 +86,9 @@ public class BNBWeatherRenderer {
 		if (prevWeather == WeatherType.RAIN || weather == WeatherType.RAIN) {
 			renderRain(minecraft, delta, cameraPos);
 		}
+		if (prevWeather == WeatherType.DRIZZLE || weather == WeatherType.DRIZZLE) {
+			renderDrizzle(minecraft, delta, cameraPos);
+		}
 	}
 	
 	public static void updateFog(float[] fogColor) {
@@ -248,6 +251,79 @@ public class BNBWeatherRenderer {
 		GL11.glDepthMask(true);
 	}
 	
+	private static void renderDrizzle(Minecraft minecraft, float delta, Vec3D cameraPos) {
+		LivingEntity entity = minecraft.viewEntity;
+		double x = MathHelper.lerp(delta, entity.prevRenderX, entity.x);
+		double y = MathHelper.lerp(delta, entity.prevRenderY, entity.y);
+		double z = MathHelper.lerp(delta, entity.prevRenderZ, entity.z);
+		
+		int ix = MCMath.floor(entity.x);
+		int iy = MCMath.floor(entity.y);
+		int iz = MCMath.floor(entity.z);
+		
+		int radius = minecraft.options.fancyGraphics ? 10 : 5;
+		Level level = minecraft.level;
+		int rainTop = level.getTopY();
+		
+		if (iy - rainTop > 40) return;
+		
+		float vOffset = (float) (((double) level.getLevelTime() + delta) * 0.03 % 1.0);
+		
+		Tessellator tessellator = Tessellator.INSTANCE;
+		
+		GL11.glDisable(GL11.GL_CULL_FACE);
+		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glAlphaFunc(GL11.GL_GREATER, 0.01F);
+		GL11.glColor4f(1F, 1F, 1F, 1F);
+		
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, rainTexture);
+		
+		tessellator.start();
+		float intensity = getIntensity(WeatherType.DRIZZLE);
+		tessellator.color(1F, 1F, 1F, intensity);
+		tessellator.setOffset(-x, -y, -z);
+		
+		for (byte dx = (byte) -radius; dx <= radius; dx++) {
+			int wx = ix + dx;
+			int lx = wx & 3;
+			for (byte dz = (byte) -radius; dz <= radius; dz++) {
+				int wz = iz + dz;
+				int lz = wz & 3;
+				if ((lx != 0 || lz != 0) && (lx != 2 || lz != 2)) continue;
+				renderDrizzleSection(level, wx, wz, cameraPos, tessellator, vOffset);
+			}
+		}
+		
+		tessellator.render();
+		
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, lavaPuddleTexture);
+		vOffset = (float) (((double) level.getLevelTime() + delta) * 0.03);
+		
+		tessellator.start();
+		
+		radius = minecraft.options.fancyGraphics ? 15 : 7;
+		for (byte dx = (byte) -radius; dx <= radius; dx++) {
+			int wx = ix + dx;
+			int lx = wx & 3;
+			for (byte dz = (byte) -radius; dz <= radius; dz++) {
+				int wz = iz + dz;
+				int lz = wz & 3;
+				//if (((wx + wz) & 1) == 0) continue;
+				if ((lx != 0 || lz != 0) && (lx != 2 || lz != 2)) continue;
+				renderLavaPuddles(level, wx, wz, cameraPos, tessellator, vOffset, radius, intensity);
+			}
+		}
+		
+		tessellator.render();
+		tessellator.setOffset(0.0, 0.0, 0.0);
+		
+		GL11.glEnable(GL11.GL_CULL_FACE);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1f);
+	}
+	
 	private static void renderRain(Minecraft minecraft, float delta, Vec3D cameraPos) {
 		LivingEntity entity = minecraft.viewEntity;
 		double x = MathHelper.lerp(delta, entity.prevRenderX, entity.x);
@@ -279,7 +355,8 @@ public class BNBWeatherRenderer {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, rainTexture);
 		
 		tessellator.start();
-		tessellator.color(1F, 1F, 1F, getIntensity(WeatherType.RAIN));
+		float intensity = getIntensity(WeatherType.RAIN);
+		tessellator.color(1F, 1F, 1F, intensity);
 		tessellator.setOffset(-x, -y, -z);
 		
 		for (byte dx = (byte) -radius; dx <= radius; dx++) {
@@ -312,7 +389,7 @@ public class BNBWeatherRenderer {
 			int wx = ix + dx;
 			for (byte dz = (byte) -radius; dz <= radius; dz++) {
 				int wz = iz + dz;
-				renderLavaPuddles(level, wx, wz, cameraPos, tessellator, vOffset, radius);
+				renderLavaPuddles(level, wx, wz, cameraPos, tessellator, vOffset, radius, intensity);
 			}
 		}
 		
@@ -404,7 +481,7 @@ public class BNBWeatherRenderer {
 		tessellator.vertex(x2, y1, z2, u2, v2);
 	}
 	
-	private static void renderLavaPuddles(Level level, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset, float radius) {
+	private static void renderLavaPuddles(Level level, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset, float radius, float intensity) {
 		int top = BNBWeatherManager.getWeatherTop(level, x, z);
 		int height = BNBWeatherManager.getWeatherBottom(level, x, top, z);
 		
@@ -415,7 +492,7 @@ public class BNBWeatherRenderer {
 		float dy = (float) (height - pos.y) * 0.5F;
 		float dz = (float) (z - pos.z);
 		float alpha = 1F - MCMath.sqrt(dx * dx + dy * dy + dz * dz) / radius;
-		alpha = alpha * 4F * getIntensity(WeatherType.RAIN);
+		alpha = alpha * 4F * intensity;
 		if (alpha <= 0.01F) return;
 		if (alpha > 1F) alpha = 1F;
 		
@@ -456,6 +533,51 @@ public class BNBWeatherRenderer {
 		tessellator.vertex(x1, h, z2, 0.0F, v2);
 		tessellator.vertex(x2, h, z2, 1.0F, v2);
 		tessellator.vertex(x2, h, z1, 1.0F, v1);
+	}
+	
+	private static void renderDrizzleSection(Level level, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset) {
+		int y1 = BNBWeatherManager.getWeatherTop(level, x, z);
+		int y2 = BNBWeatherManager.getWeatherBottom(level, x, y1, z);
+		
+		if (y2 - y1 == 0) return;
+		if (areIsInvisible(pos, x, y1, z, x + 1, y2, z + 1)) return;
+		
+		int index = (x & 15) << 4 | (z & 15);
+		float v1 = RANDOM_OFFSET[index] - vOffset;
+		float v2 = (y2 - y1) * 0.0625F + v1;
+		
+		float u1 = ((x + z) & 3) * 0.25F;
+		float u2 = u1 + 0.25F;
+		
+		float du = Math.round(RANDOM_OFFSET[(index + 13) & 255] * 16) * 0.0625F;
+		u1 = u1 * 0.25F + du;
+		u2 = u2 * 0.25F + du;
+		
+		float dx = (float) (pos.x - (x + 0.5));
+		float dz = (float) (pos.z - (z + 0.5));
+		float l = dx * dx + dz * dz;
+		if (l > 0) {
+			l = MCMath.sqrt(l) / 0.5F;
+			dx /= l;
+			dz /= l;
+			float v = dx;
+			dx = -dz;
+			dz = v;
+		}
+		else {
+			dx = 0.5F;
+			dz = 0;
+		}
+		
+		double x1 = x + 0.5 + dx * 0.25F;
+		double x2 = x + 0.5 - dx * 0.25F;
+		double z1 = z + 0.5 + dz * 0.25F;
+		double z2 = z + 0.5 - dz * 0.25F;
+		
+		tessellator.vertex(x1, y1, z1, u1, v2);
+		tessellator.vertex(x1, y2, z1, u1, v1);
+		tessellator.vertex(x2, y2, z2, u2, v1);
+		tessellator.vertex(x2, y1, z2, u2, v2);
 	}
 	
 	private static Vec3D getPosition(LivingEntity entity) {

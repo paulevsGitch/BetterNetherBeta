@@ -8,7 +8,8 @@ import java.util.Random;
 public enum WeatherType {
 	CLEAR("clear", 300, 1200, 1.0F),
 	FOG("fog", 30, 120, 0.55F),
-	RAIN("rain", 60, 300, 0.5F);
+	DRIZZLE("drizzle", 30, 60, 0.6F),
+	RAIN("rain", 60, 300, 0.75F);
 	
 	private static final Map<String, WeatherType> BY_NAME = new Object2ReferenceOpenHashMap<>();
 	private static final WeatherType[] VALUES = values();

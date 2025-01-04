@@ -4,7 +4,15 @@ import net.minecraft.entity.living.player.PlayerEntity;
 import paulevs.bnb.weather.BNBWeatherManager;
 import paulevs.bnb.weather.WeatherType;
 
+import java.util.Arrays;
+
 public class BNBWeatherCommand extends BNBCommand {
+	private static final String[] WEATHER_NAMES = Arrays
+		.stream(WeatherType.values())
+		.map(type -> type.name)
+		.sorted()
+		.toArray(String[]::new);
+	
 	protected BNBWeatherCommand() {
 		super("weather");
 	}
@@ -57,8 +65,8 @@ public class BNBWeatherCommand extends BNBCommand {
 		return "shows list of available commands";
 	}
 	
-	/*@Environment(EnvType.SERVER)
-	private void executeOnServer() {
-		BNBWeatherManager.setWeather(type, length);
-	}*/
+	@Override
+	protected String[] getArgumentSuggestions(int index, String input) {
+		return getPossibleVariants(input, WEATHER_NAMES);
+	}
 }

@@ -8,7 +8,6 @@ import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
 import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.BNBBlocks;
-import paulevs.bnb.block.MossCoverBlock;
 
 import java.util.Random;
 

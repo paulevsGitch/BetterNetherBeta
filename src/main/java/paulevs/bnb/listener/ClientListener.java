@@ -280,7 +280,7 @@ public class ClientListener {
 		event.itemColors.register((stack, tintIndex) -> tintIndex == 0 ? 0xFFC03939 : 0xFFFFFFFF, BNBBlocks.NETHERRACK_MYCORRUM, BNBBlocks.MOSSY_NETHERRACK);
 		event.itemColors.register((stack, tintIndex) -> tintIndex == 0 ? Color.CYAN.getRGB() : 0xFFFFFFFF, BNBBlocks.SOUL_MYCORRUM);
 		event.itemColors.register((stack, tintIndex) -> 0xFFB02921, BNBBlocks.NETHER_SPROUTS);
-		event.itemColors.register((stack, tintIndex) -> 0xFFCB6F6F, BNBBlocks.NETHER_MOSS_BLOCK);
+		event.itemColors.register((stack, tintIndex) -> 0xFFC03939, BNBBlocks.NETHER_MOSS_BLOCK);
 	}
 	
 	private InputStream getAsStream(Identifier id) {

@@ -4,7 +4,6 @@ import net.minecraft.level.Level;
 import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.block.BlockState;
 import paulevs.bnb.block.BNBBlocks;
-import paulevs.bnb.block.MossCoverBlock;
 
 import java.util.Random;
 
