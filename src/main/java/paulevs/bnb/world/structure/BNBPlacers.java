@@ -20,9 +20,9 @@ public class BNBPlacers {
 	public static final StructurePlacer FIREWEED_STRUCTURE = new FloorPlacer(BNBStructures.FIREWEED, 1).setNoiseDensityFunction(2);
 	public static final StructurePlacer FLAME_BULBS_TALL = new FloorPlacer(BNBStructures.FLAME_BULBS_TALL, 3).setNoiseDensityFunction(3);
 	public static final StructurePlacer LANTERN_GRASS = new FloorPlacer(BNBStructures.LANTERN_GRASS, 1).setNoiseDensityFunction(4);
-	public static final StructurePlacer FALURIAN_MOSS = new VolumetricPlacer(BNBStructures.FALURIAN_MOSS, 4).setNoiseDensityFunction(5);
-	public static final StructurePlacer FALURIAN_MOSS_BLOCK = new VolumetricPlacer(BNBStructures.FALURIAN_MOSS_BLOCK, 3).setNoiseDensityFunction(6);
-	public static final StructurePlacer FALURIAN_MOSS_CEILING = new CeilingPlacer(BNBStructures.FALURIAN_MOSS_BLOCK, 5).setNoiseDensityFunction(7);
+	public static final StructurePlacer NETHER_MOSS_COVER = new VolumetricPlacer(BNBStructures.NETHER_MOSS_COVER, 4).setNoiseDensityFunction(5);
+	public static final StructurePlacer FALURIAN_MOSS_BLOCK = new VolumetricPlacer(BNBStructures.NETHER_MOSS_BLOCK, 3).setNoiseDensityFunction(6);
+	public static final StructurePlacer FALURIAN_MOSS_CEILING = new CeilingPlacer(BNBStructures.NETHER_MOSS_BLOCK, 5).setNoiseDensityFunction(7);
 	public static final StructurePlacer FALURIAN_VINE_SHORT = new CeilingPlacer(BNBStructures.FALURIAN_VINE_SHORT, 10).setNoiseDensityFunction(8);
 	public static final StructurePlacer FALURIAN_VINE_LONG = new CeilingPlacer(BNBStructures.FALURIAN_VINE_LONG, 5).setNoiseDensityFunction(9);
 	public static final StructurePlacer FALURIAN_TREE = new FloorPlacer(BNBStructures.FALURIAN_TREE, 3).setNoiseDensityFunction(10);
@@ -39,9 +39,6 @@ public class BNBPlacers {
 	public static final StructurePlacer FALLEN_PIROZEN_TREE = new FloorPlacer(BNBStructures.FALLEN_PIROZEN_TREE, 1).setRandomDensityFunction(4, 7);
 	public static final StructurePlacer PIROZEN_VINE_SHORT = new CeilingPlacer(BNBStructures.PIROZEN_VINE_SHORT, 10).setNoiseDensityFunction(8);
 	public static final StructurePlacer PIROZEN_VINE_LONG = new CeilingPlacer(BNBStructures.PIROZEN_VINE_LONG, 5).setNoiseDensityFunction(9);
-	public static final StructurePlacer PIROZEN_MOSS = new VolumetricPlacer(BNBStructures.PIROZEN_MOSS, 4).setNoiseDensityFunction(5);
-	public static final StructurePlacer PIROZEN_MOSS_BLOCK = new VolumetricPlacer(BNBStructures.PIROZEN_MOSS_BLOCK, 3).setNoiseDensityFunction(6);
-	public static final StructurePlacer PIROZEN_MOSS_CEILING = new CeilingPlacer(BNBStructures.PIROZEN_MOSS_BLOCK, 5).setNoiseDensityFunction(7);
 	
 	public static final StructurePlacer CHLOROPHATE_TREE = new FloorPlacer(BNBStructures.CHLOROPHATE_TREE, 2).setNoiseDensityFunction(0);
 	public static final StructurePlacer CHLOROPHATE_BUSH = new FloorPlacer(BNBStructures.CHLOROPHATE_TREE_BUSH, 3).setNoiseDensityFunction(1);

@@ -7,16 +7,16 @@ import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
 import paulevs.bnb.block.BNBBlockTags;
-import paulevs.bnb.block.CoverMossBlock;
+import paulevs.bnb.block.MossCoverBlock;
 
 import java.util.Random;
 
 public class BlockMossScatterStructure extends VolumeScatterStructure {
 	private final MutableBlockPos bp = new MutableBlockPos();
 	private final BlockState mossBlock;
-	private final CoverMossBlock moss;
+	private final MossCoverBlock moss;
 	
-	public BlockMossScatterStructure(int radius, float density, Block mossBlock, CoverMossBlock moss) {
+	public BlockMossScatterStructure(int radius, float density, Block mossBlock, MossCoverBlock moss) {
 		super(radius, density);
 		this.mossBlock = mossBlock.getDefaultState();
 		this.moss = moss;
@@ -30,7 +30,7 @@ public class BlockMossScatterStructure extends VolumeScatterStructure {
 			Direction dir = Direction.byId(i);
 			bp.set(pos.x, pos.y, pos.z).move(dir);
 			if (!level.getBlockState(bp.getX(), bp.getY(), bp.getZ()).isAir()) continue;
-			BlockState state = moss.getStructureState(level, bp);
+			BlockState state = moss.getStructureState(level, bp.getX(), bp.getY(), bp.getZ());
 			if (state != null) {
 				level.setBlockState(bp.getX(), bp.getY(), bp.getZ(), state);
 			}

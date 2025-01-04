@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "bnb:item/pirozen_moss_cover"
+		"layer0": "bnb:item/nether_moss_cover"
 	}
 }

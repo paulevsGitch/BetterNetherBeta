@@ -64,7 +64,10 @@ public abstract class BNBPlantBlock extends TemplateBlock {
 	
 	@Override
 	public void afterBreak(Level level, PlayerEntity player, int x, int y, int z, int meta) {
-		if (level.isRemote) super.afterBreak(level, player, x, y, z, meta);
+		if (level.isRemote) {
+			super.afterBreak(level, player, x, y, z, meta);
+			return;
+		}
 		ItemStack heldItem = player.getHeldItem();
 		if (heldItem == null || !(heldItem.getType() instanceof ShearsItem)) return;
 		drop(level, x, y, z, new ItemStack(this));

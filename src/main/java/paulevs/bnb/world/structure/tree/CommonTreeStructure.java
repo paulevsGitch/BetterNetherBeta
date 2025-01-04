@@ -87,8 +87,8 @@ public class CommonTreeStructure extends Structure {
 			int py = y + length;
 			if (!canReplace(level.getBlockState(px, py, pz))) continue;
 			BlockState branch = this.branch
-				.with(BNBBlockProperties.getByFace(side.getOpposite()), true)
-				.with(BNBBlockProperties.getByFace(Direction.DOWN), true);
+				.with(BNBBlockProperties.getByDir(side.getOpposite()), true)
+				.with(BNBBlockProperties.getByDir(Direction.DOWN), true);
 			level.setBlockState(px, py, pz, branch);
 			for (byte j = (byte) (length - 1); j >= -1; j--) {
 				if (!canReplace(level.getBlockState(px, y + j, pz))) break;
@@ -107,8 +107,8 @@ public class CommonTreeStructure extends Structure {
 			int py = y + height - length;
 			if (!canReplace(level.getBlockState(px, py, pz))) continue;
 			BlockState branch = this.branch
-				.with(BNBBlockProperties.getByFace(side.getOpposite()), true)
-				.with(BNBBlockProperties.getByFace(Direction.UP), true);
+				.with(BNBBlockProperties.getByDir(side.getOpposite()), true)
+				.with(BNBBlockProperties.getByDir(Direction.UP), true);
 			level.setBlockState(px, py, pz, branch);
 			for (byte j = 1; j < length; j++) {
 				if (!canReplace(level.getBlockState(px, py + j, pz))) break;

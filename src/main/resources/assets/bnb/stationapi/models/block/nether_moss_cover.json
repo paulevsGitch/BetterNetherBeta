@@ -1,6 +1,6 @@
 {
 	"parent": "bnb:block/moss_cover",
 	"textures": {
-		"cover": "bnb:block/falurian_moss_cover"
+		"cover": "bnb:block/nether_moss_cover"
 	}
 }

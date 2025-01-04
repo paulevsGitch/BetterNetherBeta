@@ -74,6 +74,26 @@
 		"bnb:nether_cloth_orange_slab_half",
 		"bnb:nether_cloth_orange_slab_full",
 		"bnb:nether_cloth_white_slab_half",
-		"bnb:nether_cloth_white_slab_full"
+		"bnb:nether_cloth_white_slab_full",
+		"bnb:flame_bulbs",
+		"bnb:flame_bulbs_tall",
+		"bnb:falurian_roots",
+		"bnb:nether_daisy",
+		"bnb:fireweed",
+		"bnb:lantern_grass",
+		"bnb:falurian_moss_cover",
+		"bnb:falurian_moss_block",
+		"bnb:falurian_vine",
+		"bnb:pirozen_roots",
+		"bnb:chlorophate_roots",
+		"bnb:falurian_weeping_vine",
+		"bnb:pirozen_weeping_vine",
+		"bnb:chlorophate_weeping_vine",
+		"bnb:falurian_sapling",
+		"bnb:pirozen_sapling",
+		"bnb:chlorophate_sapling",
+		"bnb:pirozen_moss_cover",
+		"bnb:pirozen_moss_block",
+		"bnb:nether_sprouts"
 	]
 }

@@ -4,6 +4,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.BlockRegistry;
@@ -38,6 +39,7 @@ public class BNBBlocks {
 	public static final NetherTerrainBlock SOUL_MYCORRUM = make("soul_mycorrum", SoulTerrainBlock::new);
 	public static final Block NETHERRACK_GRAVEL = make("netherrack_gravel", NetherrackGravelBlock::new);
 	public static final Block MOSSY_NETHERRACK = make("mossy_netherrack", NetherTerrainBlock::new);
+	public static final MossCoverBlock NETHER_MOSS_COVER = makeNI("nether_moss_cover", MossCoverBlock::new);
 	
 	public static final Block TREE_LANTERN = make("tree_lantern", NetherLanternBlock::new);
 	
@@ -125,10 +127,7 @@ public class BNBBlocks {
 	public static final FerruminePlantBlock FERRUMINE_PLANT = make("ferrumine_plant", FerruminePlantBlock::new);
 	public static final Block NETHER_SPROUTS = make("nether_sprouts", BNBFloorPlantBlock::new);
 	
-	public static final Block FALURIAN_MOSS = make("falurian_moss_cover", CoverMossBlock::new);
 	public static final Block FALURIAN_MOSS_BLOCK = make("falurian_moss_block", NetherMossBlock::new);
-	
-	public static final Block PIROZEN_MOSS = make("pirozen_moss_cover", CoverMossBlock::new);
 	public static final Block PIROZEN_MOSS_BLOCK = make("pirozen_moss_block", NetherMossBlock::new);
 	
 	public static final BNBCollectableVineBlock FALURIAN_VINE = (BNBCollectableVineBlock) make(
@@ -329,7 +328,9 @@ public class BNBBlocks {
 	private static <B extends Block> B makeNI(String name, Function<Identifier, B> constructor) {
 		Identifier id = BNB.id(name);
 		B block = constructor.apply(id);
+		block.disableAutoItemRegistration();
 		block.setTranslationKey(id);
+		Item item = BlockItem.BLOCK_ITEMS.get(block);
 		BlockItem.BLOCK_ITEMS.remove(block);
 		if (block instanceof BlockTextureUpdate update) {
 			UPDATE_TEXTURE_INTERFACE.add(update);
@@ -340,6 +341,7 @@ public class BNBBlocks {
 	private static <B extends Block> B makeNI(String name, BiFunction<Identifier, Block, B> constructor, Block sourceBlock) {
 		Identifier id = BNB.id(name);
 		B block = constructor.apply(id, sourceBlock);
+		block.disableAutoItemRegistration();
 		block.setTranslationKey(id);
 		BlockItem.BLOCK_ITEMS.remove(block);
 		if (block instanceof BlockTextureUpdate update) {

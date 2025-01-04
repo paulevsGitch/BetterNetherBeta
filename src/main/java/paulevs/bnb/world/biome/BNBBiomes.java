@@ -9,6 +9,7 @@ import net.modificationstation.stationapi.api.worldgen.biome.BiomeBuilder;
 import net.modificationstation.stationapi.api.worldgen.surface.SurfaceBuilder;
 import net.modificationstation.stationapi.api.worldgen.surface.SurfaceRule;
 import net.modificationstation.stationapi.api.worldgen.surface.condition.PositionSurfaceCondition;
+import net.modificationstation.stationapi.api.worldgen.surface.condition.SurfaceCondition;
 import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.noise.FractalNoise;
@@ -30,7 +31,8 @@ public class BNBBiomes {
 	
 	private static final FractalNoise SHORE_NOISE = new FractalNoise(PerlinNoise::new);
 	private static final PositionSurfaceCondition SHORE_COND = new PositionSurfaceCondition(BNBBiomes::shoreHeight);
-	private static final FractalNoise GRAPE_NYLIUM_NOISE = new FractalNoise(VoronoiNoise::new);
+	private static final FractalNoise NOISE_COVER = new FractalNoise(VoronoiNoise::new);
+	private static final SurfaceCondition NOISE_COVER_CONDITION = (level, x, y, z, state) -> NOISE_COVER.get(x * 0.1, z * 0.1) < 0.5F;
 	private static final SurfaceRule LOW_LAND_GRAVEL = SurfaceBuilder
 		.start(BNBBlocks.NETHERRACK_GRAVEL)
 		.replace(BNBBlockTags.NETHERRACK_TERRAIN)
@@ -43,7 +45,12 @@ public class BNBBiomes {
 		.fogColor(0x951922)
 		.grassAndLeavesColor(0xFFFD2C4E)
 		.surfaceRule(LOW_LAND_GRAVEL)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.NETHERRACK_MYCORRUM).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(1).build())
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.NETHERRACK_MYCORRUM)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(1)
+			.build()
+		)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -66,7 +73,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.FALURIAN_VINE_SHORT)
 		.feature(BNBPlacers.FALURIAN_VINE_LONG)
 		.feature(BNBPlacers.FALURIAN_MOSS_BLOCK)
-		.feature(BNBPlacers.FALURIAN_MOSS)
+		.feature(BNBPlacers.NETHER_MOSS_COVER)
 		.build(), BiomeArea.NETHERRACK_LUSH).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
 	
 	public static final Biome FALURIAN_GRASSLAND = addLand(BiomeBuilder
@@ -74,7 +81,13 @@ public class BNBBiomes {
 		.fogColor(0x951922)
 		.grassAndLeavesColor(0xFFFD2C4E)
 		.surfaceRule(LOW_LAND_GRAVEL)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.NETHERRACK_MYCORRUM).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(1).build())
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.NETHERRACK_MYCORRUM)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(1)
+			.condition(NOISE_COVER_CONDITION, 5)
+			.build()
+		)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -100,7 +113,12 @@ public class BNBBiomes {
 		.fogColor(0x119b85)
 		.grassAndLeavesColor(0xFF1EB6A0)
 		.surfaceRule(LOW_LAND_GRAVEL)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.NETHERRACK_MYCORRUM).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(1).build())
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.NETHERRACK_MYCORRUM)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(1)
+			.build()
+		)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -116,8 +134,6 @@ public class BNBBiomes {
 		.feature(BNBPlacers.NETHER_SPROUTS)
 		.feature(BNBPlacers.PIROZEN_VINE_SHORT)
 		.feature(BNBPlacers.PIROZEN_VINE_LONG)
-		.feature(BNBPlacers.PIROZEN_MOSS_BLOCK)
-		.feature(BNBPlacers.PIROZEN_MOSS)
 		.build(), BiomeArea.NETHERRACK_LUSH).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
 	
 	public static final Biome PIROZEN_GRASSLAND = addLand(BiomeBuilder
@@ -125,7 +141,13 @@ public class BNBBiomes {
 		.fogColor(0x119b85)
 		.grassAndLeavesColor(0xFF1EB6A0)
 		.surfaceRule(LOW_LAND_GRAVEL)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.NETHERRACK_MYCORRUM).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(1).build())
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.NETHERRACK_MYCORRUM)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(1)
+			.condition(NOISE_COVER_CONDITION, 5)
+			.build()
+		)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -145,7 +167,12 @@ public class BNBBiomes {
 		.fogColor(0x7db33d)
 		.grassAndLeavesColor(0x558b30)
 		.surfaceRule(LOW_LAND_GRAVEL)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.NETHERRACK_MYCORRUM).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(1).build())
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.NETHERRACK_MYCORRUM)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(1)
+			.build()
+		)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -166,7 +193,12 @@ public class BNBBiomes {
 		.fogColor(0x7db33d)
 		.grassAndLeavesColor(0x558b30)
 		.surfaceRule(LOW_LAND_GRAVEL)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.NETHERRACK_MYCORRUM).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(1).build())
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.NETHERRACK_MYCORRUM)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(1)
+			.build()
+		)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -183,7 +215,13 @@ public class BNBBiomes {
 		.start("bnb_gravel_shore")
 		.fogColor(0xab1302)
 		.grassAndLeavesColor(0xFFC03939)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.NETHERRACK_GRAVEL).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(3).condition(SHORE_COND, 1).build())
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.NETHERRACK_GRAVEL)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(3)
+			.condition(SHORE_COND, 1)
+			.build()
+		)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
@@ -193,7 +231,21 @@ public class BNBBiomes {
 		.start("bnb_obsidian_shore")
 		.fogColor(0xab1302)
 		.grassAndLeavesColor(0xFFC03939)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.NETHERRACK_GRAVEL).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(3).condition(SHORE_COND, 1).build())
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.OBSIDIAN_GRAVEL)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(3)
+			.condition(SHORE_COND, 1)
+			.condition(NOISE_COVER_CONDITION, 5)
+			.build()
+		)
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.NETHERRACK_GRAVEL)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(3)
+			.condition(SHORE_COND, 1)
+			.build()
+		)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.OBSIDIAN_GRAVEL_BLOB)
@@ -206,7 +258,13 @@ public class BNBBiomes {
 		.start("bnb_lava_ocean")
 		.fogColor(0xab1302)
 		.grassAndLeavesColor(0xFFC03939)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.NETHERRACK_GRAVEL).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(3).condition(SHORE_COND, 1).build())
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.NETHERRACK_GRAVEL)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(3)
+			.condition(SHORE_COND, 1)
+			.build()
+		)
 		.noDimensionFeatures()
 		.hostileEntity(GhastEntity.class, 1)
 		.hostileEntity(ZombiePigmanEntity.class, 10)
@@ -221,9 +279,24 @@ public class BNBBiomes {
 		.fogColor(Color.CYAN.getRGB())
 		.grassAndLeavesColor(Color.CYAN.getRGB())
 		.surfaceRule(LOW_LAND_GRAVEL)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_MYCORRUM).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(1).build())
-		.surfaceRule(SurfaceBuilder.start(Block.SOUL_SAND).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(3).build())
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_SANDSTONE).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(10).build())
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.SOUL_MYCORRUM)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(1)
+			.build()
+		)
+		.surfaceRule(SurfaceBuilder
+			.start(Block.SOUL_SAND)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(3)
+			.build()
+		)
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.SOUL_SANDSTONE)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(10)
+			.build()
+		)
 		.noDimensionFeatures()
 		.build(), BiomeArea.SOUL_LUSH);
 	
@@ -232,11 +305,25 @@ public class BNBBiomes {
 		.fogColor(0x4A306B)
 		.grassAndLeavesColor(0xFF372a65)
 		.surfaceRule(LOW_LAND_GRAVEL)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_MYCORRUM).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(1).condition(
-			(level, x, y, z, state) -> GRAPE_NYLIUM_NOISE.get(x * 0.1, z * 0.1) < 0.5F, 5
-		).build())
-		.surfaceRule(SurfaceBuilder.start(Block.SOUL_SAND).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(3).build())
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_SANDSTONE).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(10).build())
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.SOUL_MYCORRUM)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(1)
+			.condition(NOISE_COVER_CONDITION, 5)
+			.build()
+		)
+		.surfaceRule(SurfaceBuilder
+			.start(Block.SOUL_SAND)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(3)
+			.build()
+		)
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.SOUL_SANDSTONE)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(10)
+			.build()
+		)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -313,7 +400,7 @@ public class BNBBiomes {
 	public static void init() {
 		SHORE_NOISE.setOctaves(2);
 		SHORE_NOISE.setSeed(123);
-		GRAPE_NYLIUM_NOISE.setSeed(513);
+		NOISE_COVER.setSeed(513);
 		Biome.NETHER.setGrassColorProvider((source, x, z) -> 0xFFC03939);
 		Biome.NETHER.addFeature(BNBPlacers.NETHER_SPROUTS_RARE);
 	}

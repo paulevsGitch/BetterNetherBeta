@@ -56,13 +56,13 @@ public class JalumineTreeStructure extends Structure {
 			if (!canReplace(state)) continue;
 			
 			level.setBlockState(x, wy, z, BRANCH
-				.with(BNBBlockProperties.getByFace(direction), true)
-				.with(BNBBlockProperties.getByFace(Direction.DOWN), true)
-				.with(BNBBlockProperties.getByFace(Direction.UP), true)
+				.with(BNBBlockProperties.getByDir(direction), true)
+				.with(BNBBlockProperties.getByDir(Direction.DOWN), true)
+				.with(BNBBlockProperties.getByDir(Direction.UP), true)
 			);
 			level.setBlockState(wx, wy, wz, BRANCH
-				.with(BNBBlockProperties.getByFace(direction.getOpposite()), true)
-				.with(BNBBlockProperties.getByFace(Direction.DOWN), true)
+				.with(BNBBlockProperties.getByDir(direction.getOpposite()), true)
+				.with(BNBBlockProperties.getByDir(Direction.DOWN), true)
 			);
 			
 			for (int j = i; j >= -2; j--) {

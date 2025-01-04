@@ -1,0 +1,7 @@
+{
+	"parent": "bnb:block/moss_cover_flowers",
+	"textures": {
+		"cover": "bnb:block/nether_moss_cover",
+		"flowers": "bnb:block/nether_moss_flowers_1"
+	}
+}

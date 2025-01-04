@@ -110,8 +110,8 @@ public class CommonLargeTreeStructure extends Structure {
 				level.setBlockState(sx, py, sz, stemSide);
 			}
 			BlockState branch = this.branch
-				.with(BNBBlockProperties.getByFace(side.getOpposite()), true)
-				.with(BNBBlockProperties.getByFace(Direction.DOWN), true);
+				.with(BNBBlockProperties.getByDir(side.getOpposite()), true)
+				.with(BNBBlockProperties.getByDir(Direction.DOWN), true);
 			level.setBlockState(px, py, pz, branch);
 			for (byte j = (byte) (length - 1); j >= -1; j--) {
 				py = y + j;
@@ -122,12 +122,12 @@ public class CommonLargeTreeStructure extends Structure {
 				sz = pz + side.getOffsetZ();
 				if (!canReplace(level.getBlockState(sx, py, sz))) continue;
 				branch = this.branch
-					.with(BNBBlockProperties.getByFace(Direction.UP), true)
-					.with(BNBBlockProperties.getByFace(Direction.DOWN), true);
-				level.setBlockState(px, py, pz, branch.with(BNBBlockProperties.getByFace(side), true));
+					.with(BNBBlockProperties.getByDir(Direction.UP), true)
+					.with(BNBBlockProperties.getByDir(Direction.DOWN), true);
+				level.setBlockState(px, py, pz, branch.with(BNBBlockProperties.getByDir(side), true));
 				level.setBlockState(sx, py, sz, this.branch
-					.with(BNBBlockProperties.getByFace(side.getOpposite()), true)
-					.with(BNBBlockProperties.getByFace(Direction.DOWN), true)
+					.with(BNBBlockProperties.getByDir(side.getOpposite()), true)
+					.with(BNBBlockProperties.getByDir(Direction.DOWN), true)
 				);
 				int sy = py;
 				for (byte k = j; k >= -1; k--) {
@@ -159,8 +159,8 @@ public class CommonLargeTreeStructure extends Structure {
 				level.setBlockState(sx, py, sz, stemSide);
 			}
 			BlockState branch = this.branch
-				.with(BNBBlockProperties.getByFace(side.getOpposite()), true)
-				.with(BNBBlockProperties.getByFace(Direction.UP), true);
+				.with(BNBBlockProperties.getByDir(side.getOpposite()), true)
+				.with(BNBBlockProperties.getByDir(Direction.UP), true);
 			level.setBlockState(px, py, pz, branch);
 			for (byte j = 1; j < length; j++) {
 				int by = py + j;
@@ -171,12 +171,12 @@ public class CommonLargeTreeStructure extends Structure {
 				sz = pz + side.getOffsetZ();
 				if (!canReplace(level.getBlockState(sx, by, sz))) continue;
 				branch = this.branch
-					.with(BNBBlockProperties.getByFace(Direction.UP), true)
-					.with(BNBBlockProperties.getByFace(Direction.DOWN), true);
-				level.setBlockState(px, by, pz, branch.with(BNBBlockProperties.getByFace(side), true));
+					.with(BNBBlockProperties.getByDir(Direction.UP), true)
+					.with(BNBBlockProperties.getByDir(Direction.DOWN), true);
+				level.setBlockState(px, by, pz, branch.with(BNBBlockProperties.getByDir(side), true));
 				level.setBlockState(sx, by, sz, this.branch
-					.with(BNBBlockProperties.getByFace(side.getOpposite()), true)
-					.with(BNBBlockProperties.getByFace(Direction.UP), true)
+					.with(BNBBlockProperties.getByDir(side.getOpposite()), true)
+					.with(BNBBlockProperties.getByDir(Direction.UP), true)
 				);
 				int sy = by;
 				for (byte k = (byte) (j + 1); k < length; k++) {

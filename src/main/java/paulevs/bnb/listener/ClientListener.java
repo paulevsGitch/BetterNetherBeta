@@ -48,6 +48,7 @@ import paulevs.bnb.entity.renderer.ObsidianBoatRenderer;
 import paulevs.bnb.gui.container.SpinningWheelContainer;
 import paulevs.bnb.gui.screen.SpinningWheelScreen;
 import paulevs.bnb.item.PortalCompassItem;
+import paulevs.bnb.math.ColorUtil;
 import paulevs.bnb.noise.FloatNoise;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
@@ -206,11 +207,7 @@ public class ClientListener {
 			float ng = noiseG.get(px, py, pz) * 0.4F + 0.6F;
 			float nb = noiseB.get(px, py, pz) * 0.4F + 0.6F;
 			
-			int cr = Math.round(((color >> 16) & 255) * nr) << 16;
-			int cg = Math.round(((color >> 8) & 255) * ng) << 8;
-			int cb = Math.round((color & 255) * nb);
-			
-			return 0xFF000000 | cr | cg | cb;
+			return ColorUtil.multiply(color, nr, ng, nb);
 		}, BNBBlocks.NETHERRACK_MYCORRUM, BNBBlocks.SOUL_MYCORRUM, BNBBlocks.MOSSY_NETHERRACK);
 		
 		event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
@@ -222,7 +219,7 @@ public class ClientListener {
 			state = view.getBlockState(pos.x, pos.y - 1, pos.z);
 			if (state.isOf(Block.NETHERRACK)) {
 				float delta = (rnd & 7) / 7.0F;
-				return mixColor(0xFF9A4545, 0xFFC03939, delta);
+				return ColorUtil.blend(0xFF9A4545, 0xFFC03939, delta);
 			}
 			
 			int color = BiomeColorsImpl.GRASS_INTERPOLATOR.getColor(world.getBiomeSource(), pos.x, pos.z);
@@ -239,16 +236,41 @@ public class ClientListener {
 			float ng = noiseG.get(px, py, pz) * 0.4F + 0.6F;
 			float nb = noiseB.get(px, py, pz) * 0.4F + 0.6F;
 			
-			int cr = (color >> 16) & 255;
-			int cg = (color >> 8) & 255;
-			int cb = color & 255;
+			int cr = ColorUtil.getR(color);
+			int cg = ColorUtil.getG(color);
+			int cb = ColorUtil.getB(color);
 			
-			cr = MathHelper.clamp(Math.round(cr * nr) + dr, 0, 255) << 16;
-			cg = MathHelper.clamp(Math.round(cg * ng) + dg, 0, 255) << 8;
+			cr = MathHelper.clamp(Math.round(cr * nr) + dr, 0, 255);
+			cg = MathHelper.clamp(Math.round(cg * ng) + dg, 0, 255);
 			cb = MathHelper.clamp(Math.round(cb * nb) + db, 0, 255);
 			
-			return 0xFF000000 | cr | cg | cb;
+			return ColorUtil.getRGB(cr, cg, cb);
 		}, BNBBlocks.NETHER_SPROUTS);
+		
+		event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
+			if (tintIndex == -1 || world == null || pos == null) return 0xFFFFFFFF;
+			int color = BiomeColorsImpl.GRASS_INTERPOLATOR.getColor(world.getBiomeSource(), pos.x, pos.z);
+			
+			double px = pos.x * 0.1;
+			double py = pos.y * 0.1;
+			double pz = pos.z * 0.1;
+			
+			float nr = noiseR.get(px, py, pz) * 0.4F + 0.6F;
+			float ng = noiseG.get(px, py, pz) * 0.4F + 0.6F;
+			float nb = noiseB.get(px, py, pz) * 0.4F + 0.6F;
+			
+			color = ColorUtil.multiply(color, nr, ng, nb);
+			
+			if (tintIndex == 1) {
+				float[] hsv = ColorUtil.toHSV(color);
+				hsv[0] += 0.07F;
+				hsv[1] = hsv[1] * 0.75F;
+				hsv[2] = Math.min(hsv[2] * 1.75F, 1.0F);
+				color = ColorUtil.fromHSV(hsv);
+			}
+			
+			return color;
+		}, BNBBlocks.NETHER_MOSS_COVER);
 	}
 	
 	@EventListener
@@ -372,21 +394,5 @@ public class ClientListener {
 		int ib = MathHelper.clamp((int) Math.ceil(b * 255.0F), 0, 255);
 		
 		System.out.println("Color: 0xFF" + Integer.toHexString(ir << 16 | ig << 8 | ib).toUpperCase(Locale.ROOT));
-	}
-	
-	private static int mixColor(int colorA, int colorB, float delta) {
-		int cr1 = (colorA >> 16) & 255;
-		int cg1 = (colorA >> 8) & 255;
-		int cb1 = colorA & 255;
-		
-		int cr2 = (colorB >> 16) & 255;
-		int cg2 = (colorB >> 8) & 255;
-		int cb2 = colorB & 255;
-		
-		cr1 = MathHelper.lerp(delta, cr1, cr2);
-		cg1 = MathHelper.lerp(delta, cg1, cg2);
-		cb1 = MathHelper.lerp(delta, cb1, cb2);
-		
-		return 0xFF000000 | cr1 << 16 | cg1 << 8 | cb1;
 	}
 }

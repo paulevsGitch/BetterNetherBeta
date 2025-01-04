@@ -1,7 +1,0 @@
-{
-	"parent": "bnb:block/moss_cover_flowers",
-	"textures": {
-		"cover": "bnb:block/pirozen_moss_cover",
-		"flowers": "bnb:block/pirozen_moss_flowers_2"
-	}
-}

@@ -89,6 +89,8 @@ public class BNBItems {
 	
 	public static final Item NETHERRACK_BRICK = make("netherrack_brick", TemplateItem::new);
 	
+	public static final Item FALURIAN_MOSS_COVER = make("nether_moss_cover", MossCoverItem::new);
+	
 	private static Item makeFood(String name, int healAmount, boolean isWolfFood) {
 		Identifier id = BNB.id(name);
 		Item item = new TemplateFoodItem(id, healAmount, isWolfFood);
