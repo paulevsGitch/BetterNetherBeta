@@ -92,6 +92,12 @@ public class BNBWeatherRenderer {
 	}
 	
 	public static void updateFog(float[] fogColor) {
+		if (isCurrentWeather(WeatherType.DRIZZLE)) {
+			float alpha = getIntensity(WeatherType.DRIZZLE);
+			fogColor[0] = MathHelper.lerp(alpha * 0.25F, fogColor[0], 0.5F);
+			fogColor[1] = MathHelper.lerp(alpha * 0.25F, fogColor[1], 0.01F);
+			fogColor[2] = MathHelper.lerp(alpha * 0.25F, fogColor[2], 0.0F);
+		}
 		if (isCurrentWeather(WeatherType.RAIN)) {
 			float alpha = getIntensity(WeatherType.RAIN);
 			fogColor[0] = MathHelper.lerp(alpha, fogColor[0], 0.5F);

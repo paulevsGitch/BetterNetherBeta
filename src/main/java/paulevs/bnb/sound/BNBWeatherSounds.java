@@ -15,8 +15,10 @@ import java.net.URL;
 
 @Environment(EnvType.CLIENT)
 public class BNBWeatherSounds {
-	public static final SoundEntry RAIN = getSound("lava_rain");
+	public static final SoundEntry RAIN_SOUND = getSound("lava_rain");
+	public static final SoundEntry DRIZZLE_SOUND = getSound("drizzle");
 	private static final String RAIN_KEY = "bnb.weather.lava_rain";
+	private static final String DRIZZLE_KEY = "bnb.weather.drizzle";
 	
 	private static SoundSystem soundSystem;
 	
@@ -29,6 +31,7 @@ public class BNBWeatherSounds {
 	public static void stop() {
 		if (soundSystem == null) return;
 		if (soundSystem.playing(RAIN_KEY)) soundSystem.stop(RAIN_KEY);
+		if (soundSystem.playing(DRIZZLE_KEY)) soundSystem.stop(RAIN_KEY);
 	}
 	
 	public static void updateSound(Level level, LivingEntity entity, SoundSystem soundSystem, float volume) {
@@ -39,25 +42,30 @@ public class BNBWeatherSounds {
 			return;
 		}
 		
-		if (!BNBWeatherRenderer.isCurrentWeather(WeatherType.RAIN)) volume = 0.0F;
-		volume *= BNBWeatherRenderer.getIntensity(WeatherType.RAIN);
 		volume *= getWeatherVolume(level, entity);
+		processWeatherSound(level, entity, WeatherType.RAIN, RAIN_KEY, RAIN_SOUND, volume);
+		processWeatherSound(level, entity, WeatherType.DRIZZLE, DRIZZLE_KEY, DRIZZLE_SOUND, volume);
+	}
+	
+	private static void processWeatherSound(Level level, LivingEntity entity, WeatherType weather, String key, SoundEntry sound, float volume) {
+		if (!BNBWeatherRenderer.isCurrentWeather(weather)) volume = 0.0F;
+		volume *= BNBWeatherRenderer.getIntensity(weather);
 		
 		if (volume == 0) {
-			stop();
+			if (soundSystem.playing(key)) soundSystem.stop(key);
 			return;
 		}
-		else if (!soundSystem.playing(RAIN_KEY)) {
-			soundSystem.backgroundMusic(RAIN_KEY, RAIN.soundUrl, RAIN.soundName, true);
-			soundSystem.play(RAIN_KEY);
+		else if (!soundSystem.playing(key)) {
+			soundSystem.backgroundMusic(key, sound.soundUrl, sound.soundName, true);
+			soundSystem.play(key);
 		}
 		
 		int x = MCMath.floor(entity.x);
 		int z = MCMath.floor(entity.z);
 		boolean underRoof = entity.y + entity.height < BNBWeatherManager.getWeatherBottom(level, x, z);
 		
-		soundSystem.setPitch(RAIN_KEY, underRoof ? 0.25F : 1.0F);
-		soundSystem.setVolume(RAIN_KEY, volume);
+		soundSystem.setPitch(key, underRoof ? 0.25F : 1.0F);
+		soundSystem.setVolume(key, volume);
 	}
 	
 	private static float getWeatherVolume(Level level, LivingEntity entity) {

@@ -24,7 +24,6 @@ import java.util.Random;
 
 public class BNBWeatherManager {
 	private static final WeatherType[] WEATHER_SEQUENCE = new WeatherType[16];
-	private static final WeatherType[] WEATHER_TYPES = WeatherType.values();
 	private static final LongSet CHUNKS = new LongOpenHashSet(4096);
 	private static final Random RANDOM = new Random();
 	
