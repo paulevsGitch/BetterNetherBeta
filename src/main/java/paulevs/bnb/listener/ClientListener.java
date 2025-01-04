@@ -11,6 +11,8 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
 import net.minecraft.client.resource.language.I18n;
+import net.minecraft.level.BlockView;
+import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.client.event.color.block.BlockColorsRegisterEvent;
 import net.modificationstation.stationapi.api.client.event.color.item.ItemColorsRegisterEvent;
 import net.modificationstation.stationapi.api.client.event.render.entity.EntityRendererRegisterEvent;
@@ -65,6 +67,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.ToIntBiFunction;
 
 @Environment(EnvType.CLIENT)
 public class ClientListener {
@@ -195,9 +198,8 @@ public class ClientListener {
 		noiseG.setSeed(17);
 		noiseB.setSeed(19);
 		
-		event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
-			if (tintIndex != 0 || world == null || pos == null) return 0xFFFFFFFF;
-			int color = BiomeColorsImpl.GRASS_INTERPOLATOR.getColor(world.getBiomeSource(), pos.x, pos.z);
+		final ToIntBiFunction<BlockView, BlockPos> colorVariation = (level, pos) -> {
+			int color = BiomeColorsImpl.GRASS_INTERPOLATOR.getColor(level.getBiomeSource(), pos.x, pos.z);
 			
 			double px = pos.x * 0.1;
 			double py = pos.y * 0.1;
@@ -208,6 +210,11 @@ public class ClientListener {
 			float nb = noiseB.get(px, py, pz) * 0.4F + 0.6F;
 			
 			return ColorUtil.multiply(color, nr, ng, nb);
+		};
+		
+		event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
+			if (tintIndex != 0 || world == null || pos == null) return 0xFFFFFFFF;
+			return colorVariation.applyAsInt(world, pos);
 		}, BNBBlocks.NETHERRACK_MYCORRUM, BNBBlocks.SOUL_MYCORRUM, BNBBlocks.MOSSY_NETHERRACK);
 		
 		event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
@@ -222,55 +229,51 @@ public class ClientListener {
 				return ColorUtil.blend(0xFF9A4545, 0xFFC03939, delta);
 			}
 			
-			int color = BiomeColorsImpl.GRASS_INTERPOLATOR.getColor(world.getBiomeSource(), pos.x, pos.z);
+			int color = colorVariation.applyAsInt(world, pos);
 			
-			double px = pos.x * 0.1;
-			double py = pos.y * 0.1;
-			double pz = pos.z * 0.1;
-			
-			int dr = ((rnd % 5) & 15) - 7;
+			int dr = ((rnd) & 15) - 7;
 			int dg = ((rnd >> 5) & 15) - 7;
 			int db = ((rnd >> 10) & 15) - 7;
 			
-			float nr = noiseR.get(px, py, pz) * 0.4F + 0.6F;
-			float ng = noiseG.get(px, py, pz) * 0.4F + 0.6F;
-			float nb = noiseB.get(px, py, pz) * 0.4F + 0.6F;
-			
-			int cr = ColorUtil.getR(color);
-			int cg = ColorUtil.getG(color);
-			int cb = ColorUtil.getB(color);
-			
-			cr = MathHelper.clamp(Math.round(cr * nr) + dr, 0, 255);
-			cg = MathHelper.clamp(Math.round(cg * ng) + dg, 0, 255);
-			cb = MathHelper.clamp(Math.round(cb * nb) + db, 0, 255);
+			int cr = MathHelper.clamp(ColorUtil.getR(color) + dr, 0, 255);
+			int cg = MathHelper.clamp(ColorUtil.getG(color) + dg, 0, 255);
+			int cb = MathHelper.clamp(ColorUtil.getB(color) + db, 0, 255);
 			
 			return ColorUtil.getRGB(cr, cg, cb);
 		}, BNBBlocks.NETHER_SPROUTS);
 		
 		event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
 			if (tintIndex == -1 || world == null || pos == null) return 0xFFFFFFFF;
-			int color = BiomeColorsImpl.GRASS_INTERPOLATOR.getColor(world.getBiomeSource(), pos.x, pos.z);
+			int color = colorVariation.applyAsInt(world, pos);
 			
-			double px = pos.x * 0.1;
-			double py = pos.y * 0.1;
-			double pz = pos.z * 0.1;
-			
-			float nr = noiseR.get(px, py, pz) * 0.4F + 0.6F;
-			float ng = noiseG.get(px, py, pz) * 0.4F + 0.6F;
-			float nb = noiseB.get(px, py, pz) * 0.4F + 0.6F;
-			
-			color = ColorUtil.multiply(color, nr, ng, nb);
-			
-			if (tintIndex == 1) {
+			if (tintIndex == 0) {
+				float[] hsv = ColorUtil.toHSV(color);
+				hsv[0] -= 0.02F;
+				hsv[1] *= 0.85F;
+				color = ColorUtil.fromHSV(hsv);
+			}
+			else {
 				float[] hsv = ColorUtil.toHSV(color);
 				hsv[0] += 0.07F;
-				hsv[1] = hsv[1] * 0.75F;
+				hsv[1] *= 0.75F;
 				hsv[2] = Math.min(hsv[2] * 1.75F, 1.0F);
 				color = ColorUtil.fromHSV(hsv);
 			}
 			
 			return color;
 		}, BNBBlocks.NETHER_MOSS_COVER);
+		
+		event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
+			if (world == null || pos == null) return 0xFFFFFFFF;
+			int color = colorVariation.applyAsInt(world, pos);
+			
+			float[] hsv = ColorUtil.toHSV(color);
+			hsv[0] -= 0.01F;
+			hsv[1] *= 0.875F;
+			hsv[2] *= 0.925F;
+			
+			return ColorUtil.fromHSV(hsv);
+		}, BNBBlocks.NETHER_MOSS_BLOCK);
 	}
 	
 	@EventListener
@@ -278,6 +281,7 @@ public class ClientListener {
 		event.itemColors.register((stack, tintIndex) -> tintIndex == 0 ? 0xFFC03939 : 0xFFFFFFFF, BNBBlocks.NETHERRACK_MYCORRUM, BNBBlocks.MOSSY_NETHERRACK);
 		event.itemColors.register((stack, tintIndex) -> tintIndex == 0 ? Color.CYAN.getRGB() : 0xFFFFFFFF, BNBBlocks.SOUL_MYCORRUM);
 		event.itemColors.register((stack, tintIndex) -> 0xFFB02921, BNBBlocks.NETHER_SPROUTS);
+		event.itemColors.register((stack, tintIndex) -> 0xFFCB6F6F, BNBBlocks.NETHER_MOSS_BLOCK);
 	}
 	
 	private InputStream getAsStream(Identifier id) {

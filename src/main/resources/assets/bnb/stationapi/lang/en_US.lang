@@ -57,12 +57,10 @@ tile.bnb.falurian_roots.name=Falurian Roots
 tile.bnb.fireweed.name=Fireweed
 tile.bnb.lantern_grass.name=Lantern Grass
 tile.bnb.nether_daisy.name=Nether Daisy
-tile.bnb.falurian_moss_block.name=Falurian Moss Block
 
 tile.bnb.falurian_vine.name=Falurian Vine
 item.bnb.falurian_vine_berries.name=Falurian Berries
 tile.bnb.pirozen_vine.name=Pirozen Vine
-tile.bnb.pirozen_moss_block.name=Pirozen Moss Block
 
 tile.bnb.glowstone_shards.name=Glowstone Shards
 tile.bnb.obsidian_shards.name=Obsidian Shards
@@ -240,6 +238,8 @@ item.bnb.fiber_boots.name=Fiber Boots
 item.bnb.portal_compass.name=Portal Compass
 
 item.bnb.nether_moss_cover.name=Nether Moss Cover
+tile.bnb.nether_moss_cover.name=Nether Moss Cover
+tile.bnb.nether_moss_block.name=Nether Moss Block
 
 gui.stationapi.achievementPage.bnb.achievements=Better Nether B.
 achievement.bnb.the_ways=The Ways

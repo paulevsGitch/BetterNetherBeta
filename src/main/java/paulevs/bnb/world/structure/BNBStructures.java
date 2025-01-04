@@ -42,7 +42,7 @@ public class BNBStructures {
 	);
 	public static final Structure NETHER_MOSS_BLOCK = new BlockMossScatterStructure(
 		3, 0.75F,
-		BNBBlocks.FALURIAN_MOSS_BLOCK,
+		BNBBlocks.NETHER_MOSS_BLOCK,
 		(MossCoverBlock) BNBBlocks.NETHER_MOSS_COVER
 	);
 	

@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" X ",
+		"XXX"
+	],
+	"key": {
+		"X": { "item": "bnb:obsidian_shards" }
+	},
+	"result": {
+		"item": "bnb:obsidian_shard"
+	}
+}

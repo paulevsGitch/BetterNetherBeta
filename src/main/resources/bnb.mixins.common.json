@@ -11,6 +11,7 @@
 		"LevelPropertiesMixin",
 		"NetherDimensionMixin",
 		"NetherrackBlockMixin",
+		"ShapedRecipeAccessor",
 		"CraftingResultMixin",
 		"FlattenedChunkMixin",
 		"FireballEntityMixin",

@@ -12,6 +12,8 @@ import net.modificationstation.stationapi.api.template.block.TemplateBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.vbe.utils.CreativeUtil;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public abstract class BNBPlantBlock extends TemplateBlock {
@@ -72,6 +74,11 @@ public abstract class BNBPlantBlock extends TemplateBlock {
 		if (heldItem == null || !(heldItem.getType() instanceof ShearsItem)) return;
 		drop(level, x, y, z, new ItemStack(this));
 		if (!CreativeUtil.isCreative(player)) heldItem.applyDamage(1, player);
+	}
+	
+	@Override
+	public List<ItemStack> getDropList(Level world, int x, int y, int z, BlockState state, int meta) {
+		return Collections.emptyList();
 	}
 	
 	protected abstract boolean canStay(Level level, int x, int y, int z);
