@@ -36,24 +36,11 @@ public class BNBStructures {
 	public static final Structure FIREWEED = new DoublePlantScatterStructure(2, 3, BNBBlocks.FIREWEED);
 	public static final Structure FLAME_BULBS_TALL = new DoublePlantScatterStructure(2, 5, BNBBlocks.FLAME_BULBS_TALL);
 	public static final Structure LANTERN_GRASS = new DoublePlantScatterStructure(2, 4, BNBBlocks.LANTERN_GRASS);
-	public static final Structure NETHER_MOSS_COVER = new MossScatterStructure(
-		3, 0.4F,
-		(MossCoverBlock) BNBBlocks.NETHER_MOSS_COVER
-	);
-	public static final Structure NETHER_MOSS_BLOCK = new BlockMossScatterStructure(
-		3, 0.75F,
-		BNBBlocks.NETHER_MOSS_BLOCK,
-		(MossCoverBlock) BNBBlocks.NETHER_MOSS_COVER
-	);
+	public static final Structure NETHER_MOSS_COVER = new MossScatterStructure(3, 0.4F);
+	public static final Structure NETHER_MOSS_BLOCK = new BlockMossScatterStructure(3, 0.75F);
 	
-	public static final Structure FALURIAN_VINE_SHORT = new BerriesVineStructure(
-		BNBBlocks.FALURIAN_VINE,
-		3, 9
-	);
-	public static final Structure FALURIAN_VINE_LONG = new BerriesVineStructure(
-		BNBBlocks.FALURIAN_VINE,
-		9, 32
-	);
+	public static final Structure FALURIAN_VINE_SHORT = new BerriesVineStructure(BNBBlocks.FALURIAN_VINE, 3, 9);
+	public static final Structure FALURIAN_VINE_LONG = new BerriesVineStructure(BNBBlocks.FALURIAN_VINE, 9, 32);
 	
 	public static final Structure PIROZEN_VINE_SHORT = new VineStructure(BNBBlocks.PIROZEN_VINE, 3, 9);
 	public static final Structure PIROZEN_VINE_LONG = new VineStructure(BNBBlocks.PIROZEN_VINE, 9, 32);

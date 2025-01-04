@@ -69,11 +69,11 @@ public class BNBBiomes {
 		.feature(BNBPlacers.FLAME_BULBS_TALL)
 		.feature(BNBPlacers.FLAME_BULBS)
 		.feature(BNBPlacers.NETHER_SPROUTS)
-		.feature(BNBPlacers.FALURIAN_MOSS_CEILING)
+		.feature(BNBPlacers.NETHER_MOSS_CEILING)
+		.feature(BNBPlacers.NETHER_MOSS_BLOCK)
+		.feature(BNBPlacers.NETHER_MOSS_COVER)
 		.feature(BNBPlacers.FALURIAN_VINE_SHORT)
 		.feature(BNBPlacers.FALURIAN_VINE_LONG)
-		.feature(BNBPlacers.FALURIAN_MOSS_BLOCK)
-		.feature(BNBPlacers.NETHER_MOSS_COVER)
 		.build(), BiomeArea.NETHERRACK_LUSH).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
 	
 	public static final Biome FALURIAN_GRASSLAND = addLand(BiomeBuilder
@@ -103,7 +103,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.FLAME_BULBS_TALL)
 		.feature(BNBPlacers.FLAME_BULBS)
 		.feature(BNBPlacers.NETHER_SPROUTS)
-		.feature(BNBPlacers.FALURIAN_MOSS_CEILING)
+		.feature(BNBPlacers.NETHER_MOSS_CEILING)
 		.feature(BNBPlacers.FALURIAN_VINE_SHORT)
 		.feature(BNBPlacers.FALURIAN_VINE_LONG)
 		.build(), BiomeArea.NETHERRACK_MEDIUM).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
@@ -132,6 +132,9 @@ public class BNBBiomes {
 		.feature(BNBPlacers.PIROZEN_SPIDER_COCOON)
 		.feature(BNBPlacers.PIROZEN_ROOTS)
 		.feature(BNBPlacers.NETHER_SPROUTS)
+		.feature(BNBPlacers.NETHER_MOSS_CEILING)
+		.feature(BNBPlacers.NETHER_MOSS_BLOCK)
+		.feature(BNBPlacers.NETHER_MOSS_COVER)
 		.feature(BNBPlacers.PIROZEN_VINE_SHORT)
 		.feature(BNBPlacers.PIROZEN_VINE_LONG)
 		.build(), BiomeArea.NETHERRACK_LUSH).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
@@ -184,6 +187,9 @@ public class BNBBiomes {
 		.feature(BNBPlacers.CHLOROPHATE_TREE)
 		.feature(BNBPlacers.CHLOROPHATE_BUSH)
 		.feature(BNBPlacers.NETHER_SPROUTS)
+		.feature(BNBPlacers.NETHER_MOSS_CEILING)
+		.feature(BNBPlacers.NETHER_MOSS_BLOCK)
+		.feature(BNBPlacers.NETHER_MOSS_COVER)
 		.feature(BNBPlacers.CHLOROPHATE_SPIDER_COCOON)
 		.feature(BNBPlacers.CHLOROPHATE_ROOTS)
 		.build(), BiomeArea.NETHERRACK_LUSH).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);

@@ -249,14 +249,14 @@ public class ClientListener {
 			if (tintIndex == 0) {
 				float[] hsv = ColorUtil.toHSV(color);
 				hsv[0] -= 0.02F;
-				hsv[1] *= 0.85F;
+				hsv[2] *= 0.85F;
 				color = ColorUtil.fromHSV(hsv);
 			}
 			else {
 				float[] hsv = ColorUtil.toHSV(color);
-				hsv[0] += 0.07F;
-				hsv[1] *= 0.75F;
-				hsv[2] = Math.min(hsv[2] * 1.75F, 1.0F);
+				hsv[0] += 0.1F;
+				hsv[1] *= 0.85F;
+				hsv[2] = Math.min(hsv[2] * 2.0F, 1.0F);
 				color = ColorUtil.fromHSV(hsv);
 			}
 			
@@ -268,8 +268,7 @@ public class ClientListener {
 			int color = colorVariation.applyAsInt(world, pos);
 			
 			float[] hsv = ColorUtil.toHSV(color);
-			hsv[0] -= 0.01F;
-			hsv[1] *= 0.875F;
+			hsv[0] -= 0.005F;
 			hsv[2] *= 0.925F;
 			
 			return ColorUtil.fromHSV(hsv);

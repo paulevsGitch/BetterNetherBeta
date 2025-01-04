@@ -3,17 +3,16 @@ package paulevs.bnb.world.structure.scatter;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.block.BlockState;
+import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.MossCoverBlock;
 
 import java.util.Random;
 
 public class MossScatterStructure extends VolumeScatterStructure {
-	private final MossCoverBlock moss;
 	private BlockState state;
 	
-	public MossScatterStructure(int radius, float density, MossCoverBlock moss) {
+	public MossScatterStructure(int radius, float density) {
 		super(radius, density);
-		this.moss = moss;
 	}
 	
 	@Override
@@ -24,7 +23,7 @@ public class MossScatterStructure extends VolumeScatterStructure {
 	@Override
 	protected boolean canPlaceAt(Level level, BlockPos pos) {
 		if (!level.getBlockState(pos.getX(), pos.getY(), pos.getZ()).isAir()) return false;
-		state = moss.getStructureState(level, pos.getX(), pos.getY(), pos.getZ());
+		state = BNBBlocks.NETHER_MOSS_COVER.getStructureState(level, pos.getX(), pos.getY(), pos.getZ());
 		return state != null;
 	}
 }
