@@ -49,6 +49,7 @@ import paulevs.bnb.entity.renderer.NetherSpiderRenderer;
 import paulevs.bnb.entity.renderer.ObsidianBoatRenderer;
 import paulevs.bnb.gui.container.SpinningWheelContainer;
 import paulevs.bnb.gui.screen.SpinningWheelScreen;
+import paulevs.bnb.item.NetherHygrometerItem;
 import paulevs.bnb.item.PortalCompassItem;
 import paulevs.bnb.math.ColorUtil;
 import paulevs.bnb.noise.FloatNoise;
@@ -117,6 +118,10 @@ public class ClientListener {
 		
 		for (byte i = 0; i < 64; i++) {
 			PortalCompassItem.TEXTURES[i] = itemAtlas.addTexture(BNB.id("item/portal_compass_" + i)).index;
+		}
+		
+		for (byte i = 0; i < 32; i++) {
+			NetherHygrometerItem.TEXTURES[i] = itemAtlas.addTexture(BNB.id("item/nether_hygrometer_" + i)).index;
 		}
 		
 		printTranslations();

@@ -10,7 +10,6 @@ public class BNBWeatherCommand extends BNBCommand {
 	private static final String[] WEATHER_NAMES = Arrays
 		.stream(WeatherType.values())
 		.map(type -> type.name)
-		.sorted()
 		.toArray(String[]::new);
 	
 	protected BNBWeatherCommand() {
@@ -68,5 +67,9 @@ public class BNBWeatherCommand extends BNBCommand {
 	@Override
 	protected String[] getArgumentSuggestions(int index, String input) {
 		return getPossibleVariants(input, WEATHER_NAMES);
+	}
+	
+	static {
+		Arrays.sort(WEATHER_NAMES);
 	}
 }

@@ -157,6 +157,10 @@ public class BNBWeatherManager {
 		return currentWeather;
 	}
 	
+	public static int getWeatherLength() {
+		return weatherLength;
+	}
+	
 	@Environment(EnvType.CLIENT)
 	public static void setWeather(WeatherType weather) {
 		currentWeather = weather;

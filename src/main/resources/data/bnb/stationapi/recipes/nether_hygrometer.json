@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" I ",
+		"OCO",
+		" S "
+	],
+	"key": {
+		"I": { "item": "bnb:orichalcum_ingot" },
+		"O": { "item": "bnb:obsidian_shard" },
+		"C": { "item": "bnb:portal_compass" },
+		"S": { "item": "bnb:nether_fiber" }
+	},
+	"result": {
+		"item": "bnb:nether_hygrometer"
+	}
+}

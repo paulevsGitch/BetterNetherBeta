@@ -86,6 +86,7 @@ public class BNBItems {
 	public static final Item FIBER_BOOTS = makeArmor("fiber_boots", 0, 1, 3).setDurability(2000);
 	
 	public static final Item PORTAL_COMPASS = make("portal_compass", PortalCompassItem::new);
+	public static final Item NETHER_HYGROMETER = make("nether_hygrometer", NetherHygrometerItem::new);
 	
 	public static final Item NETHERRACK_BRICK = make("netherrack_brick", TemplateItem::new);
 	
