@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"XX",
+		" S",
+		" S"
+	],
+	"key": {
+		"X": { "item": "bnb:netherrack_brick" },
+		"S": { "item": "minecraft:stick" }
+	},
+	"result": {
+		"item": "bnb:netherrack_hoe"
+	}
+}

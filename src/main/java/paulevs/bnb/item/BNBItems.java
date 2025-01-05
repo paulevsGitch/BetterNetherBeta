@@ -29,6 +29,7 @@ public class BNBItems {
 	
 	private static final ToolMaterial ORICHALCUM = ToolMaterialFactory.create("bnb_orichalcum", 2, 750, 6.0F, 2);
 	private static final ToolMaterial OBSIDIAN = ToolMaterialFactory.create("bnb_obsidian", 1, 786, 4.0F, 1);
+	private static final ToolMaterial NETHERRACK = ToolMaterialFactory.create("bnb_netherrack", 1, 100, 2.5F, 1);
 	
 	public static final Item FALURIAN_TREE_PLACER = make(
 		"falurian_tree_placer", () -> BNBStructures.FALURIAN_TREE, StructurePlacerItem::new
@@ -77,6 +78,12 @@ public class BNBItems {
 	public static final Item OBSIDIAN_PICKAXE = makeTool("obsidian_pickaxe", ObsidianPickaxeItem::new, OBSIDIAN);
 	public static final Item OBSIDIAN_AXE = makeTool("obsidian_axe", TemplateAxeItem::new, OBSIDIAN);
 	public static final Item OBSIDIAN_HOE = makeTool("obsidian_hoe", TemplateHoeItem::new, OBSIDIAN);
+	
+	public static final Item NETHERRACK_SWORD = makeTool("netherrack_sword", TemplateSwordItem::new, NETHERRACK);
+	public static final Item NETHERRACK_SHOVEL = makeTool("netherrack_shovel", TemplateShovelItem::new, NETHERRACK);
+	public static final Item NETHERRACK_PICKAXE = makeTool("netherrack_pickaxe", TemplatePickaxeItem::new, NETHERRACK);
+	public static final Item NETHERRACK_AXE = makeTool("netherrack_axe", TemplateAxeItem::new, NETHERRACK);
+	public static final Item NETHERRACK_HOE = makeTool("netherrack_hoe", TemplateHoeItem::new, NETHERRACK);
 	
 	public static final Item NETHER_FIBER = make("nether_fiber", TemplateItem::new);
 	

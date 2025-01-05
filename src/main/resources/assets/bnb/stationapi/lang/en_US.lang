@@ -2,6 +2,7 @@ tile.bnb.netherrack_mycorrum.name=Netherrack Mycorrum
 tile.bnb.soul_mycorrum.name=Soul Mycorrum
 tile.bnb.netherrack_gravel.name=Netherrack Gravel
 tile.bnb.mossy_netherrack.name=Mossy Netherrack
+tile.bnb.hardened_netherrack.name=Hardened Netherrack
 
 tile.bnb.falurian_log.name=Falurian Log
 tile.bnb.falurian_stem.name=Falurian Stem
@@ -237,6 +238,12 @@ item.bnb.fiber_leggings.name=Fiber Leggings
 item.bnb.fiber_boots.name=Fiber Boots
 item.bnb.portal_compass.name=Portal Compass
 item.bnb.nether_hygrometer.name=Nether Hygrometer
+
+item.bnb.netherrack_sword.name=Netherrack Sword
+item.bnb.netherrack_shovel.name=Netherrack Shovel
+item.bnb.netherrack_pickaxe.name=Netherrack Pickaxe
+item.bnb.netherrack_axe.name=Netherrack Axe
+item.bnb.netherrack_hoe.name=Netherrack Hoe
 
 item.bnb.nether_moss_cover.name=Nether Moss Cover
 tile.bnb.nether_moss_cover.name=Nether Moss Cover

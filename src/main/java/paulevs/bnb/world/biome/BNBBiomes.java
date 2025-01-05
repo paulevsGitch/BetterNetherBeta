@@ -33,11 +33,26 @@ public class BNBBiomes {
 	private static final PositionSurfaceCondition SHORE_COND = new PositionSurfaceCondition(BNBBiomes::shoreHeight);
 	private static final FractalNoise NOISE_COVER = new FractalNoise(VoronoiNoise::new);
 	private static final SurfaceCondition NOISE_COVER_CONDITION = (level, x, y, z, state) -> NOISE_COVER.get(x * 0.1, z * 0.1) < 0.5F;
+	private static final FractalNoise NOISE_STONE = new FractalNoise(VoronoiNoise::new);
+	
 	private static final SurfaceRule LOW_LAND_GRAVEL = SurfaceBuilder
 		.start(BNBBlocks.NETHERRACK_GRAVEL)
 		.replace(BNBBlockTags.NETHERRACK_TERRAIN)
 		.ground(2)
 		.range(0, 96)
+		.build();
+	
+	private static final SurfaceRule HARDENED_NETHERRACK_1 = SurfaceBuilder
+		.start(BNBBlocks.HARDENED_NETHERRACK)
+		.replace(Block.NETHERRACK)
+		.range(0, 85)
+		.build();
+	
+	private static final SurfaceRule HARDENED_NETHERRACK_2 = SurfaceBuilder
+		.start(BNBBlocks.HARDENED_NETHERRACK)
+		.replace(Block.NETHERRACK)
+		.condition((level, x, y, z, state) -> !level.getBlockState(x, y + 3, z).isAir(), 2)
+		.condition((level, x, y, z, state) -> NOISE_STONE.get(x * 0.02, y * 0.1, z * 0.02) < 0.3F, 5)
 		.build();
 	
 	public static final Biome FALURIAN_FOREST = addLand(BiomeBuilder
@@ -51,6 +66,8 @@ public class BNBBiomes {
 			.ground(1)
 			.build()
 		)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -90,6 +107,8 @@ public class BNBBiomes {
 			.condition(NOISE_COVER_CONDITION, 5)
 			.build()
 		)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -123,6 +142,8 @@ public class BNBBiomes {
 			.ground(1)
 			.build()
 		)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -157,6 +178,8 @@ public class BNBBiomes {
 			.condition(NOISE_COVER_CONDITION, 5)
 			.build()
 		)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -184,6 +207,8 @@ public class BNBBiomes {
 			.ground(1)
 			.build()
 		)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -215,6 +240,8 @@ public class BNBBiomes {
 			.ground(1)
 			.build()
 		)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -240,6 +267,8 @@ public class BNBBiomes {
 			.condition(SHORE_COND, 1)
 			.build()
 		)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
@@ -264,6 +293,8 @@ public class BNBBiomes {
 			.condition(SHORE_COND, 1)
 			.build()
 		)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.OBSIDIAN_GRAVEL_BLOB)
@@ -283,6 +314,8 @@ public class BNBBiomes {
 			.condition(SHORE_COND, 1)
 			.build()
 		)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.hostileEntity(GhastEntity.class, 1)
 		.hostileEntity(ZombiePigmanEntity.class, 10)
@@ -315,6 +348,8 @@ public class BNBBiomes {
 			.ground(10)
 			.build()
 		)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.build(), BiomeArea.SOUL_LUSH);
 	
@@ -342,6 +377,8 @@ public class BNBBiomes {
 			.ground(10)
 			.build()
 		)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
@@ -361,6 +398,8 @@ public class BNBBiomes {
 		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_MYCORRUM).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(1).build())
 		.surfaceRule(SurfaceBuilder.start(Block.SOUL_SAND).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(3).build())
 		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_SANDSTONE).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(10).build())
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.build(), BiomeArea.SOUL_MEDIUM);
 	
@@ -371,6 +410,8 @@ public class BNBBiomes {
 		.surfaceRule(LOW_LAND_GRAVEL)
 		.surfaceRule(SurfaceBuilder.start(Block.SOUL_SAND).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(3).build())
 		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_SANDSTONE).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(10).build())
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.build(), BiomeArea.SOUL_BARREN);
 	

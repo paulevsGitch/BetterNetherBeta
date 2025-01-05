@@ -28,6 +28,10 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class BNBBlocks {
+	static {
+		Block.NETHERRACK.setHardness(0.75F);
+	}
+	
 	public static final List<Block> BLOCKS_WITH_ITEMS = new ArrayList<>();
 	public static final Set<BlockTextureUpdate> UPDATE_TEXTURE_INTERFACE = new HashSet<>();
 	public static final Set<Block> UPDATE_TEXTURE_SINGLE = new HashSet<>();
@@ -41,6 +45,7 @@ public class BNBBlocks {
 	public static final Block MOSSY_NETHERRACK = make("mossy_netherrack", NetherTerrainBlock::new);
 	public static final MossCoverBlock NETHER_MOSS_COVER = makeNI("nether_moss_cover", MossCoverBlock::new);
 	public static final Block NETHER_MOSS_BLOCK = make("nether_moss_block", NetherMossBlock::new);
+	public static final Block HARDENED_NETHERRACK = make("hardened_netherrack", BNBNetherrack::new);
 	
 	public static final Block TREE_LANTERN = make("tree_lantern", NetherLanternBlock::new);
 	

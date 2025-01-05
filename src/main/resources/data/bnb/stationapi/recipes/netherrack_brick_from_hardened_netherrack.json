@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient": {
+		"item": "bnb:hardened_netherrack"
+	},
+	"result": {
+		"item": "bnb:netherrack_brick"
+	}
+}
