@@ -9,8 +9,8 @@ public class BNBFloorSoulPlantBlock extends BNBFloorPlantBlock {
 		super(id);
 	}
 	
-	public BNBFloorSoulPlantBlock(Identifier id, Material material) {
-		super(id, material);
+	public BNBFloorSoulPlantBlock(Identifier id, Material material, boolean needShears) {
+		super(id, material, needShears);
 	}
 	
 	@Override

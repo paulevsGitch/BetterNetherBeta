@@ -8,7 +8,7 @@ import paulevs.bnb.block.property.BNBBlockMaterials;
 
 public class BNBCeilPlantBlock extends BNBPlantBlock {
 	public BNBCeilPlantBlock(Identifier id) {
-		super(id, BNBBlockMaterials.NETHER_PLANT);
+		super(id, BNBBlockMaterials.NETHER_PLANT, true);
 		this.setBoundingBox(0.125F, 0.25F, 0.125F, 0.875F, 1.0F, 0.875F);
 	}
 	

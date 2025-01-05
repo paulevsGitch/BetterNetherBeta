@@ -262,7 +262,7 @@ tooltip.bnb.portal_compass_not_linked=§5Link with right click on the portal
 tooltip.bnb.portal_compass_linked=§5Linked§r in
 
 tooltip.bnb.nether_hygrometer.current=Current weather is
-tooltip.bnb.nether_hygrometer.change=The weather will change in
+tooltip.bnb.nether_hygrometer.change=The weather will change
 
 tooltip.bnb.nether_hygrometer.no_rain=§aRain is unlikely
 tooltip.bnb.nether_hygrometer.small_chance=§eRain is possible
@@ -275,9 +275,9 @@ tooltip.bnb.nether_hygrometer.weather.fog=§efog
 tooltip.bnb.nether_hygrometer.weather.drizzle=§6drizzle
 tooltip.bnb.nether_hygrometer.weather.rain=§crain
 
-tooltip.bnb.nether_hygrometer.time.more_hour=more than an hour
-tooltip.bnb.nether_hygrometer.time.hour=around an hour
-tooltip.bnb.nether_hygrometer.time.30_min=around 30 minutes
-tooltip.bnb.nether_hygrometer.time.15_min=around 15 minutes
-tooltip.bnb.nether_hygrometer.time.10_min=around 10 minutes
+tooltip.bnb.nether_hygrometer.time.more_hour=in more than an hour
+tooltip.bnb.nether_hygrometer.time.hour=in around an hour
+tooltip.bnb.nether_hygrometer.time.30_min=in around 30 minutes
+tooltip.bnb.nether_hygrometer.time.15_min=in around 15 minutes
+tooltip.bnb.nether_hygrometer.time.10_min=in around 10 minutes
 tooltip.bnb.nether_hygrometer.time.soon=soon

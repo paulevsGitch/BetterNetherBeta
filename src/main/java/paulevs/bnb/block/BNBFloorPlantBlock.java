@@ -8,11 +8,11 @@ import paulevs.bnb.block.property.BNBBlockMaterials;
 
 public class BNBFloorPlantBlock extends BNBPlantBlock {
 	public BNBFloorPlantBlock(Identifier id) {
-		this(id, BNBBlockMaterials.NETHER_PLANT_REPLACEABLE);
+		this(id, BNBBlockMaterials.NETHER_PLANT_REPLACEABLE, true);
 	}
 	
-	public BNBFloorPlantBlock(Identifier id, Material material) {
-		super(id, material);
+	public BNBFloorPlantBlock(Identifier id, Material material, boolean needShears) {
+		super(id, material, needShears);
 		this.setBoundingBox(0.125F, 0.0F, 0.125F, 0.875F, 0.875F, 0.875F);
 	}
 	

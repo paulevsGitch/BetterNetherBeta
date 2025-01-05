@@ -7,6 +7,7 @@ import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.block.States;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.util.Identifier;
+import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.block.property.BNBBlockProperties;
 
 import java.util.Random;
@@ -16,7 +17,7 @@ public class BNBSaplingBlock extends BNBFloorPlantBlock {
 	protected final Supplier<Structure> structure;
 	
 	public BNBSaplingBlock(Identifier id, Supplier<Structure> structure) {
-		super(id);
+		super(id, BNBBlockMaterials.NETHER_PLANT, false);
 		this.structure = structure;
 		setTicksRandomly(true);
 		disableNotifyOnMetaDataChange();

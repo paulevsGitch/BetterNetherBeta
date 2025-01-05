@@ -18,7 +18,7 @@ import java.util.List;
 
 public class BNBDoubleFloorPlantBlock extends BNBFloorPlantBlock {
 	public BNBDoubleFloorPlantBlock(Identifier id) {
-		super(id, BNBBlockMaterials.NETHER_PLANT);
+		super(id, BNBBlockMaterials.NETHER_PLANT, true);
 		setDefaultState(getDefaultState().with(BNBBlockProperties.DOUBLE_SHAPE, DoubleShape.BOTTOM));
 	}
 	

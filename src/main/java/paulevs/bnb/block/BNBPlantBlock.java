@@ -17,13 +17,16 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class BNBPlantBlock extends TemplateBlock {
-	public BNBPlantBlock(Identifier id, Material material) {
+	private final boolean needShears;
+	
+	public BNBPlantBlock(Identifier id, Material material, boolean needShears) {
 		super(id, material);
 		NO_AMBIENT_OCCLUSION[this.id] = true;
 		disableNotifyOnMetaDataChange();
 		setSounds(GRASS_SOUNDS);
 		disableStat();
 		setLightOpacity(0);
+		this.needShears = needShears;
 	}
 	
 	@Override
@@ -66,7 +69,8 @@ public abstract class BNBPlantBlock extends TemplateBlock {
 	
 	@Override
 	public void afterBreak(Level level, PlayerEntity player, int x, int y, int z, int meta) {
-		if (level.isRemote) {
+		if (level.isRemote) return;
+		if (!needShears) {
 			super.afterBreak(level, player, x, y, z, meta);
 			return;
 		}
@@ -78,7 +82,7 @@ public abstract class BNBPlantBlock extends TemplateBlock {
 	
 	@Override
 	public List<ItemStack> getDropList(Level world, int x, int y, int z, BlockState state, int meta) {
-		return Collections.emptyList();
+		return needShears ? Collections.emptyList() : List.of(new ItemStack(this));
 	}
 	
 	protected abstract boolean canStay(Level level, int x, int y, int z);

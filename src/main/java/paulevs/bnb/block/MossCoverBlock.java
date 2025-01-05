@@ -31,7 +31,7 @@ public class MossCoverBlock extends BNBPlantBlock {
 	private HitResult hit;
 	
 	public MossCoverBlock(Identifier id) {
-		super(id, BNBBlockMaterials.NETHER_PLANT_REPLACEABLE);
+		super(id, BNBBlockMaterials.NETHER_PLANT_REPLACEABLE, true);
 		setSounds(BNBSounds.MOSS_BLOCK);
 		BlockState state = getDefaultState();
 		BlockState fullState = getDefaultState();
