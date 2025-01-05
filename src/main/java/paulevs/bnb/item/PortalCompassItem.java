@@ -33,6 +33,7 @@ public class PortalCompassItem extends TemplateItem implements CustomStackTextur
 	
 	public PortalCompassItem(Identifier identifier) {
 		super(identifier);
+		setMaxStackSize(1);
 	}
 	
 	@Override

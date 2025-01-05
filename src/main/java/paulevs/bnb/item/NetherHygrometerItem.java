@@ -22,6 +22,7 @@ public class NetherHygrometerItem extends TemplateItem implements CustomStackTex
 	
 	public NetherHygrometerItem(Identifier identifier) {
 		super(identifier);
+		setMaxStackSize(1);
 	}
 	
 	@Override

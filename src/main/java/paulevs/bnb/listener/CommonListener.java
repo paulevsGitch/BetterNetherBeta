@@ -1,12 +1,15 @@
 package paulevs.bnb.listener;
 
 import net.mine_diver.unsafeevents.listener.EventListener;
+import net.mine_diver.unsafeevents.listener.ListenerPriority;
 import net.minecraft.achievement.Achievement;
 import net.minecraft.block.Block;
 import net.minecraft.level.Level;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.biome.BiomeSource;
 import net.minecraft.level.chunk.Chunk;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeRegistry;
 import net.minecraft.stat.Stat;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.event.achievement.AchievementRegisterEvent;
@@ -20,8 +23,10 @@ import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
 import net.modificationstation.stationapi.api.event.world.biome.BiomeRegisterEvent;
 import net.modificationstation.stationapi.api.event.world.gen.WorldGenEvent.ChunkDecoration;
 import net.modificationstation.stationapi.api.recipe.FuelRegistry;
+import net.modificationstation.stationapi.api.registry.ItemRegistry;
 import net.modificationstation.stationapi.api.registry.PacketTypeRegistry;
 import net.modificationstation.stationapi.api.registry.Registry;
+import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.BNB;
 import paulevs.bnb.achievement.BNBAchievementPage;
@@ -40,6 +45,8 @@ import paulevs.bnb.entity.PoisonSpiderEntity;
 import paulevs.bnb.item.BNBItems;
 import paulevs.bnb.packet.BNBWeatherPacket;
 import paulevs.bnb.world.biome.BNBBiomes;
+
+import java.util.List;
 
 public class CommonListener {
 	@EventListener
@@ -105,6 +112,21 @@ public class CommonListener {
 	@EventListener
 	public void registerPackets(PacketRegisterEvent event) {
 		Registry.register(PacketTypeRegistry.INSTANCE, BNBWeatherPacket.ID, BNBWeatherPacket.TYPE);
+	}
+	
+	@EventListener(priority = ListenerPriority.LOWEST)
+	public void registerPackets(RecipeRegisterEvent event) {
+		if (!event.recipeId.path.equals("crafting_shaped")) return;
+		@SuppressWarnings("unchecked")
+		List<Recipe> recipes = RecipeRegistry.getInstance().getRecipes();
+		recipes.sort((r1, r2) -> {
+			Identifier id1 = ItemRegistry.INSTANCE.getId(r1.getOutput().getType());
+			Identifier id2 = ItemRegistry.INSTANCE.getId(r2.getOutput().getType());
+			assert id1 != null;
+			assert id2 != null;
+			if (id1.namespace.equals(id2.namespace)) return 0;
+			return id1.namespace == BNB.NAMESPACE ? -1 : 1;
+		});
 	}
 	
 	@EventListener
