@@ -24,7 +24,7 @@ public class BNBLeavesBlock extends VBELeavesBlock {
 	
 	@Override
 	public List<ItemStack> getDropList(Level level, int x, int y, int z, BlockState state, int meta) {
-		if (sapling == null || level.random.nextInt(31) == 0) return Collections.emptyList();
+		if (sapling == null || level.random.nextInt(31) > 0) return Collections.emptyList();
 		return Collections.singletonList(new ItemStack(sapling));
 	}
 	
