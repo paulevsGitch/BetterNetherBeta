@@ -268,7 +268,7 @@ tooltip.bnb.nether_hygrometer.no_rain=§aRain is unlikely
 tooltip.bnb.nether_hygrometer.small_chance=§eRain is possible
 tooltip.bnb.nether_hygrometer.hight_chance=§6Large risk or rain
 tooltip.bnb.nether_hygrometer.rain=§cRaining
-tooltip.bnb.nether_hygrometer.no_weather="Can't predict weather outside of the Nether"
+tooltip.bnb.nether_hygrometer.no_weather=Can't predict weather outside of the Nether
 
 tooltip.bnb.nether_hygrometer.weather.clear=§aclear
 tooltip.bnb.nether_hygrometer.weather.fog=§efog

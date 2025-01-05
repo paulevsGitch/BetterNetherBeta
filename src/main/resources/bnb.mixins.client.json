@@ -6,6 +6,7 @@
 	"client": [
 		"AchievementScreenMixin",
 		"BlockRendererAccessor",
+		"ParticleManagerMixin",
 		"MainMenuScreenMixin",
 		"PlayerRendererMixin",
 		"EntityRendererMixin",

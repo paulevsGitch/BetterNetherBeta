@@ -19,8 +19,14 @@ public class BNBWeatherSounds {
 	public static final SoundEntry DRIZZLE_SOUND = getSound("drizzle");
 	private static final String RAIN_KEY = "bnb.weather.lava_rain";
 	private static final String DRIZZLE_KEY = "bnb.weather.drizzle";
+	private static boolean inTheNether;
 	
 	private static SoundSystem soundSystem;
+	
+	public static void setInTheNether(boolean inTheNether) {
+		if (BNBWeatherSounds.inTheNether != inTheNether) stop();
+		BNBWeatherSounds.inTheNether = inTheNether;
+	}
 	
 	public static SoundEntry getSound(String name) {
 		name = "assets/bnb/stationapi/sounds/weather/" + name + ".ogg";

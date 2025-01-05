@@ -48,6 +48,7 @@ public class SoundHelperMixin {
 		Minecraft minecraft = BNBClient.getMinecraft();
 		boolean isNether = minecraft != null && minecraft.level != null && minecraft.level.dimension.id == -1;
 		BNBSoundManager.setInTheNether(isNether);
+		BNBWeatherSounds.setInTheNether(isNether);
 		if (isNether) {
 			BNBSoundManager.playBackgroundMusic();
 			BNBSoundManager.playAmbience(minecraft.player, minecraft.level.dimension.biomeSource);

@@ -74,7 +74,9 @@ public class BNBBiomes {
 		.feature(BNBPlacers.NETHER_MOSS_COVER)
 		.feature(BNBPlacers.FALURIAN_VINE_SHORT)
 		.feature(BNBPlacers.FALURIAN_VINE_LONG)
-		.build(), BiomeArea.NETHERRACK_LUSH).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
+		.build(), BiomeArea.NETHERRACK_LUSH)
+		.bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE)
+		.bnb_setParticleRange(0, 2);
 	
 	public static final Biome FALURIAN_GRASSLAND = addLand(BiomeBuilder
 		.start("bnb_falurian_grassland")
@@ -106,7 +108,9 @@ public class BNBBiomes {
 		.feature(BNBPlacers.NETHER_MOSS_CEILING)
 		.feature(BNBPlacers.FALURIAN_VINE_SHORT)
 		.feature(BNBPlacers.FALURIAN_VINE_LONG)
-		.build(), BiomeArea.NETHERRACK_MEDIUM).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
+		.build(), BiomeArea.NETHERRACK_MEDIUM)
+		.bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE)
+		.bnb_setParticleRange(0, 2);
 	
 	public static final Biome PIROZEN_FOREST = addLand(BiomeBuilder
 		.start("bnb_pirozen_forest")
@@ -137,7 +141,9 @@ public class BNBBiomes {
 		.feature(BNBPlacers.NETHER_MOSS_COVER)
 		.feature(BNBPlacers.PIROZEN_VINE_SHORT)
 		.feature(BNBPlacers.PIROZEN_VINE_LONG)
-		.build(), BiomeArea.NETHERRACK_LUSH).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
+		.build(), BiomeArea.NETHERRACK_LUSH)
+		.bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE)
+		.bnb_setParticleRange(3, 5);
 	
 	public static final Biome PIROZEN_GRASSLAND = addLand(BiomeBuilder
 		.start("bnb_pirozen_grassland")
@@ -163,7 +169,9 @@ public class BNBBiomes {
 		.feature(BNBPlacers.NETHER_SPROUTS)
 		.feature(BNBPlacers.PIROZEN_VINE_SHORT)
 		.feature(BNBPlacers.PIROZEN_VINE_LONG)
-		.build(), BiomeArea.NETHERRACK_MEDIUM).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
+		.build(), BiomeArea.NETHERRACK_MEDIUM)
+		.bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE)
+		.bnb_setParticleRange(3, 5);
 	
 	public static final Biome CHLOROPHATE_FOREST = addLand(BiomeBuilder
 		.start("bnb_chlorophate_forest")
@@ -192,7 +200,9 @@ public class BNBBiomes {
 		.feature(BNBPlacers.NETHER_MOSS_COVER)
 		.feature(BNBPlacers.CHLOROPHATE_SPIDER_COCOON)
 		.feature(BNBPlacers.CHLOROPHATE_ROOTS)
-		.build(), BiomeArea.NETHERRACK_LUSH).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
+		.build(), BiomeArea.NETHERRACK_LUSH)
+		.bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE)
+		.bnb_setParticleRange(6, 8);
 	
 	public static final Biome CHLOROPHATE_GRASSLAND = addLand(BiomeBuilder
 		.start("bnb_chlorophate_grassland")
@@ -215,7 +225,9 @@ public class BNBBiomes {
 		.feature(BNBPlacers.NETHER_SPROUTS)
 		.feature(BNBPlacers.CHLOROPHATE_SPIDER_COCOON)
 		.feature(BNBPlacers.CHLOROPHATE_ROOTS)
-		.build(), BiomeArea.NETHERRACK_MEDIUM).bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE);
+		.build(), BiomeArea.NETHERRACK_MEDIUM)
+		.bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE)
+		.bnb_setParticleRange(6, 8);
 	
 	public static final Biome GRAVEL_SHORE = addShore(BiomeBuilder
 		.start("bnb_gravel_shore")

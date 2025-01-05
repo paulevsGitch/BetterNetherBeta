@@ -6,7 +6,11 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.server.command.Command;
+import paulevs.bnb.BNBClient;
+import paulevs.bnb.particle.BiomeParticle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +33,34 @@ public class BNBCommandManager {
 		add(new BNBHelpCommand());
 		add(new BNBBiomeCommand());
 		add(new BNBWeatherCommand());
+		add(new BNBCommand("particle") {
+			@Override
+			void execute(Object commandSource, String[] args) {
+				PlayerEntity player = (PlayerEntity) commandSource;
+				Minecraft minecraft = BNBClient.getMinecraft();
+				for (byte i = 0; i < 16; i++) {
+					double x = player.x + player.level.random.nextFloat() * 2.0F - 1.0;
+					double y = player.y + player.level.random.nextFloat() * 2.0F - 1.0;
+					double z = player.z + player.level.random.nextFloat() * 2.0F - 1.0;
+					minecraft.particleManager.addParticle(new BiomeParticle(
+						player.level,
+						x, y, z,
+						player.level.random.nextInt(3),
+						true
+					));
+				}
+			}
+			
+			@Override
+			String getUsage() {
+				return "";
+			}
+			
+			@Override
+			String getDescription() {
+				return "";
+			}
+		});
 		COMMAND_LIST.subList(1, COMMAND_LIST.size()).sort(Comparator.comparing(c -> c.name));
 	}
 	
