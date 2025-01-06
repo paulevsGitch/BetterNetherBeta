@@ -1,7 +1,6 @@
 package paulevs.bnb.listener;
 
 import net.mine_diver.unsafeevents.listener.EventListener;
-import net.mine_diver.unsafeevents.listener.ListenerPriority;
 import net.minecraft.achievement.Achievement;
 import net.minecraft.block.Block;
 import net.minecraft.level.Level;
@@ -18,6 +17,7 @@ import net.modificationstation.stationapi.api.event.block.entity.BlockEntityRegi
 import net.modificationstation.stationapi.api.event.entity.EntityRegister;
 import net.modificationstation.stationapi.api.event.network.packet.PacketRegisterEvent;
 import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent;
+import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent.Vanilla;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
 import net.modificationstation.stationapi.api.event.world.biome.BiomeRegisterEvent;
@@ -46,6 +46,7 @@ import paulevs.bnb.item.BNBItems;
 import paulevs.bnb.packet.BNBWeatherPacket;
 import paulevs.bnb.world.biome.BNBBiomes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommonListener {
@@ -90,13 +91,36 @@ public class CommonListener {
 	
 	@EventListener
 	public void onRecipesRegister(RecipeRegisterEvent event) {
-		if (event.recipeId != RecipeRegisterEvent.Vanilla.SMELTING.type()) return;
-		for (Block block : BNBBlocks.BLOCKS_WITH_ITEMS) {
-			if (block.material == BNBBlockMaterials.NETHER_LOG) {
-				FuelRegistry.addFuelItem(block.asItem(), block.isFullCube() ? 300 : 100);
+		if (event.recipeId == RecipeRegisterEvent.Vanilla.SMELTING.type()) {
+			for (Block block : BNBBlocks.BLOCKS_WITH_ITEMS) {
+				if (block.material == BNBBlockMaterials.NETHER_LOG) {
+					FuelRegistry.addFuelItem(block.asItem(), block.isFullCube() ? 300 : 100);
+				}
+				if (block.material == BNBBlockMaterials.NETHER_PLANT || block.material == BNBBlockMaterials.NETHER_LEAVES) {
+					FuelRegistry.addFuelItem(block.asItem(), block.isFullCube() ? 100 : 50);
+				}
 			}
-			if (block.material == BNBBlockMaterials.NETHER_PLANT || block.material == BNBBlockMaterials.NETHER_LEAVES) {
-				FuelRegistry.addFuelItem(block.asItem(), block.isFullCube() ? 100 : 50);
+		}
+		
+		if (event.recipeId == Vanilla.CRAFTING_SHAPED.type()) {
+			List<Recipe> bnbRecipes = new ArrayList<>();
+			List<Recipe> otherRecipes = new ArrayList<>();
+			
+			@SuppressWarnings("unchecked")
+			List<Recipe> recipes = RecipeRegistry.getInstance().getRecipes();
+			
+			for (Recipe recipe : recipes) {
+				Identifier id = ItemRegistry.INSTANCE.getId(recipe.getOutput().getType());
+				if (id != null && id.namespace == BNB.NAMESPACE) bnbRecipes.add(recipe);
+				else otherRecipes.add(recipe);
+			}
+			
+			for (int i = 0; i < bnbRecipes.size(); i++) {
+				recipes.set(i, bnbRecipes.get(i));
+			}
+			
+			for (int i = 0; i < otherRecipes.size(); i++) {
+				recipes.set(i + bnbRecipes.size(), otherRecipes.get(i));
 			}
 		}
 	}
@@ -112,21 +136,6 @@ public class CommonListener {
 	@EventListener
 	public void registerPackets(PacketRegisterEvent event) {
 		Registry.register(PacketTypeRegistry.INSTANCE, BNBWeatherPacket.ID, BNBWeatherPacket.TYPE);
-	}
-	
-	@EventListener(priority = ListenerPriority.LOWEST)
-	public void registerPackets(RecipeRegisterEvent event) {
-		if (!event.recipeId.path.equals("crafting_shaped")) return;
-		@SuppressWarnings("unchecked")
-		List<Recipe> recipes = RecipeRegistry.getInstance().getRecipes();
-		recipes.sort((r1, r2) -> {
-			Identifier id1 = ItemRegistry.INSTANCE.getId(r1.getOutput().getType());
-			Identifier id2 = ItemRegistry.INSTANCE.getId(r2.getOutput().getType());
-			assert id1 != null;
-			assert id2 != null;
-			if (id1.namespace.equals(id2.namespace)) return 0;
-			return id1.namespace == BNB.NAMESPACE ? -1 : 1;
-		});
 	}
 	
 	@EventListener

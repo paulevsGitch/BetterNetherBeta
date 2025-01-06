@@ -18,7 +18,7 @@ public abstract class GhastEntityMixin extends FlyingEntity {
 	@Inject(method = "canSpawn", at = @At("HEAD"), cancellable = true)
 	private void bnb_canSpawn(CallbackInfoReturnable<Boolean> info) {
 		Box bounds = Box.createAndCache(x - 128, y - 128, z - 128, x + 128, y + 128, z + 128);
-		if (level.getEntities(GhastEntity.class, bounds).size() > 5) {
+		if (level.getEntities(GhastEntity.class, bounds).size() > 1) {
 			info.setReturnValue(false);
 		}
 	}

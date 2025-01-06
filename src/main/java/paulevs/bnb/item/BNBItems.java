@@ -3,6 +3,7 @@ package paulevs.bnb.item;
 import net.minecraft.item.Item;
 import net.minecraft.item.material.ToolMaterial;
 import net.minecraft.level.structure.Structure;
+import net.modificationstation.stationapi.api.item.tool.ToolLevel;
 import net.modificationstation.stationapi.api.item.tool.ToolMaterialFactory;
 import net.modificationstation.stationapi.api.template.item.TemplateAxeItem;
 import net.modificationstation.stationapi.api.template.item.TemplateFoodItem;
@@ -27,9 +28,9 @@ import java.util.function.Supplier;
 public class BNBItems {
 	public static final List<Item> ITEMS = new ArrayList<>();
 	
-	private static final ToolMaterial ORICHALCUM = ToolMaterialFactory.create("bnb_orichalcum", 2, 750, 6.0F, 2);
-	private static final ToolMaterial OBSIDIAN = ToolMaterialFactory.create("bnb_obsidian", 1, 786, 4.0F, 1);
-	private static final ToolMaterial NETHERRACK = ToolMaterialFactory.create("bnb_netherrack", 1, 100, 2.5F, 1);
+	private static final ToolMaterial ORICHALCUM = ToolMaterialFactory.create("bnb_orichalcum", 2, 750, 6.0F, 2).toolLevel(ToolLevel.getNumeric(2));
+	private static final ToolMaterial OBSIDIAN = ToolMaterialFactory.create("bnb_obsidian", 1, 786, 4.0F, 1).toolLevel(ToolLevel.getNumeric(1));
+	private static final ToolMaterial NETHERRACK = ToolMaterialFactory.create("bnb_netherrack", 1, 100, 2.5F, 1).toolLevel(ToolLevel.getNumeric(1));
 	
 	public static final Item FALURIAN_TREE_PLACER = make(
 		"falurian_tree_placer", () -> BNBStructures.FALURIAN_TREE, StructurePlacerItem::new
