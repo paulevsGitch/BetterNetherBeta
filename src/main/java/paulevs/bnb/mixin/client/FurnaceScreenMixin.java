@@ -8,7 +8,7 @@ import net.minecraft.client.render.TextRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import paulevs.bnb.block.entity.NetherrackFurnaceBlockEntity;
+import paulevs.bnb.block.BNBFurnaceBlock;
 
 @Mixin(FurnaceScreen.class)
 public class FurnaceScreenMixin {
@@ -20,7 +20,7 @@ public class FurnaceScreenMixin {
 		ordinal = 0
 	))
 	private void bnb_renderTitle(TextRenderer renderer, String text, int x, int y, int color, Operation<Void> operation) {
-		if (furnace instanceof NetherrackFurnaceBlockEntity) {
+		if (furnace.getBlock() instanceof BNBFurnaceBlock) {
 			String name = furnace.getInventoryName();
 			int px = (176 - renderer.getTextWidth(name)) >> 1;
 			operation.call(renderer, name, px, y, color);

@@ -1,0 +1,12 @@
+{
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"north": "bnb:block/netherrack_brick_furnace_front_on",
+		"south": "bnb:block/netherrack_brick_furnace_side",
+		"east": "bnb:block/netherrack_brick_furnace_side",
+		"west": "bnb:block/netherrack_brick_furnace_side",
+		"up": "bnb:block/netherrack_brick_furnace_top",
+		"down": "bnb:block/netherrack_brick_furnace_top",
+		"particle": "#north"
+	}
+}

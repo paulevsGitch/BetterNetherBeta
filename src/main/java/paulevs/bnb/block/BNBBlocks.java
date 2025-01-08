@@ -166,7 +166,8 @@ public class BNBBlocks {
 	public static final VBEHalfSlabBlock ORICHALCUM_TILES_SLAB_HALF = make("orichalcum_tiles_slab_half", VBEHalfSlabBlock::new, ORICHALCUM_TILES);
 	public static final VBEFullSlabBlock ORICHALCUM_TILES_SLAB_FULL = makeNI("orichalcum_tiles_slab_full", VBEFullSlabBlock::new, ORICHALCUM_TILES);
 	
-	public static final Block NETHERRACK_FURNACE = make("netherrack_furnace", NetherrackFurnaceBlock::new);
+	public static final Block NETHERRACK_FURNACE = makeFurnace("netherrack_furnace", 800, "gui.bnb.netherrack_furnace");
+	public static final Block NETHERRACK_BRICK_FURNACE = makeFurnace("netherrack_brick_furnace", 200, "gui.bnb.netherrack_brick_furnace");
 	public static final Block SPINNING_WHEEL = make("spinning_wheel", SpinningWheelBlock::new);
 	
 	public static final Block NETHER_CLOTH = make("nether_cloth", NetherCloth::new);
@@ -274,6 +275,14 @@ public class BNBBlocks {
 		if (block instanceof BlockTextureUpdate update) {
 			UPDATE_TEXTURE_INTERFACE.add(update);
 		}
+		return block;
+	}
+	
+	private static BNBFurnaceBlock makeFurnace(String name, int cookingTime, String guiTranslationKey) {
+		Identifier id = BNB.id(name);
+		BNBFurnaceBlock block = new BNBFurnaceBlock(id, cookingTime, guiTranslationKey);
+		block.setTranslationKey(id);
+		BLOCKS_WITH_ITEMS.add(block);
 		return block;
 	}
 	

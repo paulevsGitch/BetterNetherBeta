@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.Level;
@@ -13,17 +14,21 @@ import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.template.block.TemplateBlockWithEntity;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
-import paulevs.bnb.block.entity.NetherrackFurnaceBlockEntity;
 import paulevs.bnb.block.property.BNBBlockProperties;
 
 import java.util.Random;
 
-public class NetherrackFurnaceBlock extends TemplateBlockWithEntity {
-	public NetherrackFurnaceBlock(Identifier identifier) {
+public class BNBFurnaceBlock extends TemplateBlockWithEntity {
+	public final String guiTranslationKey;
+	public final int cookingTime;
+	
+	public BNBFurnaceBlock(Identifier identifier, int cookingTime, String guiTranslationKey) {
 		super(identifier, Material.STONE);
 		setHardness(1.0F);
 		setDefaultState(getDefaultState().with(BNBBlockProperties.LIT, false));
-		setLuminance(NetherrackFurnaceBlock::getLight);
+		setLuminance(BNBFurnaceBlock::getLight);
+		this.guiTranslationKey = guiTranslationKey;
+		this.cookingTime = cookingTime;
 	}
 	
 	@Override
@@ -40,13 +45,13 @@ public class NetherrackFurnaceBlock extends TemplateBlockWithEntity {
 	
 	@Override
 	protected BlockEntity createBlockEntity() {
-		return new NetherrackFurnaceBlockEntity();
+		return new FurnaceBlockEntity();
 	}
 	
 	@Override
 	public boolean canUse(Level level, int x, int y, int z, PlayerEntity player) {
 		if (level.isRemote) return true;
-		NetherrackFurnaceBlockEntity entity = (NetherrackFurnaceBlockEntity) level.getBlockEntity(x, y, z);
+		FurnaceBlockEntity entity = (FurnaceBlockEntity) level.getBlockEntity(x, y, z);
 		if (entity == null) return false;
 		player.openFurnaceScreen(entity);
 		return true;
