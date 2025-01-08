@@ -65,7 +65,10 @@ public class BNBWorldDecoratorThread extends Thread {
 		if (lastLevel == null) {
 			lastLevel = server.getLevel(-1);
 			decorator = new BNBDecoratorLevel(lastLevel);
+			int radius = server.serverProperties.getInteger("view-distance", 10);
+			updateRadius(radius);
 		}
+		
 	}
 	
 	public void updateRadius(int radius) {

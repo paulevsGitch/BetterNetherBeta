@@ -52,7 +52,7 @@ public class BNBBlocks {
 	public static final Block FALURIAN_LOG = make("falurian_log", NetherLogBlock::new);
 	public static final Block FALURIAN_STEM = make("falurian_stem", StemBlock::new);
 	public static final Block FALURIAN_BRANCH = make("falurian_branch", BranchBlock::new);
-	public static final BNBLeavesBlock FALURIAN_LEAVES = make("falurian_leaves", BNBLeavesSolidBlock::new);
+	public static final BNBLeavesBlock FALURIAN_LEAVES = make("falurian_leaves", BNBLeavesBlock::new);
 	public static final Block FALURIAN_SAPLING = makeSapling(
 		"falurian_sapling",
 		() -> BNBStructures.FALURIAN_TREE,
@@ -72,7 +72,7 @@ public class BNBBlocks {
 	public static final Block PIROZEN_LOG = make("pirozen_log", NetherLogBlock::new);
 	public static final Block PIROZEN_STEM = make("pirozen_stem", StemBlock::new);
 	public static final Block PIROZEN_BRANCH = make("pirozen_branch", BranchBlock::new);
-	public static final BNBLeavesBlock PIROZEN_LEAVES = make("pirozen_leaves", BNBLeavesSolidBlock::new);
+	public static final BNBLeavesBlock PIROZEN_LEAVES = make("pirozen_leaves", BNBLeavesBlock::new);
 	public static final Block PIROZEN_SAPLING = makeSapling(
 		"pirozen_sapling",
 		() -> BNBStructures.PIROZEN_TREE,
@@ -92,7 +92,7 @@ public class BNBBlocks {
 	public static final Block CHLOROPHATE_LOG = make("chlorophate_log", NetherLogBlock::new);
 	public static final Block CHLOROPHATE_STEM = make("chlorophate_stem", StemBlock::new);
 	public static final Block CHLOROPHATE_BRANCH = make("chlorophate_branch", BranchBlock::new);
-	public static final BNBLeavesBlock CHLOROPHATE_LEAVES = make("chlorophate_leaves", BNBLeavesSolidBlock::new);
+	public static final BNBLeavesBlock CHLOROPHATE_LEAVES = make("chlorophate_leaves", BNBLeavesBlock::new);
 	public static final Block CHLOROPHATE_SAPLING = makeSapling(
 		"chlorophate_sapling",
 		() -> BNBStructures.CHLOROPHATE_TREE,

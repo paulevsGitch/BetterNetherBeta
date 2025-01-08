@@ -50,7 +50,7 @@ public class BNBStructures {
 		BNBBlocks.FALURIAN_STEM,
 		BNBBlocks.FALURIAN_BRANCH,
 		BNBBlocks.FALURIAN_WEEPING_VINE,
-		7, 11,
+		9, 13,
 		0.75F, 1.7F,
 		1.0F
 	);
@@ -60,7 +60,7 @@ public class BNBStructures {
 		BNBBlocks.PIROZEN_STEM,
 		BNBBlocks.PIROZEN_BRANCH,
 		BNBBlocks.PIROZEN_WEEPING_VINE,
-		7, 11,
+		9, 13,
 		2.5F, 1.5F,
 		1.25F
 	);
@@ -70,7 +70,7 @@ public class BNBStructures {
 		BNBBlocks.CHLOROPHATE_STEM,
 		BNBBlocks.CHLOROPHATE_BRANCH,
 		BNBBlocks.CHLOROPHATE_WEEPING_VINE,
-		7, 11,
+		9, 13,
 		1.5F, 1.5F,
 		0.25F
 	);
@@ -81,7 +81,7 @@ public class BNBStructures {
 		BNBBlocks.FALURIAN_STEM,
 		BNBBlocks.FALURIAN_BRANCH,
 		BNBBlocks.FALURIAN_WEEPING_VINE,
-		10, 16,
+		12, 18,
 		0.75F * 2.5F, 1.7F * 2.0F,
 		1.0F
 	);
@@ -91,7 +91,7 @@ public class BNBStructures {
 		BNBBlocks.PIROZEN_STEM,
 		BNBBlocks.PIROZEN_BRANCH,
 		BNBBlocks.PIROZEN_WEEPING_VINE,
-		7, 11,
+		9, 13,
 		2.5F * 2.5F, 1.5F * 2.0F,
 		1.25F
 	);
@@ -101,7 +101,7 @@ public class BNBStructures {
 		BNBBlocks.CHLOROPHATE_STEM,
 		BNBBlocks.CHLOROPHATE_BRANCH,
 		BNBBlocks.CHLOROPHATE_WEEPING_VINE,
-		7, 11,
+		9, 13,
 		1.5F * 2.5F, 1.5F * 2.0F,
 		0.25F
 	);

@@ -4,20 +4,27 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
+import net.modificationstation.stationapi.api.block.States;
+import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.template.block.TemplateBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
+import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.block.property.BNBBlockMaterials;
+import paulevs.bnb.block.property.BNBBlockProperties;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class BNBLeavesBlock extends TemplateBlock {
 	private Block sapling;
 	
-	public BNBLeavesBlock(Identifier id, int radius) {
+	public BNBLeavesBlock(Identifier id) {
 		super(id, BNBBlockMaterials.NETHER_LEAVES);
 		setHardness(LEAVES.getHardness());
 		setSounds(GRASS_SOUNDS);
+		setDefaultState(getDefaultState().with(BNBBlockProperties.LEAVES_DIRECTION, 6));
+		setTicksRandomly(true);
 	}
 	
 	@Override
@@ -26,32 +33,55 @@ public class BNBLeavesBlock extends TemplateBlock {
 		return Collections.singletonList(new ItemStack(sapling));
 	}
 	
-	/*@Override
+	@Override
+	public void appendProperties(Builder<Block, BlockState> builder) {
+		builder.add(BNBBlockProperties.LEAVES_DIRECTION);
+	}
+	
+	public BlockState getState(Direction direction) {
+		BlockState state = getDefaultState();
+		if (direction == null) return state;
+		return state.with(BNBBlockProperties.LEAVES_DIRECTION, direction.getId());
+	}
+	
+	public Direction getDirection(BlockState state) {
+		int dirID = state.get(BNBBlockProperties.LEAVES_DIRECTION);
+		if (dirID == 6) return null;
+		return Direction.byId(dirID);
+	}
+	
+	private boolean canStay(Level level, int x, int y, int z, BlockState state) {
+		Direction dir = getDirection(state);
+		if (dir == null) return true;
+		BlockState side = level.getBlockState(
+			x + dir.getOffsetX(),
+			y + dir.getOffsetY(),
+			z + dir.getOffsetZ()
+		);
+		return side.isIn(BNBBlockTags.LEAVES_SUPPORT);
+	}
+	
+	@Override
 	public void onAdjacentBlockUpdate(Level level, int x, int y, int z, int blockID) {
-		super.onAdjacentBlockUpdate(level, x, y, z, blockID);
-		for (byte i = 0; i < 6; i++) {
-			Direction dir = Direction.byId(i);
-			tickNeighbour(level, x + dir.getOffsetX(), y + dir.getOffsetY(), z + dir.getOffsetZ());
-		}
+		if (level.isRemote) return;
+		level.scheduleTick(x, y, z, id, level.random.nextInt(40) + 20);
 	}
 	
 	@Override
 	public void onScheduledTick(Level level, int x, int y, int z, Random random) {
-		super.onScheduledTick(level, x, y, z, random);
-		for (byte i = 0; i < 6; i++) {
-			Direction dir = Direction.byId(i);
-			tickNeighbour(level, x + dir.getOffsetX(), y + dir.getOffsetY(), z + dir.getOffsetZ());
-		}
-	}*/
+		if (level.isRemote) return;
+		BlockState state = level.getBlockState(x, y, z);
+		if (!state.isOf(this)) return;
+		if (canStay(level, x, y, z, state)) return;
+		drop(level, x, y, z, 0);
+		level.setBlockStateWithNotify(x, y, z, States.AIR.get());
+		/*level.playSound(x + 0.5, y + 0.5, z + 0.5, sounds.getBreakSound(), sounds.getVolume() * 0.125F, sounds.getPitch());
+		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+			BNBClient.getMinecraft().particleManager.addBlockBreakParticles(x, y, z, state.getBlock().id, 0);
+		}*/
+	}
 	
 	public void setSapling(Block sapling) {
 		this.sapling = sapling;
 	}
-	
-	/*private void tickNeighbour(Level level, int x, int y, int z) {
-		BlockState state = level.getBlockState(x, y, z);
-		if (!state.isOf(this) && !state.isIn(VBEBlockTags.LEAVES)) {
-			state.getBlock().onAdjacentBlockUpdate(level, x, y, z, state.getBlock().id);
-		}
-	}*/
 }

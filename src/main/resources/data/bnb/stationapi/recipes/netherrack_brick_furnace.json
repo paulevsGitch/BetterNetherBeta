@@ -6,7 +6,7 @@
 		"XXX"
 	],
 	"key": {
-		"X": { "item": "bnb:netherrack_bricks" }
+		"X": { "item": "bnb:netherrack_brick" }
 	},
 	"result": {
 		"item": "bnb:netherrack_brick_furnace"
