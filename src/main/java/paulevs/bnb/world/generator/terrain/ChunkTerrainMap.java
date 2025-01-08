@@ -18,12 +18,10 @@ public class ChunkTerrainMap implements TerrainSDF {
 	
 	private final Reference2ObjectMap<Identifier, TerrainFeature> features = new Reference2ObjectOpenHashMap<>();
 	private final List<TerrainFeature> commonFeatures = new ArrayList<>();
+	private final List<Reference2FloatMap<Identifier>> featureDensity;
 	
-	@SuppressWarnings("unchecked")
-	private static final Reference2FloatMap<Identifier>[] FEATURE_DENSITY = new Reference2FloatMap[32];
-	
-	private static int posX;
-	private static int posZ;
+	private int posX;
+	private int posZ;
 	
 	public ChunkTerrainMap() {
 		CONSTRUCTORS.forEach((id, constructor) ->
@@ -33,6 +31,11 @@ public class ChunkTerrainMap implements TerrainSDF {
 		COMMON_CONSTRUCTORS.forEach((constructor) ->
 			commonFeatures.add(constructor.get())
 		);
+		
+		featureDensity = new ArrayList<>(32);
+		for (byte i = 0; i < 32; i++) {
+			featureDensity.add(new Reference2FloatOpenHashMap<>());
+		}
 	}
 	
 	public void setSeed(int seed) {
@@ -45,7 +48,7 @@ public class ChunkTerrainMap implements TerrainSDF {
 		);
 	}
 	
-	public static void prepare(int x, int z) {
+	public void prepare(int x, int z) {
 		posX = x;
 		posZ = z;
 		TerrainMap map = BNBWorldGenerator.getMapCopy();
@@ -55,7 +58,7 @@ public class ChunkTerrainMap implements TerrainSDF {
 			if ((dx + dz & 1) == 1) continue;
 			dx = (byte) ((dx << 2) - 4);
 			dz = (byte) ((dz << 2) - 4);
-			Reference2FloatMap<Identifier> density = FEATURE_DENSITY[i >> 1];
+			Reference2FloatMap<Identifier> density = featureDensity.get(i >> 1);
 			map.getDensity(dx + x, dz + z, density);
 		}
 	}
@@ -64,7 +67,7 @@ public class ChunkTerrainMap implements TerrainSDF {
 	public float getDensity(int x, int y, int z) {
 		float result = -100.0F;
 		
-		Reference2FloatMap<Identifier> density = FEATURE_DENSITY[getIndex(x, z)];
+		Reference2FloatMap<Identifier> density = featureDensity.get(getIndex(x, z));
 		for (Identifier id : density.keySet()) {
 			result = features.get(id).getAndMixDensity(result, x, y, z, density.getFloat(id));
 		}
@@ -84,15 +87,9 @@ public class ChunkTerrainMap implements TerrainSDF {
 		COMMON_CONSTRUCTORS.add(constructor);
 	}
 	
-	private static int getIndex(int x, int z) {
+	private int getIndex(int x, int z) {
 		int dx = ((x - posX + 4) >> 2);
 		int dz = ((z - posZ + 4) >> 2);
 		return ((dx * 8 + dz) >> 1);
-	}
-	
-	static {
-		for (byte i = 0; i < FEATURE_DENSITY.length; i++) {
-			FEATURE_DENSITY[i] = new Reference2FloatOpenHashMap<>();
-		}
 	}
 }

@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.bnb.world.generator.BNBWorldGenerator;
 import paulevs.bnb.world.generator.biome.BNBBiomeSource;
 
-@Mixin(NetherLevelSource.class)
+@Mixin(value = NetherLevelSource.class, priority = 100)
 public class NetherLevelSourceMixin {
 	@Shadow private Level level;
 	
@@ -32,7 +32,6 @@ public class NetherLevelSourceMixin {
 	
 	@Inject(method = "decorate", at = @At("HEAD"), cancellable = true)
 	public void decorate(LevelSource source, int cx, int cz, CallbackInfo info) {
-		BNBWorldGenerator.decorateChunk(this.level, cx, cz);
 		info.cancel();
 	}
 }

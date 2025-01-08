@@ -33,12 +33,12 @@ public class StreamStructure extends Structure {
 		}
 		
 		chunk.setBlockState(x, y, z, LAVA);
-		chunk.setLight(LightType.BLOCK, x, y, z, 15);
 		
 		for (int py = minY; py <= y; py++) {
 			chunk.setBlockStateWithMetadata(x, py, z, LAVA, 1);
-			chunk.setLight(LightType.BLOCK, x, py, z, 15);
 		}
+		
+		level.updateLight(LightType.BLOCK, x, minY, z, x, y, z);
 		
 		return false;
 	}

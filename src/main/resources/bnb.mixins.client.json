@@ -6,6 +6,7 @@
 	"client": [
 		"AchievementScreenMixin",
 		"BlockRendererAccessor",
+		"LevelRendererAccessor",
 		"ParticleManagerMixin",
 		"MainMenuScreenMixin",
 		"PlayerRendererMixin",
@@ -15,6 +16,7 @@
 		"FurnaceScreenMixin",
 		"LevelRendererMixin",
 		"GameRendererMixin",
+		"AreaRendererMixin",
 		"SoundMapAccessor",
 		"SoundHelperMixin",
 		"FluidBlockMixin",

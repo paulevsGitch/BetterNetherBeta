@@ -4,22 +4,20 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
+import net.modificationstation.stationapi.api.template.block.TemplateBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
-import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.block.property.BNBBlockMaterials;
-import paulevs.vbe.block.VBEBlockTags;
-import paulevs.vbe.block.VBELeavesBlock;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
-public class BNBLeavesBlock extends VBELeavesBlock {
+public class BNBLeavesBlock extends TemplateBlock {
 	private Block sapling;
 	
 	public BNBLeavesBlock(Identifier id, int radius) {
-		super(id, BNBBlockMaterials.NETHER_LEAVES, radius);
+		super(id, BNBBlockMaterials.NETHER_LEAVES);
 		setHardness(LEAVES.getHardness());
+		setSounds(GRASS_SOUNDS);
 	}
 	
 	@Override
@@ -28,7 +26,7 @@ public class BNBLeavesBlock extends VBELeavesBlock {
 		return Collections.singletonList(new ItemStack(sapling));
 	}
 	
-	@Override
+	/*@Override
 	public void onAdjacentBlockUpdate(Level level, int x, int y, int z, int blockID) {
 		super.onAdjacentBlockUpdate(level, x, y, z, blockID);
 		for (byte i = 0; i < 6; i++) {
@@ -44,16 +42,16 @@ public class BNBLeavesBlock extends VBELeavesBlock {
 			Direction dir = Direction.byId(i);
 			tickNeighbour(level, x + dir.getOffsetX(), y + dir.getOffsetY(), z + dir.getOffsetZ());
 		}
-	}
+	}*/
 	
 	public void setSapling(Block sapling) {
 		this.sapling = sapling;
 	}
 	
-	private void tickNeighbour(Level level, int x, int y, int z) {
+	/*private void tickNeighbour(Level level, int x, int y, int z) {
 		BlockState state = level.getBlockState(x, y, z);
 		if (!state.isOf(this) && !state.isIn(VBEBlockTags.LEAVES)) {
 			state.getBlock().onAdjacentBlockUpdate(level, x, y, z, state.getBlock().id);
 		}
-	}
+	}*/
 }

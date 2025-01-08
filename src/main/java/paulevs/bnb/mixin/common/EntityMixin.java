@@ -4,7 +4,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.LivingEntity;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.At.Shift;
@@ -13,9 +15,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.item.BNBItemTags;
+import paulevs.bnb.world.generator.BNBChunkStatus;
+import paulevs.bnb.world.generator.BNBWorldChunk;
 
 @Mixin(Entity.class)
 public class EntityMixin {
+	@Shadow public Level level;
+	
+	@Shadow public int chunkX;
+	
+	@Shadow public int chunkZ;
+	
 	@Inject(method = "setOnFire", at = @At("HEAD"), cancellable = true)
 	private void bnb_disableFireDamage(CallbackInfo info) {
 		if (!(Entity.class.cast(this) instanceof LivingEntity entity)) return;
@@ -77,5 +87,15 @@ public class EntityMixin {
 			}
 		}
 		return false;
+	}
+	
+	@Inject(method = "move", at = @At("HEAD"), cancellable = true)
+	private void bnb_checkChunk(double x, double y, double z, CallbackInfo info) {
+		if (level == null || level.isRemote || level.dimension.id != -1) return;
+		BNBWorldChunk chunk = BNBWorldChunk.cast(level.getChunkFromCache(chunkX, chunkZ));
+		if (chunk == null) return;
+		if (chunk.bnb_getStatus() == BNBChunkStatus.EMPTY) {
+			info.cancel();
+		}
 	}
 }
