@@ -1,0 +1,10 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient": {
+		"item": "bnb:falurian_log"
+	},
+	"result": {
+		"item": "minecraft:coal",
+		"damage": 1
+	}
+}

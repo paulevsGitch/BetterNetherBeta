@@ -35,7 +35,15 @@ public class FlattenedWorldManagerMixin {
 	))
 	private static void bnb_saveChunk(Level level, CompoundTag chunkTag, CallbackInfoReturnable<FlattenedChunk> info, @Local FlattenedChunk chunk) {
 		if (level.dimension.id != -1) return;
-		byte statusID = chunkTag.getByte("bnb_chunkStatus");
-		BNBWorldChunk.cast(chunk).bnb_setStatus(BNBChunkStatus.fromID(statusID));
+		BNBChunkStatus status;
+		if (chunkTag.containsKey("bnb_chunkStatus")) {
+			byte statusID = chunkTag.getByte("bnb_chunkStatus");
+			status = BNBChunkStatus.fromID(statusID);
+		}
+		else {
+			status = chunk.decorated ? BNBChunkStatus.FINISHED : BNBChunkStatus.TERRAIN;
+			chunk.decorated = true;
+		}
+		BNBWorldChunk.cast(chunk).bnb_setStatus(status);
 	}
 }
