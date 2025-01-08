@@ -2,7 +2,6 @@ package paulevs.bnb.world.generator;
 
 import it.unimi.dsi.fastutil.longs.Long2ReferenceMap;
 import it.unimi.dsi.fastutil.longs.Long2ReferenceOpenHashMap;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.SandBlock;
 import net.minecraft.level.Level;
@@ -17,7 +16,6 @@ import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.impl.world.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
 import net.modificationstation.stationapi.impl.worldgen.WorldDecoratorImpl;
-import paulevs.bnb.BNB;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.MossCoverBlock;
 import paulevs.bnb.math.ConcurrentLongQueue;
@@ -207,9 +205,9 @@ public class BNBDecoratorLevel extends Level {
 		
 		chunks.clear();
 		
-		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+		/*if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			BNB.LOGGER.info("Decorated " + x + " " + z);
-		}
+		}*/
 		return true;
 	}
 	

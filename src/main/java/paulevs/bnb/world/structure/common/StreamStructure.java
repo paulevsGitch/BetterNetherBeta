@@ -17,14 +17,20 @@ public class StreamStructure extends Structure {
 	@Override
 	public boolean generate(Level level, Random random, int x, int y, int z) {
 		Chunk chunk = level.getChunkFromCache(x >> 4, z >> 4);
-		x &= 15;
-		z &= 15;
+		byte cx = (byte) (x & 15);
+		byte cz = (byte) (z & 15);
+		int maxY = y + 2;
 		
-		if (!chunk.getBlockState(x, y + 1, z).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) return false;
+		if (maxY < 100 || !chunk.getBlockState(cx, maxY, cz).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) return false;
+		
+		int searchStart = maxY;
+		while (chunk.getBlockState(cx, searchStart, cz).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) {
+			searchStart--;
+		}
 		
 		int minY;
-		for (minY = y - 1; minY > 95; minY--) {
-			BlockState state = chunk.getBlockState(x, minY, z);
+		for (minY = searchStart; minY > 95; minY--) {
+			BlockState state = chunk.getBlockState(cx, minY, cz);
 			if (state.getMaterial() == Material.LAVA) {
 				minY++;
 				break;
@@ -32,13 +38,12 @@ public class StreamStructure extends Structure {
 			if (!state.getMaterial().isReplaceable()) return false;
 		}
 		
-		chunk.setBlockState(x, y, z, LAVA);
-		
-		for (int py = minY; py <= y; py++) {
-			chunk.setBlockStateWithMetadata(x, py, z, LAVA, 1);
+		chunk.setBlockState(cx, maxY, cz, LAVA);
+		for (int py = minY; py < maxY; py++) {
+			chunk.setBlockStateWithMetadata(cx, py, cz, LAVA, 1);
 		}
 		
-		level.updateLight(LightType.BLOCK, x, minY, z, x, y, z);
+		level.updateLight(LightType.BLOCK, x, minY, z, x, maxY, z);
 		
 		return false;
 	}
