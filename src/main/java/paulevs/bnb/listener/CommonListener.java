@@ -3,14 +3,9 @@ package paulevs.bnb.listener;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.achievement.Achievement;
 import net.minecraft.block.Block;
-import net.minecraft.level.Level;
-import net.minecraft.level.biome.Biome;
-import net.minecraft.level.biome.BiomeSource;
-import net.minecraft.level.chunk.Chunk;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeRegistry;
 import net.minecraft.stat.Stat;
-import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.event.achievement.AchievementRegisterEvent;
 import net.modificationstation.stationapi.api.event.block.BlockEvent.BeforePlacedByItem;
 import net.modificationstation.stationapi.api.event.block.entity.BlockEntityRegisterEvent;
@@ -21,18 +16,15 @@ import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent.V
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
 import net.modificationstation.stationapi.api.event.world.biome.BiomeRegisterEvent;
-import net.modificationstation.stationapi.api.event.world.gen.WorldGenEvent.ChunkDecoration;
 import net.modificationstation.stationapi.api.recipe.FuelRegistry;
 import net.modificationstation.stationapi.api.registry.ItemRegistry;
 import net.modificationstation.stationapi.api.registry.PacketTypeRegistry;
 import net.modificationstation.stationapi.api.registry.Registry;
 import net.modificationstation.stationapi.api.util.Identifier;
-import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.BNB;
 import paulevs.bnb.achievement.BNBAchievementPage;
 import paulevs.bnb.achievement.BNBAchievements;
 import paulevs.bnb.block.BNBBlocks;
-import paulevs.bnb.block.MossCoverBlock;
 import paulevs.bnb.block.ShardsBlock;
 import paulevs.bnb.block.entity.CocoonSpawnerBlockEntity;
 import paulevs.bnb.block.entity.NetherrackFurnaceBlockEntity;
@@ -137,102 +129,4 @@ public class CommonListener {
 	public void registerPackets(PacketRegisterEvent event) {
 		Registry.register(PacketTypeRegistry.INSTANCE, BNBWeatherPacket.ID, BNBWeatherPacket.TYPE);
 	}
-	
-	@EventListener
-	public void registerDecoration(ChunkDecoration decoration) {
-		if (decoration.world.dimension.id != -1) return;
-		int minX = decoration.x | 8;
-		int minZ = decoration.z | 8;
-		int maxX = minX + 16;
-		int maxZ = minZ + 16;
-		
-		final BlockState netherrack = Block.NETHERRACK.getDefaultState();
-		final BlockState mossyNetherrack = BNBBlocks.MOSSY_NETHERRACK.getDefaultState();
-		
-		for (int x = minX; x < maxX; x++) {
-			for (int z = minZ; z < maxZ; z++) {
-				Chunk chunk = decoration.world.getChunkFromCache(x >> 4, z >> 4);
-				int cx = x & 15;
-				int cz = z & 15;
-				for (int y = 94; y < 256; y++) {
-					BlockState state = chunk.getBlockState(cx, y, cz);
-					if (state.isOf(BNBBlocks.NETHERRACK_MYCORRUM)) {
-						fillCube(decoration.world, x, y, z, netherrack, mossyNetherrack, BNBBlocks.NETHER_MOSS_COVER);
-					}
-				}
-			}
-		}
-	}
-	
-	private static void fillCube(Level level, int x, int y, int z, BlockState filter, BlockState fill, MossCoverBlock moss) {
-		boolean skipMoss = level.random.nextInt(32) > 0;
-		
-		if (!skipMoss) {
-			BiomeSource source = level.getBiomeSource();
-			Biome center = source.getBiome(x, z);
-			boolean isSame = true;
-			for (byte i = 0; i < 4; i++) {
-				Direction dir = Direction.fromHorizontal(i);
-				Biome side = source.getBiome(x + (dir.getOffsetX() << 2), z + (dir.getOffsetZ() << 2));
-				if (side != center) {
-					isSame = false;
-					break;
-				}
-			}
-			skipMoss = isSame;
-		}
-		
-		for (byte dx = -2; dx <= 2; dx++) {
-			int wx = x + dx;
-			byte cx = (byte) (wx & 15);
-			for (byte dz = -2; dz <= 2; dz++) {
-				int wz = z + dz;
-				byte cz = (byte) (wz & 15);
-				Chunk chunk2 = level.getChunkFromCache(wx >> 4, wz >> 4);
-				for (int dy = -1; dy <= 1; dy++) {
-					int cy = y + dy;
-					BlockState above = chunk2.getBlockState(cx, cy + 1, cz);
-					if (!above.isAir() && above.isOpaque()) continue;
-					
-					if (chunk2.getBlockState(cx, cy, cz) == filter) {
-						chunk2.setBlockState(cx, cy, cz, fill);
-					}
-					
-					if (skipMoss) continue;
-					
-					for (byte i = 0; i < 6; i++) {
-						if (level.random.nextInt(3) > 0) continue;
-						Direction dir = Direction.byId(i);
-						int px = wx + dir.getOffsetX();
-						int py = cy + dir.getOffsetY();
-						int pz = wz + dir.getOffsetZ();
-						if (!level.getBlockState(px, py, pz).isAir()) continue;
-						BlockState state = moss.getStructureState(level, px, py, pz);
-						if (state != null) {
-							level.setBlockState(px, py, pz, state);
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	/*@EventListener
-	public void registerGen(ChunkDecoration decoration) {
-		if (decoration.world.dimension.id != -1) return;
-		int px = decoration.x;
-		int pz = decoration.z;
-		Biome[] biomes = decoration.world.getBiomeSource().getBiomes(px, pz, 16, 16);
-		int index = 0;
-		for (int i = 0; i < 16; i++) {
-			for (int j = 0; j < 16; j++) {
-				Biome biome = biomes[index++];
-				if (i == 0 || j == 0 || i == 15 || j == 15) continue;
-				int color = biome.name.hashCode() & 15;
-				decoration.world.setBlockStateWithMetadataWithNotify(
-					px + i, 100, pz + j, Block.WOOL.getDefaultState(), color
-				);
-			}
-		}
-	}*/
 }

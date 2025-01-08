@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "bnb:jalumine_stem" }
+	],
+	"result": {
+		"item": "bnb:jalumine_branch"
+	}
+}

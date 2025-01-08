@@ -3,17 +3,23 @@ package paulevs.bnb.world.generator;
 import it.unimi.dsi.fastutil.longs.Long2ReferenceMap;
 import it.unimi.dsi.fastutil.longs.Long2ReferenceOpenHashMap;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Block;
 import net.minecraft.block.SandBlock;
 import net.minecraft.level.Level;
 import net.minecraft.level.LightType;
 import net.minecraft.level.LightUpdateArea;
+import net.minecraft.level.biome.Biome;
+import net.minecraft.level.biome.BiomeSource;
 import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.source.LevelSource;
 import net.modificationstation.stationapi.api.block.BlockState;
+import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.impl.world.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
 import net.modificationstation.stationapi.impl.worldgen.WorldDecoratorImpl;
 import paulevs.bnb.BNB;
+import paulevs.bnb.block.BNBBlocks;
+import paulevs.bnb.block.MossCoverBlock;
 import paulevs.bnb.math.ConcurrentLongQueue;
 import paulevs.bnb.mixin.common.LevelAccessor;
 
@@ -26,7 +32,6 @@ public class BNBDecoratorLevel extends Level {
 	private final List<LightUpdateArea> lightUpdates = new ArrayList<>();
 	private final LevelSource source;
 	private final Level level;
-	
 	
 	public BNBDecoratorLevel(Level source) {
 		super(
@@ -185,6 +190,7 @@ public class BNBDecoratorLevel extends Level {
 		
 		boolean sand = SandBlock.fallInstantly;
 		WorldDecoratorImpl.decorate(this, x, z);
+		additionalDecoration(x, z);
 		SandBlock.fallInstantly = sand;
 		
 		for (int i = 0; i < lightUpdates.size(); i++) {
@@ -218,5 +224,82 @@ public class BNBDecoratorLevel extends Level {
 	
 	private static long pack(int x, int z) {
 		return (long) x << 32L | (long) z & 0xFFFFFFFFL;
+	}
+	
+	private void additionalDecoration(int x, int z) {
+		final BlockState netherrack = Block.NETHERRACK.getDefaultState();
+		final BlockState mossyNetherrack = BNBBlocks.MOSSY_NETHERRACK.getDefaultState();
+		
+		int minX = x << 4 | 8;
+		int minZ = z << 4 | 8;
+		int maxX = minX + 16;
+		int maxZ = minZ + 16;
+		
+		for (x = minX; x < maxX; x++) {
+			for (z = minZ; z < maxZ; z++) {
+				Chunk chunk = getChunkFromCache(x >> 4, z >> 4);
+				int cx = x & 15;
+				int cz = z & 15;
+				for (int y = 94; y < 256; y++) {
+					BlockState state = chunk.getBlockState(cx, y, cz);
+					if (state.isOf(BNBBlocks.NETHERRACK_MYCORRUM)) {
+						fillCube(x, y, z, netherrack, mossyNetherrack, BNBBlocks.NETHER_MOSS_COVER);
+					}
+				}
+			}
+		}
+	}
+	
+	private void fillCube(int x, int y, int z, BlockState filter, BlockState fill, MossCoverBlock moss) {
+		boolean skipMoss = random.nextInt(32) > 0;
+		
+		if (!skipMoss) {
+			BiomeSource source = getBiomeSource();
+			Biome center = source.getBiome(x, z);
+			boolean isSame = true;
+			for (byte i = 0; i < 4; i++) {
+				Direction dir = Direction.fromHorizontal(i);
+				Biome side = source.getBiome(x + (dir.getOffsetX() << 2), z + (dir.getOffsetZ() << 2));
+				if (side != center) {
+					isSame = false;
+					break;
+				}
+			}
+			skipMoss = isSame;
+		}
+		
+		for (byte dx = -2; dx <= 2; dx++) {
+			int wx = x + dx;
+			byte cx = (byte) (wx & 15);
+			for (byte dz = -2; dz <= 2; dz++) {
+				int wz = z + dz;
+				byte cz = (byte) (wz & 15);
+				Chunk chunk2 = getChunkFromCache(wx >> 4, wz >> 4);
+				for (int dy = -1; dy <= 1; dy++) {
+					int cy = y + dy;
+					BlockState above = chunk2.getBlockState(cx, cy + 1, cz);
+					if (!above.isAir() && above.isOpaque()) continue;
+					
+					if (chunk2.getBlockState(cx, cy, cz) == filter) {
+						chunk2.setBlockState(cx, cy, cz, fill);
+					}
+					
+					if (skipMoss) continue;
+					
+					for (byte i = 0; i < 6; i++) {
+						if (random.nextInt(3) > 0) continue;
+						Direction dir = Direction.byId(i);
+						int px = wx + dir.getOffsetX();
+						int py = cy + dir.getOffsetY();
+						int pz = wz + dir.getOffsetZ();
+						if (!getBlockState(px, py, pz).isAir()) continue;
+						BlockState state = moss.getStructureState(level, px, py, pz);
+						if (state != null) {
+							setBlockState(px, py, pz, state);
+						}
+					}
+				}
+			}
+		}
 	}
 }
