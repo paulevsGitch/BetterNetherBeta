@@ -10,6 +10,7 @@ import net.minecraft.client.texture.TextureManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.LivingEntity;
 import net.minecraft.level.Level;
+import net.minecraft.level.chunk.Chunk;
 import net.minecraft.util.maths.MCMath;
 import net.minecraft.util.maths.Vec2I;
 import net.minecraft.util.maths.Vec3D;
@@ -298,7 +299,8 @@ public class BNBWeatherRenderer {
 				int wz = iz + dz;
 				int lz = wz & 3;
 				if ((lx != 0 || lz != 0) && (lx != 2 || lz != 2)) continue;
-				renderDrizzleSection(level, wx, wz, cameraPos, tessellator, vOffset);
+				Chunk chunk = level.getChunk(wx, wz);
+				renderDrizzleSection(chunk, wx, wz, cameraPos, tessellator, vOffset);
 			}
 		}
 		
@@ -316,9 +318,9 @@ public class BNBWeatherRenderer {
 			for (byte dz = (byte) -radius; dz <= radius; dz++) {
 				int wz = iz + dz;
 				int lz = wz & 3;
-				//if (((wx + wz) & 1) == 0) continue;
 				if ((lx != 0 || lz != 0) && (lx != 2 || lz != 2)) continue;
-				renderLavaPuddles(level, wx, wz, cameraPos, tessellator, vOffset, radius, intensity);
+				Chunk chunk = level.getChunk(wx, wz);
+				renderLavaPuddles(chunk, wx, wz, cameraPos, tessellator, vOffset, radius, intensity);
 			}
 		}
 		
@@ -370,7 +372,8 @@ public class BNBWeatherRenderer {
 			for (byte dz = (byte) -radius; dz <= radius; dz++) {
 				if (Math.abs(dx) < radiusCenter && Math.abs(dz) < radiusCenter) continue;
 				int wz = (iz & -4) + (dz << 2);
-				renderLargeSection(level, wx, wz, cameraPos, tessellator, vOffset);
+				Chunk chunk = level.getChunk(wx, wz);
+				renderLargeSection(chunk, wx, wz, cameraPos, tessellator, vOffset);
 			}
 		}
 		
@@ -379,7 +382,8 @@ public class BNBWeatherRenderer {
 			for (byte dz = (byte) -radius; dz <= radius; dz++) {
 				int wz = iz + dz;
 				if (((wx + wz) & 1) == 0) continue;
-				renderNormalSection(level, wx, wz, cameraPos, tessellator, vOffset);
+				Chunk chunk = level.getChunk(wx, wz);
+				renderNormalSection(chunk, wx, wz, cameraPos, tessellator, vOffset);
 			}
 		}
 		
@@ -395,7 +399,8 @@ public class BNBWeatherRenderer {
 			int wx = ix + dx;
 			for (byte dz = (byte) -radius; dz <= radius; dz++) {
 				int wz = iz + dz;
-				renderLavaPuddles(level, wx, wz, cameraPos, tessellator, vOffset, radius, intensity);
+				Chunk chunk = level.getChunk(wx, wz);
+				renderLavaPuddles(chunk, wx, wz, cameraPos, tessellator, vOffset, radius, intensity);
 			}
 		}
 		
@@ -407,9 +412,13 @@ public class BNBWeatherRenderer {
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1f);
 	}
 	
-	private static void renderLargeSection(Level level, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset) {
-		int y1 = BNBWeatherManager.getWeatherTop(level, x, z);
-		int y2 = BNBWeatherManager.getWeatherBottom(level, x, y1, z);
+	private static void renderLargeSection(Chunk chunk, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset) {
+		byte cx = (byte) (x & 15);
+		byte cz = (byte) (z & 15);
+		
+		int y1 = BNBWeatherManager.getWeatherTop(chunk, cx, cz);
+		if (y1 == Integer.MAX_VALUE) return;
+		int y2 = BNBWeatherManager.getWeatherBottom(chunk, cx, y1, cz);
 		
 		if (y2 - y1 == 0) return;
 		if (areIsInvisible(pos, x - 2, y1, z - 2, x + 3, y2, z + 3)) return;
@@ -447,9 +456,13 @@ public class BNBWeatherRenderer {
 		tessellator.vertex(x2, y1, z2, u2, v2);
 	}
 	
-	private static void renderNormalSection(Level level, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset) {
-		int y1 = BNBWeatherManager.getWeatherTop(level, x, z);
-		int y2 = BNBWeatherManager.getWeatherBottom(level, x, y1, z);
+	private static void renderNormalSection(Chunk chunk, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset) {
+		byte cx = (byte) (x & 15);
+		byte cz = (byte) (z & 15);
+		
+		int y1 = BNBWeatherManager.getWeatherTop(chunk, cx, cz);
+		if (y1 == Integer.MAX_VALUE) return;
+		int y2 = BNBWeatherManager.getWeatherBottom(chunk, cx, y1, cz);
 		
 		if (y2 - y1 == 0) return;
 		if (areIsInvisible(pos, x, y1, z, x + 1, y2, z + 1)) return;
@@ -487,15 +500,19 @@ public class BNBWeatherRenderer {
 		tessellator.vertex(x2, y1, z2, u2, v2);
 	}
 	
-	private static void renderLavaPuddles(Level level, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset, float radius, float intensity) {
-		int top = BNBWeatherManager.getWeatherTop(level, x, z);
-		int height = BNBWeatherManager.getWeatherBottom(level, x, top, z);
+	private static void renderLavaPuddles(Chunk chunk, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset, float radius, float intensity) {
+		byte cx = (byte) (x & 15);
+		byte cz = (byte) (z & 15);
 		
-		Block block = level.getBlockState(x, height, z).getBlock();
+		int y1 = BNBWeatherManager.getWeatherTop(chunk, cx, cz);
+		if (y1 == Integer.MAX_VALUE) return;
+		int y2 = BNBWeatherManager.getWeatherBottom(chunk, cx, y1, cz);
+		
+		Block block = chunk.getBlockState(cx, y2, cz).getBlock();
 		if (!block.isFullCube()) return;
 		
 		float dx = (float) (x - pos.x);
-		float dy = (float) (height - pos.y) * 0.5F;
+		float dy = (float) (y2 - pos.y) * 0.5F;
 		float dz = (float) (z - pos.z);
 		float alpha = 1F - MCMath.sqrt(dx * dx + dy * dy + dz * dz) / radius;
 		alpha = alpha * 4F * intensity;
@@ -531,7 +548,7 @@ public class BNBWeatherRenderer {
 		float x2 = px + scaleMax;
 		float z1 = pz + scaleMin;
 		float z2 = pz + scaleMax;
-		float h = height + 1.01F;
+		float h = y2 + 1.01F;
 		
 		if (areIsInvisible(pos, x1, h, z1, x2, h, z2)) return;
 		
@@ -541,9 +558,13 @@ public class BNBWeatherRenderer {
 		tessellator.vertex(x2, h, z1, 1.0F, v1);
 	}
 	
-	private static void renderDrizzleSection(Level level, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset) {
-		int y1 = BNBWeatherManager.getWeatherTop(level, x, z);
-		int y2 = BNBWeatherManager.getWeatherBottom(level, x, y1, z);
+	private static void renderDrizzleSection(Chunk chunk, int x, int z, Vec3D pos, Tessellator tessellator, float vOffset) {
+		byte cx = (byte) (x & 15);
+		byte cz = (byte) (z & 15);
+		
+		int y1 = BNBWeatherManager.getWeatherTop(chunk, cx, cz);
+		if (y1 == Integer.MAX_VALUE) return;
+		int y2 = BNBWeatherManager.getWeatherBottom(chunk, cx, y1, cz);
 		
 		if (y2 - y1 == 0) return;
 		if (areIsInvisible(pos, x, y1, z, x + 1, y2, z + 1)) return;

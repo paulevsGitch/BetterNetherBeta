@@ -7,6 +7,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.living.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.item.ItemPlacementContext;
@@ -19,6 +20,7 @@ import paulevs.bnb.block.property.BNBBlockProperties;
 import java.util.Random;
 
 public class BNBFurnaceBlock extends TemplateBlockWithEntity {
+	private static boolean updating;
 	public final String guiTranslationKey;
 	public final int cookingTime;
 	
@@ -81,11 +83,26 @@ public class BNBFurnaceBlock extends TemplateBlockWithEntity {
 		level.addParticle("flame", px, py, pz, 0.0, 0.0, 0.0);
 	}
 	
+	@Override
+	public void onBlockRemoved(Level level, int x, int y, int z) {
+		if (updating || level.isRemote) return;
+		FurnaceBlockEntity entity = (FurnaceBlockEntity) level.getBlockEntity(x, y, z);
+		if (entity == null) return;
+		for (byte i = 0; i < entity.getInventorySize(); i++) {
+			ItemStack stack = entity.getItem(i);
+			if (stack == null) continue;
+			drop(level, x, y, z, stack);
+		}
+		level.removeBlockEntity(x, y, z);
+	}
+	
 	public static void updateState(boolean lit, Level level, int x, int y, int z) {
+		updating = true;
 		BlockEntity entity = level.getBlockEntity(x, y, z);
 		level.setBlockState(x, y, z, level.getBlockState(x, y, z).with(BNBBlockProperties.LIT, lit));
 		entity.validate();
 		level.setBlockEntity(x, y, z, entity);
+		updating = false;
 	}
 	
 	private static int getLight(BlockState state) {

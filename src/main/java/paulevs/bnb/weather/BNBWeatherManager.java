@@ -6,6 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.Level;
@@ -15,6 +16,8 @@ import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.network.packet.PacketHelper;
 import paulevs.bnb.BNB;
 import paulevs.bnb.BNBClient;
+import paulevs.bnb.block.BNBBlockTags;
+import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.mixin.common.EntityAccessor;
 import paulevs.bnb.packet.BNBWeatherPacket;
 import paulevs.vbe.utils.CreativeUtil;
@@ -23,6 +26,7 @@ import java.util.List;
 import java.util.Random;
 
 public class BNBWeatherManager {
+	private static final int MAX_WEATHER_SEARCH = 255 - 32;
 	private static final WeatherType[] WEATHER_SEQUENCE = new WeatherType[16];
 	private static final LongSet CHUNKS = new LongOpenHashSet(4096);
 	private static final Random RANDOM = new Random();
@@ -95,7 +99,8 @@ public class BNBWeatherManager {
 				if (RANDOM.nextInt(2000) > 0) continue;
 				x = i & 15;
 				z = i >> 4;
-				int y = getWeatherBottom(level, chunk, x, z);
+				int y = getWeatherBottom(chunk, x, z);
+				if (y == Integer.MAX_VALUE) continue;
 				BlockState state = chunk.getBlockState(x, y, z);
 				if (state.getMaterial().isBurnable() && chunk.getBlockState(x, y + 1, z).isAir()) {
 					chunk.setBlockState(x, y + 1, z, Block.FIRE.getDefaultState());
@@ -113,7 +118,7 @@ public class BNBWeatherManager {
 					}
 					x = MCMath.floor(entity.x) & 15;
 					z = MCMath.floor(entity.z) & 15;
-					int y = getWeatherBottom(level, chunk, x, z);
+					int y = getWeatherBottom(chunk, x, z);
 					if (y > entity.y + entity.height) continue;
 					accessor.bnb_setOnFire();
 				}
@@ -172,41 +177,40 @@ public class BNBWeatherManager {
 		weatherLength = length;
 	}
 	
-	public static int getWeatherTop(Level level, int x, int z) {
-		int y = level.getTopY() - 1;
-		int minY = level.getBottomY();
-		Chunk chunk = level.getChunkFromCache(x >> 4, z >> 4);
-		x &= 15;
-		z &= 15;
+	public static int getWeatherTop(Chunk chunk, int x, int z) {
+		int y = 255;
 		BlockState state = chunk.getBlockState(x, y, z);
-		while (!state.isAir() && y > minY) state = chunk.getBlockState(x, --y, z);
-		return y;
+		while (isNetherCeiling(state) && y > MAX_WEATHER_SEARCH) state = chunk.getBlockState(x, --y, z);
+		return !canPropagateWeather(state) ? Integer.MAX_VALUE : y;
 	}
 	
-	public static int getWeatherBottom(Level level, int x, int y, int z) {
-		int minY = level.getBottomY();
-		Chunk chunk = level.getChunkFromCache(x >> 4, z >> 4);
-		x &= 15;
-		z &= 15;
-		BlockState state = chunk.getBlockState(x, y, z);
-		while (state.isAir() && y > minY) state = chunk.getBlockState(x, --y, z);
-		return y;
+	public static int getWeatherBottom(Chunk chunk, int x, int z) {
+		int y = getWeatherTop(chunk, x, z);
+		if (y == Integer.MAX_VALUE) return Integer.MAX_VALUE;
+		return getWeatherBottom(chunk, x, y, z);
 	}
 	
-	public static int getWeatherBottom(Level level, int x, int z) {
-		return getWeatherBottom(level, level.getChunkFromCache(x >> 4, z >> 4), x & 15, z & 15);
-	}
-	
-	private static int getWeatherBottom(Level level, Chunk chunk, int x, int z) {
-		int y = level.getTopY() - 1;
-		int minY = level.getBottomY();
+	public static int getWeatherBottom(Chunk chunk, int x, int y, int z) {
 		BlockState state = chunk.getBlockState(x, y, z);
-		while (!state.isAir() && y > minY) state = chunk.getBlockState(x, --y, z);
-		while (state.isAir() && y > minY) state = chunk.getBlockState(x, --y, z);
+		while (canPropagateWeather(state) && y > 0) state = chunk.getBlockState(x, --y, z);
 		return y;
 	}
 	
 	public static int getCurrentWeatherLength() {
 		return weatherLength;
+	}
+	
+	private static boolean isNetherCeiling(BlockState state) {
+		return state.isOf(Block.BEDROCK) ||
+			state.isIn(BNBBlockTags.NETHERRACK_TERRAIN) ||
+			state.isIn(BNBBlockTags.SOUL_TERRAIN);
+	}
+	
+	private static boolean canPropagateWeather(BlockState state) {
+		if (state.isAir()) return true;
+		Material material = state.getMaterial();
+		if (material.isLiquid()) return false;
+		if (material == BNBBlockMaterials.NETHER_PLANT) return true;
+		return !material.blocksMovement();
 	}
 }

@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "bnb:spider_net" }
+	],
+	"result": {
+		"item": "minecraft:string"
+	}
+}

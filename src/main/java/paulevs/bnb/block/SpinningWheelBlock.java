@@ -82,13 +82,13 @@ public class SpinningWheelBlock extends TemplateBlockWithEntity {
 	@Override
 	public void onBlockRemoved(Level level, int x, int y, int z) {
 		SpinningWheelBlockEntity entity = (SpinningWheelBlockEntity) level.getBlockEntity(x, y, z);
-		if (entity != null) {
-			if (entity.getProcess() > 0) drop(level, x, y, z, new ItemStack(BNBItems.NETHER_FIBER));
-			for (byte i = 0; i < entity.getInventorySize(); i++) {
-				ItemStack stack = entity.getItem(i);
-				if (stack == null) continue;
-				drop(level, x, y, z, stack);
-			}
+		if (entity == null) return;
+		if (entity.getProcess() > 0) drop(level, x, y, z, new ItemStack(BNBItems.NETHER_FIBER));
+		for (byte i = 0; i < entity.getInventorySize(); i++) {
+			ItemStack stack = entity.getItem(i);
+			if (stack == null) continue;
+			drop(level, x, y, z, stack);
 		}
+		level.removeBlockEntity(x, y, z);
 	}
 }
