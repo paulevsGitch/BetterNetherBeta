@@ -22,7 +22,7 @@ public class LevelRendererMixin {
 	}
 	
 	@Inject(method = "renderSky", at = @At("HEAD"), cancellable = true)
-	public void bnb_renderSky(float delta, CallbackInfo info) {
+	private void bnb_renderSky(float delta, CallbackInfo info) {
 		if (level.dimension.id == -1) {
 			BNBSkyRenderer.renderSky(minecraft);
 			info.cancel();

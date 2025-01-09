@@ -8,6 +8,7 @@
 		"LevelMonsterSpawnerMixin",
 		"FurnaceBlockEntityMixin",
 		"ZombiePigmanEntityMixin",
+		"FlowingFluidBlockMixin",
 		"NetherLevelSourceMixin",
 		"LevelPropertiesMixin",
 		"NetherDimensionMixin",
