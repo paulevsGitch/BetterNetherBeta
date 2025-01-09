@@ -5,15 +5,14 @@ import net.minecraft.container.slot.Slot;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.inventory.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import paulevs.bnb.achievement.BNBAchievements;
 import paulevs.bnb.block.entity.SpinningWheelBlockEntity;
 import paulevs.bnb.item.BNBItemTags;
 
 public class SpinningWheelContainer extends Container {
 	public final SpinningWheelBlockEntity entity;
-	private final PlayerInventory playerInventory;
 	
 	public SpinningWheelContainer(PlayerInventory playerInventory, SpinningWheelBlockEntity entity) {
-		this.playerInventory = playerInventory;
 		this.entity = entity;
 		
 		// Input
@@ -71,5 +70,14 @@ public class SpinningWheelContainer extends Container {
 		}
 		
 		return result;
+	}
+	
+	@Override
+	public ItemStack clickSlot(int slotIndex, int clickType, boolean shift, PlayerEntity player) {
+		if (slotIndex > 3 && slotIndex < 8) {
+			ItemStack stored = ((Slot) slots.get(slotIndex)).getItem();
+			if (stored != null) BNBAchievements.craftAchievement(player, stored.getType());
+		}
+		return super.clickSlot(slotIndex, clickType, shift, player);
 	}
 }

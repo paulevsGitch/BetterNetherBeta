@@ -266,6 +266,16 @@ achievement.bnb.orichalcum=Plato was right
 achievement.bnb.orichalcum.desc=Make Orichalcum ingot
 achievement.bnb.ariadnes_string=Ariadne's String
 achievement.bnb.ariadnes_string.desc=Craft a Portal Compass
+achievement.bnb.brick_by_brick=Brick by brick
+achievement.bnb.brick_by_brick.desc=Craft a Netherrack Brick
+achievement.bnb.meteorology=Accurate meteorology
+achievement.bnb.meteorology.desc=Craft a Nether Hygrometer
+achievement.bnb.spinning_wheel=Spinning Wheel
+achievement.bnb.spinning_wheel.desc=Craft a Spinning Wheel
+achievement.bnb.fabric_yarn=Fabric Yarn
+achievement.bnb.fabric_yarn.desc=Is this an Easter egg?
+achievement.bnb.fire_upgrade=Fire Upgrade
+achievement.bnb.fire_upgrade.desc=Make Netherrack Brick Furnace
 
 tooltip.bnb.portal_compass_not_linked=§5Link with right click on the portal
 tooltip.bnb.portal_compass_linked=§5Linked§r in

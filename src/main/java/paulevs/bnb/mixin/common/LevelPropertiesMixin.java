@@ -9,12 +9,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.weather.BNBWeatherManager;
 import paulevs.bnb.weather.WeatherType;
 
+import java.util.Random;
+
 @Mixin(LevelProperties.class)
 public class LevelPropertiesMixin {
 	@Inject(method = "<init>(Lnet/minecraft/util/io/CompoundTag;)V", at = @At("TAIL"))
 	private void bnb_readTag(CompoundTag tag, CallbackInfo info) {
 		WeatherType weather = WeatherType.getByID(tag.getByte("bnb_weather_type"));
 		int length = tag.getInt("bnb_weather_length");
+		if (length == 0) length = weather.getTime(new Random());
 		BNBWeatherManager.setWeather(weather, length);
 	}
 	

@@ -2,11 +2,12 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"XXX",
-		"X X",
+		"XFX",
 		"XXX"
 	],
 	"key": {
-		"X": { "item": "bnb:netherrack_brick" }
+		"X": { "item": "bnb:netherrack_brick" },
+		"F": { "item": "bnb:netherrack_furnace" }
 	},
 	"result": {
 		"item": "bnb:netherrack_brick_furnace"
