@@ -16,6 +16,7 @@ import paulevs.bnb.block.property.BNBBlockProperties.VineShape;
 import java.util.Random;
 
 public class CommonLargeTreeStructure extends Structure {
+	private final LeavesDistributor distributor = new LeavesDistributor();
 	private final BlockState trunk;
 	private final BNBLeavesBlock leaves;
 	private final BlockState stem;
@@ -60,6 +61,7 @@ public class CommonLargeTreeStructure extends Structure {
 		
 		if (height < minHeight) return false;
 		
+		distributor.setCenter(x, y, z);
 		growTrunk(level, x, y, z, height);
 		growRoots(level, random, x, y, z, height);
 		growBranches(level, random, x, y, z, height);
@@ -78,12 +80,16 @@ public class CommonLargeTreeStructure extends Structure {
 	
 	private void growTrunk(Level level, int x, int y, int z, int height) {
 		for (byte i = -2; i < height; i++) {
+			boolean isSupport = i > height - 3;
 			for (byte j = 0; j < 9; j++) {
 				int px = x + (j % 3) - 1;
 				int py = y + i;
 				int pz = z + (j / 3) - 1;
 				if (!canReplace(level.getBlockState(px, py, pz))) continue;
 				level.setBlockState(px, py, pz, trunk);
+				if (isSupport) {
+					distributor.addLog(px, py, pz);
+				}
 			}
 		}
 	}
@@ -180,29 +186,15 @@ public class CommonLargeTreeStructure extends Structure {
 					.with(BNBBlockProperties.getByDir(Direction.UP), true)
 				);
 				int sy = by;
+				int lastY = sy;
 				for (byte k = (byte) (j + 1); k < length; k++) {
 					if (!canReplace(level.getBlockState(sx, ++sy, sz))) break;
 					level.setBlockState(sx, sy, sz, stem);
+					lastY = sy;
 				}
+				distributor.addLog(sx, lastY, sz);
 			}
 		}
-	}
-	
-	private BlockState getLeavesState(int x, int y, int z, int centerX, int centerY, int centerZ) {
-		Direction side;
-		int dy = y - centerY;
-		if (dy > 1) side = Direction.DOWN;
-		else if (dy < 0) side = Direction.UP;
-		else {
-			int dx = x - centerX;
-			int dz = z - centerZ;
-			int ax = Math.abs(dx);
-			int az = Math.abs(dz);
-			int mx = Math.max(ax, az);
-			if (ax == mx) side = dx > 0 ? Direction.NORTH : Direction.SOUTH;
-			else side = dz > 0 ? Direction.EAST : Direction.WEST;
-		}
-		return leaves.getState(side);
 	}
 	
 	private void growCap(Level level, Random random, int x, int y, int z, float radius, float height) {
@@ -236,7 +228,8 @@ public class CommonLargeTreeStructure extends Structure {
 					
 					if (py < 1 && random.nextBoolean()) {
 						if (!canReplace(level.getBlockState(wx, wy + 1, wz))) continue;
-						level.setBlockState(wx, wy + 1, wz, getLeavesState(wx, wy + 1, wz, x, y, z));
+						level.setBlockState(wx, wy + 1, wz, leaves.getDefaultState());
+						distributor.addLeaves(wx, wy + 1, wz);
 						
 						if (level.getBlockState(wx, wy, wz).getMaterial().isReplaceable()) {
 							int length = random.nextInt(3) + 2;
@@ -247,7 +240,8 @@ public class CommonLargeTreeStructure extends Structure {
 					}
 					
 					if (!canReplace(level.getBlockState(wx, wy, wz))) continue;
-					level.setBlockState(wx, wy, wz, getLeavesState(wx, wy, wz, x, y, z));
+					level.setBlockState(wx, wy, wz, leaves.getDefaultState());
+					distributor.addLeaves(wx, wy, wz);
 					
 					if (level.getBlockState(wx, wy - 1, wz).getMaterial().isReplaceable()) {
 						int length = random.nextInt(3) + 2;
@@ -255,10 +249,13 @@ public class CommonLargeTreeStructure extends Structure {
 					}
 					
 					if (!canReplace(level.getBlockState(wx, ++wy, wz))) continue;
-					level.setBlockState(wx, wy, wz, getLeavesState(wx, wy, wz, x, y, z));
+					level.setBlockState(wx, wy, wz, leaves.getDefaultState());
+					distributor.addLeaves(wx, wy, wz);
 				}
 			}
 		}
+		
+		distributor.updateLeaves(level, leaves);
 		
 		placeLantern(level, random, x + 2, y, z - 2);
 		placeLantern(level, random, x + 2, y, z + 2);

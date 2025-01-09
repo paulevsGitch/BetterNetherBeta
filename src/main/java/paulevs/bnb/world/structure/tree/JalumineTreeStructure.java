@@ -9,11 +9,13 @@ import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.BNBBlocks;
+import paulevs.bnb.block.BNBLeavesBlock;
 import paulevs.bnb.block.property.BNBBlockProperties;
 
 import java.util.Random;
 
 public class JalumineTreeStructure extends Structure {
+	private final LeavesDistributor distributor = new LeavesDistributor();
 	private static final BlockState STEM = BNBBlocks.JALUMINE_STEM.getDefaultState().with(BNBBlockProperties.AXIS, Axis.Y);
 	private static final BlockState LEAVES = BNBBlocks.JALUMINE_LEAVES.getDefaultState();
 	private static final BlockState FLOWER = BNBBlocks.JALUMINE_FLOWER.getDefaultState();
@@ -36,12 +38,15 @@ public class JalumineTreeStructure extends Structure {
 	}
 	
 	private boolean makeStem(Level level, int x, int y, int z, int height) {
+		int lastY = y;
 		for (int i = 0; i < height; i++) {
 			BlockState state = level.getBlockState(x, y, z);
 			if (!canReplace(state)) return false;
 			level.setBlockState(x, y, z, STEM);
+			lastY = y;
 			y++;
 		}
+		distributor.addLog(x, y, z);
 		return true;
 	}
 	
@@ -79,6 +84,7 @@ public class JalumineTreeStructure extends Structure {
 		makeLeafCylinder(level, x, y + 1, z, radius * 0.75F + random.nextFloat() * radius * 0.1F, random);
 		makeLeafCylinder(level, x, y + 2, z, radius * 0.5F + random.nextFloat() * radius * 0.1F, random);
 		makeLeafCylinder(level, x, y + 3, z, radius * 0.25F + random.nextFloat() * radius * 0.1F, random);
+		distributor.updateLeaves(level, (BNBLeavesBlock) LEAVES.getBlock());
 	}
 	
 	private void makeLeafCylinder(Level level, int x, int y, int z, float radius, Random random) {
@@ -98,6 +104,7 @@ public class JalumineTreeStructure extends Structure {
 				BlockState state = level.getBlockState(wx, y, wz);
 				if (!canReplace(state)) continue;
 				level.setBlockState(wx, y, wz, LEAVES);
+				distributor.addLeaves(wx, y, wz);
 				
 				if (random.nextInt(3) > 0) continue;
 				

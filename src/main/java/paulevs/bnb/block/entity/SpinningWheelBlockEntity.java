@@ -13,7 +13,7 @@ import paulevs.bnb.item.BNBItemTags;
 import paulevs.bnb.item.BNBItems;
 
 public class SpinningWheelBlockEntity extends BlockEntity implements Inventory {
-	private static final int PROCESS_TICKS = 10 * 20; // 10 seconds
+	private static final int PROCESS_TICKS = 200;
 	private final ItemStack[] storage = new ItemStack[8];
 	private int process;
 	
