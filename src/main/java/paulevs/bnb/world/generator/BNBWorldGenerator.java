@@ -55,6 +55,7 @@ public class BNBWorldGenerator {
 	
 	private static ThreadLocal<TerrainMap> mapCopies;
 	private static volatile boolean canRun = true;
+	private static volatile BNBWorldDecoratorThread decoratorThread;
 	
 	public static void updateData(DimensionData dimensionData, long seed) {
 		RANDOM.setSeed(seed);
@@ -198,14 +199,16 @@ public class BNBWorldGenerator {
 		}
 	}
 	
-	private static final BNBWorldDecoratorThread DECORATOR_THREAD = new BNBWorldDecoratorThread();
-	
 	public static void tick() {
-		DECORATOR_THREAD.updateMain(BNBClient.getMinecraft());
+		if (decoratorThread == null || !decoratorThread.isAlive()) {
+			decoratorThread = new BNBWorldDecoratorThread();
+			decoratorThread.start();
+		}
+		decoratorThread.updateMain(BNBClient.getMinecraft());
 	}
 	
 	public static void stop() {
-		DECORATOR_THREAD.stopThread();
+		decoratorThread.stopThread();
 		canRun = false;
 	}
 	
@@ -284,7 +287,5 @@ public class BNBWorldGenerator {
 			thread.setName("BNB Chunk Generator " + n);
 			thread.start();
 		}
-		
-		DECORATOR_THREAD.start();
 	}
 }

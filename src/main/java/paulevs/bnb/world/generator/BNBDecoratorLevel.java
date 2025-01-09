@@ -48,11 +48,10 @@ public class BNBDecoratorLevel extends Level {
 		FlattenedChunk chunk = chunks.get(index);
 		if (chunk == null) {
 			synchronized (source) {
-				if (source.isChunkLoaded(x, z)) {
-					chunk = copyFromSource((FlattenedChunk) source.getChunk(x, z));
-					chunks.put(index, chunk);
-				}
+				if (source.isChunkLoaded(x, z)) chunk = (FlattenedChunk) source.getChunk(x, z);
+				else chunk = (FlattenedChunk) source.loadChunk(x, z);
 			}
+			chunks.put(index, copyFromSource(chunk));
 		}
 		return chunk;
 	}
