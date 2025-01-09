@@ -1,7 +1,9 @@
 package paulevs.bnb.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tool.ShearsItem;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.block.States;
@@ -11,6 +13,7 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.block.property.BNBBlockProperties;
+import paulevs.vbe.utils.CreativeUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +39,18 @@ public class BNBLeavesBlock extends TemplateBlock {
 	@Override
 	public void appendProperties(Builder<Block, BlockState> builder) {
 		builder.add(BNBBlockProperties.LEAVES_DIRECTION);
+	}
+	
+	@Override
+	public void afterBreak(Level level, PlayerEntity player, int x, int y, int z, int meta) {
+		if (level.isRemote) return;
+		ItemStack heldItem = player.getHeldItem();
+		if (heldItem == null || !(heldItem.getType() instanceof ShearsItem)) {
+			super.afterBreak(level, player, x, y, z, meta);
+			return;
+		}
+		drop(level, x, y, z, new ItemStack(this));
+		if (!CreativeUtil.isCreative(player)) heldItem.applyDamage(1, player);
 	}
 	
 	public BlockState getState(Direction direction) {
@@ -75,10 +90,6 @@ public class BNBLeavesBlock extends TemplateBlock {
 		if (canStay(level, x, y, z, state)) return;
 		drop(level, x, y, z, 0);
 		level.setBlockStateWithNotify(x, y, z, States.AIR.get());
-		/*level.playSound(x + 0.5, y + 0.5, z + 0.5, sounds.getBreakSound(), sounds.getVolume() * 0.125F, sounds.getPitch());
-		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-			BNBClient.getMinecraft().particleManager.addBlockBreakParticles(x, y, z, state.getBlock().id, 0);
-		}*/
 	}
 	
 	public void setSapling(Block sapling) {
