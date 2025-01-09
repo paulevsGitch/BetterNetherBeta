@@ -28,6 +28,7 @@ public class BNBDecoratorLevel extends Level {
 	private final Long2ReferenceMap<FlattenedChunk> chunks = new Long2ReferenceOpenHashMap<>();
 	private final ConcurrentLongQueue areasToUpdate = new ConcurrentLongQueue();
 	private final List<LightUpdateArea> lightUpdates = new ArrayList<>();
+	private final FlattenedChunk empty;
 	private final LevelSource source;
 	private final Level level;
 	
@@ -40,6 +41,7 @@ public class BNBDecoratorLevel extends Level {
 		);
 		this.source = source.getCache();
 		this.level = source;
+		empty = new FlattenedChunk(this, 0, 0);
 	}
 	
 	@Override
@@ -49,9 +51,9 @@ public class BNBDecoratorLevel extends Level {
 		if (chunk == null) {
 			synchronized (source) {
 				if (source.isChunkLoaded(x, z)) chunk = (FlattenedChunk) source.getChunk(x, z);
-				else chunk = (FlattenedChunk) source.loadChunk(x, z);
 			}
-			chunks.put(index, copyFromSource(chunk));
+			if (chunk == null) chunk = empty;
+			else chunks.put(index, copyFromSource(chunk));
 		}
 		return chunk;
 	}

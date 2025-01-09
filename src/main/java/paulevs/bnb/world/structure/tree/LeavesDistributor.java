@@ -69,13 +69,6 @@ public class LeavesDistributor {
 			startPositions = endPositions;
 		}
 		
-		for (int index : leavesPositions) {
-			int sx = getX(index);
-			int sy = getY(index);
-			int sz = getZ(index);
-			level.setBlockState(sx, sy, sz, States.AIR.get());
-		}
-		
 		logsPositions.clear();
 		leavesPositions.clear();
 	}
