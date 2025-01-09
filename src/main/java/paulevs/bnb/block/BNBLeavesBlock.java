@@ -28,6 +28,7 @@ public class BNBLeavesBlock extends TemplateBlock {
 		setSounds(GRASS_SOUNDS);
 		setDefaultState(getDefaultState().with(BNBBlockProperties.LEAVES_DIRECTION, 6));
 		setTicksRandomly(true);
+		disableNotifyOnMetaDataChange();
 	}
 	
 	@Override

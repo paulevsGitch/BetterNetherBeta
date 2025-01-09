@@ -1,8 +1,11 @@
 package paulevs.bnb.mixin.common;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.FlyingEntity;
 import net.minecraft.entity.living.monster.GhastEntity;
 import net.minecraft.level.Level;
@@ -29,6 +32,14 @@ public abstract class GhastEntityMixin extends FlyingEntity {
 		if (level.getEntities(GhastEntity.class, bounds).size() > 1) {
 			info.setReturnValue(false);
 		}
+	}
+	
+	@WrapOperation(method = "tickHandSwing", at = @At(
+		value = "INVOKE",
+		target = "Lnet/minecraft/level/Level;playSound(Lnet/minecraft/entity/Entity;Ljava/lang/String;FF)V")
+	)
+	private void bnb_changeSound(Level level, Entity entity, String sound, float volume, float pitch, Operation<Void> original) {
+		BNBSoundManager.playSound(sound, x, y, z, volume, pitch, 128.0F);
 	}
 	
 	@ModifyConstant(method = "getSoundVolume", constant = @Constant(floatValue = 10.0F))
