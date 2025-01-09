@@ -5,6 +5,7 @@
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"FlattenedWorldManagerMixin",
+		"LevelMonsterSpawnerMixin",
 		"FurnaceBlockEntityMixin",
 		"ZombiePigmanEntityMixin",
 		"NetherLevelSourceMixin",
@@ -24,6 +25,7 @@
 		"ExplosionMixin",
 		"FireBlockMixin",
 		"EntityAccessor",
+		"HellBiomeMixin",
 		"LevelAccessor",
 		"EntityMixin",
 		"BiomeMixin",

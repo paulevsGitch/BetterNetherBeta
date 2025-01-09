@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
 
 @Mixin(value = FogRendererImpl.class, remap = false)
-public class FogRendererImplImpl {
+public class FogRendererImplMixin {
 	@Shadow @Final private static float[] FOG_COLOR;
 	
 	@Inject(method = "setupFog", at = @At("RETURN"))

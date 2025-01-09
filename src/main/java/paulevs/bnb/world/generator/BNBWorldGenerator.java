@@ -208,7 +208,9 @@ public class BNBWorldGenerator {
 	}
 	
 	public static void stop() {
-		decoratorThread.stopThread();
+		if (decoratorThread != null) {
+			decoratorThread.stopThread();
+		}
 		canRun = false;
 	}
 	

@@ -24,12 +24,13 @@ public class SoundHelperMixin {
 	@Shadow private GameOptions gameOptions;
 	@Shadow private static SoundSystem soundSystem;
 	@Shadow private SoundMap music;
+	@Shadow private SoundMap sounds;
 	
 	@Unique private boolean bnb_clearList = true;
 	
 	@Inject(method = "setLibsAndCodecs", at = @At("TAIL"))
 	private void bnb_setLibsAndCodecs(CallbackInfo info) {
-		BNBSoundManager.init(gameOptions, soundSystem);
+		BNBSoundManager.init(gameOptions, soundSystem, sounds);
 	}
 	
 	@Inject(method = "handleBackgroundMusic", at = @At("HEAD"), cancellable = true)

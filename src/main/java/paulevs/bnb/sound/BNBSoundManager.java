@@ -2,16 +2,22 @@ package paulevs.bnb.sound;
 
 import it.unimi.dsi.fastutil.objects.Reference2FloatMap;
 import it.unimi.dsi.fastutil.objects.Reference2FloatOpenHashMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.sound.SoundEntry;
+import net.minecraft.client.sound.SoundMap;
+import net.minecraft.entity.living.LivingEntity;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.biome.BiomeSource;
 import net.minecraft.util.maths.MCMath;
 import net.modificationstation.stationapi.api.util.Identifier;
+import paulevs.bnb.BNBClient;
 import paulscode.sound.SoundSystem;
 
 import java.util.Random;
 
+@Environment(EnvType.CLIENT)
 public class BNBSoundManager {
 	private static final String STREAMING_KEY = "streaming";
 	private static final String MUSIC_KEY = "BgMusic";
@@ -21,6 +27,8 @@ public class BNBSoundManager {
 	private static int musicCountdown = 0;
 	private static GameOptions gameOptions;
 	private static SoundSystem soundSystem;
+	private static SoundMap sounds;
+	private static byte soundID;
 	
 	private static final Reference2FloatMap<Identifier> OLD_AMBIENCE_MAP = new Reference2FloatOpenHashMap<>();
 	private static final Reference2FloatMap<Identifier> AMBIENCE_MAP = new Reference2FloatOpenHashMap<>();
@@ -28,7 +36,7 @@ public class BNBSoundManager {
 	public static void setInTheNether(boolean inTheNether) {
 		if (BNBSoundManager.inTheNether != inTheNether) {
 			soundSystem.stop(MUSIC_KEY);
-			musicCountdown = 50;
+			musicCountdown = 400 + RANDOM.nextInt(800);
 			AMBIENCE_MAP.putAll(OLD_AMBIENCE_MAP);
 			for (Identifier sound : AMBIENCE_MAP.keySet()) {
 				String key = sound.toString();
@@ -40,9 +48,10 @@ public class BNBSoundManager {
 		BNBSoundManager.inTheNether = inTheNether;
 	}
 	
-	public static void init(GameOptions gameOptions, SoundSystem soundSystem) {
+	public static void init(GameOptions gameOptions, SoundSystem soundSystem, SoundMap sounds) {
 		BNBSoundManager.gameOptions = gameOptions;
 		BNBSoundManager.soundSystem = soundSystem;
+		BNBSoundManager.sounds = sounds;
 	}
 	
 	public static void playBackgroundMusic() {
@@ -113,5 +122,41 @@ public class BNBSoundManager {
 		
 		OLD_AMBIENCE_MAP.clear();
 		OLD_AMBIENCE_MAP.putAll(AMBIENCE_MAP);
+	}
+	
+	public static void playSound(String name, double x, double y, double z, float volume, float pitch, float distance) {
+		volume *= gameOptions.sound;
+		if (volume < 0.01F) return;
+		
+		LivingEntity entity = BNBClient.getMinecraft().viewEntity;
+		if (entity == null) return;
+		
+		float dx = (float) (entity.x - x);
+		float dy = (float) (entity.y - y);
+		float dz = (float) (entity.z - z);
+		if (dx * dx + dy * dy + dz * dz > distance * distance) return;
+		
+		SoundEntry sound = sounds.getRandomSoundForId(name);
+		if (sound == null) return;
+		
+		soundID = (byte) ((soundID + 1) & 63);
+		String sourceName = "bnb_sound_" + soundID;
+		
+		soundSystem.newSource(
+			volume > 1.0F,
+			sourceName,
+			sound.soundUrl,
+			sound.soundName,
+			false,
+			(float) x,
+			(float) y,
+			(float) z,
+			2,
+			distance
+		);
+		
+		soundSystem.setPitch(sourceName, pitch);
+		soundSystem.setVolume(sourceName, volume);
+		soundSystem.play(sourceName);
 	}
 }
