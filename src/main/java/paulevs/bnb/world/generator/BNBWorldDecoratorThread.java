@@ -3,21 +3,24 @@ package paulevs.bnb.world.generator;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.Level;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.ServerPlayerView;
 import net.minecraft.util.maths.Vec2I;
 import paulevs.bnb.mixin.client.LevelRendererAccessor;
+import paulevs.bnb.mixin.server.ServerPlayerConnectionManagerAccessor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BNBWorldDecoratorThread extends Thread {
-	private volatile List<Vec2I> offsets;
+	private final List<PlayerPos> centers = Collections.synchronizedList(new ArrayList<>());
 	private volatile BNBDecoratorLevel decorator;
+	private volatile List<Vec2I> offsets;
 	private volatile boolean canRun;
 	private volatile Level lastLevel;
-	private volatile int centerX;
-	private volatile int centerZ;
 	
 	public BNBWorldDecoratorThread() {
 		setName("BNB Chunk Decorator");
@@ -28,13 +31,18 @@ public class BNBWorldDecoratorThread extends Thread {
 	@Override
 	public void run() {
 		while (canRun) {
-			if (decorator == null) continue;
+			if (decorator == null || centers == null) continue;
 			List<Vec2I> offsets = this.offsets;
 			if (offsets == null) continue;
-			for (Vec2I offset : offsets) {
-				int x = centerX + offset.x;
-				int z = centerZ + offset.z;
-				if (decorator.decorate(x, z)) break;
+			boolean needSearch = true;
+			for (int i = 0; needSearch && i < offsets.size(); i++) {
+				Vec2I offset = offsets.get(i);
+				for (PlayerPos pos : centers) {
+					if (pos == null) break;
+					int x = pos.x + offset.x;
+					int z = pos.z + offset.z;
+					if (decorator.decorate(x, z)) needSearch = false;
+				}
 			}
 		}
 	}
@@ -54,8 +62,17 @@ public class BNBWorldDecoratorThread extends Thread {
 		int sectionsX = ((LevelRendererAccessor) minecraft.levelRenderer).bnb_getSectionCounX();
 		updateRadius(sectionsX >> 1);
 		
-		centerX = minecraft.player.chunkX;
-		centerZ = minecraft.player.chunkZ;
+		if (centers.isEmpty()) {
+			PlayerPos pos = new PlayerPos();
+			pos.x = minecraft.player.chunkX;
+			pos.z = minecraft.player.chunkZ;
+			centers.add(pos);
+		}
+		else {
+			PlayerPos pos = centers.get(0);
+			pos.x = minecraft.player.chunkX;
+			pos.z = minecraft.player.chunkZ;
+		}
 		
 		decorator.copyBack();
 	}
@@ -68,6 +85,27 @@ public class BNBWorldDecoratorThread extends Thread {
 			decorator = new BNBDecoratorLevel(lastLevel);
 			int radius = server.serverProperties.getInteger("view-distance", 10);
 			updateRadius(radius);
+		}
+		
+		ServerPlayerConnectionManagerAccessor accessor = (ServerPlayerConnectionManagerAccessor) server.serverPlayerConnectionManager;
+		ServerPlayerView view = accessor.bnb_getPlayerView(-1);
+		
+		int index = 0;
+		for (Object prePlayer : view.trackers) {
+			PlayerEntity player = (PlayerEntity) prePlayer;
+			PlayerPos pos;
+			if (centers.size() <= index) {
+				pos = new PlayerPos();
+				centers.add(pos);
+			}
+			else pos = centers.get(index);
+			pos.x = player.chunkX;
+			pos.z = player.chunkZ;
+			index++;
+		}
+		
+		if (centers.size() > index) {
+			centers.subList(index, centers.size()).clear();
 		}
 	}
 	
@@ -94,5 +132,10 @@ public class BNBWorldDecoratorThread extends Thread {
 	
 	public void stopThread() {
 		canRun = false;
+	}
+	
+	private static class PlayerPos {
+		volatile int x;
+		volatile int z;
 	}
 }

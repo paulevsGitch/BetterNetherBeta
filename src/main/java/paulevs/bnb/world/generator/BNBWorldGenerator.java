@@ -1,18 +1,21 @@
 package paulevs.bnb.world.generator;
 
 import com.mojang.datafixers.util.Pair;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.level.Level;
 import net.minecraft.level.LightType;
 import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.dimension.DimensionData;
+import net.minecraft.server.MinecraftServer;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.impl.world.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
 import paulevs.bnb.BNB;
-import paulevs.bnb.BNBClient;
 import paulevs.bnb.world.generator.terrain.ChunkTerrainMap;
 import paulevs.bnb.world.generator.terrain.CrossInterpolationCell;
 import paulevs.bnb.world.generator.terrain.TerrainMap;
@@ -199,12 +202,22 @@ public class BNBWorldGenerator {
 		}
 	}
 	
-	public static void tick() {
+	@Environment(EnvType.CLIENT)
+	public static void tick(Minecraft minecraft) {
 		if (decoratorThread == null || !decoratorThread.isAlive()) {
 			decoratorThread = new BNBWorldDecoratorThread();
 			decoratorThread.start();
 		}
-		decoratorThread.updateMain(BNBClient.getMinecraft());
+		decoratorThread.updateMain(minecraft);
+	}
+	
+	@Environment(EnvType.SERVER)
+	public static void tick(MinecraftServer server) {
+		if (decoratorThread == null || !decoratorThread.isAlive()) {
+			decoratorThread = new BNBWorldDecoratorThread();
+			decoratorThread.start();
+		}
+		decoratorThread.updateMain(server);
 	}
 	
 	public static void stop() {

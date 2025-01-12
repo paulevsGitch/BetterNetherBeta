@@ -41,7 +41,7 @@ public class MinecraftMixin {
 		if (viewEntity != null && level != null && level.dimension.id == -1) {
 			Minecraft minecraft = Minecraft.class.cast(this);
 			BNBParticleManager.tick(minecraft);
-			BNBWorldGenerator.tick();
+			BNBWorldGenerator.tick(minecraft);
 		}
 	}
 	

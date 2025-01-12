@@ -4,7 +4,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.FlyingEntity;
 import net.minecraft.entity.living.monster.GhastEntity;
@@ -12,7 +11,6 @@ import net.minecraft.level.Level;
 import net.minecraft.util.maths.Box;
 import net.minecraft.util.maths.Vec3D;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -34,6 +32,7 @@ public abstract class GhastEntityMixin extends FlyingEntity {
 		}
 	}
 	
+	@Environment(EnvType.CLIENT)
 	@WrapOperation(method = "tickHandSwing", at = @At(
 		value = "INVOKE",
 		target = "Lnet/minecraft/level/Level;playSound(Lnet/minecraft/entity/Entity;Ljava/lang/String;FF)V")
@@ -48,15 +47,8 @@ public abstract class GhastEntityMixin extends FlyingEntity {
 	}
 	
 	@Override
-	public void playAmbientSound() {
-		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-			bnb_playAmbientSound();
-		}
-	}
-	
-	@Unique
 	@Environment(EnvType.CLIENT)
-	private void bnb_playAmbientSound() {
+	public void playAmbientSound() {
 		float volume = random.nextFloat() * 0.2F + 0.4F;
 		float pitch = random.nextFloat() * 0.2F + 0.9F;
 		BNBSoundManager.playSound(getAmbientSound(), x, y, z, volume, pitch, 128.0F);

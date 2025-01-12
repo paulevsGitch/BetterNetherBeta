@@ -19,6 +19,7 @@ import net.modificationstation.stationapi.impl.worldgen.WorldDecoratorImpl;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.MossCoverBlock;
 import paulevs.bnb.mixin.common.LevelAccessor;
+import paulevs.bnb.mixin.common.LevelPropertiesAccessor;
 import paulevs.bnb.util.ConcurrentLongQueue;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class BNBDecoratorLevel extends Level {
 	public BNBDecoratorLevel(Level source) {
 		super(
 			((LevelAccessor) source).bnb_getDimData(),
-			source.getProperties().getName(),
+			((LevelPropertiesAccessor) source.getProperties()).bnb_getLevelName(),
 			source.getSeed(),
 			source.dimension
 		);
