@@ -109,18 +109,19 @@ public class BNBWeatherManager {
 				}
 			}
 			
-			for (Object list : chunk.entities) {
-				for (Object obj : (List<?>) list) {
-					EntityAccessor accessor = (EntityAccessor) obj;
+			for (Object section : chunk.entities) {
+				for (Object preEntity : (List<?>) section) {
+					EntityAccessor accessor = (EntityAccessor) preEntity;
 					if (accessor.bnb_immuneToFire()) continue;
-					Entity entity = (Entity) obj;
-					if (entity.fire > 0) continue;
-					if (obj instanceof PlayerEntity player) {
+					Entity entity = (Entity) preEntity;
+					if ((entity.ticks & 7) > 0) continue;
+					if (entity.fire > 8) continue;
+					if (preEntity instanceof PlayerEntity player) {
 						if (CreativeUtil.isCreative(player)) continue;
 					}
 					x = MCMath.floor(entity.x) & 15;
 					z = MCMath.floor(entity.z) & 15;
-					int y = getWeatherBottom(chunk, x, z);
+					int y = getWeatherBottom(chunk, x, z) + 2;
 					if (y > entity.y + entity.height) continue;
 					accessor.bnb_setOnFire();
 				}
