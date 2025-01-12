@@ -133,9 +133,7 @@ public class BNBWeatherManager {
 	
 	@Environment(EnvType.CLIENT)
 	private static void updateOnClient(Level level) {
-		Minecraft minecraft = BNBClient.getMinecraft();
-		BNBWeatherRenderer.tick(minecraft);
-		PlayerEntity player = minecraft.player;
+		PlayerEntity player = BNBClient.getMinecraft().player;
 		for (int x = -7; x <= 7; x++) {
 			int px = player.chunkX + x;
 			for (int z = -7; z <= 7; z++) {

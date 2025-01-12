@@ -337,6 +337,7 @@ public class BNBWeatherRenderer {
 		
 		tessellator.start();
 		float intensity = getIntensity(WeatherType.DRIZZLE);
+		if (isCurrentWeather(WeatherType.RAIN)) intensity = 1.0F;
 		tessellator.color(1F, 1F, 1F, intensity);
 		tessellator.setOffset(-x, -y, -z);
 		
@@ -347,7 +348,7 @@ public class BNBWeatherRenderer {
 				int wz = iz + dz;
 				int lz = wz & 3;
 				if ((lx != 0 || lz != 0) && (lx != 2 || lz != 2)) continue;
-				renderDrizzleSection( wx, wz, cameraPos, tessellator, vOffset);
+				renderDrizzleSection(wx, wz, cameraPos, tessellator, vOffset);
 			}
 		}
 		
