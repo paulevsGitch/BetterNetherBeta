@@ -7,7 +7,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.Level;
@@ -21,7 +20,6 @@ import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.mixin.common.EntityAccessor;
 import paulevs.bnb.packet.BNBWeatherPacket;
-import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.vbe.utils.CreativeUtil;
 
 import java.util.List;

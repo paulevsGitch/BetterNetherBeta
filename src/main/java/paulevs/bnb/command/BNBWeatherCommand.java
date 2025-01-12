@@ -41,6 +41,7 @@ public class BNBWeatherCommand extends BNBCommand {
 			}
 		}
 		
+		// TODO make server side
 		if (commandSource instanceof PlayerEntity player) {
 			if (player.level.isRemote) {
 				// Send packet to server

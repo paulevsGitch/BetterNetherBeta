@@ -60,6 +60,7 @@ public class BNBWorldDecoratorThread extends Thread {
 		decorator.copyBack();
 	}
 	
+	// TODO make server side
 	@Environment(EnvType.SERVER)
 	public void updateMain(MinecraftServer server) {
 		if (lastLevel == null) {
@@ -68,7 +69,6 @@ public class BNBWorldDecoratorThread extends Thread {
 			int radius = server.serverProperties.getInteger("view-distance", 10);
 			updateRadius(radius);
 		}
-		
 	}
 	
 	public void updateRadius(int radius) {

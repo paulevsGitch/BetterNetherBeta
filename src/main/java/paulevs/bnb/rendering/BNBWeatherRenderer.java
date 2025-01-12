@@ -16,6 +16,7 @@ import net.minecraft.util.maths.Vec2I;
 import net.minecraft.util.maths.Vec3D;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
+import paulevs.bnb.BNBClient;
 import paulevs.bnb.weather.BNBWeatherManager;
 import paulevs.bnb.weather.WeatherType;
 
@@ -39,7 +40,9 @@ public class BNBWeatherRenderer {
 	private static final float[] RANDOM_OFFSET;
 	private static final float[] SMOKE_RANDOM;
 	private static final Vec2I[] SMOKE_OFFSETS;
+	private static final Thread CACHE_UPDATE;
 	
+	private static volatile boolean canRun = true;
 	private static float[] smokeDensity;
 	private static int smokeDensityWidth;
 	private static int smokeDensityHeight;
@@ -82,49 +85,6 @@ public class BNBWeatherRenderer {
 		}
 		catch (IOException e) {
 			throw new RuntimeException(e);
-		}
-	}
-	
-	public static void tick(Minecraft minecraft) {
-		if (!isCurrentWeather(WeatherType.RAIN) && !isCurrentWeather(WeatherType.DRIZZLE)) return;
-		
-		rainRadius = minecraft.options.fancyGraphics ? (byte) 10 : (byte) 5;
-		puddlesRadius = minecraft.options.fancyGraphics ? (byte) 15 : (byte) 7;
-		innerRadius = (byte) ((rainRadius >> 1) - 1);
-		
-		LivingEntity entity = minecraft.viewEntity;
-		int ix = MCMath.floor(entity.x);
-		int iz = MCMath.floor(entity.z);
-		
-		if ((minecraft.level.getLevelTime() & 3) > 1) return;
-		byte tick = (byte) (minecraft.level.getLevelTime() & 1);
-		
-		for (byte dx = (byte) -puddlesRadius; dx <= puddlesRadius; dx++) {
-			int wxn = ix + dx;
-			for (byte dz = (byte) -puddlesRadius; dz <= puddlesRadius; dz++) {
-				if (((dx + dz) & 1) == tick) continue;
-				int wzn = iz + dz;
-				Chunk chunk = minecraft.level.getChunk(wxn, wzn);
-				short max = BNBWeatherManager.getWeatherTop(chunk, wxn & 15, wzn & 15);
-				short min = BNBWeatherManager.getWeatherBottom(chunk, wxn & 15, max, wzn & 15);
-				NEAR_CACHE.setData(wxn, wzn, min, max);
-				
-				Block block = chunk.getBlockState(wxn & 15, min, wzn & 15).getBlock();
-				PUDDLES_CACHE.setData(wxn, wzn, block.isFullCube());
-			}
-		}
-		
-		for (byte dx = (byte) -rainRadius; dx <= rainRadius; dx++) {
-			int wxf = (ix & -4) + (dx << 2);
-			for (byte dz = (byte) -rainRadius; dz <= rainRadius; dz++) {
-				if (((dx + dz) & 1) == tick) continue;
-				if (Math.abs(dx) < innerRadius && Math.abs(dz) < innerRadius) continue;
-				int wzf = (iz & -4) + (dz << 2);
-				Chunk chunk = minecraft.level.getChunk(wxf, wzf);
-				short max = BNBWeatherManager.getWeatherTop(chunk, wxf & 15, wzf & 15);
-				short min = BNBWeatherManager.getWeatherBottom(chunk, wxf & 15, max, wzf & 15);
-				FAR_CACHE.setData(wxf >> 2, wzf >> 2, min, max);
-			}
 		}
 	}
 	
@@ -640,6 +600,61 @@ public class BNBWeatherRenderer {
 		return !frustum.isInside(x1, y1, z1, x2, y2, z2);
 	}
 	
+	private static void updateCache() {
+		while (canRun) {
+			try {
+				//noinspection BusyWait
+				Thread.sleep(100);
+			}
+			catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
+			
+			Minecraft minecraft = BNBClient.getMinecraft();
+			
+			if (minecraft == null || minecraft.level == null || minecraft.level.dimension.id != -1) continue;
+			if (!isCurrentWeather(WeatherType.RAIN) && !isCurrentWeather(WeatherType.DRIZZLE)) continue;
+			
+			rainRadius = minecraft.options.fancyGraphics ? (byte) 10 : (byte) 5;
+			puddlesRadius = minecraft.options.fancyGraphics ? (byte) 15 : (byte) 7;
+			innerRadius = (byte) ((rainRadius >> 1) - 1);
+			
+			LivingEntity entity = minecraft.viewEntity;
+			int ix = MCMath.floor(entity.x);
+			int iz = MCMath.floor(entity.z);
+			
+			for (byte dx = (byte) -puddlesRadius; dx <= puddlesRadius; dx++) {
+				int wxn = ix + dx;
+				for (byte dz = (byte) -puddlesRadius; dz <= puddlesRadius; dz++) {
+					int wzn = iz + dz;
+					Chunk chunk = minecraft.level.getChunk(wxn, wzn);
+					short max = BNBWeatherManager.getWeatherTop(chunk, wxn & 15, wzn & 15);
+					short min = BNBWeatherManager.getWeatherBottom(chunk, wxn & 15, max, wzn & 15);
+					NEAR_CACHE.setData(wxn, wzn, min, max);
+					
+					Block block = chunk.getBlockState(wxn & 15, min, wzn & 15).getBlock();
+					PUDDLES_CACHE.setData(wxn, wzn, block.isFullCube());
+				}
+			}
+			
+			for (byte dx = (byte) -rainRadius; dx <= rainRadius; dx++) {
+				int wxf = (ix & -4) + (dx << 2);
+				for (byte dz = (byte) -rainRadius; dz <= rainRadius; dz++) {
+					if (Math.abs(dx) < innerRadius && Math.abs(dz) < innerRadius) continue;
+					int wzf = (iz & -4) + (dz << 2);
+					Chunk chunk = minecraft.level.getChunk(wxf, wzf);
+					short max = BNBWeatherManager.getWeatherTop(chunk, wxf & 15, wzf & 15);
+					short min = BNBWeatherManager.getWeatherBottom(chunk, wxf & 15, max, wzf & 15);
+					FAR_CACHE.setData(wxf >> 2, wzf >> 2, min, max);
+				}
+			}
+		}
+	}
+	
+	public static void stop() {
+		canRun = false;
+	}
+	
 	static {
 		RANDOM_OFFSET = new float[256];
 		Random random = new Random(0);
@@ -679,5 +694,9 @@ public class BNBWeatherRenderer {
 			SMOKE_RANDOM[i + 5] = u2;
 			SMOKE_RANDOM[i + 6] = random.nextBoolean() ? 1.0F : 0.0F;
 		}
+		
+		CACHE_UPDATE = new Thread(BNBWeatherRenderer::updateCache);
+		CACHE_UPDATE.setName("BNB Weather Cache");
+		CACHE_UPDATE.start();
 	}
 }

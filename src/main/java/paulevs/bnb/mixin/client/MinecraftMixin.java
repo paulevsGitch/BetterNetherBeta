@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import paulevs.bnb.BNBClient;
 import paulevs.bnb.particle.BNBParticleManager;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.world.generator.BNBWorldGenerator;
@@ -41,7 +40,6 @@ public class MinecraftMixin {
 		if (paused && currentScreen instanceof AchievementsScreen) textureManager.tick();
 		if (viewEntity != null && level != null && level.dimension.id == -1) {
 			Minecraft minecraft = Minecraft.class.cast(this);
-			BNBWeatherRenderer.tick(minecraft);
 			BNBParticleManager.tick(minecraft);
 			BNBWorldGenerator.tick();
 		}
@@ -50,5 +48,6 @@ public class MinecraftMixin {
 	@Inject(method = "scheduleStop", at = @At("HEAD"))
 	private void bnb_onExit(CallbackInfo info) {
 		BNBWorldGenerator.stop();
+		BNBWeatherRenderer.stop();
 	}
 }
