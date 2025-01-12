@@ -24,8 +24,9 @@ import paulevs.bnb.item.BNBItemTags;
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends Entity {
 	@Shadow public ItemStack stack;
-	
 	@Shadow private int health;
+	
+	@Shadow public abstract void onPlayerCollision(PlayerEntity player);
 	
 	public ItemEntityMixin(Level arg) {
 		super(arg);
@@ -75,17 +76,22 @@ public abstract class ItemEntityMixin extends Entity {
 	))
 	private Material bnb_disableLavaVelocity(Level level, int x, int y, int z, Operation<Material> original) {
 		Material material = original.call(level, x, y, z);
-		if (immuneToFire && material == Material.LAVA) {
-			float h = stack.getType() instanceof BlockItem ? 0.9F : 0.7F;
-			float dy = (float) ((y + h) - this.y);
-			if (level.getBlockState(x, y + 1, z).getMaterial() == Material.LAVA) {
-				dy = 1.0F;
-			}
-			if (dy > 0) velocityY = dy * 0.5F;
-			velocityX *= 0.9;
-			velocityZ *= 0.9;
-			return Material.WATER;
+		if (!immuneToFire || material != Material.LAVA) return material;
+		
+		float h = stack.getType() instanceof BlockItem ? 0.9F : 0.7F;
+		float dy = (float) ((y + h) - this.y);
+		if (level.getBlockState(x, y + 1, z).getMaterial() == Material.LAVA) {
+			dy = 1.0F;
 		}
-		return material;
+		if (dy > 0) velocityY = dy * 0.5F;
+		velocityX *= 0.9;
+		velocityZ *= 0.9;
+		
+		PlayerEntity player = level.getClosestPlayerTo(this, 2.5F);
+		if (player != null && player.y - y > -0.25) {
+			onPlayerCollision(player);
+		}
+		
+		return Material.WATER;
 	}
 }

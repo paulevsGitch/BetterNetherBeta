@@ -1,7 +1,14 @@
 {
 	"values": [
+		"#bnb:fireproof_armor",
 		"bnb:obsidian_boat",
+		"bnb:lavarrack",
 		"minecraft:obsidian",
-		"bnb:lavarrack"
+		"bnb:obsidian_shards",
+		"bnb:obsidian_tile",
+		"bnb:obsidian_tiles",
+		"bnb:obsidian_bricks",
+		"bnb:obsidian_tiles_stairs",
+		"bnb:obsidian_tiles_slab_half"
 	]
 }
