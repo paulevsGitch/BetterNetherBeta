@@ -20,10 +20,9 @@ public class AreaRendererMixin {
 	
 	@Inject(method = "update", at = @At("HEAD"), cancellable = true)
 	private void bnb_skipUpdate(CallbackInfo info) {
-		if (!this.isVisible || !this.canUpdate || level == null || level.isRemote || level.dimension.id != -1) return;
+		if (!isVisible || !canUpdate || level == null || level.isRemote || level.dimension.id != -1) return;
 		BNBWorldChunk bnbWorldChunk = BNBWorldChunk.cast(level.getChunk(startX, startZ));
 		if (bnbWorldChunk != null && bnbWorldChunk.bnb_getStatus() != BNBChunkStatus.FINISHED) {
-			canUpdate = false;
 			info.cancel();
 		}
 	}

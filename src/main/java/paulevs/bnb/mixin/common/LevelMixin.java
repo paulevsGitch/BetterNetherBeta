@@ -1,7 +1,6 @@
 package paulevs.bnb.mixin.common;
 
 import net.minecraft.level.Level;
-import net.minecraft.level.LightType;
 import net.minecraft.level.dimension.Dimension;
 import net.modificationstation.stationapi.api.world.BlockStateView;
 import org.spongepowered.asm.mixin.Final;
@@ -20,7 +19,6 @@ public abstract class LevelMixin implements BlockStateView {
 	@Shadow @Final public Dimension dimension;
 	
 	@Shadow public abstract boolean isBlockLoaded(int x, int y, int z);
-	@Shadow public abstract int getLight(LightType type, int x, int y, int z);
 	
 	@Inject(method = "processLevel", at = @At("HEAD"))
 	private void bnb_tickWeather(CallbackInfo info) {
@@ -33,13 +31,5 @@ public abstract class LevelMixin implements BlockStateView {
 		if ((Object) this instanceof BNBDecoratorLevel) {
 			info.setReturnValue(isBlockLoaded(chunkX << 4, 0, chunkZ << 4));
 		}
-	}
-	
-	@Inject(method = "updateListenersLight", at = @At("HEAD"), cancellable = true)
-	private void bnb_disableLightUpdate(int x, int y, int z, CallbackInfo info) {
-		if (dimension.id != -1) return;
-		int worldLight = getLight(LightType.BLOCK, x, y, z);
-		int blockLight = getBlockState(x, y, z).getLuminance();
-		if (worldLight != blockLight) info.cancel();
 	}
 }

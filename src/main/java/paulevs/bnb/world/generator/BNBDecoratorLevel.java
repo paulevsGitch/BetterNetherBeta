@@ -18,8 +18,8 @@ import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
 import net.modificationstation.stationapi.impl.worldgen.WorldDecoratorImpl;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.MossCoverBlock;
-import paulevs.bnb.math.ConcurrentLongQueue;
 import paulevs.bnb.mixin.common.LevelAccessor;
+import paulevs.bnb.util.ConcurrentLongQueue;
 
 import java.util.ArrayList;
 import java.util.List;

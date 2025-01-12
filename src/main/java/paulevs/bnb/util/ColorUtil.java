@@ -1,4 +1,4 @@
-package paulevs.bnb.math;
+package paulevs.bnb.util;
 
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 

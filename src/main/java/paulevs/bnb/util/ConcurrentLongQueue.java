@@ -1,4 +1,4 @@
-package paulevs.bnb.math;
+package paulevs.bnb.util;
 
 import it.unimi.dsi.fastutil.longs.LongArrayFIFOQueue;
 

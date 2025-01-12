@@ -51,12 +51,12 @@ import paulevs.bnb.gui.container.SpinningWheelContainer;
 import paulevs.bnb.gui.screen.SpinningWheelScreen;
 import paulevs.bnb.item.NetherHygrometerItem;
 import paulevs.bnb.item.PortalCompassItem;
-import paulevs.bnb.math.ColorUtil;
 import paulevs.bnb.noise.FloatNoise;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
+import paulevs.bnb.util.ColorUtil;
 import paulevs.bnb.world.generator.terrain.features.RiversFeature;
 import paulevs.bnb.world.generator.terrain.features.TerrainFeature;
 

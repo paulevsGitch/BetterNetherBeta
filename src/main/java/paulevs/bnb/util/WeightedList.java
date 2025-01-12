@@ -1,4 +1,4 @@
-package paulevs.bnb.math;
+package paulevs.bnb.util;
 
 import java.util.ArrayList;
 import java.util.List;

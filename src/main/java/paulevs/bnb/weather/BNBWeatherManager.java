@@ -7,6 +7,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.Level;
@@ -20,6 +21,7 @@ import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.mixin.common.EntityAccessor;
 import paulevs.bnb.packet.BNBWeatherPacket;
+import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.vbe.utils.CreativeUtil;
 
 import java.util.List;
@@ -95,12 +97,12 @@ public class BNBWeatherManager {
 			int z = (int) (pos & 0xFFFFFFFFL);
 			Chunk chunk = level.getChunkFromCache(x, z);
 			
-			for (int i = 0; i < 256; i++) {
+			for (short i = 0; i < 256; i++) {
 				if (RANDOM.nextInt(2000) > 0) continue;
 				x = i & 15;
 				z = i >> 4;
 				int y = getWeatherBottom(chunk, x, z);
-				if (y == Integer.MAX_VALUE) continue;
+				if (y == Short.MAX_VALUE) continue;
 				BlockState state = chunk.getBlockState(x, y, z);
 				if (state.getMaterial().isBurnable() && chunk.getBlockState(x, y + 1, z).isAir()) {
 					chunk.setBlockState(x, y + 1, z, Block.FIRE.getDefaultState());
@@ -130,7 +132,9 @@ public class BNBWeatherManager {
 	
 	@Environment(EnvType.CLIENT)
 	private static void updateOnClient(Level level) {
-		PlayerEntity player = BNBClient.getMinecraft().player;
+		Minecraft minecraft = BNBClient.getMinecraft();
+		BNBWeatherRenderer.tick(minecraft);
+		PlayerEntity player = minecraft.player;
 		for (int x = -7; x <= 7; x++) {
 			int px = player.chunkX + x;
 			for (int z = -7; z <= 7; z++) {
@@ -177,23 +181,25 @@ public class BNBWeatherManager {
 		weatherLength = length;
 	}
 	
-	public static int getWeatherTop(Chunk chunk, int x, int z) {
+	public static short getWeatherTop(Chunk chunk, int x, int z) {
 		int y = 255;
 		BlockState state = chunk.getBlockState(x, y, z);
 		while (isNetherCeiling(state) && y > MAX_WEATHER_SEARCH) state = chunk.getBlockState(x, --y, z);
-		return !canPropagateWeather(state) ? Integer.MAX_VALUE : y;
+		return !canPropagateWeather(state) ? Short.MAX_VALUE : (short) y;
 	}
 	
-	public static int getWeatherBottom(Chunk chunk, int x, int z) {
+	public static short getWeatherBottom(Chunk chunk, int x, int z) {
 		int y = getWeatherTop(chunk, x, z);
-		if (y == Integer.MAX_VALUE) return Integer.MAX_VALUE;
+		if (y == Short.MAX_VALUE) return Short.MAX_VALUE;
 		return getWeatherBottom(chunk, x, y, z);
 	}
 	
-	public static int getWeatherBottom(Chunk chunk, int x, int y, int z) {
+	public static short getWeatherBottom(Chunk chunk, int x, int y, int z) {
 		BlockState state = chunk.getBlockState(x, y, z);
-		while (canPropagateWeather(state) && y > 0) state = chunk.getBlockState(x, --y, z);
-		return y;
+		while (canPropagateWeather(state) && y > 0) {
+			state = chunk.getBlockState(x, --y, z);
+		}
+		return (short) y;
 	}
 	
 	public static int getCurrentWeatherLength() {

@@ -1,4 +1,4 @@
-package paulevs.bnb.math;
+package paulevs.bnb.util;
 
 import net.minecraft.util.maths.Vec3D;
 
