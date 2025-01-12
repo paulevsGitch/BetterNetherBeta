@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"X X",
+		"XXX",
+		"XXX"
+	],
+	"key": {
+		"X": { "item": "bnb:nether_fiber" }
+	},
+	"result": {
+		"item": "bnb:fiber_chestplate"
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"XXX",
+		"X X"
+	],
+	"key": {
+		"X": { "item": "bnb:nether_fiber" }
+	},
+	"result": {
+		"item": "bnb:fiber_helmet"
+	}
+}
