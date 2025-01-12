@@ -25,7 +25,7 @@ public class BoulderStructure extends Structure {
 	public boolean generate(Level level, Random random, int x, int y, int z) {
 		BlockState below = level.getBlockState(x, y - 1, z);
 		if (below == state) return false;
-		if (!below.isIn(BNBBlockTags.NETHERRACK_TERRAIN) && !below.isIn(BNBBlockTags.SOUL_TERRAIN)) {
+		if (!below.isIn(BNBBlockTags.NETHERRACK_TERRAIN) && !below.isIn(BNBBlockTags.SOUL_TERRAIN) && !below.isIn(BNBBlockTags.GRAVEL)) {
 			return false;
 		}
 		

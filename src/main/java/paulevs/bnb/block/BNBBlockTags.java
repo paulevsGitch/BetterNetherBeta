@@ -11,6 +11,7 @@ public class BNBBlockTags {
 	public static final TagKey<Block> ORGANIC_TERRAIN = get("organic_terrain");
 	public static final TagKey<Block> OBSIDIAN = get("obsidian");
 	public static final TagKey<Block> LEAVES_SUPPORT = get("leaves_support");
+	public static final TagKey<Block> GRAVEL = get("gravel");
 	
 	private static TagKey<Block> get(String name) {
 		return TagKey.of(BlockRegistry.KEY, BNB.id(name));
