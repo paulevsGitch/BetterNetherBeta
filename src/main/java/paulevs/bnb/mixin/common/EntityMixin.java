@@ -1,10 +1,13 @@
 package paulevs.bnb.mixin.common;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.LivingEntity;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
+import net.minecraft.util.maths.Box;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -25,6 +28,12 @@ public class EntityMixin {
 	@Shadow public int chunkX;
 	
 	@Shadow public int chunkZ;
+	
+	@Shadow @Final public Box boundingBox;
+	
+	@Shadow protected float fallDistance;
+	
+	@Shadow private boolean skipFallCheck;
 	
 	@Inject(method = "setOnFire", at = @At("HEAD"), cancellable = true)
 	private void bnb_disableFireDamage(CallbackInfo info) {
@@ -91,6 +100,16 @@ public class EntityMixin {
 	
 	@Inject(method = "move", at = @At("HEAD"), cancellable = true)
 	private void bnb_checkChunk(double x, double y, double z, CallbackInfo info) {
+		boolean isInLava = level.collidesWithMaterial(
+			boundingBox.expandNegative(0.0, -0.4, 0.0).createAndCache(0.001, 0.001, 0.001),
+			Material.LAVA,
+			Entity.class.cast(this)
+		);
+		if (isInLava) {
+			skipFallCheck = true;
+			fallDistance = 0.0F;
+		}
+		
 		if (level == null || level.isRemote || level.dimension.id != -1) return;
 		BNBWorldChunk chunk = BNBWorldChunk.cast(level.getChunkFromCache(chunkX, chunkZ));
 		if (chunk == null) return;
