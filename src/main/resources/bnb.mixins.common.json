@@ -6,6 +6,7 @@
 	"mixins": [
 		"FlattenedWorldManagerMixin",
 		"LevelMonsterSpawnerMixin",
+		"NetherPortalManagerMixin",
 		"FurnaceBlockEntityMixin",
 		"LevelPropertiesAccessor",
 		"ZombiePigmanEntityMixin",

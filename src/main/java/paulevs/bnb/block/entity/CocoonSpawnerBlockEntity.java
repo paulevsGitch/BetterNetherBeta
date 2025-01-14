@@ -39,17 +39,29 @@ public class CocoonSpawnerBlockEntity extends BlockEntity {
 		for(byte i = 0; i < count; ++i) {
 			LivingEntity spider = (LivingEntity) EntityRegistry.create(entity, level);
 			spider.setPosition(x + random.nextGaussian(), y, z + random.nextGaussian());
-			if (level.canSuffocate(
-				MCMath.floor(spider.x),
-				MCMath.floor(spider.y),
-				MCMath.floor(spider.z)
-			)) continue;
-			if (level.containsLiquids(spider.boundingBox)) continue;
+			if (!canSpawn(spider) || level.containsLiquids(spider.boundingBox)) continue;
 			level.spawnEntity(spider);
 		}
 	}
 	
 	public boolean isPlayerInRange() {
 		return this.level.getClosestPlayer((double)this.x + 0.5D, (double)this.y + 0.5D, (double)this.z + 0.5D, 16.0D) != null;
+	}
+	
+	private static boolean canSpawn(LivingEntity entity) {
+		int x1 = MCMath.floor(entity.boundingBox.minX);
+		int y1 = MCMath.floor(entity.boundingBox.minY);
+		int z1 = MCMath.floor(entity.boundingBox.minY);
+		int x2 = MCMath.floor(entity.boundingBox.maxX);
+		int y2 = MCMath.floor(entity.boundingBox.maxY);
+		int z2 = MCMath.floor(entity.boundingBox.maxY);
+		for (int x = x1; x <= x2; x++) {
+			for (int y = y1; y <= y2; y++) {
+				for (int z = z1; z <= z2; z++) {
+					if (entity.level.canSuffocate(x, y, z)) return false;
+				}
+			}
+		}
+		return true;
 	}
 }

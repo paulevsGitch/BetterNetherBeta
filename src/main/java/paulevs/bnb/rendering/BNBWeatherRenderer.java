@@ -620,6 +620,8 @@ public class BNBWeatherRenderer {
 			innerRadius = (byte) ((rainRadius >> 1) - 1);
 			
 			LivingEntity entity = minecraft.viewEntity;
+			if (entity == null) continue;
+			
 			int ix = MCMath.floor(entity.x);
 			int iz = MCMath.floor(entity.z);
 			

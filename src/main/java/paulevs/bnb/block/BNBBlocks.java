@@ -63,6 +63,12 @@ public class BNBBlocks {
 		Block.NETHERRACK.setHardness(0.75F);
 	}
 	
+	private static final String[] OLD_TREE_SHAPE = new String[] {
+		" # ",
+		"###",
+		" # "
+	};
+	
 	public static final List<Block> BLOCKS_WITH_ITEMS = new ArrayList<>();
 	public static final Set<BlockTextureUpdate> UPDATE_TEXTURE_INTERFACE = new HashSet<>();
 	public static final Set<Block> UPDATE_TEXTURE_SINGLE = new HashSet<>();
@@ -84,11 +90,7 @@ public class BNBBlocks {
 	public static final Block FALURIAN_SAPLING = makeSapling(
 		"falurian_sapling",
 		() -> BNBStructures.FALURIAN_TREE,
-		new String[] {
-			" # ",
-			"###",
-			" # "
-		},
+		OLD_TREE_SHAPE,
 		() -> BNBStructures.LARGE_FALURIAN_TREE
 	);
 	public static final Block FALURIAN_PLANKS = make("falurian_planks", BNBPlanksBlock::new);
@@ -104,11 +106,7 @@ public class BNBBlocks {
 	public static final Block PIROZEN_SAPLING = makeSapling(
 		"pirozen_sapling",
 		() -> BNBStructures.PIROZEN_TREE,
-		new String[] {
-			" # ",
-			"###",
-			" # "
-		},
+		OLD_TREE_SHAPE,
 		() -> BNBStructures.LARGE_PIROZEN_TREE
 	);
 	public static final Block PIROZEN_PLANKS = make("pirozen_planks", BNBPlanksBlock::new);
@@ -124,11 +122,7 @@ public class BNBBlocks {
 	public static final Block CHLOROPHATE_SAPLING = makeSapling(
 		"chlorophate_sapling",
 		() -> BNBStructures.CHLOROPHATE_TREE,
-		new String[] {
-			" # ",
-			"###",
-			" # "
-		},
+		OLD_TREE_SHAPE,
 		() -> BNBStructures.LARGE_CHLOROPHATE_TREE
 	);
 	public static final Block CHLOROPHATE_PLANKS = make("chlorophate_planks", BNBPlanksBlock::new);
