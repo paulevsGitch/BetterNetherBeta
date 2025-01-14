@@ -347,10 +347,6 @@ public class BNBBlocks {
 		return block;
 	}
 	
-	/*private static Block makeSlab() {
-	
-	};*/
-	
 	private static <B extends Block> B make(String name, BiFunction<Identifier, Supplier<Structure>, B> constructor, Supplier<Structure> structure) {
 		Identifier id = BNB.id(name);
 		B block = constructor.apply(id, structure);
@@ -397,7 +393,6 @@ public class BNBBlocks {
 		if (block instanceof BlockTextureUpdate update) {
 			UPDATE_TEXTURE_INTERFACE.add(update);
 		}
-		//if (block instanceof VBEFullSlabBlock slab) FULL_SLABS.add(slab);
 		return block;
 	}
 	
@@ -406,13 +401,6 @@ public class BNBBlocks {
 	}
 	
 	public static void init() {
-		/*for (int i = 0; i < HALF_SLABS.size(); i++) {
-			VBEHalfSlabBlock halfSlab = HALF_SLABS.get(i);
-			VBEFullSlabBlock fullSlab = FULL_SLABS.get(i);
-			halfSlab.setFullBlock(fullSlab);
-			fullSlab.setHalfBlock(halfSlab);
-		}*/
-		
 		FALURIAN_LEAVES.setSapling(FALURIAN_SAPLING);
 		PIROZEN_LEAVES.setSapling(PIROZEN_SAPLING);
 		CHLOROPHATE_LEAVES.setSapling(CHLOROPHATE_SAPLING);

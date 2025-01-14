@@ -2,6 +2,7 @@ package paulevs.bnb.block.slab;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
+import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
 
 import java.lang.reflect.Constructor;
@@ -30,19 +31,19 @@ public class SlabUtil {
 	}
 	
 	// Reason for reflection - prevent static init crash
-	@SuppressWarnings({"JavaReflectionInvocation", "JavaReflectionMemberAccess"})
+	@SuppressWarnings({"JavaReflectionInvocation"})
 	private static void makeVBESlabs(String name, Block source) {
 		try {
 			Class<?> slabClass = Class.forName("paulevs.vbe.block.VBEHalfSlabBlock");
-			Constructor<?> constructor = slabClass.getConstructor(String.class, Block.class);
-			halfSlab = (Block) constructor.newInstance(name, source);
+			Constructor<?> constructor = slabClass.getConstructor(Identifier.class, Block.class);
+			halfSlab = (Block) constructor.newInstance(BNB.id(name + "_slab_half"), source);
 			
 			slabClass = Class.forName("paulevs.vbe.block.VBEFullSlabBlock");
-			constructor = slabClass.getConstructor(String.class, Block.class);
-			fullSlab = (Block) constructor.newInstance(name, source);
+			constructor = slabClass.getConstructor(Identifier.class, Block.class);
+			fullSlab = (Block) constructor.newInstance(BNB.id(name + "_slab_full"), source);
 			
-			halfSlab.getClass().getDeclaredMethod("setFullBlock").invoke(halfSlab, fullSlab);
-			fullSlab.getClass().getDeclaredMethod("setFullBlock").invoke(fullSlab, halfSlab);
+			halfSlab.getClass().getDeclaredMethod("setFullBlock", Block.class).invoke(halfSlab, fullSlab);
+			fullSlab.getClass().getDeclaredMethod("setHalfBlock", Block.class).invoke(fullSlab, halfSlab);
 		}
 		catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
 			//noinspection CallToPrintStackTrace
