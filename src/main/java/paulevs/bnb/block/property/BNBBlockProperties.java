@@ -12,11 +12,9 @@ public class BNBBlockProperties {
 	public static final EnumProperty<Direction> DIRECTION = EnumProperty.of("direction", Direction.class);
 	public static final EnumProperty<VineShape> VINE_SHAPE = EnumProperty.of("shape", VineShape.class);
 	public static final EnumProperty<Axis> AXIS = EnumProperty.of("axis", Axis.class);
-	public static final BooleanProperty NEAR_LAVA = BooleanProperty.of("near_lava");
 	public static final BooleanProperty LIT = BooleanProperty.of("lit");
 	public static final BooleanProperty BERRIES = BooleanProperty.of("berries");
 	public static final IntProperty STAGE_4 = IntProperty.of("stage", 0, 3);
-	public static final IntProperty FLOWERS_4 = IntProperty.of("flowers", 0, 3);
 	public static final IntProperty LEAVES_DIRECTION = IntProperty.of("direction", 0, 6);
 	public static final BooleanProperty GRAPE = BooleanProperty.of("grape");
 	public static final BooleanProperty[] FACES = new BooleanProperty[6];

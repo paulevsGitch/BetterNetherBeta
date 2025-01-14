@@ -6,7 +6,7 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.util.math.Direction;
-import paulevs.bnb.block.BNBLeavesBlock;
+import paulevs.bnb.block.tree.BNBLeavesBlock;
 
 public class LeavesDistributor {
 	private final IntSet leavesPositions = new IntOpenHashSet();

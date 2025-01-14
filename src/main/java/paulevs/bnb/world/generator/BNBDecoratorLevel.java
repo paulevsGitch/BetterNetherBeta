@@ -17,7 +17,7 @@ import net.modificationstation.stationapi.impl.world.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
 import net.modificationstation.stationapi.impl.worldgen.WorldDecoratorImpl;
 import paulevs.bnb.block.BNBBlocks;
-import paulevs.bnb.block.MossCoverBlock;
+import paulevs.bnb.block.plant.MossCoverBlock;
 import paulevs.bnb.mixin.common.LevelAccessor;
 import paulevs.bnb.mixin.common.LevelPropertiesAccessor;
 import paulevs.bnb.util.ConcurrentLongQueue;

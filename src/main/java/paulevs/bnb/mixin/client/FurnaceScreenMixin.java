@@ -8,7 +8,7 @@ import net.minecraft.client.render.TextRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import paulevs.bnb.block.BNBFurnaceBlock;
+import paulevs.bnb.block.crafting.BNBFurnaceBlock;
 
 @Mixin(FurnaceScreen.class)
 public class FurnaceScreenMixin {

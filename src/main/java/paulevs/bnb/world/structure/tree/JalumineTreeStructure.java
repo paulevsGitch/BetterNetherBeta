@@ -9,8 +9,8 @@ import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.BNBBlocks;
-import paulevs.bnb.block.BNBLeavesBlock;
 import paulevs.bnb.block.property.BNBBlockProperties;
+import paulevs.bnb.block.tree.BNBLeavesBlock;
 
 import java.util.Random;
 

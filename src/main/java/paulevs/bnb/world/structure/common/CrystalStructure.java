@@ -7,8 +7,8 @@ import net.minecraft.util.maths.MCMath;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.block.BNBBlockTags;
-import paulevs.bnb.block.ShardsBlock;
 import paulevs.bnb.block.property.BNBBlockProperties;
+import paulevs.bnb.block.stone.ShardsBlock;
 
 import java.util.Random;
 

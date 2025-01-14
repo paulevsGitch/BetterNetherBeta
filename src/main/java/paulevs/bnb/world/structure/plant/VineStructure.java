@@ -3,7 +3,7 @@ package paulevs.bnb.world.structure.plant;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
-import paulevs.bnb.block.BNBVineBlock;
+import paulevs.bnb.block.plant.BNBVineBlock;
 import paulevs.bnb.block.property.BNBBlockProperties;
 import paulevs.bnb.block.property.BNBBlockProperties.VineShape;
 

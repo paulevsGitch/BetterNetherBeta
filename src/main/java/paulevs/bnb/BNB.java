@@ -22,7 +22,7 @@ public class BNB {
 	}
 	
 	public static boolean isCreative(PlayerEntity player) {
-		if (FabricLoader.getInstance().isModLoaded("bhcreative")) return false;
+		if (!FabricLoader.getInstance().isModLoaded("bhcreative")) return false;
 		return player.creative_isCreative();
 	}
 }

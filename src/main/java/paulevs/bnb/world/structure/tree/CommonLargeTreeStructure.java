@@ -9,9 +9,9 @@ import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.BNBBlocks;
-import paulevs.bnb.block.BNBLeavesBlock;
 import paulevs.bnb.block.property.BNBBlockProperties;
 import paulevs.bnb.block.property.BNBBlockProperties.VineShape;
+import paulevs.bnb.block.tree.BNBLeavesBlock;
 
 import java.util.Random;
 
