@@ -45,7 +45,6 @@ public class BNBClientSounds {
 	}
 	
 	public static SoundEntry getRandomMusic(Random random) {
-		if (MUSIC.length == 1) return MUSIC[MUSIC_INDEX_DATA[0]];
 		if (musicIndex == MUSIC.length) {
 			byte value = MUSIC_INDEX_DATA[musicIndex - 1];
 			shuffleMusic(random);

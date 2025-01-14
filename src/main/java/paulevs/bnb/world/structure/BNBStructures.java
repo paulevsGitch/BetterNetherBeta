@@ -2,6 +2,7 @@ package paulevs.bnb.world.structure;
 
 import net.minecraft.block.Block;
 import net.minecraft.level.structure.Structure;
+import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.world.structure.common.BoulderStructure;
 import paulevs.bnb.world.structure.common.CocoonStructure;
@@ -111,13 +112,13 @@ public class BNBStructures {
 	
 	public static final Structure FALURIAN_TREE_BUSH = new PillarStructure()
 		.addSection(BNBBlocks.FALURIAN_STEM.getDefaultState(), 1, 2)
-		.addSection(BNBBlocks.FALURIAN_LEAVES.getDefaultState(), 2, 3);
+		.addSection(BNBBlocks.FALURIAN_LEAVES.getState(Direction.DOWN), 2, 3);
 	public static final Structure PIROZEN_TREE_BUSH = new PillarStructure()
 		.addSection(BNBBlocks.PIROZEN_STEM.getDefaultState(), 1, 1)
-		.addSection(BNBBlocks.PIROZEN_LEAVES.getDefaultState(), 1, 2);
+		.addSection(BNBBlocks.PIROZEN_LEAVES.getState(Direction.DOWN), 1, 2);
 	public static final Structure CHLOROPHATE_TREE_BUSH = new PillarStructure()
 		.addSection(BNBBlocks.CHLOROPHATE_STEM.getDefaultState(), 2, 4)
-		.addSection(BNBBlocks.CHLOROPHATE_LEAVES.getDefaultState(), 1, 1);
+		.addSection(BNBBlocks.CHLOROPHATE_LEAVES.getState(Direction.DOWN), 1, 1);
 	
 	public static final Structure FALLEN_FALURIAN_TREE = new FallenTreeStructure(BNBBlocks.FALURIAN_LOG, 5, 7);
 	public static final Structure FALLEN_PIROZEN_TREE = new FallenTreeStructure(BNBBlocks.PIROZEN_LOG, 5, 7);

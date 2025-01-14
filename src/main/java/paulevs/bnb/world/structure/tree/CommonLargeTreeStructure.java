@@ -18,7 +18,7 @@ import java.util.Random;
 public class CommonLargeTreeStructure extends Structure {
 	private final LeavesDistributor distributor = new LeavesDistributor();
 	private final BlockState trunk;
-	private final BNBLeavesBlock leaves;
+	private final BlockState leaves;
 	private final BlockState stem;
 	private final BlockState branch;
 	private final BlockState vine;
@@ -30,7 +30,7 @@ public class CommonLargeTreeStructure extends Structure {
 	
 	public CommonLargeTreeStructure(Block trunk, BNBLeavesBlock leaves, Block stem, Block branch, Block vine, int minHeight, int maxHeight, float capWAspect, float capHAspect, float noise) {
 		this.trunk = trunk.getDefaultState();
-		this.leaves = leaves;
+		this.leaves = leaves.getState(Direction.UP);
 		this.stem = stem.getDefaultState();
 		this.branch = branch.getDefaultState();
 		this.vine = vine.getDefaultState();
@@ -85,7 +85,7 @@ public class CommonLargeTreeStructure extends Structure {
 				int px = x + (j % 3) - 1;
 				int py = y + i;
 				int pz = z + (j / 3) - 1;
-				if (!canReplace(level.getBlockState(px, py, pz))) continue;
+				if (i != 0 && !canReplace(level.getBlockState(px, py, pz))) continue;
 				level.setBlockState(px, py, pz, trunk);
 				if (isSupport) {
 					distributor.addLog(px, py, pz);
@@ -228,7 +228,7 @@ public class CommonLargeTreeStructure extends Structure {
 					
 					if (py < 1 && random.nextBoolean()) {
 						if (!canReplace(level.getBlockState(wx, wy + 1, wz))) continue;
-						level.setBlockState(wx, wy + 1, wz, leaves.getDefaultState());
+						level.setBlockState(wx, wy + 1, wz, leaves);
 						distributor.addLeaves(wx, wy + 1, wz);
 						
 						if (level.getBlockState(wx, wy, wz).getMaterial().isReplaceable()) {
@@ -240,7 +240,7 @@ public class CommonLargeTreeStructure extends Structure {
 					}
 					
 					if (!canReplace(level.getBlockState(wx, wy, wz))) continue;
-					level.setBlockState(wx, wy, wz, leaves.getDefaultState());
+					level.setBlockState(wx, wy, wz, leaves);
 					distributor.addLeaves(wx, wy, wz);
 					
 					if (level.getBlockState(wx, wy - 1, wz).getMaterial().isReplaceable()) {
@@ -249,13 +249,13 @@ public class CommonLargeTreeStructure extends Structure {
 					}
 					
 					if (!canReplace(level.getBlockState(wx, ++wy, wz))) continue;
-					level.setBlockState(wx, wy, wz, leaves.getDefaultState());
+					level.setBlockState(wx, wy, wz, leaves);
 					distributor.addLeaves(wx, wy, wz);
 				}
 			}
 		}
 		
-		distributor.updateLeaves(level, leaves);
+		distributor.updateLeaves(level, (BNBLeavesBlock) leaves.getBlock());
 		
 		placeLantern(level, random, x + 2, y, z - 2);
 		placeLantern(level, random, x + 2, y, z + 2);
@@ -272,7 +272,7 @@ public class CommonLargeTreeStructure extends Structure {
 	}
 	
 	private void placeLantern(Level level, Random random, int x, int y, int z) {
-		while (level.getBlockState(x, y - 1, z).isOf(leaves)) y--;
+		while (level.getBlockState(x, y - 1, z).isOf(leaves.getBlock())) y--;
 		BlockState lamp = BNBBlocks.TREE_LANTERN.getDefaultState();
 		if (canReplace(level.getBlockState(x, y, z))) level.setBlockState(x, y, z, lamp);
 		if (random.nextBoolean() && canReplace(level.getBlockState(x, --y, z))) level.setBlockState(x, y, z, lamp);
@@ -290,7 +290,7 @@ public class CommonLargeTreeStructure extends Structure {
 	}
 	
 	private boolean canReplace(BlockState state) {
-		if (state.isAir() || state.isOf(leaves)) return true;
+		if (state.isAir() || state.isOf(leaves.getBlock())) return true;
 		Material material = state.getMaterial();
 		return material.isReplaceable() || material == Material.PLANT;
 	}
