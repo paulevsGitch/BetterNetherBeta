@@ -46,7 +46,10 @@ public class BNBHalfSlab extends BNBSlab {
 	
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext context) {
-		boolean down = context.getHitPos().y - context.getBlockPos().y < 0.5;
+		PlayerEntity player = context.getPlayer();
+		if (player == null) return getDefaultState();
+		HitResult result = raycast(context.getWorld(), player);
+		boolean down = result.pos.y - result.y < 0.5;
 		return getDefaultState().with(BNBBlockProperties.DIRECTION, down ? Direction.DOWN : Direction.UP);
 	}
 	
