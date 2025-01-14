@@ -13,7 +13,6 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.block.property.BNBBlockProperties;
-import paulevs.vbe.utils.CreativeUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -50,7 +49,7 @@ public class BNBLeavesBlock extends TemplateBlock {
 			return;
 		}
 		drop(level, x, y, z, new ItemStack(this));
-		if (!CreativeUtil.isCreative(player)) heldItem.applyDamage(1, player);
+		heldItem.applyDamage(1, null);
 	}
 	
 	public BlockState getState(Direction direction) {

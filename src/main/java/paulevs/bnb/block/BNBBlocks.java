@@ -29,6 +29,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class BNBBlocks {
 	static {
+		Block.PORTAL.setLightEmittance(1F);
 		Block.NETHERRACK.setHardness(0.75F);
 	}
 	
@@ -312,6 +313,10 @@ public class BNBBlocks {
 		}
 		return block;
 	}
+	
+	/*private static Block makeSlab() {
+	
+	};*/
 	
 	private static <B extends Block> B make(String name, BiFunction<Identifier, Supplier<Structure>, B> constructor, Supplier<Structure> structure) {
 		Identifier id = BNB.id(name);

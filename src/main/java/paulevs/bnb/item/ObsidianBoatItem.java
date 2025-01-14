@@ -12,7 +12,6 @@ import net.minecraft.util.maths.MCMath;
 import net.minecraft.util.maths.Vec3D;
 import net.modificationstation.stationapi.api.template.item.TemplateBoatItem;
 import net.modificationstation.stationapi.api.util.Identifier;
-import paulevs.vbe.utils.CreativeUtil;
 
 public class ObsidianBoatItem extends TemplateBoatItem {
 	public ObsidianBoatItem(Identifier id) {
@@ -42,7 +41,7 @@ public class ObsidianBoatItem extends TemplateBoatItem {
 				entity.setPosition(px + 0.5, py + 1.5, pz + 0.5);
 				level.spawnEntity(entity);
 			}
-			if (!CreativeUtil.isCreative(player)) stack.count--;
+			stack.count--;
 		}
 		
 		return stack;

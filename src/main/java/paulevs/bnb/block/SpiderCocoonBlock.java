@@ -13,7 +13,6 @@ import net.modificationstation.stationapi.api.template.block.TemplateBlockWithEn
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.block.entity.CocoonSpawnerBlockEntity;
 import paulevs.bnb.sound.BNBSounds;
-import paulevs.vbe.utils.CreativeUtil;
 
 public class SpiderCocoonBlock extends TemplateBlockWithEntity {
 	public SpiderCocoonBlock(Identifier identifier) {
@@ -62,6 +61,6 @@ public class SpiderCocoonBlock extends TemplateBlockWithEntity {
 			return;
 		}
 		drop(level, x, y, z, new ItemStack(this));
-		if (!CreativeUtil.isCreative(player)) heldItem.applyDamage(1, player);
+		heldItem.applyDamage(1, null);
 	}
 }

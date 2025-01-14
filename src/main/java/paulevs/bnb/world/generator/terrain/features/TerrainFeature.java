@@ -3,15 +3,12 @@ package paulevs.bnb.world.generator.terrain.features;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.bnb.world.generator.terrain.TerrainSDF;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
 public abstract class TerrainFeature implements TerrainSDF {

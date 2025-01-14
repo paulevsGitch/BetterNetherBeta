@@ -20,10 +20,10 @@ import net.modificationstation.stationapi.api.template.block.TemplateBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
+import paulevs.bnb.BNB;
 import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.block.property.BNBBlockProperties;
 import paulevs.bnb.sound.BNBSounds;
-import paulevs.vbe.utils.CreativeUtil;
 
 public class SpiderNetBlock extends TemplateBlock {
 	public SpiderNetBlock(Identifier id) {
@@ -129,7 +129,7 @@ public class SpiderNetBlock extends TemplateBlock {
 	@Override
 	public void onEntityCollision(Level level, int x, int y, int z, Entity entity) {
 		if (entity instanceof SpiderEntity) return;
-		if (entity instanceof PlayerEntity player && CreativeUtil.isCreative(player)) return;
+		if (entity instanceof PlayerEntity player && BNB.isCreative(player)) return;
 		entity.inCobweb = true;
 	}
 	
@@ -145,7 +145,7 @@ public class SpiderNetBlock extends TemplateBlock {
 			return;
 		}
 		drop(level, x, y, z, new ItemStack(this));
-		if (!CreativeUtil.isCreative(player)) heldItem.applyDamage(1, player);
+		if (!BNB.isCreative(player)) heldItem.applyDamage(1, player);
 	}
 	
 	private boolean isSupport(BlockState state) {

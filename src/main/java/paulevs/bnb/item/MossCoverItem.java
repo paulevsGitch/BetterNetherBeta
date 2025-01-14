@@ -10,7 +10,6 @@ import net.modificationstation.stationapi.api.template.item.TemplateItem;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.block.BNBBlocks;
-import paulevs.vbe.utils.CreativeUtil;
 
 public class MossCoverItem extends TemplateItem {
 	public MossCoverItem(Identifier identifier) {
@@ -31,7 +30,7 @@ public class MossCoverItem extends TemplateItem {
 		level.setBlockStateWithNotify(x, y, z, state);
 		BlockSounds sound = BNBBlocks.NETHER_MOSS_COVER.sounds;
 		level.playSound(x + 0.5, y + 0.5, z + 0.5, sound.getWalkSound(), sound.getVolume(), sound.getPitch());
-		if (!CreativeUtil.isCreative(player)) item.count--;
+		item.count--;
 		return true;
 	}
 }

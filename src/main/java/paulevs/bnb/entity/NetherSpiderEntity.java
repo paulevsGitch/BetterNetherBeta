@@ -2,12 +2,10 @@ package paulevs.bnb.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.monster.SpiderEntity;
-import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.MCMath;
 import net.modificationstation.stationapi.api.network.packet.MessagePacket;
 import net.modificationstation.stationapi.api.server.entity.MobSpawnDataProvider;
-import paulevs.vbe.utils.CreativeUtil;
 
 public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpawnDataProvider {
 	public NetherSpiderEntity(Level level) {
@@ -25,12 +23,6 @@ public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpaw
 	@Override
 	public void readFromMessage(MessagePacket message) {
 		MobSpawnDataProvider.super.readFromMessage(message);
-	}
-	
-	@Override
-	protected Entity getAttackTarget() {
-		PlayerEntity player = (PlayerEntity) super.getAttackTarget();
-		return player == null || CreativeUtil.isCreative(player) ? null : player;
 	}
 	
 	@Override

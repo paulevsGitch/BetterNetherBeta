@@ -20,7 +20,6 @@ import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.mixin.common.EntityAccessor;
 import paulevs.bnb.packet.BNBWeatherPacket;
-import paulevs.vbe.utils.CreativeUtil;
 
 import java.util.List;
 import java.util.Random;
@@ -115,7 +114,7 @@ public class BNBWeatherManager {
 					if ((entity.ticks & 7) > 0) continue;
 					if (entity.fire > 8) continue;
 					if (preEntity instanceof PlayerEntity player) {
-						if (CreativeUtil.isCreative(player)) continue;
+						if (BNB.isCreative(player)) continue;
 					}
 					x = MCMath.floor(entity.x) & 15;
 					z = MCMath.floor(entity.z) & 15;

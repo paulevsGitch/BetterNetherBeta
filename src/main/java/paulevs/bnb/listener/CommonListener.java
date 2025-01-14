@@ -44,7 +44,6 @@ public class CommonListener {
 	@EventListener
 	public void onBlockRegister(BlockRegistryEvent event) {
 		BNBBlocks.init();
-		Block.PORTAL.setLightEmittance(1F);
 	}
 	
 	@EventListener

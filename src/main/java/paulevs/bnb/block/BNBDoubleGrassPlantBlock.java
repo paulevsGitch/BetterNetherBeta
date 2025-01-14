@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.tool.ShearsItem;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.util.Identifier;
-import paulevs.vbe.utils.CreativeUtil;
 
 public class BNBDoubleGrassPlantBlock extends BNBDoubleFloorPlantBlock {
 	public BNBDoubleGrassPlantBlock(Identifier id) {
@@ -18,6 +17,6 @@ public class BNBDoubleGrassPlantBlock extends BNBDoubleFloorPlantBlock {
 		ItemStack heldItem = player.getHeldItem();
 		if (heldItem == null || !(heldItem.getType() instanceof ShearsItem)) return;
 		drop(level, x, y, z, new ItemStack(this));
-		if (!CreativeUtil.isCreative(player)) heldItem.applyDamage(1, player);
+		heldItem.applyDamage(1, player);
 	}
 }
