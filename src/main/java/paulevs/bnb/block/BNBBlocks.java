@@ -59,7 +59,6 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class BNBBlocks {
 	static {
-		Block.PORTAL.setLightEmittance(1F);
 		Block.NETHERRACK.setHardness(0.75F);
 	}
 	

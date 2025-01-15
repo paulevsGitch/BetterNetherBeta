@@ -125,7 +125,7 @@ public class ClientListener {
 		}
 		
 		printTranslations();
-		debugTerrain();
+		//debugTerrain();
 		biomeColors();
 	}
 	

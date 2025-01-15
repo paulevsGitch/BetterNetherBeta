@@ -2,7 +2,9 @@ package paulevs.bnb.mixin.common;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.living.LivingEntity;
 import net.minecraft.entity.living.player.PlayerEntity;
+import net.minecraft.level.Level;
 import net.minecraft.stat.Stat;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,8 +14,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.achievement.BNBAchievements;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin {
+public abstract class PlayerEntityMixin extends LivingEntity {
 	@Shadow public int dimensionId;
+	
+	public PlayerEntityMixin(Level level) {
+		super(level);
+	}
+	
 	@Shadow public abstract void incrementStat(Stat arg);
 	
 	@Inject(method = "tick", at = @At("TAIL"))

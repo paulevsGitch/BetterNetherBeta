@@ -6,7 +6,9 @@ import net.minecraft.entity.living.LivingEntity;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.level.Level;
+import net.minecraft.util.maths.BlockPos;
 import net.minecraft.util.maths.Box;
+import net.modificationstation.stationapi.api.util.math.MutableBlockPos;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,23 +18,22 @@ import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import paulevs.bnb.entity.BNBPortalEntity;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.item.BNBItemTags;
 import paulevs.bnb.world.generator.BNBChunkStatus;
 import paulevs.bnb.world.generator.BNBWorldChunk;
 
 @Mixin(Entity.class)
-public class EntityMixin {
+public class EntityMixin implements BNBPortalEntity {
+	@Unique private MutableBlockPos bnb_originPortalPos = new MutableBlockPos();
+	@Unique private Level bnb_originPortalLevel;
+	
 	@Shadow public Level level;
-	
 	@Shadow public int chunkX;
-	
 	@Shadow public int chunkZ;
-	
 	@Shadow @Final public Box boundingBox;
-	
 	@Shadow protected float fallDistance;
-	
 	@Shadow private boolean skipFallCheck;
 	
 	@Inject(method = "setOnFire", at = @At("HEAD"), cancellable = true)
@@ -116,5 +117,21 @@ public class EntityMixin {
 		if (chunk.bnb_getStatus() == BNBChunkStatus.EMPTY) {
 			info.cancel();
 		}
+	}
+	
+	@Override
+	public Level bnb_getOriginLevel() {
+		return bnb_originPortalLevel;
+	}
+	
+	@Override
+	public BlockPos bnb_getOriginPos() {
+		return bnb_originPortalPos;
+	}
+	
+	@Override
+	public void bnb_setPortalOrigin(Level level, int x, int y, int z) {
+		bnb_originPortalLevel = level;
+		bnb_originPortalPos.set(x, y, z);
 	}
 }

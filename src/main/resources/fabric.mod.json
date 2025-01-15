@@ -55,6 +55,9 @@
 		"loom:injected_interfaces": {
 			"net/minecraft/class_153": [
 				"paulevs/bnb/world/biome/BNBBiomeData"
+			],
+			"net/minecraft/class_57": [
+				"paulevs/bnb/entity/BNBPortalEntity"
 			]
 		}
 	}

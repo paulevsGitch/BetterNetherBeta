@@ -22,6 +22,7 @@
 		"SoulSandBlockMixin",
 		"PlayerEntityMixin",
 		"GhastEntityMixin",
+		"PortalBlockMixin",
 		"BoatEntityMixin",
 		"ItemEntityMixin",
 		"ExplosionMixin",
