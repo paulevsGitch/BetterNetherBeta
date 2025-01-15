@@ -105,15 +105,16 @@ public class BNBWeatherRenderer {
 	public static void updateFog(float[] fogColor) {
 		if (isCurrentWeather(WeatherType.DRIZZLE)) {
 			float alpha = getIntensity(WeatherType.DRIZZLE);
-			fogColor[0] = MathHelper.lerp(alpha * 0.25F, fogColor[0], 0.5F);
-			fogColor[1] = MathHelper.lerp(alpha * 0.25F, fogColor[1], 0.01F);
-			fogColor[2] = MathHelper.lerp(alpha * 0.25F, fogColor[2], 0.0F);
+			if (isCurrentWeather(WeatherType.RAIN)) alpha = 1.0F;
+			fogColor[0] = MathHelper.lerp(alpha * 0.5F, fogColor[0], 0.722F);
+			fogColor[1] = MathHelper.lerp(alpha * 0.5F, fogColor[1], 0.163F);
+			fogColor[2] = MathHelper.lerp(alpha * 0.5F, fogColor[2], 0.065F);
 		}
 		if (isCurrentWeather(WeatherType.RAIN)) {
 			float alpha = getIntensity(WeatherType.RAIN);
-			fogColor[0] = MathHelper.lerp(alpha, fogColor[0], 0.5F);
-			fogColor[1] = MathHelper.lerp(alpha, fogColor[1], 0.01F);
-			fogColor[2] = MathHelper.lerp(alpha, fogColor[2], 0.0F);
+			fogColor[0] = MathHelper.lerp(alpha, fogColor[0], 0.722F);
+			fogColor[1] = MathHelper.lerp(alpha, fogColor[1], 0.163F);
+			fogColor[2] = MathHelper.lerp(alpha, fogColor[2], 0.065F);
 		}
 		
 		int r = (int) (fogColor[0] * 255);
@@ -636,7 +637,7 @@ public class BNBWeatherRenderer {
 					NEAR_CACHE.setData(wxn, wzn, min, max);
 					
 					Block block = chunk.getBlockState(wxn & 15, min, wzn & 15).getBlock();
-					PUDDLES_CACHE.setData(wxn, wzn, block.isFullCube());
+					PUDDLES_CACHE.setData(wxn, wzn, block.isFullCube() || block.material.isLiquid());
 				}
 			}
 			

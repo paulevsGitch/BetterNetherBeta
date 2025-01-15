@@ -114,8 +114,10 @@ public class BNBPortalManager {
 			if (py > level.getTopY() || py < level.getBottomY()) return false;
 			int px = x + getLocalX(index);
 			int pz = z + getLocalZ(index);
-			if (!level.getBlockState(px, py, pz).getMaterial().isReplaceable()) return false;
-			hasGround |= level.getBlockState(px, py - 1, pz).getMaterial().blocksMovement();
+			BlockState state = level.getBlockState(px, py, pz);
+			if (!state.getMaterial().isReplaceable() || state.getMaterial().isLiquid()) return false;
+			state = level.getBlockState(px, py - 1, pz);
+			hasGround |= state.getMaterial().blocksMovement() || state.getMaterial().isLiquid();
 		}
 		return hasGround;
 	}
