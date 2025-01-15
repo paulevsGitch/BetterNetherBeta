@@ -17,6 +17,7 @@ import java.util.List;
 
 public class BNBWorldDecoratorThread extends Thread {
 	private final List<PlayerPos> centers = Collections.synchronizedList(new ArrayList<>());
+	private final List<PlayerPos> centersCopy = new ArrayList<>();
 	private volatile BNBDecoratorLevel decorator;
 	private volatile List<Vec2I> offsets;
 	private volatile boolean canRun;
@@ -32,13 +33,14 @@ public class BNBWorldDecoratorThread extends Thread {
 	public void run() {
 		while (canRun) {
 			if (decorator == null || centers == null) continue;
+			centersCopy.clear();
+			centersCopy.addAll(centers);
 			List<Vec2I> offsets = this.offsets;
 			if (offsets == null) continue;
 			boolean needSearch = true;
 			for (int i = 0; needSearch && i < offsets.size(); i++) {
 				Vec2I offset = offsets.get(i);
-				for (PlayerPos pos : centers) {
-					if (pos == null) break;
+				for (PlayerPos pos : centersCopy) {
 					int x = pos.x + offset.x;
 					int z = pos.z + offset.z;
 					if (decorator.decorate(x, z)) needSearch = false;
@@ -52,7 +54,9 @@ public class BNBWorldDecoratorThread extends Thread {
 		if (lastLevel != minecraft.level) {
 			lastLevel = minecraft.level;
 			if (lastLevel == null || lastLevel.isRemote || lastLevel.dimension.id != -1) {
+				lastLevel = null;
 				decorator = null;
+				return;
 			}
 			else decorator = new BNBDecoratorLevel(lastLevel);
 		}

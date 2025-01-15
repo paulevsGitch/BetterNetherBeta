@@ -46,6 +46,9 @@ public class BNBDecoratorLevel extends Level {
 	}
 	
 	@Override
+	protected void updateSpawnPosition() {}
+	
+	@Override
 	public Chunk getChunkFromCache(int x, int z) {
 		long index = pack(x, z);
 		FlattenedChunk chunk = chunks.get(index);
