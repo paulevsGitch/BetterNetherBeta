@@ -9,6 +9,7 @@ import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.LivingEntity;
+import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;
 import net.minecraft.util.maths.MCMath;
@@ -611,19 +612,19 @@ public class BNBWeatherRenderer {
 			}
 			
 			Minecraft minecraft = BNBClient.getMinecraft();
-			
 			if (minecraft == null || minecraft.level == null || minecraft.level.dimension.id != -1) continue;
+			
+			PlayerEntity player = minecraft.player;
+			if (player == null) continue;
+			
 			if (!isCurrentWeather(WeatherType.RAIN) && !isCurrentWeather(WeatherType.DRIZZLE)) continue;
 			
 			rainRadius = minecraft.options.fancyGraphics ? (byte) 10 : (byte) 5;
 			puddlesRadius = minecraft.options.fancyGraphics ? (byte) 15 : (byte) 7;
 			innerRadius = (byte) ((rainRadius >> 1) - 1);
 			
-			LivingEntity entity = minecraft.viewEntity;
-			if (entity == null) continue;
-			
-			int ix = MCMath.floor(entity.x);
-			int iz = MCMath.floor(entity.z);
+			int ix = MCMath.floor(player.x);
+			int iz = MCMath.floor(player.z);
 			
 			for (byte dx = (byte) -puddlesRadius; dx <= puddlesRadius; dx++) {
 				int wxn = ix + dx;

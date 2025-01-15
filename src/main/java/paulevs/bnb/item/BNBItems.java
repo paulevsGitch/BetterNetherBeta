@@ -70,6 +70,7 @@ public class BNBItems {
 	public static final Item ORICHALCUM_AXE = makeTool("orichalcum_axe", TemplateAxeItem::new, ORICHALCUM);
 	public static final Item ORICHALCUM_HOE = makeTool("orichalcum_hoe", TemplateHoeItem::new, ORICHALCUM);
 	public static final Item ORICHALCUM_SHEARS = makeShears("orichalcum_shears", ORICHALCUM);
+	public static final Item ORICHALCUM_IGNITER = make("orichalcum_igniter", OrichalcumIgniter::new);
 	
 	public static final Item OBSIDIAN_BOAT = make("obsidian_boat", ObsidianBoatItem::new);
 	public static final Item OBSIDIAN_SHARD = make("obsidian_shard", TemplateItem::new);

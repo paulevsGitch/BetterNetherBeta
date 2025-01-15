@@ -17,6 +17,7 @@ import net.modificationstation.stationapi.api.network.packet.PacketHelper;
 import paulevs.bnb.BNB;
 import paulevs.bnb.BNBClient;
 import paulevs.bnb.block.BNBBlockTags;
+import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.mixin.common.EntityAccessor;
 import paulevs.bnb.packet.BNBWeatherPacket;
@@ -25,7 +26,6 @@ import java.util.List;
 import java.util.Random;
 
 public class BNBWeatherManager {
-	private static final int MAX_WEATHER_SEARCH = 255 - 32;
 	private static final WeatherType[] WEATHER_SEQUENCE = new WeatherType[16];
 	private static final LongSet CHUNKS = new LongOpenHashSet(4096);
 	private static final Random RANDOM = new Random();
@@ -119,7 +119,7 @@ public class BNBWeatherManager {
 					x = MCMath.floor(entity.x) & 15;
 					z = MCMath.floor(entity.z) & 15;
 					int y = getWeatherBottom(chunk, x, z) + 2;
-					if (y > entity.y + entity.height) continue;
+					if (y == Short.MAX_VALUE || y > entity.y + entity.height) continue;
 					accessor.bnb_setOnFire();
 				}
 			}
@@ -180,17 +180,17 @@ public class BNBWeatherManager {
 	public static short getWeatherTop(Chunk chunk, int x, int z) {
 		int y = 255;
 		BlockState state = chunk.getBlockState(x, y, z);
-		while (isNetherCeiling(state) && y > MAX_WEATHER_SEARCH) state = chunk.getBlockState(x, --y, z);
+		while (isNetherCeiling(state) && y > 200) state = chunk.getBlockState(x, --y, z);
 		return !canPropagateWeather(state) ? Short.MAX_VALUE : (short) y;
 	}
 	
 	public static short getWeatherBottom(Chunk chunk, int x, int z) {
 		int y = getWeatherTop(chunk, x, z);
-		if (y == Short.MAX_VALUE) return Short.MAX_VALUE;
 		return getWeatherBottom(chunk, x, y, z);
 	}
 	
 	public static short getWeatherBottom(Chunk chunk, int x, int y, int z) {
+		if (y == Short.MAX_VALUE) return Short.MAX_VALUE;
 		BlockState state = chunk.getBlockState(x, y, z);
 		while (canPropagateWeather(state) && y > 0) {
 			state = chunk.getBlockState(x, --y, z);
@@ -203,7 +203,7 @@ public class BNBWeatherManager {
 	}
 	
 	private static boolean isNetherCeiling(BlockState state) {
-		return state.isOf(Block.BEDROCK) ||
+		return state.isOf(Block.BEDROCK) || state.isOf(BNBBlocks.SOUL_SANDSTONE) ||
 			state.isIn(BNBBlockTags.NETHERRACK_TERRAIN) ||
 			state.isIn(BNBBlockTags.SOUL_TERRAIN);
 	}
