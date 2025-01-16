@@ -42,7 +42,9 @@ public class BiomeMap extends DataMap<Biome> {
 	@Override
 	protected Biome deserialize(String name) {
 		// TODO remove closer to release
-		name = name.replaceFirst("_", ":");
+		if (!name.contains(":")) {
+			name = name.replaceFirst("_", ":");
+		}
 		return nameToBiome.getOrDefault(name, Biome.NETHER);
 	}
 	

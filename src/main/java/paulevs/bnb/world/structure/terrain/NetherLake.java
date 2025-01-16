@@ -1,4 +1,4 @@
-package paulevs.bnb.world.structure.common;
+package paulevs.bnb.world.structure.terrain;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

@@ -37,7 +37,7 @@ public class CocoonSpawnerBlockEntity extends BlockEntity {
 		Identifier id = BlockRegistry.INSTANCE.getId(level.getBlockState(x, y, z).getBlock());
 		if (id == null) return;
 		
-		String entity = "bnb_" + id.path.replace("_cocoon", "");
+		String entity = "bnb:" + id.path.replace("_cocoon", "");
 		
 		for(byte i = 0; i < count; ++i) {
 			LivingEntity spider = (LivingEntity) EntityRegistry.create(entity, level);

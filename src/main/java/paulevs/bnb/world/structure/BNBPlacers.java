@@ -62,4 +62,7 @@ public class BNBPlacers {
 	public static final StructurePlacer NETHER_MOSS_COVER = new VolumetricPlacer(BNBStructures.NETHER_MOSS_COVER, 4).setNoiseDensityFunction(5);
 	public static final StructurePlacer NETHER_MOSS_BLOCK = new VolumetricPlacer(BNBStructures.NETHER_MOSS_BLOCK, 3).setNoiseDensityFunction(6);
 	public static final StructurePlacer NETHER_MOSS_CEILING = new CeilingPlacer(BNBStructures.NETHER_MOSS_BLOCK, 5).setNoiseDensityFunction(7);
+	
+	public static final StructurePlacer FLAME_QUARTZ_CLUSTER_FLOOR = new FloorPlacer(BNBStructures.FLAME_QUARTZ_CLUSTER_FLOOR, 1).setNoiseDensityFunction(0, 0.5F);
+	public static final StructurePlacer FLAME_QUARTZ_CLUSTER_CEILING = new CeilingPlacer(BNBStructures.FLAME_QUARTZ_CLUSTER_CEILING, 1).setNoiseDensityFunction(1, 0.5F);
 }

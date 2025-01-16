@@ -2,6 +2,8 @@ package paulevs.bnb.world.generator;
 
 import it.unimi.dsi.fastutil.longs.Long2ReferenceMap;
 import it.unimi.dsi.fastutil.longs.Long2ReferenceOpenHashMap;
+import it.unimi.dsi.fastutil.longs.LongArrayList;
+import it.unimi.dsi.fastutil.longs.LongList;
 import net.minecraft.block.Block;
 import net.minecraft.block.SandBlock;
 import net.minecraft.level.Level;
@@ -27,6 +29,7 @@ import java.util.List;
 
 public class BNBDecoratorLevel extends Level {
 	private final Long2ReferenceMap<FlattenedChunk> chunks = new Long2ReferenceOpenHashMap<>();
+	private final LongList toRemove = new LongArrayList();
 	private final ConcurrentLongQueue areasToUpdate = new ConcurrentLongQueue();
 	private final List<LightUpdateArea> lightUpdates = new ArrayList<>();
 	private final FlattenedChunk empty;
@@ -205,14 +208,26 @@ public class BNBDecoratorLevel extends Level {
 		
 		for (FlattenedChunk chunk : chunks.values()) {
 			copyBack(chunk);
-			areasToUpdate.add(pack(chunk.x, chunk.z));
+			long index = pack(chunk.x, chunk.z);
+			areasToUpdate.add(index);
+			if (BNBWorldChunk.cast(chunk).bnb_getStatus() == BNBChunkStatus.FINISHED) {
+				boolean needRemoval = true;
+				for (byte i = 1; i < 4; i++) {
+					byte dx = (byte) (i & 1);
+					byte dz = (byte) ((i >> 1) & 1);
+					status = getChunkStatus(chunk.x + dx, chunk.z + dz);
+					if (status != BNBChunkStatus.FINISHED) {
+						needRemoval = false;
+						break;
+					}
+				}
+				if (needRemoval) toRemove.add(index);
+			}
 		}
 		
-		chunks.clear();
+		for (long index : toRemove) chunks.remove(index);
+		toRemove.clear();
 		
-		/*if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-			BNB.LOGGER.info("Decorated " + x + " " + z);
-		}*/
 		return true;
 	}
 	
@@ -296,7 +311,7 @@ public class BNBDecoratorLevel extends Level {
 						int py = cy + dir.getOffsetY();
 						int pz = wz + dir.getOffsetZ();
 						if (!getBlockState(px, py, pz).isAir()) continue;
-						BlockState state = moss.getStructureState(level, px, py, pz);
+						BlockState state = moss.getStructureState(this, px, py, pz);
 						if (state != null) {
 							setBlockState(px, py, pz, state);
 						}

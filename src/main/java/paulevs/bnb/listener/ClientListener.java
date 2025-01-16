@@ -370,10 +370,7 @@ public class ClientListener {
 	// TODO remove that after release
 	private void biomeColors() {
 		if (!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
-		biomeColor(0xB4223D, 0xB6C8CA);
-		biomeColor(0x158E7E, 0xB6C8CA);
-		biomeColor(0xf99221, 0xB6C8CA);
-		biomeColor(0xed5c24, 0xB6C8CA);
+		biomeColor(0xEA7D2E, 0xB6C8CA);
 	}
 	
 	// TODO remove that after release

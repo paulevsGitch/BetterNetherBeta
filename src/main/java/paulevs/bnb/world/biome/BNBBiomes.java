@@ -401,6 +401,7 @@ public class BNBBiomes {
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
+		.feature(BNBPlacers.ORICHALCUM)
 		.build(), BiomeArea.SOUL_MEDIUM);
 	
 	public static final Biome BARREN_SOUL_BIOME = addLand(BiomeBuilder
@@ -413,7 +414,19 @@ public class BNBBiomes {
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
+		.feature(BNBPlacers.ORICHALCUM)
 		.build(), BiomeArea.SOUL_BARREN);
+	
+	public static final Biome FLAME_QUARTZ_CAVE = addLand(BiomeBuilder
+		.start("bnb:flame_quartz_cave")
+		.fogColor(0x934112)
+		.grassAndLeavesColor(0xFFFF7C2E)
+		.noDimensionFeatures()
+		.feature(BNBPlacers.ORICHALCUM)
+		.feature(BNBPlacers.FLAME_QUARTZ_CLUSTER_FLOOR)
+		.feature(BNBPlacers.FLAME_QUARTZ_CLUSTER_CEILING)
+		.build(), BiomeArea.NETHERRACK_BARREN)
+		.bnb_setParticleRange(9, 11);
 	
 	private static void add(TerrainRegion region, BiomeArea area, Biome biome) {
 		BIOME_BY_TERRAIN

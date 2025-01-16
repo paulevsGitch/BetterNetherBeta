@@ -1,4 +1,4 @@
-package paulevs.bnb.world.structure.common;
+package paulevs.bnb.world.structure.terrain;
 
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;

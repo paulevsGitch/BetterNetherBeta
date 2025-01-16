@@ -4,11 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.bnb.block.BNBBlocks;
-import paulevs.bnb.world.structure.common.BoulderStructure;
 import paulevs.bnb.world.structure.common.CocoonStructure;
-import paulevs.bnb.world.structure.common.CrystalStructure;
 import paulevs.bnb.world.structure.common.FallenTreeStructure;
-import paulevs.bnb.world.structure.common.NetherLake;
 import paulevs.bnb.world.structure.common.NetherOreStructure;
 import paulevs.bnb.world.structure.common.PatchBlobStructure;
 import paulevs.bnb.world.structure.common.PillarStructure;
@@ -22,6 +19,10 @@ import paulevs.bnb.world.structure.scatter.FerruminePlantScatterStructure;
 import paulevs.bnb.world.structure.scatter.MossScatterStructure;
 import paulevs.bnb.world.structure.scatter.SimpleScatterStructure;
 import paulevs.bnb.world.structure.scatter.SolidSupportScatterStructure;
+import paulevs.bnb.world.structure.terrain.BoulderStructure;
+import paulevs.bnb.world.structure.terrain.CrystalStructure;
+import paulevs.bnb.world.structure.terrain.FlameQuartzClusterStructure;
+import paulevs.bnb.world.structure.terrain.NetherLake;
 import paulevs.bnb.world.structure.tree.CommonLargeTreeStructure;
 import paulevs.bnb.world.structure.tree.CommonTreeStructure;
 import paulevs.bnb.world.structure.tree.JalumineBushStructure;
@@ -157,4 +158,7 @@ public class BNBStructures {
 	public static final Structure NETHER_SPROUTS = new SimpleScatterStructure(5, 30, BNBBlocks.NETHER_SPROUTS);
 	
 	public static final Structure MOSSY_NETHERRACK = new NetherOreStructure(BNBBlocks.MOSSY_NETHERRACK, 4);
+	
+	public static final Structure FLAME_QUARTZ_CLUSTER_FLOOR = new FlameQuartzClusterStructure(false);
+	public static final Structure FLAME_QUARTZ_CLUSTER_CEILING = new FlameQuartzClusterStructure(true);
 }

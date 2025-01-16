@@ -1,6 +1,7 @@
 package paulevs.bnb.world.structure.common;
 
 import net.modificationstation.stationapi.api.block.BlockState;
+import paulevs.bnb.world.structure.terrain.BoulderStructure;
 
 public class PatchBlobStructure extends BoulderStructure {
 	private final BlockState filter;
