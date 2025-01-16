@@ -18,6 +18,7 @@
 		"GameRendererMixin",
 		"AreaRendererMixin",
 		"SoundMapAccessor",
+		"ClientLevelMixin",
 		"SoundHelperMixin",
 		"FluidBlockMixin",
 		"MinecraftMixin",

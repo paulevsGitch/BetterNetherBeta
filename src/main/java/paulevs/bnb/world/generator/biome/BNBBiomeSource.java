@@ -1,5 +1,7 @@
 package paulevs.bnb.world.generator.biome;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.biome.BiomeSource;
 import net.minecraft.level.dimension.DimensionData;
@@ -10,16 +12,26 @@ import java.util.Random;
 
 public class BNBBiomeSource extends BiomeSource {
 	private final Random random = new Random();
-	private final BiomeMap map;
+	private final BiomeMap map = new BiomeMap();
 	
-	public BNBBiomeSource(long seed, DimensionData data) {
-		map = new BiomeMap();
-		random.setSeed(seed);
-		map.setData(data, random.nextInt());
+	private BNBBiomeSource() {
 		temperatureNoises = new double[256];
 		rainfallNoises = new double[256];
 		detailNoises = new double[256];
 		Arrays.fill(temperatureNoises, 1.0);
+	}
+	
+	public BNBBiomeSource(long seed, DimensionData data) {
+		this();
+		random.setSeed(seed);
+		map.setData(data, random.nextInt());
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public BNBBiomeSource(long seed) {
+		this();
+		random.setSeed(seed);
+		map.setSeed(random.nextInt());
 	}
 	
 	@Override

@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import paulevs.bnb.world.generator.BNBDecoratorLevel;
 import paulevs.bnb.world.generator.BNBWorldGenerator;
 import paulevs.bnb.world.generator.biome.BNBBiomeSource;
 
@@ -20,6 +21,7 @@ public class NetherLevelSourceMixin {
 	
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void bnb_updateGenerator(Level level, long seed, CallbackInfo info) {
+		if (level instanceof BNBDecoratorLevel) return;
 		DimensionData data = ((LevelAccessor) level).bnb_getDimData();
 		BNBWorldGenerator.updateData(data, seed);
 		this.level.dimension.biomeSource = new BNBBiomeSource(seed, data);

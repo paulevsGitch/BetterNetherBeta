@@ -2,6 +2,8 @@ package paulevs.bnb.world.generator.biome;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.dimension.DimensionData;
 import net.modificationstation.stationapi.api.util.Identifier;
@@ -30,6 +32,7 @@ public class BiomeMap extends DataMap<Biome> {
 		BNBBiomes.BIOME_BY_TERRAIN.values().forEach(map -> map.values().forEach(list -> list.forEach(
 			biome -> nameToBiome.put(biome.name, biome)
 		)));
+		System.out.println("Created biome map");
 	}
 	
 	@Override
@@ -67,6 +70,15 @@ public class BiomeMap extends DataMap<Biome> {
 	@Override
 	public void setData(DimensionData data, int seed) {
 		super.setData(data, seed);
+		cellNoise.setSeed(random.nextInt());
+		soulBiomeNoise.setSeed(random.nextInt());
+		densityBiomeNoise.setSeed(random.nextInt());
+		map = BNBWorldGenerator.getMapCopy();
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public void setSeed(int seed) {
+		super.setSeed(seed);
 		cellNoise.setSeed(random.nextInt());
 		soulBiomeNoise.setSeed(random.nextInt());
 		densityBiomeNoise.setSeed(random.nextInt());

@@ -77,6 +77,24 @@ public class BNBWorldGenerator {
 		});
 	}
 	
+	@Environment(EnvType.CLIENT)
+	public static void updateData(long seed) {
+		RANDOM.setSeed(seed);
+		final int mapSeed = RANDOM.nextInt();
+		
+		int terrainSeed = RANDOM.nextInt();
+		for (ChunkTerrainMap map : FEATURE_MAPS) {
+			map.setSeed(terrainSeed);
+		}
+		
+		mapCopies = ThreadLocal.withInitial(() -> {
+			TerrainMap map = new TerrainMap();
+			map.setSeed(mapSeed);
+			MAP_FEATURES.forEach(pair -> map.addTerrain(pair.getFirst(), pair.getSecond()));
+			return map;
+		});
+	}
+	
 	public static Chunk makeChunk(Level level, int cx, int cz) {
 		FlattenedChunk chunk = new FlattenedChunk(level, cx, cz);
 		CHUNKS_TO_GENERATE.get((cx + cz) & 7).add(chunk);

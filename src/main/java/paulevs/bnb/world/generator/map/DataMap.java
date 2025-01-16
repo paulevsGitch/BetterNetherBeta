@@ -48,6 +48,13 @@ public abstract class DataMap<T> {
 		}
 	}
 	
+	public void setSeed(int seed) {
+		random.setSeed(seed);
+		distortionX.setSeed(random.nextInt());
+		distortionZ.setSeed(random.nextInt());
+		System.out.println("Set server seed");
+	}
+	
 	public T getData(int x, int z) {
 		double preX = (COS * x - SIN * z) / 16.0 + distortionX.get(x * 0.03, z * 0.03) * 1.5F;
 		double preZ = (SIN * x + COS * z) / 16.0 + distortionX.get(x * 0.03, z * 0.03) * 1.5F;
@@ -107,9 +114,25 @@ public abstract class DataMap<T> {
 		return getChunk(x >> 6, z >> 6).get(getIndex(x, z));
 	}
 	
+	private void generateChunk(MapChunk<T> chunk, int cx, int cz) {
+		int wx = cx << 6;
+		int wz = cz << 6;
+		for (short i = 0; i < 4096; i++) {
+			int posX = wx | (i >> 6);
+			int posZ = wz | (i & 63);
+			chunk.set(i, generateData(posX, posZ));
+		}
+	}
+	
 	private MapChunk<T> getChunk(int cx, int cz) {
 		return chunks.computeIfAbsent(getKey(cx, cz), p -> {
 			MapChunk<T> chunk = new MapChunk<>();
+			
+			if (folder == null) {
+				generateChunk(chunk, cx, cz);
+				return chunk;
+			}
+			
 			boolean loaded = false;
 			
 			File file = new File(folder, "chunk_" + cx + "_" + cz + ".nbt");
@@ -126,13 +149,7 @@ public abstract class DataMap<T> {
 			}
 			
 			if (!loaded) {
-				int wx = cx << 6;
-				int wz = cz << 6;
-				for (short i = 0; i < 4096; i++) {
-					int posX = wx | (i >> 6);
-					int posZ = wz | (i & 63);
-					chunk.set(i, generateData(posX, posZ));
-				}
+				generateChunk(chunk, cx, cz);
 				
 				CompoundTag tag = new CompoundTag();
 				chunk.save(tag, this::serialize);
