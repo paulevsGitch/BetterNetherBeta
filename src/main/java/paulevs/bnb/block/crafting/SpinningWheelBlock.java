@@ -1,5 +1,7 @@
 package paulevs.bnb.block.crafting;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.material.Material;
@@ -54,6 +56,9 @@ public class SpinningWheelBlock extends TemplateBlockWithEntity {
 		SpinningWheelBlockEntity entity = (SpinningWheelBlockEntity) level.getBlockEntity(x, y, z);
 		if (entity == null) return false;
 		GuiHelper.openGUI(player, GUI_ID, entity, new SpinningWheelContainer(player.inventory, entity));
+		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
+			entity.addPlayer(player);
+		}
 		return true;
 	}
 	
@@ -83,7 +88,7 @@ public class SpinningWheelBlock extends TemplateBlockWithEntity {
 	public void onBlockRemoved(Level level, int x, int y, int z) {
 		SpinningWheelBlockEntity entity = (SpinningWheelBlockEntity) level.getBlockEntity(x, y, z);
 		if (entity == null) return;
-		if (entity.getProcess() > 0) drop(level, x, y, z, new ItemStack(BNBItems.NETHER_FIBER));
+		if (entity.getVisualProcess() > 0) drop(level, x, y, z, new ItemStack(BNBItems.NETHER_FIBER));
 		for (byte i = 0; i < entity.getInventorySize(); i++) {
 			ItemStack stack = entity.getItem(i);
 			if (stack == null) continue;

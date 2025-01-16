@@ -32,7 +32,8 @@ public class BNBWorldDecoratorThread extends Thread {
 	@Override
 	public void run() {
 		while (canRun) {
-			if (decorator == null || centers == null) continue;
+			BNBDecoratorLevel decorator = this.decorator;
+			if (decorator == null) continue;
 			centersCopy.clear();
 			centersCopy.addAll(centers);
 			List<Vec2I> offsets = this.offsets;

@@ -2,6 +2,7 @@ package paulevs.bnb.packet;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.Minecraft;
 import net.minecraft.packet.AbstractPacket;
 import net.minecraft.packet.PacketHandler;
 import net.modificationstation.stationapi.api.network.packet.ManagedPacket;
@@ -9,28 +10,28 @@ import net.modificationstation.stationapi.api.network.packet.PacketType;
 import net.modificationstation.stationapi.api.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import paulevs.bnb.BNB;
-import paulevs.bnb.weather.BNBWeatherManager;
-import paulevs.bnb.weather.WeatherType;
+import paulevs.bnb.BNBClient;
+import paulevs.bnb.gui.container.SpinningWheelContainer;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class BNBWeatherPacket extends AbstractPacket implements ManagedPacket<BNBWeatherPacket> {
-	public static final PacketType<BNBWeatherPacket> TYPE = PacketType.builder(true, false, BNBWeatherPacket::new).build();
-	public static final Identifier ID = BNB.id("weather");
-	private byte weatherID;
+public class SpinningWheelPacket extends AbstractPacket implements ManagedPacket<SpinningWheelPacket> {
+	public static final PacketType<SpinningWheelPacket> TYPE = PacketType.builder(true, false, SpinningWheelPacket::new).build();
+	public static final Identifier ID = BNB.id("spinning_wheel");
+	private int process;
 	
-	public  BNBWeatherPacket() {}
+	public SpinningWheelPacket() {}
 	
-	public BNBWeatherPacket(WeatherType weatherType) {
-		weatherID = (byte) weatherType.ordinal();
+	public SpinningWheelPacket(int process) {
+		this.process = process;
 	}
 	
 	@Override
 	public void read(DataInputStream stream) {
 		try {
-			weatherID = stream.readByte();
+			process = stream.readByte() & 255;
 		}
 		catch (IOException e) {
 			throw new RuntimeException(e);
@@ -40,7 +41,7 @@ public class BNBWeatherPacket extends AbstractPacket implements ManagedPacket<BN
 	@Override
 	public void write(DataOutputStream stream) {
 		try {
-			stream.writeByte(weatherID);
+			stream.writeByte((byte) process);
 		}
 		catch (IOException e) {
 			throw new RuntimeException(e);
@@ -50,18 +51,21 @@ public class BNBWeatherPacket extends AbstractPacket implements ManagedPacket<BN
 	@Override
 	public void apply(PacketHandler handler) {
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-			BNBWeatherManager.setWeather(WeatherType.getByID(weatherID));
+			Minecraft minecraft = BNBClient.getMinecraft();
+			if (minecraft.player.container instanceof SpinningWheelContainer wheelContainer) {
+				wheelContainer.entity.setProcess(process);
+			}
 		}
 	}
 	
 	@Override
 	public int length() {
-		return 1;
+		return 13;
 	}
 	
 	@NotNull
 	@Override
-	public PacketType<BNBWeatherPacket> getType() {
+	public PacketType<SpinningWheelPacket> getType() {
 		return TYPE;
 	}
 }

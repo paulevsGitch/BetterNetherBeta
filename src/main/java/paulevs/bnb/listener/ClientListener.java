@@ -79,8 +79,7 @@ public class ClientListener {
 		Registry.register(GuiHandlerRegistry.INSTANCE, SpinningWheelBlock.GUI_ID, new GuiHandler(
 			(player, inventory, packet) -> new SpinningWheelScreen(
 				new SpinningWheelContainer(player.inventory, (SpinningWheelBlockEntity) inventory
-			)),
-			() -> null
+			)), SpinningWheelBlockEntity::new
 		));
 	}
 	

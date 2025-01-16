@@ -35,6 +35,7 @@ import paulevs.bnb.entity.PirozenSpiderEntity;
 import paulevs.bnb.entity.PoisonSpiderEntity;
 import paulevs.bnb.item.BNBItems;
 import paulevs.bnb.packet.BNBWeatherPacket;
+import paulevs.bnb.packet.SpinningWheelPacket;
 import paulevs.bnb.world.biome.BNBBiomes;
 
 import java.util.ArrayList;
@@ -58,16 +59,16 @@ public class CommonListener {
 	
 	@EventListener
 	public void onBlockEntityRegister(BlockEntityRegisterEvent event) {
-		event.register(CocoonSpawnerBlockEntity.class, "bnb_cocoon_spawner");
-		event.register(SpinningWheelBlockEntity.class, "bnb_spinning_wheel");
+		event.register(CocoonSpawnerBlockEntity.class, "bnb:cocoon_spawner");
+		event.register(SpinningWheelBlockEntity.class, "bnb:spinning_wheel");
 	}
 	
 	@EventListener
 	public void onEntityRegister(EntityRegister event) {
-		event.register(CrimsonSpiderEntity.class, "bnb_falurian_spider");
-		event.register(PirozenSpiderEntity.class, "bnb_pirozen_spider");
-		event.register(PoisonSpiderEntity.class, "bnb_chlorophate_spider");
-		event.register(ObsidianBoatEntity.class, "bnb_obsidian_boat");
+		event.register(CrimsonSpiderEntity.class, "bnb:falurian_spider");
+		event.register(PirozenSpiderEntity.class, "bnb:pirozen_spider");
+		event.register(PoisonSpiderEntity.class, "bnb:chlorophate_spider");
+		event.register(ObsidianBoatEntity.class, "bnb:obsidian_boat");
 	}
 	
 	@EventListener
@@ -125,5 +126,6 @@ public class CommonListener {
 	@EventListener
 	public void registerPackets(PacketRegisterEvent event) {
 		Registry.register(PacketTypeRegistry.INSTANCE, BNBWeatherPacket.ID, BNBWeatherPacket.TYPE);
+		Registry.register(PacketTypeRegistry.INSTANCE, SpinningWheelPacket.ID, SpinningWheelPacket.TYPE);
 	}
 }

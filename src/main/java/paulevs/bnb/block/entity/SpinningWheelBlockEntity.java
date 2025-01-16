@@ -2,6 +2,7 @@ package paulevs.bnb.block.entity;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.living.player.PlayerEntity;
@@ -9,13 +10,30 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.io.CompoundTag;
 import net.minecraft.util.io.ListTag;
+import net.modificationstation.stationapi.api.network.packet.PacketHelper;
+import paulevs.bnb.gui.container.SpinningWheelContainer;
 import paulevs.bnb.item.BNBItemTags;
 import paulevs.bnb.item.BNBItems;
+import paulevs.bnb.packet.SpinningWheelPacket;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SpinningWheelBlockEntity extends BlockEntity implements Inventory {
 	private static final int PROCESS_TICKS = 200;
 	private final ItemStack[] storage = new ItemStack[8];
 	private int process;
+	
+	private List<PlayerEntity> playersToTrack;
+	
+	@Environment(EnvType.SERVER)
+	private int updateTick;
+	
+	public SpinningWheelBlockEntity() {
+		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
+			playersToTrack = new ArrayList<>();
+		}
+	}
 	
 	@Override
 	public int getInventorySize() {
@@ -56,11 +74,18 @@ public class SpinningWheelBlockEntity extends BlockEntity implements Inventory {
 	
 	@Override
 	public void tick() {
+		if (level.isRemote) return;
+		
 		if (process > 0) {
 			if (process == 1 && !addStack(new ItemStack(BNBItems.NETHER_FIBER))) {
 				return;
 			}
 			process--;
+			
+			if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
+				processPlayers();
+			}
+			
 			return;
 		}
 		
@@ -89,9 +114,33 @@ public class SpinningWheelBlockEntity extends BlockEntity implements Inventory {
 	}
 	
 	@Environment(EnvType.CLIENT)
-	public float getProcess() {
+	public float getVisualProcess() {
 		if (process == 0) return 0;
 		return 1.0F - (float) process / PROCESS_TICKS;
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public void setProcess(int process) {
+		this.process = process;
+	}
+	
+	@Environment(EnvType.SERVER)
+	public void addPlayer(PlayerEntity player) {
+		PacketHelper.sendTo(player, new SpinningWheelPacket(process));
+		playersToTrack.add(player);
+	}
+	
+	@Environment(EnvType.SERVER)
+	private void processPlayers() {
+		if (updateTick++ < 10 && process > 0) return;
+		updateTick = 0;
+		for (int i = 0; i < playersToTrack.size(); i++) {
+			PlayerEntity player = playersToTrack.get(i);
+			if (player.container instanceof SpinningWheelContainer) {
+				PacketHelper.sendTo(player, new SpinningWheelPacket(process));
+			}
+			else playersToTrack.remove(i--);
+		}
 	}
 	
 	private ListTag arrayToTag(ItemStack[] items) {

@@ -29,7 +29,7 @@ public class SpinningWheelScreen extends ContainerScreen {
 		
 		SpinningWheelBlockEntity entity = ((SpinningWheelContainer) container).entity;
 		
-		int side = (int) Math.ceil(19 * entity.getProcess());
+		int side = (int) Math.ceil(19 * entity.getVisualProcess());
 		blit(posX + 79, posY + 44, 176, 0, side, 12);
 		
 		String name = entity.getInventoryName();

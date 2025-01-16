@@ -613,15 +613,19 @@ public class BNBWeatherRenderer {
 			}
 			
 			Minecraft minecraft = BNBClient.getMinecraft();
-			if (minecraft == null || minecraft.level == null || minecraft.level.dimension.id != -1) continue;
+			if (minecraft == null) continue;
+			
+			Level level = minecraft.level;
+			if (level == null || level.dimension.id != -1) continue;
 			
 			PlayerEntity player = minecraft.player;
 			if (player == null) continue;
 			
 			if (!isCurrentWeather(WeatherType.RAIN) && !isCurrentWeather(WeatherType.DRIZZLE)) continue;
 			
-			rainRadius = minecraft.options.fancyGraphics ? (byte) 10 : (byte) 5;
-			puddlesRadius = minecraft.options.fancyGraphics ? (byte) 15 : (byte) 7;
+			boolean fancy = minecraft.options.fancyGraphics;
+			rainRadius = fancy ? (byte) 10 : (byte) 5;
+			puddlesRadius = fancy ? (byte) 15 : (byte) 7;
 			innerRadius = (byte) ((rainRadius >> 1) - 1);
 			
 			int ix = MCMath.floor(player.x);
@@ -631,7 +635,7 @@ public class BNBWeatherRenderer {
 				int wxn = ix + dx;
 				for (byte dz = (byte) -puddlesRadius; dz <= puddlesRadius; dz++) {
 					int wzn = iz + dz;
-					Chunk chunk = minecraft.level.getChunk(wxn, wzn);
+					Chunk chunk = level.getChunk(wxn, wzn);
 					short max = BNBWeatherManager.getWeatherTop(chunk, wxn & 15, wzn & 15);
 					short min = BNBWeatherManager.getWeatherBottom(chunk, wxn & 15, max, wzn & 15);
 					NEAR_CACHE.setData(wxn, wzn, min, max);
@@ -646,7 +650,7 @@ public class BNBWeatherRenderer {
 				for (byte dz = (byte) -rainRadius; dz <= rainRadius; dz++) {
 					if (Math.abs(dx) < innerRadius && Math.abs(dz) < innerRadius) continue;
 					int wzf = (iz & -4) + (dz << 2);
-					Chunk chunk = minecraft.level.getChunk(wxf, wzf);
+					Chunk chunk = level.getChunk(wxf, wzf);
 					short max = BNBWeatherManager.getWeatherTop(chunk, wxf & 15, wzf & 15);
 					short min = BNBWeatherManager.getWeatherBottom(chunk, wxf & 15, max, wzf & 15);
 					FAR_CACHE.setData(wxf >> 2, wzf >> 2, min, max);

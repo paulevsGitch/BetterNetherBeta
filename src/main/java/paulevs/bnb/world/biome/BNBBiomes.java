@@ -56,7 +56,7 @@ public class BNBBiomes {
 		.build();
 	
 	public static final Biome FALURIAN_FOREST = addLand(BiomeBuilder
-		.start("bnb_falurian_forest")
+		.start("bnb:falurian_forest")
 		.fogColor(0x951922)
 		.grassAndLeavesColor(0xFFFD2C4E)
 		.surfaceRule(LOW_LAND_GRAVEL)
@@ -96,7 +96,7 @@ public class BNBBiomes {
 		.bnb_setParticleRange(0, 2);
 	
 	public static final Biome FALURIAN_GRASSLAND = addLand(BiomeBuilder
-		.start("bnb_falurian_grassland")
+		.start("bnb:falurian_grassland")
 		.fogColor(0x951922)
 		.grassAndLeavesColor(0xFFFD2C4E)
 		.surfaceRule(LOW_LAND_GRAVEL)
@@ -132,7 +132,7 @@ public class BNBBiomes {
 		.bnb_setParticleRange(0, 2);
 	
 	public static final Biome PIROZEN_FOREST = addLand(BiomeBuilder
-		.start("bnb_pirozen_forest")
+		.start("bnb:pirozen_forest")
 		.fogColor(0x119b85)
 		.grassAndLeavesColor(0xFF1EB6A0)
 		.surfaceRule(LOW_LAND_GRAVEL)
@@ -167,7 +167,7 @@ public class BNBBiomes {
 		.bnb_setParticleRange(3, 5);
 	
 	public static final Biome PIROZEN_GRASSLAND = addLand(BiomeBuilder
-		.start("bnb_pirozen_grassland")
+		.start("bnb:pirozen_grassland")
 		.fogColor(0x119b85)
 		.grassAndLeavesColor(0xFF1EB6A0)
 		.surfaceRule(LOW_LAND_GRAVEL)
@@ -197,7 +197,7 @@ public class BNBBiomes {
 		.bnb_setParticleRange(3, 5);
 	
 	public static final Biome CHLOROPHATE_FOREST = addLand(BiomeBuilder
-		.start("bnb_chlorophate_forest")
+		.start("bnb:chlorophate_forest")
 		.fogColor(0x7db33d)
 		.grassAndLeavesColor(0x558b30)
 		.surfaceRule(LOW_LAND_GRAVEL)
@@ -230,7 +230,7 @@ public class BNBBiomes {
 		.bnb_setParticleRange(6, 8);
 	
 	public static final Biome CHLOROPHATE_GRASSLAND = addLand(BiomeBuilder
-		.start("bnb_chlorophate_grassland")
+		.start("bnb:chlorophate_grassland")
 		.fogColor(0x7db33d)
 		.grassAndLeavesColor(0x558b30)
 		.surfaceRule(LOW_LAND_GRAVEL)
@@ -257,7 +257,7 @@ public class BNBBiomes {
 		.bnb_setParticleRange(6, 8);
 	
 	public static final Biome GRAVEL_SHORE = addShore(BiomeBuilder
-		.start("bnb_gravel_shore")
+		.start("bnb:gravel_shore")
 		.fogColor(0xab1302)
 		.grassAndLeavesColor(0xFFC03939)
 		.surfaceRule(SurfaceBuilder
@@ -275,7 +275,7 @@ public class BNBBiomes {
 		.build(), BiomeArea.VALUES).bnb_setBiomeAmbience(BNBSounds.LAVA_SEA_AMBIENCE);
 	
 	public static final Biome OBSIDIAN_SHORE = addShore(BiomeBuilder
-		.start("bnb_obsidian_shore")
+		.start("bnb:obsidian_shore")
 		.fogColor(0xab1302)
 		.grassAndLeavesColor(0xFFC03939)
 		.surfaceRule(SurfaceBuilder
@@ -304,7 +304,7 @@ public class BNBBiomes {
 		.build(), BiomeArea.VALUES).bnb_setBiomeAmbience(BNBSounds.LAVA_SEA_AMBIENCE);
 	
 	public static final Biome LAVA_OCEAN = addOcean(BiomeBuilder
-		.start("bnb_lava_ocean")
+		.start("bnb:lava_ocean")
 		.fogColor(0xab1302)
 		.grassAndLeavesColor(0xFFC03939)
 		.surfaceRule(SurfaceBuilder
@@ -326,7 +326,7 @@ public class BNBBiomes {
 		.build(), BiomeArea.VALUES).bnb_setBiomeAmbience(BNBSounds.LAVA_SEA_AMBIENCE);
 	
 	public static final Biome LUSH_SOUL_BIOME = addLand(BiomeBuilder
-		.start("bnb_lush_soul_biome")
+		.start("bnb:lush_soul_biome")
 		.fogColor(Color.CYAN.getRGB())
 		.grassAndLeavesColor(Color.CYAN.getRGB())
 		.surfaceRule(LOW_LAND_GRAVEL)
@@ -354,7 +354,7 @@ public class BNBBiomes {
 		.build(), BiomeArea.SOUL_LUSH);
 	
 	public static final Biome GLOWSTONE_FOREST = addLand(BiomeBuilder
-		.start("bnb_glowstone_forest")
+		.start("bnb:glowstone_forest")
 		.fogColor(0x4A306B)
 		.grassAndLeavesColor(0xFF372a65)
 		.surfaceRule(LOW_LAND_GRAVEL)
@@ -391,7 +391,7 @@ public class BNBBiomes {
 		.build(), BiomeArea.SOUL_LUSH);
 	
 	public static final Biome MEDIUM_SOUL_BIOME = addLand(BiomeBuilder
-		.start("bnb_medium_soul_biome")
+		.start("bnb:medium_soul_biome")
 		.fogColor(Color.CYAN.darker().getRGB())
 		.grassAndLeavesColor(Color.CYAN.getRGB())
 		.surfaceRule(LOW_LAND_GRAVEL)
@@ -404,7 +404,7 @@ public class BNBBiomes {
 		.build(), BiomeArea.SOUL_MEDIUM);
 	
 	public static final Biome BARREN_SOUL_BIOME = addLand(BiomeBuilder
-		.start("bnb_barren_soul_biome")
+		.start("bnb:barren_soul_biome")
 		.fogColor(Color.CYAN.darker().darker().getRGB())
 		.grassAndLeavesColor(Color.CYAN.getRGB())
 		.surfaceRule(LOW_LAND_GRAVEL)

@@ -80,4 +80,21 @@ public class SpinningWheelContainer extends Container {
 		}
 		return super.clickSlot(slotIndex, clickType, shift, player);
 	}
+	
+	/*@Override
+	@Environment(EnvType.SERVER)
+	public void addPlayer(PlayerEntity player, boolean remove) {
+		super.addPlayer(player, remove);
+		System.out.println(player.name + " " + remove);
+		if (!remove) {
+			System.out.println("Sending to " + player.name);
+			PacketHelper.sendTo(player, new SpinningWheelPacket(entity.x, entity.y, entity.z, entity.getProcess()));
+		}
+	}*/
+	
+	/*@Override
+	public boolean canOpen(PlayerEntity player) {
+		System.out.println("Test " + player.name);
+		return super.canOpen(player);
+	}*/
 }
