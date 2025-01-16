@@ -32,7 +32,6 @@ public class BiomeMap extends DataMap<Biome> {
 		BNBBiomes.BIOME_BY_TERRAIN.values().forEach(map -> map.values().forEach(list -> list.forEach(
 			biome -> nameToBiome.put(biome.name, biome)
 		)));
-		System.out.println("Created biome map");
 	}
 	
 	@Override
@@ -42,6 +41,8 @@ public class BiomeMap extends DataMap<Biome> {
 	
 	@Override
 	protected Biome deserialize(String name) {
+		// TODO remove closer to release
+		name = name.replaceFirst("_", ":");
 		return nameToBiome.getOrDefault(name, Biome.NETHER);
 	}
 	
