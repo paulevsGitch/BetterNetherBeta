@@ -59,4 +59,9 @@ public abstract class GhastEntityMixin extends FlyingEntity {
 	public boolean canRenderFrom(Vec3D pos) {
 		return true;
 	}
+	
+	@Override
+	public int getAmbientChance() {
+		return 800;
+	}
 }

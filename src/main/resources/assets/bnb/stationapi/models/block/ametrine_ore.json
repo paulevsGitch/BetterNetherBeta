@@ -1,0 +1,34 @@
+{
+	"parent": "minecraft:block/block",
+	"textures": {
+		"all": "bnb:block/ametrine_ore",
+		"all_e": "bnb:block/ametrine_ore_e",
+		"particle": "#all"
+	},
+	"elements": [
+		{
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"down": { "texture": "#all", "cullface": "down" },
+				"up": { "texture": "#all", "cullface": "up" },
+				"north": { "texture": "#all", "cullface": "north" },
+				"south": { "texture": "#all", "cullface": "south" },
+				"west": { "texture": "#all", "cullface": "west" },
+				"east": { "texture": "#all", "cullface": "east" }
+			}
+		},
+		{
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"down": { "texture": "#all_e", "cullface": "down", "emission": 0.5 },
+				"up": { "texture": "#all_e", "cullface": "up", "emission": 0.5 },
+				"north": { "texture": "#all_e", "cullface": "north", "emission": 0.5 },
+				"south": { "texture": "#all_e", "cullface": "south", "emission": 0.5 },
+				"west": { "texture": "#all_e", "cullface": "west", "emission": 0.5 },
+				"east": { "texture": "#all_e", "cullface": "east", "emission": 0.5 }
+			}
+		}
+	]
+}

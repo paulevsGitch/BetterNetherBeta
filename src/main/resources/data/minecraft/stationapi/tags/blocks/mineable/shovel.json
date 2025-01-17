@@ -1,8 +1,8 @@
 {
 	"values": [
-		"bnb:soul_mycorrum",
-		"bnb:obsidian_gravel",
 		"bnb:netherrack_gravel",
+		"bnb:obsidian_gravel",
+		"bnb:soul_mycorrum",
 		"minecraft:soul_sand"
 	]
 }

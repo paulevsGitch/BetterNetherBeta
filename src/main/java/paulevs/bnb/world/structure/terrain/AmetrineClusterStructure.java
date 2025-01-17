@@ -14,22 +14,20 @@ import paulevs.bnb.world.structure.BNBStructureStage;
 
 import java.util.Random;
 
-public class FlameQuartzClusterStructure extends Structure implements BNBStructureStage {
+public class AmetrineClusterStructure extends Structure implements BNBStructureStage {
 	private static final Vec3D POS = Vec3D.make(0.0, 0.0, 0.0);
 	private static final Matrix3F TEMP = new Matrix3F();
 	private static final Matrix3F TRANSFORM = new Matrix3F();
 	private static final Vec3D UP = Vec3D.make(0.0, 1.0, 0.0);
 	private static final Vec3D POS_X = Vec3D.make(1.0, 0.0, 0.0);
-	private static final BlockState[] PALETTE = new BlockState[] {
-		BNBBlocks.FLAME_QUARTZ_RED.getDefaultState(),
-		BNBBlocks.FLAME_QUARTZ_ORANGE.getDefaultState(),
-		BNBBlocks.FLAME_QUARTZ_YELLOW.getDefaultState()
-	};
 	private static final Vec3D[] HEXAGON_PLANES = new Vec3D[12];
+	private static final BlockState DENSE = BNBBlocks.AMETRINE_DENSE.getDefaultState();
+	private static final BlockState LIGHT = BNBBlocks.AMETRINE_LIGHT.getDefaultState();
+	private static final BlockState ORE = BNBBlocks.AMETRINE_ORE.getDefaultState();
 	
 	private final boolean isCeiling;
 	
-	public FlameQuartzClusterStructure(boolean isCeiling) {
+	public AmetrineClusterStructure(boolean isCeiling) {
 		this.isCeiling = isCeiling;
 	}
 	
@@ -109,26 +107,57 @@ public class FlameQuartzClusterStructure extends Structure implements BNBStructu
 		normal.y *= length;
 		normal.z *= length;
 		
-		for (int dx = minX; dx <= maxX; dx++) {
-			for (int dy = minY; dy <= maxY; dy++) {
+		for (int dy = minY; dy <= maxY; dy++) {
+			int wy = py + dy;
+			for (int dx = minX; dx <= maxX; dx++) {
+				int wx = px + dx;
 				for (int dz = minZ; dz <= maxZ; dz++) {
+					int wz = pz + dz;
+					
+					POS.x = dx + random.nextInt(3) - 1;
+					POS.y = dy + random.nextInt(3) - 1;
+					POS.z = dz + random.nextInt(3) - 1;
+					TRANSFORM.transform(POS);
+					if (isInHexagon(6) && random.nextBoolean() && level.getBlockState(wx, wy, wz).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) {
+						level.setBlockState(wx, wy, wz, ORE);
+					}
+					
 					POS.x = dx;
 					POS.y = dy;
 					POS.z = dz;
 					TRANSFORM.transform(POS);
-					if (!isInHexagon()) continue;
+					if (!isInHexagon(0)) continue;
 					if (!planeTest(point, normal)) continue;
-					int color = Math.round(MathHelper.lerp(0.3F, (float) POS.y * 0.8F + 0.55F, random.nextFloat()) * 2.0F);
-					color = MathHelper.clamp(color, 0, 2);
-					level.setBlockState(px + dx, py + dy, pz + dz, PALETTE[color]);
+					
+					POS.x *= 1.5;
+					POS.y *= 1.5;
+					POS.z *= 1.5;
+					BlockState state = isInHexagon(0) && planeTest(point, normal) ? DENSE : LIGHT;
+					level.setBlockState(wx, wy, wz, state);
+				}
+			}
+		}
+		
+		for (int dy = -5; dy <= 5; dy++) {
+			int y2 = dy * dy;
+			int wy = y + dy;
+			for (int dx = -5; dx <= 5; dx++) {
+				int yx2 = y2 + dx * dx;
+				int wx = x + dx;
+				for (int dz = -5; dz <= 5; dz++) {
+					if (yx2 + dz * dz > 25) continue;
+					int wz = z + dz;
+					if (!level.getBlockState(wx, wy, wz).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) continue;
+					level.setBlockState(wx, wy, wz, ORE);
 				}
 			}
 		}
 	}
 	
-	private static boolean isInHexagon() {
-		for (byte i = 0; i < 12; i += 2) {
-			if (!planeTest(HEXAGON_PLANES[i], HEXAGON_PLANES[i | 1])) return false;
+	private static boolean isInHexagon(int offset) {
+		for (byte i = 0; i < 6; i++) {
+			int index = i + offset;
+			if (!planeTest(HEXAGON_PLANES[index], HEXAGON_PLANES[i])) return false;
 		}
 		return true;
 	}
@@ -145,12 +174,11 @@ public class FlameQuartzClusterStructure extends Structure implements BNBStructu
 	static {
 		float scale = (float) Math.PI * 2.0F / 6.0F;
 		for (byte i = 0; i < 6; i++) {
-			int index = i << 1;
 			float angle = i * scale;
 			double x = Math.sin(angle);
 			double z = Math.cos(angle);
-			HEXAGON_PLANES[index] = Vec3D.make(x, 0.0, z);
-			HEXAGON_PLANES[index | 1] = Vec3D.make(x, 0.0, z);
+			HEXAGON_PLANES[i] = Vec3D.make(x, 0.0, z);
+			HEXAGON_PLANES[i + 6] = Vec3D.make(x * 2.0, 0.0, z * 2.0);
 		}
 	}
 }

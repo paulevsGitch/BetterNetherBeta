@@ -44,7 +44,7 @@ public class BNBPlacers {
 	public static final StructurePlacer LARGE_CHLOROPHATE_TREE = new FloorPlacer(BNBStructures.LARGE_CHLOROPHATE_TREE, 1).setRandomDensityFunction(3, 15);
 	public static final StructurePlacer FALLEN_CHLOROPHATE_TREE = new FloorPlacer(BNBStructures.FALLEN_CHLOROPHATE_TREE, 1).setRandomDensityFunction(4, 7);
 	
-	public static final StructurePlacer ORICHALCUM = new VolumetricPlacer(BNBStructures.ORICHALCUM, 1);
+	public static final StructurePlacer ORICHALCUM_ORE = new VolumetricPlacer(BNBStructures.ORICHALCUM_ORE, 1);
 	public static final StructurePlacer LAVA_STREAM = new CeilingPlacer(BNBStructures.LAVA_STREAM, 1).setRandomDensityFunction(5, 15);
 	public static final StructurePlacer OBSIDIAN_BOLDER = new FloorPlacer(BNBStructures.OBSIDIAN_BOLDER, 3).setNoiseDensityFunction(15);
 	public static final StructurePlacer OBSIDIAN_GRAVEL_BLOB = new FloorPlacer(BNBStructures.OBSIDIAN_GRAVEL_BLOB, 7);
@@ -63,6 +63,7 @@ public class BNBPlacers {
 	public static final StructurePlacer NETHER_MOSS_BLOCK = new VolumetricPlacer(BNBStructures.NETHER_MOSS_BLOCK, 3).setNoiseDensityFunction(6);
 	public static final StructurePlacer NETHER_MOSS_CEILING = new CeilingPlacer(BNBStructures.NETHER_MOSS_BLOCK, 5).setNoiseDensityFunction(7);
 	
-	public static final StructurePlacer FLAME_QUARTZ_CLUSTER_FLOOR = new FloorPlacer(BNBStructures.FLAME_QUARTZ_CLUSTER_FLOOR, 1).setNoiseDensityFunction(0, 0.5F);
-	public static final StructurePlacer FLAME_QUARTZ_CLUSTER_CEILING = new CeilingPlacer(BNBStructures.FLAME_QUARTZ_CLUSTER_CEILING, 1).setNoiseDensityFunction(1, 0.5F);
+	public static final StructurePlacer AMETRINE_CLUSTER_FLOOR = new FloorPlacer(BNBStructures.AMETRINE_CLUSTER_FLOOR, 1).setNoiseDensityFunction(0, 0.5F);
+	public static final StructurePlacer AMETRINE_CLUSTER_CEILING = new CeilingPlacer(BNBStructures.AMETRINE_CLUSTER_CEILING, 1).setNoiseDensityFunction(1, 0.5F);
+	public static final StructurePlacer AMETRINE_ORE = new VolumetricPlacer(BNBStructures.AMETRINE_ORE, 4);
 }

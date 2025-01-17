@@ -1,15 +1,15 @@
 {
 	"values": [
-		"bnb:falurian_log",
-		"bnb:falurian_stem",
-		"bnb:falurian_branch",
-		"bnb:pirozen_log",
-		"bnb:pirozen_stem",
-		"bnb:pirozen_branch",
+		"bnb:chlorophate_branch",
 		"bnb:chlorophate_log",
 		"bnb:chlorophate_stem",
-		"bnb:chlorophate_branch",
+		"bnb:falurian_branch",
+		"bnb:falurian_log",
+		"bnb:falurian_stem",
+		"bnb:jalumine_branch",
 		"bnb:jalumine_stem",
-		"bnb:jalumine_branch"
+		"bnb:pirozen_branch",
+		"bnb:pirozen_log",
+		"bnb:pirozen_stem"
 	]
 }

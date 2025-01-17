@@ -19,9 +19,9 @@ import paulevs.bnb.world.structure.scatter.FerruminePlantScatterStructure;
 import paulevs.bnb.world.structure.scatter.MossScatterStructure;
 import paulevs.bnb.world.structure.scatter.SimpleScatterStructure;
 import paulevs.bnb.world.structure.scatter.SolidSupportScatterStructure;
+import paulevs.bnb.world.structure.terrain.AmetrineClusterStructure;
 import paulevs.bnb.world.structure.terrain.BoulderStructure;
 import paulevs.bnb.world.structure.terrain.CrystalStructure;
-import paulevs.bnb.world.structure.terrain.FlameQuartzClusterStructure;
 import paulevs.bnb.world.structure.terrain.NetherLake;
 import paulevs.bnb.world.structure.tree.CommonLargeTreeStructure;
 import paulevs.bnb.world.structure.tree.CommonTreeStructure;
@@ -141,7 +141,7 @@ public class BNBStructures {
 	public static final Structure PIROZEN_SPIDER_COCOON = new CocoonStructure(BNBBlocks.PIROZEN_SPIDER_COCOON);
 	public static final Structure CHLOROPHATE_SPIDER_COCOON = new CocoonStructure(BNBBlocks.CHLOROPHATE_SPIDER_COCOON);
 	
-	public static final Structure ORICHALCUM = new NetherOreStructure(BNBBlocks.ORICHALCUM_ORE, 2);
+	public static final Structure ORICHALCUM_ORE = new NetherOreStructure(BNBBlocks.ORICHALCUM_ORE, 2);
 	
 	public static final Structure LAVA_STREAM = new StreamStructure();
 	public static final Structure OBSIDIAN_BOLDER = new ShardsBoulderStructure(
@@ -159,6 +159,7 @@ public class BNBStructures {
 	
 	public static final Structure MOSSY_NETHERRACK = new NetherOreStructure(BNBBlocks.MOSSY_NETHERRACK, 4);
 	
-	public static final Structure FLAME_QUARTZ_CLUSTER_FLOOR = new FlameQuartzClusterStructure(false);
-	public static final Structure FLAME_QUARTZ_CLUSTER_CEILING = new FlameQuartzClusterStructure(true);
+	public static final Structure AMETRINE_CLUSTER_FLOOR = new AmetrineClusterStructure(false);
+	public static final Structure AMETRINE_CLUSTER_CEILING = new AmetrineClusterStructure(true);
+	public static final Structure AMETRINE_ORE = new NetherOreStructure(BNBBlocks.AMETRINE_ORE, 2);
 }

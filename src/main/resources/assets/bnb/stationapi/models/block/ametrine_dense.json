@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:block/cube_all",
 	"textures": {
-		"all": "bnb:block/flame_quartz_yellow"
+		"all": "bnb:block/ametrine_0"
 	}
 }

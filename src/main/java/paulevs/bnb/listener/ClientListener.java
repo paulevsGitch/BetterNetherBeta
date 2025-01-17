@@ -39,6 +39,7 @@ import paulevs.bnb.achievement.BNBAchievementPage;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.crafting.SpinningWheelBlock;
 import paulevs.bnb.block.entity.SpinningWheelBlockEntity;
+import paulevs.bnb.block.stone.AmetrineBlock;
 import paulevs.bnb.block.stone.SoulSandstoneTexturedBlock;
 import paulevs.bnb.command.BNBCommandManager;
 import paulevs.bnb.entity.CrimsonSpiderEntity;
@@ -95,6 +96,8 @@ public class ClientListener {
 		for (byte i = 0; i < 16; i++) {
 			Identifier id = BNB.id("block/lava_still_" + i);
 			LavaRenderer.STILL_TEXTURES[i] = blockAtlas.addTexture(id).index;
+			id = BNB.id("block/ametrine_" + i);
+			AmetrineBlock.TEXTURES[i] = blockAtlas.addTexture(id).index;
 		}
 		
 		SoulSandstoneTexturedBlock.TEXTURES[0] = blockAtlas.addTexture(BNB.id("block/soul_sandstone_top")).index;
@@ -371,6 +374,7 @@ public class ClientListener {
 	private void biomeColors() {
 		if (!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
 		biomeColor(0xEA7D2E, 0xB6C8CA);
+		biomeColor(0x9139A5, 0xB6C8CA);
 	}
 	
 	// TODO remove that after release
