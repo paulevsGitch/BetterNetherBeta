@@ -20,6 +20,7 @@ public class AmetrineBlock extends TemplateBlock {
 		super(identifier, Material.STONE);
 		setSounds(GLASS_SOUNDS);
 		setLightEmittance(light);
+		setHardness(transparent ? 1.0F : 1.5F);
 		this.transparent = transparent;
 		setLightOpacity(transparent ? 0 : 255);
 	}
@@ -51,8 +52,11 @@ public class AmetrineBlock extends TemplateBlock {
 	
 	@Override
 	public int getTexture(BlockView blockView, int x, int y, int z, int side) {
-		int value = Math.round(NOISE.get(x * 0.05, y * 0.05, z * 0.05) * 15.0F);
-		return TEXTURES[value];
+		return TEXTURES[getTypeAt(x, y, z)];
+	}
+	
+	protected static int getTypeAt(int x, int y, int z) {
+		return Math.round(NOISE.get(x * 0.05, y * 0.05, z * 0.05) * 15.0F);
 	}
 	
 	static {

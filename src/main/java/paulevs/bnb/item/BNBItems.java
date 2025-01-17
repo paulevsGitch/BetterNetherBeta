@@ -100,6 +100,7 @@ public class BNBItems {
 	public static final Item NETHERRACK_BRICK = make("netherrack_brick", TemplateItem::new);
 	
 	public static final Item FALURIAN_MOSS_COVER = make("nether_moss_cover", MossCoverItem::new);
+	public static final Item AMETRINE_SHARD = make("ametrine_shard", TemplateItem::new);
 	
 	private static Item makeFood(String name, int healAmount, boolean isWolfFood) {
 		Identifier id = BNB.id(name);

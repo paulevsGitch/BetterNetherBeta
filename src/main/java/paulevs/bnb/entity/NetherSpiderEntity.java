@@ -2,10 +2,12 @@ package paulevs.bnb.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.monster.SpiderEntity;
+import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.MCMath;
 import net.modificationstation.stationapi.api.network.packet.MessagePacket;
 import net.modificationstation.stationapi.api.server.entity.MobSpawnDataProvider;
+import paulevs.bnb.BNB;
 
 public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpawnDataProvider {
 	public NetherSpiderEntity(Level level) {
@@ -38,5 +40,12 @@ public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpaw
 			velocityZ = dz / dist * 0.4F + velocityZ * 0.2F;
 			velocityY = 0.15F;
 		}
+	}
+	
+	@Override
+	public Entity getAttackTarget() {
+		Entity target = super.getAttackTarget();
+		if (target instanceof PlayerEntity player && BNB.isCreative(player)) return null;
+		return entity;
 	}
 }

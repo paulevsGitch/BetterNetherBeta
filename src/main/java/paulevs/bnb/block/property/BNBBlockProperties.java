@@ -18,6 +18,7 @@ public class BNBBlockProperties {
 	public static final IntProperty LEAVES_DIRECTION = IntProperty.of("direction", 0, 6);
 	public static final BooleanProperty GRAPE = BooleanProperty.of("grape");
 	public static final BooleanProperty[] FACES = new BooleanProperty[6];
+	public static final IntProperty TYPE_16 = IntProperty.of("type", 0, 15);
 	
 	public static BooleanProperty getByDir(Direction dir) {
 		return FACES[dir.getId()];

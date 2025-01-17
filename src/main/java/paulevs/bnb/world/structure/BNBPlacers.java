@@ -66,4 +66,7 @@ public class BNBPlacers {
 	public static final StructurePlacer AMETRINE_CLUSTER_FLOOR = new FloorPlacer(BNBStructures.AMETRINE_CLUSTER_FLOOR, 1).setNoiseDensityFunction(0, 0.5F);
 	public static final StructurePlacer AMETRINE_CLUSTER_CEILING = new CeilingPlacer(BNBStructures.AMETRINE_CLUSTER_CEILING, 1).setNoiseDensityFunction(1, 0.5F);
 	public static final StructurePlacer AMETRINE_ORE = new VolumetricPlacer(BNBStructures.AMETRINE_ORE, 4);
+	public static final StructurePlacer AMETRINE_CRYSTAL_FLOOR = new FloorPlacer(BNBStructures.AMETRINE_CRYSTAL_FLOOR, 1);
+	public static final StructurePlacer AMETRINE_CRYSTAL_CEILING = new CeilingPlacer(BNBStructures.AMETRINE_CRYSTAL_CEILING, 1);
+	public static final StructurePlacer AMETRINE_SHARDS = new FloorPlacer(BNBStructures.AMETRINE_SHARDS, 2).setNoiseDensityFunction(13);
 }

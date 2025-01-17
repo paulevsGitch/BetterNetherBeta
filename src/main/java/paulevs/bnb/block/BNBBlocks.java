@@ -28,8 +28,10 @@ import paulevs.bnb.block.plant.NetherMossBlock;
 import paulevs.bnb.block.property.BNBBlockProperties;
 import paulevs.bnb.block.slab.SlabUtil;
 import paulevs.bnb.block.stone.AmetrineBlock;
+import paulevs.bnb.block.stone.AmetrineShards;
 import paulevs.bnb.block.stone.BNBNetherrack;
 import paulevs.bnb.block.stone.BNBObsidianBlock;
+import paulevs.bnb.block.stone.GlowstoneShards;
 import paulevs.bnb.block.stone.LavarrackBlock;
 import paulevs.bnb.block.stone.NetherrackBricksBlock;
 import paulevs.bnb.block.stone.ObsidianShardsBlock;
@@ -165,7 +167,7 @@ public class BNBBlocks {
 	public static final Block PIROZEN_ROOTS = make("pirozen_roots", BNBRootsBlock::new);
 	public static final Block CHLOROPHATE_ROOTS = make("chlorophate_roots", BNBRootsBlock::new);
 	
-	public static final ShardsBlock GLOWSTONE_SHARDS = (ShardsBlock) make("glowstone_shards", ShardsBlock::new).setLightEmittance(1F);
+	public static final ShardsBlock GLOWSTONE_SHARDS = make("glowstone_shards", GlowstoneShards::new);
 	public static final ShardsBlock OBSIDIAN_SHARDS = make("obsidian_shards", ObsidianShardsBlock::new);
 	public static final Block OBSIDIAN_GRAVEL = make("obsidian_gravel", ObsidianGravelBlock::new);
 	
@@ -292,7 +294,9 @@ public class BNBBlocks {
 	public static final Block AMETRINE_LIGHT = add(new AmetrineBlock(BNB.id("ametrine_light"), 0.25F, true));
 	public static final Block AMETRINE_DENSE = add(new AmetrineBlock(BNB.id("ametrine_dense"), 0.5F, false));
 	public static final Block AMETRINE_ORE = add(new BNBOreBlock(BNB.id("ametrine_ore")).setLightEmittance(0.25F));
+	public static final ShardsBlock AMETRINE_SHARDS = add(new AmetrineShards(BNB.id("ametrine_shards")));
 	
+	@SuppressWarnings("unchecked")
 	private static <B extends Block> B add(B block) {
 		Identifier id = BlockRegistry.INSTANCE.getId(block);
 		block.setTranslationKey(id);

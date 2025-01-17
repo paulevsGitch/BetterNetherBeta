@@ -110,7 +110,7 @@ public class Datagen {
 		saveJson(root, new File("../src/main/resources/data/bnb/stationapi/recipes/" + name + ".json"));
 	}
 	
-	private static void saveJson(JsonObject obj, File out) {
+	public static void saveJson(JsonObject obj, File out) {
 		if (out.exists()) return;
 		try {
 			FileWriter fileWriter = new FileWriter(out);

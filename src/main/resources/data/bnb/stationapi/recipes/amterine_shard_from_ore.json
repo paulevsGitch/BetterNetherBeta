@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient": {
+		"item": "bnb:ametrine_ore"
+	},
+	"result": {
+		"item": "bnb:ametrine_shard"
+	}
+}

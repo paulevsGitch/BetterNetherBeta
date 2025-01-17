@@ -416,6 +416,9 @@ public class BNBBiomes {
 		.feature(BNBPlacers.AMETRINE_ORE)
 		.feature(BNBPlacers.AMETRINE_CLUSTER_FLOOR)
 		.feature(BNBPlacers.AMETRINE_CLUSTER_CEILING)
+		.feature(BNBPlacers.AMETRINE_CRYSTAL_FLOOR)
+		.feature(BNBPlacers.AMETRINE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.AMETRINE_SHARDS)
 		.build(), BiomeArea.NETHERRACK_BARREN)
 		.bnb_setParticleRange(9, 11);
 	

@@ -162,4 +162,15 @@ public class BNBStructures {
 	public static final Structure AMETRINE_CLUSTER_FLOOR = new AmetrineClusterStructure(false);
 	public static final Structure AMETRINE_CLUSTER_CEILING = new AmetrineClusterStructure(true);
 	public static final Structure AMETRINE_ORE = new NetherOreStructure(BNBBlocks.AMETRINE_ORE, 2);
+	public static final Structure AMETRINE_CRYSTAL_FLOOR = new CrystalStructure(
+		BNBBlocks.AMETRINE_DENSE,
+		BNBBlocks.AMETRINE_SHARDS,
+		false, 7, 4
+	);
+	public static final Structure AMETRINE_CRYSTAL_CEILING = new CrystalStructure(
+		BNBBlocks.AMETRINE_DENSE,
+		BNBBlocks.AMETRINE_SHARDS,
+		true, 7, 4
+	);
+	public static final Structure AMETRINE_SHARDS = new SolidSupportScatterStructure(5, 7, BNBBlocks.AMETRINE_SHARDS);
 }
