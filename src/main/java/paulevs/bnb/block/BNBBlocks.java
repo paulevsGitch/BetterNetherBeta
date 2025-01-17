@@ -27,9 +27,9 @@ import paulevs.bnb.block.plant.MossCoverBlock;
 import paulevs.bnb.block.plant.NetherMossBlock;
 import paulevs.bnb.block.property.BNBBlockProperties;
 import paulevs.bnb.block.slab.SlabUtil;
+import paulevs.bnb.block.stone.AmetrineBlock;
 import paulevs.bnb.block.stone.BNBNetherrack;
 import paulevs.bnb.block.stone.BNBObsidianBlock;
-import paulevs.bnb.block.stone.FlameQuartzBlock;
 import paulevs.bnb.block.stone.LavarrackBlock;
 import paulevs.bnb.block.stone.NetherrackBricksBlock;
 import paulevs.bnb.block.stone.ObsidianShardsBlock;
@@ -289,9 +289,9 @@ public class BNBBlocks {
 	public static final Block SOUL_SANDSTONE_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("soul_sandstone_tiles", SOUL_SANDSTONE_TILES));
 	public static final Block SOUL_SANDSTONE_TILES_SLAB_FULL = add(SlabUtil.getFullSlab());
 	
-	public static final Block FLAME_QUARTZ_YELLOW = add(new FlameQuartzBlock(BNB.id("flame_quartz_yellow"), 0.75F));
-	public static final Block FLAME_QUARTZ_ORANGE = add(new FlameQuartzBlock(BNB.id("flame_quartz_orange"), 0.625F));
-	public static final Block FLAME_QUARTZ_RED = add(new FlameQuartzBlock(BNB.id("flame_quartz_red"), 0.5F));
+	public static final Block AMETRINE_LIGHT = add(new AmetrineBlock(BNB.id("ametrine_light"), 0.25F, true));
+	public static final Block AMETRINE_DENSE = add(new AmetrineBlock(BNB.id("ametrine_dense"), 0.5F, false));
+	public static final Block AMETRINE_ORE = add(new BNBOreBlock(BNB.id("ametrine_ore")).setLightEmittance(0.25F));
 	
 	private static <B extends Block> B add(B block) {
 		Identifier id = BlockRegistry.INSTANCE.getId(block);

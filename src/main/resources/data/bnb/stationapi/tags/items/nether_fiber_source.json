@@ -1,22 +1,22 @@
 {
 	"values": [
+		"bnb:chlorophate_roots",
+		"bnb:chlorophate_sapling",
+		"bnb:chlorophate_weeping_vine",
+		"bnb:falurian_roots",
+		"bnb:falurian_sapling",
+		"bnb:falurian_vine",
+		"bnb:falurian_weeping_vine",
+		"bnb:fireweed",
 		"bnb:flame_bulbs",
 		"bnb:flame_bulbs_tall",
-		"bnb:falurian_roots",
-		"bnb:nether_daisy",
-		"bnb:fireweed",
 		"bnb:lantern_grass",
-		"bnb:nether_moss_cover",
+		"bnb:nether_daisy",
 		"bnb:nether_moss_block",
-		"bnb:falurian_vine",
+		"bnb:nether_moss_cover",
+		"bnb:nether_sprouts",
 		"bnb:pirozen_roots",
-		"bnb:chlorophate_roots",
-		"bnb:falurian_weeping_vine",
-		"bnb:pirozen_weeping_vine",
-		"bnb:chlorophate_weeping_vine",
-		"bnb:falurian_sapling",
 		"bnb:pirozen_sapling",
-		"bnb:chlorophate_sapling",
-		"bnb:nether_sprouts"
+		"bnb:pirozen_weeping_vine"
 	]
 }
