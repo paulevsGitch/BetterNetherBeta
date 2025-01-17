@@ -1,4 +1,4 @@
-package paulevs.bnb.world.generator;
+package paulevs.bnb.world.generator.decorator;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -25,7 +25,6 @@ public class BNBWorldDecoratorThread extends Thread {
 	
 	public BNBWorldDecoratorThread() {
 		setName("BNB Chunk Decorator");
-		updateRadius(8);
 		canRun = true;
 	}
 	

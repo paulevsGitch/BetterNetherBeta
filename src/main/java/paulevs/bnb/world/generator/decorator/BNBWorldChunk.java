@@ -1,4 +1,4 @@
-package paulevs.bnb.world.generator;
+package paulevs.bnb.world.generator.decorator;
 
 public interface BNBWorldChunk {
 	void bnb_setStatus(BNBChunkStatus status);

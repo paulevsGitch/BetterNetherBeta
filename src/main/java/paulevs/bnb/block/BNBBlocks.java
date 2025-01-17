@@ -289,9 +289,9 @@ public class BNBBlocks {
 	public static final Block SOUL_SANDSTONE_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("soul_sandstone_tiles", SOUL_SANDSTONE_TILES));
 	public static final Block SOUL_SANDSTONE_TILES_SLAB_FULL = add(SlabUtil.getFullSlab());
 	
-	public static final Block FLAME_QUARTZ_YELLOW = add(new FlameQuartzBlock(BNB.id("flame_quartz_yellow"), 0.0F));
-	public static final Block FLAME_QUARTZ_ORANGE = add(new FlameQuartzBlock(BNB.id("flame_quartz_orange"), 0.5F));
-	public static final Block FLAME_QUARTZ_RED = add(new FlameQuartzBlock(BNB.id("flame_quartz_red"), 1.0F));
+	public static final Block FLAME_QUARTZ_YELLOW = add(new FlameQuartzBlock(BNB.id("flame_quartz_yellow"), 0.75F));
+	public static final Block FLAME_QUARTZ_ORANGE = add(new FlameQuartzBlock(BNB.id("flame_quartz_orange"), 0.625F));
+	public static final Block FLAME_QUARTZ_RED = add(new FlameQuartzBlock(BNB.id("flame_quartz_red"), 0.5F));
 	
 	private static <B extends Block> B add(B block) {
 		Identifier id = BlockRegistry.INSTANCE.getId(block);
@@ -305,6 +305,7 @@ public class BNBBlocks {
 		return block;
 	}
 	
+	@Deprecated(forRemoval = true)
 	private static <B extends Block> B make(String name, Function<Identifier, B> constructor) {
 		Identifier id = BNB.id(name);
 		B block = constructor.apply(id);
@@ -324,6 +325,7 @@ public class BNBBlocks {
 		return block;
 	}
 	
+	@Deprecated(forRemoval = true)
 	private static <B extends Block> B make(String name, BiFunction<Identifier, Block, B> constructor, Block sourceBlock) {
 		Identifier id = BNB.id(name);
 		B block = constructor.apply(id, sourceBlock);
@@ -345,6 +347,7 @@ public class BNBBlocks {
 		return block;
 	}
 	
+	@Deprecated(forRemoval = true)
 	private static <B extends Block> B make(String name, BiFunction<Identifier, Supplier<Structure>, B> constructor, Supplier<Structure> structure) {
 		Identifier id = BNB.id(name);
 		B block = constructor.apply(id, structure);
@@ -369,6 +372,7 @@ public class BNBBlocks {
 		return block;
 	}
 	
+	@Deprecated(forRemoval = true)
 	private static <B extends Block> B makeNI(String name, Function<Identifier, B> constructor) {
 		Identifier id = BNB.id(name);
 		B block = constructor.apply(id);
@@ -382,6 +386,7 @@ public class BNBBlocks {
 		return block;
 	}
 	
+	@Deprecated(forRemoval = true)
 	private static <B extends Block> B makeNI(String name, BiFunction<Identifier, Block, B> constructor, Block sourceBlock) {
 		Identifier id = BNB.id(name);
 		B block = constructor.apply(id, sourceBlock);

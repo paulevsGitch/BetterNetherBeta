@@ -22,6 +22,10 @@ public class BNBCollectableVineBlock extends BNBVineBlock {
 		setTicksRandomly(true);
 	}
 	
+	public void setCollectableItem(Item item) {
+		this.collectableItem = item;
+	}
+	
 	@Override
 	public void appendProperties(Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
@@ -32,10 +36,6 @@ public class BNBCollectableVineBlock extends BNBVineBlock {
 	public void onScheduledTick(Level level, int x, int y, int z, Random rand) {
 		super.onScheduledTick(level, x, y, z, rand);
 		grow(level, x, y, z);
-	}
-	
-	public void setCollectableItem(Item item) {
-		this.collectableItem = item;
 	}
 	
 	@Override

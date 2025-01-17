@@ -21,8 +21,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.bnb.entity.BNBPortalEntity;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.item.BNBItemTags;
-import paulevs.bnb.world.generator.BNBChunkStatus;
-import paulevs.bnb.world.generator.BNBWorldChunk;
+import paulevs.bnb.world.generator.decorator.BNBChunkStatus;
+import paulevs.bnb.world.generator.decorator.BNBWorldChunk;
 
 @Mixin(Entity.class)
 public class EntityMixin implements BNBPortalEntity {

@@ -9,10 +9,12 @@ import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.util.Matrix3F;
+import paulevs.bnb.world.generator.decorator.BNBChunkStatus;
+import paulevs.bnb.world.structure.BNBStructureStage;
 
 import java.util.Random;
 
-public class FlameQuartzClusterStructure extends Structure {
+public class FlameQuartzClusterStructure extends Structure implements BNBStructureStage {
 	private static final Vec3D POS = Vec3D.make(0.0, 0.0, 0.0);
 	private static final Matrix3F TEMP = new Matrix3F();
 	private static final Matrix3F TRANSFORM = new Matrix3F();
@@ -32,10 +34,19 @@ public class FlameQuartzClusterStructure extends Structure {
 	}
 	
 	@Override
+	public BNBChunkStatus bnb_getTargetStatus() {
+		return BNBChunkStatus.POPULATION_BIG;
+	}
+	
+	@Override
 	public boolean generate(Level level, Random random, int x, int y, int z) {
+		if (isCeiling != y > 176) return false;
+		
 		int offset = random.nextInt(5) + 5;
-		y += isCeiling ? offset : -offset;
+		if (!isCeiling) offset = -offset;
+		y += offset;
 		if (!level.getBlockState(x, y, z).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) return false;
+		if (!level.getBlockState(x, y + offset, z).isIn(BNBBlockTags.NETHERRACK_TERRAIN)) return false;
 		
 		byte count = (byte) (4 + random.nextInt(6));
 		float maxAngle = (float) Math.PI * 2.0F;
@@ -115,10 +126,6 @@ public class FlameQuartzClusterStructure extends Structure {
 		}
 	}
 	
-	private static boolean isInCube() {
-		return Math.abs(POS.x) <= 1.0 && Math.abs(POS.y) <= 1.0 && Math.abs(POS.z) <= 1.0;
-	}
-	
 	private static boolean isInHexagon() {
 		for (byte i = 0; i < 12; i += 2) {
 			if (!planeTest(HEXAGON_PLANES[i], HEXAGON_PLANES[i | 1])) return false;
@@ -126,6 +133,7 @@ public class FlameQuartzClusterStructure extends Structure {
 		return true;
 	}
 	
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	private static boolean planeTest(Vec3D point, Vec3D normal) {
 		float dx = (float) (POS.x - point.x);
 		float dy = (float) (POS.y - point.y);

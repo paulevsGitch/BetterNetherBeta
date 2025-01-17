@@ -8,8 +8,8 @@ import net.minecraft.level.Level;
 import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
-import paulevs.bnb.world.generator.BNBChunkStatus;
-import paulevs.bnb.world.generator.BNBWorldChunk;
+import paulevs.bnb.world.generator.decorator.BNBChunkStatus;
+import paulevs.bnb.world.generator.decorator.BNBWorldChunk;
 
 import java.util.ArrayList;
 import java.util.List;

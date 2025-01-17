@@ -65,6 +65,20 @@ public class BNBVineBlock extends BNBCeilPlantBlock {
 	}
 	
 	@Override
+	public boolean onBonemealUse(Level level, int x, int y, int z, BlockState state) {
+		int bottomY = y - 1;
+		BlockState bottom = level.getBlockState(x, bottomY, z);
+		while (bottom.isOf(this)) {
+			state = bottom;
+			bottom = level.getBlockState(x, --bottomY, z);
+		}
+		if (!bottom.isAir()) return false;
+		level.setBlockStateWithNotify(x, bottomY, z, getDefaultState());
+		level.setBlockState(x, bottomY + 1, z, state.with(BNBBlockProperties.VINE_SHAPE, VineShape.NORMAL));
+		return true;
+	}
+	
+	@Override
 	public List<ItemStack> getDropList(Level level, int x, int y, int z, BlockState state, int meta) {
 		return Collections.emptyList();
 	}

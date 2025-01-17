@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import paulevs.bnb.world.generator.BNBChunkStatus;
-import paulevs.bnb.world.generator.BNBWorldChunk;
+import paulevs.bnb.world.generator.decorator.BNBChunkStatus;
+import paulevs.bnb.world.generator.decorator.BNBWorldChunk;
 
 @Mixin(FlattenedWorldManager.class)
 public class FlattenedWorldManagerMixin {
@@ -25,7 +25,7 @@ public class FlattenedWorldManagerMixin {
 		if (level.dimension.id != -1) return;
 		BNBChunkStatus status = BNBWorldChunk.cast(chunk).bnb_getStatus();
 		if (status == null) status = BNBChunkStatus.EMPTY;
-		chunkTag.put("bnb_chunkStatus", status.id);
+		chunkTag.put("bnb:chunk_status", status.id);
 	}
 	
 	@Inject(method = "loadChunk", at = @At(
@@ -36,8 +36,8 @@ public class FlattenedWorldManagerMixin {
 	private static void bnb_saveChunk(Level level, CompoundTag chunkTag, CallbackInfoReturnable<FlattenedChunk> info, @Local FlattenedChunk chunk) {
 		if (level.dimension.id != -1) return;
 		BNBChunkStatus status;
-		if (chunkTag.containsKey("bnb_chunkStatus")) {
-			byte statusID = chunkTag.getByte("bnb_chunkStatus");
+		if (chunkTag.containsKey("bnb:chunk_status")) {
+			byte statusID = chunkTag.getByte("bnb:chunk_status");
 			status = BNBChunkStatus.fromID(statusID);
 		}
 		else {

@@ -15,7 +15,7 @@ import java.util.Random;
 public class LevelPropertiesMixin {
 	@Inject(method = "<init>(Lnet/minecraft/util/io/CompoundTag;)V", at = @At("TAIL"))
 	private void bnb_readTag(CompoundTag tag, CallbackInfo info) {
-		WeatherType weather = WeatherType.getByID(tag.getByte("bnb_weather_type"));
+		WeatherType weather = WeatherType.getByID(tag.getByte("bnb:weather_type"));
 		int length = tag.getInt("bnb_weather_length");
 		if (length == 0) length = weather.getTime(new Random());
 		BNBWeatherManager.setWeather(weather, length);
@@ -23,7 +23,7 @@ public class LevelPropertiesMixin {
 	
 	@Inject(method = "updateProperties", at = @At("TAIL"))
 	private void bnb_updateTag(CompoundTag to, CompoundTag from, CallbackInfo ci) {
-		to.put("bnb_weather_type", (byte) BNBWeatherManager.getCurrentWeather().ordinal());
+		to.put("bnb:weather_type", (byte) BNBWeatherManager.getCurrentWeather().ordinal());
 		to.put("bnb_weather_length", BNBWeatherManager.getCurrentWeatherLength());
 	}
 }

@@ -1,4 +1,4 @@
-package paulevs.bnb.world.generator;
+package paulevs.bnb.world.generator.decorator;
 
 import it.unimi.dsi.fastutil.longs.Long2ReferenceMap;
 import it.unimi.dsi.fastutil.longs.Long2ReferenceOpenHashMap;
@@ -13,16 +13,17 @@ import net.minecraft.level.biome.Biome;
 import net.minecraft.level.biome.BiomeSource;
 import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.source.LevelSource;
+import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.impl.world.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
-import net.modificationstation.stationapi.impl.worldgen.WorldDecoratorImpl;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.plant.MossCoverBlock;
 import paulevs.bnb.mixin.common.LevelAccessor;
 import paulevs.bnb.mixin.common.LevelPropertiesAccessor;
 import paulevs.bnb.util.ConcurrentLongQueue;
+import paulevs.bnb.world.structure.BNBStructureStage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ public class BNBDecoratorLevel extends Level {
 	private final LongList toRemove = new LongArrayList();
 	private final ConcurrentLongQueue areasToUpdate = new ConcurrentLongQueue();
 	private final List<LightUpdateArea> lightUpdates = new ArrayList<>();
+	private final Biome[] biomes = new Biome[256];
 	private final FlattenedChunk empty;
 	private final LevelSource source;
 	private final Level level;
@@ -120,7 +122,7 @@ public class BNBDecoratorLevel extends Level {
 		lightUpdates.add(new LightUpdateArea(type, x1, y1, z1, x2, y2, z2));
 	}
 	
-	private void CopySection(ChunkSection source, ChunkSection target) {
+	private void copySection(ChunkSection source, ChunkSection target) {
 		for (short n = 0; n < 4096; n++) {
 			byte x = (byte) (n & 15);
 			byte y = (byte) ((n >> 4) & 15);
@@ -132,19 +134,20 @@ public class BNBDecoratorLevel extends Level {
 		}
 	}
 	
-	private void CopySections(FlattenedChunk source, FlattenedChunk target) {
+	private void copySections(FlattenedChunk source, FlattenedChunk target) {
 		for (int i = 0; i < source.sections.length; i++) {
 			if (source.sections[i] == null || source.sections[i] == target.sections[i]) continue;
 			if (target.sections[i] == null) {
 				target.sections[i] = new ChunkSection(i);
 			}
-			CopySection(source.sections[i], target.sections[i]);
+			copySection(source.sections[i], target.sections[i]);
 		}
 	}
 	
 	private FlattenedChunk copyFromSource(FlattenedChunk source) {
 		FlattenedChunk target = new FlattenedChunk(this, source.x, source.z);
 		System.arraycopy(source.sections, 0, target.sections, 0, source.sections.length);
+		BNBWorldChunk.cast(target).bnb_setStatus(BNBWorldChunk.cast(source).bnb_getStatus());
 		target.decorated = true;
 		return target;
 	}
@@ -157,10 +160,9 @@ public class BNBDecoratorLevel extends Level {
 			}
 			else {
 				target = (FlattenedChunk) this.source.loadChunk(source.x, source.z);
-				System.out.println("Loading chunk");
 			}
 		}
-		CopySections(source, target);
+		copySections(source, target);
 		BNBWorldChunk bnbWorldChunk = BNBWorldChunk.cast(target);
 		BNBChunkStatus sourceStatus = BNBWorldChunk.cast(source).bnb_getStatus();
 		BNBChunkStatus targetStatus = bnbWorldChunk.bnb_getStatus();
@@ -180,36 +182,35 @@ public class BNBDecoratorLevel extends Level {
 	
 	public boolean decorate(int x, int z) {
 		BNBChunkStatus status = getChunkStatus(x, z);
-		if (status != BNBChunkStatus.TERRAIN) return false;
+		if (status == BNBChunkStatus.EMPTY || status == BNBChunkStatus.FINISHED) return false;
+		
+		FlattenedChunk worldChunk = (FlattenedChunk) getChunkFromCache(x, z);
+		if (worldChunk == empty) return false;
+		BNBWorldChunk bnbChunk = BNBWorldChunk.cast(worldChunk);
 		
 		boolean decorate = true;
 		for (byte i = 1; i < 4; i++) {
 			byte dx = (byte) (i & 1);
 			byte dz = (byte) ((i >> 1) & 1);
-			status = getChunkStatus(x + dx, z + dz);
-			if (status == BNBChunkStatus.EMPTY) {
+			BNBChunkStatus sideStatus = getChunkStatus(x + dx, z + dz);
+			if (sideStatus.isLessThan(status)) {
 				decorate = false;
 				break;
 			}
 		}
 		if (!decorate) return false;
 		
-		boolean sand = SandBlock.fallInstantly;
-		WorldDecoratorImpl.decorate(this, x, z);
-		additionalDecoration(x, z);
-		SandBlock.fallInstantly = sand;
+		decorateWithStatus(x, z, status);
+		bnbChunk.bnb_setStatus(status.increment());
 		
 		for (int i = 0; i < lightUpdates.size(); i++) {
 			lightUpdates.get(i).process(this);
 			lightUpdates.remove(i--);
 		}
 		
-		BNBWorldChunk.cast(getChunkFromCache(x, z)).bnb_setStatus(BNBChunkStatus.FINISHED);
-		
 		for (FlattenedChunk chunk : chunks.values()) {
 			copyBack(chunk);
 			long index = pack(chunk.x, chunk.z);
-			areasToUpdate.add(index);
 			if (BNBWorldChunk.cast(chunk).bnb_getStatus() == BNBChunkStatus.FINISHED) {
 				boolean needRemoval = true;
 				for (byte i = 1; i < 4; i++) {
@@ -225,7 +226,10 @@ public class BNBDecoratorLevel extends Level {
 			}
 		}
 		
-		for (long index : toRemove) chunks.remove(index);
+		for (long index : toRemove) {
+			chunks.remove(index);
+			areasToUpdate.add(index);
+		}
 		toRemove.clear();
 		
 		return true;
@@ -234,9 +238,9 @@ public class BNBDecoratorLevel extends Level {
 	public void copyBack() {
 		for (int i = 0; i < 8 && !areasToUpdate.isEmpty(); i++) {
 			long index = areasToUpdate.get();
-			int wx = (int) (index >> 32) << 4;
-			int wz = (int) (index) << 4;
-			level.updateArea(wx | 8, getBottomY(), wz | 8, wx | 8, getTopY(), wz | 8);
+			int wx = (int) (index >> 32) << 4 | 8;
+			int wz = (int) (index) << 4 | 8;
+			level.updateArea(wx, getBottomY(), wz, wx + 16, getTopY(), wz + 16);
 		}
 	}
 	
@@ -244,17 +248,56 @@ public class BNBDecoratorLevel extends Level {
 		return (long) x << 32L | (long) z & 0xFFFFFFFFL;
 	}
 	
-	private void additionalDecoration(int x, int z) {
+	private void decorateWithStatus(int cx, int cz, BNBChunkStatus status) {
+		boolean fallInstantly = SandBlock.fallInstantly;
+		SandBlock.fallInstantly = false;
+		
+		int x1 = cx << 4 | 8;
+		int z1 = cz << 4 | 8;
+		
+		Biome biome;
+		
+		if (status == BNBChunkStatus.TERRAIN) {
+			getBiomeSource().getBiomes(biomes, x1, z1, 16, 16);
+			
+			int x2 = x1 + 16;
+			int z2 = z1 + 16;
+			
+			surfaceRules(x1, z1, x2, z2);
+			additionalDecoration(x1, z1, x2, z2);
+			
+			biome = biomes[136];
+		}
+		else {
+			biome = getBiomeSource().getBiomes(biomes, x1 + 8, z1 + 8, 1, 1)[0];
+		}
+		
+		placeStructures(biome, cx, cz, status, x1, z1);
+		
+		SandBlock.fallInstantly = fallInstantly;
+	}
+	
+	private void surfaceRules(int x1, int z1, int x2, int z2) {
+		int index = 0;
+		for (int x = x1; x < x2; x++) {
+			for (int z = z1; z < z2; z++) {
+				Biome biome = biomes[index++];
+				int minY = getBottomY();
+				int maxY = dimension.noSkyLight ? getTopY() : getHeight(x, z);
+				for (int y = minY; y < maxY; y++) {
+					BlockState state = getBlockState(x, y, z);
+					biome.applySurfaceRules(this, x, y, z, state);
+				}
+			}
+		}
+	}
+	
+	private void additionalDecoration(int x1, int z1, int x2, int z2) {
 		final BlockState netherrack = Block.NETHERRACK.getDefaultState();
 		final BlockState mossyNetherrack = BNBBlocks.MOSSY_NETHERRACK.getDefaultState();
 		
-		int minX = x << 4 | 8;
-		int minZ = z << 4 | 8;
-		int maxX = minX + 16;
-		int maxZ = minZ + 16;
-		
-		for (x = minX; x < maxX; x++) {
-			for (z = minZ; z < maxZ; z++) {
+		for (int x = x1; x < x2; x++) {
+			for (int z = z1; z < z2; z++) {
 				Chunk chunk = getChunkFromCache(x >> 4, z >> 4);
 				int cx = x & 15;
 				int cz = z & 15;
@@ -318,6 +361,25 @@ public class BNBDecoratorLevel extends Level {
 					}
 				}
 			}
+		}
+	}
+	
+	private void placeStructures(Biome biome, int cx, int cz, BNBChunkStatus status, int x1, int z1) {
+		List<Structure> structures = biome.getFeatures();
+		if (structures.isEmpty()) return;
+		
+		random.setSeed(getSeed());
+		long dx = (random.nextLong() >> 1) << 1 | 1;
+		long dy = (random.nextLong() >> 1) << 1 | 1;
+		random.setSeed((long) cx * dx + (long) cz * dy ^ getSeed());
+		
+		for (Structure structure : structures) {
+			BNBChunkStatus targetStatus = BNBChunkStatus.TERRAIN;
+			if (structure instanceof BNBStructureStage bnbStructureStage) {
+				targetStatus = bnbStructureStage.bnb_getTargetStatus();
+			}
+			if (targetStatus != status) continue;
+			structure.generate(this, random, x1, 0, z1);
 		}
 	}
 }

@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import paulevs.bnb.world.generator.BNBChunkStatus;
-import paulevs.bnb.world.generator.BNBWorldChunk;
+import paulevs.bnb.world.generator.decorator.BNBChunkStatus;
+import paulevs.bnb.world.generator.decorator.BNBWorldChunk;
 
 @Mixin(LevelMonsterSpawner.class)
 public class LevelMonsterSpawnerMixin {
