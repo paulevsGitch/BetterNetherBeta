@@ -37,7 +37,7 @@ public class ObsidianBoatItem extends TemplateBoatItem {
 			int pz = hit.z;
 			if (!level.isRemote) {
 				if (level.getBlockID(px, py, pz) == Block.SNOW.id) py--;
-				Entity entity = EntityRegistry.create("bnb_obsidian_boat", level);
+				Entity entity = EntityRegistry.create("bnb:obsidian_boat", level);
 				entity.setPosition(px + 0.5, py + 1.5, pz + 0.5);
 				level.spawnEntity(entity);
 			}
