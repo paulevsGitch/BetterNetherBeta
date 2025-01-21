@@ -100,7 +100,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.FALURIAN_VINE_LONG)
 		.build(), BiomeArea.NETHERRACK_LUSH)
 		.bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE)
-		.bnb_setParticleRange(0, 2);
+		.bnb_setParticleProperties(0, 2, true);
 	
 	public static final Biome FALURIAN_GRASSLAND = addLand(BiomeBuilder
 		.start("bnb:falurian_grassland")
@@ -130,7 +130,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.FALURIAN_VINE_LONG)
 		.build(), BiomeArea.NETHERRACK_MEDIUM)
 		.bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE)
-		.bnb_setParticleRange(0, 2);
+		.bnb_setParticleProperties(0, 2, true);
 	
 	public static final Biome PIROZEN_FOREST = addLand(BiomeBuilder
 		.start("bnb:pirozen_forest")
@@ -165,7 +165,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.PIROZEN_VINE_LONG)
 		.build(), BiomeArea.NETHERRACK_LUSH)
 		.bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE)
-		.bnb_setParticleRange(3, 5);
+		.bnb_setParticleProperties(3, 5, true);
 	
 	public static final Biome PIROZEN_GRASSLAND = addLand(BiomeBuilder
 		.start("bnb:pirozen_grassland")
@@ -189,7 +189,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.PIROZEN_VINE_LONG)
 		.build(), BiomeArea.NETHERRACK_MEDIUM)
 		.bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE)
-		.bnb_setParticleRange(3, 5);
+		.bnb_setParticleProperties(3, 5, true);
 	
 	public static final Biome CHLOROPHATE_FOREST = addLand(BiomeBuilder
 		.start("bnb:chlorophate_forest")
@@ -222,7 +222,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.CHLOROPHATE_ROOTS)
 		.build(), BiomeArea.NETHERRACK_LUSH)
 		.bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE)
-		.bnb_setParticleRange(6, 8);
+		.bnb_setParticleProperties(6, 8, true);
 	
 	public static final Biome CHLOROPHATE_GRASSLAND = addLand(BiomeBuilder
 		.start("bnb:chlorophate_grassland")
@@ -244,7 +244,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.CHLOROPHATE_ROOTS)
 		.build(), BiomeArea.NETHERRACK_MEDIUM)
 		.bnb_setBiomeAmbience(BNBSounds.NETHER_FOREST_AMBIENCE)
-		.bnb_setParticleRange(6, 8);
+		.bnb_setParticleProperties(6, 8, true);
 	
 	public static final Biome GRAVEL_SHORE = addShore(BiomeBuilder
 		.start("bnb:gravel_shore")
@@ -341,6 +341,9 @@ public class BNBBiomes {
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
+		.feature(BNBPlacers.LAVA_LAKE)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
 		.build(), BiomeArea.SOUL_LUSH);
 	
 	public static final Biome GLOWSTONE_FOREST = addLand(BiomeBuilder
@@ -370,6 +373,7 @@ public class BNBBiomes {
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
+		.feature(BNBPlacers.LAVA_LAKE)
 		.feature(BNBPlacers.ORICHALCUM_ORE)
 		.feature(BNBPlacers.MOSSY_NETHERRACK)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR_FREQUENT)
@@ -392,6 +396,8 @@ public class BNBBiomes {
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM_ORE)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
 		.build(), BiomeArea.SOUL_MEDIUM);
 	
 	public static final Biome BARREN_SOUL_BIOME = addLand(BiomeBuilder
@@ -404,23 +410,83 @@ public class BNBBiomes {
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
+		.feature(BNBPlacers.LAVA_LAKE)
 		.feature(BNBPlacers.ORICHALCUM_ORE)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
 		.build(), BiomeArea.SOUL_BARREN);
 	
 	public static final Biome AMETRINE_CAVE = addLand(BiomeBuilder
 		.start("bnb:ametrine_cave")
 		.fogColor(0x8B4B8F)
 		.grassAndLeavesColor(0xFFCC49D1)
+		.surfaceRule(LOW_LAND_GRAVEL)
 		.noDimensionFeatures()
+		.feature(BNBPlacers.LAVA_LAKE)
 		.feature(BNBPlacers.ORICHALCUM_ORE)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
 		.feature(BNBPlacers.AMETRINE_ORE)
 		.feature(BNBPlacers.AMETRINE_CLUSTER_FLOOR)
 		.feature(BNBPlacers.AMETRINE_CLUSTER_CEILING)
 		.feature(BNBPlacers.AMETRINE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.AMETRINE_CRYSTAL_CEILING)
 		.feature(BNBPlacers.AMETRINE_SHARDS)
+		.feature(BNBPlacers.NETHER_SPROUTS_RARE)
 		.build(), BiomeArea.NETHERRACK_BARREN)
-		.bnb_setParticleRange(9, 11);
+		.bnb_setParticleProperties(9, 11, true);
+	
+	public static final Biome ACID_TERRACES = addLand(BiomeBuilder
+		.start("bnb:acid_terraces")
+		.fogColor(0xB1F536)
+		.grassAndLeavesColor(0xB1F536)
+		.surfaceRule(LOW_LAND_GRAVEL)
+		.surfaceRule(SurfaceBuilder
+			.start(Block.GOLD_BLOCK)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(1)
+			.build()
+		)
+		.noDimensionFeatures()
+		.feature(BNBPlacers.ORICHALCUM_ORE)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.build(), BiomeArea.NETHERRACK_BARREN);
+	
+	public static final Biome STONE_GARDEN = addLand(BiomeBuilder
+		.start("bnb:stone_garden")
+		.fogColor(0x801600)
+		.grassAndLeavesColor(0xFFC03939)
+		.surfaceRule(LOW_LAND_GRAVEL)
+		.surfaceRule(SurfaceBuilder
+			.start(Block.STONE)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(1)
+			.build()
+		)
+		.noDimensionFeatures()
+		.feature(BNBPlacers.ORICHALCUM_ORE)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.build(), BiomeArea.NETHERRACK_BARREN);
+	
+	public static final Biome ASHY_PLAINS = addLand(BiomeBuilder
+		.start("bnb:ashy_plains")
+		.fogColor(0x484756)
+		.grassAndLeavesColor(0x484756)
+		.surfaceRule(LOW_LAND_GRAVEL)
+		.surfaceRule(SurfaceBuilder
+			.start(BNBBlocks.ASH_BLOCK)
+			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.ground(3)
+			.build()
+		)
+		.noDimensionFeatures()
+		.feature(BNBPlacers.ORICHALCUM_ORE)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
+		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.build(), BiomeArea.NETHERRACK_BARREN)
+		.bnb_setParticleProperties(12, 14, false);
 	
 	private static void add(TerrainRegion region, BiomeArea area, Biome biome) {
 		BIOME_BY_TERRAIN

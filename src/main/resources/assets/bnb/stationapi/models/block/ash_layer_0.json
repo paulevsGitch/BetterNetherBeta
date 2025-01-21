@@ -1,0 +1,6 @@
+{
+	"parent": "bnb:block/layer_0",
+	"textures": {
+		"all": "bnb:block/ash"
+	}
+}

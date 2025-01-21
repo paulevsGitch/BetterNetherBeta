@@ -15,11 +15,15 @@ public interface BNBBiomeData {
 		return Util.assertImpl();
 	}
 	
-	default Biome bnb_setParticleRange(int minIndex, int maxIndex) {
+	default Biome bnb_setParticleProperties(int minIndex, int maxIndex, boolean emissive) {
 		return Util.assertImpl();
 	}
 	
 	default int bnb_getParticleTexture(Random random) {
+		return Util.assertImpl();
+	}
+	
+	default boolean bnb_getParticleEmissive() {
 		return Util.assertImpl();
 	}
 }

@@ -14,6 +14,8 @@ import paulevs.bnb.BNB;
 import paulevs.bnb.Datagen;
 import paulevs.bnb.block.crafting.BNBFurnaceBlock;
 import paulevs.bnb.block.crafting.SpinningWheelBlock;
+import paulevs.bnb.block.falling.AshBlock;
+import paulevs.bnb.block.falling.AshLayerBlock;
 import paulevs.bnb.block.falling.NetherrackGravelBlock;
 import paulevs.bnb.block.falling.ObsidianGravelBlock;
 import paulevs.bnb.block.plant.BNBCollectableVineBlock;
@@ -61,10 +63,6 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class BNBBlocks {
-	static {
-		Block.NETHERRACK.setHardness(0.75F);
-	}
-	
 	private static final String[] OLD_TREE_SHAPE = new String[] {
 		" # ",
 		"###",
@@ -296,7 +294,9 @@ public class BNBBlocks {
 	public static final Block AMETRINE_ORE = add(new BNBOreBlock(BNB.id("ametrine_ore")).setLightEmittance(0.25F));
 	public static final ShardsBlock AMETRINE_SHARDS = add(new AmetrineShards(BNB.id("ametrine_shards")));
 	
-	@SuppressWarnings("unchecked")
+	public static final Block ASH_BLOCK = make("ash_block", AshBlock::new);
+	public static final Block ASH_LAYER = make("ash_layer", AshLayerBlock::new);
+	
 	private static <B extends Block> B add(B block) {
 		Identifier id = BlockRegistry.INSTANCE.getId(block);
 		block.setTranslationKey(id);

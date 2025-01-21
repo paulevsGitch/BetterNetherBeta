@@ -21,6 +21,7 @@ import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 import net.modificationstation.stationapi.api.world.BlockStateView;
 import paulevs.bnb.BNB;
 import paulevs.bnb.block.property.BNBBlockProperties;
+import paulevs.bnb.util.WorldUtil;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,7 @@ public class BNBHalfSlab extends BNBSlab {
 	public BlockState getPlacementState(ItemPlacementContext context) {
 		PlayerEntity player = context.getPlayer();
 		if (player == null) return getDefaultState();
-		HitResult result = raycast(context.getWorld(), player);
+		HitResult result = WorldUtil.raycast(context.getWorld(), player);
 		boolean down = result.pos.y - result.y < 0.5;
 		return getDefaultState().with(BNBBlockProperties.DIRECTION, down ? Direction.DOWN : Direction.UP);
 	}
@@ -82,7 +83,7 @@ public class BNBHalfSlab extends BNBSlab {
 	public void doesBoxCollide(Level level, int x, int y, int z, Box box, ArrayList list) {
 		updateBoundingBox(level, x, y, z);
 		super.doesBoxCollide(level, x, y, z, box, list);
-		this.setBoundingBox(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
+		this.setBoundingBox(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 	
 	@Override
@@ -110,14 +111,14 @@ public class BNBHalfSlab extends BNBSlab {
 		
 		Direction facing = state.get(BNBBlockProperties.DIRECTION);
 		
-		HitResult hit = raycast(level, player);
+		HitResult hit = WorldUtil.raycast(level, player);
 		if (hit == null || hit.type != HitType.BLOCK) return false;
 		
 		double dx = hit.pos.x - x;
 		double dy = hit.pos.y - y;
 		double dz = hit.pos.z - z;
 		
-		if (dx < 0 || dx > 1 || dy < 0 || dy > 1 || dz < 0 || dz > 1) return false;
+		if (dx <= 0.0F || dx >= 1.0F || dy <= 0.0F || dy >= 1.0F || dz <= 0.0F || dz >= 1.0F) return false;
 		
 		Axis axis = facing.getAxis();
 		
@@ -125,17 +126,8 @@ public class BNBHalfSlab extends BNBSlab {
 		if (axis == Axis.Y && Math.abs(dy - 0.5) > 0.0001) return false;
 		if (axis == Axis.Z && Math.abs(dz - 0.5) > 0.0001) return false;
 		
-		BlockState fullBlock = this.fullBlock.getDefaultState();
-		
-		if (fullBlock.getProperties().contains(BNBBlockProperties.AXIS)) {
-			fullBlock = fullBlock.with(BNBBlockProperties.AXIS, facing.getAxis());
-		}
-		else if (fullBlock.getProperties().contains(BNBBlockProperties.DIRECTION)) {
-			fullBlock = fullBlock.with(BNBBlockProperties.DIRECTION, facing);
-		}
-		
-		level.setBlockState(x, y, z, fullBlock);
-		level.playSound(x + 0.5, y + 0.5, z + 0.5, this.sounds.getWalkSound(), 1.0F, 1.0F);
+		level.setBlockState(x, y, z, fullBlock.getDefaultState().with(BNBBlockProperties.AXIS, facing.getAxis()));
+		level.playSound(x + 0.5, y + 0.5, z + 0.5, sounds.getWalkSound(), 1.0F, 1.0F);
 		level.updateBlock(x, y, z);
 		
 		if (!BNB.isCreative(player)) stack.count--;

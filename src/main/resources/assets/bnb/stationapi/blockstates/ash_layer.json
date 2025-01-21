@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"layer=0": { "model": "bnb:block/ash_layer_0" },
+		"layer=1": { "model": "bnb:block/ash_layer_1" },
+		"layer=2": { "model": "bnb:block/ash_layer_2" }
+	}
+}

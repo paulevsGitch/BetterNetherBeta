@@ -44,7 +44,7 @@ public class BNBPlacers {
 	public static final StructurePlacer LARGE_CHLOROPHATE_TREE = new FloorPlacer(BNBStructures.LARGE_CHLOROPHATE_TREE, 1).setRandomDensityFunction(3, 15);
 	public static final StructurePlacer FALLEN_CHLOROPHATE_TREE = new FloorPlacer(BNBStructures.FALLEN_CHLOROPHATE_TREE, 1).setRandomDensityFunction(4, 7);
 	
-	public static final StructurePlacer ORICHALCUM_ORE = new VolumetricPlacer(BNBStructures.ORICHALCUM_ORE, 1);
+	public static final StructurePlacer ORICHALCUM_ORE = new VolumetricPlacer(BNBStructures.ORICHALCUM_ORE, 3);
 	public static final StructurePlacer LAVA_STREAM = new CeilingPlacer(BNBStructures.LAVA_STREAM, 1).setRandomDensityFunction(5, 15);
 	public static final StructurePlacer OBSIDIAN_BOLDER = new FloorPlacer(BNBStructures.OBSIDIAN_BOLDER, 3).setNoiseDensityFunction(15);
 	public static final StructurePlacer OBSIDIAN_GRAVEL_BLOB = new FloorPlacer(BNBStructures.OBSIDIAN_GRAVEL_BLOB, 7);

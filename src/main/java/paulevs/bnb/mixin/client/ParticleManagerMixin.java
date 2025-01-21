@@ -6,6 +6,7 @@ import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.technical.ParticleEntity;
+import net.minecraft.level.Level;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -59,5 +60,10 @@ public class ParticleManagerMixin {
 			particle.render(tessellator, delta, x, y, z, width, height);
 		}
 		tessellator.render();
+	}
+	
+	@Inject(method = "setLevel", at = @At("HEAD"))
+	private void bnb_setLevel(Level level, CallbackInfo info) {
+		bnb_particles.clear();
 	}
 }

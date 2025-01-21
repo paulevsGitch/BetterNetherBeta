@@ -31,7 +31,6 @@ public class SlabUtil {
 	}
 	
 	// Reason for reflection - prevent static init crash
-	@SuppressWarnings({"JavaReflectionInvocation"})
 	private static void makeVBESlabs(String name, Block source) {
 		try {
 			Class<?> slabClass = Class.forName("paulevs.vbe.block.VBEHalfSlabBlock");
@@ -41,6 +40,7 @@ public class SlabUtil {
 			slabClass = Class.forName("paulevs.vbe.block.VBEFullSlabBlock");
 			constructor = slabClass.getConstructor(Identifier.class, Block.class);
 			fullSlab = (Block) constructor.newInstance(BNB.id(name + "_slab_full"), source);
+			fullSlab.disableAutoItemRegistration();
 			
 			halfSlab.getClass().getDeclaredMethod("setFullBlock", Block.class).invoke(halfSlab, fullSlab);
 			fullSlab.getClass().getDeclaredMethod("setHalfBlock", Block.class).invoke(fullSlab, halfSlab);

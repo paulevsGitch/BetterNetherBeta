@@ -3,6 +3,7 @@ package paulevs.bnb.particle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
+import net.minecraft.level.biome.Biome;
 import net.modificationstation.stationapi.api.block.BlockState;
 
 import java.util.Random;
@@ -17,13 +18,14 @@ public class BNBParticleManager {
 		int z = (int) (minecraft.viewEntity.z) + random.nextInt(31) - 15;
 		BlockState state = minecraft.level.getBlockState(x, y, z);
 		if (!state.isAir() && state.getMaterial().blocksMovement()) return;
-		int index = minecraft.level.getBiomeSource().getBiome(x, z).bnb_getParticleTexture(random);
+		Biome biome = minecraft.level.getBiomeSource().getBiome(x, z);
+		int index = biome.bnb_getParticleTexture(random);
 		if (index == -1) return;
 		minecraft.particleManager.addParticle(new BiomeParticle(
 			minecraft.level,
 			x, y, z,
 			index,
-			true
+			biome.bnb_getParticleEmissive()
 		));
 	}
 }

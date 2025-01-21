@@ -89,10 +89,18 @@ public class BNBItems {
 	
 	public static final Item NETHER_FIBER = make("nether_fiber", TemplateItem::new);
 	
-	public static final Item FIBER_HELMET = makeArmor("fiber_helmet", 0, 1, 0).setDurability(2000);
-	public static final Item FIBER_CHESTPLATE = makeArmor("fiber_chestplate", 0, 1, 1).setDurability(2000);
-	public static final Item FIBER_LEGGINGS = makeArmor("fiber_leggings", 0, 1, 2).setDurability(2000);
-	public static final Item FIBER_BOOTS = makeArmor("fiber_boots", 0, 1, 3).setDurability(2000);
+	public static final Item FIBER_HELMET = makeArmor(
+		"fiber_helmet", 0, 1, 0, "tooltip.bnb.fiber_cloth_1", "tooltip.bnb.fiber_cloth_2"
+	).setDurability(2000);
+	public static final Item FIBER_CHESTPLATE = makeArmor(
+		"fiber_chestplate", 0, 1, 1, "tooltip.bnb.fiber_cloth_1", "tooltip.bnb.fiber_cloth_2"
+	).setDurability(2000);
+	public static final Item FIBER_LEGGINGS = makeArmor(
+		"fiber_leggings", 0, 1, 2, "tooltip.bnb.fiber_cloth_1", "tooltip.bnb.fiber_cloth_2"
+	).setDurability(2000);
+	public static final Item FIBER_BOOTS = makeArmor(
+		"fiber_boots", 0, 1, 3, "tooltip.bnb.fiber_cloth_1", "tooltip.bnb.fiber_cloth_2"
+	).setDurability(2000);
 	
 	public static final Item PORTAL_COMPASS = make("portal_compass", PortalCompassItem::new);
 	public static final Item NETHER_HYGROMETER = make("nether_hygrometer", NetherHygrometerItem::new);
@@ -101,6 +109,7 @@ public class BNBItems {
 	
 	public static final Item FALURIAN_MOSS_COVER = make("nether_moss_cover", MossCoverItem::new);
 	public static final Item AMETRINE_SHARD = make("ametrine_shard", TemplateItem::new);
+	public static final Item ASH = make("ash", TemplateItem::new);
 	
 	private static Item makeFood(String name, int healAmount, boolean isWolfFood) {
 		Identifier id = BNB.id(name);
@@ -113,6 +122,13 @@ public class BNBItems {
 	private static Item makeArmor(String name, int level, int protection, int slot) {
 		Identifier id = BNB.id(name);
 		Item item = new NetherArmorItem(id, level, protection, slot);
+		ITEMS.add(item);
+		return item;
+	}
+	
+	private static Item makeArmor(String name, int level, int protection, int slot, String... tooltip) {
+		Identifier id = BNB.id(name);
+		Item item = new NetherArmorTooltipItem(id, level, protection, slot, tooltip);
 		ITEMS.add(item);
 		return item;
 	}

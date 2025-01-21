@@ -75,6 +75,9 @@ import java.util.function.ToIntBiFunction;
 public class ClientListener {
 	private static final Gson GSON = new GsonBuilder().create();
 	
+	public static int netherrackAshTexture;
+	public static int ashTexture;
+	
 	@EventListener
 	public void onGUIRegister(GuiHandlerRegistryEvent event) {
 		Registry.register(GuiHandlerRegistry.INSTANCE, SpinningWheelBlock.GUI_ID, new GuiHandler(
@@ -87,6 +90,9 @@ public class ClientListener {
 	@EventListener
 	public void onTextureRegister(TextureRegisterEvent event) {
 		final ExpandableAtlas blockAtlas = Atlases.getTerrain();
+		
+		netherrackAshTexture = blockAtlas.addTexture(BNB.id("block/netherrack_ash")).index;
+		ashTexture = blockAtlas.addTexture(BNB.id("block/ash")).index;
 		
 		Block.NETHERRACK.texture = blockAtlas.addTexture(BNB.id("block/netherrack")).index;
 		Block.GLOWSTONE.texture = blockAtlas.addTexture(BNB.id("block/glowstone")).index;

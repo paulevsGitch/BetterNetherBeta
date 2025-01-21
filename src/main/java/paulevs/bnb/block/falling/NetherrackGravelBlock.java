@@ -5,14 +5,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tool.ShovelItem;
 import net.minecraft.level.Level;
-import net.modificationstation.stationapi.api.template.block.TemplateSandBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
 
-public class NetherrackGravelBlock extends TemplateSandBlock {
+public class NetherrackGravelBlock extends BNBFallingBlock {
 	public NetherrackGravelBlock(Identifier id) {
-		super(id, 0);
-		setHardness(1.0F);
-		setSounds(GRAVEL_SOUNDS);
+		super(id);
 	}
 	
 	@Override

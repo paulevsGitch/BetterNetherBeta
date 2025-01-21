@@ -44,6 +44,7 @@ import java.util.List;
 public class CommonListener {
 	@EventListener
 	public void onBlockRegister(BlockRegistryEvent event) {
+		Block.NETHERRACK.setHardness(0.75F);
 		BNBBlocks.init();
 	}
 	
