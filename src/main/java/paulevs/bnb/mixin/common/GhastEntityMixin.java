@@ -64,4 +64,9 @@ public abstract class GhastEntityMixin extends FlyingEntity {
 	public int getAmbientChance() {
 		return 800;
 	}
+	
+	@ModifyConstant(method = "tickHandSwing", constant = @Constant(doubleValue = 64.0))
+	private double bnb_changeGhastAttackDistance(double constant) {
+		return 24.0;
+	}
 }

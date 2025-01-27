@@ -14,25 +14,35 @@ import net.minecraft.level.biome.BiomeSource;
 import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.source.LevelSource;
 import net.minecraft.level.structure.Structure;
+import net.minecraft.util.maths.Vec3I;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
+import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.impl.world.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
 import paulevs.bnb.block.BNBBlocks;
-import paulevs.bnb.block.plant.MossCoverBlock;
+import paulevs.bnb.block.property.BNBBlockProperties;
 import paulevs.bnb.mixin.common.LevelAccessor;
 import paulevs.bnb.mixin.common.LevelPropertiesAccessor;
+import paulevs.bnb.noise.FractalNoise;
+import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.util.ConcurrentLongQueue;
+import paulevs.bnb.world.biome.BNBBiomes;
 import paulevs.bnb.world.structure.BNBStructureStage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BNBDecoratorLevel extends Level {
+	private static final BlockState NETHERRACK = Block.NETHERRACK.getDefaultState();
+	private static final BlockState MOSSY_NETHERRACK = BNBBlocks.MOSSY_NETHERRACK.getDefaultState();
+	private static final Vec3I[] OFFSETS;
+	
 	private final Long2ReferenceMap<FlattenedChunk> chunks = new Long2ReferenceOpenHashMap<>();
-	private final LongList toRemove = new LongArrayList();
+	private final FractalNoise ashNoise = new FractalNoise(PerlinNoise::new);
 	private final ConcurrentLongQueue areasToUpdate = new ConcurrentLongQueue();
 	private final List<LightUpdateArea> lightUpdates = new ArrayList<>();
+	private final LongList toRemove = new LongArrayList();
 	private final Biome[] biomes = new Biome[256];
 	private final FlattenedChunk empty;
 	private final LevelSource source;
@@ -48,6 +58,8 @@ public class BNBDecoratorLevel extends Level {
 		this.source = source.getCache();
 		this.level = source;
 		empty = new FlattenedChunk(this, 0, 0);
+		ashNoise.setSeed((int) level.getSeed());
+		ashNoise.setOctaves(2);
 	}
 	
 	@Override
@@ -303,15 +315,56 @@ public class BNBDecoratorLevel extends Level {
 				int cz = z & 15;
 				for (int y = 94; y < 256; y++) {
 					BlockState state = chunk.getBlockState(cx, y, cz);
+					
 					if (state.isOf(BNBBlocks.NETHERRACK_MYCORRUM)) {
-						fillCube(x, y, z, netherrack, mossyNetherrack, BNBBlocks.NETHER_MOSS_COVER);
+						placeMoss(x, y, z);
+						continue;
+					}
+					
+					int index = (x - x1) << 4 | (z - z1);
+					Biome biome = biomes[index];
+					if (biome == BNBBiomes.ASHY_PLAINS && state.getBlock().isFullCube() && chunk.getBlockState(cx, y + 1, cz).isAir()) {
+						placeAshLayer(state, chunk, cx, cz, x, y, z);
 					}
 				}
 			}
 		}
 	}
 	
-	private void fillCube(int x, int y, int z, BlockState filter, BlockState fill, MossCoverBlock moss) {
+	private void placeAshLayer(BlockState state, Chunk chunk, int cx, int cz, int x, int y, int z) {
+		int layer = -1;
+		
+		if (state.isOf(BNBBlocks.ASH_BLOCK)) {
+			int count = 0;
+			for (byte i = 0; i < 4; i++) {
+				Direction side = Direction.fromHorizontal(i);
+				state = getBlockState(x + side.getOffsetX(), y, z + side.getOffsetZ());
+				if (state.isOf(BNBBlocks.ASH_LAYER) || isSolid(state)) count++;
+				if (!isSolid(getBlockState(x + side.getOffsetX(), y, z + side.getOffsetZ()))) count--;
+			}
+			if (count < 3) {
+				count = Math.max(count, 0);
+				chunk.setBlockState(cx, y, cz, BNBBlocks.ASH_LAYER.getDefaultState().with(BNBBlockProperties.LAYER, count));
+				return;
+			}
+		}
+		
+		y++;
+		
+		for (Vec3I offset : OFFSETS) {
+			Block block = getBlockState(x + offset.x, y, z + offset.y).getBlock();
+			if (block.isFullCube() && block.isFullOpaque() && block.material.blocksMovement()) {
+				layer = offset.z;
+				break;
+			}
+		}
+		
+		if (layer == -1) return;
+		//layer = MathHelper.clamp(layer + random.nextInt(3) - 1, 0, 1);
+		chunk.setBlockState(cx, y, cz, BNBBlocks.ASH_LAYER.getDefaultState().with(BNBBlockProperties.LAYER, layer));
+	}
+	
+	private void placeMoss(int x, int y, int z) {
 		boolean skipMoss = random.nextInt(32) > 0;
 		
 		if (!skipMoss) {
@@ -341,8 +394,8 @@ public class BNBDecoratorLevel extends Level {
 					BlockState above = chunk2.getBlockState(cx, cy + 1, cz);
 					if (!above.isAir() && above.isOpaque()) continue;
 					
-					if (chunk2.getBlockState(cx, cy, cz) == filter) {
-						chunk2.setBlockState(cx, cy, cz, fill);
+					if (chunk2.getBlockState(cx, cy, cz) == NETHERRACK) {
+						chunk2.setBlockState(cx, cy, cz, MOSSY_NETHERRACK);
 					}
 					
 					if (skipMoss) continue;
@@ -354,7 +407,7 @@ public class BNBDecoratorLevel extends Level {
 						int py = cy + dir.getOffsetY();
 						int pz = wz + dir.getOffsetZ();
 						if (!getBlockState(px, py, pz).isAir()) continue;
-						BlockState state = moss.getStructureState(this, px, py, pz);
+						BlockState state = BNBBlocks.NETHER_MOSS_COVER.getStructureState(this, px, py, pz);
 						if (state != null) {
 							setBlockState(px, py, pz, state);
 						}
@@ -381,5 +434,33 @@ public class BNBDecoratorLevel extends Level {
 			if (targetStatus != status) continue;
 			structure.generate(this, random, x1, 0, z1);
 		}
+	}
+	
+	private static boolean isSolid(BlockState state) {
+		Block block = state.getBlock();
+		return block.isFullCube() && block.isFullOpaque() && block.material.blocksMovement();
+	}
+	
+	static {
+		List<Vec3I> offsets = new ArrayList<>();
+		
+		for (int dx = -2; dx <= 2; dx++) {
+			for (int dy = -2; dy <= 2; dy++) {
+				if (dx == 0 && dy == 0) continue;
+				float h = MathHelper.sqrt(dx * dx + dy * dy);
+				int dz = Math.round((1.0F - h / 2.0F) * 3.0F + 0.5F);
+				if (dz < 0) continue;
+				dz = Math.min(dz, 2);
+				offsets.add(new Vec3I(dx, dy, dz));
+			}
+		}
+		
+		offsets.sort((v1, v2) -> {
+			int l1 = v1.x * v1.x + v1.y * v1.y;
+			int l2 = v2.x * v2.x + v2.y * v2.y;
+			return Integer.compare(l1, l2);
+		});
+		
+		OFFSETS = offsets.toArray(Vec3I[]::new);
 	}
 }
