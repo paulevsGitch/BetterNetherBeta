@@ -19,7 +19,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.achievement.BNBAchievements;
 import paulevs.bnb.block.BNBBlocks;
+import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.item.BNBItemTags;
+import paulevs.bnb.item.BNBItems;
 
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends Entity {
@@ -27,6 +29,8 @@ public abstract class ItemEntityMixin extends Entity {
 	@Shadow private int health;
 	
 	@Shadow public abstract void onPlayerCollision(PlayerEntity player);
+	
+	@Shadow public int age;
 	
 	public ItemEntityMixin(Level arg) {
 		super(arg);
@@ -76,6 +80,36 @@ public abstract class ItemEntityMixin extends Entity {
 	))
 	private Material bnb_disableLavaVelocity(Level level, int x, int y, int z, Operation<Material> original) {
 		Material material = original.call(level, x, y, z);
+		
+		if (material == BNBBlockMaterials.SULPHURIC_ACID) {
+			if ((age & 3) == 0) {
+				if (stack.getType() == BNBItems.AMETRINE_SHARD) {
+					dropItem(new ItemStack(BNBItems.PURE_QUARTZ), 0.0F);
+					level.playSound(x, y, z, "random.fizz", 1.0F, 1.0F);
+					level.addParticle(
+						"smoke",
+						x + level.random.nextFloat() * 0.2F - 0.1F,
+						y + level.random.nextFloat() * 0.2F - 0.1F,
+						z + level.random.nextFloat() * 0.2F - 0.1F,
+						0.0F, 0.0F, 0.0F
+					);
+					if (--stack.count < 1) remove();
+				}
+				else if (stack.getType() != BNBItems.PURE_QUARTZ) {
+					level.playSound(x, y, z, "random.fizz", 1.0F, 1.0F);
+					level.addParticle(
+						"smoke",
+						x + level.random.nextFloat() * 0.2F - 0.1F,
+						y + level.random.nextFloat() * 0.2F - 0.1F,
+						z + level.random.nextFloat() * 0.2F - 0.1F,
+						0.0F, 0.0F, 0.0F
+					);
+					if (--stack.count < 1) remove();
+				}
+			}
+			return Material.WATER;
+		}
+		
 		if (!immuneToFire || material != Material.LAVA) return material;
 		
 		float h = stack.getType() instanceof BlockItem ? 0.9F : 0.7F;

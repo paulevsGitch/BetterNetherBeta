@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
 
 @Mixin(value = GameRenderer.class, priority = 500)
@@ -25,9 +26,15 @@ public class GameRendererMixin {
 	))
 	private void bnb_changeNetherFog(int i, float par2, CallbackInfo info) {
 		if (minecraft.level == null || this.minecraft.level.dimension.id != -1) return;
-		float fog = BNBWeatherRenderer.getFogDensity();
-		GL11.glFogf(GL11.GL_FOG_START, fogDistance * 0.5F * fog);
-		GL11.glFogf(GL11.GL_FOG_END, fogDistance * fog);
+		if (minecraft.viewEntity.isInFluid(BNBBlockMaterials.SULPHURIC_ACID)) {
+			GL11.glFogf(GL11.GL_FOG_START, 0.5F);
+			GL11.glFogf(GL11.GL_FOG_END, 15.0F);
+		}
+		else {
+			float fog = BNBWeatherRenderer.getFogDensity();
+			GL11.glFogf(GL11.GL_FOG_START, fogDistance * 0.5F * fog);
+			GL11.glFogf(GL11.GL_FOG_END, fogDistance * fog);
+		}
 	}
 	
 	@Inject(method = "renderWeather", at = @At("HEAD"))

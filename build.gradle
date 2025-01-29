@@ -80,6 +80,18 @@ dependencies {
 	modImplementation("com.github.matthewperiut:retrocommands:${project.retrocommands_version}") {
 		transitive false
 	}
+
+	// Always More Items dependencies
+	implementation(include("me.carleslc:Simple-Yaml:1.8.4") as Dependency)
+	modImplementation("net.glasslauncher.mods:glass-networking:${project.glass_networking_version}") {
+		transitive false
+	}
+	modImplementation("net.glasslauncher.mods:GlassConfigAPI:${project.gcapi_version}") {
+		transitive false
+	}
+	modImplementation("net.glasslauncher.mods:AlwaysMoreItems:${project.alwaysmoreitems_version}") {
+		transitive false
+	}
 }
 
 processResources {

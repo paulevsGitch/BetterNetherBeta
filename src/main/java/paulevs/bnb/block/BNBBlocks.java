@@ -11,13 +11,15 @@ import net.modificationstation.stationapi.api.registry.BlockRegistry;
 import net.modificationstation.stationapi.api.template.block.TemplateStairsBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
-import paulevs.bnb.Datagen;
+import paulevs.bnb.DataGen;
 import paulevs.bnb.block.crafting.BNBFurnaceBlock;
 import paulevs.bnb.block.crafting.SpinningWheelBlock;
 import paulevs.bnb.block.falling.AshBlock;
 import paulevs.bnb.block.falling.AshLayerBlock;
 import paulevs.bnb.block.falling.NetherrackGravelBlock;
 import paulevs.bnb.block.falling.ObsidianGravelBlock;
+import paulevs.bnb.block.fluid.SulphuricAcidFlowingBlock;
+import paulevs.bnb.block.fluid.SulphuricAcidStillBlock;
 import paulevs.bnb.block.plant.BNBCollectableVineBlock;
 import paulevs.bnb.block.plant.BNBDoubleFloorPlantBlock;
 import paulevs.bnb.block.plant.BNBDoubleGrassPlantBlock;
@@ -40,6 +42,7 @@ import paulevs.bnb.block.stone.ObsidianShardsBlock;
 import paulevs.bnb.block.stone.ShardsBlock;
 import paulevs.bnb.block.stone.SoulSandstoneBlock;
 import paulevs.bnb.block.stone.SoulSandstoneTexturedBlock;
+import paulevs.bnb.block.stone.SulphurBlock;
 import paulevs.bnb.block.terrain.NetherTerrainBlock;
 import paulevs.bnb.block.terrain.SoulTerrainBlock;
 import paulevs.bnb.block.tree.BNBLeavesBlock;
@@ -79,7 +82,9 @@ public class BNBBlocks {
 	public static final Block MOSSY_NETHERRACK = make("mossy_netherrack", NetherTerrainBlock::new);
 	public static final MossCoverBlock NETHER_MOSS_COVER = makeNI("nether_moss_cover", MossCoverBlock::new);
 	public static final Block NETHER_MOSS_BLOCK = make("nether_moss_block", NetherMossBlock::new);
-	public static final Block HARDENED_NETHERRACK = make("hardened_netherrack", BNBNetherrack::new);
+	public static final Block HARDENED_NETHERRACK = make("hardened_netherrack", BNBNetherrack::new).setRelativeHardness(3.0F);
+	public static final Block SULPHURIFIED_NETHERRACK = add(new SulphurBlock(BNB.id("sulphurified_netherrack"), 1).setRelativeHardness(1.25F));
+	public static final Block SULPHURIC_NETHERRACK = add(new SulphurBlock(BNB.id("sulphuric_netherrack"), 2).setRelativeHardness(1.5F));
 	
 	public static final Block TREE_LANTERN = make("tree_lantern", TreeLanternBlock::new);
 	
@@ -294,8 +299,16 @@ public class BNBBlocks {
 	public static final Block AMETRINE_ORE = add(new BNBOreBlock(BNB.id("ametrine_ore")).setLightEmittance(0.25F));
 	public static final ShardsBlock AMETRINE_SHARDS = add(new AmetrineShards(BNB.id("ametrine_shards")));
 	
-	public static final Block ASH_BLOCK = make("ash_block", AshBlock::new);
-	public static final Block ASH_LAYER = make("ash_layer", AshLayerBlock::new);
+	public static final Block ASH_BLOCK = add(new AshBlock(BNB.id("ash_block")));
+	public static final Block ASH_LAYER = add(new AshLayerBlock(BNB.id("ash_layer")));
+	
+	public static final SulphuricAcidStillBlock SULPHURIC_ACID_STILL = add(new SulphuricAcidStillBlock(BNB.id("sulphuric_acid_still")));
+	public static final SulphuricAcidFlowingBlock SULPHURIC_ACID_FLOWING = add(new SulphuricAcidFlowingBlock(BNB.id("sulphuric_acid_flowing")));
+	
+	public static final Block SULPHURIC_NETHERRACK_BRICKS = make("sulphuric_netherrack_bricks", NetherrackBricksBlock::new);
+	public static final Block SULPHURIC_NETHERRACK_BRICKS_STAIRS = make("sulphuric_netherrack_bricks_stairs", TemplateStairsBlock::new, SULPHURIC_NETHERRACK_BRICKS);
+	public static final Block SULPHURIC_NETHERRACK_BRICKS_SLAB_HALF = add(SlabUtil.makeHalfSlab("sulphuric_netherrack_bricks", SULPHURIC_NETHERRACK_BRICKS));
+	public static final Block SULPHURIC_NETHERRACK_BRICKS_SLAB_FULL = add(SlabUtil.getFullSlab());
 	
 	private static <B extends Block> B add(B block) {
 		Identifier id = BlockRegistry.INSTANCE.getId(block);
@@ -344,7 +357,7 @@ public class BNBBlocks {
 				if (block instanceof StairsBlock) {
 					Identifier sourceID = BlockRegistry.INSTANCE.getId(sourceBlock);
 					assert sourceID != null;
-					Datagen.makeStairsRecipe(name, sourceID, id);
+					DataGen.makeStairsRecipe(name, sourceID, id);
 				}
 			}
 		}
@@ -411,5 +424,7 @@ public class BNBBlocks {
 		FALURIAN_LEAVES.setSapling(FALURIAN_SAPLING);
 		PIROZEN_LEAVES.setSapling(PIROZEN_SAPLING);
 		CHLOROPHATE_LEAVES.setSapling(CHLOROPHATE_SAPLING);
+		SULPHURIC_ACID_STILL.flowingFluid = SULPHURIC_ACID_FLOWING;
+		SULPHURIC_ACID_FLOWING.stillFluid = SULPHURIC_ACID_STILL;
 	}
 }

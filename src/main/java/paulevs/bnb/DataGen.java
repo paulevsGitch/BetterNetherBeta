@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Datagen {
+public class DataGen {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	
 	public static void makeFullBlock(String name) {

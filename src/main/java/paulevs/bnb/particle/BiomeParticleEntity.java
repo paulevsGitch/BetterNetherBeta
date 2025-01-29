@@ -5,7 +5,7 @@ import net.minecraft.entity.technical.ParticleEntity;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 
-public class BiomeParticle extends ParticleEntity implements BNBParticle {
+public class BiomeParticleEntity extends ParticleEntity implements BNBParticle {
 	private final boolean emissive;
 	private final float fullSize;
 	private float nextSpeedX;
@@ -16,7 +16,7 @@ public class BiomeParticle extends ParticleEntity implements BNBParticle {
 	private float preSpeedZ;
 	private float scale;
 	
-	public BiomeParticle(Level level, double x, double y, double z, int textureIndex, boolean emissive) {
+	public BiomeParticleEntity(Level level, double x, double y, double z, int textureIndex, boolean emissive) {
 		super(level, x, y, z, 0, 0, 0);
 		this.textureIndex = textureIndex;
 		this.emissive = emissive;
@@ -60,7 +60,6 @@ public class BiomeParticle extends ParticleEntity implements BNBParticle {
 		velocityX = MathHelper.lerp(delta, preSpeedX, nextSpeedX);
 		velocityY = MathHelper.lerp(delta, preSpeedY, nextSpeedY);
 		velocityZ = MathHelper.lerp(delta, preSpeedZ, nextSpeedZ);
-		setVelocity(velocityX, velocityY, velocityZ);
 		
 		prevX = x;
 		prevY = y;

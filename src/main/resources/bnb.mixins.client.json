@@ -23,6 +23,7 @@
 		"ClientLevelMixin",
 		"SoundHelperMixin",
 		"FluidBlockMixin",
+		"FluidBlockMixin",
 		"MinecraftMixin",
 		"LevelMixin",
 		"ItemMixin"

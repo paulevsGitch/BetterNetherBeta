@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "bnb:sulphur" },
+		{ "item": "bnb:ash" },
+		{ "item": "minecraft:coal", "damage": -1 }
+	],
+	"result": {
+		"item": "minecraft:gunpowder"
+	}
+}

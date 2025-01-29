@@ -34,7 +34,7 @@ public class BNBSoundManager {
 	private static final Reference2FloatMap<Identifier> AMBIENCE_MAP = new Reference2FloatOpenHashMap<>();
 	
 	public static void setInTheNether(boolean inTheNether) {
-		if (BNBSoundManager.inTheNether != inTheNether) {
+		if (BNBSoundManager.inTheNether != inTheNether && soundSystem != null) {
 			soundSystem.stop(MUSIC_KEY);
 			musicCountdown = getMusicCountdown();
 			AMBIENCE_MAP.putAll(OLD_AMBIENCE_MAP);

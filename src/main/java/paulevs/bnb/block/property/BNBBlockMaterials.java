@@ -1,5 +1,6 @@
 package paulevs.bnb.block.property;
 
+import net.minecraft.block.material.FluidMaterial;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.material.ReplaceableMaterial;
@@ -11,6 +12,7 @@ public class BNBBlockMaterials {
 	public static final Material NETHER_CLOTH = new Material(MaterialColor.WHITE);
 	public static final Material NETHER_PLANT_REPLACEABLE = new ReplaceableMaterial(MaterialColor.FOLIAGE).replaceable();
 	public static final Material SPIDER_NET = new NetMaterial();
+	public static final Material SULPHURIC_ACID = new FluidMaterial(MaterialColor.LAVA);
 	
 	private static class NetMaterial extends Material {
 		public NetMaterial() {

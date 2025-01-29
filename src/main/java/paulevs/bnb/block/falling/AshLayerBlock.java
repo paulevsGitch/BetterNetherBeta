@@ -13,6 +13,7 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.hit.HitType;
 import net.minecraft.util.maths.Box;
 import net.minecraft.util.maths.MCMath;
+import net.modificationstation.stationapi.api.block.BeforeBlockRemoved;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.block.States;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
@@ -28,7 +29,9 @@ import paulevs.bnb.util.WorldUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AshLayerBlock extends AshBlock {
+public class AshLayerBlock extends AshBlock implements BeforeBlockRemoved {
+	private static BlockState beforeRemove;
+	
 	public AshLayerBlock(Identifier id) {
 		super(id);
 		setDefaultState(getDefaultState().with(BNBBlockProperties.LAYER, 0));
@@ -42,7 +45,8 @@ public class AshLayerBlock extends AshBlock {
 	
 	@Override
 	public List<ItemStack> getDropList(Level level, int x, int y, int z, BlockState state, int meta) {
-		return List.of(new ItemStack(BNBItems.ASH, state.get(BNBBlockProperties.LAYER) + 1));
+		if (!beforeRemove.isOf(this)) return List.of(new ItemStack(BNBItems.ASH));
+		return List.of(new ItemStack(BNBItems.ASH, beforeRemove.get(BNBBlockProperties.LAYER) + 1));
 	}
 	
 	@Override
@@ -152,5 +156,10 @@ public class AshLayerBlock extends AshBlock {
 			self = newSelfLayer < 0 ? States.AIR.get() : self.with(BNBBlockProperties.LAYER, newSelfLayer);
 			level.setBlockState(x, y, z, self);
 		}
+	}
+	
+	@Override
+	public void beforeBlockRemoved(Level level, int x, int y, int z) {
+		beforeRemove = level.getBlockState(x, y, z);
 	}
 }

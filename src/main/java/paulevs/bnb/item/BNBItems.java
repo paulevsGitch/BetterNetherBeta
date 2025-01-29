@@ -5,6 +5,7 @@ import net.minecraft.item.material.ToolMaterial;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.item.tool.ToolLevel;
 import net.modificationstation.stationapi.api.item.tool.ToolMaterialFactory;
+import net.modificationstation.stationapi.api.registry.ItemRegistry;
 import net.modificationstation.stationapi.api.template.item.TemplateAxeItem;
 import net.modificationstation.stationapi.api.template.item.TemplateFoodItem;
 import net.modificationstation.stationapi.api.template.item.TemplateHoeItem;
@@ -109,7 +110,10 @@ public class BNBItems {
 	
 	public static final Item FALURIAN_MOSS_COVER = make("nether_moss_cover", MossCoverItem::new);
 	public static final Item AMETRINE_SHARD = make("ametrine_shard", TemplateItem::new);
+	public static final Item PURE_QUARTZ = make("pure_quartz", TemplateItem::new);
 	public static final Item ASH = make("ash", TemplateItem::new);
+	public static final Item ACID_BUCKET = make("acid_bucket", BNBBucket::new);
+	public static final Item SULPHUR = make("sulphur", TemplateItem::new);
 	
 	private static Item makeFood(String name, int healAmount, boolean isWolfFood) {
 		Identifier id = BNB.id(name);
@@ -146,6 +150,12 @@ public class BNBItems {
 		TemplateShearsItem item = new TemplateShearsItem(id);
 		item.setDurability(material.getDurability());
 		item.setTranslationKey(id);
+		ITEMS.add(item);
+		return item;
+	}
+	
+	private static Item add(Item item) {
+		item.setTranslationKey(ItemRegistry.INSTANCE.getId(item));
 		ITEMS.add(item);
 		return item;
 	}

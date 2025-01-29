@@ -39,6 +39,8 @@ import paulevs.bnb.achievement.BNBAchievementPage;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.crafting.SpinningWheelBlock;
 import paulevs.bnb.block.entity.SpinningWheelBlockEntity;
+import paulevs.bnb.block.fluid.SulphuricAcidFlowingBlock;
+import paulevs.bnb.block.fluid.SulphuricAcidStillBlock;
 import paulevs.bnb.block.stone.AmetrineBlock;
 import paulevs.bnb.block.stone.SoulSandstoneTexturedBlock;
 import paulevs.bnb.command.BNBCommandManager;
@@ -63,10 +65,16 @@ import paulevs.bnb.world.generator.terrain.features.TerrainFeature;
 
 import java.awt.Color;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.function.ToIntBiFunction;
@@ -97,6 +105,8 @@ public class ClientListener {
 		Block.NETHERRACK.texture = blockAtlas.addTexture(BNB.id("block/netherrack")).index;
 		Block.GLOWSTONE.texture = blockAtlas.addTexture(BNB.id("block/glowstone")).index;
 		Block.SOUL_SAND.texture = blockAtlas.addTexture(BNB.id("block/soul_sand")).index;
+		SulphuricAcidStillBlock.texture = blockAtlas.addTexture(BNB.id("block/sulphuric_acid_still")).index;
+		SulphuricAcidFlowingBlock.texture = blockAtlas.addTexture(BNB.id("block/sulphuric_acid_flowing")).index;
 		
 		LavaRenderer.flowTexture = blockAtlas.addTexture(BNB.id("block/lava_flow")).index;
 		for (byte i = 0; i < 16; i++) {
@@ -308,42 +318,53 @@ public class ClientListener {
 	
 	private void printTranslations() {
 		if (!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
-		printBlockTranslations();
-		printItemTranslations();
+		try {
+			Path path = new File("../src/main/resources/assets/bnb/stationapi/lang/en_US.lang").toPath();
+			List<String> lines = Files.readAllLines(path);
+			int size = lines.size();
+			addBlockTranslations(lines);
+			addItemTranslations(lines);
+			if (size != lines.size()) {
+				Collections.sort(lines);
+				Files.writeString(path, String.join("\n", lines), StandardOpenOption.WRITE);
+			}
+		}
+		catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
-	private void printBlockTranslations() {
-		StringBuilder builder = new StringBuilder();
+	private void addBlockTranslations(List<String> lines) {
+		StringBuffer buffer = new StringBuffer(256);
 		BlockRegistry.INSTANCE.forEach(block -> {
 			Identifier id = BlockRegistry.INSTANCE.getId(block);
 			if (id == null || id.namespace != BNB.NAMESPACE) return;
 			String name = I18n.translate(block.getTranslatedName());
 			if (name.startsWith("tile.")) {
-				builder.append(name);
-				builder.append("=");
-				builder.append(fastTranslate(name));
-				builder.append("\n");
+				buffer.append(name);
+				buffer.append("=");
+				buffer.append(fastTranslate(name));
+				lines.add(buffer.toString());
+				buffer.setLength(0);
+				
 			}
 		});
-		if (builder.isEmpty()) return;
-		BNB.LOGGER.info("Block Translations\n================\n" + builder + "================");
 	}
 	
-	private void printItemTranslations() {
-		StringBuilder builder = new StringBuilder();
+	private void addItemTranslations(List<String> lines) {
+		StringBuffer buffer = new StringBuffer(256);
 		ItemRegistry.INSTANCE.forEach(item -> {
 			Identifier id = ItemRegistry.INSTANCE.getId(item);
 			if (id == null || id.namespace != BNB.NAMESPACE) return;
 			String name = I18n.translate(item.getTranslatedName());
 			if (name.startsWith("item.")) {
-				builder.append(name);
-				builder.append("=");
-				builder.append(fastTranslate(name));
-				builder.append("\n");
+				buffer.append(name);
+				buffer.append("=");
+				buffer.append(fastTranslate(name));
+				lines.add(buffer.toString());
+				buffer.setLength(0);
 			}
 		});
-		if (builder.isEmpty()) return;
-		BNB.LOGGER.info("Item Translations\n================\n" + builder + "================");
 	}
 	
 	private String fastTranslate(String name) {
@@ -381,6 +402,7 @@ public class ClientListener {
 		if (!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
 		biomeColor(0xEA7D2E, 0xB6C8CA);
 		biomeColor(0x9139A5, 0xB6C8CA);
+		biomeColor(0xf3d949, 0xB6C8CA);
 	}
 	
 	// TODO remove that after release

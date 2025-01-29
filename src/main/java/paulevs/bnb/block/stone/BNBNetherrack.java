@@ -7,6 +7,10 @@ import net.modificationstation.stationapi.api.util.Identifier;
 public class BNBNetherrack extends TemplateBlock {
 	public BNBNetherrack(Identifier identifier) {
 		super(identifier, Material.STONE);
-		setHardness(NETHERRACK.getHardness() * 3.0F);
+	}
+	
+	public BNBNetherrack setRelativeHardness(float scale) {
+		setHardness(NETHERRACK.getHardness() * scale);
+		return this;
 	}
 }

@@ -1,10 +1,12 @@
 {
 	"values": [
-		"minecraft:netherrack",
-		"bnb:netherrack_mycorrum",
-		"bnb:mossy_netherrack",
-		"bnb:orichalcum_ore",
+		"bnb:ametrine_ore",
 		"bnb:hardened_netherrack",
-		"bnb:ametrine_ore"
+		"bnb:mossy_netherrack",
+		"bnb:netherrack_mycorrum",
+		"bnb:orichalcum_ore",
+		"bnb:sulphuric_netherrack",
+		"bnb:sulphurified_netherrack",
+		"minecraft:netherrack"
 	]
 }

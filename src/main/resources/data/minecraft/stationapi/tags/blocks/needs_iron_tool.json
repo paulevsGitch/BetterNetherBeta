@@ -1,5 +1,8 @@
 {
 	"values": [
-		"bnb:ametrine_dense"
+		"bnb:ametrine_dense",
+		"bnb:ametrine_light",
+		"bnb:ametrine_ore",
+		"bnb:ametrine_shards"
 	]
 }

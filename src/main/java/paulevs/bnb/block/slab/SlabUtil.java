@@ -2,8 +2,10 @@ package paulevs.bnb.block.slab;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
+import net.modificationstation.stationapi.api.registry.BlockRegistry;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
+import paulevs.bnb.DataGen;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -16,6 +18,11 @@ public class SlabUtil {
 	public static Block makeHalfSlab(String name, Block source) {
 		if (HAS_VBE) makeVBESlabs(name, source);
 		else makeBNBSlabs(name, source);
+		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+			Identifier sourceID = BlockRegistry.INSTANCE.getId(source);
+			assert sourceID != null;
+			DataGen.makeSlabRecipe(name + "_slab", sourceID, BNB.id(name + "_slab_half"));
+		}
 		return halfSlab;
 	}
 	

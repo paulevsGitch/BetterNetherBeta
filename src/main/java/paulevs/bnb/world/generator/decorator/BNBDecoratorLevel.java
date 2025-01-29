@@ -305,9 +305,6 @@ public class BNBDecoratorLevel extends Level {
 	}
 	
 	private void additionalDecoration(int x1, int z1, int x2, int z2) {
-		final BlockState netherrack = Block.NETHERRACK.getDefaultState();
-		final BlockState mossyNetherrack = BNBBlocks.MOSSY_NETHERRACK.getDefaultState();
-		
 		for (int x = x1; x < x2; x++) {
 			for (int z = z1; z < z2; z++) {
 				Chunk chunk = getChunkFromCache(x >> 4, z >> 4);
@@ -318,6 +315,11 @@ public class BNBDecoratorLevel extends Level {
 					
 					if (state.isOf(BNBBlocks.NETHERRACK_MYCORRUM)) {
 						placeMoss(x, y, z);
+						continue;
+					}
+					
+					if (state.isOf(BNBBlocks.SULPHURIC_NETHERRACK)) {
+						placeSulphurifiedNetherrack(x, y, z);
 						continue;
 					}
 					
@@ -411,6 +413,24 @@ public class BNBDecoratorLevel extends Level {
 						if (state != null) {
 							setBlockState(px, py, pz, state);
 						}
+					}
+				}
+			}
+		}
+	}
+	
+	private void placeSulphurifiedNetherrack(int x, int y, int z) {
+		for (byte dx = -2; dx <= 2; dx++) {
+			int wx = x + dx;
+			byte cx = (byte) (wx & 15);
+			for (byte dz = -2; dz <= 2; dz++) {
+				int wz = z + dz;
+				byte cz = (byte) (wz & 15);
+				Chunk chunk2 = getChunkFromCache(wx >> 4, wz >> 4);
+				for (int dy = -1; dy <= 1; dy++) {
+					int cy = y + dy;
+					if (chunk2.getBlockState(cx, cy, cz) == NETHERRACK) {
+						chunk2.setBlockState(cx, cy, cz, BNBBlocks.SULPHURIFIED_NETHERRACK.getDefaultState());
 					}
 				}
 			}

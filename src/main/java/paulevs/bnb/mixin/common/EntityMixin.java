@@ -26,7 +26,7 @@ import paulevs.bnb.world.generator.decorator.BNBWorldChunk;
 
 @Mixin(Entity.class)
 public class EntityMixin implements BNBPortalEntity {
-	@Unique private MutableBlockPos bnb_originPortalPos = new MutableBlockPos();
+	@Unique private final MutableBlockPos bnb_originPortalPos = new MutableBlockPos();
 	@Unique private Level bnb_originPortalLevel;
 	
 	@Shadow public Level level;

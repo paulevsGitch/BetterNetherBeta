@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"  X",
+		" XX",
+		"XXX"
+	],
+	"key": {
+		"X": {
+			"item": "bnb:sulphuric_netherrack_bricks"
+		}
+	},
+	"result": {
+		"item": "bnb:sulphuric_netherrack_bricks_stairs",
+		"count": 6
+	}
+}

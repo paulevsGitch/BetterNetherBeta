@@ -21,7 +21,7 @@ public class BNBParticleManager {
 		Biome biome = minecraft.level.getBiomeSource().getBiome(x, z);
 		int index = biome.bnb_getParticleTexture(random);
 		if (index == -1) return;
-		minecraft.particleManager.addParticle(new BiomeParticle(
+		minecraft.particleManager.addParticle(new BiomeParticleEntity(
 			minecraft.level,
 			x, y, z,
 			index,
