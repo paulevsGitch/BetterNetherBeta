@@ -1,5 +1,8 @@
 package paulevs.bnb.mixin.common;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.LivingEntity;
@@ -18,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.entity.BNBPortalEntity;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.item.BNBItemTags;
@@ -25,9 +29,10 @@ import paulevs.bnb.world.generator.decorator.BNBChunkStatus;
 import paulevs.bnb.world.generator.decorator.BNBWorldChunk;
 
 @Mixin(Entity.class)
-public class EntityMixin implements BNBPortalEntity {
+public abstract class EntityMixin implements BNBPortalEntity {
 	@Unique private final MutableBlockPos bnb_originPortalPos = new MutableBlockPos();
 	@Unique private Level bnb_originPortalLevel;
+	@Unique private static boolean bnb_isAcid;
 	
 	@Shadow public Level level;
 	@Shadow public int chunkX;
@@ -35,6 +40,8 @@ public class EntityMixin implements BNBPortalEntity {
 	@Shadow @Final public Box boundingBox;
 	@Shadow protected float fallDistance;
 	@Shadow private boolean skipFallCheck;
+	
+	@Shadow public abstract boolean damage(Entity target, int amount);
 	
 	@Inject(method = "setOnFire", at = @At("HEAD"), cancellable = true)
 	private void bnb_disableFireDamage(CallbackInfo info) {
@@ -117,6 +124,25 @@ public class EntityMixin implements BNBPortalEntity {
 		if (chunk.bnb_getStatus() == BNBChunkStatus.EMPTY) {
 			info.cancel();
 		}
+	}
+	
+	@ModifyReturnValue(method = "checkGroundCollision", at = @At("RETURN"))
+	private boolean bnb_checkAcid(boolean original) {
+		bnb_isAcid = original || level.collidesWithMaterial(
+			boundingBox.expandNegative(0.0, -0.4F, 0.0).createAndCache(0.001, 0.001, 0.001),
+			BNBBlockMaterials.SULPHURIC_ACID,
+			Entity.class.cast(this)
+		);
+		if (bnb_isAcid) damage(null, 2);
+		return bnb_isAcid;
+	}
+	
+	@WrapOperation(method = "baseTick", at = @At(
+		value = "INVOKE",
+		target = "Lnet/minecraft/level/Level;addParticle(Ljava/lang/String;DDDDDD)V"
+	))
+	private void bnb_removeParticles(Level level, String name, double x, double y, double z, double dx, double dy, double dz, Operation<Void> original) {
+		if (!bnb_isAcid) original.call(level, name, x, y, z, dx, dy, dz);
 	}
 	
 	@Override

@@ -3,11 +3,9 @@ package paulevs.bnb.block.fluid;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.level.BlockView;
 import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;
-import net.minecraft.util.maths.Vec3D;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.template.block.TemplateStillLiquidBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
@@ -69,11 +67,6 @@ public class SulphuricAcidStillBlock extends TemplateStillLiquidBlock {
 	@Override
 	public void onScheduledTick(Level level, int x, int y, int z, Random random) {
 		acidCommonTick(level, x, y, z, random);
-	}
-	
-	@Override
-	public void onCollideWithEntity(Level level, int x, int y, int z, Entity entityBase, Vec3D vec3f) {
-		System.out.println(entityBase.getClass());
 	}
 	
 	@Override
