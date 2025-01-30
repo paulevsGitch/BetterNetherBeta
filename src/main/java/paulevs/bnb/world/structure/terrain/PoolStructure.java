@@ -34,7 +34,7 @@ public class PoolStructure extends Structure {
 				int dist = dx2 + dz * dz;
 				if (dist > r2) continue;
 				int wz = z + dz;
-				if (!level.getBlockState(wx, y, wz).isAir()) continue;
+				if (level.getBlockState(wx, y, wz).getMaterial().blocksMovement()) continue;
 				BlockState state = dist > r1 ? wallsBlock : fluidBlock;
 				level.setBlockState(wx, y, wz, state);
 				level.setBlockState(wx, y - 1, wz, wallsBlock);
