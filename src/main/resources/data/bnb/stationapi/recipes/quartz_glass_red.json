@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"XXX",
+		"XDX",
+		"XXX"
+	],
+	"key": {
+		"X": { "tag": "bnb:quartz_glass" },
+		"D": {
+			"item": "minecraft:dye",
+			"damage": 1
+		}
+	},
+	"result": {
+		"item": "bnb:quartz_glass_red",
+		"count": 8
+	}
+}

@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:block/cube_all",
 	"textures": {
-		"all": "bnb:block/ametrine_7"
+		"all": "bnb:block/pure_quartz_block"
 	}
 }

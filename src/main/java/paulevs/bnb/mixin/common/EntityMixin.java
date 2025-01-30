@@ -128,13 +128,13 @@ public abstract class EntityMixin implements BNBPortalEntity {
 	
 	@ModifyReturnValue(method = "checkGroundCollision", at = @At("RETURN"))
 	private boolean bnb_checkAcid(boolean original) {
-		bnb_isAcid = original || level.collidesWithMaterial(
+		bnb_isAcid = level.collidesWithMaterial(
 			boundingBox.expandNegative(0.0, -0.4F, 0.0).createAndCache(0.001, 0.001, 0.001),
 			BNBBlockMaterials.SULPHURIC_ACID,
 			Entity.class.cast(this)
 		);
 		if (bnb_isAcid) damage(null, 2);
-		return bnb_isAcid;
+		return original || bnb_isAcid;
 	}
 	
 	@WrapOperation(method = "baseTick", at = @At(

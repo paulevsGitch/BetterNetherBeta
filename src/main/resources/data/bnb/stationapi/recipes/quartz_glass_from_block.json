@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient": {
+		"item": "bnb:pure_quartz_block"
+	},
+	"result": {
+		"item": "bnb:quartz_glass_white"
+	}
+}

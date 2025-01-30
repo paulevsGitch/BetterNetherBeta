@@ -439,33 +439,9 @@ public class BNBBiomes {
 	
 	public static final Biome ACID_TERRACES = addLand(BiomeBuilder
 		.start("bnb:acid_terraces")
-		.fogColor(0xB1F536)
+		.fogColor(0x449B47)
 		.grassAndLeavesColor(0xFFFFD046)
 		.surfaceRule(LOW_LAND_GRAVEL)
-		/*.surfaceRule(SurfaceBuilder
-			.start(BNBBlocks.SULPHURIC_ACID_STILL)
-			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
-			.ground(1)
-			.condition((level, x, y, z, state) -> NOISE_COVER.get(x * 0.05, z * 0.05) > 0.5F, 5)
-			.condition((level, x, y, z, state) -> {
-				for (byte i = 0; i < 4; i++) {
-					Direction side = Direction.fromHorizontal(i);
-					state = level.getBlockState(x + side.getOffsetX(), y, z + side.getOffsetZ());
-					if (!state.getMaterial().blocksMovement() && !state.isOf(BNBBlocks.SULPHURIC_ACID_STILL)) {
-						return false;
-					}
-				}
-				return true;
-			}, 6)
-			.build()
-		)
-		.surfaceRule(SurfaceBuilder
-			.start(BNBBlocks.SULPHURIC_NETHERRACK)
-			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
-			.ground(2)
-			.condition((level, x, y, z, state) -> NOISE_COVER.get(x * 0.05, z * 0.05) > 0.4F, 5)
-			.build()
-		)*/
 		.surfaceRule(SurfaceBuilder
 			.start(BNBBlocks.SULPHURIC_NETHERRACK)
 			.replace(BNBBlockTags.NETHERRACK_TERRAIN)

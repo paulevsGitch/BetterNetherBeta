@@ -11,6 +11,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
 import net.minecraft.client.resource.language.I18n;
+import net.minecraft.item.DyeItem;
 import net.minecraft.level.BlockView;
 import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.client.event.color.block.BlockColorsRegisterEvent;
@@ -31,6 +32,7 @@ import net.modificationstation.stationapi.api.registry.Registry;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
+import net.modificationstation.stationapi.api.vanillafix.util.DyeColor;
 import net.modificationstation.stationapi.api.world.BlockStateView;
 import net.modificationstation.stationapi.impl.worldgen.BiomeColorsImpl;
 import paulevs.bnb.BNB;
@@ -296,6 +298,13 @@ public class ClientListener {
 			
 			return ColorUtil.fromHSV(hsv);
 		}, BNBBlocks.NETHER_MOSS_BLOCK);
+		
+		int index = BNBBlocks.BLOCKS_WITH_ITEMS.indexOf(BNBBlocks.QUARTZ_GLASS_BLACK);
+		for (byte i = 0; i < 16; i++) {
+			final int color = i == 7 ? 0xC0C0C0 : DyeItem.COLORS[i];
+			Block block = BNBBlocks.BLOCKS_WITH_ITEMS.get(index + i);
+			event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> color, block);
+		}
 	}
 	
 	@EventListener
@@ -304,6 +313,12 @@ public class ClientListener {
 		event.itemColors.register((stack, tintIndex) -> tintIndex == 0 ? Color.CYAN.getRGB() : 0xFFFFFFFF, BNBBlocks.SOUL_MYCORRUM);
 		event.itemColors.register((stack, tintIndex) -> 0xFFB02921, BNBBlocks.NETHER_SPROUTS);
 		event.itemColors.register((stack, tintIndex) -> 0xFFC03939, BNBBlocks.NETHER_MOSS_BLOCK);
+		int index = BNBBlocks.BLOCKS_WITH_ITEMS.indexOf(BNBBlocks.QUARTZ_GLASS_BLACK);
+		for (byte i = 0; i < 16; i++) {
+			final int color = i == 7 ? 0xC0C0C0 : DyeItem.COLORS[i];
+			Block block = BNBBlocks.BLOCKS_WITH_ITEMS.get(index + i);
+			event.itemColors.register((stack, tintIndex) -> color, block);
+		}
 	}
 	
 	private InputStream getAsStream(Identifier id) {

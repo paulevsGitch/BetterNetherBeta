@@ -15,6 +15,7 @@ public class AmetrineBlock extends TemplateBlock {
 	private static final FractalNoise NOISE = new FractalNoise(PerlinNoise::new);
 	public static final int[] TEXTURES = new int[16];
 	private final boolean transparent;
+	private final boolean emissive;
 	
 	public AmetrineBlock(Identifier identifier, float light, boolean transparent) {
 		super(identifier, Material.STONE);
@@ -22,13 +23,14 @@ public class AmetrineBlock extends TemplateBlock {
 		setLightEmittance(light);
 		setHardness(transparent ? 1.0F : 1.5F);
 		this.transparent = transparent;
+		emissive = light > 0.0F;
 		setLightOpacity(transparent ? 0 : 255);
 	}
 	
 	@Override
 	@Environment(EnvType.CLIENT)
 	public float getBrightness(BlockView blockView, int x, int y, int z) {
-		return 1.5F;
+		return emissive ? 1.5F : super.getBrightness(blockView, x, y, z);
 	}
 	
 	@Override

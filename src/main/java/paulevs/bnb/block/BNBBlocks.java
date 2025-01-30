@@ -76,6 +76,11 @@ public class BNBBlocks {
 	public static final Set<BlockTextureUpdate> UPDATE_TEXTURE_INTERFACE = new HashSet<>();
 	public static final Set<Block> UPDATE_TEXTURE_SINGLE = new HashSet<>();
 	
+	static {
+		BLOCKS_WITH_ITEMS.add(Block.NETHERRACK);
+	}
+	public static final Block LAVARRACK = make("lavarrack", LavarrackBlock::new);
+	
 	public static final NetherTerrainBlock NETHERRACK_MYCORRUM = make("netherrack_mycorrum", NetherTerrainBlock::new);
 	public static final NetherTerrainBlock SOUL_MYCORRUM = make("soul_mycorrum", SoulTerrainBlock::new);
 	public static final Block NETHERRACK_GRAVEL = make("netherrack_gravel", NetherrackGravelBlock::new);
@@ -83,8 +88,80 @@ public class BNBBlocks {
 	public static final MossCoverBlock NETHER_MOSS_COVER = makeNI("nether_moss_cover", MossCoverBlock::new);
 	public static final Block NETHER_MOSS_BLOCK = make("nether_moss_block", NetherMossBlock::new);
 	public static final Block HARDENED_NETHERRACK = make("hardened_netherrack", BNBNetherrack::new).setRelativeHardness(3.0F);
+	
+	public static final Block NETHERRACK_BRICKS = make("netherrack_bricks", NetherrackBricksBlock::new);
+	public static final Block NETHERRACK_LARGE_TILE = make("netherrack_large_tile", NetherrackBricksBlock::new);
+	public static final Block NETHERRACK_TILES = make("netherrack_tiles", NetherrackBricksBlock::new);
+	public static final Block NETHERRACK_BRICKS_STAIRS = make("netherrack_bricks_stairs", TemplateStairsBlock::new, NETHERRACK_BRICKS);
+	public static final Block NETHERRACK_TILES_STAIRS = make("netherrack_tiles_stairs", TemplateStairsBlock::new, NETHERRACK_TILES);
+	public static final Block NETHERRACK_BRICKS_SLAB_HALF = add(SlabUtil.makeHalfSlab("netherrack_bricks", NETHERRACK_BRICKS));
+	public static final Block NETHERRACK_BRICKS_SLAB_FULL = add(SlabUtil.getFullSlab());
+	public static final Block NETHERRACK_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("netherrack_tiles", NETHERRACK_TILES));
+	public static final Block NETHERRACK_TILES_SLAB_FULL = add(SlabUtil.getFullSlab());
+	
 	public static final Block SULPHURIFIED_NETHERRACK = add(new SulphurBlock(BNB.id("sulphurified_netherrack"), 1).setRelativeHardness(1.25F));
 	public static final Block SULPHURIC_NETHERRACK = add(new SulphurBlock(BNB.id("sulphuric_netherrack"), 2).setRelativeHardness(1.5F));
+	public static final Block SULPHURIC_NETHERRACK_BRICKS = make("sulphuric_netherrack_bricks", NetherrackBricksBlock::new);
+	public static final Block SULPHURIC_NETHERRACK_BRICKS_STAIRS = make("sulphuric_netherrack_bricks_stairs", TemplateStairsBlock::new, SULPHURIC_NETHERRACK_BRICKS);
+	public static final Block SULPHURIC_NETHERRACK_BRICKS_SLAB_HALF = add(SlabUtil.makeHalfSlab("sulphuric_netherrack_bricks", SULPHURIC_NETHERRACK_BRICKS));
+	public static final Block SULPHURIC_NETHERRACK_BRICKS_SLAB_FULL = add(SlabUtil.getFullSlab());
+	
+	static {
+		BLOCKS_WITH_ITEMS.add(Block.OBSIDIAN);
+	}
+	
+	public static final Block OBSIDIAN_TILE = make("obsidian_tile", BNBObsidianBlock::new);
+	public static final Block OBSIDIAN_TILES = make("obsidian_tiles", BNBObsidianBlock::new);
+	public static final Block OBSIDIAN_BRICKS = make("obsidian_bricks", BNBObsidianBlock::new);
+	public static final Block OBSIDIAN_TILES_STAIRS = make("obsidian_tiles_stairs", TemplateStairsBlock::new, OBSIDIAN_TILES);
+	public static final Block OBSIDIAN_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("obsidian_tiles", OBSIDIAN_TILES));
+	public static final Block OBSIDIAN_TILES_SLAB_FULL = add(SlabUtil.getFullSlab());
+	public static final Block OBSIDIAN_GRAVEL = make("obsidian_gravel", ObsidianGravelBlock::new);
+	public static final ShardsBlock OBSIDIAN_SHARDS = make("obsidian_shards", ObsidianShardsBlock::new);
+	
+	public static final Block SOUL_SANDSTONE = make("soul_sandstone", SoulSandstoneTexturedBlock::new);
+	public static final Block SOUL_SANDSTONE_BRICKS = make("soul_sandstone_bricks", SoulSandstoneBlock::new);
+	public static final Block SOUL_SANDSTONE_TILES = make("soul_sandstone_tiles", SoulSandstoneBlock::new);
+	public static final Block SOUL_SANDSTONE_STAIRS = make("soul_sandstone_stairs", TemplateStairsBlock::new, SOUL_SANDSTONE);
+	public static final Block SOUL_SANDSTONE_BRICKS_STAIRS = make("soul_sandstone_bricks_stairs", TemplateStairsBlock::new, SOUL_SANDSTONE_BRICKS);
+	public static final Block SOUL_SANDSTONE_TILES_STAIRS = make("soul_sandstone_tiles_stairs", TemplateStairsBlock::new, SOUL_SANDSTONE_TILES);
+	public static final Block SOUL_SANDSTONE_SLAB_HALF = add(SlabUtil.makeHalfSlab("soul_sandstone", SOUL_SANDSTONE));
+	public static final Block SOUL_SANDSTONE_SLAB_FULL = add(SlabUtil.getFullSlab());
+	public static final Block SOUL_SANDSTONE_BRICKS_SLAB_HALF = add(SlabUtil.makeHalfSlab("soul_sandstone_bricks", SOUL_SANDSTONE_BRICKS));
+	public static final Block SOUL_SANDSTONE_BRICKS_SLAB_FULL = add(SlabUtil.getFullSlab());
+	public static final Block SOUL_SANDSTONE_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("soul_sandstone_tiles", SOUL_SANDSTONE_TILES));
+	public static final Block SOUL_SANDSTONE_TILES_SLAB_FULL = add(SlabUtil.getFullSlab());
+	
+	static {
+		BLOCKS_WITH_ITEMS.add(Block.GLOWSTONE);
+	}
+	public static final ShardsBlock GLOWSTONE_SHARDS = make("glowstone_shards", GlowstoneShards::new);
+	
+	public static final Block AMETRINE_ORE = add(new BNBOreBlock(BNB.id("ametrine_ore")).setLightEmittance(0.25F));
+	public static final Block AMETRINE_LIGHT = add(new AmetrineBlock(BNB.id("ametrine_light"), 0.25F, true));
+	public static final Block AMETRINE_DENSE = add(new AmetrineBlock(BNB.id("ametrine_dense"), 0.5F, false));
+	public static final ShardsBlock AMETRINE_SHARDS = add(new AmetrineShards(BNB.id("ametrine_shards")));
+	public static final Block PURE_QUARTZ = add(new AmetrineBlock(BNB.id("pure_quartz_block"), 0.0F, false));
+	
+	public static final Block QUARTZ_GLASS_BLACK = make("quartz_glass_black", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_RED = make("quartz_glass_red", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_GREEN = make("quartz_glass_green", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_BROWN = make("quartz_glass_brown", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_BLUE = make("quartz_glass_blue", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_PURPLE = make("quartz_glass_purple", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_CYAN = make("quartz_glass_cyan", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_LIGHT_GRAY = make("quartz_glass_light_gray", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_GRAY = make("quartz_glass_gray", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_PINK = make("quartz_glass_pink", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_LIME = make("quartz_glass_lime", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_YELLOW = make("quartz_glass_yellow", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_LIGHT_BLUE = make("quartz_glass_light_blue", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_MAGENTA = make("quartz_glass_magenta", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_ORANGE = make("quartz_glass_orange", BNBGlass::new);
+	public static final Block QUARTZ_GLASS_WHITE = make("quartz_glass_white", BNBGlass::new);
+	
+	public static final Block ASH_BLOCK = add(new AshBlock(BNB.id("ash_block")));
+	public static final Block ASH_LAYER = add(new AshLayerBlock(BNB.id("ash_layer")));
 	
 	public static final Block TREE_LANTERN = make("tree_lantern", TreeLanternBlock::new);
 	
@@ -92,63 +169,66 @@ public class BNBBlocks {
 	public static final Block FALURIAN_STEM = make("falurian_stem", StemBlock::new);
 	public static final Block FALURIAN_BRANCH = make("falurian_branch", BranchBlock::new);
 	public static final BNBLeavesBlock FALURIAN_LEAVES = make("falurian_leaves", BNBLeavesBlock::new);
+	public static final Block FALURIAN_WEEPING_VINE = make("falurian_weeping_vine", BNBVineBlock::new);
 	public static final Block FALURIAN_SAPLING = makeSapling(
 		"falurian_sapling",
 		() -> BNBStructures.FALURIAN_TREE,
 		OLD_TREE_SHAPE,
 		() -> BNBStructures.LARGE_FALURIAN_TREE
 	);
-	public static final Block FALURIAN_PLANKS = make("falurian_planks", BNBPlanksBlock::new);
-	public static final Block FALURIAN_STAIRS = make("falurian_stairs", TemplateStairsBlock::new, FALURIAN_PLANKS);
-	public static final Block FALURIAN_SLAB_HALF = add(SlabUtil.makeHalfSlab("falurian", FALURIAN_PLANKS));
-	public static final Block FALURIAN_SLAB_FULL = add(SlabUtil.getFullSlab());
-	public static final Block FALURIAN_FENCE = make("falurian_fence", BNBFenceBlock::new, FALURIAN_PLANKS);
 	
 	public static final Block PIROZEN_LOG = make("pirozen_log", NetherLogBlock::new);
 	public static final Block PIROZEN_STEM = make("pirozen_stem", StemBlock::new);
 	public static final Block PIROZEN_BRANCH = make("pirozen_branch", BranchBlock::new);
 	public static final BNBLeavesBlock PIROZEN_LEAVES = make("pirozen_leaves", BNBLeavesBlock::new);
+	public static final Block PIROZEN_WEEPING_VINE = make("pirozen_weeping_vine", BNBVineBlock::new);
 	public static final Block PIROZEN_SAPLING = makeSapling(
 		"pirozen_sapling",
 		() -> BNBStructures.PIROZEN_TREE,
 		OLD_TREE_SHAPE,
 		() -> BNBStructures.LARGE_PIROZEN_TREE
 	);
-	public static final Block PIROZEN_PLANKS = make("pirozen_planks", BNBPlanksBlock::new);
-	public static final Block PIROZEN_STAIRS = make("pirozen_stairs", TemplateStairsBlock::new, PIROZEN_PLANKS);
-	public static final Block PIROZEN_SLAB_HALF = add(SlabUtil.makeHalfSlab("pirozen", PIROZEN_PLANKS));
-	public static final Block PIROZEN_SLAB_FULL = add(SlabUtil.getFullSlab());
-	public static final Block PIROZEN_FENCE = make("pirozen_fence", BNBFenceBlock::new, PIROZEN_PLANKS);
 	
 	public static final Block CHLOROPHATE_LOG = make("chlorophate_log", NetherLogBlock::new);
 	public static final Block CHLOROPHATE_STEM = make("chlorophate_stem", StemBlock::new);
 	public static final Block CHLOROPHATE_BRANCH = make("chlorophate_branch", BranchBlock::new);
 	public static final BNBLeavesBlock CHLOROPHATE_LEAVES = make("chlorophate_leaves", BNBLeavesBlock::new);
+	public static final Block CHLOROPHATE_WEEPING_VINE = make("chlorophate_weeping_vine", BNBVineBlock::new);
 	public static final Block CHLOROPHATE_SAPLING = makeSapling(
 		"chlorophate_sapling",
 		() -> BNBStructures.CHLOROPHATE_TREE,
 		OLD_TREE_SHAPE,
 		() -> BNBStructures.LARGE_CHLOROPHATE_TREE
 	);
-	public static final Block CHLOROPHATE_PLANKS = make("chlorophate_planks", BNBPlanksBlock::new);
-	public static final Block CHLOROPHATE_STAIRS = make("chlorophate_stairs", TemplateStairsBlock::new, CHLOROPHATE_PLANKS);
-	public static final Block CHLOROPHATE_SLAB_HALF = add(SlabUtil.makeHalfSlab("chlorophate", CHLOROPHATE_PLANKS));
-	public static final Block CHLOROPHATE_SLAB_FULL = add(SlabUtil.getFullSlab());
-	public static final Block CHLOROPHATE_FENCE = make("chlorophate_fence", BNBFenceBlock::new, CHLOROPHATE_PLANKS);
 	
 	public static final BNBLeavesBlock JALUMINE_LEAVES = make("jalumine_leaves", BNBLeavesTransparent::new);
 	public static final Block JALUMINE_FLOWER = make("jalumine_flower", JalumineFlowerBlock::new);
 	public static final Block JALUMINE_STEM = make("jalumine_stem", StemBlock::new);
 	public static final Block JALUMINE_BRANCH = make("jalumine_branch", BranchBlock::new);
+	
+	public static final Block FALURIAN_PLANKS = make("falurian_planks", BNBPlanksBlock::new);
+	public static final Block PIROZEN_PLANKS = make("pirozen_planks", BNBPlanksBlock::new);
+	public static final Block CHLOROPHATE_PLANKS = make("chlorophate_planks", BNBPlanksBlock::new);
 	public static final Block JALUMINE_PLANKS = make("jalumine_planks", BNBPlanksBlock::new);
+	
+	public static final Block FALURIAN_STAIRS = make("falurian_stairs", TemplateStairsBlock::new, FALURIAN_PLANKS);
+	public static final Block PIROZEN_STAIRS = make("pirozen_stairs", TemplateStairsBlock::new, PIROZEN_PLANKS);
+	public static final Block CHLOROPHATE_STAIRS = make("chlorophate_stairs", TemplateStairsBlock::new, CHLOROPHATE_PLANKS);
 	public static final Block JALUMINE_STAIRS = make("jalumine_stairs", TemplateStairsBlock::new, JALUMINE_PLANKS);
+	
+	public static final Block FALURIAN_SLAB_HALF = add(SlabUtil.makeHalfSlab("falurian", FALURIAN_PLANKS));
+	public static final Block FALURIAN_SLAB_FULL = add(SlabUtil.getFullSlab());
+	public static final Block PIROZEN_SLAB_HALF = add(SlabUtil.makeHalfSlab("pirozen", PIROZEN_PLANKS));
+	public static final Block PIROZEN_SLAB_FULL = add(SlabUtil.getFullSlab());
+	public static final Block CHLOROPHATE_SLAB_HALF = add(SlabUtil.makeHalfSlab("chlorophate", CHLOROPHATE_PLANKS));
+	public static final Block CHLOROPHATE_SLAB_FULL = add(SlabUtil.getFullSlab());
 	public static final Block JALUMINE_SLAB_HALF = add(SlabUtil.makeHalfSlab("jalumine", JALUMINE_PLANKS));
 	public static final Block JALUMINE_SLAB_FULL = add(SlabUtil.getFullSlab());
-	public static final Block JALUMINE_FENCE = make("jalumine_fence", BNBFenceBlock::new, JALUMINE_PLANKS);
 	
-	public static final Block FALURIAN_WEEPING_VINE = make("falurian_weeping_vine", BNBVineBlock::new);
-	public static final Block PIROZEN_WEEPING_VINE = make("pirozen_weeping_vine", BNBVineBlock::new);
-	public static final Block CHLOROPHATE_WEEPING_VINE = make("chlorophate_weeping_vine", BNBVineBlock::new);
+	public static final Block FALURIAN_FENCE = make("falurian_fence", BNBFenceBlock::new, FALURIAN_PLANKS);
+	public static final Block PIROZEN_FENCE = make("pirozen_fence", BNBFenceBlock::new, PIROZEN_PLANKS);
+	public static final Block CHLOROPHATE_FENCE = make("chlorophate_fence", BNBFenceBlock::new, CHLOROPHATE_PLANKS);
+	public static final Block JALUMINE_FENCE = make("jalumine_fence", BNBFenceBlock::new, JALUMINE_PLANKS);
 	
 	public static final Block FLAME_BULBS = make("flame_bulbs", BNBFloorPlantBlock::new);
 	public static final Block FLAME_BULBS_TALL = make("flame_bulbs_tall", BNBDoubleGrassPlantBlock::new);
@@ -170,17 +250,6 @@ public class BNBBlocks {
 	public static final Block PIROZEN_ROOTS = make("pirozen_roots", BNBRootsBlock::new);
 	public static final Block CHLOROPHATE_ROOTS = make("chlorophate_roots", BNBRootsBlock::new);
 	
-	public static final ShardsBlock GLOWSTONE_SHARDS = make("glowstone_shards", GlowstoneShards::new);
-	public static final ShardsBlock OBSIDIAN_SHARDS = make("obsidian_shards", ObsidianShardsBlock::new);
-	public static final Block OBSIDIAN_GRAVEL = make("obsidian_gravel", ObsidianGravelBlock::new);
-	
-	public static final Block OBSIDIAN_TILE = make("obsidian_tile", BNBObsidianBlock::new);
-	public static final Block OBSIDIAN_TILES = make("obsidian_tiles", BNBObsidianBlock::new);
-	public static final Block OBSIDIAN_BRICKS = make("obsidian_bricks", BNBObsidianBlock::new);
-	public static final Block OBSIDIAN_TILES_STAIRS = make("obsidian_tiles_stairs", TemplateStairsBlock::new, OBSIDIAN_TILES);
-	public static final Block OBSIDIAN_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("obsidian_tiles", OBSIDIAN_TILES));
-	public static final Block OBSIDIAN_TILES_SLAB_FULL = add(SlabUtil.getFullSlab());
-	
 	public static final SpiderNetBlock SPIDER_NET = make("spider_net", SpiderNetBlock::new);
 	public static final Block FALURIAN_SPIDER_COCOON = make("falurian_spider_cocoon", SpiderCocoonBlock::new);
 	public static final Block PIROZEN_SPIDER_COCOON = make("pirozen_spider_cocoon", SpiderCocoonBlock::new);
@@ -192,6 +261,7 @@ public class BNBBlocks {
 	public static final Block ORICHALCUM_TILES_STAIRS = make("orichalcum_tiles_stairs", TemplateStairsBlock::new, ORICHALCUM_TILES);
 	public static final Block ORICHALCUM_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("orichalcum_tiles", ORICHALCUM_TILES));
 	public static final Block ORICHALCUM_TILES_SLAB_FULL = add(SlabUtil.getFullSlab());
+	public static final Block NETHERRACK_ORICHALCUM_TILES = make("netherrack_orichalcum_tiles", NetherrackBricksBlock::new);
 	
 	public static final Block NETHERRACK_FURNACE = makeFurnace("netherrack_furnace", 800, "gui.bnb.netherrack_furnace");
 	public static final Block NETHERRACK_BRICK_FURNACE = makeFurnace("netherrack_brick_furnace", 200, "gui.bnb.netherrack_brick_furnace");
@@ -268,47 +338,8 @@ public class BNBBlocks {
 	public static final Block NETHER_CLOTH_WHITE_SLAB_HALF = add(SlabUtil.makeHalfSlab("nether_cloth_white", NETHER_CLOTH_WHITE));
 	public static final Block NETHER_CLOTH_WHITE_SLAB_FULL = add(SlabUtil.getFullSlab());
 	
-	public static final Block NETHERRACK_BRICKS = make("netherrack_bricks", NetherrackBricksBlock::new);
-	public static final Block NETHERRACK_LARGE_TILE = make("netherrack_large_tile", NetherrackBricksBlock::new);
-	public static final Block NETHERRACK_TILES = make("netherrack_tiles", NetherrackBricksBlock::new);
-	public static final Block NETHERRACK_BRICKS_STAIRS = make("netherrack_bricks_stairs", TemplateStairsBlock::new, NETHERRACK_BRICKS);
-	public static final Block NETHERRACK_TILES_STAIRS = make("netherrack_tiles_stairs", TemplateStairsBlock::new, NETHERRACK_TILES);
-	public static final Block NETHERRACK_BRICKS_SLAB_HALF = add(SlabUtil.makeHalfSlab("netherrack_bricks", NETHERRACK_BRICKS));
-	public static final Block NETHERRACK_BRICKS_SLAB_FULL = add(SlabUtil.getFullSlab());
-	public static final Block NETHERRACK_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("netherrack_tiles", NETHERRACK_TILES));
-	public static final Block NETHERRACK_TILES_SLAB_FULL = add(SlabUtil.getFullSlab());
-	
-	public static final Block NETHERRACK_ORICHALCUM_TILES = make("netherrack_orichalcum_tiles", NetherrackBricksBlock::new);
-	public static final Block LAVARRACK = make("lavarrack", LavarrackBlock::new);
-	
-	public static final Block SOUL_SANDSTONE = make("soul_sandstone", SoulSandstoneTexturedBlock::new);
-	public static final Block SOUL_SANDSTONE_BRICKS = make("soul_sandstone_bricks", SoulSandstoneBlock::new);
-	public static final Block SOUL_SANDSTONE_TILES = make("soul_sandstone_tiles", SoulSandstoneBlock::new);
-	public static final Block SOUL_SANDSTONE_STAIRS = make("soul_sandstone_stairs", TemplateStairsBlock::new, SOUL_SANDSTONE);
-	public static final Block SOUL_SANDSTONE_BRICKS_STAIRS = make("soul_sandstone_bricks_stairs", TemplateStairsBlock::new, SOUL_SANDSTONE_BRICKS);
-	public static final Block SOUL_SANDSTONE_TILES_STAIRS = make("soul_sandstone_tiles_stairs", TemplateStairsBlock::new, SOUL_SANDSTONE_TILES);
-	public static final Block SOUL_SANDSTONE_SLAB_HALF = add(SlabUtil.makeHalfSlab("soul_sandstone", SOUL_SANDSTONE));
-	public static final Block SOUL_SANDSTONE_SLAB_FULL = add(SlabUtil.getFullSlab());
-	public static final Block SOUL_SANDSTONE_BRICKS_SLAB_HALF = add(SlabUtil.makeHalfSlab("soul_sandstone_bricks", SOUL_SANDSTONE_BRICKS));
-	public static final Block SOUL_SANDSTONE_BRICKS_SLAB_FULL = add(SlabUtil.getFullSlab());
-	public static final Block SOUL_SANDSTONE_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("soul_sandstone_tiles", SOUL_SANDSTONE_TILES));
-	public static final Block SOUL_SANDSTONE_TILES_SLAB_FULL = add(SlabUtil.getFullSlab());
-	
-	public static final Block AMETRINE_LIGHT = add(new AmetrineBlock(BNB.id("ametrine_light"), 0.25F, true));
-	public static final Block AMETRINE_DENSE = add(new AmetrineBlock(BNB.id("ametrine_dense"), 0.5F, false));
-	public static final Block AMETRINE_ORE = add(new BNBOreBlock(BNB.id("ametrine_ore")).setLightEmittance(0.25F));
-	public static final ShardsBlock AMETRINE_SHARDS = add(new AmetrineShards(BNB.id("ametrine_shards")));
-	
-	public static final Block ASH_BLOCK = add(new AshBlock(BNB.id("ash_block")));
-	public static final Block ASH_LAYER = add(new AshLayerBlock(BNB.id("ash_layer")));
-	
 	public static final SulphuricAcidStillBlock SULPHURIC_ACID_STILL = add(new SulphuricAcidStillBlock(BNB.id("sulphuric_acid_still")));
 	public static final SulphuricAcidFlowingBlock SULPHURIC_ACID_FLOWING = add(new SulphuricAcidFlowingBlock(BNB.id("sulphuric_acid_flowing")));
-	
-	public static final Block SULPHURIC_NETHERRACK_BRICKS = make("sulphuric_netherrack_bricks", NetherrackBricksBlock::new);
-	public static final Block SULPHURIC_NETHERRACK_BRICKS_STAIRS = make("sulphuric_netherrack_bricks_stairs", TemplateStairsBlock::new, SULPHURIC_NETHERRACK_BRICKS);
-	public static final Block SULPHURIC_NETHERRACK_BRICKS_SLAB_HALF = add(SlabUtil.makeHalfSlab("sulphuric_netherrack_bricks", SULPHURIC_NETHERRACK_BRICKS));
-	public static final Block SULPHURIC_NETHERRACK_BRICKS_SLAB_FULL = add(SlabUtil.getFullSlab());
 	
 	private static <B extends Block> B add(B block) {
 		Identifier id = BlockRegistry.INSTANCE.getId(block);

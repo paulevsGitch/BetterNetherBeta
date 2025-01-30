@@ -1,0 +1,6 @@
+{
+	"parent": "bnb:block/tinted_cube_all",
+	"textures": {
+		"all": "bnb:block/quartz_glass"
+	}
+}
