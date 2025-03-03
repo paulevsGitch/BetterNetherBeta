@@ -48,8 +48,8 @@ public class BNBBiomeCommand extends BNBCommand {
 				int wz = cz << 4 | 8;
 				Biome biome = source.getBiome(wx, wz);
 				if (biomeName.equals(biome.name)) {
-					cx = wx - player.chunkX;
-					cz = wz - player.chunkZ;
+					cx = wx - (int) player.x;
+					cz = wz - (int) player.z;
 					int distance = (int) MathHelper.sqrt(cx * cx + cz * cz);
 					sendMessage(player, String.format(
 						"Nearest biome location at: §a%d %d§r (§b%d§r blocks away)",

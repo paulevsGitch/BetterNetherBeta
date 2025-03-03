@@ -38,6 +38,7 @@ import paulevs.bnb.block.stone.BNBObsidianBlock;
 import paulevs.bnb.block.stone.GlowstoneShards;
 import paulevs.bnb.block.stone.LavarrackBlock;
 import paulevs.bnb.block.stone.NetherrackBricksBlock;
+import paulevs.bnb.block.stone.NetherrackStalactite;
 import paulevs.bnb.block.stone.ObsidianShardsBlock;
 import paulevs.bnb.block.stone.ShardsBlock;
 import paulevs.bnb.block.stone.SoulSandstoneBlock;
@@ -88,6 +89,7 @@ public class BNBBlocks {
 	public static final MossCoverBlock NETHER_MOSS_COVER = makeNI("nether_moss_cover", MossCoverBlock::new);
 	public static final Block NETHER_MOSS_BLOCK = make("nether_moss_block", NetherMossBlock::new);
 	public static final Block HARDENED_NETHERRACK = make("hardened_netherrack", BNBNetherrack::new).setRelativeHardness(3.0F);
+	public static final Block NETHERRACK_STALACTITE = make("netherrack_stalactite", NetherrackStalactite::new);
 	
 	public static final Block NETHERRACK_BRICKS = make("netherrack_bricks", NetherrackBricksBlock::new);
 	public static final Block NETHERRACK_LARGE_TILE = make("netherrack_large_tile", NetherrackBricksBlock::new);
@@ -236,6 +238,7 @@ public class BNBBlocks {
 	public static final Block NETHER_DAISY = make("nether_daisy", BNBFloorPlantBlock::new).setLightEmittance(0.5F);
 	public static final Block FIREWEED = make("fireweed", BNBDoubleFloorPlantBlock::new).setLightEmittance(0.5F);
 	public static final Block LANTERN_GRASS = make("lantern_grass", BNBDoubleFloorPlantBlock::new).setLightEmittance(0.75F);
+	public static final Block BUBBLE_GRASS = make("bubble_grass", BNBFloorPlantBlock::new);
 	
 	public static final FerruminePlantBlock FERRUMINE_PLANT = make("ferrumine_plant", FerruminePlantBlock::new);
 	public static final Block NETHER_SPROUTS = make("nether_sprouts", BNBFloorPlantBlock::new);

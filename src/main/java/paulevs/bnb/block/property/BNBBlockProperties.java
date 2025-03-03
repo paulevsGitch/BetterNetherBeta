@@ -20,6 +20,8 @@ public class BNBBlockProperties {
 	public static final BooleanProperty[] FACES = new BooleanProperty[6];
 	public static final IntProperty TYPE_16 = IntProperty.of("type", 0, 15);
 	public static final IntProperty LAYER = IntProperty.of("layer", 0, 2);
+	public static final IntProperty THICKNESS = IntProperty.of("thickness", 0, 7);
+	public static final BooleanProperty INVERTED = BooleanProperty.of("inverted");
 	
 	public static BooleanProperty getByDir(Direction dir) {
 		return FACES[dir.getId()];

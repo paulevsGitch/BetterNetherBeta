@@ -31,7 +31,8 @@ public class BNBClientSounds {
 	private static final SoundEntry[] MUSIC = new SoundEntry[] {
 		getSound(BNB.id("music/conner_crow_phlogiston")),
 		getSound(BNB.id("music/conner_crow_glowstone_lullaby")),
-		getSound(BNB.id("music/conner_crow_bravais"))
+		getSound(BNB.id("music/conner_crow_bravais")),
+		getSound(BNB.id("music/conner_crow_vendel"))
 	};
 	
 	private static final byte[] MUSIC_INDEX_DATA = new byte[MUSIC.length];

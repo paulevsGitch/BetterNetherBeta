@@ -32,7 +32,6 @@ import net.modificationstation.stationapi.api.registry.Registry;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
-import net.modificationstation.stationapi.api.vanillafix.util.DyeColor;
 import net.modificationstation.stationapi.api.world.BlockStateView;
 import net.modificationstation.stationapi.impl.worldgen.BiomeColorsImpl;
 import paulevs.bnb.BNB;

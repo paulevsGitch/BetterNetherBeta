@@ -56,6 +56,7 @@ public class BNBPlacers {
 	public static final StructurePlacer JALUMINE_BUSH = new FloorPlacer(BNBStructures.JALUMINE_BUSH, 3).setNoiseDensityFunction(1, 0.75F);
 	public static final StructurePlacer FERRUMINE_PLANT = new FloorPlacer(BNBStructures.FERRUMINE_PLANT, 5);
 	
+	public static final StructurePlacer BUBBLE_GRASS = new FloorPlacer(BNBStructures.BUBBLE_GRASS, 5).setNoiseDensityFunction(1);
 	public static final StructurePlacer NETHER_SPROUTS = new FloorPlacer(BNBStructures.NETHER_SPROUTS, 7);
 	public static final StructurePlacer NETHER_SPROUTS_RARE = new FloorPlacer(BNBStructures.NETHER_SPROUTS, 2);
 	
@@ -70,4 +71,8 @@ public class BNBPlacers {
 	public static final StructurePlacer AMETRINE_CRYSTAL_FLOOR = new FloorPlacer(BNBStructures.AMETRINE_CRYSTAL_FLOOR, 1);
 	public static final StructurePlacer AMETRINE_CRYSTAL_CEILING = new CeilingPlacer(BNBStructures.AMETRINE_CRYSTAL_CEILING, 1);
 	public static final StructurePlacer AMETRINE_SHARDS = new FloorPlacer(BNBStructures.AMETRINE_SHARDS, 2).setNoiseDensityFunction(13);
+	
+	public static final StructurePlacer NETHERRACK_STALACTITE_FLOOR = new FloorPlacer(BNBStructures.NETHERRACK_STALACTITE_FLOOR, 3);
+	public static final StructurePlacer NETHERRACK_STALACTITE_CEILING = new CeilingPlacer(BNBStructures.NETHERRACK_STALACTITE_CEILING, 3);
+	public static final StructurePlacer NETHERRACK_STALACTITE_CEILING_RARE = new CeilingPlacer(BNBStructures.NETHERRACK_STALACTITE_CEILING, 2).setNoiseDensityFunction(1, 0.5F);
 }

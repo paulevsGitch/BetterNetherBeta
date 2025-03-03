@@ -82,6 +82,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.LAVA_LAKE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.feature(BNBPlacers.LARGE_FALURIAN_TREE)
 		.feature(BNBPlacers.FALLEN_FALURIAN_TREE)
 		.feature(BNBPlacers.FALURIAN_TREE)
@@ -117,6 +118,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.LAVA_LAKE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.feature(BNBPlacers.FALURIAN_BUSH)
 		.feature(BNBPlacers.FALURIAN_SPIDER_COCOON)
 		.feature(BNBPlacers.FIREWEED_STRUCTURE)
@@ -152,6 +154,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.LAVA_LAKE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.feature(BNBPlacers.LARGE_PIROZEN_TREE)
 		.feature(BNBPlacers.FALLEN_PIROZEN_TREE)
 		.feature(BNBPlacers.PIROZEN_TREE)
@@ -182,6 +185,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.LAVA_LAKE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.feature(BNBPlacers.LARGE_PIROZEN_TREE)
 		.feature(BNBPlacers.PIROZEN_SPIDER_COCOON)
 		.feature(BNBPlacers.PIROZEN_ROOTS)
@@ -211,10 +215,13 @@ public class BNBBiomes {
 		.feature(BNBPlacers.LAVA_LAKE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.feature(BNBPlacers.LARGE_CHLOROPHATE_TREE)
 		.feature(BNBPlacers.FALLEN_CHLOROPHATE_TREE)
 		.feature(BNBPlacers.CHLOROPHATE_TREE)
 		.feature(BNBPlacers.CHLOROPHATE_BUSH)
+		.feature(BNBPlacers.BUBBLE_GRASS)
+		.feature(BNBPlacers.NETHER_DAISY)
 		.feature(BNBPlacers.NETHER_SPROUTS)
 		.feature(BNBPlacers.NETHER_MOSS_CEILING)
 		.feature(BNBPlacers.NETHER_MOSS_BLOCK)
@@ -239,6 +246,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.LAVA_LAKE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.feature(BNBPlacers.CHLOROPHATE_BUSH)
 		.feature(BNBPlacers.NETHER_SPROUTS)
 		.feature(BNBPlacers.CHLOROPHATE_SPIDER_COCOON)
@@ -263,6 +271,7 @@ public class BNBBiomes {
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM_ORE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.build(), BiomeArea.VALUES).bnb_setBiomeAmbience(BNBSounds.LAVA_SEA_AMBIENCE);
 	
 	public static final Biome OBSIDIAN_SHORE = addShore(BiomeBuilder
@@ -292,6 +301,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.OBSIDIAN_BOLDER)
 		.feature(BNBPlacers.OBSIDIAN_SHARDS)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.build(), BiomeArea.VALUES).bnb_setBiomeAmbience(BNBSounds.LAVA_SEA_AMBIENCE);
 	
 	public static final Biome LAVA_OCEAN = addOcean(BiomeBuilder
@@ -313,6 +323,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.ORICHALCUM_ORE)
 		.feature(BNBPlacers.LAVARRACK_BOLDER)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.feature(BNBPlacers.LAVA_STREAM)
 		.build(), BiomeArea.VALUES).bnb_setBiomeAmbience(BNBSounds.LAVA_SEA_AMBIENCE);
 	
@@ -345,6 +356,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.LAVA_LAKE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.build(), BiomeArea.SOUL_LUSH);
 	
 	public static final Biome GLOWSTONE_FOREST = addLand(BiomeBuilder
@@ -399,6 +411,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.ORICHALCUM_ORE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.build(), BiomeArea.SOUL_MEDIUM);
 	
 	public static final Biome BARREN_SOUL_BIOME = addLand(BiomeBuilder
@@ -415,6 +428,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.ORICHALCUM_ORE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.build(), BiomeArea.SOUL_BARREN);
 	
 	public static final Biome AMETRINE_CAVE = addLand(BiomeBuilder
@@ -427,6 +441,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.ORICHALCUM_ORE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.feature(BNBPlacers.AMETRINE_ORE)
 		.feature(BNBPlacers.AMETRINE_CLUSTER_FLOOR)
 		.feature(BNBPlacers.AMETRINE_CLUSTER_CEILING)
@@ -454,6 +469,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.ORICHALCUM_ORE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.build(), BiomeArea.NETHERRACK_BARREN);
 	
 	public static final Biome STONE_GARDEN = addLand(BiomeBuilder
@@ -461,16 +477,13 @@ public class BNBBiomes {
 		.fogColor(0x801600)
 		.grassAndLeavesColor(0xFFC03939)
 		.surfaceRule(LOW_LAND_GRAVEL)
-		.surfaceRule(SurfaceBuilder
-			.start(Block.STONE)
-			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
-			.ground(1)
-			.build()
-		)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM_ORE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_FLOOR)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING)
+		.feature(BNBPlacers.NETHER_SPROUTS)
 		.build(), BiomeArea.NETHERRACK_BARREN);
 	
 	public static final Biome ASHY_PLAINS = addLand(BiomeBuilder
@@ -488,6 +501,7 @@ public class BNBBiomes {
 		.feature(BNBPlacers.ORICHALCUM_ORE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
+		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
 		.build(), BiomeArea.NETHERRACK_BARREN)
 		.bnb_setParticleProperties(12, 14, false);
 	

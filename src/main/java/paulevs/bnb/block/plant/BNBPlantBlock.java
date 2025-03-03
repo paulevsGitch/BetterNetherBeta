@@ -31,7 +31,7 @@ public abstract class BNBPlantBlock extends TemplateBlock {
 	@Override
 	public boolean canPlaceAt(Level level, int x, int y, int z) {
 		BlockState state = level.getBlockState(x, y, z);
-		if (state.getMaterial() == Material.LAVA || !state.getMaterial().isReplaceable()) return false;
+		if (state.getMaterial().isLiquid() || !state.getMaterial().isReplaceable()) return false;
 		return canStay(level, x, y, z);
 	}
 	

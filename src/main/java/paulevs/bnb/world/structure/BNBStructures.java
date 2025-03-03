@@ -19,6 +19,7 @@ import paulevs.bnb.world.structure.scatter.FerruminePlantScatterStructure;
 import paulevs.bnb.world.structure.scatter.MossScatterStructure;
 import paulevs.bnb.world.structure.scatter.SimpleScatterStructure;
 import paulevs.bnb.world.structure.scatter.SolidSupportScatterStructure;
+import paulevs.bnb.world.structure.scatter.StalactiteScatterStructure;
 import paulevs.bnb.world.structure.terrain.AmetrineClusterStructure;
 import paulevs.bnb.world.structure.terrain.BoulderStructure;
 import paulevs.bnb.world.structure.terrain.CrystalStructure;
@@ -35,6 +36,7 @@ public class BNBStructures {
 	public static final Structure PIROZEN_ROOTS = new SimpleScatterStructure(3, 5, BNBBlocks.PIROZEN_ROOTS);
 	public static final Structure CHLOROPHATE_ROOTS = new SimpleScatterStructure(3, 5, BNBBlocks.CHLOROPHATE_ROOTS);
 	public static final Structure NETHER_DAISY = new SimpleScatterStructure(3, 5, BNBBlocks.NETHER_DAISY);
+	public static final Structure BUBBLE_GRASS = new SimpleScatterStructure(2, 8, BNBBlocks.BUBBLE_GRASS);
 	public static final Structure FIREWEED = new DoublePlantScatterStructure(2, 3, BNBBlocks.FIREWEED);
 	public static final Structure FLAME_BULBS_TALL = new DoublePlantScatterStructure(2, 5, BNBBlocks.FLAME_BULBS_TALL);
 	public static final Structure LANTERN_GRASS = new DoublePlantScatterStructure(2, 4, BNBBlocks.LANTERN_GRASS);
@@ -179,4 +181,7 @@ public class BNBStructures {
 		true, 7, 4
 	);
 	public static final Structure AMETRINE_SHARDS = new SolidSupportScatterStructure(5, 7, BNBBlocks.AMETRINE_SHARDS);
+	
+	public static final Structure NETHERRACK_STALACTITE_FLOOR = new StalactiteScatterStructure(5, 10, false);
+	public static final Structure NETHERRACK_STALACTITE_CEILING = new StalactiteScatterStructure(5, 10, true);
 }

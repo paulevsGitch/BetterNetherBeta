@@ -1,0 +1,7 @@
+{
+	"parent": "bnb:block/cross_emissive",
+	"textures": {
+		"cross": "bnb:block/bubble_grass",
+		"cross_e": "bnb:block/bubble_grass_e"
+	}
+}
