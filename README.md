@@ -24,7 +24,7 @@ generator
 
 <img src="https://github.com/paulevsGitch/BetterNetherBeta/blob/stapi-2.0/screenshot.png" alt=""/>
 
-### Mod Content:
+### Mod Content (WIP):
 - **Tall Nether:** Nether height was increased to 256 blocks and lava sea level was increased to 96 blocks.
 - **Custom Nether Generator:** new Nether generator with different terrain features scattered all over the world. You can see many different terrain types including mountains, pillars, oceans, plains and so on.
 - **Many New Nether Biomes:** there are now many colorful biomes with unique resources.
