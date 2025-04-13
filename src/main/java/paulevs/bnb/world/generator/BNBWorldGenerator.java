@@ -17,8 +17,8 @@ import net.modificationstation.stationapi.impl.world.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
 import paulevs.bnb.BNB;
 import paulevs.bnb.world.generator.decorator.BNBChunkStatus;
+import paulevs.bnb.world.generator.decorator.BNBDecoratorThread;
 import paulevs.bnb.world.generator.decorator.BNBWorldChunk;
-import paulevs.bnb.world.generator.decorator.BNBWorldDecoratorThread;
 import paulevs.bnb.world.generator.terrain.ChunkTerrainMap;
 import paulevs.bnb.world.generator.terrain.CrossInterpolationCell;
 import paulevs.bnb.world.generator.terrain.TerrainMap;
@@ -61,7 +61,7 @@ public class BNBWorldGenerator {
 	
 	private static ThreadLocal<TerrainMap> mapCopies;
 	private static volatile boolean canRun = true;
-	private static volatile BNBWorldDecoratorThread decoratorThread;
+	private static volatile BNBDecoratorThread decoratorThread;
 	
 	public static void updateData(DimensionData dimensionData, long seed) {
 		RANDOM.setSeed(seed);
@@ -226,8 +226,9 @@ public class BNBWorldGenerator {
 	@Environment(EnvType.CLIENT)
 	public static void tick(Minecraft minecraft) {
 		if (decoratorThread == null || !decoratorThread.isAlive()) {
-			decoratorThread = new BNBWorldDecoratorThread();
+			decoratorThread = new BNBDecoratorThread();
 			decoratorThread.start();
+			System.out.println("Create thread " + decoratorThread.getName());
 		}
 		decoratorThread.updateMain(minecraft);
 	}
@@ -235,7 +236,7 @@ public class BNBWorldGenerator {
 	@Environment(EnvType.SERVER)
 	public static void tick(MinecraftServer server) {
 		if (decoratorThread == null || !decoratorThread.isAlive()) {
-			decoratorThread = new BNBWorldDecoratorThread();
+			decoratorThread = new BNBDecoratorThread();
 			decoratorThread.start();
 		}
 		decoratorThread.updateMain(server);
@@ -291,15 +292,26 @@ public class BNBWorldGenerator {
 			}
 			
 			Thread thread = new Thread(() -> {
+				int startX, startZ;
+				byte index;
+				
 				while (canRun) {
 					FlattenedChunk chunk = generateQueue.poll();
-					if (chunk == null) continue;
-					int startX = chunk.x << 4;
-					int startZ = chunk.z << 4;
+					if (chunk == null) {
+						try {
+							//noinspection BusyWait
+							Thread.sleep(100L);
+						}
+						catch (InterruptedException ignored) {}
+						continue;
+					}
+					
+					startX = chunk.x << 4;
+					startZ = chunk.z << 4;
 					
 					featureMap.prepare(startX, startZ);
 					
-					for (byte index = 0; index < 16; index++) {
+					for (index = 0; index < 16; index++) {
 						fillBlocksData(
 							startX,
 							startZ,
@@ -312,7 +324,7 @@ public class BNBWorldGenerator {
 					
 					fixGenerationErrors(blockSections);
 					
-					for (byte index = 0; index < 16; index++) {
+					for (index = 0; index < 16; index++) {
 						if (cells[index].isEmpty()) chunk.sections[index] = new ChunkSection(index);
 						else chunk.sections[index] = fillSection(index, blockSections[index]);
 					}

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BNBWorldDecoratorThread extends Thread {
+public class BNBDecoratorThread extends Thread {
 	private final List<PlayerPos> centers = Collections.synchronizedList(new ArrayList<>());
 	private final List<PlayerPos> centersCopy = new ArrayList<>();
 	private volatile BNBDecoratorLevel decorator;
@@ -23,13 +23,14 @@ public class BNBWorldDecoratorThread extends Thread {
 	private volatile boolean canRun;
 	private volatile Level lastLevel;
 	
-	public BNBWorldDecoratorThread() {
+	public BNBDecoratorThread() {
 		setName("BNB Chunk Decorator");
 		canRun = true;
 	}
 	
 	@Override
 	public void run() {
+		int x, z, i;
 		while (canRun) {
 			BNBDecoratorLevel decorator = this.decorator;
 			if (decorator == null) continue;
@@ -38,13 +39,23 @@ public class BNBWorldDecoratorThread extends Thread {
 			List<Vec2I> offsets = this.offsets;
 			if (offsets == null) continue;
 			boolean needSearch = true;
-			for (int i = 0; needSearch && i < offsets.size(); i++) {
+			for (i = 0; needSearch && i < offsets.size(); i++) {
 				Vec2I offset = offsets.get(i);
 				for (PlayerPos pos : centersCopy) {
-					int x = pos.x + offset.x;
-					int z = pos.z + offset.z;
-					if (decorator.decorate(x, z)) needSearch = false;
+					x = pos.x + offset.x;
+					z = pos.z + offset.z;
+					if (decorator.decorate(x, z)) {
+						needSearch = false;
+						break;
+					}
 				}
+			}
+			if (needSearch) {
+				try {
+					//noinspection BusyWait
+					Thread.sleep(100L);
+				}
+				catch (InterruptedException ignored) {}
 			}
 		}
 	}
