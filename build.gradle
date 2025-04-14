@@ -1,3 +1,10 @@
+//file:noinspection GroovyAssignabilityCheck
+//file:noinspection GroovyAccessibility
+//file:noinspection GrUnresolvedAccess
+//file:noinspection GrDeprecatedAPIUsage
+//file:noinspection GroovyUnusedAssignment
+//file:noinspection ForeignDelegate
+
 plugins {
 	id "fabric-loom" version "1.8.12"
 	id "babric-loom-extension" version "1.8.9"
@@ -59,15 +66,11 @@ repositories {
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "com.github.paulevsGitch:BIN-Mappings-BH:${project.mappings}"
-	modImplementation "babric:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
 	implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.17.2"
-	implementation "blue.endless:jankson:1.2.1"
 
-	modImplementation ("net.modificationstation:StationAPI:${project.stapi_version}") {
-		exclude group: "com.github.llamalad7.mixinextras"
-	}
+	modImplementation ("net.modificationstation:StationAPI:${project.stapi_version}")
 	
 	modImplementation("com.github.paulevsGitch:BHCreative:${project.bhcreative_version}") {
 		transitive false

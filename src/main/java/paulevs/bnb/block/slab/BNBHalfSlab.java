@@ -51,6 +51,8 @@ public class BNBHalfSlab extends BNBSlab {
 		if (player == null) return getDefaultState();
 		HitResult result = WorldUtil.raycast(context.getWorld(), player);
 		boolean down = result.pos.y - result.y < 0.5;
+		Direction side = context.getSide();
+		if (side.getAxis() == Axis.Y) down = side == Direction.UP;
 		return getDefaultState().with(BNBBlockProperties.DIRECTION, down ? Direction.DOWN : Direction.UP);
 	}
 	
