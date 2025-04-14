@@ -9,7 +9,7 @@ import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.util.Matrix3F;
-import paulevs.bnb.world.generator.decorator.BNBChunkStatus;
+import paulevs.bnb.world.decorator.BNBChunkStatus;
 import paulevs.bnb.world.structure.BNBStructureStage;
 
 import java.util.Random;

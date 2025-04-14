@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.bnb.world.biome.BNBBiomes;
-import paulevs.bnb.world.generator.decorator.BNBChunkStatus;
-import paulevs.bnb.world.generator.decorator.BNBWorldChunk;
+import paulevs.bnb.world.decorator.BNBChunkStatus;
+import paulevs.bnb.world.decorator.BNBWorldChunk;
 
 import java.util.Collection;
 

@@ -25,8 +25,8 @@ import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.entity.BNBPortalEntity;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.item.BNBItemTags;
-import paulevs.bnb.world.generator.decorator.BNBChunkStatus;
-import paulevs.bnb.world.generator.decorator.BNBWorldChunk;
+import paulevs.bnb.world.decorator.BNBChunkStatus;
+import paulevs.bnb.world.decorator.BNBWorldChunk;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin implements BNBPortalEntity {

@@ -24,7 +24,7 @@ import paulevs.bnb.world.structure.terrain.AmetrineClusterStructure;
 import paulevs.bnb.world.structure.terrain.BoulderStructure;
 import paulevs.bnb.world.structure.terrain.CrystalStructure;
 import paulevs.bnb.world.structure.terrain.NetherLake;
-import paulevs.bnb.world.structure.terrain.PoolStructure;
+import paulevs.bnb.world.structure.terrain.AcidFountain;
 import paulevs.bnb.world.structure.tree.CommonLargeTreeStructure;
 import paulevs.bnb.world.structure.tree.CommonTreeStructure;
 import paulevs.bnb.world.structure.tree.JalumineBushStructure;
@@ -139,11 +139,12 @@ public class BNBStructures {
 		BNBBlocks.GLOWSTONE_SHARDS,
 		true, 5, 3
 	);
-	public static final Structure ACID_POOL = new PoolStructure(
+	/*public static final Structure ACID_POOL = new PoolStructure(
 		BNBBlocks.SULPHURIC_NETHERRACK.getDefaultState(),
 		BNBBlocks.SULPHURIC_ACID_STILL.getDefaultState(),
 		2.0F, 4.0F
-	);
+	);*/
+	public static final Structure ACID_FOUNTAIN = new AcidFountain();
 	
 	public static final Structure FALURIAN_SPIDER_COCOON = new CocoonStructure(BNBBlocks.FALURIAN_SPIDER_COCOON);
 	public static final Structure PIROZEN_SPIDER_COCOON = new CocoonStructure(BNBBlocks.PIROZEN_SPIDER_COCOON);

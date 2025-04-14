@@ -61,10 +61,16 @@ import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
 import paulevs.bnb.util.ColorUtil;
-import paulevs.bnb.world.generator.terrain.features.RiversFeature;
-import paulevs.bnb.world.generator.terrain.features.TerrainFeature;
+import paulevs.bnb.world.terrain.TerrainMap;
+import paulevs.bnb.world.terrain.TerrainRegion;
+import paulevs.bnb.world.terrain.features.RiversFeature;
+import paulevs.bnb.world.terrain.features.TerrainFeature;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -137,7 +143,7 @@ public class ClientListener {
 		}
 		
 		printTranslations();
-		//debugTerrain();
+		debugTerrain();
 		biomeColors();
 	}
 	
@@ -396,12 +402,51 @@ public class ClientListener {
 	private void debugTerrain() {
 		if (!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
 		
-		long t = System.currentTimeMillis();
+		//long t = System.currentTimeMillis();
+		//TerrainFeature feature = new RiversFeature();
+		//feature.setSeed(2);
+		//feature.debugImage();
+		//t = System.currentTimeMillis() - t;
+		//System.out.println("\n\nF: " + t + "\n\n");
+		
+		/*TerrainMap map = new TerrainMap();
+		BufferedImage img = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
+		
+		for (int x = 0; x < 512; x++) {
+			for (int z = 0; z < 512; z++) {
+				TerrainRegion region = map.getRegion(x << 2, z << 2);
+				int rgb = 0;
+				if (region == TerrainRegion.OCEAN_NORMAL || region == TerrainRegion.OCEAN_MOUNTAINS) rgb = 0x0000FF;
+				else if (region == TerrainRegion.RIVER) rgb = 0xFF00FF;
+				else rgb = 0x00FF00;
+				img.setRGB(x, z, 0xFF000000 | rgb);
+			}
+		}
+		
+		JFrame frame = new JFrame();
+		frame.add(new JLabel(new ImageIcon(img)));
+		frame.pack();
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		
 		TerrainFeature feature = new RiversFeature();
-		feature.setSeed(2);
-		feature.debugImage();
-		t = System.currentTimeMillis() - t;
-		System.out.println("\n\nF: " + t + "\n\n");
+		BufferedImage img2 = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
+		
+		for (int x = 0; x < 512; x++) {
+			for (int z = 0; z < 512; z++) {
+				float density = feature.getDensity(x << 2, 96, z << 2);
+				int rgb = (int) (MathHelper.clamp(density * 0.5F + 0.5F, 0.0F, 1.0F) * 255);
+				img2.setRGB(x, z, 0xFF000000 | rgb << 16 | rgb << 8 | rgb);
+			}
+		}
+		
+		JFrame frame2 = new JFrame();
+		frame2.add(new JLabel(new ImageIcon(img2)));
+		frame2.pack();
+		frame2.setResizable(false);
+		frame2.setLocationRelativeTo(null);
+		frame2.setVisible(true);*/
 	}
 	
 	// TODO remove that after release

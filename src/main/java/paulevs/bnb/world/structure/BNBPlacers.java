@@ -8,7 +8,7 @@ import paulevs.bnb.world.structure.placer.VolumetricPlacer;
 
 public class BNBPlacers {
 	public static final StructurePlacer LAVA_LAKE = new FloorPlacer(BNBStructures.LAVA_LAKE, 1).setCentered(true).setRandomDensityFunction(0, 7);
-	public static final StructurePlacer ACID_POOL = new FloorPlacer(BNBStructures.ACID_POOL, 5);
+	public static final StructurePlacer ACID_FOUNTAIN = new FloorPlacer(BNBStructures.ACID_FOUNTAIN, 5);
 	public static final StructurePlacer GLOWSTONE_CRYSTAL_FLOOR = new FloorPlacer(BNBStructures.GLOWSTONE_CRYSTAL_FLOOR, 1).setRandomDensityFunction(1, 15);
 	public static final StructurePlacer GLOWSTONE_CRYSTAL_CEILING = new CeilingPlacer(BNBStructures.GLOWSTONE_CRYSTAL_CEILING, 1).setRandomDensityFunction(2, 15);
 	public static final StructurePlacer GLOWSTONE_CRYSTAL_FLOOR_FREQUENT = new FloorPlacer(BNBStructures.GLOWSTONE_CRYSTAL_FLOOR, 1).setRandomDensityFunction(1, 4);

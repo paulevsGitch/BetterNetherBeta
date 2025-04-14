@@ -16,7 +16,7 @@ import paulevs.bnb.noise.FractalNoise;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.noise.VoronoiNoise;
 import paulevs.bnb.sound.BNBSounds;
-import paulevs.bnb.world.generator.terrain.TerrainRegion;
+import paulevs.bnb.world.terrain.TerrainRegion;
 import paulevs.bnb.world.structure.BNBPlacers;
 
 import java.awt.Color;
@@ -465,7 +465,7 @@ public class BNBBiomes {
 			.build()
 		)
 		.noDimensionFeatures()
-		.feature(BNBPlacers.ACID_POOL)
+		.feature(BNBPlacers.ACID_FOUNTAIN)
 		.feature(BNBPlacers.ORICHALCUM_ORE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
@@ -493,6 +493,7 @@ public class BNBBiomes {
 		.surfaceRule(LOW_LAND_GRAVEL)
 		.surfaceRule(SurfaceBuilder
 			.start(BNBBlocks.ASH_BLOCK)
+			.range(0, 180)
 			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
 			.ground(3)
 			.build()

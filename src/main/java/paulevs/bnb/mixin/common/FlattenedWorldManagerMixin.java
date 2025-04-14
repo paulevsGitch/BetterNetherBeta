@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import paulevs.bnb.world.generator.decorator.BNBChunkStatus;
-import paulevs.bnb.world.generator.decorator.BNBWorldChunk;
+import paulevs.bnb.world.decorator.BNBChunkStatus;
+import paulevs.bnb.world.decorator.BNBWorldChunk;
 
 @Mixin(FlattenedWorldManager.class)
 public class FlattenedWorldManagerMixin {

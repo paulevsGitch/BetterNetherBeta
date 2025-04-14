@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.bnb.particle.BNBParticleManager;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
-import paulevs.bnb.world.generator.BNBWorldGenerator;
+import paulevs.bnb.world.BNBWorldGenerator;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {

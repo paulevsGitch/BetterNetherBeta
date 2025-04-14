@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.bnb.weather.BNBWeatherManager;
-import paulevs.bnb.world.generator.decorator.BNBDecoratorLevel;
+import paulevs.bnb.world.decorator.BNBDecoratorLevel;
 
 @Mixin(Level.class)
 public abstract class LevelMixin implements BlockStateView {

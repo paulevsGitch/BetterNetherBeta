@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import paulevs.bnb.world.generator.decorator.BNBChunkStatus;
-import paulevs.bnb.world.generator.decorator.BNBWorldChunk;
+import paulevs.bnb.world.decorator.BNBChunkStatus;
+import paulevs.bnb.world.decorator.BNBWorldChunk;
 
 @Mixin(AreaRenderer.class)
 public class AreaRendererMixin {
