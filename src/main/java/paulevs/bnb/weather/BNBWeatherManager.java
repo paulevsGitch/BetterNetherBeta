@@ -16,6 +16,7 @@ import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.network.packet.PacketHelper;
 import paulevs.bnb.BNB;
 import paulevs.bnb.BNBClient;
+import paulevs.bnb.achievement.BNBAchievements;
 import paulevs.bnb.block.BNBBlockTags;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.block.property.BNBBlockMaterials;
@@ -82,12 +83,8 @@ public class BNBWeatherManager {
 	private static void processBlocksAndEntities(Level level) {
 		if (currentWeather != WeatherType.RAIN) return;
 		
-		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-			updateOnClient(level);
-		}
-		else {
-			updateOnServer(level);
-		}
+		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) updateOnClient(level);
+		else updateOnServer(level);
 		
 		for (long pos : CHUNKS) {
 			int x = (int) (pos >> 32);
@@ -126,6 +123,12 @@ public class BNBWeatherManager {
 		}
 		
 		CHUNKS.clear();
+	}
+	
+	public static void resetWeatherSingleplayer(Level level) {
+		if (level.isRemote) return;
+		currentWeather = WeatherType.CLEAR;
+		fillSequence();
 	}
 	
 	@Environment(EnvType.CLIENT)
