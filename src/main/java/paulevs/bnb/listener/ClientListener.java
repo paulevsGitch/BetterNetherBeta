@@ -121,13 +121,6 @@ public class ClientListener {
 		SoulSandstoneTexturedBlock.TEXTURES[1] = blockAtlas.addTexture(BNB.id("block/soul_sandstone_bottom")).index;
 		SoulSandstoneTexturedBlock.TEXTURES[2] = blockAtlas.addTexture(BNB.id("block/soul_sandstone_side")).index;
 		
-		BNBBlocks.UPDATE_TEXTURE_SINGLE.forEach(block -> {
-			Identifier id = BlockRegistry.INSTANCE.getId(block);
-			if (id != null) {
-				block.texture = blockAtlas.addTexture(BNB.id("block/" + id.path)).index;
-			}
-		});
-		
 		BNBBlocks.UPDATE_TEXTURE_INTERFACE.forEach(update -> update.updateTextures(blockAtlas));
 		
 		BNBAchievementPage.getInstance().updateTextures(blockAtlas);

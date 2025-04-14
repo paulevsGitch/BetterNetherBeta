@@ -17,7 +17,7 @@ import paulevs.bnb.world.generator.decorator.BNBWorldChunk;
 
 import java.util.Collection;
 
-@Mixin(NetherDimension.class)
+@Mixin(value = NetherDimension.class, priority = 100)
 public class NetherDimensionMixin extends Dimension implements StationDimension {
 	@Override
 	public int getHeight() {

@@ -1,17 +1,13 @@
 package paulevs.bnb.block;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
-import net.minecraft.block.StairsBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.BlockRegistry;
-import net.modificationstation.stationapi.api.template.block.TemplateStairsBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
-import paulevs.bnb.DataGen;
 import paulevs.bnb.block.crafting.BNBFurnaceBlock;
 import paulevs.bnb.block.crafting.SpinningWheelBlock;
 import paulevs.bnb.block.falling.AshBlock;
@@ -75,7 +71,6 @@ public class BNBBlocks {
 	
 	public static final List<Block> BLOCKS_WITH_ITEMS = new ArrayList<>();
 	public static final Set<BlockTextureUpdate> UPDATE_TEXTURE_INTERFACE = new HashSet<>();
-	public static final Set<Block> UPDATE_TEXTURE_SINGLE = new HashSet<>();
 	
 	static {
 		BLOCKS_WITH_ITEMS.add(Block.NETHERRACK);
@@ -94,8 +89,8 @@ public class BNBBlocks {
 	public static final Block NETHERRACK_BRICKS = make("netherrack_bricks", NetherrackBricksBlock::new);
 	public static final Block NETHERRACK_LARGE_TILE = make("netherrack_large_tile", NetherrackBricksBlock::new);
 	public static final Block NETHERRACK_TILES = make("netherrack_tiles", NetherrackBricksBlock::new);
-	public static final Block NETHERRACK_BRICKS_STAIRS = make("netherrack_bricks_stairs", TemplateStairsBlock::new, NETHERRACK_BRICKS);
-	public static final Block NETHERRACK_TILES_STAIRS = make("netherrack_tiles_stairs", TemplateStairsBlock::new, NETHERRACK_TILES);
+	public static final Block NETHERRACK_BRICKS_STAIRS = make("netherrack_bricks_stairs", BNBStairs::new, NETHERRACK_BRICKS);
+	public static final Block NETHERRACK_TILES_STAIRS = make("netherrack_tiles_stairs", BNBStairs::new, NETHERRACK_TILES);
 	public static final Block NETHERRACK_BRICKS_SLAB_HALF = add(SlabUtil.makeHalfSlab("netherrack_bricks", NETHERRACK_BRICKS));
 	public static final Block NETHERRACK_BRICKS_SLAB_FULL = add(SlabUtil.getFullSlab());
 	public static final Block NETHERRACK_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("netherrack_tiles", NETHERRACK_TILES));
@@ -104,7 +99,7 @@ public class BNBBlocks {
 	public static final Block SULPHURIFIED_NETHERRACK = add(new SulphurBlock(BNB.id("sulphurified_netherrack"), 1).setRelativeHardness(1.25F));
 	public static final Block SULPHURIC_NETHERRACK = add(new SulphurBlock(BNB.id("sulphuric_netherrack"), 2).setRelativeHardness(1.5F));
 	public static final Block SULPHURIC_NETHERRACK_BRICKS = make("sulphuric_netherrack_bricks", NetherrackBricksBlock::new);
-	public static final Block SULPHURIC_NETHERRACK_BRICKS_STAIRS = make("sulphuric_netherrack_bricks_stairs", TemplateStairsBlock::new, SULPHURIC_NETHERRACK_BRICKS);
+	public static final Block SULPHURIC_NETHERRACK_BRICKS_STAIRS = add(new BNBStairs(BNB.id("sulphuric_netherrack_bricks_stairs"), SULPHURIC_NETHERRACK_BRICKS).setLightOpacity(0));
 	public static final Block SULPHURIC_NETHERRACK_BRICKS_SLAB_HALF = add(SlabUtil.makeHalfSlab("sulphuric_netherrack_bricks", SULPHURIC_NETHERRACK_BRICKS));
 	public static final Block SULPHURIC_NETHERRACK_BRICKS_SLAB_FULL = add(SlabUtil.getFullSlab());
 	
@@ -115,7 +110,7 @@ public class BNBBlocks {
 	public static final Block OBSIDIAN_TILE = make("obsidian_tile", BNBObsidianBlock::new);
 	public static final Block OBSIDIAN_TILES = make("obsidian_tiles", BNBObsidianBlock::new);
 	public static final Block OBSIDIAN_BRICKS = make("obsidian_bricks", BNBObsidianBlock::new);
-	public static final Block OBSIDIAN_TILES_STAIRS = make("obsidian_tiles_stairs", TemplateStairsBlock::new, OBSIDIAN_TILES);
+	public static final Block OBSIDIAN_TILES_STAIRS = make("obsidian_tiles_stairs", BNBStairs::new, OBSIDIAN_TILES);
 	public static final Block OBSIDIAN_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("obsidian_tiles", OBSIDIAN_TILES));
 	public static final Block OBSIDIAN_TILES_SLAB_FULL = add(SlabUtil.getFullSlab());
 	public static final Block OBSIDIAN_GRAVEL = make("obsidian_gravel", ObsidianGravelBlock::new);
@@ -124,9 +119,9 @@ public class BNBBlocks {
 	public static final Block SOUL_SANDSTONE = make("soul_sandstone", SoulSandstoneTexturedBlock::new);
 	public static final Block SOUL_SANDSTONE_BRICKS = make("soul_sandstone_bricks", SoulSandstoneBlock::new);
 	public static final Block SOUL_SANDSTONE_TILES = make("soul_sandstone_tiles", SoulSandstoneBlock::new);
-	public static final Block SOUL_SANDSTONE_STAIRS = make("soul_sandstone_stairs", TemplateStairsBlock::new, SOUL_SANDSTONE);
-	public static final Block SOUL_SANDSTONE_BRICKS_STAIRS = make("soul_sandstone_bricks_stairs", TemplateStairsBlock::new, SOUL_SANDSTONE_BRICKS);
-	public static final Block SOUL_SANDSTONE_TILES_STAIRS = make("soul_sandstone_tiles_stairs", TemplateStairsBlock::new, SOUL_SANDSTONE_TILES);
+	public static final Block SOUL_SANDSTONE_STAIRS = make("soul_sandstone_stairs", BNBStairs::new, SOUL_SANDSTONE);
+	public static final Block SOUL_SANDSTONE_BRICKS_STAIRS = make("soul_sandstone_bricks_stairs", BNBStairs::new, SOUL_SANDSTONE_BRICKS);
+	public static final Block SOUL_SANDSTONE_TILES_STAIRS = make("soul_sandstone_tiles_stairs", BNBStairs::new, SOUL_SANDSTONE_TILES);
 	public static final Block SOUL_SANDSTONE_SLAB_HALF = add(SlabUtil.makeHalfSlab("soul_sandstone", SOUL_SANDSTONE));
 	public static final Block SOUL_SANDSTONE_SLAB_FULL = add(SlabUtil.getFullSlab());
 	public static final Block SOUL_SANDSTONE_BRICKS_SLAB_HALF = add(SlabUtil.makeHalfSlab("soul_sandstone_bricks", SOUL_SANDSTONE_BRICKS));
@@ -213,10 +208,10 @@ public class BNBBlocks {
 	public static final Block CHLOROPHATE_PLANKS = make("chlorophate_planks", BNBPlanksBlock::new);
 	public static final Block JALUMINE_PLANKS = make("jalumine_planks", BNBPlanksBlock::new);
 	
-	public static final Block FALURIAN_STAIRS = make("falurian_stairs", TemplateStairsBlock::new, FALURIAN_PLANKS);
-	public static final Block PIROZEN_STAIRS = make("pirozen_stairs", TemplateStairsBlock::new, PIROZEN_PLANKS);
-	public static final Block CHLOROPHATE_STAIRS = make("chlorophate_stairs", TemplateStairsBlock::new, CHLOROPHATE_PLANKS);
-	public static final Block JALUMINE_STAIRS = make("jalumine_stairs", TemplateStairsBlock::new, JALUMINE_PLANKS);
+	public static final Block FALURIAN_STAIRS = make("falurian_stairs", BNBStairs::new, FALURIAN_PLANKS);
+	public static final Block PIROZEN_STAIRS = make("pirozen_stairs", BNBStairs::new, PIROZEN_PLANKS);
+	public static final Block CHLOROPHATE_STAIRS = make("chlorophate_stairs", BNBStairs::new, CHLOROPHATE_PLANKS);
+	public static final Block JALUMINE_STAIRS = make("jalumine_stairs", BNBStairs::new, JALUMINE_PLANKS);
 	
 	public static final Block FALURIAN_SLAB_HALF = add(SlabUtil.makeHalfSlab("falurian", FALURIAN_PLANKS));
 	public static final Block FALURIAN_SLAB_FULL = add(SlabUtil.getFullSlab());
@@ -261,7 +256,7 @@ public class BNBBlocks {
 	public static final Block ORICHALCUM_ORE = make("orichalcum_ore", BNBOreBlock::new);
 	public static final Block ORICHALCUM_BLOCK = make("orichalcum_block", BNBMetalBlock::new);
 	public static final Block ORICHALCUM_TILES = make("orichalcum_tiles", BNBMetalBlock::new);
-	public static final Block ORICHALCUM_TILES_STAIRS = make("orichalcum_tiles_stairs", TemplateStairsBlock::new, ORICHALCUM_TILES);
+	public static final Block ORICHALCUM_TILES_STAIRS = make("orichalcum_tiles_stairs", BNBStairs::new, ORICHALCUM_TILES);
 	public static final Block ORICHALCUM_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("orichalcum_tiles", ORICHALCUM_TILES));
 	public static final Block ORICHALCUM_TILES_SLAB_FULL = add(SlabUtil.getFullSlab());
 	public static final Block NETHERRACK_ORICHALCUM_TILES = make("netherrack_orichalcum_tiles", NetherrackBricksBlock::new);
@@ -288,23 +283,23 @@ public class BNBBlocks {
 	public static final Block NETHER_CLOTH_ORANGE = make("nether_cloth_orange", BNBCloth::new);
 	public static final Block NETHER_CLOTH_WHITE = make("nether_cloth_white", BNBCloth::new);
 	
-	public static final Block NETHER_CLOTH_STAIRS = make("nether_cloth_stairs", TemplateStairsBlock::new, NETHER_CLOTH);
-	public static final Block NETHER_CLOTH_BLACK_STAIRS = make("nether_cloth_black_stairs", TemplateStairsBlock::new, NETHER_CLOTH_BLACK);
-	public static final Block NETHER_CLOTH_RED_STAIRS = make("nether_cloth_red_stairs", TemplateStairsBlock::new, NETHER_CLOTH_RED);
-	public static final Block NETHER_CLOTH_GREEN_STAIRS = make("nether_cloth_green_stairs", TemplateStairsBlock::new, NETHER_CLOTH_GREEN);
-	public static final Block NETHER_CLOTH_BROWN_STAIRS = make("nether_cloth_brown_stairs", TemplateStairsBlock::new, NETHER_CLOTH_BROWN);
-	public static final Block NETHER_CLOTH_BLUE_STAIRS = make("nether_cloth_blue_stairs", TemplateStairsBlock::new, NETHER_CLOTH_BLUE);
-	public static final Block NETHER_CLOTH_PURPLE_STAIRS = make("nether_cloth_purple_stairs", TemplateStairsBlock::new, NETHER_CLOTH_PURPLE);
-	public static final Block NETHER_CLOTH_CYAN_STAIRS = make("nether_cloth_cyan_stairs", TemplateStairsBlock::new, NETHER_CLOTH_CYAN);
-	public static final Block NETHER_CLOTH_LIGHT_GRAY_STAIRS = make("nether_cloth_light_gray_stairs", TemplateStairsBlock::new, NETHER_CLOTH_LIGHT_GRAY);
-	public static final Block NETHER_CLOTH_GRAY_STAIRS = make("nether_cloth_gray_stairs", TemplateStairsBlock::new, NETHER_CLOTH_GRAY);
-	public static final Block NETHER_CLOTH_PINK_STAIRS = make("nether_cloth_pink_stairs", TemplateStairsBlock::new, NETHER_CLOTH_PINK);
-	public static final Block NETHER_CLOTH_LIME_STAIRS = make("nether_cloth_lime_stairs", TemplateStairsBlock::new, NETHER_CLOTH_LIME);
-	public static final Block NETHER_CLOTH_YELLOW_STAIRS = make("nether_cloth_yellow_stairs", TemplateStairsBlock::new, NETHER_CLOTH_YELLOW);
-	public static final Block NETHER_CLOTH_LIGHT_BLUE_STAIRS = make("nether_cloth_light_blue_stairs", TemplateStairsBlock::new, NETHER_CLOTH_LIGHT_BLUE);
-	public static final Block NETHER_CLOTH_MAGENTA_STAIRS = make("nether_cloth_magenta_stairs", TemplateStairsBlock::new, NETHER_CLOTH_MAGENTA);
-	public static final Block NETHER_CLOTH_ORANGE_STAIRS = make("nether_cloth_orange_stairs", TemplateStairsBlock::new, NETHER_CLOTH_ORANGE);
-	public static final Block NETHER_CLOTH_WHITE_STAIRS = make("nether_cloth_white_stairs", TemplateStairsBlock::new, NETHER_CLOTH_WHITE);
+	public static final Block NETHER_CLOTH_STAIRS = make("nether_cloth_stairs", BNBStairs::new, NETHER_CLOTH);
+	public static final Block NETHER_CLOTH_BLACK_STAIRS = make("nether_cloth_black_stairs", BNBStairs::new, NETHER_CLOTH_BLACK);
+	public static final Block NETHER_CLOTH_RED_STAIRS = make("nether_cloth_red_stairs", BNBStairs::new, NETHER_CLOTH_RED);
+	public static final Block NETHER_CLOTH_GREEN_STAIRS = make("nether_cloth_green_stairs", BNBStairs::new, NETHER_CLOTH_GREEN);
+	public static final Block NETHER_CLOTH_BROWN_STAIRS = make("nether_cloth_brown_stairs", BNBStairs::new, NETHER_CLOTH_BROWN);
+	public static final Block NETHER_CLOTH_BLUE_STAIRS = make("nether_cloth_blue_stairs", BNBStairs::new, NETHER_CLOTH_BLUE);
+	public static final Block NETHER_CLOTH_PURPLE_STAIRS = make("nether_cloth_purple_stairs", BNBStairs::new, NETHER_CLOTH_PURPLE);
+	public static final Block NETHER_CLOTH_CYAN_STAIRS = make("nether_cloth_cyan_stairs", BNBStairs::new, NETHER_CLOTH_CYAN);
+	public static final Block NETHER_CLOTH_LIGHT_GRAY_STAIRS = make("nether_cloth_light_gray_stairs", BNBStairs::new, NETHER_CLOTH_LIGHT_GRAY);
+	public static final Block NETHER_CLOTH_GRAY_STAIRS = make("nether_cloth_gray_stairs", BNBStairs::new, NETHER_CLOTH_GRAY);
+	public static final Block NETHER_CLOTH_PINK_STAIRS = make("nether_cloth_pink_stairs", BNBStairs::new, NETHER_CLOTH_PINK);
+	public static final Block NETHER_CLOTH_LIME_STAIRS = make("nether_cloth_lime_stairs", BNBStairs::new, NETHER_CLOTH_LIME);
+	public static final Block NETHER_CLOTH_YELLOW_STAIRS = make("nether_cloth_yellow_stairs", BNBStairs::new, NETHER_CLOTH_YELLOW);
+	public static final Block NETHER_CLOTH_LIGHT_BLUE_STAIRS = make("nether_cloth_light_blue_stairs", BNBStairs::new, NETHER_CLOTH_LIGHT_BLUE);
+	public static final Block NETHER_CLOTH_MAGENTA_STAIRS = make("nether_cloth_magenta_stairs", BNBStairs::new, NETHER_CLOTH_MAGENTA);
+	public static final Block NETHER_CLOTH_ORANGE_STAIRS = make("nether_cloth_orange_stairs", BNBStairs::new, NETHER_CLOTH_ORANGE);
+	public static final Block NETHER_CLOTH_WHITE_STAIRS = make("nether_cloth_white_stairs", BNBStairs::new, NETHER_CLOTH_WHITE);
 	
 	public static final Block NETHER_CLOTH_SLAB_HALF = add(SlabUtil.makeHalfSlab("nether_cloth", NETHER_CLOTH));
 	public static final Block NETHER_CLOTH_SLAB_FULL = add(SlabUtil.getFullSlab());
@@ -384,16 +379,6 @@ public class BNBBlocks {
 		BLOCKS_WITH_ITEMS.add(block);
 		if (block instanceof BlockTextureUpdate update) {
 			UPDATE_TEXTURE_INTERFACE.add(update);
-		}
-		if (block instanceof StairsBlock) {
-			UPDATE_TEXTURE_SINGLE.add(sourceBlock);
-			if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-				if (block instanceof StairsBlock) {
-					Identifier sourceID = BlockRegistry.INSTANCE.getId(sourceBlock);
-					assert sourceID != null;
-					DataGen.makeStairsRecipe(name, sourceID, id);
-				}
-			}
 		}
 		return block;
 	}
