@@ -3,6 +3,7 @@
 	"obj": "block/spider_cocoon",
 	"offset": [0.5, 0.0, 0.5],
 	"textures": {
-		"Material": "bnb:block/pirozen_cocoon"
+		"Material": "bnb:block/pirozen_cocoon",
+		"particle": "bnb:block/pirozen_cocoon"
 	}
 }

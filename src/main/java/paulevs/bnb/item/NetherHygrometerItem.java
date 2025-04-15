@@ -3,6 +3,7 @@ package paulevs.bnb.item;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.container.PlayerScreen;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.ItemStack;
 import net.modificationstation.stationapi.api.client.item.CustomTooltipProvider;
@@ -11,6 +12,7 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.bnb.BNBClient;
 import paulevs.bnb.rendering.CustomStackTexture;
+import paulevs.bnb.util.CompatUtil;
 import paulevs.bnb.weather.BNBWeatherManager;
 
 public class NetherHygrometerItem extends TemplateItem implements CustomStackTexture, CustomTooltipProvider {
@@ -30,6 +32,12 @@ public class NetherHygrometerItem extends TemplateItem implements CustomStackTex
 	public int getTexture(ItemStack stack) {
 		Minecraft minecraft = BNBClient.getMinecraft();
 		canPredict = minecraft.level != null && minecraft.level.dimension.id == -1;
+		if (canPredict) {
+			if (minecraft.currentScreen instanceof PlayerScreen) {
+				canPredict = !CompatUtil.isAMIItem(stack);
+			}
+			else canPredict = false;
+		}
 		double time = minecraft.level == null ? stack.hashCode() : (minecraft.level.getLevelTime() + stack.hashCode()) * 0.05;
 		if (canPredict) {
 			weatherDelta = MathHelper.lerp(0.002F, weatherDelta, switch (BNBWeatherManager.getCurrentWeather()) {
