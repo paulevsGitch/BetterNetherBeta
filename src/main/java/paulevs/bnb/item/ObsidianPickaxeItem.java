@@ -9,6 +9,7 @@ import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.template.item.TemplatePickaxeItem;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.block.BNBBlockTags;
+import paulevs.bnb.util.MaterialExcavatorUtil;
 
 public class ObsidianPickaxeItem extends TemplatePickaxeItem {
 	public ObsidianPickaxeItem(Identifier identifier, ToolMaterial material) {
@@ -23,7 +24,7 @@ public class ObsidianPickaxeItem extends TemplatePickaxeItem {
 	
 	@Override
 	public float getMiningSpeedMultiplier(PlayerEntity player, ItemStack itemStack, BlockView blockView, BlockPos blockPos, BlockState state) {
-		if (state.isIn(BNBBlockTags.OBSIDIAN)) return 10.0F;
+		if (state.isIn(BNBBlockTags.OBSIDIAN)) return MaterialExcavatorUtil.scaleMiningSpeed(10.0F);
 		return super.getMiningSpeedMultiplier(player, itemStack, blockView, blockPos, state);
 	}
 }

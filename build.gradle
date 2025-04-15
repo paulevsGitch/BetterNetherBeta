@@ -75,8 +75,10 @@ dependencies {
 	modImplementation("com.github.paulevsGitch:BHCreative:${project.bhcreative_version}") {
 		transitive false
 	}
-	
 	modImplementation("com.github.paulevsGitch:VanillaBlockEnhancements:${project.vbe_version}") {
+		transitive false
+	}
+	modImplementation("com.github.paulevsGitch:MaterialExcavator:${project.materialexcavator_version}") {
 		transitive false
 	}
 
