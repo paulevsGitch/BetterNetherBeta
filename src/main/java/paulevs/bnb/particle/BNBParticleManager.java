@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.level.biome.Biome;
+import net.minecraft.util.maths.Box;
 import net.modificationstation.stationapi.api.block.BlockState;
 
 import java.util.Random;
@@ -12,6 +13,10 @@ import java.util.Random;
 public class BNBParticleManager {
 	public static void tick(Minecraft minecraft) {
 		if ((minecraft.level.getLevelTime() & 1) > 0) return;
+		if (minecraft.level.getEntities(BiomeParticleEntity.class, Box.createAndCache(
+			minecraft.viewEntity.x - 15, minecraft.viewEntity.y - 15, minecraft.viewEntity.z - 15,
+			minecraft.viewEntity.x + 15, minecraft.viewEntity.y + 15, minecraft.viewEntity.z + 15
+		)).size() > 16) return;
 		Random random = minecraft.level.random;
 		int x = (int) (minecraft.viewEntity.x) + random.nextInt(31) - 15;
 		int y = (int) (minecraft.viewEntity.y) + random.nextInt(31) - 15;
