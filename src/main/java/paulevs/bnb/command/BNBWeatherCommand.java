@@ -50,7 +50,7 @@ public class BNBWeatherCommand extends BNBCommand {
 		}
 		
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) updateOnServer(type);
-		else BNBWeatherManager.setWeather(type, weatherLength);
+		BNBWeatherManager.setWeather(type, weatherLength);
 		
 		sendMessage(commandSource, "Weather set to §a" + type.name + "§r");
 	}
