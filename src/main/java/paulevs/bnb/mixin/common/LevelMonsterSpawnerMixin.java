@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.living.monster.GhastEntity;
 import net.minecraft.level.Level;
 import net.minecraft.level.LevelMonsterSpawner;
+import net.minecraft.level.chunk.Chunk;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,8 +28,10 @@ public class LevelMonsterSpawnerMixin {
 	))
 	private static boolean bnb_testChunk(Level level, int x, int y, int z, Operation<Boolean> original) {
 		if (level.dimension.id == -1) {
-			BNBChunkStatus status = BNBWorldChunk.cast(level.getChunk(x, z)).bnb_getStatus();
-			if (status != BNBChunkStatus.FINISHED) return false;
+			Chunk chunk = level.getChunk(x, z);
+			if (chunk instanceof BNBWorldChunk bnbWorldChunk) {
+				if (bnbWorldChunk.bnb_getStatus() != BNBChunkStatus.FINISHED) return false;
+			}
 		}
 		return original.call(level, x, y, z);
 	}
