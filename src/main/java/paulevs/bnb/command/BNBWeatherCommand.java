@@ -1,6 +1,14 @@
 package paulevs.bnb.command;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.living.player.PlayerEntity;
+import net.minecraft.entity.living.player.ServerPlayer;
+import net.minecraft.server.MinecraftServer;
+import net.modificationstation.stationapi.api.network.packet.PacketHelper;
+import paulevs.bnb.packet.BNBSetWeatherPacket;
+import paulevs.bnb.packet.BNBWeatherPacket;
 import paulevs.bnb.weather.BNBWeatherManager;
 import paulevs.bnb.weather.WeatherType;
 
@@ -41,16 +49,8 @@ public class BNBWeatherCommand extends BNBCommand {
 			}
 		}
 		
-		// TODO make server side
-		if (commandSource instanceof PlayerEntity player) {
-			if (player.level.isRemote) {
-				// Send packet to server
-			}
-			else BNBWeatherManager.setWeather(type, weatherLength);
-		}
-		else {
-			// Send packet from server
-		}
+		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) updateOnServer(type);
+		else BNBWeatherManager.setWeather(type, weatherLength);
 		
 		sendMessage(commandSource, "Weather set to §a" + type.name + "§r");
 	}
@@ -68,6 +68,17 @@ public class BNBWeatherCommand extends BNBCommand {
 	@Override
 	protected String[] getArgumentSuggestions(int index, String input) {
 		return getPossibleVariants(input, WEATHER_NAMES);
+	}
+	
+	@Environment(EnvType.SERVER)
+	private void updateOnServer(WeatherType type) {
+		@SuppressWarnings("deprecation")
+		MinecraftServer server = (MinecraftServer) FabricLoader.getInstance().getGameInstance();
+		for (Object playerObj : server.serverPlayerConnectionManager.players) {
+			ServerPlayer player = (ServerPlayer) playerObj;
+			if (player.dimensionId != -1) continue;
+			PacketHelper.sendTo(player, new BNBWeatherPacket(type));
+		}
 	}
 	
 	static {

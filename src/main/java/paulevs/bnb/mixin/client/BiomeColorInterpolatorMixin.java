@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BiomeColorInterpolator.class)
 public class BiomeColorInterpolatorMixin {
-	@Shadow private boolean initiated;
+	@Shadow(remap = false) private boolean initiated;
 	@Unique private BiomeSource oldSource;
 	
 	@Inject(method = "getColor", at = @At(value = "HEAD", remap = false))

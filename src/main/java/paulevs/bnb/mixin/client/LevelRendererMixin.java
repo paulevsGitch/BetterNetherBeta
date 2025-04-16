@@ -39,7 +39,7 @@ public class LevelRendererMixin {
 		target = "Lnet/minecraft/entity/Entity;canRenderFrom(Lnet/minecraft/util/maths/Vec3D;)Z"
 	))
 	private boolean bnb_skipEmptyChunks(Entity entity, Vec3D pos, Operation<Boolean> original) {
-		if (level.dimension.id == -1) {
+		if (!level.isRemote && level.dimension.id == -1) {
 			BNBWorldChunk chunk = BNBWorldChunk.cast(level.getChunkFromCache(entity.chunkX, entity.chunkZ));
 			if (chunk.bnb_getStatus() != BNBChunkStatus.FINISHED) return false;
 		}

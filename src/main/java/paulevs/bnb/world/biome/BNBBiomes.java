@@ -16,8 +16,8 @@ import paulevs.bnb.noise.FractalNoise;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.noise.VoronoiNoise;
 import paulevs.bnb.sound.BNBSounds;
-import paulevs.bnb.world.terrain.TerrainRegion;
 import paulevs.bnb.world.structure.BNBPlacers;
+import paulevs.bnb.world.terrain.TerrainRegion;
 
 import java.awt.Color;
 import java.util.ArrayList;

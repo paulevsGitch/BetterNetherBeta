@@ -9,7 +9,6 @@ import paulevs.bnb.noise.FractalNoise;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.noise.VoronoiNoise;
 import paulevs.bnb.world.map.DataMap;
-import paulevs.bnb.world.terrain.features.RiversFeature;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,6 +1,7 @@
 package paulevs.bnb.packet;
 
 import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.packet.AbstractPacket;
@@ -50,12 +51,8 @@ public class SpinningWheelPacket extends AbstractPacket implements ManagedPacket
 	
 	@Override
 	public void apply(PacketHandler handler) {
-		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-			Minecraft minecraft = BNBClient.getMinecraft();
-			if (minecraft.player.container instanceof SpinningWheelContainer wheelContainer) {
-				wheelContainer.entity.setProcess(process);
-			}
-		}
+		if (FabricLoader.getInstance().getEnvironmentType() != EnvType.CLIENT) return;
+		applyClient();
 	}
 	
 	@Override
@@ -67,5 +64,13 @@ public class SpinningWheelPacket extends AbstractPacket implements ManagedPacket
 	@Override
 	public PacketType<SpinningWheelPacket> getType() {
 		return TYPE;
+	}
+	
+	@Environment(EnvType.CLIENT)
+	private void applyClient() {
+		Minecraft minecraft = BNBClient.getMinecraft();
+		if (minecraft.player.container instanceof SpinningWheelContainer wheelContainer) {
+			wheelContainer.entity.setProcess(process);
+		}
 	}
 }

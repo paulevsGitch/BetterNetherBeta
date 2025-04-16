@@ -286,6 +286,7 @@ tile.bnb.sulphuric_netherrack_bricks_slab_half.name=Sulphuric Netherrack Bricks 
 tile.bnb.sulphuric_netherrack_bricks_stairs.name=Sulphuric Netherrack Bricks Stairs
 tile.bnb.sulphurified_netherrack.name=Sulphurified Netherrack
 tile.bnb.tree_lantern.name=Tree Lantern
+tooltip.bnb.spinning_wheel=§cCan turn plants into fiber
 tooltip.bnb.fiber_cloth_1=§cCan protect you from fire damage
 tooltip.bnb.fiber_cloth_2=§4but not from other things
 tooltip.bnb.nether_hygrometer.change=The weather will change

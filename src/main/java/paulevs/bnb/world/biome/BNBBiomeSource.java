@@ -2,9 +2,11 @@ package paulevs.bnb.world.biome;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.biome.BiomeSource;
 import net.minecraft.level.dimension.DimensionData;
+import net.minecraft.util.io.CompoundTag;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 
 import java.util.Arrays;
@@ -67,5 +69,15 @@ public class BNBBiomeSource extends BiomeSource {
 		}
 		
 		return biomes;
+	}
+	
+	@Environment(EnvType.SERVER)
+	public void requestUpdate(PlayerEntity player, long position) {
+		map.requestUpdate(player, position);
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public void updateData(long position, CompoundTag data) {
+		map.updateData(position, data);
 	}
 }

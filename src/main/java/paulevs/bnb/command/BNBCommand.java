@@ -39,9 +39,12 @@ public abstract class BNBCommand {
 	
 	protected static void sendMessage(Object commandSource, String message) {
 		if (commandSource instanceof PlayerEntity player) {
-			sendMessageClient(player, message);
+			if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+				sendMessageClient(player, message);
+			}
+			else sendMessageServer(player, message);
 		}
-		else if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
+		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
 			sendMessageServer(commandSource, message);
 		}
 	}

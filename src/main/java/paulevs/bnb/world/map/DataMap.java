@@ -2,10 +2,14 @@ package paulevs.bnb.world.map;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.Minecraft;
 import net.minecraft.level.dimension.DimensionData;
 import net.minecraft.util.io.CompoundTag;
 import net.minecraft.util.io.NBTIO;
 import paulevs.bnb.BNB;
+import paulevs.bnb.BNBClient;
 import paulevs.bnb.noise.FractalNoise;
 import paulevs.bnb.noise.PerlinNoise;
 
@@ -124,12 +128,13 @@ public abstract class DataMap<T> {
 		}
 	}
 	
-	private MapChunk<T> getChunk(int cx, int cz) {
+	protected MapChunk<T> getChunk(int cx, int cz) {
 		return chunks.computeIfAbsent(getKey(cx, cz), p -> {
 			MapChunk<T> chunk = new MapChunk<>();
 			
 			if (folder == null) {
 				generateChunk(chunk, cx, cz);
+				onRemoteDataGen(p);
 				return chunk;
 			}
 			
@@ -168,6 +173,8 @@ public abstract class DataMap<T> {
 			return chunk;
 		});
 	}
+	
+	protected void onRemoteDataGen(long position) {}
 	
 	private int getIndex(int x, int z) {
 		return (x & 63) << 6 | (z & 63);

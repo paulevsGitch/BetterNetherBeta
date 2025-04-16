@@ -34,7 +34,10 @@ import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.entity.PirozenSpiderEntity;
 import paulevs.bnb.entity.PoisonSpiderEntity;
 import paulevs.bnb.item.BNBItems;
+import paulevs.bnb.packet.BNBSetWeatherPacket;
 import paulevs.bnb.packet.BNBWeatherPacket;
+import paulevs.bnb.packet.BiomeRequestPacket;
+import paulevs.bnb.packet.BiomeUpdatePacket;
 import paulevs.bnb.packet.SpinningWheelPacket;
 import paulevs.bnb.world.biome.BNBBiomes;
 
@@ -128,5 +131,8 @@ public class CommonListener {
 	public void registerPackets(PacketRegisterEvent event) {
 		Registry.register(PacketTypeRegistry.INSTANCE, BNBWeatherPacket.ID, BNBWeatherPacket.TYPE);
 		Registry.register(PacketTypeRegistry.INSTANCE, SpinningWheelPacket.ID, SpinningWheelPacket.TYPE);
+		Registry.register(PacketTypeRegistry.INSTANCE, BiomeRequestPacket.ID, BiomeRequestPacket.TYPE);
+		Registry.register(PacketTypeRegistry.INSTANCE, BiomeUpdatePacket.ID, BiomeUpdatePacket.TYPE);
+		Registry.register(PacketTypeRegistry.INSTANCE, BNBSetWeatherPacket.ID, BNBSetWeatherPacket.TYPE);
 	}
 }

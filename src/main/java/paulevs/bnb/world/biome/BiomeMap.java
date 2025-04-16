@@ -4,13 +4,19 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.dimension.DimensionData;
+import net.minecraft.util.io.CompoundTag;
+import net.modificationstation.stationapi.api.network.packet.PacketHelper;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.noise.VoronoiNoise;
+import paulevs.bnb.packet.BiomeRequestPacket;
+import paulevs.bnb.packet.BiomeUpdatePacket;
 import paulevs.bnb.world.BNBWorldGenerator;
 import paulevs.bnb.world.map.DataMap;
+import paulevs.bnb.world.map.MapChunk;
 import paulevs.bnb.world.terrain.TerrainMap;
 import paulevs.bnb.world.terrain.TerrainRegion;
 import paulevs.bnb.world.terrain.features.OceanPillarsFeature;
@@ -24,6 +30,7 @@ public class BiomeMap extends DataMap<Biome> {
 	private final PerlinNoise soulBiomeNoise = new PerlinNoise();
 	private final PerlinNoise densityBiomeNoise = new PerlinNoise();
 	private TerrainMap map;
+	private boolean isUpdating;
 	
 	public BiomeMap() {
 		super("bnb_biomes");
@@ -73,6 +80,13 @@ public class BiomeMap extends DataMap<Biome> {
 		map = BNBWorldGenerator.getMapCopy();
 	}
 	
+	@Override
+	@Environment(EnvType.CLIENT)
+	protected void onRemoteDataGen(long position) {
+		if (isUpdating) return;
+		PacketHelper.send(new BiomeRequestPacket(position));
+	}
+	
 	@Environment(EnvType.CLIENT)
 	public void setSeed(int seed) {
 		super.setSeed(seed);
@@ -80,5 +94,23 @@ public class BiomeMap extends DataMap<Biome> {
 		soulBiomeNoise.setSeed(random.nextInt());
 		densityBiomeNoise.setSeed(random.nextInt());
 		map = BNBWorldGenerator.getMapCopy();
+	}
+	
+	@Environment(EnvType.SERVER)
+	public void requestUpdate(PlayerEntity player, long position) {
+		int x = (int) (position >> 32);
+		int y = (int) position;
+		MapChunk<Biome> chunk = getChunk(x, y);
+		PacketHelper.sendTo(player, new BiomeUpdatePacket(position, chunk, this::serialize));
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public void updateData(long position, CompoundTag data) {
+		int x = (int) (position >> 32);
+		int y = (int) position;
+		isUpdating = true;
+		MapChunk<Biome> chunk = getChunk(x, y);
+		isUpdating = false;
+		chunk.load(data, this::deserialize);
 	}
 }

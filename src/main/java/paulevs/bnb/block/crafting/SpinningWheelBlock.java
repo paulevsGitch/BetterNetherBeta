@@ -5,11 +5,13 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.level.BlockView;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
+import net.modificationstation.stationapi.api.client.item.CustomTooltipProvider;
 import net.modificationstation.stationapi.api.gui.screen.container.GuiHelper;
 import net.modificationstation.stationapi.api.item.ItemPlacementContext;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
@@ -24,8 +26,9 @@ import paulevs.bnb.block.property.BNBBlockProperties;
 import paulevs.bnb.gui.container.SpinningWheelContainer;
 import paulevs.bnb.item.BNBItems;
 
-public class SpinningWheelBlock extends TemplateBlockWithEntity {
+public class SpinningWheelBlock extends TemplateBlockWithEntity implements CustomTooltipProvider {
 	public static final Identifier GUI_ID = BNB.id("spinning_wheel");
+	private static final String[] TOOLTIP = new String[2];
 	
 	public SpinningWheelBlock(Identifier identifier) {
 		super(identifier, Material.STONE);
@@ -95,5 +98,13 @@ public class SpinningWheelBlock extends TemplateBlockWithEntity {
 			drop(level, x, y, z, stack);
 		}
 		level.removeBlockEntity(x, y, z);
+	}
+	
+	@Override
+	public String[] getTooltip(ItemStack stack, String originalTooltip) {
+		System.out.println("Get!");
+		TOOLTIP[0] = getTranslatedName();
+		TOOLTIP[1] = I18n.translate("tooltip.bnb.spinning_wheel");
+		return TOOLTIP;
 	}
 }
