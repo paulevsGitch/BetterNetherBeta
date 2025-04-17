@@ -51,6 +51,7 @@ import paulevs.bnb.block.tree.StemBlock;
 import paulevs.bnb.block.tree.TreeLanternBlock;
 import paulevs.bnb.block.tree.TreeSaplingBlock;
 import paulevs.bnb.rendering.BlockTextureUpdate;
+import paulevs.bnb.util.CompatUtil;
 import paulevs.bnb.world.structure.BNBStructures;
 
 import java.util.ArrayList;
@@ -96,8 +97,8 @@ public class BNBBlocks {
 	public static final Block NETHERRACK_TILES_SLAB_HALF = add(SlabUtil.makeHalfSlab("netherrack_tiles", NETHERRACK_TILES));
 	public static final Block NETHERRACK_TILES_SLAB_FULL = add(SlabUtil.getFullSlab());
 	
-	public static final Block SULPHURIFIED_NETHERRACK = add(new SulphurBlock(BNB.id("sulphurified_netherrack"), 1).setRelativeHardness(1.25F));
-	public static final Block SULPHURIC_NETHERRACK = add(new SulphurBlock(BNB.id("sulphuric_netherrack"), 2).setRelativeHardness(1.5F));
+	public static final Block SULPHURIFIED_NETHERRACK = add(new SulphurBlock(BNB.id("sulphurified_netherrack"), 1, 1).setRelativeHardness(1.25F));
+	public static final Block SULPHURIC_NETHERRACK = add(new SulphurBlock(BNB.id("sulphuric_netherrack"), 2, 4).setRelativeHardness(1.5F));
 	public static final Block SULPHURIC_NETHERRACK_BRICKS = make("sulphuric_netherrack_bricks", NetherrackBricksBlock::new);
 	public static final Block SULPHURIC_NETHERRACK_BRICKS_STAIRS = add(new BNBStairs(BNB.id("sulphuric_netherrack_bricks_stairs"), SULPHURIC_NETHERRACK_BRICKS).setLightOpacity(0));
 	public static final Block SULPHURIC_NETHERRACK_BRICKS_SLAB_HALF = add(SlabUtil.makeHalfSlab("sulphuric_netherrack_bricks", SULPHURIC_NETHERRACK_BRICKS));
@@ -445,5 +446,10 @@ public class BNBBlocks {
 		CHLOROPHATE_LEAVES.setSapling(CHLOROPHATE_SAPLING);
 		SULPHURIC_ACID_STILL.flowingFluid = SULPHURIC_ACID_FLOWING;
 		SULPHURIC_ACID_FLOWING.stillFluid = SULPHURIC_ACID_STILL;
+		
+		CompatUtil.registerExcavatorPattern(FALURIAN_LOG, FALURIAN_STEM, FALURIAN_BRANCH, TREE_LANTERN);
+		CompatUtil.registerExcavatorPattern(PIROZEN_LOG, PIROZEN_STEM, PIROZEN_BRANCH, TREE_LANTERN);
+		CompatUtil.registerExcavatorPattern(CHLOROPHATE_LOG, CHLOROPHATE_STEM, CHLOROPHATE_BRANCH, TREE_LANTERN);
+		CompatUtil.registerExcavatorPattern(JALUMINE_STEM, JALUMINE_BRANCH);
 	}
 }

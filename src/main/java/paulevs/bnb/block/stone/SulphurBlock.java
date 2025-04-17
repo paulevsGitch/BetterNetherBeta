@@ -9,15 +9,18 @@ import paulevs.bnb.item.BNBItems;
 import java.util.List;
 
 public class SulphurBlock extends BNBNetherrack {
-	private final int dropCount;
+	private final int dropCountMin;
+	private final int dropDelta;
 	
-	public SulphurBlock(Identifier identifier, int dropCount) {
+	public SulphurBlock(Identifier identifier, int dropCountMin, int dropCountMax) {
 		super(identifier);
-		this.dropCount = dropCount;
+		this.dropCountMin = dropCountMin;
+		this.dropDelta = dropCountMax - dropCountMin + 1;
 	}
 	
 	@Override
-	public List<ItemStack> getDropList(Level world, int x, int y, int z, BlockState state, int meta) {
-		return List.of(new ItemStack(BNBItems.SULPHUR, dropCount));
+	public List<ItemStack> getDropList(Level level, int x, int y, int z, BlockState state, int meta) {
+		int count = dropDelta > 1 ? level.random.nextInt(dropDelta) + dropCountMin : dropCountMin;
+		return List.of(new ItemStack(NETHERRACK), new ItemStack(BNBItems.SULPHUR, count));
 	}
 }

@@ -43,12 +43,16 @@
 	"suggests": {
 		"bhcreative": ">=0.4.5",
 		"retrocommands": ">=0.5.0",
-		"vbe": ">=0.2.2"
+		"vbe": ">=0.2.2",
+		"materialexcavator": ">=0.2.0"
 	},
 	"depends": {
 		"minecraft": "1.0.0-beta.7.3",
 		"stationapi": ">=2.0.0-alpha.3",
 		"fabricloader": ">=0.15.6-babric.1"
+	},
+	"breaks": {
+		"materialexcavator": "<0.2.0"
 	},
 	
 	"custom": {

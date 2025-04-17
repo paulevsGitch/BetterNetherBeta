@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class BranchBlock extends TemplateBlock {
 	public BranchBlock(Identifier identifier) {
 		super(identifier, Material.WOOD);
+		setHardness(LOG.getHardness() * 0.75F);
 		setSounds(WOOD_SOUNDS);
-		setHardness(0.25F);
 		
 		BlockState state = getDefaultState();
 		for (byte i = 0; i < 6; i++) {

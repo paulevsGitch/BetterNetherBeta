@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class StemBlock extends BNBPillarBlock {
 	public StemBlock(Identifier identifier) {
 		super(identifier, BNBBlockMaterials.NETHER_LOG);
-		setHardness(LOG.getHardness());
+		setHardness(LOG.getHardness() * 0.75F);
 		setSounds(WOOD_SOUNDS);
 	}
 	
