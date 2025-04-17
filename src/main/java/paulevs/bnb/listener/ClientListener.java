@@ -315,25 +315,25 @@ public class ClientListener {
 		}
 	}
 	
-	@EventListener
+	/*@EventListener
 	public void onTooltipBuilding(TooltipBuildEvent event) {
 		if (event.itemStack.getType() instanceof BlockItem blockItem && blockItem instanceof CustomTooltipProvider provider) {
 			System.out.println("Tooltip!");
 			String[] tooltip = provider.getTooltip(event.itemStack, "");
 			event.tooltip.addAll(Arrays.asList(tooltip));
 		}
-		/*if (event.itemStack.getType() instanceof BlockItem item) {
-			if (item.getBlock() instanceof CustomTooltipProvider provider) {
-				event.textManager.drawMultilineText(
-					String.join("\n", provider.getTooltip(event.itemStack, event.originalTooltip)),
-					event.mouseX,
-					event.mouseY,
-					10,
-					0xFFFFFFFF
-				);
-			}
-		}*/
-	}
+		// if (event.itemStack.getType() instanceof BlockItem item) {
+		// 	if (item.getBlock() instanceof CustomTooltipProvider provider) {
+		// 		event.textManager.drawMultilineText(
+		// 			String.join("\n", provider.getTooltip(event.itemStack, event.originalTooltip)),
+		// 			event.mouseX,
+		// 			event.mouseY,
+		// 			10,
+		// 			0xFFFFFFFF
+		// 		);
+		// 	}
+		// }
+	}*/
 	
 	private InputStream getAsStream(Identifier id) {
 		String path = "assets/bnb/stationapi/models/" + id.path + ".json";

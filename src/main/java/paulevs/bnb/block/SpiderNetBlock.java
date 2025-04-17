@@ -25,6 +25,9 @@ import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.block.property.BNBBlockProperties;
 import paulevs.bnb.sound.BNBSounds;
 
+import java.util.Collections;
+import java.util.List;
+
 public class SpiderNetBlock extends TemplateBlock {
 	public SpiderNetBlock(Identifier id) {
 		super(id, BNBBlockMaterials.SPIDER_NET);
@@ -146,6 +149,11 @@ public class SpiderNetBlock extends TemplateBlock {
 		}
 		drop(level, x, y, z, new ItemStack(this));
 		if (!BNB.isCreative(player)) heldItem.applyDamage(1, player);
+	}
+	
+	@Override
+	public List<ItemStack> getDropList(Level world, int x, int y, int z, BlockState state, int meta) {
+		return Collections.emptyList();
 	}
 	
 	private boolean isSupport(BlockState state) {
