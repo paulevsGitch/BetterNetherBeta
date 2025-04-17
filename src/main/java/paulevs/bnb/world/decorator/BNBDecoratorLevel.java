@@ -15,7 +15,9 @@ import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.source.LevelSource;
 import net.minecraft.level.structure.Structure;
 import net.minecraft.util.maths.Vec3I;
+import net.modificationstation.stationapi.api.StationAPI;
 import net.modificationstation.stationapi.api.block.BlockState;
+import net.modificationstation.stationapi.api.event.world.gen.WorldGenEvent;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.impl.world.chunk.ChunkSection;
@@ -285,6 +287,24 @@ public class BNBDecoratorLevel extends Level {
 		}
 		
 		placeStructures(biome, cx, cz, status, x1, z1);
+		
+		if (status == BNBChunkStatus.POPULATION_BIG) {
+			random.setSeed(getSeed());
+			long xRandomMultiplier = (random.nextLong() / 2L) * 2L + 1L;
+			long zRandomMultiplier = (random.nextLong() / 2L) * 2L + 1L;
+			random.setSeed((long) cx * xRandomMultiplier + (long) cz * zRandomMultiplier ^ getSeed());
+			StationAPI.EVENT_BUS.post(
+				WorldGenEvent.ChunkDecoration
+					.builder()
+					.world(this)
+					.worldSource(source)
+					.biome(biome)
+					.x(cx << 4)
+					.z(cz << 4)
+					.random(random)
+					.build()
+			);
+		}
 		
 		SandBlock.fallInstantly = fallInstantly;
 	}
