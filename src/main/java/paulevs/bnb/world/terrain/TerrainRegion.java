@@ -9,5 +9,5 @@ public enum TerrainRegion {
 	HILLS,
 	MOUNTAINS,
 	BRIDGES,
-	// RIVER
+	RIVERS
 }

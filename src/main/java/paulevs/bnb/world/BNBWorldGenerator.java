@@ -250,7 +250,7 @@ public class BNBWorldGenerator {
 	}
 	
 	static {
-		addFeature(BNB.id("plains"), PlainsFeature::new, TerrainRegion.PLAINS);
+		addFeature(BNB.id("plains"), PlainsFeature::new, TerrainRegion.PLAINS, TerrainRegion.RIVERS);
 		addFeature(BNB.id("arches"), ArchesFeature::new, TerrainRegion.PLAINS);
 		addFeature(BNB.id("flat_hills"), FlatHillsFeature::new, TerrainRegion.HILLS);
 		addFeature(BNB.id("flat_mountains"), FlatMountainsFeature::new, TerrainRegion.MOUNTAINS);
@@ -261,7 +261,6 @@ public class BNBWorldGenerator {
 		addFeature(BNB.id("cubes"), CubesFeature::new, TerrainRegion.HILLS, TerrainRegion.MOUNTAINS);
 		addFeature(BNB.id("ocean_pillars"), OceanPillarsFeature::new, TerrainRegion.OCEAN_MOUNTAINS);
 		addFeature(BNB.id("land_pillars"), LandPillarsFeature::new, TerrainRegion.MOUNTAINS);
-		// addFeature(BNB.id("rivers"), FlatOceanFeature::new, TerrainRegion.RIVER);
 		
 		ChunkTerrainMap.addCommonFeature(BigPillarsFeature::new);
 		ChunkTerrainMap.addCommonFeature(ThinPillarsFeature::new);

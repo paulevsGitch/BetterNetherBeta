@@ -2,6 +2,9 @@ package paulevs.bnb.world.map;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.level.dimension.DimensionData;
 import net.minecraft.util.io.CompoundTag;
 import net.minecraft.util.io.NBTIO;
@@ -41,10 +44,13 @@ public abstract class DataMap<T> {
 		random.setSeed(seed);
 		distortionX.setSeed(random.nextInt());
 		distortionZ.setSeed(random.nextInt());
-		folder = new File(data.getFile("").getParentFile(), dataKey);
-		if (!folder.exists()) {
-			//noinspection ResultOfMethodCallIgnored
-			folder.mkdirs();
+		File root = data.getFile("");
+		if (root != null) {
+			folder = new File(root.getParentFile(), dataKey);
+			if (!folder.exists()) {
+				//noinspection ResultOfMethodCallIgnored
+				folder.mkdirs();
+			}
 		}
 	}
 	
@@ -130,7 +136,9 @@ public abstract class DataMap<T> {
 			
 			if (folder == null) {
 				generateChunk(chunk, cx, cz);
-				onRemoteDataGen(p);
+				if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+					onRemoteDataGen(p);
+				}
 				return chunk;
 			}
 			
@@ -170,6 +178,7 @@ public abstract class DataMap<T> {
 		});
 	}
 	
+	@Environment(EnvType.CLIENT)
 	protected void onRemoteDataGen(long position) {}
 	
 	private int getIndex(int x, int z) {

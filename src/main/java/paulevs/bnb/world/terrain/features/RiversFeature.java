@@ -20,12 +20,12 @@ public class RiversFeature extends TerrainFeature {
 	@Override
 	public float getDensity(int x, int y, int z) {
 		if (y < 80 || y > 240) return 2.0F;
-		double dx = x * 0.01;
-		double dz = z * 0.01;
-		double px = x * 0.02 + distortionNoiseX.get(dx, dz) * 3.0F;
-		double pz = z * 0.02 + distortionNoiseZ.get(dx, dz) * 3.0F;
+		double dx = x * 0.007;
+		double dz = z * 0.007;
+		double px = dx * 2.0 + distortionNoiseX.get(dx, dz) * 2.0F;
+		double pz = dz * 2.0 + distortionNoiseZ.get(dx, dz) * 2.0F;
 		float density = riversNoise.get(px * 0.2, pz * 0.2);
-		density = Math.abs(density - 0.5F) * 2.0F + 0.45F;
+		density = Math.abs(density - 0.5F) * 2.0F + 0.48F;
 		density += gradient(y, 80, 96, 0.02F, 0.0F);
 		density += gradient(y, 97, 128, 0.0F, -0.1F);
 		density += gradient(y, 129, 240, 0.0F, 0.5F);
@@ -52,13 +52,13 @@ public class RiversFeature extends TerrainFeature {
 		REGION_DISTORTION_NOISE_Z.setSeed(RANDOM.nextInt());
 	}
 	
-	public static boolean isRiverRegion(int x, int z) {
-		double dx = x * 0.01;
-		double dz = z * 0.01;
-		double px = x * 0.02 + REGION_DISTORTION_NOISE_X.get(dx, dz) * 3.0F;
-		double pz = z * 0.02 + REGION_DISTORTION_NOISE_Z.get(dx, dz) * 3.0F;
+	public static boolean isRiverRegion(double x, double z) {
+		double dx = x * 0.007;
+		double dz = z * 0.007;
+		double px = dx * 2.0 + REGION_DISTORTION_NOISE_X.get(dx, dz) * 2.0F;
+		double pz = dz * 2.0 + REGION_DISTORTION_NOISE_Z.get(dx, dz) * 2.0F;
 		float density = REGION_RIVERS_NOISE.get(px * 0.2, pz * 0.2);
 		density = Math.abs(density - 0.5F) * 2.0F + 0.45F;
-		return density < 0.75F;
+		return density < 0.5F;
 	}
 }

@@ -5,11 +5,13 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.living.player.PlayerEntity;
+import net.minecraft.level.Level;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.dimension.DimensionData;
 import net.minecraft.util.io.CompoundTag;
 import net.modificationstation.stationapi.api.network.packet.PacketHelper;
 import net.modificationstation.stationapi.api.util.Identifier;
+import paulevs.bnb.BNBClient;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.noise.VoronoiNoise;
 import paulevs.bnb.packet.BiomeRequestPacket;
@@ -29,7 +31,7 @@ public class BiomeMap extends DataMap<Biome> {
 	private final VoronoiNoise cellNoise = new VoronoiNoise();
 	private final PerlinNoise soulBiomeNoise = new PerlinNoise();
 	private final PerlinNoise densityBiomeNoise = new PerlinNoise();
-	private TerrainMap map;
+	private TerrainMap map = new TerrainMap();
 	private boolean isUpdating;
 	
 	public BiomeMap() {
@@ -58,6 +60,9 @@ public class BiomeMap extends DataMap<Biome> {
 				region = TerrainRegion.MOUNTAINS;
 			}
 		}
+		if (region == TerrainRegion.RIVERS) {
+			region = TerrainRegion.PLAINS;
+		}
 		Map<BiomeArea, List<Biome>> areaMap = BNBBiomes.BIOME_BY_TERRAIN.get(region);
 		if (areaMap == null || areaMap.isEmpty()) return Biome.NETHER;
 		float soul = soulBiomeNoise.get(x * 0.05, z * 0.05);
@@ -84,6 +89,8 @@ public class BiomeMap extends DataMap<Biome> {
 	@Environment(EnvType.CLIENT)
 	protected void onRemoteDataGen(long position) {
 		if (isUpdating) return;
+		Level level = BNBClient.getMinecraft().level;
+		if (level == null || !level.isRemote) return;
 		PacketHelper.send(new BiomeRequestPacket(position));
 	}
 	

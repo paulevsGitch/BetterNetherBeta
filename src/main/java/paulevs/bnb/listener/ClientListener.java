@@ -11,18 +11,16 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
 import net.minecraft.client.resource.language.I18n;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.DyeItem;
 import net.minecraft.level.BlockView;
+import net.minecraft.level.biome.Biome;
 import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.client.event.color.block.BlockColorsRegisterEvent;
 import net.modificationstation.stationapi.api.client.event.color.item.ItemColorsRegisterEvent;
-import net.modificationstation.stationapi.api.client.event.gui.screen.container.TooltipBuildEvent;
 import net.modificationstation.stationapi.api.client.event.render.entity.EntityRendererRegisterEvent;
 import net.modificationstation.stationapi.api.client.event.render.model.LoadUnbakedModelEvent;
 import net.modificationstation.stationapi.api.client.event.texture.TextureRegisterEvent;
 import net.modificationstation.stationapi.api.client.gui.screen.GuiHandler;
-import net.modificationstation.stationapi.api.client.item.CustomTooltipProvider;
 import net.modificationstation.stationapi.api.client.registry.GuiHandlerRegistry;
 import net.modificationstation.stationapi.api.client.texture.SpriteIdentifier;
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
@@ -64,8 +62,17 @@ import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
 import paulevs.bnb.util.ColorUtil;
+import paulevs.bnb.world.biome.BiomeMap;
+import paulevs.bnb.world.terrain.TerrainMap;
+import paulevs.bnb.world.terrain.TerrainRegion;
+import paulevs.bnb.world.terrain.features.RiversFeature;
+import paulevs.bnb.world.terrain.features.TerrainFeature;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -74,7 +81,6 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -425,28 +431,49 @@ public class ClientListener {
 		//t = System.currentTimeMillis() - t;
 		//System.out.println("\n\nF: " + t + "\n\n");
 		
-		/*TerrainMap map = new TerrainMap();
-		BufferedImage img = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
+		TerrainMap regionMap = new TerrainMap();
+		BiomeMap biomeMap = new BiomeMap();
+		BufferedImage img1 = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage img2 = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
+		int scale = 4;
 		
 		for (int x = 0; x < 512; x++) {
 			for (int z = 0; z < 512; z++) {
-				TerrainRegion region = map.getRegion(x << 2, z << 2);
-				int rgb = 0;
+				TerrainRegion region = regionMap.getRegion(x * scale, z * scale);
+				
+				int rgb;
 				if (region == TerrainRegion.OCEAN_NORMAL || region == TerrainRegion.OCEAN_MOUNTAINS) rgb = 0x0000FF;
-				else if (region == TerrainRegion.RIVER) rgb = 0xFF00FF;
+				else if (region == TerrainRegion.SHORE_NORMAL || region == TerrainRegion.SHORE_MOUNTAINS) rgb = 0x00CCFF;
+				else if (region == TerrainRegion.RIVERS) rgb = 0xFF00FF;
 				else rgb = 0x00FF00;
-				img.setRGB(x, z, 0xFF000000 | rgb);
+				
+				img1.setRGB(x, z, 0xFF000000 | rgb);
+				
+				Biome biome = biomeMap.getData(x * scale, z * scale);
+				img2.setRGB(x, z, 0xFF000000 | biome.name.hashCode());
 			}
 		}
 		
-		JFrame frame = new JFrame();
-		frame.add(new JLabel(new ImageIcon(img)));
-		frame.pack();
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
+		JFrame frame1 = new JFrame();
+		frame1.add(new JLabel(new ImageIcon(img1)));
+		frame1.pack();
+		frame1.setResizable(false);
+		frame1.setLocationRelativeTo(null);
+		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame1.setVisible(true);
+		
+		JFrame frame2 = new JFrame();
+		frame2.add(new JLabel(new ImageIcon(img2)));
+		frame2.pack();
+		frame2.setResizable(false);
+		frame2.setLocationRelativeTo(null);
+		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame2.setVisible(true);
 		
 		TerrainFeature feature = new RiversFeature();
+		feature.debugImage();
+		
+		/*TerrainFeature feature = new RiversFeature();
 		BufferedImage img2 = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
 		
 		for (int x = 0; x < 512; x++) {

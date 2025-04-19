@@ -9,6 +9,7 @@ import paulevs.bnb.noise.FractalNoise;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.noise.VoronoiNoise;
 import paulevs.bnb.world.map.DataMap;
+import paulevs.bnb.world.terrain.features.RiversFeature;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,14 +80,6 @@ public class TerrainMap extends DataMap<Identifier> {
 	}
 	
 	public TerrainRegion getRegion(int x, int z) {
-		TerrainRegion region = getRegionSmooth(x, z);
-		/*if (region != TerrainRegion.OCEAN_NORMAL && region != TerrainRegion.OCEAN_MOUNTAINS) {
-			if (RiversFeature.isRiverRegion(x, z)) region = TerrainRegion.RIVER;
-		}*/
-		return region;
-	}
-	
-	private TerrainRegion getRegionSmooth(int x, int z) {
 		double preX = (COS * x - SIN * z) / 16.0 + distortionX.get(x * 0.03, z * 0.03) * 1.5F;
 		double preZ = (SIN * x + COS * z) / 16.0 + distortionX.get(x * 0.03, z * 0.03) * 1.5F;
 		
@@ -142,7 +135,7 @@ public class TerrainMap extends DataMap<Identifier> {
 	}
 	
 	public TerrainRegion getRegionInternal(int x, int z) {
-		// if (RiversFeature.isRiverRegion(x, z)) return TerrainRegion.RIVER;
+		// if (RiversFeature.isRiverRegion(x, z)) return TerrainRegion.RIVERS;
 		float ocean = oceanNoise.get(x * 0.0375, z * 0.0375);
 		float mountains = mountainNoise.get(x * 0.075, z * 0.075);
 		if (ocean > 0.5F) {
@@ -155,10 +148,26 @@ public class TerrainMap extends DataMap<Identifier> {
 				oceanNoise.get((x - 1) * 0.0375, z * 0.0375) < 0.5F ||
 				oceanNoise.get(x * 0.0375, (z + 1) * 0.0375) < 0.5F ||
 				oceanNoise.get(x * 0.0375, (z - 1) * 0.0375) < 0.5F
-			) return mountains > 0.6F ? TerrainRegion.SHORE_MOUNTAINS : TerrainRegion.SHORE_NORMAL;
+			) {
+				double px = 16.0 * (x * COS + z * SIN);
+				double pz = 16.0 * (z * COS - x * SIN);
+				float dx = distortionX.get(px * 0.03, pz * 0.03) * 1.5F;
+				float dz = distortionZ.get(px * 0.03, pz * 0.03) * 1.5F;
+				px -= dx;
+				pz -= dz;
+				if (RiversFeature.isRiverRegion(px, pz)) return TerrainRegion.RIVERS;
+				return mountains > 0.6F ? TerrainRegion.SHORE_MOUNTAINS : TerrainRegion.SHORE_NORMAL;
+			}
 			if (ocean < 0.63F) return TerrainRegion.OCEAN_NORMAL;
 			return mountains > 0.4F ? TerrainRegion.OCEAN_MOUNTAINS : TerrainRegion.OCEAN_NORMAL;
 		}
+		double px = 16.0 * (x * COS + z * SIN);
+		double pz = 16.0 * (z * COS - x * SIN);
+		float dx = distortionX.get(px * 0.03, pz * 0.03) * 1.5F;
+		float dz = distortionZ.get(px * 0.03, pz * 0.03) * 1.5F;
+		px -= dx;
+		pz -= dz;
+		if (RiversFeature.isRiverRegion(px, pz)) return TerrainRegion.RIVERS;
 		return mountains > 0.6F ? TerrainRegion.MOUNTAINS : mountains > 0.53F ? TerrainRegion.HILLS : TerrainRegion.PLAINS;
 	}
 	
