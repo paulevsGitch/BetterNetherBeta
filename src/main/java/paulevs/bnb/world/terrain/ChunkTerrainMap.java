@@ -6,7 +6,6 @@ import it.unimi.dsi.fastutil.objects.Reference2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.world.BNBWorldGenerator;
-import paulevs.bnb.world.terrain.features.RiversFeature;
 import paulevs.bnb.world.terrain.features.TerrainFeature;
 
 import java.util.ArrayList;
@@ -47,8 +46,6 @@ public class ChunkTerrainMap implements TerrainSDF {
 		commonFeatures.forEach((feature) ->
 			feature.setSeed(seed)
 		);
-		
-		RiversFeature.setSeedForRegion(seed);
 	}
 	
 	public void prepare(int x, int z) {
@@ -71,6 +68,7 @@ public class ChunkTerrainMap implements TerrainSDF {
 		float result = -100.0F;
 		
 		Reference2FloatMap<Identifier> density = featureDensity.get(getIndex(x, z));
+		
 		for (Identifier id : density.keySet()) {
 			result = features.get(id).blendDensity(result, x, y, z, density.getFloat(id));
 		}

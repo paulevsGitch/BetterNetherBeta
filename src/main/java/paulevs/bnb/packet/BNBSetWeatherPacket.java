@@ -81,7 +81,6 @@ public class BNBSetWeatherPacket extends AbstractPacket implements ManagedPacket
 		WeatherType type = WeatherType.getByID(weatherID);
 		for (Object playerObj : server.serverPlayerConnectionManager.players) {
 			ServerPlayer player = (ServerPlayer) playerObj;
-			System.out.println(player + " " + player.dimensionId);
 			if (player.dimensionId != -1) continue;
 			PacketHelper.sendTo(player, new BNBWeatherPacket(type));
 		}

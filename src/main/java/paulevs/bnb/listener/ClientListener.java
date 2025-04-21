@@ -13,7 +13,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.DyeItem;
 import net.minecraft.level.BlockView;
-import net.minecraft.level.biome.Biome;
 import net.minecraft.util.maths.BlockPos;
 import net.modificationstation.stationapi.api.client.event.color.block.BlockColorsRegisterEvent;
 import net.modificationstation.stationapi.api.client.event.color.item.ItemColorsRegisterEvent;
@@ -62,7 +61,6 @@ import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
 import paulevs.bnb.util.ColorUtil;
-import paulevs.bnb.world.biome.BiomeMap;
 import paulevs.bnb.world.terrain.TerrainMap;
 import paulevs.bnb.world.terrain.TerrainRegion;
 import paulevs.bnb.world.terrain.features.RiversFeature;
@@ -431,10 +429,17 @@ public class ClientListener {
 		//t = System.currentTimeMillis() - t;
 		//System.out.println("\n\nF: " + t + "\n\n");
 		
+		TerrainFeature feature = new RiversFeature();
 		TerrainMap regionMap = new TerrainMap();
-		BiomeMap biomeMap = new BiomeMap();
+		//BiomeMap biomeMap = new BiomeMap();
+		
+		regionMap.setSeed(10);
+		//biomeMap.setSeed(10);
+		regionMap.setRiversSeed(-512);
+		feature.setSeed(-512);
+		
 		BufferedImage img1 = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
-		BufferedImage img2 = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
+		//BufferedImage img2 = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
 		int scale = 4;
 		
 		for (int x = 0; x < 512; x++) {
@@ -449,8 +454,11 @@ public class ClientListener {
 				
 				img1.setRGB(x, z, 0xFF000000 | rgb);
 				
-				Biome biome = biomeMap.getData(x * scale, z * scale);
-				img2.setRGB(x, z, 0xFF000000 | biome.name.hashCode());
+				float dens = feature.getDensity(x * scale, 96, z * scale);
+				if (dens < 0.5F) img1.setRGB(x, z, 0xFFFFFFFF);
+				
+				//Biome biome = biomeMap.getData(x * scale, z * scale);
+				//img2.setRGB(x, z, 0xFF000000 | biome.name.hashCode());
 			}
 		}
 		
@@ -462,16 +470,16 @@ public class ClientListener {
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame1.setVisible(true);
 		
-		JFrame frame2 = new JFrame();
+		/*JFrame frame2 = new JFrame();
 		frame2.add(new JLabel(new ImageIcon(img2)));
 		frame2.pack();
 		frame2.setResizable(false);
 		frame2.setLocationRelativeTo(null);
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame2.setVisible(true);
+		frame2.setVisible(true);*/
 		
-		TerrainFeature feature = new RiversFeature();
-		feature.debugImage();
+		//TerrainFeature feature = new RiversFeature();
+		//feature.debugImage();
 		
 		/*TerrainFeature feature = new RiversFeature();
 		BufferedImage img2 = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);

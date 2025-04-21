@@ -28,6 +28,7 @@ public class TerrainMap extends DataMap<Identifier> {
 	private final VoronoiNoise bridgesNoise = new VoronoiNoise();
 	private final VoronoiNoise cellNoise = new VoronoiNoise();
 	private final Random random = new Random(0);
+	private final RiversFeature rivers = new RiversFeature();
 	
 	public TerrainMap() {
 		super("bnb_terrain");
@@ -66,6 +67,10 @@ public class TerrainMap extends DataMap<Identifier> {
 		cellNoise.setSeed(random.nextInt());
 	}
 	
+	public void setRiversSeed(int seed) {
+		rivers.setSeed(seed);
+	}
+	
 	public void addTerrain(Identifier terrainID, TerrainRegion region) {
 		regionTerrain.get(region).add(terrainID);
 	}
@@ -74,12 +79,20 @@ public class TerrainMap extends DataMap<Identifier> {
 		data.clear();
 		for (Vec2I offset : OFFSETS) {
 			Identifier sdf = getData(x + offset.x, z + offset.z);
-			float value = data.getOrDefault(sdf, 0.0F) + MULTIPLIER;
+			float value = Math.min(data.getOrDefault(sdf, 0.0F) + MULTIPLIER, 1.0F);
 			data.put(sdf, value);
 		}
 	}
 	
 	public TerrainRegion getRegion(int x, int z) {
+		TerrainRegion region = getRegionSmooth(x, z);
+		if (!region.isOcean() && rivers.isRiverRegion(x, z)) {
+			region = TerrainRegion.RIVERS;
+		}
+		return region;
+	}
+	
+	private TerrainRegion getRegionSmooth(int x, int z) {
 		double preX = (COS * x - SIN * z) / 16.0 + distortionX.get(x * 0.03, z * 0.03) * 1.5F;
 		double preZ = (SIN * x + COS * z) / 16.0 + distortionX.get(x * 0.03, z * 0.03) * 1.5F;
 		
@@ -155,7 +168,7 @@ public class TerrainMap extends DataMap<Identifier> {
 				float dz = distortionZ.get(px * 0.03, pz * 0.03) * 1.5F;
 				px -= dx;
 				pz -= dz;
-				if (RiversFeature.isRiverRegion(px, pz)) return TerrainRegion.RIVERS;
+				if (rivers.isRiverRegion(px, pz)) return TerrainRegion.RIVERS;
 				return mountains > 0.6F ? TerrainRegion.SHORE_MOUNTAINS : TerrainRegion.SHORE_NORMAL;
 			}
 			if (ocean < 0.63F) return TerrainRegion.OCEAN_NORMAL;
@@ -167,8 +180,12 @@ public class TerrainMap extends DataMap<Identifier> {
 		float dz = distortionZ.get(px * 0.03, pz * 0.03) * 1.5F;
 		px -= dx;
 		pz -= dz;
-		if (RiversFeature.isRiverRegion(px, pz)) return TerrainRegion.RIVERS;
+		if (rivers.isRiverRegion(px, pz)) return TerrainRegion.RIVERS;
 		return mountains > 0.6F ? TerrainRegion.MOUNTAINS : mountains > 0.53F ? TerrainRegion.HILLS : TerrainRegion.PLAINS;
+	}
+	
+	public boolean isRiverRegion(int x, int z) {
+		return rivers.isRiverRegion(x, z);
 	}
 	
 	static {
@@ -182,6 +199,6 @@ public class TerrainMap extends DataMap<Identifier> {
 			}
 		}
 		OFFSETS = offsets.toArray(Vec2I[]::new);
-		MULTIPLIER = 1F / OFFSETS.length;
+		MULTIPLIER = 4.0F / OFFSETS.length;
 	}
 }

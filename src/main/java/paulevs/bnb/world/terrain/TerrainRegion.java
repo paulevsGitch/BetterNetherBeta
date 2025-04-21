@@ -9,5 +9,17 @@ public enum TerrainRegion {
 	HILLS,
 	MOUNTAINS,
 	BRIDGES,
-	RIVERS
+	RIVERS;
+	
+	public boolean isOcean() {
+		return this == OCEAN_NORMAL || this == OCEAN_MOUNTAINS;
+	}
+	
+	public boolean isShore() {
+		return this == SHORE_NORMAL || this == SHORE_MOUNTAINS;
+	}
+	
+	public boolean isLand() {
+		return this != RIVERS && !isOcean() && !isShore();
+	}
 }

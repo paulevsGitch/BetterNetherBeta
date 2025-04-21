@@ -58,7 +58,6 @@ public abstract class DataMap<T> {
 		random.setSeed(seed);
 		distortionX.setSeed(random.nextInt());
 		distortionZ.setSeed(random.nextInt());
-		System.out.println("Set server seed");
 	}
 	
 	public T getData(int x, int z) {

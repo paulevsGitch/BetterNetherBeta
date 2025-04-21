@@ -26,6 +26,7 @@ import paulevs.bnb.world.terrain.TerrainRegion;
 import paulevs.bnb.world.terrain.features.ArchesFeature;
 import paulevs.bnb.world.terrain.features.ArchipelagoFeature;
 import paulevs.bnb.world.terrain.features.BigPillarsFeature;
+import paulevs.bnb.world.terrain.features.CavesFeature;
 import paulevs.bnb.world.terrain.features.CubesFeature;
 import paulevs.bnb.world.terrain.features.FlatCliffFeature;
 import paulevs.bnb.world.terrain.features.FlatHillsFeature;
@@ -66,8 +67,8 @@ public class BNBWorldGenerator {
 	public static void updateData(DimensionData dimensionData, long seed) {
 		RANDOM.setSeed(seed);
 		final int mapSeed = RANDOM.nextInt();
+		final int terrainSeed = RANDOM.nextInt();
 		
-		int terrainSeed = RANDOM.nextInt();
 		for (ChunkTerrainMap map : FEATURE_MAPS) {
 			map.setSeed(terrainSeed);
 		}
@@ -75,6 +76,7 @@ public class BNBWorldGenerator {
 		mapCopies = ThreadLocal.withInitial(() -> {
 			TerrainMap map = new TerrainMap();
 			map.setData(dimensionData, mapSeed);
+			map.setRiversSeed(terrainSeed);
 			MAP_FEATURES.forEach(pair -> map.addTerrain(pair.getFirst(), pair.getSecond()));
 			return map;
 		});
@@ -84,8 +86,8 @@ public class BNBWorldGenerator {
 	public static void updateData(long seed) {
 		RANDOM.setSeed(seed);
 		final int mapSeed = RANDOM.nextInt();
+		final int terrainSeed = RANDOM.nextInt();
 		
-		int terrainSeed = RANDOM.nextInt();
 		for (ChunkTerrainMap map : FEATURE_MAPS) {
 			map.setSeed(terrainSeed);
 		}
@@ -93,6 +95,7 @@ public class BNBWorldGenerator {
 		mapCopies = ThreadLocal.withInitial(() -> {
 			TerrainMap map = new TerrainMap();
 			map.setSeed(mapSeed);
+			map.setRiversSeed(terrainSeed);
 			MAP_FEATURES.forEach(pair -> map.addTerrain(pair.getFirst(), pair.getSecond()));
 			return map;
 		});
@@ -105,29 +108,8 @@ public class BNBWorldGenerator {
 		return chunk;
 	}
 	
-	private static void fillBlocksData(int startX, int startZ, int index, byte[] section, CrossInterpolationCell cell, ChunkTerrainMap featureMap) {
+	private static void fillBlocksData(int startX, int startZ, int index, byte[] section, CrossInterpolationCell cell, ChunkTerrainMap featureMap, boolean[] hasLava) {
 		Arrays.fill(section, (byte) 0);
-		
-		cell.fill(startX, index << 4, startZ, featureMap);
-		if (cell.isEmpty() && index > 5) return;
-		
-		for (byte bx = 0; bx < 16; bx++) {
-			cell.setX(bx);
-			for (byte bz = 0; bz < 16; bz++) {
-				cell.setZ(bz);
-				for (byte by = 0; by < 16; by++) {
-					cell.setY(by);
-					int pos = getIndex(bx, by, bz);
-					if (cell.get() < 0.5F) {
-						if (index > 5) continue;
-						section[pos] = 3;
-					}
-					else {
-						section[pos] = 1;
-					}
-				}
-			}
-		}
 		
 		Random random = new Random(MathHelper.hashCode(startX >> 4, index, startZ >> 4));
 		if (index == 0) {
@@ -146,6 +128,31 @@ public class BNBWorldGenerator {
 					section[getIndex(bx, 15, bz)] = 4;
 					if (random.nextInt(2) == 0) {
 						section[getIndex(bx, 14, bz)] = 4;
+					}
+				}
+			}
+		}
+		
+		cell.fill(startX, index << 4, startZ, featureMap);
+		if (cell.isEmpty()) return;
+		
+		for (byte bx = 0; bx < 16; bx++) {
+			cell.setX(bx);
+			for (byte bz = 0; bz < 16; bz++) {
+				cell.setZ(bz);
+				for (byte by = 0; by < 16; by++) {
+					cell.setY(by);
+					int pos = getIndex(bx, by, bz);
+					if (section[pos] == 4) continue;
+					if (cell.get() < 0.5F) {
+						if (index > 5) continue;
+						int y = index << 4 | by;
+						if (y < 85) continue;
+						if (!hasLava[bz << 4 | bx]) continue;
+						section[pos] = 3;
+					}
+					else {
+						section[pos] = 1;
 					}
 				}
 			}
@@ -228,7 +235,6 @@ public class BNBWorldGenerator {
 		if (decoratorThread == null || !decoratorThread.isAlive()) {
 			decoratorThread = new BNBDecoratorThread();
 			decoratorThread.start();
-			System.out.println("Create thread " + decoratorThread.getName());
 		}
 		decoratorThread.updateMain(minecraft);
 	}
@@ -262,11 +268,12 @@ public class BNBWorldGenerator {
 		addFeature(BNB.id("ocean_pillars"), OceanPillarsFeature::new, TerrainRegion.OCEAN_MOUNTAINS);
 		addFeature(BNB.id("land_pillars"), LandPillarsFeature::new, TerrainRegion.MOUNTAINS);
 		
+		ChunkTerrainMap.addCommonFeature(RiversFeature::new);
 		ChunkTerrainMap.addCommonFeature(BigPillarsFeature::new);
 		ChunkTerrainMap.addCommonFeature(ThinPillarsFeature::new);
 		ChunkTerrainMap.addCommonFeature(StalactitesFeature::new);
 		ChunkTerrainMap.addCommonFeature(StraightThinPillarsFeature::new);
-		ChunkTerrainMap.addCommonFeature(RiversFeature::new);
+		ChunkTerrainMap.addCommonFeature(CavesFeature::new);
 		
 		mapCopies = ThreadLocal.withInitial(() -> {
 			TerrainMap map = new TerrainMap();
@@ -292,6 +299,7 @@ public class BNBWorldGenerator {
 			}
 			
 			Thread thread = new Thread(() -> {
+				final boolean[] hasLava = new boolean[256];
 				int startX, startZ;
 				byte index;
 				
@@ -311,6 +319,14 @@ public class BNBWorldGenerator {
 					
 					featureMap.prepare(startX, startZ);
 					
+					TerrainMap terrainTap = BNBWorldGenerator.getMapCopy();
+					for (short i = 0; i < 256; i++) {
+						int x = startX | (i & 15);
+						int z = startZ | (i >> 4);
+						TerrainRegion region = terrainTap.getRegion(x, z);
+						hasLava[i] = !region.isLand();
+					}
+					
 					for (index = 0; index < 16; index++) {
 						fillBlocksData(
 							startX,
@@ -318,15 +334,15 @@ public class BNBWorldGenerator {
 							index,
 							blockSections[index],
 							cells[index],
-							featureMap
+							featureMap,
+							hasLava
 						);
 					}
 					
 					fixGenerationErrors(blockSections);
 					
 					for (index = 0; index < 16; index++) {
-						if (cells[index].isEmpty()) chunk.sections[index] = new ChunkSection(index);
-						else chunk.sections[index] = fillSection(index, blockSections[index]);
+						chunk.sections[index] = fillSection(index, blockSections[index]);
 					}
 					
 					BNBWorldChunk.cast(chunk).bnb_setStatus(BNBChunkStatus.TERRAIN);

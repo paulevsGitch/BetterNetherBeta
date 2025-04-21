@@ -102,7 +102,6 @@ public class SpinningWheelBlock extends TemplateBlockWithEntity implements Custo
 	
 	@Override
 	public String[] getTooltip(ItemStack stack, String originalTooltip) {
-		System.out.println("Get!");
 		TOOLTIP[0] = getTranslatedName();
 		TOOLTIP[1] = I18n.translate("tooltip.bnb.spinning_wheel");
 		return TOOLTIP;
