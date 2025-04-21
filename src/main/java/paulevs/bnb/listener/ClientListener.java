@@ -63,6 +63,7 @@ import paulevs.bnb.rendering.OBJModel;
 import paulevs.bnb.util.ColorUtil;
 import paulevs.bnb.world.terrain.TerrainMap;
 import paulevs.bnb.world.terrain.TerrainRegion;
+import paulevs.bnb.world.terrain.features.CavesFeature;
 import paulevs.bnb.world.terrain.features.RiversFeature;
 import paulevs.bnb.world.terrain.features.TerrainFeature;
 
@@ -143,7 +144,7 @@ public class ClientListener {
 		}
 		
 		printTranslations();
-		debugTerrain();
+		//debugTerrain();
 		biomeColors();
 	}
 	
@@ -421,6 +422,9 @@ public class ClientListener {
 	// TODO remove that after release
 	private void debugTerrain() {
 		if (!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
+		
+		//TerrainFeature feature = new CavesFeature();
+		//feature.debugImage();
 		
 		//long t = System.currentTimeMillis();
 		//TerrainFeature feature = new RiversFeature();

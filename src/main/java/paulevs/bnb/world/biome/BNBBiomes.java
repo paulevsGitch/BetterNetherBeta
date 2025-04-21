@@ -16,7 +16,9 @@ import paulevs.bnb.noise.FractalNoise;
 import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.noise.VoronoiNoise;
 import paulevs.bnb.sound.BNBSounds;
+import paulevs.bnb.world.BNBWorldGenerator;
 import paulevs.bnb.world.structure.BNBPlacers;
+import paulevs.bnb.world.terrain.TerrainMap;
 import paulevs.bnb.world.terrain.TerrainRegion;
 
 import java.awt.Color;
@@ -39,8 +41,13 @@ public class BNBBiomes {
 	private static final SurfaceRule LOW_LAND_GRAVEL = SurfaceBuilder
 		.start(BNBBlocks.NETHERRACK_GRAVEL)
 		.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+		.condition(new PositionSurfaceCondition(pos -> {
+			TerrainMap map = BNBWorldGenerator.getMapCopy();
+			if (map == null) return false;
+			return !map.getRegion(pos.x, pos.z).isLand();
+		}), 5)
 		.ground(2)
-		.range(0, 96)
+		.range(80, 96)
 		.build();
 	
 	private static final SurfaceRule HARDENED_NETHERRACK_1 = SurfaceBuilder

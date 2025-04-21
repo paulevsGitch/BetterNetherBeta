@@ -42,8 +42,7 @@ public class BigPillarsFeature extends TerrainFeature {
 		if (map == null) map = BNBWorldGenerator.getMapCopy();
 		if (map == null) return 0.0F;
 		TerrainRegion region = map.getRegion(wx, wz);
-		if (region == TerrainRegion.OCEAN_NORMAL || region == TerrainRegion.OCEAN_MOUNTAINS) return 0;
-		if (region == TerrainRegion.SHORE_NORMAL || region == TerrainRegion.SHORE_MOUNTAINS) return 0;
+		if (region.isOcean() || region.isShore()) return 0;
 		if (region == TerrainRegion.BRIDGES) return 0;
 		float dx = (float) relativePos.x;
 		float dz = (float) relativePos.z;

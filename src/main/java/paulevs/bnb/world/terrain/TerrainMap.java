@@ -184,10 +184,6 @@ public class TerrainMap extends DataMap<Identifier> {
 		return mountains > 0.6F ? TerrainRegion.MOUNTAINS : mountains > 0.53F ? TerrainRegion.HILLS : TerrainRegion.PLAINS;
 	}
 	
-	public boolean isRiverRegion(int x, int z) {
-		return rivers.isRiverRegion(x, z);
-	}
-	
 	static {
 		int radius = 5;
 		List<Vec2I> offsets = new ArrayList<>();
