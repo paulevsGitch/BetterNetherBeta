@@ -12,11 +12,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BiomeColorInterpolator.class)
 public class BiomeColorInterpolatorMixin {
 	@Shadow(remap = false) private boolean initiated;
-	@Unique private BiomeSource oldSource;
+	@Unique private BiomeSource bnb_oldSource;
 	
+	// TODO remove after StAPI fix
 	@Inject(method = "getColor", at = @At(value = "HEAD", remap = false))
 	private void bnb_checkSource(BiomeSource source, double x, double z, CallbackInfoReturnable<Integer> info) {
-		if (oldSource != source) initiated = false;
-		oldSource = source;
+		if (bnb_oldSource != source) initiated = false;
+		bnb_oldSource = source;
 	}
 }

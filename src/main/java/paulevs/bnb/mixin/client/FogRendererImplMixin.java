@@ -10,8 +10,11 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import paulevs.bnb.BNBClient;
 import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
+import paulevs.bnb.util.ColorUtil;
+import paulevs.bnb.world.biome.BNBBiomes;
 
 @Mixin(value = FogRendererImpl.class, remap = false)
 public class FogRendererImplMixin {
@@ -21,9 +24,10 @@ public class FogRendererImplMixin {
 	
 	@Shadow @Final private static float[] FOG_COLOR;
 	
-	@Inject(method = "setupFog", at = @At("RETURN"))
+	@Inject(method = "setupFog", at = @At(value = "RETURN", ordinal = 0))
 	private static void bnb_correctFog(Minecraft minecraft, float delta, CallbackInfo info) {
 		if (minecraft.level == null || minecraft.level.dimension.id != -1) return;
+		
 		if (minecraft.viewEntity.isInFluid(BNBBlockMaterials.SULPHURIC_ACID)) {
 			if (bnb_delta == 0.0F) {
 				bnb_lastLight = bnb_nextLight;
@@ -39,6 +43,18 @@ public class FogRendererImplMixin {
 			bnb_delta = Math.min(bnb_delta + delta * 0.01F, 1.0F);
 			if (bnb_delta == 1.0F) bnb_delta = 0.0F;
 		}
+		else if (minecraft.viewEntity.y < 80) {
+			float depthBlend = BNBClient.getDepthBlend();
+			int deepColor = BNBBiomes.DEEP_NETHER.getFogColor().getColor(
+				minecraft.level.getBiomeSource(),
+				(int) minecraft.viewEntity.x,
+				(int) minecraft.viewEntity.z
+			);
+			FOG_COLOR[0] = MathHelper.lerp(depthBlend, FOG_COLOR[0], ColorUtil.getR(deepColor) / 255.0F);
+			FOG_COLOR[1] = MathHelper.lerp(depthBlend, FOG_COLOR[1], ColorUtil.getG(deepColor) / 255.0F);
+			FOG_COLOR[2] = MathHelper.lerp(depthBlend, FOG_COLOR[2], ColorUtil.getB(deepColor) / 255.0F);
+		}
+		
 		BNBWeatherRenderer.updateFog(FOG_COLOR);
 	}
 }

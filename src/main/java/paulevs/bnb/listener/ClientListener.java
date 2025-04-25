@@ -61,6 +61,8 @@ import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
 import paulevs.bnb.util.ColorUtil;
+import paulevs.bnb.world.biome.BNBBiomeSource;
+import paulevs.bnb.world.biome.BNBBiomes;
 import paulevs.bnb.world.terrain.TerrainMap;
 import paulevs.bnb.world.terrain.TerrainRegion;
 import paulevs.bnb.world.terrain.features.CavesFeature;
@@ -224,6 +226,12 @@ public class ClientListener {
 		
 		final ToIntBiFunction<BlockView, BlockPos> colorVariation = (level, pos) -> {
 			int color = BiomeColorsImpl.GRASS_INTERPOLATOR.getColor(level.getBiomeSource(), pos.x, pos.z);
+			
+			if (pos.y < 80 && level.getBiomeSource() instanceof BNBBiomeSource source) {
+				float delta = MathHelper.clamp((80 - pos.y) / 32.0F, 0.0F, 1.0F);
+				int deepColor = BNBBiomes.DEEP_NETHER.getGrassColor().getColor(source, pos.x, pos.z);
+				color = ColorUtil.blend(color, deepColor, delta);
+			}
 			
 			double px = pos.x * 0.1;
 			double py = pos.y * 0.1;
@@ -507,9 +515,7 @@ public class ClientListener {
 	// TODO remove that after release
 	private void biomeColors() {
 		if (!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
-		biomeColor(0xEA7D2E, 0xB6C8CA);
-		biomeColor(0x9139A5, 0xB6C8CA);
-		biomeColor(0xf3d949, 0xB6C8CA);
+		biomeColor(0xFF052a32, 0xB6C8CA);
 	}
 	
 	// TODO remove that after release

@@ -513,6 +513,12 @@ public class BNBBiomes {
 		.build(), BiomeArea.NETHERRACK_BARREN)
 		.bnb_setParticleProperties(12, 14, false);
 	
+	public static final Biome DEEP_NETHER = BiomeBuilder
+		.start("bnb:deep_nether")
+		.fogColor(0xFF0d1217)
+		.grassAndLeavesColor(0xFF052a32)
+		.build();
+	
 	private static void add(TerrainRegion region, BiomeArea area, Biome biome) {
 		BIOME_BY_TERRAIN
 			.computeIfAbsent(region, k -> new EnumMap<>(BiomeArea.class))

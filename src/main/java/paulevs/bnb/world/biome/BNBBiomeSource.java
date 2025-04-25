@@ -71,6 +71,10 @@ public class BNBBiomeSource extends BiomeSource {
 		return biomes;
 	}
 	
+	public Biome getBiome(int x, int y, int z) {
+		return y < 80 ? BNBBiomes.DEEP_NETHER : getBiome(x, z);
+	}
+	
 	@Environment(EnvType.SERVER)
 	public void requestUpdate(PlayerEntity player, long position) {
 		map.requestUpdate(player, position);

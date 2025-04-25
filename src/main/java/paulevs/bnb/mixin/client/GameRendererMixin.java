@@ -2,6 +2,7 @@ package paulevs.bnb.mixin.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.GameRenderer;
+import net.modificationstation.stationapi.api.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -9,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import paulevs.bnb.BNBClient;
 import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
 
@@ -25,6 +27,7 @@ public class GameRendererMixin {
 		shift = Shift.AFTER
 	))
 	private void bnb_changeNetherFog(int i, float par2, CallbackInfo info) {
+		BNBClient.updateDepthBlend();
 		if (minecraft.level == null || this.minecraft.level.dimension.id != -1) return;
 		if (minecraft.viewEntity.isInFluid(BNBBlockMaterials.SULPHURIC_ACID)) {
 			GL11.glFogf(GL11.GL_FOG_START, 0.5F);
@@ -32,8 +35,15 @@ public class GameRendererMixin {
 		}
 		else {
 			float fog = BNBWeatherRenderer.getFogDensity();
-			GL11.glFogf(GL11.GL_FOG_START, fogDistance * 0.5F * fog);
-			GL11.glFogf(GL11.GL_FOG_END, fogDistance * fog);
+			float fogStart = fogDistance * 0.5F * fog;
+			float fogEnd = fogDistance * fog;
+			float depthBlend = BNBClient.getDepthBlend();
+			if (depthBlend > 0.0F) {
+				fogStart = MathHelper.lerp(depthBlend, fogStart, Math.min(fogStart, 10.0F));
+				fogEnd = MathHelper.lerp(depthBlend, fogEnd, fogEnd * 0.75F);
+			}
+			GL11.glFogf(GL11.GL_FOG_START, fogStart);
+			GL11.glFogf(GL11.GL_FOG_END, fogEnd);
 		}
 	}
 	
