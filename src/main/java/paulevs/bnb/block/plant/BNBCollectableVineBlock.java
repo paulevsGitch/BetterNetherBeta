@@ -48,6 +48,7 @@ public class BNBCollectableVineBlock extends BNBVineBlock {
 		BlockState state = level.getBlockState(x, y, z);
 		if (!state.get(BNBBlockProperties.BERRIES)) return false;
 		level.setBlockState(x, y, z, state.with(BNBBlockProperties.BERRIES, false));
+		level.updateBlock(x, y, z);
 		
 		stack = new ItemStack(collectableItem, 1 + level.random.nextInt(3));
 		if (!player.inventory.addStack(stack)) player.dropItem(stack);
@@ -70,5 +71,6 @@ public class BNBCollectableVineBlock extends BNBVineBlock {
 		if (count > 2) return;
 		
 		level.setBlockState(x, y, z, state.with(BNBBlockProperties.BERRIES, true));
+		level.updateBlock(x, y, z);
 	}
 }
