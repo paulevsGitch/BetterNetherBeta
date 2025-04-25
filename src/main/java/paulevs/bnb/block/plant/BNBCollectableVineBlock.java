@@ -70,5 +70,6 @@ public class BNBCollectableVineBlock extends BNBVineBlock {
 		if (count > 2) return;
 		
 		level.setBlockState(x, y, z, state.with(BNBBlockProperties.BERRIES, true));
+		level.updateBlock(x, y, z);
 	}
 }
