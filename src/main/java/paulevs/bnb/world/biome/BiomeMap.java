@@ -91,6 +91,8 @@ public class BiomeMap extends DataMap<Biome> {
 		if (isUpdating) return;
 		Level level = BNBClient.getMinecraft().level;
 		if (level == null || !level.isRemote) return;
+		// TODO implement better fix or wait for StAPI #189 issue resolve
+		if (BNBClient.getMinecraft().getNetworkHandler() == null) return;
 		PacketHelper.send(new BiomeRequestPacket(position));
 	}
 	
