@@ -15,6 +15,7 @@
 		"MainMenuScreenMixin",
 		"PlayerRendererMixin",
 		"EntityRendererMixin",
+		"VectorCacheAccessor",
 		"BlockRendererMixin",
 		"FurnaceScreenMixin",
 		"LevelRendererMixin",

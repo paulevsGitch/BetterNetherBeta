@@ -50,15 +50,16 @@ public class BNBPlacers {
 	public static final StructurePlacer OBSIDIAN_BOLDER = new FloorPlacer(BNBStructures.OBSIDIAN_BOLDER, 3).setNoiseDensityFunction(15);
 	public static final StructurePlacer OBSIDIAN_GRAVEL_BLOB = new FloorPlacer(BNBStructures.OBSIDIAN_GRAVEL_BLOB, 7);
 	public static final StructurePlacer OBSIDIAN_SHARDS = new FloorPlacer(BNBStructures.OBSIDIAN_SHARDS, 4).setNoiseDensityFunction(13);
-	public static final StructurePlacer LAVARRACK_BOLDER = new FloorPlacerLimited(BNBStructures.LAVARRACK_BOLDER, 3, 0, 90).setNoiseDensityFunction(17);
+	public static final StructurePlacer LAVARRACK_BOLDER = new FloorPlacerLimited(BNBStructures.LAVARRACK_BOLDER, 3, 70, 90).setNoiseDensityFunction(17);
 	
 	public static final StructurePlacer JALUMINE_TREE = new FloorPlacer(BNBStructures.JALUMINE_TREE, 3).setNoiseDensityFunction(0, 0.75F);
 	public static final StructurePlacer JALUMINE_BUSH = new FloorPlacer(BNBStructures.JALUMINE_BUSH, 3).setNoiseDensityFunction(1, 0.75F);
 	public static final StructurePlacer FERRUMINE_PLANT = new FloorPlacer(BNBStructures.FERRUMINE_PLANT, 5);
 	
 	public static final StructurePlacer BUBBLE_GRASS = new FloorPlacer(BNBStructures.BUBBLE_GRASS, 5).setNoiseDensityFunction(1);
-	public static final StructurePlacer NETHER_SPROUTS = new FloorPlacer(BNBStructures.NETHER_SPROUTS, 7);
-	public static final StructurePlacer NETHER_SPROUTS_RARE = new FloorPlacer(BNBStructures.NETHER_SPROUTS, 2);
+	public static final StructurePlacer NETHER_SPROUTS = new FloorPlacerLimited(BNBStructures.NETHER_SPROUTS, 7, 80, 256);
+	public static final StructurePlacer NETHER_SPROUTS_RARE = new FloorPlacerLimited(BNBStructures.NETHER_SPROUTS, 2, 80, 256);
+	public static final StructurePlacer NETHER_SPROUTS_DEEP = new FloorPlacerLimited(BNBStructures.NETHER_SPROUTS, 7, 0, 80);
 	
 	public static final StructurePlacer MOSSY_NETHERRACK = new VolumetricPlacer(BNBStructures.MOSSY_NETHERRACK, 3);
 	public static final StructurePlacer NETHER_MOSS_COVER = new VolumetricPlacer(BNBStructures.NETHER_MOSS_COVER, 4).setNoiseDensityFunction(5);

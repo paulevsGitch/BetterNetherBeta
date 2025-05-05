@@ -65,7 +65,6 @@ import paulevs.bnb.world.biome.BNBBiomeSource;
 import paulevs.bnb.world.biome.BNBBiomes;
 import paulevs.bnb.world.terrain.TerrainMap;
 import paulevs.bnb.world.terrain.TerrainRegion;
-import paulevs.bnb.world.terrain.features.CavesFeature;
 import paulevs.bnb.world.terrain.features.RiversFeature;
 import paulevs.bnb.world.terrain.features.TerrainFeature;
 
@@ -244,10 +243,13 @@ public class ClientListener {
 			return ColorUtil.multiply(color, nr, ng, nb);
 		};
 		
-		event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
-			if (tintIndex != 0 || world == null || pos == null) return 0xFFFFFFFF;
-			return colorVariation.applyAsInt(world, pos);
-		}, BNBBlocks.NETHERRACK_MYCORRUM, BNBBlocks.SOUL_MYCORRUM, BNBBlocks.MOSSY_NETHERRACK);
+		event.blockColors.registerColorProvider(
+			(state, world, pos, tintIndex) -> {
+				if (tintIndex != 0 || world == null || pos == null) return 0xFFFFFFFF;
+				return colorVariation.applyAsInt(world, pos);
+			},
+			BNBBlocks.NETHERRACK_MYCORRUM, BNBBlocks.SOUL_MYCORRUM, BNBBlocks.MOSSY_NETHERRACK, BNBBlocks.MOSSY_HARDENED_NETHERRACK
+		);
 		
 		event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
 			if (world == null || pos == null) return 0xFF9A4545;
@@ -256,7 +258,7 @@ public class ClientListener {
 			
 			BlockStateView view = (BlockStateView) world;
 			state = view.getBlockState(pos.x, pos.y - 1, pos.z);
-			if (state.isOf(Block.NETHERRACK)) {
+			if (state.isOf(Block.NETHERRACK) || state.isOf(BNBBlocks.HARDENED_NETHERRACK)) {
 				float delta = (rnd & 7) / 7.0F;
 				return ColorUtil.blend(0xFF9A4545, 0xFFC03939, delta);
 			}
@@ -274,9 +276,9 @@ public class ClientListener {
 			return ColorUtil.getRGB(cr, cg, cb);
 		}, BNBBlocks.NETHER_SPROUTS);
 		
-		event.blockColors.registerColorProvider((state, world, pos, tintIndex) -> {
-			if (tintIndex == -1 || world == null || pos == null) return 0xFFFFFFFF;
-			int color = colorVariation.applyAsInt(world, pos);
+		event.blockColors.registerColorProvider((state, level, pos, tintIndex) -> {
+			if (tintIndex == -1 || level == null || pos == null) return 0xFFFFFFFF;
+			int color = colorVariation.applyAsInt(level, pos);
 			
 			if (tintIndex == 0) {
 				float[] hsv = ColorUtil.toHSV(color);
@@ -290,6 +292,11 @@ public class ClientListener {
 				hsv[1] *= 0.85F;
 				hsv[2] = Math.min(hsv[2] * 2.0F, 1.0F);
 				color = ColorUtil.fromHSV(hsv);
+			}
+			
+			if (tintIndex == 1 && pos.y < 80 && level.getBiomeSource() instanceof BNBBiomeSource) {
+				float delta = MathHelper.clamp((80 - pos.y) / 32.0F, 0.0F, 1.0F);
+				color = ColorUtil.blend(color, 0xFF17A1A4, delta);
 			}
 			
 			return color;
@@ -316,7 +323,10 @@ public class ClientListener {
 	
 	@EventListener
 	public void onItemColorsRegister(ItemColorsRegisterEvent event) {
-		event.itemColors.register((stack, tintIndex) -> tintIndex == 0 ? 0xFFC03939 : 0xFFFFFFFF, BNBBlocks.NETHERRACK_MYCORRUM, BNBBlocks.MOSSY_NETHERRACK);
+		event.itemColors.register(
+			(stack, tintIndex) -> tintIndex == 0 ? 0xFFC03939 : 0xFFFFFFFF,
+			BNBBlocks.NETHERRACK_MYCORRUM, BNBBlocks.MOSSY_NETHERRACK, BNBBlocks.MOSSY_HARDENED_NETHERRACK
+		);
 		event.itemColors.register((stack, tintIndex) -> tintIndex == 0 ? Color.CYAN.getRGB() : 0xFFFFFFFF, BNBBlocks.SOUL_MYCORRUM);
 		event.itemColors.register((stack, tintIndex) -> 0xFFB02921, BNBBlocks.NETHER_SPROUTS);
 		event.itemColors.register((stack, tintIndex) -> 0xFFC03939, BNBBlocks.NETHER_MOSS_BLOCK);
@@ -361,7 +371,9 @@ public class ClientListener {
 	private void printTranslations() {
 		if (!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
 		try {
-			Path path = new File("../src/main/resources/assets/bnb/stationapi/lang/en_US.lang").toPath();
+			File file = new File("../src/main/resources/assets/bnb/stationapi/lang/en_US.lang");
+			if (!file.exists()) return;
+			Path path = file.toPath();
 			List<String> lines = Files.readAllLines(path);
 			int size = lines.size();
 			addBlockTranslations(lines);

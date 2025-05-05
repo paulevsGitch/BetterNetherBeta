@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.modificationstation.stationapi.api.registry.BlockRegistry;
 import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
-import paulevs.bnb.DataGen;
 import paulevs.bnb.block.BNBBlocks;
 
 import java.lang.reflect.Constructor;
@@ -24,11 +23,6 @@ public class SlabUtil {
 		}
 		if (HAS_VBE) makeVBESlabs(name, source);
 		else makeBNBSlabs(name, source);
-		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-			Identifier sourceID = BlockRegistry.INSTANCE.getId(source);
-			assert sourceID != null;
-			DataGen.makeSlabRecipe(name + "_slab", sourceID, BNB.id(name + "_slab_half"));
-		}
 		return halfSlab;
 	}
 	

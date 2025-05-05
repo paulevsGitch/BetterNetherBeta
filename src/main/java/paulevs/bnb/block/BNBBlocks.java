@@ -79,9 +79,11 @@ public class BNBBlocks {
 	public static final Block LAVARRACK = make("lavarrack", LavarrackBlock::new);
 	
 	public static final NetherTerrainBlock NETHERRACK_MYCORRUM = make("netherrack_mycorrum", NetherTerrainBlock::new);
+	public static final NetherTerrainBlock DEEP_MYCORRUM = make("deep_mycorrum", NetherTerrainBlock::new);
 	public static final NetherTerrainBlock SOUL_MYCORRUM = make("soul_mycorrum", SoulTerrainBlock::new);
 	public static final Block NETHERRACK_GRAVEL = make("netherrack_gravel", NetherrackGravelBlock::new);
 	public static final Block MOSSY_NETHERRACK = make("mossy_netherrack", NetherTerrainBlock::new);
+	public static final Block MOSSY_HARDENED_NETHERRACK = make("mossy_hardened_netherrack", NetherTerrainBlock::new);
 	public static final MossCoverBlock NETHER_MOSS_COVER = makeNI("nether_moss_cover", MossCoverBlock::new);
 	public static final Block NETHER_MOSS_BLOCK = make("nether_moss_block", NetherMossBlock::new);
 	public static final Block HARDENED_NETHERRACK = make("hardened_netherrack", BNBNetherrack::new).setRelativeHardness(3.0F);

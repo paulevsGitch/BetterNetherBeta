@@ -70,6 +70,15 @@ public class BNBBiomes {
 		.condition(NOISE_COVER_CONDITION, 5)
 		.build();
 	
+	private static final SurfaceRule DEEP_MYCORRUM_COVER = SurfaceBuilder
+		.start(BNBBlocks.DEEP_MYCORRUM)
+		.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+		.ground(1)
+		.range(0, 60)
+		.condition(NOISE_COVER_INVERTED_CONDITION, 5)
+		.condition((level, x, y, z, state) -> SHORE_NOISE.get(x * 0.03, y * 0.03, z * 0.03) > 0.4F, 6)
+		.build();
+	
 	public static final Biome FALURIAN_FOREST = addLand(BiomeBuilder
 		.start("bnb:falurian_forest")
 		.fogColor(0x951922)
@@ -81,6 +90,7 @@ public class BNBBiomes {
 			.ground(1)
 			.build()
 		)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -117,6 +127,7 @@ public class BNBBiomes {
 		.grassAndLeavesColor(0xFFFD2C4E)
 		.surfaceRule(LOW_LAND_GRAVEL)
 		.surfaceRule(PARTIAL_MYCORRUM_COVER)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -153,6 +164,7 @@ public class BNBBiomes {
 			.ground(1)
 			.build()
 		)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -184,6 +196,7 @@ public class BNBBiomes {
 		.grassAndLeavesColor(0xFF1EB6A0)
 		.surfaceRule(LOW_LAND_GRAVEL)
 		.surfaceRule(PARTIAL_MYCORRUM_COVER)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -214,6 +227,7 @@ public class BNBBiomes {
 			.ground(1)
 			.build()
 		)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -245,6 +259,7 @@ public class BNBBiomes {
 		.grassAndLeavesColor(0x558b30)
 		.surfaceRule(LOW_LAND_GRAVEL)
 		.surfaceRule(PARTIAL_MYCORRUM_COVER)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -273,6 +288,7 @@ public class BNBBiomes {
 			.condition(SHORE_COND, 1)
 			.build()
 		)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -300,6 +316,7 @@ public class BNBBiomes {
 			.condition(SHORE_COND, 1)
 			.build()
 		)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -322,6 +339,7 @@ public class BNBBiomes {
 			.condition(SHORE_COND, 1)
 			.build()
 		)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -342,21 +360,25 @@ public class BNBBiomes {
 		.surfaceRule(SurfaceBuilder
 			.start(BNBBlocks.SOUL_MYCORRUM)
 			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.range(80, 256)
 			.ground(1)
 			.build()
 		)
 		.surfaceRule(SurfaceBuilder
 			.start(Block.SOUL_SAND)
 			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.range(80, 256)
 			.ground(3)
 			.build()
 		)
 		.surfaceRule(SurfaceBuilder
 			.start(BNBBlocks.SOUL_SANDSTONE)
 			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.range(80, 256)
 			.ground(10)
 			.build()
 		)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -374,6 +396,7 @@ public class BNBBiomes {
 		.surfaceRule(SurfaceBuilder
 			.start(BNBBlocks.SOUL_MYCORRUM)
 			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.range(80, 256)
 			.ground(1)
 			.condition(NOISE_COVER_CONDITION, 5)
 			.build()
@@ -381,15 +404,18 @@ public class BNBBiomes {
 		.surfaceRule(SurfaceBuilder
 			.start(Block.SOUL_SAND)
 			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.range(80, 256)
 			.ground(3)
 			.build()
 		)
 		.surfaceRule(SurfaceBuilder
 			.start(BNBBlocks.SOUL_SANDSTONE)
 			.replace(BNBBlockTags.NETHERRACK_TERRAIN)
+			.range(80, 256)
 			.ground(10)
 			.build()
 		)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -409,9 +435,10 @@ public class BNBBiomes {
 		.fogColor(Color.CYAN.darker().getRGB())
 		.grassAndLeavesColor(Color.CYAN.getRGB())
 		.surfaceRule(LOW_LAND_GRAVEL)
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_MYCORRUM).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(1).build())
-		.surfaceRule(SurfaceBuilder.start(Block.SOUL_SAND).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(3).build())
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_SANDSTONE).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(10).build())
+		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_MYCORRUM).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(1).range(80, 256).build())
+		.surfaceRule(SurfaceBuilder.start(Block.SOUL_SAND).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(3).range(80, 256).build())
+		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_SANDSTONE).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(10).range(80, 256).build())
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -426,8 +453,9 @@ public class BNBBiomes {
 		.fogColor(Color.CYAN.darker().darker().getRGB())
 		.grassAndLeavesColor(Color.CYAN.getRGB())
 		.surfaceRule(LOW_LAND_GRAVEL)
-		.surfaceRule(SurfaceBuilder.start(Block.SOUL_SAND).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(3).build())
-		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_SANDSTONE).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(10).build())
+		.surfaceRule(SurfaceBuilder.start(Block.SOUL_SAND).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(3).range(80, 256).build())
+		.surfaceRule(SurfaceBuilder.start(BNBBlocks.SOUL_SANDSTONE).replace(BNBBlockTags.NETHERRACK_TERRAIN).ground(10).range(80, 256).build())
+		.surfaceRule(DEEP_MYCORRUM_COVER)
 		.surfaceRule(HARDENED_NETHERRACK_1)
 		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
@@ -443,6 +471,9 @@ public class BNBBiomes {
 		.fogColor(0x8B4B8F)
 		.grassAndLeavesColor(0xFFCC49D1)
 		.surfaceRule(LOW_LAND_GRAVEL)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.LAVA_LAKE)
 		.feature(BNBPlacers.ORICHALCUM_ORE)
@@ -471,6 +502,9 @@ public class BNBBiomes {
 			.condition(NOISE_COVER_INVERTED_CONDITION, 5)
 			.build()
 		)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ACID_FOUNTAIN)
 		.feature(BNBPlacers.ORICHALCUM_ORE)
@@ -484,6 +518,9 @@ public class BNBBiomes {
 		.fogColor(0x801600)
 		.grassAndLeavesColor(0xFFC03939)
 		.surfaceRule(LOW_LAND_GRAVEL)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM_ORE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
@@ -505,11 +542,15 @@ public class BNBBiomes {
 			.ground(3)
 			.build()
 		)
+		.surfaceRule(DEEP_MYCORRUM_COVER)
+		.surfaceRule(HARDENED_NETHERRACK_1)
+		.surfaceRule(HARDENED_NETHERRACK_2)
 		.noDimensionFeatures()
 		.feature(BNBPlacers.ORICHALCUM_ORE)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR)
 		.feature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING)
 		.feature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE)
+		.feature(BNBPlacers.NETHER_SPROUTS_DEEP)
 		.build(), BiomeArea.NETHERRACK_BARREN)
 		.bnb_setParticleProperties(12, 14, false);
 	
@@ -518,6 +559,14 @@ public class BNBBiomes {
 		.fogColor(0xFF0d1217)
 		.grassAndLeavesColor(0xFF052a32)
 		.build();
+	
+	/*private static BiomeBuilder deepNether(BiomeBuilder builder) {
+		return builder
+			.surfaceRule(DEEP_MYCORRUM_COVER)
+			.surfaceRule(HARDENED_NETHERRACK_1)
+			.surfaceRule(HARDENED_NETHERRACK_2)
+			.feature(BNBPlacers.NETHER_SPROUTS_DEEP);
+	}*/
 	
 	private static void add(TerrainRegion region, BiomeArea area, Biome biome) {
 		BIOME_BY_TERRAIN
@@ -556,6 +605,7 @@ public class BNBBiomes {
 	}
 	
 	private static boolean shoreHeight(BlockPos pos) {
+		if (pos.y < 70) return false;
 		if (pos.y < 100) return true;
 		return pos.y - 100 < SHORE_NOISE.get(pos.x * 0.1, pos.z * 0.1) * 5;
 	}

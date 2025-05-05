@@ -37,7 +37,9 @@ import java.util.List;
 
 public class BNBDecoratorLevel extends Level {
 	private static final BlockState NETHERRACK = Block.NETHERRACK.getDefaultState();
+	private static final BlockState HARDENED_NETHERRACK = BNBBlocks.HARDENED_NETHERRACK.getDefaultState();
 	private static final BlockState MOSSY_NETHERRACK = BNBBlocks.MOSSY_NETHERRACK.getDefaultState();
+	private static final BlockState MOSSY_HARDENED_NETHERRACK = BNBBlocks.MOSSY_HARDENED_NETHERRACK.getDefaultState();
 	private static final Vec3I[] OFFSETS;
 	
 	private final Long2ReferenceMap<FlattenedChunk> chunks = new Long2ReferenceOpenHashMap<>();
@@ -330,11 +332,18 @@ public class BNBDecoratorLevel extends Level {
 				Chunk chunk = getChunkFromCache(x >> 4, z >> 4);
 				int cx = x & 15;
 				int cz = z & 15;
-				for (int y = 94; y < 256; y++) {
+				for (int y = 0; y < 256; y++) {
 					BlockState state = chunk.getBlockState(cx, y, cz);
 					
+					if (state.isOf(BNBBlocks.DEEP_MYCORRUM)) {
+						placeMoss(x, y, z, HARDENED_NETHERRACK, MOSSY_HARDENED_NETHERRACK);
+						continue;
+					}
+					
+					if (y < 80) continue;
+					
 					if (state.isOf(BNBBlocks.NETHERRACK_MYCORRUM)) {
-						placeMoss(x, y, z);
+						placeMoss(x, y, z, NETHERRACK, MOSSY_NETHERRACK);
 						continue;
 					}
 					
@@ -386,7 +395,7 @@ public class BNBDecoratorLevel extends Level {
 		chunk.setBlockState(cx, y, cz, BNBBlocks.ASH_LAYER.getDefaultState().with(BNBBlockProperties.LAYER, layer));
 	}
 	
-	private void placeMoss(int x, int y, int z) {
+	private void placeMoss(int x, int y, int z, BlockState mask, BlockState mossBlock) {
 		boolean skipMoss = random.nextInt(32) > 0;
 		
 		if (!skipMoss) {
@@ -416,8 +425,8 @@ public class BNBDecoratorLevel extends Level {
 					BlockState above = chunk2.getBlockState(cx, cy + 1, cz);
 					if (!above.isAir() && above.isOpaque()) continue;
 					
-					if (chunk2.getBlockState(cx, cy, cz) == NETHERRACK) {
-						chunk2.setBlockState(cx, cy, cz, MOSSY_NETHERRACK);
+					if (chunk2.getBlockState(cx, cy, cz) == mask) {
+						chunk2.setBlockState(cx, cy, cz, mossBlock);
 					}
 					
 					if (skipMoss) continue;

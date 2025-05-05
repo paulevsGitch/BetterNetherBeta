@@ -14,6 +14,7 @@
 		"FlowingFluidBlockMixin",
 		"NetherLevelSourceMixin",
 		"LevelPropertiesMixin",
+		"LivingEntityAccessor",
 		"NetherDimensionMixin",
 		"NetherrackBlockMixin",
 		"CraftingResultMixin",

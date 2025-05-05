@@ -6,7 +6,6 @@ import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.noise.VoronoiNoise;
 import paulevs.bnb.world.BNBWorldGenerator;
 import paulevs.bnb.world.terrain.TerrainMap;
-import paulevs.bnb.world.terrain.TerrainRegion;
 
 public class CavesFeature extends TerrainFeature {
 	private final FractalNoise noiseBig = new FractalNoise(PerlinNoise::new);

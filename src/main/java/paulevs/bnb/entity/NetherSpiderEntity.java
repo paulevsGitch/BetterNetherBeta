@@ -1,27 +1,30 @@
 package paulevs.bnb.entity;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.monster.SpiderEntity;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.Level;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.maths.MCMath;
+import net.minecraft.util.maths.VectorCache;
 import net.modificationstation.stationapi.api.network.packet.MessagePacket;
 import net.modificationstation.stationapi.api.server.entity.MobSpawnDataProvider;
-import paulevs.bnb.BNB;
-import paulevs.bnb.block.BNBBlockTags;
-import paulevs.bnb.util.WorldUtil;
+import paulevs.bnb.entity.ai.EntityAI;
+import paulevs.bnb.entity.ai.TargetAttackAITask;
 
 public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpawnDataProvider {
-	private double fearVelocityX;
+	/*private double fearVelocityX;
 	private double fearVelocityZ;
-	private int fearTicks;
+	private int fearTicks;*/
+	
+	private final EntityAI<NetherSpiderEntity> entityAI;
+	public VectorCache path;
 	
 	public NetherSpiderEntity(Level level) {
 		super(level);
-		setSize(1.5F, 1.25f);
+		setSize(1.5F, 1.0f);
 		immuneToFire = true;
 		health = 30;
+		
+		entityAI = new EntityAI<>(this);
+		entityAI.addTask(0, new TargetAttackAITask<>(PlayerEntity.class, 16));
 	}
 	
 	@Override
@@ -34,7 +37,7 @@ public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpaw
 		MobSpawnDataProvider.super.readFromMessage(message);
 	}
 	
-	@Override
+	/*@Override
 	protected void tryAttack(Entity target, float distance) {
 		if (distance < 2.0F || distance > 6.0F || random.nextInt(10) != 0) {
 			super.tryAttack(target, distance);
@@ -47,24 +50,25 @@ public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpaw
 			velocityZ = dz / dist * 0.4F + velocityZ * 0.2F;
 			velocityY = 0.15F;
 		}
-	}
+	}*/
 	
-	@Override
+	/*@Override
 	public Entity getAttackTarget() {
 		if (fearTicks > 0) return null;
 		Entity target = super.getAttackTarget();
 		if (target instanceof PlayerEntity player && BNB.isCreative(player)) return null;
 		return entity;
-	}
+	}*/
 	
 	@Override
 	protected void tickHandSwing() {
-		super.tickHandSwing();
-		processRepellent();
-		processFear();
+		//super.tickHandSwing();
+		//processRepellent();
+		//processFear();
+		entityAI.process();
 	}
 	
-	private void processRepellent() {
+	/*private void processRepellent() {
 		if ((this.ticks & 7) > 0) return;
 		double centerX;
 		double centerZ;
@@ -113,5 +117,5 @@ public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpaw
 			}
 		}
 		return false;
-	}
+	}*/
 }
