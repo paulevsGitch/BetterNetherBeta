@@ -65,10 +65,10 @@ public class CavesFeature extends TerrainFeature {
 		float dx = (x - x1) / 32.0F;
 		float dz = (x - x1) / 32.0F;
 		
-		float a = map.getRegion(x1, z1).isLand() ? -1.0F : 1.0F;
-		float b = map.getRegion(x2, z1).isLand() ? -1.0F : 1.0F;
-		float c = map.getRegion(x1, z2).isLand() ? -1.0F : 1.0F;
-		float d = map.getRegion(x2, z2).isLand() ? -1.0F : 1.0F;
+		float a = map.getRegion(x1, z1).isLand() ? 0.0F : 1.0F;
+		float b = map.getRegion(x2, z1).isLand() ? 0.0F : 1.0F;
+		float c = map.getRegion(x1, z2).isLand() ? 0.0F : 1.0F;
+		float d = map.getRegion(x2, z2).isLand() ? 0.0F : 1.0F;
 		
 		a = MathHelper.lerp(dx, a, b);
 		b = MathHelper.lerp(dx, c, d);
