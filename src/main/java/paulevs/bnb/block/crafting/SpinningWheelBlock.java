@@ -39,13 +39,13 @@ public class SpinningWheelBlock extends TemplateBlockWithEntity implements Custo
 	@Override
 	public void appendProperties(Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
-		builder.add(BNBBlockProperties.DIRECTION);
+		builder.add(BNBBlockProperties.DIRECTION_HORIZONTAL);
 	}
 	
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext context) {
 		Direction dir = context.getHorizontalPlayerFacing();
-		return getDefaultState().with(BNBBlockProperties.DIRECTION, dir);
+		return getDefaultState().with(BNBBlockProperties.DIRECTION_HORIZONTAL, dir);
 	}
 	
 	@Override
@@ -79,7 +79,7 @@ public class SpinningWheelBlock extends TemplateBlockWithEntity implements Custo
 	public void updateBoundingBox(BlockView view, int x, int y, int z) {
 		if (!(view instanceof BlockStateView stateView)) return;
 		BlockState state = stateView.getBlockState(x, y, z);
-		if (state.get(BNBBlockProperties.DIRECTION).getAxis() == Axis.X) {
+		if (state.get(BNBBlockProperties.DIRECTION_HORIZONTAL).getAxis() == Axis.X) {
 			setBoundingBox(0.0625F, 0.0F, 0.3125F, 0.9375F, 0.9375F, 0.6875F);
 		}
 		else {
