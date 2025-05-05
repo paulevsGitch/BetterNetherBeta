@@ -47,9 +47,9 @@ public class BNBPlacers {
 	
 	public static final StructurePlacer ORICHALCUM_ORE = new VolumetricPlacer(BNBStructures.ORICHALCUM_ORE, 3);
 	public static final StructurePlacer LAVA_STREAM = new CeilingPlacer(BNBStructures.LAVA_STREAM, 1).setRandomDensityFunction(5, 15);
-	public static final StructurePlacer OBSIDIAN_BOLDER = new FloorPlacer(BNBStructures.OBSIDIAN_BOLDER, 3).setNoiseDensityFunction(15);
-	public static final StructurePlacer OBSIDIAN_GRAVEL_BLOB = new FloorPlacer(BNBStructures.OBSIDIAN_GRAVEL_BLOB, 7);
-	public static final StructurePlacer OBSIDIAN_SHARDS = new FloorPlacer(BNBStructures.OBSIDIAN_SHARDS, 4).setNoiseDensityFunction(13);
+	public static final StructurePlacer OBSIDIAN_BOLDER = new FloorPlacerLimited(BNBStructures.OBSIDIAN_BOLDER, 3, 75, 120).setNoiseDensityFunction(15);
+	public static final StructurePlacer OBSIDIAN_GRAVEL_BLOB = new FloorPlacerLimited(BNBStructures.OBSIDIAN_GRAVEL_BLOB, 7, 75, 120);
+	public static final StructurePlacer OBSIDIAN_SHARDS = new FloorPlacerLimited(BNBStructures.OBSIDIAN_SHARDS, 4, 75, 120).setNoiseDensityFunction(13);
 	public static final StructurePlacer LAVARRACK_BOLDER = new FloorPlacerLimited(BNBStructures.LAVARRACK_BOLDER, 3, 70, 90).setNoiseDensityFunction(17);
 	
 	public static final StructurePlacer JALUMINE_TREE = new FloorPlacer(BNBStructures.JALUMINE_TREE, 3).setNoiseDensityFunction(0, 0.75F);

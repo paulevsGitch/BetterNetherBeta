@@ -29,7 +29,7 @@ public class CavesFeature extends TerrainFeature {
 		densityTunnels += getRegionDensity(x, z) * gradient(y, 80, 96, 0.0F, 1.0F);
 		densityTunnels += gradient(y, 120, 140, 0.0F, 1.0F);
 		
-		if (y > 80) return densityTunnels;
+		if (y > 60) return densityTunnels;
 		
 		float densityCaves = noiseBig.get(x * 0.01, y * 0.03, z * 0.01);
 		densityCaves += noiseSmall.get(x * 0.1, y * 0.1, z * 0.1) * 0.1F;
@@ -65,10 +65,10 @@ public class CavesFeature extends TerrainFeature {
 		float dx = (x - x1) / 32.0F;
 		float dz = (x - x1) / 32.0F;
 		
-		float a = map.getRegion(x1, z1).isLand() ? 0.0F : 1.0F;
-		float b = map.getRegion(x2, z1).isLand() ? 0.0F : 1.0F;
-		float c = map.getRegion(x1, z2).isLand() ? 0.0F : 1.0F;
-		float d = map.getRegion(x2, z2).isLand() ? 0.0F : 1.0F;
+		float a = map.getRegion(x1, z1).isLand() ? -1.0F : 1.0F;
+		float b = map.getRegion(x2, z1).isLand() ? -1.0F : 1.0F;
+		float c = map.getRegion(x1, z2).isLand() ? -1.0F : 1.0F;
+		float d = map.getRegion(x2, z2).isLand() ? -1.0F : 1.0F;
 		
 		a = MathHelper.lerp(dx, a, b);
 		b = MathHelper.lerp(dx, c, d);

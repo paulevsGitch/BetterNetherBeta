@@ -16,6 +16,7 @@ import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.impl.world.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
 import paulevs.bnb.BNB;
+import paulevs.bnb.noise.PerlinNoise;
 import paulevs.bnb.world.decorator.BNBChunkStatus;
 import paulevs.bnb.world.decorator.BNBDecoratorThread;
 import paulevs.bnb.world.decorator.BNBWorldChunk;
@@ -108,7 +109,11 @@ public class BNBWorldGenerator {
 		return chunk;
 	}
 	
-	private static void fillBlocksData(int startX, int startZ, int index, byte[] section, CrossInterpolationCell cell, ChunkTerrainMap featureMap, boolean[] hasLava) {
+	private static void fillBlocksData(
+		int startX, int startZ, int index,
+		byte[] section, CrossInterpolationCell cell, ChunkTerrainMap featureMap,
+		boolean[] hasLava, PerlinNoise oceanFloorCeiling
+	) {
 		Arrays.fill(section, (byte) 0);
 		
 		Random random = new Random(MathHelper.hashCode(startX >> 4, index, startZ >> 4));
@@ -147,9 +152,11 @@ public class BNBWorldGenerator {
 					if (cell.get() < 0.5F) {
 						if (index > 5) continue;
 						int y = index << 4 | by;
-						if (y < 85) continue;
 						if (!hasLava[bz << 4 | bx]) continue;
-						section[pos] = 3;
+						int x = startX | bx;
+						int z = startZ | bz;
+						if (y < 65 + oceanFloorCeiling.get(x * 0.1, z * 0.1) * 5) continue;
+						section[pos] = y > 75 ? (byte) 3 : (byte) 1;
 					}
 					else {
 						section[pos] = 1;
@@ -299,6 +306,7 @@ public class BNBWorldGenerator {
 			}
 			
 			Thread thread = new Thread(() -> {
+				final PerlinNoise oceanFloorCeiling = new PerlinNoise();
 				final boolean[] hasLava = new boolean[256];
 				int startX, startZ;
 				byte index;
@@ -335,7 +343,8 @@ public class BNBWorldGenerator {
 							blockSections[index],
 							cells[index],
 							featureMap,
-							hasLava
+							hasLava,
+							oceanFloorCeiling
 						);
 					}
 					
