@@ -7,9 +7,16 @@ import net.modificationstation.stationapi.api.util.StringIdentifiable;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 
+import java.util.Arrays;
+
 public class BNBBlockProperties {
 	public static final EnumProperty<DoubleShape> DOUBLE_SHAPE = EnumProperty.of("shape", DoubleShape.class);
 	public static final EnumProperty<Direction> DIRECTION = EnumProperty.of("direction", Direction.class);
+	public static final EnumProperty<Direction> DIRECTION_HORIZONTAL = EnumProperty.of(
+		"direction",
+		Direction.class,
+		Arrays.stream(Direction.values()).filter(dir -> dir.getAxis().isHorizontal()).toArray(Direction[]::new)
+	);
 	public static final EnumProperty<VineShape> VINE_SHAPE = EnumProperty.of("shape", VineShape.class);
 	public static final EnumProperty<Axis> AXIS = EnumProperty.of("axis", Axis.class);
 	public static final BooleanProperty LIT = BooleanProperty.of("lit");

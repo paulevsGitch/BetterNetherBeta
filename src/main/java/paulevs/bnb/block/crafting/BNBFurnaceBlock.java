@@ -36,13 +36,13 @@ public class BNBFurnaceBlock extends TemplateBlockWithEntity {
 	@Override
 	public void appendProperties(Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
-		builder.add(BNBBlockProperties.DIRECTION, BNBBlockProperties.LIT);
+		builder.add(BNBBlockProperties.DIRECTION_HORIZONTAL, BNBBlockProperties.LIT);
 	}
 	
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext context) {
 		Direction dir = context.getHorizontalPlayerFacing();
-		return getDefaultState().with(BNBBlockProperties.DIRECTION, dir);
+		return getDefaultState().with(BNBBlockProperties.DIRECTION_HORIZONTAL, dir);
 	}
 	
 	@Override
@@ -69,7 +69,7 @@ public class BNBFurnaceBlock extends TemplateBlockWithEntity {
 		double py = y + random.nextFloat() * 0.375;
 		double pz = z + 0.5;
 		
-		Direction dir = state.get(BNBBlockProperties.DIRECTION);
+		Direction dir = state.get(BNBBlockProperties.DIRECTION_HORIZONTAL);
 		if (dir.getOffsetX() != 0) {
 			px -= dir.getOffsetX() * 0.52;
 			pz += random.nextFloat() * 0.75 - 0.375;
