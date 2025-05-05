@@ -57,6 +57,7 @@ import paulevs.bnb.item.NetherHygrometerItem;
 import paulevs.bnb.item.PortalCompassItem;
 import paulevs.bnb.noise.FloatNoise;
 import paulevs.bnb.noise.PerlinNoise;
+import paulevs.bnb.rendering.BNBSkyRenderer;
 import paulevs.bnb.rendering.BNBWeatherRenderer;
 import paulevs.bnb.rendering.LavaRenderer;
 import paulevs.bnb.rendering.OBJModel;
@@ -144,9 +145,7 @@ public class ClientListener {
 			NetherHygrometerItem.TEXTURES[i] = itemAtlas.addTexture(BNB.id("item/nether_hygrometer_" + i)).index;
 		}
 		
-		printTranslations();
-		//debugTerrain();
-		biomeColors();
+		BNBSkyRenderer.init(BNBClient.getMinecraft().textureManager);
 	}
 	
 	@EventListener
@@ -211,6 +210,9 @@ public class ClientListener {
 	@EventListener
 	public void onInit(InitEvent event) {
 		BNBCommandManager.registerClient();
+		printTranslations();
+		//debugTerrain();
+		biomeColors();
 	}
 	
 	@EventListener

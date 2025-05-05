@@ -560,14 +560,6 @@ public class BNBBiomes {
 		.grassAndLeavesColor(0xFF052a32)
 		.build();
 	
-	/*private static BiomeBuilder deepNether(BiomeBuilder builder) {
-		return builder
-			.surfaceRule(DEEP_MYCORRUM_COVER)
-			.surfaceRule(HARDENED_NETHERRACK_1)
-			.surfaceRule(HARDENED_NETHERRACK_2)
-			.feature(BNBPlacers.NETHER_SPROUTS_DEEP);
-	}*/
-	
 	private static void add(TerrainRegion region, BiomeArea area, Biome biome) {
 		BIOME_BY_TERRAIN
 			.computeIfAbsent(region, k -> new EnumMap<>(BiomeArea.class))

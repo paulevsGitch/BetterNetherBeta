@@ -1,5 +1,7 @@
 package paulevs.bnb.world.biome;
 
+import it.unimi.dsi.fastutil.longs.LongArrayList;
+import it.unimi.dsi.fastutil.longs.LongList;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.fabricmc.api.EnvType;
@@ -27,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BiomeMap extends DataMap<Biome> {
+	private static final LongList PACKET_POSITIONS = new LongArrayList();
 	private final Object2ObjectMap<String, Biome> nameToBiome = new Object2ObjectOpenHashMap<>();
 	private final VoronoiNoise cellNoise = new VoronoiNoise();
 	private final PerlinNoise soulBiomeNoise = new PerlinNoise();
@@ -92,8 +95,13 @@ public class BiomeMap extends DataMap<Biome> {
 		Level level = BNBClient.getMinecraft().level;
 		if (level == null || !level.isRemote) return;
 		// TODO implement better fix or wait for StAPI #189 issue resolve
-		if (BNBClient.getMinecraft().getNetworkHandler() == null) return;
+		if (BNBClient.getMinecraft().getNetworkHandler() == null) {
+			PACKET_POSITIONS.add(position);
+			return;
+		}
 		PacketHelper.send(new BiomeRequestPacket(position));
+		PACKET_POSITIONS.forEach(BiomeRequestPacket::new);
+		PACKET_POSITIONS.clear();
 	}
 	
 	@Environment(EnvType.CLIENT)
