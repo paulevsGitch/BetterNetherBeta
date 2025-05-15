@@ -2,11 +2,7 @@ package paulevs.bnb.entity.ai;
 
 import net.minecraft.entity.living.LivingEntity;
 import net.minecraft.entity.living.WalkingEntity;
-import net.minecraft.util.maths.Box;
 import net.minecraft.util.maths.VectorCache;
-import paulevs.bnb.entity.NetherSpiderEntity;
-
-import java.util.List;
 
 public class TargetAttackAITask <T extends LivingEntity, E extends WalkingEntity> extends AITask<E> {
 	private final Class<T> targetClass;
@@ -16,13 +12,19 @@ public class TargetAttackAITask <T extends LivingEntity, E extends WalkingEntity
 	private VectorCache path;
 	private int updateTick;
 	
-	public TargetAttackAITask(Class<T> targetClass, int range) {
+	public TargetAttackAITask(E entity, Class<T> targetClass, int range) {
+		super(entity);
 		this.targetClass = targetClass;
 		this.range = range;
 	}
 	
 	@Override
-	public void process(E entity) {
+	public void process() {
+	
+	}
+	
+	/*@Override
+	public void process() {
 		if (path != null) EntityAI.moveOnPath(entity, path);
 		if (target != null) EntityAI.lookAt(entity, target);
 		
@@ -32,7 +34,7 @@ public class TargetAttackAITask <T extends LivingEntity, E extends WalkingEntity
 	}
 	
 	@Override
-	public boolean canStart(E entity) {
+	public boolean canStart() {
 		findTarget(entity);
 		return target != null;
 	}
@@ -72,5 +74,5 @@ public class TargetAttackAITask <T extends LivingEntity, E extends WalkingEntity
 		
 		//if (path != null) System.out.println("Path " + path.size);
 		((NetherSpiderEntity) entity).path = path;
-	}
+	}*/
 }

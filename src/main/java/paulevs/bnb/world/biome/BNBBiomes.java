@@ -1,5 +1,6 @@
 package paulevs.bnb.world.biome;
 
+import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.block.Block;
 import net.minecraft.entity.living.monster.GhastEntity;
 import net.minecraft.entity.living.monster.ZombiePigmanEntity;
@@ -25,12 +26,14 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Set;
 
 @SuppressWarnings("unused")
 public class BNBBiomes {
 	public static final EnumMap<TerrainRegion, EnumMap<BiomeArea, List<Biome>>> BIOME_BY_TERRAIN = new EnumMap<>(TerrainRegion.class);
 	public static final List<Biome> BIOMES = new ArrayList<>();
 	
+	private static final Set<Biome> EXTERNAL_BIOMES = new ReferenceOpenHashSet<>();
 	private static final FractalNoise SHORE_NOISE = new FractalNoise(PerlinNoise::new);
 	private static final PositionSurfaceCondition SHORE_COND = new PositionSurfaceCondition(BNBBiomes::shoreHeight);
 	private static final FractalNoise NOISE_COVER = new FractalNoise(VoronoiNoise::new);
@@ -602,11 +605,25 @@ public class BNBBiomes {
 		return pos.y - 100 < SHORE_NOISE.get(pos.x * 0.1, pos.z * 0.1) * 5;
 	}
 	
+	public static void addExternalBiome(Biome biome) {
+		if (biome == Biome.NETHER || EXTERNAL_BIOMES.contains(biome)) return;
+		addLand(biome, BiomeArea.VALUES);
+		EXTERNAL_BIOMES.add(biome);
+		biome.addSurfaceRule(LOW_LAND_GRAVEL);
+		biome.addSurfaceRule(PARTIAL_MYCORRUM_COVER);
+		biome.addSurfaceRule(DEEP_MYCORRUM_COVER);
+		biome.addSurfaceRule(HARDENED_NETHERRACK_1);
+		biome.addSurfaceRule(HARDENED_NETHERRACK_2);
+		biome.addFeature(BNBPlacers.ORICHALCUM_ORE);
+		biome.addFeature(BNBPlacers.NETHER_SPROUTS_RARE);
+	}
+	
 	public static void init() {
 		SHORE_NOISE.setOctaves(2);
 		SHORE_NOISE.setSeed(123);
 		NOISE_COVER.setSeed(513);
 		Biome.NETHER.setGrassColorProvider((source, x, z) -> 0xFFC03939);
 		Biome.NETHER.addFeature(BNBPlacers.NETHER_SPROUTS_RARE);
+		System.out.println("Gen init");
 	}
 }

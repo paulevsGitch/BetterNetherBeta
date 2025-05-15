@@ -3,11 +3,7 @@ package paulevs.bnb.entity.renderer;
 import net.minecraft.client.render.entity.SpiderEyesRenderer;
 import net.minecraft.entity.living.LivingEntity;
 import net.minecraft.entity.living.monster.SpiderEntity;
-import net.minecraft.util.maths.Vec3I;
-import net.minecraft.util.maths.VectorCache;
 import org.lwjgl.opengl.GL11;
-import paulevs.bnb.entity.NetherSpiderEntity;
-import paulevs.bnb.mixin.client.VectorCacheAccessor;
 
 public class NetherSpiderRenderer extends SpiderEyesRenderer {
 	private final String texture;
@@ -31,18 +27,9 @@ public class NetherSpiderRenderer extends SpiderEyesRenderer {
 		return true;
 	}
 	
-	@Override
+	/*@Override
 	protected void renderEntityName(LivingEntity entity, double x, double y, double z) {
 		super.renderEntityName(entity, x, y, z);
-		/*GL11.glColor4f(1.0F, 0.0F, 1.0F, 1.0F);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glBegin(GL11.GL_LINES);
-		GL11.glVertex3f(0.0F + (float) x, 0.0F + (float) y, 0.0F + (float) z);
-		GL11.glVertex3f(0.0F + (float) x, 3.0F + (float) y, 0.0F + (float) z);
-		GL11.glEnd();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);*/
-		
-		//double px = MathHelper.lerp()
 		
 		NetherSpiderEntity spider = (NetherSpiderEntity) entity;
 		VectorCache path = spider.path;
@@ -61,5 +48,5 @@ public class NetherSpiderRenderer extends SpiderEyesRenderer {
 		}
 		GL11.glEnd();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-	}
+	}*/
 }

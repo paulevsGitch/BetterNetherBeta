@@ -1,30 +1,27 @@
 package paulevs.bnb.entity;
 
 import net.minecraft.entity.living.monster.SpiderEntity;
-import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.VectorCache;
 import net.modificationstation.stationapi.api.network.packet.MessagePacket;
 import net.modificationstation.stationapi.api.server.entity.MobSpawnDataProvider;
-import paulevs.bnb.entity.ai.EntityAI;
-import paulevs.bnb.entity.ai.TargetAttackAITask;
+import paulevs.bnb.entity.ai.AITask;
+import paulevs.bnb.entity.ai.EntityWithAI;
 
-public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpawnDataProvider {
+public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpawnDataProvider, EntityWithAI<NetherSpiderEntity> {
 	/*private double fearVelocityX;
 	private double fearVelocityZ;
 	private int fearTicks;*/
 	
-	private final EntityAI<NetherSpiderEntity> entityAI;
 	public VectorCache path;
+	
+	private AITask<NetherSpiderEntity> task;
 	
 	public NetherSpiderEntity(Level level) {
 		super(level);
 		setSize(1.5F, 1.0f);
 		immuneToFire = true;
 		health = 30;
-		
-		entityAI = new EntityAI<>(this);
-		entityAI.addTask(0, new TargetAttackAITask<>(PlayerEntity.class, 16));
 	}
 	
 	@Override
@@ -60,13 +57,14 @@ public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpaw
 		return entity;
 	}*/
 	
-	@Override
+	/*@Override
 	protected void tickHandSwing() {
 		//super.tickHandSwing();
 		//processRepellent();
 		//processFear();
-		entityAI.process();
-	}
+		if (task == null) setCurrentTask(getDefaultTask());
+		if (task != null) task.process();
+	}*/
 	
 	/*private void processRepellent() {
 		if ((this.ticks & 7) > 0) return;
@@ -118,4 +116,19 @@ public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpaw
 		}
 		return false;
 	}*/
+	
+	@Override
+	public AITask<NetherSpiderEntity> getDefaultTask() {
+		return null;
+	}
+	
+	@Override
+	public AITask<NetherSpiderEntity> getCurrentTask() {
+		return task;
+	}
+	
+	@Override
+	public void setCurrentTask(AITask<NetherSpiderEntity> task) {
+		this.task = task;
+	}
 }
