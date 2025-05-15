@@ -610,12 +610,12 @@ public class BNBBiomes {
 		addLand(biome, BiomeArea.VALUES);
 		EXTERNAL_BIOMES.add(biome);
 		biome.addSurfaceRule(LOW_LAND_GRAVEL);
-		biome.addSurfaceRule(PARTIAL_MYCORRUM_COVER);
 		biome.addSurfaceRule(DEEP_MYCORRUM_COVER);
 		biome.addSurfaceRule(HARDENED_NETHERRACK_1);
 		biome.addSurfaceRule(HARDENED_NETHERRACK_2);
 		biome.addFeature(BNBPlacers.ORICHALCUM_ORE);
 		biome.addFeature(BNBPlacers.NETHER_SPROUTS_RARE);
+		biome.addFeature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE);
 	}
 	
 	public static void init() {
