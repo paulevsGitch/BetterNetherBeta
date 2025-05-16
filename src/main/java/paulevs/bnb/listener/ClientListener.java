@@ -22,6 +22,7 @@ import net.modificationstation.stationapi.api.client.event.texture.TextureRegist
 import net.modificationstation.stationapi.api.client.gui.screen.GuiHandler;
 import net.modificationstation.stationapi.api.client.registry.GuiHandlerRegistry;
 import net.modificationstation.stationapi.api.client.texture.SpriteIdentifier;
+import net.modificationstation.stationapi.api.client.texture.atlas.Atlas.Sprite;
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
 import net.modificationstation.stationapi.api.event.mod.InitEvent;
@@ -112,7 +113,10 @@ public class ClientListener {
 		netherrackAshTexture = blockAtlas.addTexture(BNB.id("block/netherrack_ash")).index;
 		ashTexture = blockAtlas.addTexture(BNB.id("block/ash")).index;
 		
-		Block.NETHERRACK.texture = blockAtlas.addTexture(BNB.id("block/netherrack")).index;
+		Sprite netherrack = blockAtlas.addTexture(BNB.id("block/netherrack"));
+		//noinspection UnstableApiUsage
+		blockAtlas.idToTex.put(Identifier.of("minecraft:block/netherrack"), netherrack);
+		Block.NETHERRACK.texture = netherrack.index;
 		Block.GLOWSTONE.texture = blockAtlas.addTexture(BNB.id("block/glowstone")).index;
 		Block.SOUL_SAND.texture = blockAtlas.addTexture(BNB.id("block/soul_sand")).index;
 		SulphuricAcidStillBlock.texture = blockAtlas.addTexture(BNB.id("block/sulphuric_acid_still")).index;
