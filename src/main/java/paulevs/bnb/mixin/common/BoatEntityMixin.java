@@ -63,6 +63,8 @@ public abstract class BoatEntityMixin extends Entity {
 	))
 	private void bnb_stopRiding(PlayerEntity player, CallbackInfoReturnable<Boolean> info) {
 		player.setPosition(x, y + 2.5, z);
-		player.setVelocity(velocityX, velocityY, velocityZ);
+		player.velocityX = velocityX;
+		player.velocityY = velocityY;
+		player.velocityZ = velocityZ;
 	}
 }
