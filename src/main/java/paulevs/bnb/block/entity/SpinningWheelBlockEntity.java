@@ -113,6 +113,10 @@ public class SpinningWheelBlockEntity extends BlockEntity implements Inventory {
 		tag.put("process", (byte) process);
 	}
 	
+	public boolean isProcessing() {
+		return process != 0;
+	}
+	
 	@Environment(EnvType.CLIENT)
 	public float getVisualProcess() {
 		if (process == 0) return 0;

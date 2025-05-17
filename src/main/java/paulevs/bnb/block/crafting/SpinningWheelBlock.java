@@ -91,7 +91,7 @@ public class SpinningWheelBlock extends TemplateBlockWithEntity implements Custo
 	public void onBlockRemoved(Level level, int x, int y, int z) {
 		SpinningWheelBlockEntity entity = (SpinningWheelBlockEntity) level.getBlockEntity(x, y, z);
 		if (entity == null) return;
-		if (entity.getVisualProcess() > 0) drop(level, x, y, z, new ItemStack(BNBItems.NETHER_FIBER));
+		if (entity.isProcessing()) drop(level, x, y, z, new ItemStack(BNBItems.NETHER_FIBER));
 		for (byte i = 0; i < entity.getInventorySize(); i++) {
 			ItemStack stack = entity.getItem(i);
 			if (stack == null) continue;
