@@ -624,6 +624,5 @@ public class BNBBiomes {
 		NOISE_COVER.setSeed(513);
 		Biome.NETHER.setGrassColorProvider((source, x, z) -> 0xFFC03939);
 		Biome.NETHER.addFeature(BNBPlacers.NETHER_SPROUTS_RARE);
-		System.out.println("Gen init");
 	}
 }

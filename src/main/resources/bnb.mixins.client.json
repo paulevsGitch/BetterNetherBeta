@@ -9,6 +9,7 @@
 		"AchievementScreenMixin",
 		"ParticleEntityAccessor",
 		"BlockRendererAccessor",
+		"JsonUnbakedModelMixin",
 		"LevelRendererAccessor",
 		"FogRendererImplMixin",
 		"NetherrackBlockMixin",
