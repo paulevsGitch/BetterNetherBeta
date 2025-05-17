@@ -68,8 +68,7 @@ public abstract class BNBPlantBlock extends TemplateBlock {
 	
 	@Override
 	public void afterBreak(Level level, PlayerEntity player, int x, int y, int z, int meta) {
-		if (level.isRemote) return;
-		if (!needShears) {
+		if (level.isRemote || !needShears) {
 			super.afterBreak(level, player, x, y, z, meta);
 			return;
 		}
@@ -87,9 +86,8 @@ public abstract class BNBPlantBlock extends TemplateBlock {
 	protected abstract boolean canStay(Level level, int x, int y, int z);
 	
 	protected void tick(Level level, int x, int y, int z) {
-		if (!this.canStay(level, x, y, z)) {
-			this.drop(level, x, y, z, 0);
-			level.setBlockState(x, y, z, States.AIR.get());
-		}
+		if (this.canStay(level, x, y, z)) return;
+		if (!level.isRemote) this.drop(level, x, y, z, 0);
+		level.setBlockStateWithNotify(x, y, z, States.AIR.get());
 	}
 }

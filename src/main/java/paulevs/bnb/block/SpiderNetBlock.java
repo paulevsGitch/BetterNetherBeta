@@ -61,7 +61,7 @@ public class SpiderNetBlock extends TemplateBlock {
 		
 		if (isEmpty(facing)) {
 			drop(level, x, y, z, l);
-			level.setBlockState(x, y, z, States.AIR.get());
+			level.setBlockStateWithNotify(x, y, z, States.AIR.get());
 			return;
 		}
 		

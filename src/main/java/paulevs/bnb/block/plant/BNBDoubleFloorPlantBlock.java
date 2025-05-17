@@ -61,8 +61,10 @@ public class BNBDoubleFloorPlantBlock extends BNBFloorPlantBlock {
 	public void onBlockRemoved(Level level, int x, int y, int z) {
 		BlockState state = level.getBlockState(x, y - 1, z);
 		if (state.isOf(this)) {
-			level.setBlockState(x, y - 1, z, States.AIR.get());
+			level.setBlockStateWithNotify(x, y - 1, z, States.AIR.get());
+			level.updateBlock(x, y - 1, z);
 		}
+		else level.updateBlock(x, y + 1, z);
 		super.onBlockRemoved(level, x, y, z);
 	}
 	

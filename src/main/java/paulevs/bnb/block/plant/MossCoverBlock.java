@@ -168,7 +168,7 @@ public class MossCoverBlock extends BNBPlantBlock {
 		}
 		if (count == 0) newState = States.AIR.get();
 		
-		level.setBlockState(x, y, z, newState);
+		level.setBlockStateWithNotify(x, y, z, newState);
 		super.afterBreak(level, player, x, y, z, meta);
 	}
 	

@@ -109,7 +109,7 @@ public class NetherrackStalactite extends TemplateBlock implements BeforeBlockRe
 		if (state.isOf(this) || (state.getBlock().isFullCube() && state.getBlock().isFullOpaque() && state.getBlock().material.blocksMovement())) {
 			return;
 		}
-		level.setBlockState(x, y, z, States.AIR.get());
+		level.setBlockStateWithNotify(x, y, z, States.AIR.get());
 		level.playSound(x + 0.5, y + 0.5, z + 0.5, sounds.getBreakSound(), sounds.getVolume() * 0.5F, sounds.getPitch());
 		level.updateBlock(x, y, z);
 		level.scheduleTick(x, y + (inverted ? -1 : 1), z, this.id, 1);

@@ -85,10 +85,9 @@ public class ShardsBlock extends TemplateBlock {
 	}
 	
 	protected void tick(Level level, int x, int y, int z) {
-		if (!this.canStay(level, x, y, z)) {
-			this.drop(level, x, y, z, 0);
-			level.setBlockState(x, y, z, States.AIR.get());
-		}
+		if (this.canStay(level, x, y, z)) return;
+		if (!level.isRemote) this.drop(level, x, y, z, 0);
+		level.setBlockStateWithNotify(x, y, z, States.AIR.get());
 	}
 	
 	private boolean canStay(Level level, int x, int y, int z) {

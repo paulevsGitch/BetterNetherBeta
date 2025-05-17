@@ -149,12 +149,12 @@ public class AshLayerBlock extends AshBlock implements BeforeBlockRemoved {
 		
 		if (newBelowLayer != belowLayer) {
 			below = newBelowLayer == 3 ? BNBBlocks.ASH_BLOCK.getDefaultState() : below.with(BNBBlockProperties.LAYER, newBelowLayer);
-			level.setBlockState(x, y - 1, z, below);
+			level.setBlockStateWithNotify(x, y - 1, z, below);
 		}
 		
 		if (newSelfLayer != selfLayer) {
 			self = newSelfLayer < 0 ? States.AIR.get() : self.with(BNBBlockProperties.LAYER, newSelfLayer);
-			level.setBlockState(x, y, z, self);
+			level.setBlockStateWithNotify(x, y, z, self);
 		}
 	}
 	
