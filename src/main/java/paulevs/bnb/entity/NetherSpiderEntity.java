@@ -4,10 +4,12 @@ import net.minecraft.entity.living.monster.SpiderEntity;
 import net.minecraft.level.Level;
 import net.minecraft.util.maths.VectorCache;
 import net.modificationstation.stationapi.api.network.packet.MessagePacket;
+import net.modificationstation.stationapi.api.server.entity.HasTrackingParameters;
 import net.modificationstation.stationapi.api.server.entity.MobSpawnDataProvider;
 import paulevs.bnb.entity.ai.AITask;
 import paulevs.bnb.entity.ai.EntityWithAI;
 
+@HasTrackingParameters(trackingDistance = 50, updatePeriod = 4)
 public abstract class NetherSpiderEntity extends SpiderEntity implements MobSpawnDataProvider, EntityWithAI<NetherSpiderEntity> {
 	/*private double fearVelocityX;
 	private double fearVelocityZ;

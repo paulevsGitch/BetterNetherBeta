@@ -14,7 +14,9 @@ import net.modificationstation.stationapi.api.event.network.packet.PacketRegiste
 import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent;
 import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent.Vanilla;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
+import net.modificationstation.stationapi.api.event.registry.EntityHandlerRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
+import net.modificationstation.stationapi.api.event.registry.MobHandlerRegistryEvent;
 import net.modificationstation.stationapi.api.event.world.biome.BiomeRegisterEvent;
 import net.modificationstation.stationapi.api.recipe.FuelRegistry;
 import net.modificationstation.stationapi.api.registry.ItemRegistry;
@@ -29,10 +31,10 @@ import paulevs.bnb.block.entity.CocoonSpawnerBlockEntity;
 import paulevs.bnb.block.entity.SpinningWheelBlockEntity;
 import paulevs.bnb.block.property.BNBBlockMaterials;
 import paulevs.bnb.block.stone.ShardsBlock;
-import paulevs.bnb.entity.CrimsonSpiderEntity;
+import paulevs.bnb.entity.ChlorophateSpiderEntity;
+import paulevs.bnb.entity.FalurianSpiderEntity;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.entity.PirozenSpiderEntity;
-import paulevs.bnb.entity.PoisonSpiderEntity;
 import paulevs.bnb.item.BNBItems;
 import paulevs.bnb.packet.BNBSetWeatherPacket;
 import paulevs.bnb.packet.BNBWeatherPacket;
@@ -69,10 +71,10 @@ public class CommonListener {
 	
 	@EventListener
 	public void onEntityRegister(EntityRegister event) {
-		event.register(CrimsonSpiderEntity.class, "bnb:falurian_spider");
-		event.register(PirozenSpiderEntity.class, "bnb:pirozen_spider");
-		event.register(PoisonSpiderEntity.class, "bnb:chlorophate_spider");
-		event.register(ObsidianBoatEntity.class, "bnb:obsidian_boat");
+		event.register(FalurianSpiderEntity.class, FalurianSpiderEntity.ID.toString());
+		event.register(PirozenSpiderEntity.class, PirozenSpiderEntity.ID.toString());
+		event.register(ChlorophateSpiderEntity.class, ChlorophateSpiderEntity.ID.toString());
+		event.register(ObsidianBoatEntity.class, ObsidianBoatEntity.ID.toString());
 	}
 	
 	@EventListener
@@ -134,5 +136,17 @@ public class CommonListener {
 		Registry.register(PacketTypeRegistry.INSTANCE, BiomeRequestPacket.ID, BiomeRequestPacket.TYPE);
 		Registry.register(PacketTypeRegistry.INSTANCE, BiomeUpdatePacket.ID, BiomeUpdatePacket.TYPE);
 		Registry.register(PacketTypeRegistry.INSTANCE, BNBSetWeatherPacket.ID, BNBSetWeatherPacket.TYPE);
+	}
+	
+	@EventListener
+	public void registerMobHandlers(MobHandlerRegistryEvent event) {
+		event.register(FalurianSpiderEntity.ID, FalurianSpiderEntity::new);
+		event.register(PirozenSpiderEntity.ID, PirozenSpiderEntity::new);
+		event.register(ChlorophateSpiderEntity.ID, ChlorophateSpiderEntity::new);
+	}
+	
+	@EventListener
+	public void registerMobHandlers(EntityHandlerRegistryEvent event) {
+		event.register(ObsidianBoatEntity.ID, ObsidianBoatEntity::new);
 	}
 }

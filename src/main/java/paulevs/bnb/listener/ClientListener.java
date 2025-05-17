@@ -45,10 +45,10 @@ import paulevs.bnb.block.fluid.SulphuricAcidStillBlock;
 import paulevs.bnb.block.stone.AmetrineBlock;
 import paulevs.bnb.block.stone.SoulSandstoneTexturedBlock;
 import paulevs.bnb.command.BNBCommandManager;
-import paulevs.bnb.entity.CrimsonSpiderEntity;
+import paulevs.bnb.entity.ChlorophateSpiderEntity;
+import paulevs.bnb.entity.FalurianSpiderEntity;
 import paulevs.bnb.entity.ObsidianBoatEntity;
 import paulevs.bnb.entity.PirozenSpiderEntity;
-import paulevs.bnb.entity.PoisonSpiderEntity;
 import paulevs.bnb.entity.renderer.NetherSpiderRenderer;
 import paulevs.bnb.entity.renderer.ObsidianBoatRenderer;
 import paulevs.bnb.gui.container.SpinningWheelContainer;
@@ -201,9 +201,9 @@ public class ClientListener {
 	
 	@EventListener
 	public void onEntityRenderRegister(EntityRendererRegisterEvent event) {
-		event.renderers.put(CrimsonSpiderEntity.class, new NetherSpiderRenderer("falurian_spider_e"));
+		event.renderers.put(FalurianSpiderEntity.class, new NetherSpiderRenderer("falurian_spider_e"));
 		event.renderers.put(PirozenSpiderEntity.class, new NetherSpiderRenderer("pirozen_spider_e"));
-		event.renderers.put(PoisonSpiderEntity.class, new NetherSpiderRenderer("chlorophate_spider_e"));
+		event.renderers.put(ChlorophateSpiderEntity.class, new NetherSpiderRenderer("chlorophate_spider_e"));
 		event.renderers.put(ObsidianBoatEntity.class, new ObsidianBoatRenderer());
 	}
 	

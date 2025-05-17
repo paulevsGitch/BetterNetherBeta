@@ -5,7 +5,7 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
 
 public class PirozenSpiderEntity extends NetherSpiderEntity {
-	private static final Identifier ID = BNB.id("pirozen_spider");
+	public static final Identifier ID = BNB.id("pirozen_spider");
 	
 	public PirozenSpiderEntity(Level level) {
 		super(level);
