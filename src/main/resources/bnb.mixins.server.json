@@ -9,7 +9,8 @@
 		"ServerPlayerPacketHandlerAccessor",
 		"MinecraftServerMixin",
 		"CommandManagerMixin",
-		"TrackedEntityMixin"
+		"TrackedEntityMixin",
+		"ServerPlayerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
