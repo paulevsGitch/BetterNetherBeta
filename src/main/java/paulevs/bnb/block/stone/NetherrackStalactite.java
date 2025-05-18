@@ -2,6 +2,7 @@ package paulevs.bnb.block.stone;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
@@ -110,7 +111,16 @@ public class NetherrackStalactite extends TemplateBlock implements BeforeBlockRe
 			return;
 		}
 		level.setBlockStateWithNotify(x, y, z, States.AIR.get());
-		level.playSound(x + 0.5, y + 0.5, z + 0.5, sounds.getBreakSound(), sounds.getVolume() * 0.5F, sounds.getPitch());
+		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+			level.playSound(
+				x + 0.5,
+				y + 0.5,
+				z + 0.5,
+				sounds.getBreakSound(),
+				sounds.getVolume() * 0.5F,
+				sounds.getPitch()
+			);
+		}
 		level.updateBlock(x, y, z);
 		level.scheduleTick(x, y + (inverted ? -1 : 1), z, this.id, 1);
 	}

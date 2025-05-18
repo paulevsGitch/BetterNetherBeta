@@ -563,6 +563,19 @@ public class BNBBiomes {
 		.grassAndLeavesColor(0xFF052a32)
 		.build();
 	
+	/*private static Biome applyCommon(Biome biome) {
+		biome.addSurfaceRule(DEEP_MYCORRUM_COVER);
+		biome.addSurfaceRule(HARDENED_NETHERRACK_1);
+		biome.addSurfaceRule(HARDENED_NETHERRACK_2);
+		biome.setNoDimensionFeatures(true);
+		biome.addFeature(BNBPlacers.ORICHALCUM_ORE);
+		biome.addFeature(BNBPlacers.GLOWSTONE_CRYSTAL_FLOOR);
+		biome.addFeature(BNBPlacers.GLOWSTONE_CRYSTAL_CEILING);
+		biome.addFeature(BNBPlacers.NETHERRACK_STALACTITE_CEILING_RARE);
+		biome.addFeature(BNBPlacers.NETHER_SPROUTS_DEEP);
+		return biome;
+	}*/
+	
 	private static void add(TerrainRegion region, BiomeArea area, Biome biome) {
 		BIOME_BY_TERRAIN
 			.computeIfAbsent(region, k -> new EnumMap<>(BiomeArea.class))
