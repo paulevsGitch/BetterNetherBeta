@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Random;
 
 public class TerrainMap extends DataMap<Identifier> {
 	private static final Identifier DEFAULT_TERRAIN = BNB.id("plains");
@@ -27,7 +26,6 @@ public class TerrainMap extends DataMap<Identifier> {
 	private final FractalNoise mountainNoise = new FractalNoise(PerlinNoise::new);
 	private final VoronoiNoise bridgesNoise = new VoronoiNoise();
 	private final VoronoiNoise cellNoise = new VoronoiNoise();
-	private final Random random = new Random(0);
 	private final RiversFeature rivers = new RiversFeature();
 	
 	public TerrainMap() {
