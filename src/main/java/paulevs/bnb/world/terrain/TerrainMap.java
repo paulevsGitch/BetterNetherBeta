@@ -184,10 +184,12 @@ public class TerrainMap extends DataMap<Identifier> {
 	
 	static {
 		int radius = 5;
+		int radius2 = radius * radius;
 		List<Vec2I> offsets = new ArrayList<>();
 		for (int x = -radius; x <= radius; x++) {
+			int x2 = x * x;
 			for (int z = -radius; z <= radius; z++) {
-				if (x * x + z * z <= radius) {
+				if (x2 + z * z <= radius2) {
 					offsets.add(new Vec2I(x << 2, z << 2));
 				}
 			}
