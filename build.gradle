@@ -70,8 +70,10 @@ dependencies {
 
 	implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.17.2"
 
-	modImplementation ("net.modificationstation:StationAPI:${project.stapi_version}")
-	
+	modImplementation ("net.modificationstation:StationAPI:${project.stapi_version}") {
+		exclude group: "babric", module: "fabric-loader"
+	}
+
 	modImplementation("com.github.paulevsGitch:BHCreative:${project.bhcreative_version}") {
 		transitive false
 	}

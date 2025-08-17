@@ -17,7 +17,7 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
-import net.modificationstation.stationapi.api.util.math.Vector4f;
+import net.modificationstation.stationapi.api.util.math.Vec4f;
 import paulevs.bnb.BNB;
 
 import java.util.ArrayList;
@@ -145,7 +145,7 @@ public class OBJModel implements UnbakedModel {
 		BakedQuad bake(Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings settings) {
 			int[] bakedData = Arrays.copyOf(this.vertexData, 32);
 			Sprite sprite = textureGetter.apply(spriteID);
-			Vector4f pos = new Vector4f();
+			Vec4f pos = new Vec4f();
 			
 			for (byte i = 0; i < 4; i++) {
 				int index = i << 3;

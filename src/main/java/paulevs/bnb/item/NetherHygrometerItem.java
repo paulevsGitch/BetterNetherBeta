@@ -82,7 +82,7 @@ public class NetherHygrometerItem extends TemplateItem implements CustomStackTex
 		return I18n.translate(switch (BNBWeatherManager.getCurrentWeather()) {
 			case CLEAR -> "tooltip.bnb.nether_hygrometer.no_rain";
 			case FOG -> "tooltip.bnb.nether_hygrometer.small_chance";
-			case DRIZZLE -> "tooltip.bnb.nether_hygrometer.hight_chance";
+			case DRIZZLE -> "tooltip.bnb.nether_hygrometer.high_chance";
 			case RAIN -> "tooltip.bnb.nether_hygrometer.rain";
 		});
 	}
