@@ -55,7 +55,7 @@ public class BNBSaplingBlock extends BNBFloorPlantBlock {
 		
 		int stage = state.get(BNBBlockProperties.STAGE_4);
 		if (stage < 3) {
-			int increment = force ? Math.max(stage + 2, 3) : stage + 1;
+			int increment = force ? Math.min(stage + 2, 3) : stage + 1;
 			state = state.with(BNBBlockProperties.STAGE_4, increment);
 			level.setBlockState(x, y, z, state);
 			return;

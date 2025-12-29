@@ -146,7 +146,7 @@ public class CommonListener {
 	}
 	
 	@EventListener
-	public void registerMobHandlers(EntityHandlerRegistryEvent event) {
+	public void registerEntityHandlers(EntityHandlerRegistryEvent event) {
 		event.register(ObsidianBoatEntity.ID, ObsidianBoatEntity::new);
 	}
 }
