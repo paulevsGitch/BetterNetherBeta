@@ -27,7 +27,7 @@ public class MossCoverItem extends TemplateItem {
 			level, new BlockPos(x, y, z), direction.getOpposite()
 		);
 		if (state == null) return false;
-		level.setBlockStateWithNotify(x, y, z, state);
+		level.setBlockState(x, y, z, state);
 		BlockSounds sound = BNBBlocks.NETHER_MOSS_COVER.sounds;
 		level.playSound(x + 0.5, y + 0.5, z + 0.5, sound.getWalkSound(), sound.getVolume(), sound.getPitch());
 		item.count--;

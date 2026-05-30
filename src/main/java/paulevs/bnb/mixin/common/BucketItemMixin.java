@@ -25,7 +25,7 @@ public class BucketItemMixin {
 	), cancellable = true)
 	private void bnb_checkAcid(ItemStack stack, Level level, PlayerEntity player, CallbackInfoReturnable<ItemStack> info, @Local HitResult hit) {
 		if (level.getMaterial(hit.x, hit.y, hit.z) == BNBBlockMaterials.SULPHURIC_ACID) {
-			level.setBlockStateWithNotify(hit.x, hit.y, hit.z, States.AIR.get());
+			level.setBlockState(hit.x, hit.y, hit.z, States.AIR.get());
 			info.setReturnValue(new ItemStack(BNBItems.ACID_BUCKET));
 		}
 	}

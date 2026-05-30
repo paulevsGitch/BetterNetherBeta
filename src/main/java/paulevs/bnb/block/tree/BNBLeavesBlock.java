@@ -89,7 +89,7 @@ public class BNBLeavesBlock extends TemplateBlock {
 		if (!state.isOf(this)) return;
 		if (canStay(level, x, y, z, state)) return;
 		drop(level, x, y, z, 0);
-		level.setBlockStateWithNotify(x, y, z, States.AIR.get());
+		level.setBlockState(x, y, z, States.AIR.get());
 	}
 	
 	public void setSapling(Block sapling) {

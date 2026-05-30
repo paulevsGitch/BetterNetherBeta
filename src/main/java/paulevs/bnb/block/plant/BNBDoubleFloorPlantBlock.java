@@ -54,14 +54,14 @@ public class BNBDoubleFloorPlantBlock extends BNBFloorPlantBlock {
 	@Override
 	public void afterPlaced(Level level, int x, int y, int z, LivingEntity entity) {
 		super.afterPlaced(level, x, y, z, entity);
-		level.setBlockState(x, y + 1, z, getDefaultState().with(BNBBlockProperties.DOUBLE_SHAPE, DoubleShape.TOP));
+		level.setBlockStateWithoutNotifyingNeighbors(x, y + 1, z, getDefaultState().with(BNBBlockProperties.DOUBLE_SHAPE, DoubleShape.TOP));
 	}
 	
 	@Override
 	public void onBlockRemoved(Level level, int x, int y, int z) {
 		BlockState state = level.getBlockState(x, y - 1, z);
 		if (state.isOf(this)) {
-			level.setBlockStateWithNotify(x, y - 1, z, States.AIR.get());
+			level.setBlockState(x, y - 1, z, States.AIR.get());
 			level.updateBlock(x, y - 1, z);
 		}
 		else level.updateBlock(x, y + 1, z);

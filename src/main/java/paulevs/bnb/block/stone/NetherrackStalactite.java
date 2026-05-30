@@ -65,7 +65,7 @@ public class NetherrackStalactite extends TemplateBlock implements BeforeBlockRe
 			y += inverted ? 1 : -1;
 			BlockState state = level.getBlockState(x, y, z);
 			if (!state.isOf(this)) break;
-			level.setBlockState(x, y, z, state.with(BNBBlockProperties.THICKNESS, i));
+			level.setBlockStateWithoutNotifyingNeighbors(x, y, z, state.with(BNBBlockProperties.THICKNESS, i));
 		}
 	}
 	
@@ -81,7 +81,7 @@ public class NetherrackStalactite extends TemplateBlock implements BeforeBlockRe
 			y += inverted ? 1 : -1;
 			BlockState state = level.getBlockState(x, y, z);
 			if (!state.isOf(this)) break;
-			level.setBlockState(x, y, z, state.with(BNBBlockProperties.THICKNESS, i));
+			level.setBlockStateWithoutNotifyingNeighbors(x, y, z, state.with(BNBBlockProperties.THICKNESS, i));
 		}
 	}
 	
@@ -110,7 +110,7 @@ public class NetherrackStalactite extends TemplateBlock implements BeforeBlockRe
 		if (state.isOf(this) || (state.getBlock().isFullCube() && state.getBlock().isFullOpaque() && state.getBlock().material.blocksMovement())) {
 			return;
 		}
-		level.setBlockStateWithNotify(x, y, z, States.AIR.get());
+		level.setBlockState(x, y, z, States.AIR.get());
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
 			level.playSound(
 				x + 0.5,

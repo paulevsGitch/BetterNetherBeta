@@ -49,7 +49,7 @@ public class BNBBucket extends TemplateBucketItem {
 		int hitZ = hit.z + side.getOffsetZ();
 		
 		if (level.isAir(hitX, hitY, hitZ) || !level.getMaterial(hitX, hitY, hitZ).isSolid()) {
-			level.setBlockStateWithNotify(hitX, hitY, hitZ, BNBBlocks.SULPHURIC_ACID_FLOWING.getDefaultState());
+			level.setBlockState(hitX, hitY, hitZ, BNBBlocks.SULPHURIC_ACID_FLOWING.getDefaultState());
 			return BNB.isCreative(player) ? item : new ItemStack(Item.bucket);
 		}
 		

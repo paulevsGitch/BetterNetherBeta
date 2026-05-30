@@ -37,7 +37,7 @@ public class BNBVineBlock extends BNBCeilPlantBlock {
 		boolean hasBottom = bottom.isOf(this);
 		if (hasBottom != normal) {
 			state = state.with(BNBBlockProperties.VINE_SHAPE, hasBottom ? VineShape.NORMAL : VineShape.BOTTOM);
-			level.setBlockStateWithNotify(x, y, z, state);
+			level.setBlockState(x, y, z, state);
 		}
 	}
 	
@@ -57,7 +57,7 @@ public class BNBVineBlock extends BNBCeilPlantBlock {
 		int y1 = y;
 		while (level.getBlockState(x, y1, z).isOf(this)) {
 			if (!level.isRemote) this.drop(level, x, y1, z, 0);
-			level.setBlockStateWithNotify(x, y1, z, States.AIR.get());
+			level.setBlockState(x, y1, z, States.AIR.get());
 			y1--;
 		}
 		level.updateArea(x, y1, z, x, y, z);
@@ -72,8 +72,8 @@ public class BNBVineBlock extends BNBCeilPlantBlock {
 			bottom = level.getBlockState(x, --bottomY, z);
 		}
 		if (!bottom.isAir()) return false;
-		level.setBlockStateWithNotify(x, bottomY, z, getDefaultState());
-		level.setBlockStateWithNotify(x, bottomY + 1, z, state.with(BNBBlockProperties.VINE_SHAPE, VineShape.NORMAL));
+		level.setBlockState(x, bottomY, z, getDefaultState());
+		level.setBlockState(x, bottomY + 1, z, state.with(BNBBlockProperties.VINE_SHAPE, VineShape.NORMAL));
 		return true;
 	}
 	
