@@ -61,17 +61,17 @@ public abstract class ItemEntityMixin extends Entity {
 		if (!(stack.getType() instanceof BlockItem item)) return;
 		Block block = item.getBlock();
 		
-		if (block == BNBBlocks.FALURIAN_LOG) player.incrementStat(BNBAchievements.COLLECT_FALURIAN_LOG);
-		if (block == BNBBlocks.PIROZEN_LOG) player.incrementStat(BNBAchievements.COLLECT_PIROZEN_LOG);
-		if (block == BNBBlocks.CHLOROPHATE_LOG) player.incrementStat(BNBAchievements.COLLECT_CHLOROPHATE_LOG);
+//		if (block == BNBBlocks.FALURIAN_LOG) player.incrementStat(BNBAchievements.COLLECT_FALURIAN_LOG);
+//		if (block == BNBBlocks.PIROZEN_LOG) player.incrementStat(BNBAchievements.COLLECT_PIROZEN_LOG);
+//		if (block == BNBBlocks.CHLOROPHATE_LOG) player.incrementStat(BNBAchievements.COLLECT_CHLOROPHATE_LOG);
 		
-		int summ = BNBAchievements.readStat(BNBAchievements.COLLECT_FALURIAN_LOG) > 0 ? 1 : 0;
-		summ += BNBAchievements.readStat(BNBAchievements.COLLECT_PIROZEN_LOG) > 0 ? 1 : 0;
-		summ += BNBAchievements.readStat(BNBAchievements.COLLECT_CHLOROPHATE_LOG) > 0 ? 1 : 0;
+//		int summ = BNBAchievements.readStat(BNBAchievements.COLLECT_FALURIAN_LOG) > 0 ? 1 : 0;
+//		summ += BNBAchievements.readStat(BNBAchievements.COLLECT_PIROZEN_LOG) > 0 ? 1 : 0;
+//		summ += BNBAchievements.readStat(BNBAchievements.COLLECT_CHLOROPHATE_LOG) > 0 ? 1 : 0;
 		
-		if (summ == 3) {
-			player.incrementStat(BNBAchievements.RGB);
-		}
+//		if (summ == 3) {
+//			player.incrementStat(BNBAchievements.RGB);
+//		}
 	}
 	
 	@WrapOperation(method = "tick", at = @At(
