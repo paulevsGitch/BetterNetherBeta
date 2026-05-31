@@ -11,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stat.RegisteringStat;
 import net.minecraft.stat.Stat;
 import net.modificationstation.stationapi.api.template.achievement.TemplateAchievement;
+import net.modificationstation.stationapi.api.template.stat.TemplateSimpleStat;
+import net.modificationstation.stationapi.api.util.Identifier;
 import paulevs.bnb.BNB;
 import paulevs.bnb.BNBClient;
 import paulevs.bnb.block.BNBBlocks;
@@ -35,9 +37,9 @@ public class BNBAchievements {
 	public static Achievement SPINNING_WHEEL = make("spinning_wheel", BNBBlocks.SPINNING_WHEEL, 6, -1, ORICHALCUM);
 	public static Achievement FABRIC_YARN = make("fabric_yarn", BNBItems.NETHER_FIBER, 8, -1, SPINNING_WHEEL);
 	
-//	public static Stat COLLECT_FALURIAN_LOG = new RegisteringStat(9990, "stat.bnb:collectRedLog").register();
-//	public static Stat COLLECT_PIROZEN_LOG = new RegisteringStat(9991, "stat.bnb:collectBlueLog").register();
-//	public static Stat COLLECT_CHLOROPHATE_LOG = new RegisteringStat(9992, "stat.bnb:collectGreenLog").register();
+	public static Stat COLLECT_FALURIAN_LOG = new TemplateSimpleStat(Identifier.of(BNB.NAMESPACE, "collectRedLog"), "stat.bnb:collectRedLog").register();
+	public static Stat COLLECT_PIROZEN_LOG = new TemplateSimpleStat(Identifier.of(BNB.NAMESPACE, "collectBlueLog"), "stat.bnb:collectBlueLog").register();
+	public static Stat COLLECT_CHLOROPHATE_LOG = new TemplateSimpleStat(Identifier.of(BNB.NAMESPACE, "collectGreenLog"), "stat.bnb:collectGreenLog").register();
 	
 	private static ItemStack[] RGB_ICONS = new ItemStack[] {
 		new ItemStack(BNBBlocks.FALURIAN_LOG),
