@@ -47,7 +47,7 @@ public class SulphuricAcidStillBlock extends TemplateStillLiquidBlock {
 		int cz = z & 15;
 		if (chunk.getBlockState(cx, y, cz).isOf(this)) {
 			int meta = chunk.getMeta(cx, y, cz);
-			chunk.setBlockStateWithMetadata(cx, y, cz, flowingFluid.getDefaultState(), meta);
+			chunk.setBlockState(cx, y, cz, flowingFluid.getDefaultState(), meta);
 			level.scheduleTick(x, y, z, flowingFluid.id, this.getTickrate());
 			level.updateArea(x, y, z, x, y, z);
 		}
