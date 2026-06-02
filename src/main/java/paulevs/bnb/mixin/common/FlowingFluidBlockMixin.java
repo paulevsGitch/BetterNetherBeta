@@ -24,7 +24,7 @@ public abstract class FlowingFluidBlockMixin extends Block {
 	))
 	private boolean bnb_changeFluidCall(Level level, int x, int y, int z, int id, int meta, Operation<Boolean> original) {
 		if (FlowingFluidBlock.class.cast(this) instanceof SulphuricAcidFlowingBlock block) {
-			level.getChunk(x, z).setBlockStateWithMetadata(x & 15, y, z & 15, block.stillFluid.getDefaultState(), meta);
+			level.getChunk(x, z).setBlockState(x & 15, y, z & 15, block.stillFluid.getDefaultState(), meta);
 			return true;
 		}
 		return original.call(level, x, y, z, id, meta);

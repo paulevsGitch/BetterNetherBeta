@@ -36,7 +36,7 @@ public abstract class SoulSandBlockMixin extends Block {
 			int pz = z + dir.getOffsetZ();
 			BlockState neighbour = level.getBlockState(px, y, pz);
 			if (neighbour.isOf(BNBBlocks.SOUL_MYCORRUM)) {
-				level.setBlockStateWithNotify(x, y, z, neighbour);
+				level.setBlockState(x, y, z, neighbour);
 				return true;
 			}
 		}

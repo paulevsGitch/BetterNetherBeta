@@ -10,6 +10,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stat.RegisteringStat;
 import net.minecraft.stat.Stat;
+import net.modificationstation.stationapi.api.template.achievement.TemplateAchievement;
+import net.modificationstation.stationapi.api.template.stat.TemplateSimpleStat;
+import net.modificationstation.stationapi.api.util.Identifier;
+import paulevs.bnb.BNB;
 import paulevs.bnb.BNBClient;
 import paulevs.bnb.block.BNBBlocks;
 import paulevs.bnb.item.BNBItems;
@@ -18,40 +22,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BNBAchievements {
-	public static final List<Achievement> ACHIEVEMENTS = new ArrayList<>();
-	private static int achievementID = 10000;
+	public static List<Achievement> ACHIEVEMENTS = new ArrayList<>();
 	
-	public static final Achievement THE_WAYS = make("the_ways", Block.PORTAL, 0, 0, null);
-	public static final Achievement WARM_WELCOME = make("warm_welcome", Block.FIRE, 2, 0, THE_WAYS);
-	public static final Achievement RGB = make("rgb", BNBBlocks.PIROZEN_LOG, 1, 2, WARM_WELCOME);
-	public static final Achievement ALMOST_THE_SAME = make("almost_the_same", BNBBlocks.NETHERRACK_FURNACE, 3, 2, WARM_WELCOME);
-	public static final Achievement FIRE_UPGRADE = make("fire_upgrade", BNBBlocks.NETHERRACK_BRICK_FURNACE, 3, 4, ALMOST_THE_SAME);
-	public static final Achievement BRICK_BY_BRICK = make("brick_by_brick", BNBItems.NETHERRACK_BRICK, 3, -2, WARM_WELCOME);
-	public static final Achievement ARCHIMEDES_LAW = make("archimedes_law", BNBItems.OBSIDIAN_BOAT, 1, -2, WARM_WELCOME);
-	public static final Achievement ORICHALCUM = make("orichalcum", BNBItems.ORICHALCUM_INGOT, 4, 0, WARM_WELCOME);
-	public static final Achievement ARIADNES_STRING = make("ariadnes_string", BNBItems.PORTAL_COMPASS, 6, 1, ORICHALCUM);
-	public static final Achievement METEOROLOGY = make("meteorology", BNBItems.NETHER_HYGROMETER, 8, 1, ARIADNES_STRING);
-	public static final Achievement SPINNING_WHEEL = make("spinning_wheel", BNBBlocks.SPINNING_WHEEL, 6, -1, ORICHALCUM);
-	public static final Achievement FABRIC_YARN = make("fabric_yarn", BNBItems.NETHER_FIBER, 8, -1, SPINNING_WHEEL);
+	public static Achievement THE_WAYS = make("the_ways", Block.PORTAL, 0, 0, null);
+	public static Achievement WARM_WELCOME = make("warm_welcome", Block.FIRE, 2, 0, THE_WAYS);
+	public static Achievement RGB = make("rgb", BNBBlocks.PIROZEN_LOG, 1, 2, WARM_WELCOME);
+	public static Achievement ALMOST_THE_SAME = make("almost_the_same", BNBBlocks.NETHERRACK_FURNACE, 3, 2, WARM_WELCOME);
+	public static Achievement FIRE_UPGRADE = make("fire_upgrade", BNBBlocks.NETHERRACK_BRICK_FURNACE, 3, 4, ALMOST_THE_SAME);
+	public static Achievement BRICK_BY_BRICK = make("brick_by_brick", BNBItems.NETHERRACK_BRICK, 3, -2, WARM_WELCOME);
+	public static Achievement ARCHIMEDES_LAW = make("archimedes_law", BNBItems.OBSIDIAN_BOAT, 1, -2, WARM_WELCOME);
+	public static Achievement ORICHALCUM = make("orichalcum", BNBItems.ORICHALCUM_INGOT, 4, 0, WARM_WELCOME);
+	public static Achievement ARIADNES_STRING = make("ariadnes_string", BNBItems.PORTAL_COMPASS, 6, 1, ORICHALCUM);
+	public static Achievement METEOROLOGY = make("meteorology", BNBItems.NETHER_HYGROMETER, 8, 1, ARIADNES_STRING);
+	public static Achievement SPINNING_WHEEL = make("spinning_wheel", BNBBlocks.SPINNING_WHEEL, 6, -1, ORICHALCUM);
+	public static Achievement FABRIC_YARN = make("fabric_yarn", BNBItems.NETHER_FIBER, 8, -1, SPINNING_WHEEL);
 	
-	public static final Stat COLLECT_FALURIAN_LOG = new RegisteringStat(9990, "stat.bnb:collectRedLog").register();
-	public static final Stat COLLECT_PIROZEN_LOG = new RegisteringStat(9991, "stat.bnb:collectBlueLog").register();
-	public static final Stat COLLECT_CHLOROPHATE_LOG = new RegisteringStat(9992, "stat.bnb:collectGreenLog").register();
+	public static Stat COLLECT_FALURIAN_LOG = new TemplateSimpleStat(Identifier.of(BNB.NAMESPACE, "collectRedLog"), "stat.bnb:collectRedLog").register();
+	public static Stat COLLECT_PIROZEN_LOG = new TemplateSimpleStat(Identifier.of(BNB.NAMESPACE, "collectBlueLog"), "stat.bnb:collectBlueLog").register();
+	public static Stat COLLECT_CHLOROPHATE_LOG = new TemplateSimpleStat(Identifier.of(BNB.NAMESPACE, "collectGreenLog"), "stat.bnb:collectGreenLog").register();
 	
-	private static final ItemStack[] RGB_ICONS = new ItemStack[] {
+	private static ItemStack[] RGB_ICONS = new ItemStack[] {
 		new ItemStack(BNBBlocks.FALURIAN_LOG),
 		new ItemStack(BNBBlocks.PIROZEN_LOG),
 		new ItemStack(BNBBlocks.CHLOROPHATE_LOG)
 	};
 	
 	private static Achievement make(String name, Block icon, int x, int y, Achievement parent) {
-		Achievement achievement = new Achievement(achievementID++, "bnb." + name, x, y, icon, parent);
+		Achievement achievement = new TemplateAchievement(BNB.NAMESPACE.id(name), "bnb." + name, x, y, icon, parent);
 		ACHIEVEMENTS.add(achievement);
 		return achievement;
 	}
 	
 	private static Achievement make(String name, Item icon, int x, int y, Achievement parent) {
-		Achievement achievement = new Achievement(achievementID++, "bnb." + name, x, y, icon, parent);
+		Achievement achievement = new TemplateAchievement(BNB.NAMESPACE.id(name), "bnb." + name, x, y, icon, parent);
 		ACHIEVEMENTS.add(achievement);
 		return achievement;
 	}

@@ -40,7 +40,7 @@ public class StreamStructure extends Structure {
 		
 		chunk.setBlockState(cx, maxY, cz, LAVA);
 		for (int py = minY; py < maxY; py++) {
-			chunk.setBlockStateWithMetadata(cx, py, cz, LAVA, 1);
+			chunk.setBlockState(cx, py, cz, LAVA, 1);
 		}
 		
 		level.updateLight(LightType.BLOCK, x, minY, z, x, maxY, z);

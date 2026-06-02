@@ -53,7 +53,7 @@ public abstract class PortalBlockMixin extends Block {
 	private void bnb_onNeighbourBlockUpdate(Level level, int x, int y, int z, int id, CallbackInfo info) {
 		info.cancel();
 		if (BNBPortalManager.portalCanExist(level, x, y, z)) return;
-		level.setBlockStateWithNotify(x, y, z, States.AIR.get());
+		level.setBlockState(x, y, z, States.AIR.get());
 	}
 	
 	@WrapOperation(method = "updateBoundingBox", at = @At(

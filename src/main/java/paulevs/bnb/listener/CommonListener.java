@@ -9,7 +9,7 @@ import net.minecraft.stat.Stat;
 import net.modificationstation.stationapi.api.event.achievement.AchievementRegisterEvent;
 import net.modificationstation.stationapi.api.event.block.BlockEvent.BeforePlacedByItem;
 import net.modificationstation.stationapi.api.event.block.entity.BlockEntityRegisterEvent;
-import net.modificationstation.stationapi.api.event.entity.EntityRegister;
+import net.modificationstation.stationapi.api.event.entity.EntityRegisterEvent;
 import net.modificationstation.stationapi.api.event.network.packet.PacketRegisterEvent;
 import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent;
 import net.modificationstation.stationapi.api.event.recipe.RecipeRegisterEvent.Vanilla;
@@ -65,16 +65,16 @@ public class CommonListener {
 	
 	@EventListener
 	public void onBlockEntityRegister(BlockEntityRegisterEvent event) {
-		event.register(CocoonSpawnerBlockEntity.class, "bnb:cocoon_spawner");
-		event.register(SpinningWheelBlockEntity.class, "bnb:spinning_wheel");
+		event.register("bnb:cocoon_spawner", CocoonSpawnerBlockEntity.class);
+		event.register("bnb:spinning_wheel", SpinningWheelBlockEntity.class);
 	}
 	
 	@EventListener
-	public void onEntityRegister(EntityRegister event) {
-		event.register(FalurianSpiderEntity.class, FalurianSpiderEntity.ID.toString());
-		event.register(PirozenSpiderEntity.class, PirozenSpiderEntity.ID.toString());
-		event.register(ChlorophateSpiderEntity.class, ChlorophateSpiderEntity.ID.toString());
-		event.register(ObsidianBoatEntity.class, ObsidianBoatEntity.ID.toString());
+	public void onEntityRegister(EntityRegisterEvent event) {
+		event.register(FalurianSpiderEntity.ID, FalurianSpiderEntity.class);
+		event.register(PirozenSpiderEntity.ID, PirozenSpiderEntity.class);
+		event.register(ChlorophateSpiderEntity.ID, ChlorophateSpiderEntity.class);
+		event.register(ObsidianBoatEntity.ID, ObsidianBoatEntity.class);
 	}
 	
 	@EventListener

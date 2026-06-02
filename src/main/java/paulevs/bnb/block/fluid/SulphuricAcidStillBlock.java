@@ -47,7 +47,7 @@ public class SulphuricAcidStillBlock extends TemplateStillLiquidBlock {
 		int cz = z & 15;
 		if (chunk.getBlockState(cx, y, cz).isOf(this)) {
 			int meta = chunk.getMeta(cx, y, cz);
-			chunk.setBlockStateWithMetadata(cx, y, cz, flowingFluid.getDefaultState(), meta);
+			chunk.setBlockState(cx, y, cz, flowingFluid.getDefaultState(), meta);
 			level.scheduleTick(x, y, z, flowingFluid.id, this.getTickrate());
 			level.updateArea(x, y, z, x, y, z);
 		}
@@ -103,10 +103,10 @@ public class SulphuricAcidStillBlock extends TemplateStillLiquidBlock {
 			int pz = z + dir.getOffsetZ();
 			BlockState side = level.getBlockState(px, py, pz);
 			if (side.isOf(NETHERRACK)) {
-				level.setBlockStateWithNotify(px, py, pz, BNBBlocks.SULPHURIFIED_NETHERRACK.getDefaultState());
+				level.setBlockState(px, py, pz, BNBBlocks.SULPHURIFIED_NETHERRACK.getDefaultState());
 			}
 			else if (side.isOf(BNBBlocks.SULPHURIFIED_NETHERRACK)) {
-				level.setBlockStateWithNotify(px, py, pz, BNBBlocks.SULPHURIC_NETHERRACK.getDefaultState());
+				level.setBlockState(px, py, pz, BNBBlocks.SULPHURIC_NETHERRACK.getDefaultState());
 			}
 		}
 	}

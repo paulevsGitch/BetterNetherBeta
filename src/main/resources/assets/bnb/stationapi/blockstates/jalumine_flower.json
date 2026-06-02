@@ -1,9 +1,9 @@
 {
 	"variants": {
-		"direction=north": { "model": "bnb:block/jalumine_flower", "x": 90, "y": 90 },
-		"direction=south": { "model": "bnb:block/jalumine_flower", "x": 90, "y": 270 },
-		"direction=east": { "model": "bnb:block/jalumine_flower", "x": 90, "y": 180 },
-		"direction=west": { "model": "bnb:block/jalumine_flower", "x": 90 },
+		"direction=west": { "model": "bnb:block/jalumine_flower", "x": 90, "y": 90 },
+		"direction=east": { "model": "bnb:block/jalumine_flower", "x": 90, "y": 270 },
+		"direction=north": { "model": "bnb:block/jalumine_flower", "x": 90, "y": 180 },
+		"direction=south": { "model": "bnb:block/jalumine_flower", "x": 90 },
 		"direction=down": { "model": "bnb:block/jalumine_flower" },
 		"direction=up": { "model": "bnb:block/jalumine_flower", "x": 180 }
 	}
