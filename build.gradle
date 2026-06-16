@@ -1,14 +1,7 @@
-//file:noinspection GroovyAssignabilityCheck
-//file:noinspection GroovyAccessibility
-//file:noinspection GrUnresolvedAccess
-//file:noinspection GrDeprecatedAPIUsage
-//file:noinspection GroovyUnusedAssignment
-//file:noinspection ForeignDelegate
-
 plugins {
-	id "fabric-loom" version "1.15.3"
-	id "babric-loom-extension" version "1.15.3"
 	id "maven-publish"
+	id "fabric-loom" version "1.16.3"
+	id "babric-loom-extension" version "1.16.1"
 }
 
 version = property("mod_version")
@@ -22,15 +15,17 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
+	withSourcesJar()
 }
 
-babric { disableM1Fixes.set(true) }
+babric { 
+	disableM1Fixes.set(true) 
+}
 
 loom {
 	mixin {
 		useLegacyMixinAp = true
 	}
-	intermediaryUrl.set("https://maven.glass-launcher.net/babric/babric/intermediary/%1\$s/intermediary-%1\$s-v2.jar")
 }
 
 repositories {
@@ -117,12 +112,19 @@ processResources {
 	}
 }
 
+// Set the compile tasks to target Java 17
 tasks.withType(JavaCompile).configureEach {
 	it.options.release = 17
 }
 
-java {
-	withSourcesJar()
+// Disables the generation of the .module file
+tasks.withType(GenerateModuleMetadata).configureEach {
+	enabled = false
+}
+
+// Gradle 9 fails the build if there are no tests, but we are using the test package for a test mod
+tasks.withType(Test).configureEach {
+	failOnNoDiscoveredTests = false
 }
 
 jar {
@@ -139,9 +141,15 @@ jar {
 
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		create("mavenJava", MavenPublication) {
+			//noinspection GrUnresolvedAccess
+			artifactId = base.archivesName.get()
+			//noinspection GrUnresolvedAccess, GroovyAssignabilityCheck
 			from components.java
 		}
 	}
-	repositories {}
+	
+	repositories {
+		
+	}
 }
