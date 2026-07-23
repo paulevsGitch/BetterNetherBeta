@@ -1,7 +1,7 @@
 plugins {
+	id "fabric-loom" version "1.8.12"
+	id "babric-loom-extension" version "1.8.9"
 	id "maven-publish"
-	id "fabric-loom" version "1.16.3"
-	id "babric-loom-extension" version "1.16.1"
 }
 
 version = property("mod_version")
